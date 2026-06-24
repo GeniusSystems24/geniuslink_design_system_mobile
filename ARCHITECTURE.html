@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GeniusLink Mobile — Flutter MVC</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#111318;--surface:#1E2025;--input:#33353A;--border:rgba(67,70,84,.4);--border-s:rgb(67,70,84);
+    --fg1:#E2E2E9;--fg2:#C3C6D7;--fg3:#8D90A0;--fg4:#44474E;
+    --blue:#4A7CFF;--green:#1DB88A;--orange:#F97316;--red:#EF4444;
+    --display:'Manrope',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg1);font-family:var(--body);line-height:1.5;padding:48px 24px 80px;display:flex;justify-content:center}
+  .wrap{width:100%;max-width:1100px}
+  .eyebrow{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+  h1{font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.025em;line-height:1.1}
+  .lede{color:var(--fg2);font-size:15.5px;max-width:720px;margin-top:14px;text-wrap:pretty}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;background:var(--input);border:1px solid var(--border-s);font-size:12.5px;color:var(--fg2);font-weight:500}
+  .chip .dot{width:7px;height:7px;border-radius:999px}
+  .sec{display:flex;align-items:center;gap:10px;margin:48px 0 16px}
+  .sec .bar{width:4px;height:24px;border-radius:4px}
+  .sec h2{font-family:var(--body);font-weight:700;font-size:19px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+  .card .hd{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+  .card .hd .bar{width:4px;height:18px;border-radius:4px}
+  .card .hd .lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--fg2)}
+  .scr{display:flex;flex-direction:column;gap:9px}
+  .scr .row{display:flex;align-items:baseline;gap:9px;font-size:13px}
+  .scr .id{font-family:var(--mono);font-size:10.5px;color:var(--fg4);flex-shrink:0;width:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .scr .nm{color:var(--fg1)}
+  .scr .ar{font-family:var(--mono);font-size:10px;color:var(--fg3);margin-left:auto}
+  .count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--fg3)}
+  .tree{font-family:var(--mono);font-size:12.5px;line-height:1.95;color:var(--fg2);white-space:pre-wrap}
+  .tree .f{color:var(--fg1);font-weight:500}.tree .c{color:var(--fg3)}
+  code{font-family:var(--mono);background:var(--input);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--fg1)}
+  .run{font-family:var(--mono);font-size:13px;background:#0c0d11;border:1px solid var(--border);border-radius:10px;padding:16px 18px;color:var(--fg2);margin-top:14px;line-height:2}
+  .run .cm{color:var(--fg4)}
+  .note{color:var(--fg3);font-size:12.5px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">GeniusLink · Flutter</div>
+  <h1>GeniusLink Mobile — Full App</h1>
+  <p class="lede">A Flutter port of the complete GeniusLink mobile app: authentication, the four bottom tabs,
+    and every sub-screen reachable from the <strong style="color:var(--fg1)">More</strong> menu — 60+ screens in all.
+    Dark-only (matching the web demo), bilingual EN/AR strings, structured with a strict Model · View · Controller split.</p>
+  <div class="meta">
+    <span class="chip"><span class="dot" style="background:var(--blue)"></span>Controller — NavController (ChangeNotifier)</span>
+    <span class="chip"><span class="dot" style="background:var(--green)"></span>View — screens + shared kit</span>
+    <span class="chip">60+ screens</span>
+    <span class="chip">No 3rd-party packages</span>
+  </div>
+
+  <div class="sec"><span class="bar" style="background:var(--blue)"></span><h2>Architecture</h2></div>
+  <div class="card">
+    <div class="tree"><span class="c">lib/</span>
+  <span class="f">main.dart</span>                 <span class="c">MaterialApp (dark) → AppRoot</span>
+  <span class="c">controllers/</span>
+    <span class="f">nav_controller.dart</span>     <span class="c">auth gate · active tab · sub-screen stack</span>
+  <span class="c">views/</span>
+    <span class="f">app_root.dart</span>           <span class="c">navigator shell (auth → tabs → sub-stack)</span>
+    <span class="f">screen_registry.dart</span>    <span class="c">id → title/back (SUB_TITLES) + id → widget</span>
+    <span class="c">kit/</span>                    <span class="c">shared widgets — ports of window._mob / _mui / _minv / banking</span>
+      <span class="f">m_colors · m_icons · m_widgets · m_inputs · m_shell · m_inv_kit · m_bank_kit</span>
+    <span class="c">screens/</span>                <span class="c">one file per feature area (14 files)</span>
+      <span class="f">auth · dashboard · accounts(+extra) · stores · more</span>
+      <span class="f">ledger · journal · banking_cash · banking_transfer</span>
+      <span class="f">inventory · inventory_extras · currencies · contacts · reports · users</span>
+      <span class="f">settings_org · settings_team · settings_platform</span></div>
+  </div>
+
+  <div class="sec"><span class="bar" style="background:var(--green)"></span><h2>Screens ported (every entry routes)</h2></div>
+  <div class="grid" id="screens"></div>
+
+  <div class="sec"><span class="bar" style="background:var(--blue)"></span><h2>Design-system components (path dep · v2.8.1)</h2></div>
+  <div class="card">
+    <p class="note">The app consumes the sibling <code>geniuslink_design_system</code> package for its three data components; their theme extensions are registered on the dark theme in <code>main.dart</code> so all three blend with the MCard chrome.</p>
+    <div class="tree"><span class="f">Tree</span>               <span class="c">Account Tree screen — typed <code>Tree&lt;Account&gt;</code>, builders read <code>row.node.value</code> (search · expand/collapse · indent guides · roll-up balances)</span>
+<span class="f">ReadableTable</span>      <span class="c">wrapped as <code>MTable</code> (m_widgets) — Trial Balance · Inventory Valuation · Audit Log; click-to-sort + TSV copy (keys from cell text) + opt-in quick-search</span>
+<span class="f">AutoSuggestionsBox</span> <span class="c">wrapped as <code>MSuggest</code> (m_inputs) — Create-Account Parent/Currency pickers · journal-line account combo · the More menu is a spotlight over every screen</span></div>
+  </div>
+
+  <div class="sec"><span class="bar" style="background:var(--orange)"></span><h2>Run it</h2></div>
+  <div class="card">
+    <div class="run"><span class="cm"># from the project root</span>
+cd geniuslink_design_system_mobile
+flutter pub get
+flutter run   <span class="cm"># device / emulator / -d chrome</span></div>
+    <p class="note">Sign in on the login screen (any credentials enter the app). One path dependency (<code>geniuslink_design_system</code>, synced to v2.8.1) supplies the Tree / ReadableTable / AutoSuggestionsBox components; everything else is <code>flutter</code> only.
+    Fonts fall back to the platform UI font until the GL families are dropped into <code>assets/fonts/</code>.</p>
+  </div>
+</div>
+<script>
+  const groups = [
+    ['Auth', 'var(--blue)', [['login','Sign In'],['signup','Create workspace'],['forgot','Forgot password']]],
+    ['Tabs', 'var(--green)', [['dashboard','Dashboard'],['accounts','Accounts'],['stores','Stores'],['more','More menu'],['mobileDashboard','Mobile Dashboard v2 ★']]],
+    ['Accounts', 'var(--blue)', [['createAccount','Create Account'],['accountDetail','Account Detail (full)'],['createGroup','Create Group'],['groupDetail','Group Detail'],['accountTree','Account Tree']]],
+    ['Stores', 'var(--green)', [['createStore','Create Store'],['storeDetail','Store Detail'],['issue','Issue Inventory']]],
+    ['Ledger & Journal', 'var(--orange)', [['journal','Opening Entry'],['opDetail','Operation Detail'],['journalList','Journal Entries'],['createJournalEntry','Create Entry'],['journalEntryDetail','Entry Detail']]],
+    ['Banking', 'var(--blue)', [['createDeposit','Deposit'],['depositDetail','Deposit Receipt'],['createWithdrawal','Withdrawal'],['withdrawalDetail','Voucher'],['createLocalTransfer','Local Transfer'],['localTransferDetail','Settlement'],['createExternalTransfer','External Wire'],['externalTransferDetail','Wire Detail']]],
+    ['Products & Inventory', 'var(--green)', [['productsList','Products'],['productDetail','Product Detail'],['createProduct','Create Product'],['issueDetail','Issue Detail'],['receiveCreate','Receive'],['receiveDetail','Receipt Detail'],['transferCreate','Transfer'],['transferDetail','Transfer Detail'],['adjustment','Adjustment']]],
+    ['Inventory Extras', 'var(--orange)', [['invDashboard','Inventory Dashboard'],['warehousesList','Warehouses'],['transferList','Stock Transfers'],['stockTake','Stock Take'],['categories','Categories'],['uom','Units of Measure'],['priceLists','Price Lists'],['barcodePrint','Barcode Print']]],
+    ['Currencies', 'var(--blue)', [['currenciesList','Currencies'],['createCurrency','Add Currency'],['currencyDetail','Currency Detail'],['exchangeRateSetup','Exchange Rates'],['fiscalYearSetup','Fiscal Year']]],
+    ['Contacts', 'var(--green)', [['customersList','Customers'],['customerDetail','Customer Detail'],['createCustomer','Add Customer'],['suppliersList','Suppliers'],['supplierDetail','Supplier Detail'],['createSupplier','Add Supplier']]],
+    ['Reports', 'var(--orange)', [['trialBalance','Trial Balance'],['incomeStatement','Income Statement'],['balanceSheet','Balance Sheet'],['inventoryValuation','Inventory Valuation'],['auditLog','Audit Log']]],
+    ['Users', 'var(--blue)', [['usersList','Users'],['userDetail','User Detail'],['createUser','Invite User'],['rolesPermissions','Roles & Permissions']]],
+    ['Settings · Org', 'var(--green)', [['settingsHub','Settings Hub'],['setCompany','Company Profile'],['setFinancial','Financial'],['setTaxes','Taxes'],['setCurrencies','Currencies'],['setNumbering','Numbering'],['setBranches','Branches & Stores']]],
+    ['Settings · Team', 'var(--orange)', [['rolesList','Roles'],['roleEditor','Role Editor'],['tenants','Workspaces']]],
+    ['Settings · Platform', 'var(--blue)', [['setIntegrations','Integrations'],['setWebhooks','Webhooks'],['setApiKeys','API Keys'],['setNotifications','Notifications'],['setBilling','Billing & Plan'],['setBackup','Backup & Export']]],
+  ];
+  const total = groups.reduce((s,g)=>s+g[2].length,0);
+  document.getElementById('screens').innerHTML = groups.map(([title,color,items])=>`
+    <div class="card">
+      <div class="hd"><span class="bar" style="background:${color}"></span><span class="lbl">${title}</span><span class="count">${items.length}</span></div>
+      <div class="scr">${items.map(([id,nm])=>`<div class="row"><span class="id">${id}</span><span class="nm">${nm}</span></div>`).join('')}</div>
+    </div>`).join('');
+</script>
+</body>
+</html>

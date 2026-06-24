@@ -1,0 +1,978 @@
+// ============================================================
+// VIEW — Mobile Dashboard v2 (ports Mobile Dashboard.html)
+// Exact-style rebuild: workspace header · good morning · domain
+// tabs · view/currency/period row · metric cards / chart view ·
+// quick actions · recent ops · needs attention · FAB · bottom nav.
+// Dark + English (the .html default tweaks). Self-contained.
+// ============================================================
+
+import 'dart:math' as math;
+import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import '../../../../design_system/kit.dart';
+import '../../data/datasources/mobile_dashboard_data.dart';
+
+class MobileDashboardScreen extends StatefulWidget {
+  const MobileDashboardScreen({super.key});
+  @override
+  State<MobileDashboardScreen> createState() => _MobileDashboardScreenState();
+}
+
+class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
+  String _tab = 'banking';
+  String _cur = 'SAR';
+  String _period = 'week';
+  String _view = 'cards';
+  String? _chartMetric;
+  MdWorkspace _ws = mdWorkspaces[0];
+  bool _wsOpen = false;
+  bool _drawerOpen = false;
+  bool _online = true;
+  bool _loading = false;
+  final _scrollCtrl = ScrollController();
+
+  MdTab get _cfg => mdTabs.firstWhere((t) => t.id == _tab);
+
+  void _toast(String msg) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Row(mainAxisSize: MainAxisSize.min, children: [const Icon(Icons.check_rounded, size: 15, color: M.bg), const SizedBox(width: 8), Text(msg, style: const TextStyle(color: M.bg, fontWeight: FontWeight.w600, fontFamily: M.body))]),
+        backgroundColor: M.fg1, behavior: SnackBarBehavior.floating, duration: const Duration(milliseconds: 1600),
+        shape: const StadiumBorder(), width: 280,
+      ));
+  }
+
+  Future<void> _refresh() async {
+    setState(() => _loading = true);
+    await Future<void>.delayed(const Duration(milliseconds: 900));
+    if (mounted) setState(() => _loading = false);
+  }
+
+  void _switchWorkspace(MdWorkspace w) {
+    setState(() { _wsOpen = false; _ws = w; });
+    if (_scrollCtrl.hasClients) _scrollCtrl.jumpTo(0);
+    _refresh();
+  }
+
+  double _cardVal(MdCard c) => (c.val[_cur] ?? 0) * _ws.factor;
+  double _opAmt(MdOp o) => (o.amt[_cur] ?? 0) * _ws.factor;
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: M.bg,
+      body: Stack(children: [
+        Column(children: [
+          _appBar(),
+          if (!_online) _offlineBanner(),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: _refresh,
+              color: M.blue,
+              backgroundColor: M.surface,
+              child: ListView(
+                controller: _scrollCtrl,
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(18, 16, 18, 120),
+                children: [
+                  _title(),
+                  const SizedBox(height: 16),
+                  _domainTabs(),
+                  const SizedBox(height: 14),
+                  _controlsRow(),
+                  const SizedBox(height: 12),
+                  if (_view == 'cards') _cardsGrid() else _chartView(),
+                  const SizedBox(height: 24),
+                  _quickActions(),
+                  const SizedBox(height: 24),
+                  _recentOps(),
+                  const SizedBox(height: 24),
+                  _attention(),
+                ],
+              ),
+            ),
+          ),
+        ]),
+        _bottomNav(),
+        _fab(),
+        if (_wsOpen) _wsPopup(),
+        _drawer(),
+      ]),
+    );
+  }
+
+  // ── app bar (workspace selector · bell · menu) ──
+  Widget _appBar() {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(18, MediaQuery.of(context).padding.top + 14, 18, 12),
+          decoration: const BoxDecoration(color: Color(0xE6111318), border: Border(bottom: BorderSide(color: M.border))),
+          child: Row(children: [
+            Expanded(
+              child: _Press(
+                onTap: () => setState(() => _wsOpen = !_wsOpen),
+                child: Row(children: [
+                  Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: tint(M.blue, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of('grid'), size: 19, color: M.blue)),
+                  const SizedBox(width: 10),
+                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 14, color: M.fg1)),
+                    Text(_ws.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                  ])),
+                  AnimatedRotation(turns: _wsOpen ? 0.5 : 0, duration: const Duration(milliseconds: 200), child: Icon(MIcons.of('chevD'), size: 15, color: M.fg3)),
+                ]),
+              ),
+            ),
+            const SizedBox(width: 10),
+            _iconBox('bell', () => _toast('Notifications'), badge: '8'),
+            const SizedBox(width: 8),
+            _iconBox('menu', () => setState(() => _drawerOpen = true)),
+          ]),
+        ),
+      ),
+    );
+  }
+
+  Widget _offlineBanner() {
+    return Container(
+      width: double.infinity,
+      color: tint(M.orange, 0x29),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+      child: Row(children: [
+        Icon(MIcons.of('ban'), size: 15, color: M.orange),
+        const SizedBox(width: 8),
+        const Expanded(child: Text("You're offline — showing last-known data", style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: FontWeight.w600, color: M.orange))),
+      ]),
+    );
+  }
+
+  Widget _iconBox(String icon, VoidCallback onTap, {String? badge}) {
+    return _Press(
+      onTap: onTap,
+      child: Container(
+        width: 38, height: 38, alignment: Alignment.center,
+        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        child: Stack(clipBehavior: Clip.none, alignment: Alignment.center, children: [
+          Icon(MIcons.of(icon), size: 18, color: M.fg1),
+          if (badge != null) Positioned(top: -8, right: -8, child: Container(
+            constraints: const BoxConstraints(minWidth: 15), height: 15, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 3),
+            decoration: BoxDecoration(color: M.red, borderRadius: BorderRadius.circular(999), border: Border.all(color: M.bg, width: 1.5)),
+            child: Text(badge, style: const TextStyle(fontFamily: M.mono, fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white)),
+          )),
+        ]),
+      ),
+    );
+  }
+
+  Widget _wsPopup() {
+    return Positioned.fill(
+      child: Stack(children: [
+        GestureDetector(onTap: () => setState(() => _wsOpen = false), child: Container(color: Colors.transparent)),
+        Positioned(
+          top: MediaQuery.of(context).padding.top + 60, left: 18, right: 18,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(14), boxShadow: const [BoxShadow(color: Color(0x80000000), blurRadius: 28, offset: Offset(0, 12))]),
+              child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                const Padding(padding: EdgeInsets.fromLTRB(10, 8, 10, 6), child: Text('SWITCH WORKSPACE', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: M.fg3))),
+                for (final w in mdWorkspaces)
+                  GestureDetector(
+                    onTap: () => _switchWorkspace(w),
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      padding: const EdgeInsets.all(10), constraints: const BoxConstraints(minHeight: 48),
+                      decoration: BoxDecoration(color: w.id == _ws.id ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(8)),
+                      child: Row(children: [
+                        Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: w.id == _ws.id ? M.blue : M.input, borderRadius: BorderRadius.circular(9)), child: Text(w.name[0], style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 14, color: w.id == _ws.id ? Colors.white : M.fg3))),
+                        const SizedBox(width: 11),
+                        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(w.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1)),
+                          Text(w.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                        ])),
+                        if (w.id == _ws.id) Icon(MIcons.of('check'), size: 16, color: M.blue),
+                      ]),
+                    ),
+                  ),
+              ]),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  // ── side drawer (slides from start edge) ──
+  Widget _drawer() {
+    return IgnorePointer(
+      ignoring: !_drawerOpen,
+      child: AnimatedOpacity(
+        opacity: _drawerOpen ? 1 : 0,
+        duration: const Duration(milliseconds: 200),
+        child: Stack(children: [
+          GestureDetector(onTap: () => setState(() => _drawerOpen = false), child: Container(color: Colors.black.withOpacity(0.5))),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 260),
+            curve: Curves.easeOutCubic,
+            top: 0, bottom: 0,
+            left: _drawerOpen ? 0 : -300,
+            width: 300,
+            child: Material(
+              color: M.surface,
+              child: Column(children: [
+                // workspace header
+                Container(
+                  padding: EdgeInsets.fromLTRB(18, MediaQuery.of(context).padding.top + 18, 18, 16),
+                  decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                  child: Row(children: [
+                    Container(width: 42, height: 42, alignment: Alignment.center, decoration: BoxDecoration(color: tint(M.blue, 0x29), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('grid'), size: 20, color: M.blue)),
+                    const SizedBox(width: 12),
+                    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
+                      Text(_ws.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                    ])),
+                  ]),
+                ),
+                // nav + preferences
+                Expanded(child: ListView(padding: const EdgeInsets.all(10), children: [
+                  for (final it in const [('Home', 'home'), ('Accounts', 'inbox'), ('Journal', 'doc'), ('Contacts', 'user'), ('Reports', 'poll'), ('Settings', 'dots')])
+                    _drawerItem(it.$1, it.$2),
+                  Container(margin: const EdgeInsets.symmetric(vertical: 8), height: 1, color: M.border),
+                  const Padding(padding: EdgeInsets.fromLTRB(12, 2, 12, 6), child: Text('PREFERENCES', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+                  _drawerSeg('Connection', _online ? 0 : 1, const ['Online', 'Offline'], (i) => setState(() => _online = i == 0)),
+                ])),
+                // sign out
+                Container(
+                  decoration: const BoxDecoration(border: Border(top: BorderSide(color: M.border))),
+                  padding: EdgeInsets.fromLTRB(10, 12, 10, MediaQuery.of(context).padding.bottom + 14),
+                  child: _Press(
+                    onTap: () { setState(() => _drawerOpen = false); _toast('Sign out'); },
+                    child: Container(
+                      constraints: const BoxConstraints(minHeight: 48), padding: const EdgeInsets.all(12),
+                      child: Row(children: [
+                        Icon(MIcons.of('ban'), size: 19, color: M.red),
+                        const SizedBox(width: 12),
+                        const Text('Sign out', style: TextStyle(fontFamily: M.body, fontSize: 14.5, fontWeight: FontWeight.w600, color: M.red)),
+                      ]),
+                    ),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+
+  Widget _drawerItem(String label, String icon) {
+    return _Press(
+      onTap: () { setState(() => _drawerOpen = false); _toast(label); },
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 48), padding: const EdgeInsets.all(12),
+        child: Row(children: [
+          Icon(MIcons.of(icon), size: 19, color: M.fg2),
+          const SizedBox(width: 12),
+          Expanded(child: Text(label, style: const TextStyle(fontFamily: M.body, fontSize: 14.5, fontWeight: FontWeight.w600, color: M.fg1))),
+          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+        ]),
+      ),
+    );
+  }
+
+  Widget _drawerSeg(String label, int value, List<String> options, ValueChanged<int> onChange) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(label, style: const TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.fg2)),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+          child: Row(children: [
+            for (int i = 0; i < options.length; i++)
+              Expanded(child: GestureDetector(
+                onTap: () => onChange(i),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150), constraints: const BoxConstraints(minHeight: 32), alignment: Alignment.center,
+                  decoration: BoxDecoration(color: i == value ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(6)),
+                  child: Text(options[i], style: TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: i == value ? FontWeight.w700 : FontWeight.w500, color: i == value ? Colors.white : M.fg3)),
+                ),
+              )),
+          ]),
+        ),
+      ]),
+    );
+  }
+
+  Widget _title() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
+      Text('GOOD MORNING', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.3, color: M.blue)),
+      SizedBox(height: 3),
+      Text('Dashboard', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -0.8, color: M.fg1)),
+    ]);
+  }
+
+  // ── domain tabs ──
+  Widget _domainTabs() {
+    return Container(
+      decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+      child: Row(children: [
+        for (final t in mdTabs) Expanded(child: _domainTab(t)),
+      ]),
+    );
+  }
+
+  Widget _domainTab(MdTab t) {
+    final on = t.id == _tab;
+    return GestureDetector(
+      onTap: () => setState(() { _tab = t.id; _chartMetric = null; }),
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 44),
+        padding: const EdgeInsets.fromLTRB(4, 10, 4, 12),
+        child: Stack(alignment: Alignment.bottomCenter, children: [
+          Center(child: Text(t.label, style: TextStyle(fontFamily: M.body, fontSize: 15, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? M.fg1 : M.fg3))),
+          AnimatedContainer(duration: const Duration(milliseconds: 200), margin: const EdgeInsets.symmetric(horizontal: 6), height: 2.5, decoration: BoxDecoration(color: M.blue.withOpacity(on ? 1 : 0), borderRadius: BorderRadius.circular(3))),
+        ]),
+      ),
+    );
+  }
+
+  // ── view popup + currency + period ──
+  Widget _controlsRow() {
+    return Row(children: [
+      _viewToggle(),
+      const SizedBox(width: 8),
+      _currencyPopup(),
+      const Spacer(),
+      _periodSeg(),
+    ]);
+  }
+
+  Widget _viewToggle() {
+    final isChart = _view == 'chart';
+    return GestureDetector(
+      onTap: () => setState(() => _view = isChart ? 'cards' : 'chart'),
+      child: Container(
+        height: 34, padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          Icon(MIcons.of(isChart ? 'poll' : 'grid'), size: 16, color: M.fg1),
+          const SizedBox(width: 5),
+          Text(isChart ? 'Charts' : 'Cards', style: const TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.fg1)),
+        ]),
+      ),
+    );
+  }
+
+  Widget _currencyPopup() {
+    return PopupMenuButton<String>(
+      tooltip: 'Display currency',
+      color: M.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: M.borderStrong)),
+      onSelected: (v) => setState(() => _cur = v),
+      itemBuilder: (_) => [
+        for (final c in mdCurrencies)
+          PopupMenuItem<String>(value: c.$1, child: Row(children: [
+            SizedBox(width: 42, child: Text(c.$1, style: TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: c.$1 == _cur ? M.blue : M.fg1))),
+            Expanded(child: Text(c.$2, style: const TextStyle(fontFamily: M.body, fontSize: 13, color: M.fg2))),
+            if (c.$1 == _cur) Icon(MIcons.of('check'), size: 16, color: M.blue),
+          ])),
+      ],
+      child: Container(
+        height: 34, padding: const EdgeInsets.symmetric(horizontal: 11),
+        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.fg1)),
+          const SizedBox(width: 4),
+          Icon(MIcons.of('chevD'), size: 14, color: M.fg3),
+        ]),
+      ),
+    );
+  }
+
+  Widget _periodSeg() {
+    return Row(mainAxisSize: MainAxisSize.min, children: [
+      const Text('COMPARE', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: M.fg3)),
+      const SizedBox(width: 8),
+      Container(
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          for (final p in const ['day', 'week', 'month']) _periodOpt(p),
+        ]),
+      ),
+    ]);
+  }
+
+  Widget _periodOpt(String p) {
+    final on = p == _period;
+    final label = p == 'day' ? 'Day' : (p == 'week' ? 'Week' : 'Month');
+    return GestureDetector(
+      onTap: () => setState(() => _period = p),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150), constraints: const BoxConstraints(minHeight: 28),
+        alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 11),
+        decoration: BoxDecoration(color: on ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(6)),
+        child: Text(label, style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? Colors.white : M.fg3)),
+      ),
+    );
+  }
+
+  // ── metric cards grid ──
+  Widget _cardsGrid() {
+    return GridView.count(
+      crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.45,
+      children: [for (final c in _cfg.cards) _metricCard(c)],
+    );
+  }
+
+  Widget _metricCard(MdCard c) {
+    final tr = c.trend[_period];
+    final trColor = tr == null ? M.fg4 : (tr.up ? M.green : M.red);
+    return Stack(children: [
+      Container(
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
+        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        child: _loading
+            ? Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: const [
+                _Bone(w: 80, h: 9), SizedBox(height: 12), _Bone(w: 110, h: 20), SizedBox(height: 12), _Bone(w: 60, h: 9),
+              ])
+            : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(c.label.toUpperCase(), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10.5, letterSpacing: 0.5, color: M.fg2)),
+                const SizedBox(height: 9),
+                Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+                  Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 10, fontWeight: FontWeight.w500, color: M.fg3)),
+                  const SizedBox(width: 5),
+                  Flexible(child: Text(mdNum(_cardVal(c)), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: M.fg1))),
+                ]),
+                const SizedBox(height: 9),
+                SizedBox(height: 16, child: tr == null
+                    ? const Text('—', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg4))
+                    : Row(children: [
+                        Text(tr.up ? '▲' : '▼', style: TextStyle(fontSize: 10, height: 1, color: trColor)),
+                        const SizedBox(width: 5),
+                        Text('${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
+                      ])),
+              ]),
+      ),
+      PositionedDirectional(start: 0, top: 14, bottom: 14, child: Container(width: 3, decoration: BoxDecoration(color: mdMarker(c.marker), borderRadius: BorderRadius.circular(3)))),
+    ]);
+  }
+
+  // ── chart view ──
+  Widget _chartView() {
+    final cards = _cfg.cards;
+    final sel = cards.firstWhere((c) => c.id == _chartMetric, orElse: () => cards.first);
+    final tr = sel.trend[_period];
+    final trColor = tr == null ? M.fg4 : (tr.up ? M.green : M.red);
+    final axis = mdAxis[_period]!;
+    final maxVal = cards.map(_cardVal).fold(0.0, (a, b) => a > b ? a : b);
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      // metric chips
+      SizedBox(height: 32, child: ListView.separated(
+        scrollDirection: Axis.horizontal, itemCount: cards.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (_, i) {
+          final c = cards[i];
+          final on = c.id == sel.id;
+          final mc = mdMarker(c.marker);
+          return GestureDetector(
+            onTap: () => setState(() => _chartMetric = c.id),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(color: on ? tint(mc, 0x29) : M.input, border: Border.all(color: on ? Colors.transparent : M.border), borderRadius: BorderRadius.circular(999)),
+              child: Row(mainAxisSize: MainAxisSize.min, children: [
+                Container(width: 7, height: 7, decoration: BoxDecoration(color: mc, shape: BoxShape.circle)),
+                const SizedBox(width: 7),
+                Text(c.label, style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? mc : M.fg3)),
+              ]),
+            ),
+          );
+        },
+      )),
+      const SizedBox(height: 14),
+      // chart card
+      Container(
+        padding: const EdgeInsets.fromLTRB(14, 16, 14, 10),
+        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('Trend over · ${_period[0].toUpperCase()}${_period.substring(1)}', style: const TextStyle(fontFamily: M.body, fontSize: 11, fontWeight: FontWeight.w600, color: M.fg3)),
+              const SizedBox(height: 4),
+              Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+                Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 11, fontWeight: FontWeight.w500, color: M.fg3)),
+                const SizedBox(width: 5),
+                Text(mdNum(_cardVal(sel)), style: const TextStyle(fontFamily: M.mono, fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: M.fg1)),
+              ]),
+            ])),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
+              decoration: BoxDecoration(color: tint(trColor, 0x24), borderRadius: BorderRadius.circular(999)),
+              child: Text(tr == null ? '—' : '${tr.up ? '▲' : '▼'} ${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
+            ),
+          ]),
+          const SizedBox(height: 6),
+          SizedBox(height: 132, child: CustomPaint(painter: _TrendPainter(
+            values: sel.series[_period]!.map((s) => s * _cardVal(sel)).toList(),
+            color: mdMarker(sel.marker), axis: axis,
+          ))),
+        ]),
+      ),
+      const SizedBox(height: 14),
+      // breakdown bars
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Text('Breakdown', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 13.5, color: M.fg1)),
+          const SizedBox(height: 1),
+          const Text('Share of this domain', style: TextStyle(fontFamily: M.body, fontSize: 11, color: M.fg3)),
+          const SizedBox(height: 13),
+          for (final c in cards) _breakdownBar(c, maxVal),
+        ]),
+      ),
+    ]);
+  }
+
+  Widget _breakdownBar(MdCard c, double max) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 13),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+          Expanded(child: Text(c.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: FontWeight.w600, color: M.fg2))),
+          const SizedBox(width: 10),
+          Text('$_cur ${mdNum(_cardVal(c))}', style: const TextStyle(fontFamily: M.mono, fontSize: 12.5, fontWeight: FontWeight.w700, color: M.fg1)),
+        ]),
+        const SizedBox(height: 6),
+        ClipRRect(borderRadius: BorderRadius.circular(6), child: Stack(children: [
+          Container(height: 8, color: M.input),
+          LayoutBuilder(builder: (_, cns) => AnimatedContainer(
+            duration: const Duration(milliseconds: 500), curve: Curves.easeOut,
+            height: 8, width: (max == 0 ? 0 : _cardVal(c) / max).clamp(0.04, 1.0) * cns.maxWidth,
+            decoration: BoxDecoration(color: mdMarker(c.marker), borderRadius: BorderRadius.circular(6)),
+          )),
+        ])),
+      ]),
+    );
+  }
+
+  // ── quick actions ──
+  Widget _quickActions() {
+    final actions = _cfg.actions.take(7).toList();
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      _secHead('Quick Actions', 'blue', trailing: _viewAllBtn(() => _openActions())),
+      GridView.count(
+        crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
+        children: [
+          for (final a in actions) _actionTile(a.icon, a.label, M.blue, () => _toast('Opening ${a.label}')),
+          _actionTile('dots', 'View all', M.fg3, _openActions, isMore: true),
+        ],
+      ),
+    ]);
+  }
+
+  Widget _actionTile(String icon, String label, Color color, VoidCallback onTap, {bool isMore = false}) {
+    return _Press(
+      onTap: onTap,
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
+          width: 46, height: 46, alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isMore ? Colors.transparent : tint(color, 0x21),
+            border: isMore ? Border.all(color: M.borderStrong, width: 1.5) : null,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Icon(MIcons.of(icon), size: 20, color: color),
+        ),
+        const SizedBox(height: 7),
+        Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: const TextStyle(fontFamily: M.body, fontSize: 11, fontWeight: FontWeight.w600, color: M.fg2)),
+      ]),
+    );
+  }
+
+  void _openActions() {
+    showModalBottomSheet<void>(
+      context: context, backgroundColor: M.surface, isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
+      builder: (ctx) => Padding(
+        padding: EdgeInsets.fromLTRB(18, 8, 18, MediaQuery.of(ctx).padding.bottom + 24),
+        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 14), decoration: BoxDecoration(color: M.borderStrong, borderRadius: BorderRadius.circular(4)))),
+          const Padding(padding: EdgeInsets.only(bottom: 12), child: Text('All Actions', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 18, color: M.fg1))),
+          for (final group in const [('create', 'Create new'), ('manage', 'Manage')])
+            if (_cfg.actions.any((a) => a.group == group.$1)) ...[
+              Padding(padding: const EdgeInsets.only(bottom: 10, top: 4), child: Text(group.$2.toUpperCase(), style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+              GridView.count(
+                crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
+                children: [for (final a in _cfg.actions.where((a) => a.group == group.$1)) _actionTile(a.icon, a.label, M.blue, () { Navigator.of(ctx).pop(); _toast('Opening ${a.label}'); })],
+              ),
+              const SizedBox(height: 18),
+            ],
+        ]),
+      ),
+    );
+  }
+
+  // ── recent operations ──
+  Widget _recentOps() {
+    final ops = _cfg.ops;
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      _secHead('Recent Operations', 'green', sub: 'Latest 5 in this domain', trailing: _viewAllBtn(() => _toast('Open journal'))),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        child: Column(children: [
+          if (_loading) for (int i = 0; i < 5; i++) _opSkeleton(i == 4)
+          else for (int i = 0; i < ops.length; i++) _opRow(ops[i], i == ops.length - 1),
+        ]),
+      ),
+    ]);
+  }
+
+  Widget _opRow(MdOp op, bool last) {
+    final amtColor = op.isCredit ? M.green : M.red;
+    final sign = op.isCredit ? '+' : '−';
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      child: Column(children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1))),
+          const SizedBox(width: 10),
+          Text('$sign$_cur ${mdNum(_opAmt(op), decimals: 2)}', style: TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
+        ]),
+        const SizedBox(height: 7),
+        Row(children: [
+          Text(op.ref, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.blue)),
+          const SizedBox(width: 8),
+          _pill(op.type, mdTone(op.tone)),
+          const Spacer(),
+          Text(op.time, style: const TextStyle(fontFamily: M.body, fontSize: 11, color: M.fg3)),
+        ]),
+      ]),
+    );
+  }
+
+  Widget _opSkeleton(bool last) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      child: Column(children: const [
+        Row(children: [Expanded(child: _Bone(w: 160, h: 13)), SizedBox(width: 12), _Bone(w: 64, h: 13)]),
+        SizedBox(height: 9),
+        Row(children: [_Bone(w: 110, h: 9), Spacer(), _Bone(w: 40, h: 9)]),
+      ]),
+    );
+  }
+
+  // ── needs attention ──
+  Widget _attention() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      _secHead('Needs Attention', 'orange', trailing: const Text('All domains', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3))),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        child: Column(children: [
+          for (int i = 0; i < mdAttention.length; i++) _attnRow(mdAttention[i], i == mdAttention.length - 1),
+        ]),
+      ),
+    ]);
+  }
+
+  Widget _attnRow(MdAttention it, bool last) {
+    final c = mdTone(it.tone);
+    return _Press(
+      onTap: () => _toast(it.label),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+        child: Row(children: [
+          Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: tint(c, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of(it.icon), size: 18, color: c)),
+          const SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(it.label, style: const TextStyle(fontFamily: M.body, fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1)),
+            const SizedBox(height: 1),
+            Text(it.desc, style: const TextStyle(fontFamily: M.body, fontSize: 11.5, color: M.fg3)),
+          ])),
+          const SizedBox(width: 8),
+          Container(constraints: const BoxConstraints(minWidth: 24), height: 24, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 7), decoration: BoxDecoration(color: tint(c, 0x29), borderRadius: BorderRadius.circular(999)), child: Text('${it.count}', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: c))),
+          const SizedBox(width: 6),
+          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+        ]),
+      ),
+    );
+  }
+
+  // ── shared bits ──
+  Widget _secHead(String title, String marker, {String? sub, Widget? trailing}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(children: [
+        Container(width: 4, height: 22, decoration: BoxDecoration(color: mdMarker(marker), borderRadius: BorderRadius.circular(4))),
+        const SizedBox(width: 10),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(title, style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 16, color: M.fg1)),
+          if (sub != null) Padding(padding: const EdgeInsets.only(top: 2), child: Text(sub, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body))),
+        ])),
+        if (trailing != null) trailing,
+      ]),
+    );
+  }
+
+  Widget _viewAllBtn(VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Row(mainAxisSize: MainAxisSize.min, children: [
+        const Text('View all', style: TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.blue)),
+        Icon(MIcons.of('chevR'), size: 14, color: M.blue),
+      ]),
+    );
+  }
+
+  Widget _pill(String label, Color c) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(color: tint(c, 0x24), borderRadius: BorderRadius.circular(999)),
+      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: M.body, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: c)),
+    );
+  }
+
+  // ── FAB search ──
+  Widget _fab() {
+    return PositionedDirectional(
+      end: 18, bottom: 92,
+      child: _Press(
+        onTap: _openSearch,
+        child: Container(
+          width: 54, height: 54, alignment: Alignment.center,
+          decoration: BoxDecoration(color: M.blue, borderRadius: BorderRadius.circular(18), boxShadow: [BoxShadow(color: tint(M.blue, 0xB3), blurRadius: 22, offset: const Offset(0, 8))]),
+          child: const Icon(Icons.search_rounded, size: 24, color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  void _openSearch() {
+    showModalBottomSheet<void>(
+      context: context, backgroundColor: M.bg, isScrollControlled: true, useSafeArea: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
+      builder: (_) => _SearchSheet(cur: _cur, factor: _ws.factor),
+    );
+  }
+
+  // ── bottom nav ──
+  Widget _bottomNav() {
+    final items = [('home', 'Home', true), ('inbox', 'Accounts', false), ('doc', 'Journal', false), ('dots', 'More', false)];
+    return Positioned(
+      left: 0, right: 0, bottom: 0,
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+          child: Container(
+            decoration: const BoxDecoration(color: Color(0xEB111318), border: Border(top: BorderSide(color: M.border))),
+            padding: EdgeInsets.only(top: 8, bottom: MediaQuery.of(context).padding.bottom + 10),
+            child: Row(children: [
+              for (final it in items)
+                Expanded(child: _Press(
+                  onTap: () => it.$3 ? null : _toast(it.$2),
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Icon(MIcons.of(it.$1), size: 21, color: it.$3 ? M.blue : M.fg3),
+                    const SizedBox(height: 4),
+                    Text(it.$2, style: TextStyle(fontFamily: M.body, fontSize: 10, fontWeight: it.$3 ? FontWeight.w700 : FontWeight.w500, color: it.$3 ? M.blue : M.fg3)),
+                  ]),
+                )),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── shimmer bone ──
+class _Bone extends StatelessWidget {
+  final double w, h;
+  const _Bone({required this.w, required this.h});
+  @override
+  Widget build(BuildContext context) => Container(width: w, height: h, decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(6)));
+}
+
+/// Tap target with a subtle press-scale (matches the web's :active feedback).
+class _Press extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onTap;
+  const _Press({required this.child, this.onTap});
+  @override
+  State<_Press> createState() => _PressState();
+}
+
+class _PressState extends State<_Press> {
+  bool _down = false;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      onTapDown: (_) => setState(() => _down = true),
+      onTapUp: (_) => setState(() => _down = false),
+      onTapCancel: () => setState(() => _down = false),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedScale(
+        scale: _down ? 0.96 : 1,
+        duration: const Duration(milliseconds: 90),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+// ── trend chart painter ──
+class _TrendPainter extends CustomPainter {
+  final List<double> values;
+  final Color color;
+  final List<String> axis;
+  _TrendPainter({required this.values, required this.color, required this.axis});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const padL = 8.0, padR = 8.0, padT = 14.0, padB = 22.0;
+    final iw = size.width - padL - padR;
+    final ih = size.height - padT - padB;
+    final n = values.length;
+    final minV = values.reduce(math.min);
+    final maxV = values.reduce(math.max);
+    final span = (maxV - minV) == 0 ? 1 : (maxV - minV);
+    final lo = minV - span * 0.18;
+    final hi = maxV + span * 0.12;
+    double xx(int i) => padL + (n == 1 ? 0.5 : i / (n - 1)) * iw;
+    double yy(double v) => padT + ih - ((v - lo) / (hi - lo)) * ih;
+
+    // dashed midline
+    final gp = Paint()..color = M.border..strokeWidth = 1;
+    final gy = padT + ih * 0.5;
+    double dx = padL;
+    while (dx < size.width - padR) { canvas.drawLine(Offset(dx, gy), Offset(dx + 3, gy), gp); dx += 7; }
+
+    final pts = [for (int i = 0; i < n; i++) Offset(xx(i), yy(values[i]))];
+
+    final area = Path()..moveTo(pts.first.dx, padT + ih);
+    for (final p in pts) area.lineTo(p.dx, p.dy);
+    area.lineTo(pts.last.dx, padT + ih);
+    area.close();
+    canvas.drawPath(area, Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [color.withOpacity(0.30), color.withOpacity(0.02)]).createShader(Rect.fromLTWH(0, padT, size.width, ih)));
+
+    final line = Path()..moveTo(pts.first.dx, pts.first.dy);
+    for (final p in pts.skip(1)) line.lineTo(p.dx, p.dy);
+    canvas.drawPath(line, Paint()..color = color..style = PaintingStyle.stroke..strokeWidth = 2.4..strokeCap = StrokeCap.round..strokeJoin = StrokeJoin.round);
+
+    canvas.drawCircle(pts.last, 4.5, Paint()..color = color);
+    canvas.drawCircle(pts.last, 4.5, Paint()..color = M.surface..style = PaintingStyle.stroke..strokeWidth = 2.5);
+
+    for (int i = 0; i < axis.length; i++) {
+      final idx = ((i / (axis.length - 1)) * (n - 1)).round();
+      final tp = TextPainter(text: TextSpan(text: axis[i], style: const TextStyle(color: M.fg3, fontSize: 10, fontFamily: M.mono)), textDirection: TextDirection.ltr)..layout();
+      tp.paint(canvas, Offset(xx(idx) - tp.width / 2, size.height - 16));
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _TrendPainter old) => old.values != values || old.color != color;
+}
+
+// ── global search sheet ──
+class _SearchSheet extends StatefulWidget {
+  final String cur;
+  final double factor;
+  const _SearchSheet({required this.cur, required this.factor});
+  @override
+  State<_SearchSheet> createState() => _SearchSheetState();
+}
+
+class _SearchSheetState extends State<_SearchSheet> {
+  String _q = '';
+  @override
+  Widget build(BuildContext context) {
+    final all = [for (final t in mdTabs) for (final o in t.ops) (o, t.label)];
+    final ql = _q.trim().toLowerCase();
+    final results = ql.isEmpty ? all : all.where((e) => '${e.$1.ref} ${e.$1.desc} ${e.$1.type}'.toLowerCase().contains(ql)).toList();
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+          child: Row(children: [
+            GestureDetector(onTap: () => Navigator.of(context).pop(), child: Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of('back'), size: 18, color: M.fg1))),
+            const SizedBox(width: 10),
+            Expanded(child: Container(
+              height: 42, padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(10)),
+              child: Row(children: [
+                const Icon(Icons.search_rounded, size: 17, color: M.fg3),
+                const SizedBox(width: 9),
+                Expanded(child: TextField(
+                  autofocus: true, onChanged: (v) => setState(() => _q = v), cursorColor: M.blue,
+                  style: const TextStyle(fontFamily: M.body, fontSize: 14, color: M.fg1),
+                  decoration: const InputDecoration(isCollapsed: true, border: InputBorder.none, hintText: 'Search all operations…', hintStyle: TextStyle(color: M.fg3, fontFamily: M.body)),
+                )),
+              ]),
+            )),
+          ]),
+        ),
+        const Divider(height: 1, color: M.border),
+        Flexible(child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 14, 16, 28), shrinkWrap: true,
+          children: [
+            Padding(padding: const EdgeInsets.only(bottom: 10), child: Text(_q.trim().isEmpty ? 'SEARCH ACROSS BANKING, ACCOUNTING & COMMERCIAL' : 'RESULTS · ${results.length}', style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+            if (results.isEmpty)
+              const Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: Text('No matching operations', style: TextStyle(color: M.fg2, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: M.body))))
+            else
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+                child: Column(children: [
+                  for (int i = 0; i < results.length; i++) _row(results[i].$1, results[i].$2, i == results.length - 1),
+                ]),
+              ),
+          ],
+        )),
+      ]),
+    );
+  }
+
+  Widget _row(MdOp op, String domain, bool last) {
+    final amtColor = op.isCredit ? M.green : M.red;
+    final sign = op.isCredit ? '+' : '−';
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      child: Column(children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1))),
+          const SizedBox(width: 10),
+          Text('$sign${widget.cur} ${mdNum((op.amt[widget.cur] ?? 0) * widget.factor, decimals: 2)}', style: TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
+        ]),
+        const SizedBox(height: 7),
+        Row(children: [
+          Text(op.ref, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.blue)),
+          const Spacer(),
+          Text(domain.toUpperCase(), style: const TextStyle(fontFamily: M.body, fontSize: 10.5, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: M.fg3)),
+        ]),
+      ]),
+    );
+  }
+}

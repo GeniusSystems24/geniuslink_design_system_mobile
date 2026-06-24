@@ -1,0 +1,24 @@
+name: gl_mobile_app
+description: GeniusLink Mobile — full multi-screen app (MVC) ported from the web UI kit.
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # The shared GeniusLink Design System (sibling package) — provides the
+  # generic Tree<T> used by the Account Tree screen, plus the other kit
+  # widgets. Path-resolved against the project root.
+  geniuslink_design_system: ^2.8.1
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  # Fonts fall back to the platform UI font until the GL families are added
+  # under assets/fonts/ (Manrope · Inter · JetBrainsMono · NotoNaskhArabic).
