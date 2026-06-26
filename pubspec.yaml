@@ -33,6 +33,10 @@ dependencies:
   # Account Tree screen (TreeNode<T> · TreeController<T> · search · expand /
   # collapse · keyboard nav · indent guides). Consumed by accounts screens.
   super_tree_field: ^0.3.0
+  super_navigation_sidebar:
+    path: ../super_navigation_sidebar
+  super_tab_bar:
+    path: ../super_tab_bar
 
 dev_dependencies:
   flutter_test:

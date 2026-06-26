@@ -3,36 +3,8 @@
 // File placement:  lib/app/theme/design_system_theme.dart
 // ============================================================
 
-import 'package:flutter/material.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
 import '../../design_system/tokens/m_colors.dart';
-
-const TreeThemeData kMobileTreeTheme = TreeThemeData(
-  bg: M.bg,
-  surface: M.surface,
-  inputBg: M.input,
-  hover: M.card2,
-  border: M.border,
-  borderStrong: M.borderStrong,
-  guide: Color(0xFF3A3D46),
-  fg1: M.fg1,
-  fg2: M.fg2,
-  fg3: M.fg3,
-  fg4: M.fg4,
-);
-
-const EditableTableThemeData kMobileTableTheme = EditableTableThemeData(
-  bg: M.bg,
-  surface: M.surface,
-  inputBg: M.input,
-  hover: M.card2,
-  border: M.border,
-  borderStrong: M.borderStrong,
-  fg1: M.fg1,
-  fg2: M.fg2,
-  fg3: M.fg3,
-  fg4: M.fg4,
-);
 
 const AutoSuggestionsBoxThemeData kMobileSuggestTheme =
     AutoSuggestionsBoxThemeData(

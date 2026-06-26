@@ -97,28 +97,30 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
       _ReportMeta(period: _period, onPeriod: (v) => setState(() => _period = v), badges: const [('Currency', 'SAR'), ('Basis', 'Accrual'), ('Status', 'Balanced')]),
       MCard(marker: M.green, title: 'All Accounts', sub: 'Debit & credit balances as of period end', pad: 8, children: [
         MTable(
-          columns: const [
-            MCol('Code', fixed: 46),
-            MCol('Account', flex: 1),
-            MCol('Debit', fixed: 84, align: TextAlign.right),
-            MCol('Credit', fixed: 84, align: TextAlign.right),
+          columns: [
+            const MCol('code', 'Code', fixed: 60, mono: true),
+            const MCol('account', 'Account', flex: 1, bold: true),
+            MCol('debit', 'Debit', fixed: 110, align: TextAlign.right, numeric: true,
+                format: (v) => switch (v) { final int n when n != 0 => _money(n), _ => '\u2014' },
+                styles: {
+                  (_, __, row, cell) => (cell.value as num?) != 0: const CellStyle(foreground: M.green),
+                  (_, __, row, cell) => true: const CellStyle(foreground: M.fg4),
+                }),
+            MCol('credit', 'Credit', fixed: 110, align: TextAlign.right, numeric: true,
+                format: (v) => switch (v) { final int n when n != 0 => _money(n), _ => '\u2014' },
+                styles: {
+                  (_, __, row, cell) => (cell.value as num?) != 0: const CellStyle(foreground: M.red),
+                  (_, __, row, cell) => true: const CellStyle(foreground: M.fg4),
+                }),
           ],
-          rows: [
-            for (final r in rows)
-              [
-                mcell(r.$1, mono: true, muted: true),
-                mcell(r.$2, bold: true),
-                Text(r.$3 != 0 ? _money(r.$3) : '—', textAlign: TextAlign.right, style: TextStyle(fontFamily: M.mono, fontSize: 12.5, color: r.$3 != 0 ? M.green : M.fg4)),
-                Text(r.$4 != 0 ? _money(r.$4) : '—', textAlign: TextAlign.right, style: TextStyle(fontFamily: M.mono, fontSize: 12.5, color: r.$4 != 0 ? M.red : M.fg4)),
-              ],
-          ],
+          rows: [for (final r in rows) {'code': r.$1, 'account': r.$2, 'debit': r.$3, 'credit': r.$4}],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(children: [
             const Expanded(child: Eyebrow('Totals · balanced', color: M.green, size: 10)),
-            SizedBox(width: 84, child: Text(_money(totDr), textAlign: TextAlign.right, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.green))),
-            SizedBox(width: 84, child: Text(_money(totCr), textAlign: TextAlign.right, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.green))),
+            SizedBox(width: 110, child: Text(_money(totDr), textAlign: TextAlign.right, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.green))),
+            SizedBox(width: 110, child: Text(_money(totCr), textAlign: TextAlign.right, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.green))),
           ]),
         ),
       ]),
@@ -232,23 +234,14 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
           searchHint: 'Search SKU, product or store…',
           itemNoun: 'item',
           itemNounPlural: 'items',
-          columns: const [
-            MCol('Item', flex: 1),
-            MCol('Qty', fixed: 56, align: TextAlign.right),
-            MCol('Value', fixed: 96, align: TextAlign.right),
+          columns: [
+            const MCol('item', 'Item', flex: 1),
+            MCol('qty', 'Qty', fixed: 70, align: TextAlign.right, numeric: true,
+                format: (v) => switch (v) { final int n when n != 0 => '$n', _ => '\u2014' }),
+            MCol('value', 'Value', fixed: 110, align: TextAlign.right, numeric: true,
+                format: (v) => _money((v as num?) ?? 0)),
           ],
-          rows: [
-            for (final r in visible)
-              [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
-                  Text(r.$2, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                  const SizedBox(height: 2),
-                  Text('${r.$1} · ${r.$5} · ${_money(r.$4)}', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
-                ]),
-                Text('${r.$3}', textAlign: TextAlign.right, style: TextStyle(fontFamily: M.mono, fontSize: 12.5, fontWeight: FontWeight.w600, color: r.$3 == 0 ? M.red : M.fg1)),
-                Text(_money(r.$3 * r.$4), textAlign: TextAlign.right, style: TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w600, color: r.$3 == 0 ? M.red : M.fg1)),
-              ],
-          ],
+          rows: [for (final r in visible) {'item': '${r.$2}\n${r.$1} · ${r.$5} · ${_money(r.$4)}', 'qty': r.$3, 'value': r.$3 * r.$4}],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -288,19 +281,11 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
           itemNoun: 'event',
           itemNounPlural: 'events',
           columns: const [
-            MCol('Entity', flex: 1),
-            MCol('Action', fixed: 92),
+            MCol('entity', 'Entity', flex: 1),
+            MCol('action', 'Action', fixed: 100),
           ],
           rows: [
-            for (final l in visible)
-              [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
-                  Text(l.$4, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
-                  const SizedBox(height: 3),
-                  Text('${l.$2} · ${l.$5} · ${l.$1}', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
-                ]),
-                Align(alignment: Alignment.centerLeft, child: Pill(l.$3, tone: l.$6)),
-              ],
+            for (final l in visible) {'entity': '${l.$4}\n${l.$2} · ${l.$5} · ${l.$1}', 'action': l.$3},
           ],
         ),
         if (visible.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 32), child: Center(child: Text('No log entries match.', style: TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),

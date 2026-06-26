@@ -13,39 +13,71 @@ class _Group {
 }
 
 const _menu = <_Group>[
-  _Group('Workspace', [('Mobile Dashboard', 'mobileDashboard'), ('Settings', 'settingsHub')]),
-  _Group('Accounts', [('Account Tree', 'accountTree'), ('Create Account Group', 'createGroup')]),
-  _Group('Products', [('Products List', 'productsList'), ('Create Product', 'createProduct')]),
+  _Group('Workspace',
+      [('Mobile Dashboard', 'mobileDashboard'), ('Settings', 'settingsHub')]),
+  _Group('Accounts', [
+    ('Account Tree', 'accountTree'),
+    ('Create Account Group', 'createGroup')
+  ]),
+  _Group('Products',
+      [('Products List', 'productsList'), ('Create Product', 'createProduct')]),
   _Group('Inventory', [
-    ('Inventory Dashboard', 'invDashboard'), ('Warehouses', 'warehousesList'), ('Stock Transfers', 'transferList'),
-    ('Issue — Details', 'issueDetail'), ('Receive Inventory', 'receiveCreate'), ('Receive — Details', 'receiveDetail'),
-    ('Transfer Inventory', 'transferCreate'), ('Transfer — Details', 'transferDetail'), ('Inventory Adjustment', 'adjustment'),
-    ('Stock Take', 'stockTake'), ('Categories', 'categories'), ('Units of Measure', 'uom'),
-    ('Price Lists', 'priceLists'), ('Barcode Print', 'barcodePrint'),
+    ('Inventory Dashboard', 'invDashboard'),
+    ('Warehouses', 'warehousesList'),
+    ('Stock Transfers', 'transferList'),
+    ('Issue — Details', 'issueDetail'),
+    ('Receive Inventory', 'receiveCreate'),
+    ('Receive — Details', 'receiveDetail'),
+    ('Transfer Inventory', 'transferCreate'),
+    ('Transfer — Details', 'transferDetail'),
+    ('Inventory Adjustment', 'adjustment'),
+    ('Stock Take', 'stockTake'),
+    ('Categories', 'categories'),
+    ('Units of Measure', 'uom'),
+    ('Price Lists', 'priceLists'),
+    ('Barcode Print', 'barcodePrint'),
   ]),
   _Group('Ledger', [
-    ('Journal Entries', 'journalList'), ('Create Journal Entry', 'createJournalEntry'),
-    ('Journal Entry Details', 'journalEntryDetail'), ('Opening Journal Entry', 'journal'), ('Financial Operation', 'opDetail'),
+    ('Journal Entries', 'journalList'),
+    ('Create Journal Entry', 'createJournalEntry'),
+    ('Journal Entry Details', 'journalEntryDetail'),
+    ('Opening Journal Entry', 'journal'),
+    ('Financial Operation', 'opDetail'),
   ]),
-  _Group('Sales · Customers', [('Customers', 'customersList'), ('Add Customer', 'createCustomer')]),
-  _Group('Procurement · Suppliers', [('Suppliers', 'suppliersList'), ('Add Supplier', 'createSupplier')]),
+  _Group('Sales · Customers',
+      [('Customers', 'customersList'), ('Add Customer', 'createCustomer')]),
+  _Group('Procurement · Suppliers',
+      [('Suppliers', 'suppliersList'), ('Add Supplier', 'createSupplier')]),
   _Group('Configuration', [
-    ('Currencies', 'currenciesList'), ('Add Currency', 'createCurrency'),
-    ('Exchange Rates', 'exchangeRateSetup'), ('Fiscal Year', 'fiscalYearSetup'),
+    ('Currencies', 'currenciesList'),
+    ('Add Currency', 'createCurrency'),
+    ('Exchange Rates', 'exchangeRateSetup'),
+    ('Fiscal Year', 'fiscalYearSetup'),
   ]),
   _Group('Banking · Cash', [
-    ('Create Deposit', 'createDeposit'), ('Deposit Receipt', 'depositDetail'),
-    ('Create Withdrawal', 'createWithdrawal'), ('Withdrawal Voucher', 'withdrawalDetail'),
+    ('Create Deposit', 'createDeposit'),
+    ('Deposit Receipt', 'depositDetail'),
+    ('Create Withdrawal', 'createWithdrawal'),
+    ('Withdrawal Voucher', 'withdrawalDetail'),
   ]),
   _Group('Banking · Transfers', [
-    ('Create Local Transfer', 'createLocalTransfer'), ('Local Transfer Details', 'localTransferDetail'),
-    ('Create External Transfer', 'createExternalTransfer'), ('External Wire Details', 'externalTransferDetail'),
+    ('Create Local Transfer', 'createLocalTransfer'),
+    ('Local Transfer Details', 'localTransferDetail'),
+    ('Create External Transfer', 'createExternalTransfer'),
+    ('External Wire Details', 'externalTransferDetail'),
   ]),
   _Group('Reports', [
-    ('Trial Balance', 'trialBalance'), ('Income Statement', 'incomeStatement'), ('Balance Sheet', 'balanceSheet'),
-    ('Inventory Valuation', 'inventoryValuation'), ('Audit Log', 'auditLog'),
+    ('Trial Balance', 'trialBalance'),
+    ('Income Statement', 'incomeStatement'),
+    ('Balance Sheet', 'balanceSheet'),
+    ('Inventory Valuation', 'inventoryValuation'),
+    ('Audit Log', 'auditLog'),
   ]),
-  _Group('Administration', [('Users', 'usersList'), ('Invite User', 'createUser'), ('Roles & Permissions', 'rolesPermissions')]),
+  _Group('Administration', [
+    ('Users', 'usersList'),
+    ('Invite User', 'createUser'),
+    ('Roles & Permissions', 'rolesPermissions')
+  ]),
 ];
 
 class MoreScreen extends StatefulWidget {
@@ -86,11 +118,21 @@ class _MoreScreenState extends State<MoreScreen> {
                   behavior: HitTestBehavior.opaque,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 13),
-                    decoration: BoxDecoration(border: i == g.items.length - 1 ? null : const Border(bottom: BorderSide(color: M.border))),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                      Text(g.items[i].$1, style: const TextStyle(fontSize: 14, color: M.fg1, fontFamily: M.body)),
-                      Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
-                    ]),
+                    decoration: BoxDecoration(
+                        border: i == g.items.length - 1
+                            ? null
+                            : const Border(
+                                bottom: BorderSide(color: M.border))),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(g.items[i].$1,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: M.fg1,
+                                  fontFamily: M.body)),
+                          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+                        ]),
                   ),
                 ),
             ]),

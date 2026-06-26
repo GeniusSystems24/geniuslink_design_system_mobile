@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
+import 'package:super_navigation_sidebar/super_navigation_sidebar.dart';
 import '../../design_system/tokens/m_colors.dart';
 import 'design_system_theme.dart';
 
@@ -15,5 +16,5 @@ ThemeData buildMobileTheme() => ThemeData(
   colorScheme: const ColorScheme.dark(primary: M.blue, surface: M.surface, background: M.bg),
   splashFactory: InkRipple.splashFactory,
   textSelectionTheme: const TextSelectionThemeData(cursorColor: M.blue, selectionColor: Color(0x554A7CFF)),
-  extensions: const [kMobileTreeTheme, kMobileTableTheme, kMobileSuggestTheme, SuperThemeData.dark],
+  extensions: const [kMobileSuggestTheme, SuperThemeData.dark, NavigationSidebarThemeData.dark],
 );

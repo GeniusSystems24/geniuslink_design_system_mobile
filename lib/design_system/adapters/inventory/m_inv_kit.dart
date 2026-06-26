@@ -8,6 +8,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart' hide FieldDensity;
+import 'package:super_form_field/super_form_field.dart';
 import '../../tokens/m_colors.dart';
 import '../../components/layout/m_icons.dart';
 import '../../components/layout/m_widgets.dart';
@@ -276,31 +278,13 @@ class ActionRow extends StatelessWidget {
   }
 }
 
-/// Quantity stepper (− value +).
-class QtyStepper extends StatelessWidget {
-  final int value;
-  const QtyStepper({super.key, required this.value});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
-      clipBehavior: Clip.antiAlias,
-      child: Row(mainAxisSize: MainAxisSize.min, children: [
-        const SizedBox(width: 36, height: 36, child: Icon(Icons.remove_rounded, size: 15, color: M.fg2)),
-        SizedBox(width: 34, child: Text('$value', textAlign: TextAlign.center, style: const TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1))),
-        const SizedBox(width: 36, height: 36, child: Icon(Icons.add_rounded, size: 15, color: M.fg2)),
-      ]),
-    );
-  }
-}
-
-/// Product line row with qty stepper + price/total.
+/// Product line row with editable qty + price/total.
 class ProductRow extends StatelessWidget {
   final String name, sku;
-  final int qty;
+  final SuperNumericFieldController qtyController;
   final String price, total, currency;
   final bool last;
-  const ProductRow({super.key, required this.name, required this.sku, required this.qty, required this.price, required this.total, this.currency = '\$', this.last = false});
+  const ProductRow({super.key, required this.name, required this.sku, required this.qtyController, required this.price, required this.total, this.currency = '\$', this.last = false});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -330,9 +314,20 @@ class ProductRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(children: [
-                Eyebrow('Qty', color: M.fg3, size: 9.5),
+                const Eyebrow('Qty', color: M.fg3, size: 9.5),
                 const SizedBox(width: 10),
-                QtyStepper(value: qty),
+                SizedBox(
+                  width: 140,
+                  child: SuperNumericFormField(
+                    controller: qtyController,
+                    decimals: 0,
+                    step: 1,
+                    min: 1,
+                    allowNegative: false,
+                    stepper: true,
+                    density: FieldDensity.compact,
+                  ),
+                ),
               ]),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -357,9 +352,35 @@ class AddProductBtn extends StatelessWidget {
   Widget build(BuildContext context) => _DashedButton(label: label);
 }
 
-/// Barcode scanner placeholder with corner brackets.
-class Scanner extends StatelessWidget {
-  const Scanner({super.key});
+/// Barcode scanner with manual SKU typeahead. Fires [onPick] when a product
+/// is selected (raw label, e.g. "CMT-90112 — Portland Cement Type I").
+class Scanner extends StatefulWidget {
+  final ValueChanged<String>? onPick;
+  const Scanner({super.key, this.onPick});
+  @override
+  State<Scanner> createState() => _ScannerState();
+}
+
+class _ScannerState extends State<Scanner> {
+  final _skuCtl = AutoSuggestionsBoxController<String>(
+    source: SuggestionSources.strings([
+      'CMT-90112 — Portland Cement Type I',
+      'STL-44021 — Structural Steel I-Beam',
+      'RBR-33210 — Rebar 16mm',
+      'PLY-55109 — Plywood 18mm',
+      'CBL-66112 — PVC Conduit 25mm',
+    ]),
+    allowFreeText: true,
+  );
+  final _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _skuCtl.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -381,9 +402,22 @@ class Scanner extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 46,
-          child: MBtn('Scan Manually', variant: MBtnVariant.secondary, full: true),
+        AutoSuggestionsBox<String>(
+          controller: _skuCtl,
+          focusNode: _focusNode,
+          hintText: 'Search or type SKU manually…',
+          bare: true,
+          fieldHeight: 46,
+          onSelected: (s) {
+            widget.onPick?.call(s.label);
+            _skuCtl.clear();
+            _focusNode.requestFocus();
+          },
+          onSubmitted: (raw) {
+            widget.onPick?.call(raw);
+            _skuCtl.clear();
+            _focusNode.requestFocus();
+          },
         ),
       ],
     );

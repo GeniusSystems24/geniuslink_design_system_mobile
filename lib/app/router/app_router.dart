@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/features/accounts/presentation/pages/create_account_screen.dart';
+import 'package:gl_mobile_app/features/accounts/presentation/pages/create_group_screen.dart';
+import 'package:gl_mobile_app/features/accounts/presentation/pages/group_detail_screen.dart';
+import 'package:gl_mobile_app/features/inventory/presentation/pages/create_product_screen.dart';
+import 'package:gl_mobile_app/features/inventory/presentation/pages/product_detail_screen.dart';
 import '../../workspace/presentation/bloc/nav_cubit.dart';
 import '../../design_system/kit.dart';
-
-// ============================================================
-// VIEW — Screen registry (ports SUB_TITLES + screen routing)
-// ------------------------------------------------------------
-// Single source mapping a screen id → its app-bar title/back target
-// and → its widget. Screens not yet ported render a PendingScreen
-// placeholder so the whole navigator stays runnable across batches.
-// ============================================================
-
-import 'package:flutter/material.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/accounts/presentation/pages/accounts_screens.dart';
 import '../../features/stores/presentation/pages/stores_screens.dart';
@@ -19,8 +14,21 @@ import '../../features/ledger/presentation/pages/ledger_screens.dart';
 import '../../features/ledger/presentation/pages/journal_screens.dart';
 import '../../features/banking/presentation/pages/banking_cash_screens.dart';
 import '../../features/banking/presentation/pages/banking_transfer_screens.dart';
-import '../../features/inventory/presentation/pages/inventory_screens.dart';
-import '../../features/inventory/presentation/pages/inventory_extras_screens.dart';
+import '../../features/inventory/presentation/pages/products_list_screen.dart';
+import '../../features/inventory/presentation/pages/issue_detail_screen.dart';
+import '../../features/inventory/presentation/pages/receive_create_screen.dart';
+import '../../features/inventory/presentation/pages/receive_detail_screen.dart';
+import '../../features/inventory/presentation/pages/transfer_create_screen.dart';
+import '../../features/inventory/presentation/pages/transfer_detail_screen.dart';
+import '../../features/inventory/presentation/pages/adjustment_screen.dart';
+import '../../features/inventory/presentation/pages/inv_dashboard_screen.dart';
+import '../../features/inventory/presentation/pages/stock_take_screen.dart';
+import '../../features/inventory/presentation/pages/categories_screen.dart';
+import '../../features/inventory/presentation/pages/uom_screen.dart';
+import '../../features/inventory/presentation/pages/price_lists_screen.dart';
+import '../../features/inventory/presentation/pages/barcode_print_screen.dart';
+import '../../features/inventory/presentation/pages/warehouses_list_screen.dart';
+import '../../features/inventory/presentation/pages/transfer_list_screen.dart';
 import '../../features/accounts/presentation/pages/accounts_extra_screens.dart';
 import '../../features/config/presentation/pages/currencies_screens.dart';
 import '../../features/contacts/presentation/pages/contacts_screens.dart';

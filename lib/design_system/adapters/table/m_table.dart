@@ -1,41 +1,98 @@
 // ============================================================
-// GeniusLink Mobile — MTable (ReadableTable adapter)
+// GeniusLink Mobile — MTable (SuperTable adapter)
 // MCol · mCellText · mcell · MTable
 // File placement:  lib/design_system/adapters/table/m_table.dart
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
+import 'package:super_table_field/super_table_field.dart';
 import '../../tokens/m_colors.dart';
 import '../../components/feedback/m_feedback.dart';
 
 // ============================================================
-// MTable — mobile wrapper over the design-system ReadableTable
+// Surface the full SuperField API through kit.dart.
+// ============================================================
+export 'package:super_table_field/super_table_field.dart'
+    show
+        SuperTable,
+        SuperColumn,
+        SuperTableController,
+        SuperRow,
+        SuperTableMode,
+        SuperSelectionMode,
+        SuperColumnType,
+        SuperAlign,
+        CellPos,
+        SuperCell,
+        SuperCellCondition,
+        CellStyle,
+        SuperTextColumn,
+        SuperNumberColumn,
+        SuperCurrencyColumn,
+        SuperEnumerationColumn,
+        SuperComboColumn,
+        SuperComputedColumn,
+        SuperDateColumn,
+        SuperTimeColumn,
+        SuperLinkColumn,
+        SuperCheckboxColumn,
+        SuperProgressColumn,
+        SuperReadonlyColumn,
+        SuperAgg,
+        SuperPill,
+        SuperTableSkin,
+        SuperDensity,
+        SuperThemeData,
+        AutoSuggestionsBoxThemeData;
+
+// ============================================================
+// MTable — mobile wrapper over the design-system SuperTable
 // ------------------------------------------------------------
 // For the genuinely tabular surfaces on mobile (trial balance,
 // exchange rates, journal lines, valuation …). One pre-built
-// widget per column — cells render as before, now inside the DS
-// grid with click-to-sort headers + TSV copy, an opt-in quick-
-// search bar (showSearch) and whole-row tap (onRowTap). Card
-// lists stay as cards; this is only for grids.
+// widget per column — cells render via typed columns from the
+// SuperTable controller, with click-to-sort headers, TSV copy,
+// an opt-in quick-search bar and whole-row tap (onRowTap).
 // ============================================================
 
 /// Column descriptor for [MTable]. [flex] (proportional) or [fixed] (px).
-/// Sortable by default (key derived from the cell's text); right-aligned or
-/// [numeric] columns sort numerically. Pass `sortable:false` to opt out.
+/// Sortable by default; right-aligned or [numeric] columns sort numerically.
+/// Pass `sortable:false` to opt out.
+///
+/// Use [styles] for conditional cell styling (foreground/background/weight per
+/// cell based on a condition lambda). Available through the `kit.dart` barrel.
 class MCol {
+  final String key;
   final String label;
   final int flex;
   final double? fixed;
   final TextAlign align;
   final bool sortable;
   final bool numeric;
-  const MCol(this.label, {this.flex = 1, this.fixed, this.align = TextAlign.left, this.sortable = true, bool? numeric})
-      : numeric = numeric ?? (align == TextAlign.right);
+  final bool mono;
+  final bool bold;
+  final String Function(dynamic value)? format;
+  final Map<SuperCellCondition, CellStyle>? styles;
+
+  const MCol(
+    this.key,
+    this.label, {
+    this.flex = 1,
+    this.fixed,
+    this.align = TextAlign.left,
+    this.sortable = true,
+    bool? numeric,
+    this.mono = false,
+    this.bold = false,
+    this.format,
+    this.styles,
+  }) : numeric = numeric ?? (align == TextAlign.right);
 }
 
-/// Best-effort plain text of a built cell widget — powers the MTable sort key,
-/// quick-search and TSV copy. Walks the wrappers our cells use.
+// ── backward-compat helpers ─────────────────────────────────
+
+/// Best-effort plain text of a built cell widget. Kept for backward
+/// compatibility; new code should rely on the data-driven SuperTable.
 String mCellText(Widget? w) {
   if (w == null) return '';
   if (w is Text) return w.data ?? (w.textSpan?.toPlainText() ?? '');
@@ -71,10 +128,15 @@ String mCellText(Widget? w) {
   return '';
 }
 
-num _mNumKey(String s) => double.tryParse(s.replaceAll(RegExp(r'[^0-9.\-]'), '')) ?? double.negativeInfinity;
-
-/// Styled text cell for an [MTable] row.
-Widget mcell(String text, {bool mono = false, bool muted = false, bool bold = false, Color? color, TextAlign align = TextAlign.left}) {
+/// Styled text cell for an [MTable] row. Kept for backward compatibility.
+Widget mcell(
+  String text, {
+  bool mono = false,
+  bool muted = false,
+  bool bold = false,
+  Color? color,
+  TextAlign align = TextAlign.left,
+}) {
   return Text(text,
       textAlign: align,
       maxLines: 1,
@@ -87,60 +149,219 @@ Widget mcell(String text, {bool mono = false, bool muted = false, bool bold = fa
       ));
 }
 
-class MTable extends StatelessWidget {
+// ── main widget ──────────────────────────────────────────────
+
+class MTable extends StatefulWidget {
   final List<MCol> columns;
-  final List<List<Widget>> rows;
+  final List<Map<String, dynamic>> rows;
   final bool sortable;
   final bool showSearch;
   final String searchHint;
   final String itemNoun;
   final String itemNounPlural;
   final void Function(int rowIndex)? onRowTap;
+
   const MTable({
     super.key,
     required this.columns,
     required this.rows,
     this.sortable = true,
     this.showSearch = false,
-    this.searchHint = 'Search…',
+    this.searchHint = 'Search\u2026',
     this.itemNoun = 'row',
     this.itemNounPlural = 'rows',
     this.onRowTap,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return ReadableTable<List<Widget>>(
-      columns: [
-        for (var i = 0; i < columns.length; i++)
-          ReadableColumn<List<Widget>>(
-            columns[i].label,
-            width: columns[i].fixed,
-            flex: columns[i].flex,
-            align: switch (columns[i].align) {
-              TextAlign.right => ReadableAlign.end,
-              TextAlign.center => ReadableAlign.center,
-              _ => ReadableAlign.start,
-            },
-            sortable: sortable && columns[i].sortable && columns[i].label.isNotEmpty,
-            sortKey: (row) {
-              final t = i < row.length ? mCellText(row[i]) : '';
-              return (columns[i].numeric ? _mNumKey(t) : t.toLowerCase()) as Comparable<dynamic>?;
-            },
-            copyText: (row) => i < row.length ? mCellText(row[i]) : '',
-            cell: (ctx, row) => i < row.length ? row[i] : const SizedBox.shrink(),
-          ),
-      ],
-      rows: rows,
-      hoverHighlight: true,
-      rowMinHeight: 0,
-      cellPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      selectionMode: onRowTap != null ? ReadableSelectionMode.singleRow : ReadableSelectionMode.none,
-      onRowTap: onRowTap == null ? null : (row, i) => onRowTap!(i),
-      showFilterBar: showSearch,
-      filterSearchHint: searchHint,
-      filterItemNoun: itemNoun,
-      filterItemNounPlural: itemNounPlural,
+  State<MTable> createState() => _MTableState();
+}
+
+class _MTableState extends State<MTable> {
+  late SuperTableController<Map<String, dynamic>> _controller;
+  final TextEditingController _searchCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = _buildController();
+  }
+
+  @override
+  void didUpdateWidget(MTable old) {
+    super.didUpdateWidget(old);
+    if (widget.rows != old.rows) {
+      _controller.updateRows(
+        widget.rows.map((r) => SuperRow.map(r)).toList(),
+      );
+    }
+    if (widget.sortable != old.sortable) {
+      _controller.updateColumns(_buildColumns());
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _searchCtrl.dispose();
+    super.dispose();
+  }
+
+  // ── column construction ──
+
+  List<SuperColumn> _buildColumns() {
+    return [
+      for (final col in widget.columns) _buildColumn(col),
+    ];
+  }
+
+  SuperColumn _buildColumn(MCol col) {
+    final w = col.fixed ?? (col.flex * 120).toDouble();
+    final sa = switch (col.align) {
+      TextAlign.right => SuperAlign.end,
+      TextAlign.center => SuperAlign.center,
+      _ => SuperAlign.start,
+    };
+    final sortable = widget.sortable && col.sortable && col.label.isNotEmpty;
+
+    final fmt = col.format;
+
+    if (col.numeric) {
+      if (fmt != null) {
+        return SuperColumn<num>(
+          key: col.key,
+          label: col.label,
+          type: SuperColumnType.number,
+          width: w,
+          align: sa,
+          sortable: sortable,
+          decimals: 2,
+          format: (v, _) => fmt(v),
+          styles: col.styles,
+        );
+      }
+      return SuperNumberColumn<num>(
+        key: col.key,
+        label: col.label,
+        width: w,
+        align: sa,
+        sortable: sortable,
+        decimals: 2,
+        styles: col.styles,
+      );
+    }
+    if (fmt != null) {
+      return SuperColumn<String>(
+        key: col.key,
+        label: col.label,
+        type: SuperColumnType.text,
+        width: w,
+        align: sa,
+        sortable: sortable,
+        mono: col.mono,
+        format: (v, _) => fmt(v),
+        styles: col.styles,
+      );
+    }
+    return SuperTextColumn(
+      key: col.key,
+      label: col.label,
+      width: w,
+      align: sa,
+      sortable: sortable,
+      mono: col.mono,
+      styles: col.styles,
     );
+  }
+
+  SuperTableController<Map<String, dynamic>> _buildController() {
+    return SuperTableController<Map<String, dynamic>>(
+      mode: SuperTableMode.readable,
+      selectionMode: widget.onRowTap != null
+          ? SuperSelectionMode.singleRow
+          : SuperSelectionMode.singleCell,
+      columns: _buildColumns(),
+      rows: widget.rows.map((r) => SuperRow.map(r)).toList(),
+    );
+  }
+
+  // ── height calculation ──
+
+  double get _tableHeight {
+    const headH = 38.0;
+    const rowH = 40.0;
+    final n = widget.rows.length.clamp(1, 20);
+    return (headH + n * rowH + 2).clamp(60.0, 520.0);
+  }
+
+  // ── search bar ──
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: TextField(
+        controller: _searchCtrl,
+        onChanged: (v) => _controller.setSearch(v),
+        decoration: InputDecoration(
+          hintText: widget.searchHint,
+          prefixIcon: const Icon(Icons.search_rounded, size: 18),
+          isDense: true,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: M.input,
+        ),
+      ),
+    );
+  }
+
+  // ── build ──
+
+  @override
+  Widget build(BuildContext context) {
+    // Table needs bounded height.  When the parent is unbounded (e.g. inside a
+    // shrink-wrapped card column) we use a calculated SizedBox; callers inside
+    // a bounded parent (e.g. a layout with Expanded) should set showSearch and
+    // wrap MTable in Flexible themselves.
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (widget.showSearch) _buildSearchBar(),
+        SizedBox(
+          height: _tableHeight,
+          child: SuperTable<Map<String, dynamic>>(
+            controller: _controller,
+            density: SuperDensity.comfortable,
+            numbered: widget.onRowTap != null,
+            showTypeTags: false,
+            showTotals: false,
+            showFooter: false,
+            columnFilters: false,
+            advancedFilter: false,
+            formulaBar: false,
+            rowMenuBuilder: widget.onRowTap != null ? _rowMenu : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<SuperMenuEntry> _rowMenu(
+    SuperRowMenuContext<Map<String, dynamic>> ctx,
+    List<SuperMenuEntry> defaults,
+  ) {
+    return [
+      ...defaults,
+      SuperMenuEntry(
+        label: 'Open',
+        icon: Icons.open_in_new_rounded,
+        onTap: () => widget.onRowTap!(ctx.rowIndex),
+      ),
+    ];
   }
 }

@@ -4,9 +4,59 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
+import 'package:super_tab_bar/super_tab_bar.dart';
+import 'package:super_tree_field/super_tree.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../workspace/presentation/bloc/nav_cubit.dart';
+
+// ── Tab wrapper ──────────────────────────────────────────────
+
+class AccountsExtraTabs extends StatefulWidget {
+  final NavCubit nav;
+  const AccountsExtraTabs({super.key, required this.nav});
+  @override
+  State<AccountsExtraTabs> createState() => _AccountsExtraTabsState();
+}
+
+class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
+  late final SuperTabBarController _tabs = SuperTabBarController(
+    tabs: const [
+      BrowserTab(id: 1, title: 'Chart of Accounts', kind: GLTabKind.ledger, pinned: true),
+      BrowserTab(id: 2, title: 'Account Detail', kind: GLTabKind.doc),
+    ],
+    activeId: 1,
+  );
+
+  @override
+  void dispose() {
+    _tabs.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SuperTabBar(
+      controller: _tabs,
+      fillContent: true,
+      scrollContent: false,
+      contentPadding: EdgeInsets.zero,
+      pageBuilder: (context, tab) {
+        switch (tab.id) {
+          case 1:
+            return AccountTreeScreen(nav: widget.nav);
+          case 2:
+            return AccountDetailFullScreen(nav: widget.nav);
+          default:
+            return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// Account detail (full)
+// ════════════════════════════════════════════════════════════════
 
 class AccountDetailFullScreen extends StatelessWidget {
   final NavCubit nav;
@@ -93,14 +143,13 @@ class _AuditGrid extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════
-// Account tree — built on the design-system `Tree<Account>`.
+// Account tree — built on `SuperTree` from `super_tree_field`
 // ------------------------------------------------------------
 // The chart of accounts is modelled as a typed `TreeNode<Account>` forest and
-// rendered by the shared `Tree` widget (search · expand/collapse · keyboard ·
-// indent guides). Group balances roll up from the leaves; a colour-coded type
-// dot + roll-up amount ride the trailing edge of every row. Single-tap toggles
-// a group or opens a posting account (→ accountDetail). Read-only: structural
-// editing is disabled.
+// rendered by SuperTree (search · expand/collapse · keyboard · indent guides).
+// Group balances roll up from the leaves; a colour-coded type dot + roll-up
+// amount ride the trailing edge of every row. Single-tap opens a posting
+// account (→ accountDetail). Read-only: structural editing is disabled.
 // ════════════════════════════════════════════════════════════
 
 /// Account-type colour key (matches the rest of the mobile app).
@@ -111,26 +160,19 @@ const Map<String, Color> _typeDot = {
   'Income': M.green,
   'Expense': M.red,
 };
-const List<(String, Color)> _typeLegend = [
-  ('Asset', M.blue),
-  ('Liability', M.orange),
-  ('Equity', M.green),
-  ('Income', M.green),
-  ('Expense', M.red),
-];
 
 /// Strongly-typed payload carried by every account node.
 class Account {
   final String code, nameEn, type;
-  final int? balance; // posting balance for leaves; null for roll-up groups
+  final int? balance;
   const Account({required this.code, required this.nameEn, required this.type, this.balance});
 }
 
 /// Compact authoring helper for the sample chart of accounts.
 TreeNode<Account> _acc(String code, String en, String type, {int? bal, List<TreeNode<Account>> children = const []}) =>
     TreeNode<Account>(
-      id: code,
-      label: en,
+      code: code,
+      name: en,
       value: Account(code: code, nameEn: en, type: type, balance: bal),
       children: children,
     );
@@ -157,13 +199,9 @@ final List<TreeNode<Account>> _accountRoots = [
   ]),
 ];
 
-/// Roll-up: a leaf's own balance, or the sum of its descendants' balances.
-int _rollup(TreeNode<Account> n) =>
-    n.children.isEmpty ? (n.value?.balance ?? 0) : n.children.fold(0, (s, c) => s + _rollup(c));
-
 /// Thousands-grouped amount with two decimals (no intl dependency).
-String _fmtAmount(int n) {
-  final s = n.abs().toString();
+String _fmtAmount(num n) {
+  final s = n.abs().round().toString();
   final b = StringBuffer(n < 0 ? '-' : '');
   for (var i = 0; i < s.length; i++) {
     if (i > 0 && (s.length - i) % 3 == 0) b.write(',');
@@ -180,13 +218,17 @@ class AccountTreeScreen extends StatefulWidget {
 }
 
 class _AccountTreeScreenState extends State<AccountTreeScreen> {
-  // Drive the shared Tree from our own controller so a single tap on a group
-  // row toggles it (the default gesture for folders is double-tap).
-  late final TreeController<Account> _c = TreeController<Account>(
+  late final SuperTreeController<Account> _c = SuperTreeController<Account>(
     roots: _accountRoots,
-    expanded: {for (final n in _accountRoots) n.id}, // top-level groups open
-    selectionMode: TreeSelectionMode.single,
+    searchText: (n) => '${n.code} ${n.name} ${n.value?.type ?? ''}',
+    onOpenLeaf: (node) => widget.nav.go('accountDetail'),
   );
+
+  @override
+  void initState() {
+    super.initState();
+    _c.expandAll();
+  }
 
   @override
   void dispose() {
@@ -194,93 +236,43 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
     super.dispose();
   }
 
-  void _onSelected(TreeNode<Account> n) {
-    if (n.isFolder) {
-      _c.toggle(n.id);
-    } else {
-      widget.nav.go('accountDetail');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Type-colour legend.
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-          child: Wrap(spacing: 16, runSpacing: 8, children: [
-            for (final e in _typeLegend)
-              Row(mainAxisSize: MainAxisSize.min, children: [
-                Container(width: 8, height: 8, decoration: BoxDecoration(color: e.$2, shape: BoxShape.circle)),
-                const SizedBox(width: 7),
-                Text(e.$1, style: const TextStyle(fontSize: 11.5, color: M.fg2, fontFamily: M.body)),
-              ]),
-          ]),
-        ),
-        // The design-system Tree fills the remaining height and scrolls
-        // internally; rows are themed by the registered TreeThemeData.
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: Tree<Account>(
-              controller: _c,
-              dense: true,
-              editable: false,
-              showCheckboxes: false,
-              showToolbar: true,
-              showSearch: true,
-              showFooter: true,
-              onSelected: _onSelected,
-              onActivated: (_) => widget.nav.go('accountDetail'),
-              // Leading edge: monospace ledger code before the name.
-              labelBuilder: (context, row) {
-                final n = row.node;
-                final isGroup = n.isFolder;
-                return Row(children: [
-                  Text(n.value?.code ?? n.id, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      n.label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: isGroup ? (row.depth == 0 ? FontWeight.w700 : FontWeight.w600) : FontWeight.w400,
-                        color: M.fg1,
-                        fontFamily: M.body,
-                      ),
-                    ),
-                  ),
-                ]);
-              },
-              // Trailing edge: type dot + roll-up balance.
-              trailingBuilder: (context, row) {
-                final n = row.node;
-                return Row(mainAxisSize: MainAxisSize.min, children: [
-                  Container(
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(color: _typeDot[n.value?.type] ?? M.fg3, shape: BoxShape.circle),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    _fmtAmount(_rollup(n)),
-                    style: TextStyle(
-                      fontFamily: M.mono,
-                      fontSize: 12,
-                      fontWeight: row.depth == 0 ? FontWeight.w700 : FontWeight.w500,
-                      color: M.fg1,
-                    ),
-                  ),
-                ]);
-              },
-            ),
-          ),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: SuperTree<Account>(
+        controller: _c,
+        leadingBuilder: _leading,
+        trailingBuilder: _trailing,
+        title: 'Chart of Accounts',
+        subtitle: 'Roll-up balances · bilingual',
+        nameColumnLabel: 'Account',
+        trailingColumnLabel: 'Balance (SAR)',
+        enableEditing: false,
+      ),
     );
   }
+
+  static Widget _leading(BuildContext context, TreeNode<Account> node, TreeRowInfo info) {
+    final color = _typeDot[node.value?.type];
+    if (color == null) return const SizedBox.shrink();
+    return Container(width: 7, height: 7, decoration: BoxDecoration(color: color, shape: BoxShape.circle));
+  }
+
+  static Widget? _trailing(BuildContext context, TreeNode<Account> node, TreeRowInfo info) {
+    return Text(
+      _fmtAmount(_accTotal(node)),
+      style: TextStyle(
+        fontFamily: M.mono,
+        fontSize: 12,
+        fontWeight: info.depth == 0 ? FontWeight.w700 : FontWeight.w500,
+        color: M.fg1,
+      ),
+    );
+  }
+}
+
+double _accTotal(TreeNode<Account> node) {
+  if (!node.hasChildren) return (node.value?.balance ?? 0).toDouble();
+  return node.children!.fold<double>(0, (s, c) => s + _accTotal(c));
 }

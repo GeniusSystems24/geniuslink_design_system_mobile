@@ -1,12 +1,93 @@
 // ============================================================
 // VIEW — Dashboard tab (ports MDashboard)
 // KPI row · cash-flow bars · balances · recent ops · alerts
+// Wraps a responsive NavigationSidebar with all nav items
+// from the More menu, plus a built-in search bar.
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:super_navigation_sidebar/super_navigation_sidebar.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
+// ── Navigation sections (mirrors the data in more_screen.dart) ──
+const _navSections = <NavSection<String>>[
+  NavSection(title: 'Workspace', items: [
+    NavNode(id: 'mobileDashboard', label: 'Mobile Dashboard', value: 'mobileDashboard'),
+    NavNode(id: 'settingsHub', label: 'Settings', value: 'settingsHub'),
+  ]),
+  NavSection(title: 'Accounts', items: [
+    NavNode(id: 'accountTree', label: 'Account Tree', value: 'accountTree'),
+    NavNode(id: 'createGroup', label: 'Create Account Group', value: 'createGroup'),
+  ]),
+  NavSection(title: 'Products', items: [
+    NavNode(id: 'productsList', label: 'Products List', value: 'productsList'),
+    NavNode(id: 'createProduct', label: 'Create Product', value: 'createProduct'),
+  ]),
+  NavSection(title: 'Inventory', items: [
+    NavNode(id: 'invDashboard', label: 'Inventory Dashboard', value: 'invDashboard'),
+    NavNode(id: 'warehousesList', label: 'Warehouses', value: 'warehousesList'),
+    NavNode(id: 'transferList', label: 'Stock Transfers', value: 'transferList'),
+    NavNode(id: 'issueDetail', label: 'Issue — Details', value: 'issueDetail'),
+    NavNode(id: 'receiveCreate', label: 'Receive Inventory', value: 'receiveCreate'),
+    NavNode(id: 'receiveDetail', label: 'Receive — Details', value: 'receiveDetail'),
+    NavNode(id: 'transferCreate', label: 'Transfer Inventory', value: 'transferCreate'),
+    NavNode(id: 'transferDetail', label: 'Transfer — Details', value: 'transferDetail'),
+    NavNode(id: 'adjustment', label: 'Inventory Adjustment', value: 'adjustment'),
+    NavNode(id: 'stockTake', label: 'Stock Take', value: 'stockTake'),
+    NavNode(id: 'categories', label: 'Categories', value: 'categories'),
+    NavNode(id: 'uom', label: 'Units of Measure', value: 'uom'),
+    NavNode(id: 'priceLists', label: 'Price Lists', value: 'priceLists'),
+    NavNode(id: 'barcodePrint', label: 'Barcode Print', value: 'barcodePrint'),
+  ]),
+  NavSection(title: 'Ledger', items: [
+    NavNode(id: 'journalList', label: 'Journal Entries', value: 'journalList'),
+    NavNode(id: 'createJournalEntry', label: 'Create Journal Entry', value: 'createJournalEntry'),
+    NavNode(id: 'journalEntryDetail', label: 'Journal Entry Details', value: 'journalEntryDetail'),
+    NavNode(id: 'journal', label: 'Opening Journal Entry', value: 'journal'),
+    NavNode(id: 'opDetail', label: 'Financial Operation', value: 'opDetail'),
+  ]),
+  NavSection(title: 'Sales · Customers', items: [
+    NavNode(id: 'customersList', label: 'Customers', value: 'customersList'),
+    NavNode(id: 'createCustomer', label: 'Add Customer', value: 'createCustomer'),
+  ]),
+  NavSection(title: 'Procurement · Suppliers', items: [
+    NavNode(id: 'suppliersList', label: 'Suppliers', value: 'suppliersList'),
+    NavNode(id: 'createSupplier', label: 'Add Supplier', value: 'createSupplier'),
+  ]),
+  NavSection(title: 'Configuration', items: [
+    NavNode(id: 'currenciesList', label: 'Currencies', value: 'currenciesList'),
+    NavNode(id: 'createCurrency', label: 'Add Currency', value: 'createCurrency'),
+    NavNode(id: 'exchangeRateSetup', label: 'Exchange Rates', value: 'exchangeRateSetup'),
+    NavNode(id: 'fiscalYearSetup', label: 'Fiscal Year', value: 'fiscalYearSetup'),
+  ]),
+  NavSection(title: 'Banking · Cash', items: [
+    NavNode(id: 'createDeposit', label: 'Create Deposit', value: 'createDeposit'),
+    NavNode(id: 'depositDetail', label: 'Deposit Receipt', value: 'depositDetail'),
+    NavNode(id: 'createWithdrawal', label: 'Create Withdrawal', value: 'createWithdrawal'),
+    NavNode(id: 'withdrawalDetail', label: 'Withdrawal Voucher', value: 'withdrawalDetail'),
+  ]),
+  NavSection(title: 'Banking · Transfers', items: [
+    NavNode(id: 'createLocalTransfer', label: 'Create Local Transfer', value: 'createLocalTransfer'),
+    NavNode(id: 'localTransferDetail', label: 'Local Transfer Details', value: 'localTransferDetail'),
+    NavNode(id: 'createExternalTransfer', label: 'Create External Transfer', value: 'createExternalTransfer'),
+    NavNode(id: 'externalTransferDetail', label: 'External Wire Details', value: 'externalTransferDetail'),
+  ]),
+  NavSection(title: 'Reports', items: [
+    NavNode(id: 'trialBalance', label: 'Trial Balance', value: 'trialBalance'),
+    NavNode(id: 'incomeStatement', label: 'Income Statement', value: 'incomeStatement'),
+    NavNode(id: 'balanceSheet', label: 'Balance Sheet', value: 'balanceSheet'),
+    NavNode(id: 'inventoryValuation', label: 'Inventory Valuation', value: 'inventoryValuation'),
+    NavNode(id: 'auditLog', label: 'Audit Log', value: 'auditLog'),
+  ]),
+  NavSection(title: 'Administration', items: [
+    NavNode(id: 'usersList', label: 'Users', value: 'usersList'),
+    NavNode(id: 'createUser', label: 'Invite User', value: 'createUser'),
+    NavNode(id: 'rolesPermissions', label: 'Roles & Permissions', value: 'rolesPermissions'),
+  ]),
+];
+
+// ── Dashboard content data ───────────────────────────────────
 class _Flow {
   final String m;
   final double inV, outV;
@@ -40,78 +121,167 @@ const _alerts = [
   (M.green, 'check', 'Period Nov 2024 closed', 'Locked Dec 01'),
 ];
 
-class DashboardScreen extends StatelessWidget {
+// ── DashboardScreen with sidebar ────────────────────────────
+class DashboardScreen extends StatefulWidget {
   final NavCubit nav;
   const DashboardScreen({super.key, required this.nav});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  late final NavigationSidebarController<String> _sidebarController;
+  NavSidebarMode? _prevMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _sidebarController = NavigationSidebarController<String>(
+      sections: _navSections,
+    );
+  }
+
+  void _syncMode(NavSidebarMode mode) {
+    if (mode == _prevMode) return;
+    _prevMode = mode;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (mode == NavSidebarMode.expanded) { _sidebarController.collapsed = false; }
+      else if (mode == NavSidebarMode.rail) { _sidebarController.collapsed = true; }
+      else { _sidebarController.closeDrawer(); }
+    });
+  }
+
+  @override
+  void dispose() {
+    _sidebarController.dispose();
+    super.dispose();
+  }
+
+  Widget _buildNavSidebar(NavSidebarMode mode) {
+    return NavigationSidebar<String>(
+      controller: _sidebarController,
+      mode: mode,
+      searchable: true,
+      searchHint: 'Search every screen…',
+      drawerTitle: 'Navigation',
+      showGuides: true,
+      railFlyouts: true,
+      onNavigate: (node) {
+        final v = node.value;
+        if (v != null) widget.nav.go(v);
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const Padding(
-        padding: EdgeInsets.only(top: 0),
-        child: Text('Fiscal 2024 · as of Dec 19, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg3)),
-      ),
-      // KPI grid
-      GridView.count(
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.55,
-        children: const [
-          _Kpi(label: 'Total Assets', value: '289,050', delta: '+4.2%', up: true),
-          _Kpi(label: 'Cash Position', value: '235,160', delta: '+1.8%', up: true),
-          _Kpi(label: 'Revenue · MTD', value: '89,200', delta: '+12.4%', up: true, accent: M.green),
-          _Kpi(label: 'Net Income · MTD', value: '34,120', delta: '−2.1%', up: false),
-        ],
-      ),
-      // Cash flow
-      MCard(
-        marker: M.green,
-        title: 'Cash Flow',
-        sub: 'Inflow vs outflow · SAR thousands · 12 months',
-        right: const Row(mainAxisSize: MainAxisSize.min, children: [
-          _Legend(color: M.blue, label: 'In'), SizedBox(width: 12), _Legend(color: M.fg4, label: 'Out'),
-        ]),
-        children: const [_CashFlowBars()],
-      ),
-      // Balances
-      MCard(
-        marker: M.blue,
-        title: 'Cash & Asset Accounts',
-        sub: 'Top balances',
-        children: [
-          for (final b in _balances) _BalanceRow(code: b.$1, name: b.$2, value: b.$3, pct: b.$4),
-        ],
-      ),
-      // Recent ops
-      MCard(
-        marker: M.green,
-        title: 'Recent Operations',
-        pad: 8,
-        right: GestureDetector(onTap: () => nav.go('journalList'),
-            child: const Text('View All', style: TextStyle(color: M.blue, fontSize: 12, fontWeight: FontWeight.w600))),
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(children: [
-              for (int i = 0; i < _recent.length; i++)
-                _RecentRow(r: _recent[i], last: i == _recent.length - 1),
-            ]),
+    return LayoutBuilder(builder: (context, c) {
+      final mode = const NavSidebarBreakpoints().modeFor(c.maxWidth);
+      _syncMode(mode);
+
+      final body = MScroll([
+        const Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: Text('Fiscal 2024 · as of Dec 19, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg3)),
+        ),
+        // KPI grid
+        GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.55,
+          children: const [
+            _Kpi(label: 'Total Assets', value: '289,050', delta: '+4.2%', up: true),
+            _Kpi(label: 'Cash Position', value: '235,160', delta: '+1.8%', up: true),
+            _Kpi(label: 'Revenue · MTD', value: '89,200', delta: '+12.4%', up: true, accent: M.green),
+            _Kpi(label: 'Net Income · MTD', value: '34,120', delta: '−2.1%', up: false),
+          ],
+        ),
+        // Cash flow
+        const MCard(
+          marker: M.green,
+          title: 'Cash Flow',
+          sub: 'Inflow vs outflow · SAR thousands · 12 months',
+          right: Row(mainAxisSize: MainAxisSize.min, children: [
+            _Legend(color: M.blue, label: 'In'), SizedBox(width: 12), _Legend(color: M.fg4, label: 'Out'),
+          ]),
+          children: [_CashFlowBars()],
+        ),
+        // Balances
+        MCard(
+          marker: M.blue,
+          title: 'Cash & Asset Accounts',
+          sub: 'Top balances',
+          children: [
+            for (final b in _balances) _BalanceRow(code: b.$1, name: b.$2, value: b.$3, pct: b.$4),
+          ],
+        ),
+        // Recent ops
+        MCard(
+          marker: M.green,
+          title: 'Recent Operations',
+          pad: 8,
+          right: GestureDetector(onTap: () => widget.nav.go('journalList'),
+              child: const Text('View All', style: TextStyle(color: M.blue, fontSize: 12, fontWeight: FontWeight.w600))),
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < _recent.length; i++)
+                  _RecentRow(r: _recent[i], last: i == _recent.length - 1),
+              ]),
+            ),
+          ],
+        ),
+        // Alerts
+        MCard(
+          marker: M.orange,
+          title: 'Needs Attention',
+          children: [
+            for (final a in _alerts) _AlertRow(tone: a.$1, icon: a.$2, title: a.$3, sub: a.$4),
+          ],
+        ),
+      ]);
+
+      if (mode == NavSidebarMode.drawer) {
+        return Stack(children: [
+          Positioned.fill(child: body),
+          Positioned.fill(child: _buildNavSidebar(mode)),
+          Positioned(
+            top: 0,
+            left: 0,
+            child: SafeArea(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: _sidebarController.openDrawer,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: M.surface.withValues(alpha: 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: M.border),
+                    ),
+                    child: Icon(MIcons.of('menu'), size: 20, color: M.blue),
+                  ),
+                ),
+              ),
+            ),
           ),
-        ],
-      ),
-      // Alerts
-      MCard(
-        marker: M.orange,
-        title: 'Needs Attention',
-        children: [
-          for (final a in _alerts) _AlertRow(tone: a.$1, icon: a.$2, title: a.$3, sub: a.$4),
-        ],
-      ),
-    ]);
+        ]);
+      }
+      return Row(children: [
+        _buildNavSidebar(mode),
+        Expanded(child: body),
+      ]);
+    });
   }
 }
 
+// ── Presentational widgets (unchanged) ──────────────────────
 class _Kpi extends StatelessWidget {
   final String label, value, delta;
   final bool up;
