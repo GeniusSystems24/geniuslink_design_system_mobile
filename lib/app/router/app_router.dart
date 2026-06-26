@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../workspace/presentation/controllers/nav_controller.dart';
+import '../../workspace/presentation/bloc/nav_cubit.dart';
 import '../../design_system/kit.dart';
 
 // ============================================================
@@ -124,7 +124,7 @@ const Set<String> fullBleedScreens = {'mobileDashboard'};
 
 /// Build a sub-screen widget. Falls back to [PendingScreen] for ids
 /// scheduled in a later batch.
-Widget buildSubScreen(String id, NavController nav) {
+Widget buildSubScreen(String id, NavCubit nav) {
   switch (id) {
     // Full-bleed (own chrome)
     case 'mobileDashboard': return const MobileDashboardScreen();
@@ -224,7 +224,7 @@ Widget buildSubScreen(String id, NavController nav) {
 }
 
 /// Build a bottom-tab screen.
-Widget buildTabScreen(String tab, NavController nav) {
+Widget buildTabScreen(String tab, NavCubit nav) {
   switch (tab) {
     case 'accounts': return AccountsScreen(nav: nav);
     case 'stores': return StoresScreen(nav: nav);

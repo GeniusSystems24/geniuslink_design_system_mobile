@@ -1,44 +1,33 @@
 // ============================================================
-// VIEW — App root / navigator (ports the MobileApp shell)
+// WORKSPACE PRESENTATION — WorkspacePage (mobile app shell)
 // ------------------------------------------------------------
-// Auth gate → tab shell (AppBar + body + TabBar) → sub-screen
-// stack (AppBar + body). Reads NavController; rebuilds on notify.
+// Auth gate → (TenantScope) tab shell (AppBar + body + TabBar) →
+// sub-screen stack (AppBar + body). Driven by NavCubit (provided
+// at the app root); the authed shell is wrapped in TenantScope so
+// the active tenant's connection is isolated and torn down on
+// switch/logout.
+//
+// File placement:  lib/workspace/presentation/pages/workspace_page.dart
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../controllers/nav_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/nav_cubit.dart';
+import '../widgets/tenant_scope.dart';
 import '../../../design_system/kit.dart';
 import '../../../app/router/app_router.dart';
 import '../../../features/auth/presentation/pages/auth_screen.dart';
 
-class WorkspacePage extends StatefulWidget {
+class WorkspacePage extends StatelessWidget {
   const WorkspacePage({super.key});
-  @override
-  State<WorkspacePage> createState() => _AppRootState();
-}
-
-class _AppRootState extends State<WorkspacePage> {
-  final _nav = NavController();
-
-  @override
-  void initState() {
-    super.initState();
-    _nav.registryHas = (id) => portedScreens.contains(id);
-  }
-
-  @override
-  void dispose() {
-    _nav.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _nav,
-      builder: (context, _) {
-        final body = _buildBody();
-        // Constrain to a phone-width column centered on a dark backdrop (matches mobile.html).
+    return BlocBuilder<NavCubit, NavState>(
+      builder: (context, state) {
+        final nav = context.read<NavCubit>();
+        // Constrain to a phone-width column centered on a dark backdrop
+        // (matches mobile.html).
         return ColoredBox(
           color: const Color(0xFF0B0C10),
           child: Center(
@@ -49,7 +38,7 @@ class _AppRootState extends State<WorkspacePage> {
                   color: M.bg,
                   boxShadow: [BoxShadow(color: Color(0x10FFFFFF), blurRadius: 0, spreadRadius: 1)],
                 ),
-                child: body,
+                child: _buildBody(context, nav, state),
               ),
             ),
           ),
@@ -58,51 +47,58 @@ class _AppRootState extends State<WorkspacePage> {
     );
   }
 
-  Widget _buildBody() {
-    if (!_nav.authed) {
-      return switch (_nav.authScreen) {
-        AuthScreen.signup => SignUpScreen(nav: _nav),
-        AuthScreen.forgot => ForgotScreen(nav: _nav),
-        AuthScreen.login => LoginScreen(nav: _nav),
+  Widget _buildBody(BuildContext context, NavCubit nav, NavState state) {
+    if (!state.authed) {
+      return switch (state.authScreen) {
+        AuthScreen.signup => SignUpScreen(nav: nav),
+        AuthScreen.forgot => ForgotScreen(nav: nav),
+        AuthScreen.login => LoginScreen(nav: nav),
       };
     }
+    // Authed → the tab/sub shell lives inside the tenant scope.
+    return TenantScope(
+      fallbackBuilder: (_) => const _TenantLoading(),
+      child: _authedBody(nav, state),
+    );
+  }
 
+  Widget _authedBody(NavCubit nav, NavState state) {
     // sub-screen route
-    final sub = _nav.sub;
+    final sub = state.sub;
     if (sub != null) {
       // full-bleed screens render their own app bar + nav
       if (fullBleedScreens.contains(sub)) {
         return WillPopScope(
-          onWillPop: () async { _nav.back(subTitles[sub]?.back); return false; },
-          child: buildSubScreen(sub, _nav),
+          onWillPop: () async { nav.back(subTitles[sub]?.back); return false; },
+          child: buildSubScreen(sub, nav),
         );
       }
-      final meta = subTitles[sub] ?? ScreenMeta(sub, back: _nav.tab);
+      final meta = subTitles[sub] ?? ScreenMeta(sub, back: state.tab);
       return Column(
         children: [
-          MAppBar(title: meta.title, ar: meta.ar, onBack: () => _nav.back(meta.back)),
-          Expanded(child: buildSubScreen(sub, _nav)),
+          MAppBar(title: meta.title, ar: meta.ar, onBack: () => nav.back(meta.back)),
+          Expanded(child: buildSubScreen(sub, nav)),
         ],
       );
     }
 
     // tab shell
-    final (title, action) = _tabChrome(_nav.tab);
+    final (title, action) = _tabChrome(nav, state.tab);
     return Column(
       children: [
         MAppBar(title: title, action: action),
-        Expanded(child: buildTabScreen(_nav.tab, _nav)),
-        MTabBar(active: _nav.tab, onChange: _nav.selectTab),
+        Expanded(child: buildTabScreen(state.tab, nav)),
+        MTabBar(active: state.tab, onChange: nav.selectTab),
       ],
     );
   }
 
-  (String, Widget?) _tabChrome(String tab) {
+  (String, Widget?) _tabChrome(NavCubit nav, String tab) {
     switch (tab) {
       case 'accounts':
-        return ('Accounts', _actionBtn('plus', () => _nav.go('createAccount')));
+        return ('Accounts', _actionBtn('plus', () => nav.go('createAccount')));
       case 'stores':
-        return ('Stores', _actionBtn('plus', () => _nav.go('createStore')));
+        return ('Stores', _actionBtn('plus', () => nav.go('createStore')));
       case 'more':
         return ('More', null);
       case 'dashboard':
@@ -116,4 +112,22 @@ class _AppRootState extends State<WorkspacePage> {
         behavior: HitTestBehavior.opaque,
         child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: M.blue)),
       );
+}
+
+/// Shown while the active tenant's connection is resolving.
+class _TenantLoading extends StatelessWidget {
+  const _TenantLoading();
+  @override
+  Widget build(BuildContext context) {
+    return const ColoredBox(
+      color: M.bg,
+      child: Center(
+        child: SizedBox(
+          width: 22,
+          height: 22,
+          child: CircularProgressIndicator(strokeWidth: 2, color: M.fg3),
+        ),
+      ),
+    );
+  }
 }

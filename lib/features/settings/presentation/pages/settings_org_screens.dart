@@ -5,9 +5,10 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/m_inv_kit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../core/bloc/form_cubit.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _NavItem {
   final String id, label, icon, desc;
@@ -40,7 +41,7 @@ const _settingsNav = [
 ];
 
 class SettingsHubScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const SettingsHubScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -119,104 +120,131 @@ class CompanyProfileScreen extends StatelessWidget {
   }
 }
 
-class FinancialSettingsScreen extends StatefulWidget {
+class FinancialSettingsScreen extends StatelessWidget {
   const FinancialSettingsScreen({super.key});
   @override
-  State<FinancialSettingsScreen> createState() => _FinancialSettingsScreenState();
-}
-
-class _FinancialSettingsScreenState extends State<FinancialSettingsScreen> {
-  String _basis = 'accrual';
-  @override
   Widget build(BuildContext context) {
-    return MScroll([
-      ISection(icon: 'globe', title: 'Currency & Calendar', marker: M.blue, children: [
-        const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
-        const TSelect(label: 'Fiscal Year Start', value: 'January', options: ['January', 'April', 'July', 'October']),
-        const TSelect(label: 'Rounding Precision', value: '2 decimals', options: ['0 decimals', '2 decimals', '3 decimals']),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Accounting Basis')),
-          Row(children: [
-            for (final e in const [('accrual', 'Accrual'), ('cash', 'Cash')]) ...[
-              if (e.$1 == 'cash') const SizedBox(width: 8),
-              Expanded(child: GestureDetector(
-                onTap: () => setState(() => _basis = e.$1),
-                child: Container(
-                  padding: const EdgeInsets.all(12), alignment: Alignment.center,
-                  decoration: BoxDecoration(color: _basis == e.$1 ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: _basis == e.$1 ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
-                  child: Text(e.$2.toUpperCase(), style: TextStyle(color: _basis == e.$1 ? M.blue : M.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: M.body)),
-                ),
-              )),
-            ],
-          ]),
-        ]),
-      ]),
-      const ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: M.green, children: [
-        TSelect(label: 'Retained Earnings', value: '3100 — Retained Earnings', options: ['3100 — Retained Earnings', '3001 — Owner Capital']),
-        TSelect(label: 'Default Tax Account', value: '2200 — VAT Payable', options: ['2200 — VAT Payable', '1350 — VAT Receivable']),
-      ]),
-      const ISection(icon: 'lock', title: 'Posting Rules', marker: M.orange, children: [
-        TSwitch(label: 'Lock postings to open periods only', defaultOn: true),
-        TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
-      ]),
-      const MBtn('Save Changes', icon: 'check', full: true),
-    ]);
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {'basis': 'accrual'}, onSubmit: (_) async {}),
+      child: const _FinancialSettingsView(),
+    );
   }
 }
 
-class TaxesSettingsScreen extends StatefulWidget {
-  const TaxesSettingsScreen({super.key});
-  @override
-  State<TaxesSettingsScreen> createState() => _TaxesSettingsScreenState();
-}
-
-class _TaxesSettingsScreenState extends State<TaxesSettingsScreen> {
-  final _rules = [
-    ['Standard VAT', '15', 'VAT', 'Sales & Purchases', true],
-    ['Zero-Rated', '0', 'VAT', 'Exports', true],
-    ['Exempt', '0', 'VAT', 'Financial services', true],
-    ['Withholding — Services', '5', 'WHT', 'Non-resident', false],
-  ];
+class _FinancialSettingsView extends StatelessWidget {
+  const _FinancialSettingsView();
   @override
   Widget build(BuildContext context) {
-    final active = _rules.where((r) => r[4] as bool).length;
-    return MScroll([
-      MCard(marker: M.green, title: 'Tax Rules', sub: '$active active · applied at line level', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < _rules.length; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < _rules.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-                child: Row(children: [
-                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Row(children: [
-                      Text(_rules[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                      const SizedBox(width: 8),
-                      Pill(_rules[i][2] as String, tone: _rules[i][2] == 'VAT' ? PillTone.info : PillTone.warning),
-                    ]),
-                    const SizedBox(height: 3),
-                    Text(_rules[i][3] as String, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
-                  ])),
-                  Text('${_rules[i][1]}%', style: const TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1)),
-                  const SizedBox(width: 12),
-                  GestureDetector(
-                    onTap: () => setState(() => _rules[i][4] = !(_rules[i][4] as bool)),
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, state) {
+        final basis = state.value<String>('basis') ?? 'accrual';
+        return MScroll([
+          ISection(icon: 'globe', title: 'Currency & Calendar', marker: M.blue, children: [
+            const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
+            const TSelect(label: 'Fiscal Year Start', value: 'January', options: ['January', 'April', 'July', 'October']),
+            const TSelect(label: 'Rounding Precision', value: '2 decimals', options: ['0 decimals', '2 decimals', '3 decimals']),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Accounting Basis')),
+              Row(children: [
+                for (final e in const [('accrual', 'Accrual'), ('cash', 'Cash')]) ...[
+                  if (e.$1 == 'cash') const SizedBox(width: 8),
+                  Expanded(child: GestureDetector(
+                    onTap: () => form.setField('basis', e.$1),
                     child: Container(
-                      width: 42, height: 24,
-                      decoration: BoxDecoration(color: _rules[i][4] as bool ? M.blue : M.input, border: Border.all(color: _rules[i][4] as bool ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(999)),
-                      child: AnimatedAlign(duration: const Duration(milliseconds: 150), alignment: _rules[i][4] as bool ? Alignment.centerRight : Alignment.centerLeft, child: Container(width: 18, height: 18, margin: const EdgeInsets.symmetric(horizontal: 2), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle))),
+                      padding: const EdgeInsets.all(12), alignment: Alignment.center,
+                      decoration: BoxDecoration(color: basis == e.$1 ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: basis == e.$1 ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
+                      child: Text(e.$2.toUpperCase(), style: TextStyle(color: basis == e.$1 ? M.blue : M.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: M.body)),
                     ),
-                  ),
-                ]),
-              ),
+                  )),
+                ],
+              ]),
+            ]),
           ]),
-        ),
-      ]),
-      MBtn('Add Tax Rule', variant: MBtnVariant.secondary, icon: 'plus', full: true, onTap: () => setState(() => _rules.add(['New Rule', '0', 'VAT', '—', false]))),
-      const MBtn('Save Changes', icon: 'check', full: true),
-    ]);
+          const ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: M.green, children: [
+            TSelect(label: 'Retained Earnings', value: '3100 — Retained Earnings', options: ['3100 — Retained Earnings', '3001 — Owner Capital']),
+            TSelect(label: 'Default Tax Account', value: '2200 — VAT Payable', options: ['2200 — VAT Payable', '1350 — VAT Receivable']),
+          ]),
+          const ISection(icon: 'lock', title: 'Posting Rules', marker: M.orange, children: [
+            TSwitch(label: 'Lock postings to open periods only', defaultOn: true),
+            TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
+          ]),
+          MBtn('Save Changes', icon: 'check', full: true, onTap: form.submit),
+        ]);
+      },
+    );
+  }
+}
+
+class TaxesSettingsScreen extends StatelessWidget {
+  const TaxesSettingsScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {
+        'rules': [
+          ['Standard VAT', '15', 'VAT', 'Sales & Purchases', true],
+          ['Zero-Rated', '0', 'VAT', 'Exports', true],
+          ['Exempt', '0', 'VAT', 'Financial services', true],
+          ['Withholding — Services', '5', 'WHT', 'Non-resident', false],
+        ]
+      }, onSubmit: (_) async {}),
+      child: const _TaxesSettingsView(),
+    );
+  }
+}
+
+class _TaxesSettingsView extends StatelessWidget {
+  const _TaxesSettingsView();
+  @override
+  Widget build(BuildContext context) {
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, state) {
+        final rules = [for (final r in (state.value<List>('rules') ?? const [])) List<Object>.from(r as List)];
+        final active = rules.where((r) => r[4] as bool).length;
+        List<List<Object>> clone() => [for (final r in rules) List<Object>.from(r)];
+        void toggle(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('rules', n); }
+        void add() { final n = clone()..add(['New Rule', '0', 'VAT', '—', false]); form.setField('rules', n); }
+        return MScroll([
+          MCard(marker: M.green, title: 'Tax Rules', sub: '$active active · applied at line level', pad: 8, children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < rules.length; i++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(border: i < rules.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    child: Row(children: [
+                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Row(children: [
+                          Text(rules[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                          const SizedBox(width: 8),
+                          Pill(rules[i][2] as String, tone: rules[i][2] == 'VAT' ? PillTone.info : PillTone.warning),
+                        ]),
+                        const SizedBox(height: 3),
+                        Text(rules[i][3] as String, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                      ])),
+                      Text('${rules[i][1]}%', style: const TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1)),
+                      const SizedBox(width: 12),
+                      GestureDetector(
+                        onTap: () => toggle(i),
+                        child: Container(
+                          width: 42, height: 24,
+                          decoration: BoxDecoration(color: rules[i][4] as bool ? M.blue : M.input, border: Border.all(color: rules[i][4] as bool ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(999)),
+                          child: AnimatedAlign(duration: const Duration(milliseconds: 150), alignment: rules[i][4] as bool ? Alignment.centerRight : Alignment.centerLeft, child: Container(width: 18, height: 18, margin: const EdgeInsets.symmetric(horizontal: 2), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle))),
+                        ),
+                      ),
+                    ]),
+                  ),
+              ]),
+            ),
+          ]),
+          MBtn('Add Tax Rule', variant: MBtnVariant.secondary, icon: 'plus', full: true, onTap: add),
+          MBtn('Save Changes', icon: 'check', full: true, onTap: form.submit),
+        ]);
+      },
+    );
   }
 }
 

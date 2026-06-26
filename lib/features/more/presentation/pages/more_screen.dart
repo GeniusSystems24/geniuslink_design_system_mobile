@@ -4,8 +4,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _Group {
   final String title;
@@ -50,7 +49,7 @@ const _menu = <_Group>[
 ];
 
 class MoreScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const MoreScreen({super.key, required this.nav});
   @override
   State<MoreScreen> createState() => _MoreScreenState();

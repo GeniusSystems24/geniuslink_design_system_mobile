@@ -5,7 +5,6 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/m_inv_kit.dart';
 import '../../../../design_system/kit.dart';
 
 String _money(num n) {

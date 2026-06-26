@@ -10,13 +10,38 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # State management — BLoC (Cubit-first). Migration from ChangeNotifier /
+  # setState to flutter_bloc, designed for multi-tenant + database-per-tenant
+  # isolation. See bloc-state-management-plan.md.
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  equatable: ^2.0.5
   # The shared GeniusLink Design System (sibling package) — provides the
-  # generic Tree<T> used by the Account Tree screen, plus the other kit
-  # widgets. Path-resolved against the project root.
+  # remaining monolith kit widgets (and the TreeTheme* tokens until fully
+  # migrated). Path-resolved against the project root.
   geniuslink_design_system: ^2.8.1
+  # Focused GeniusLink form-field package — consumed by adapters/form/m_inputs.dart.
+  super_form_field: ^1.0.0
+  # Focused GeniusLink suggestion / combobox package — the AutoSuggestionsBox
+  # behind MSuggest (local + remote sources, prefix/contains/fuzzy, free-text).
+  # Consumed by adapters/form/m_inputs.dart.
+  super_auto_suggestion_box: ^0.5.0
+  # Focused GeniusLink table package — backs MTable (ReadableTable<T> read grid).
+  # Consumed by adapters/table/m_table.dart.
+  super_table_field: ^1.0.0
+  # Focused GeniusLink tree package — the hierarchical Tree<T> behind the
+  # Account Tree screen (TreeNode<T> · TreeController<T> · search · expand /
+  # collapse · keyboard nav · indent guides). Consumed by accounts screens.
+  super_tree_field: ^0.3.0
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   flutter_lints: ^3.0.0
+  # BLoC testing — state-machine assertions + mocking for the per-tenant
+  # isolation tests (Phase 9).
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
 
 flutter:
   uses-material-design: true

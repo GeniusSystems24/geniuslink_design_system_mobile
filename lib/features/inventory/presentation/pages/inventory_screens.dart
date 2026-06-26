@@ -7,7 +7,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _products = [
   ('STL-44021', 'Structural Steel I-Beam', 'Steel', 'PCS', 142, 'in'),
@@ -22,7 +22,7 @@ PillTone _statusTone(String s) => s == 'in' ? PillTone.success : (s == 'low' ? P
 String _statusLabel(String s) => s == 'in' ? 'In Stock' : (s == 'low' ? 'Low' : 'Out');
 
 class ProductsListScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const ProductsListScreen({super.key, required this.nav});
   @override
   State<ProductsListScreen> createState() => _ProductsListScreenState();
@@ -97,7 +97,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const ProductDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -105,11 +105,11 @@ class ProductDetailScreen extends StatelessWidget {
     const moves = [('INV-ISS-0089', 'Issue', '−12', 'Dec 18'), ('INV-REC-0241', 'Receive', '+32', 'Dec 16'), ('INV-TRF-0117', 'Transfer', '±18', 'Dec 14')];
     return MScroll([
       MCard(marker: M.green, title: 'Stock Summary', sub: 'Aggregated across all stores', right: const Pill('In Stock'), children: [
-        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: [
-          Mini(label: 'Total On Hand', value: '142', sub: 'PCS', hi: true),
-          Mini(label: 'Stock Value', value: '63,900', sub: 'SAR'),
-          Mini(label: 'Avg Unit Cost', value: '450.00', sub: 'SAR'),
-          Mini(label: 'Reorder Level', value: '50', sub: 'PCS'),
+        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: [
+          const Mini(label: 'Total On Hand', value: '142', sub: 'PCS', hi: true),
+          const Mini(label: 'Stock Value', value: '63,900', sub: 'SAR'),
+          const Mini(label: 'Avg Unit Cost', value: '450.00', sub: 'SAR'),
+          const Mini(label: 'Reorder Level', value: '50', sub: 'PCS'),
         ]),
       ]),
       const MCard(marker: M.blue, title: 'Product Information', children: [
@@ -190,7 +190,7 @@ class CreateProductScreen extends StatelessWidget {
 }
 
 class IssueDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const IssueDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -286,7 +286,7 @@ class _BalancedRow extends StatelessWidget {
 }
 
 class ReceiveDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const ReceiveDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -390,7 +390,7 @@ class TransferCreateScreen extends StatelessWidget {
 }
 
 class TransferDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const TransferDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _accounts = [
   ('1001', 'Cash Box', 'الصندوق', '42,500.00', false),
@@ -16,7 +16,7 @@ const _accounts = [
 ];
 
 class AccountsScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const AccountsScreen({super.key, required this.nav});
 
   @override
@@ -138,7 +138,7 @@ class CreateAccountScreen extends StatelessWidget {
 }
 
 class AccountDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const AccountDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -199,7 +199,7 @@ class CreateGroupScreen extends StatelessWidget {
 }
 
 class GroupDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const GroupDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {

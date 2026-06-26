@@ -3,123 +3,387 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GeniusLink Mobile — Flutter MVC</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<title>GeniusLink Mobile · Flutter Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#111318;--surface:#1E2025;--input:#33353A;--border:rgba(67,70,84,.4);--border-s:rgb(67,70,84);
+    --bg:#111318;--surface:#1E2025;--card2:#292D38;--input:#33353A;
+    --border:rgba(67,70,84,.4);--border-s:#43464F;
     --fg1:#E2E2E9;--fg2:#C3C6D7;--fg3:#8D90A0;--fg4:#44474E;
     --blue:#4A7CFF;--green:#1DB88A;--orange:#F97316;--red:#EF4444;
-    --display:'Manrope',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+    --body:'Inter',system-ui,-apple-system,sans-serif;
+    --display:'Manrope','Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--fg1);font-family:var(--body);line-height:1.5;padding:48px 24px 80px;display:flex;justify-content:center}
-  .wrap{width:100%;max-width:1100px}
-  .eyebrow{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
-  h1{font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.025em;line-height:1.1}
-  .lede{color:var(--fg2);font-size:15.5px;max-width:720px;margin-top:14px;text-wrap:pretty}
-  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;background:var(--input);border:1px solid var(--border-s);font-size:12.5px;color:var(--fg2);font-weight:500}
-  .chip .dot{width:7px;height:7px;border-radius:999px}
-  .sec{display:flex;align-items:center;gap:10px;margin:48px 0 16px}
-  .sec .bar{width:4px;height:24px;border-radius:4px}
-  .sec h2{font-family:var(--body);font-weight:700;font-size:19px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
-  .card .hd{display:flex;align-items:center;gap:9px;margin-bottom:14px}
-  .card .hd .bar{width:4px;height:18px;border-radius:4px}
-  .card .hd .lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--fg2)}
-  .scr{display:flex;flex-direction:column;gap:9px}
-  .scr .row{display:flex;align-items:baseline;gap:9px;font-size:13px}
-  .scr .id{font-family:var(--mono);font-size:10.5px;color:var(--fg4);flex-shrink:0;width:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .scr .nm{color:var(--fg1)}
-  .scr .ar{font-family:var(--mono);font-size:10px;color:var(--fg3);margin-left:auto}
-  .count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--fg3)}
-  .tree{font-family:var(--mono);font-size:12.5px;line-height:1.95;color:var(--fg2);white-space:pre-wrap}
-  .tree .f{color:var(--fg1);font-weight:500}.tree .c{color:var(--fg3)}
-  code{font-family:var(--mono);background:var(--input);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--fg1)}
-  .run{font-family:var(--mono);font-size:13px;background:#0c0d11;border:1px solid var(--border);border-radius:10px;padding:16px 18px;color:var(--fg2);margin-top:14px;line-height:2}
-  .run .cm{color:var(--fg4)}
-  .note{color:var(--fg3);font-size:12.5px;margin-top:10px}
+  body{background:var(--bg);color:var(--fg1);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:64px 32px 96px}
+  .wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+  .eyebrow{font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+  h1{font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.03em;line-height:1.1;margin-top:4px}
+  .sub{font-family:var(--mono);font-size:12.5px;color:var(--fg3);margin-top:10px}
+  .lede{font-size:15px;color:var(--fg2);max-width:74ch;margin-top:18px;text-wrap:pretty}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .stat{flex:1;min-width:130px;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:16px}
+  .stat .n{font-family:var(--mono);font-size:26px;font-weight:700}
+  .stat .l{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);margin-top:6px}
+  h2{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  h2::before{content:'';width:4px;height:22px;border-radius:12px;background:var(--blue);flex-shrink:0}
+  h2.g::before{background:var(--green)} h2.o::before{background:var(--orange)} h2.r::before{background:var(--red)}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px}
+  pre{font-family:var(--mono);font-size:12.5px;color:var(--fg2);background:var(--bg);
+    border:1px solid var(--border);border-radius:8px;padding:18px 20px;overflow:auto;line-height:1.75;white-space:pre}
+  .hl{color:var(--fg1)} .cm{color:var(--fg4)} .bl{color:var(--blue)} .gr{color:var(--green)} .or{color:var(--orange)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .mod{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+  .mod .name{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .mod .dot{width:7px;height:7px;border-radius:999px;background:var(--blue);flex-shrink:0}
+  .mod .dot.g{background:var(--green)} .mod .dot.o{background:var(--orange)}
+  .mod .count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--fg4)}
+  .mod .files{font-family:var(--mono);font-size:11px;color:var(--fg3);line-height:1.7}
+  .kv{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+  .kv:last-child{border-bottom:none}
+  .kv .k{font-family:var(--mono);font-size:11.5px;color:var(--blue);min-width:220px;flex-shrink:0}
+  .kv .v{color:var(--fg2);line-height:1.6}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{font-family:var(--mono);font-size:11px;color:var(--fg2);background:var(--input);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
+  code{font-family:var(--mono);background:var(--input);padding:2px 6px;border-radius:4px;font-size:11.5px;color:var(--fg1)}
+  footer{font-family:var(--mono);font-size:11px;color:var(--fg4);letter-spacing:.04em;border-top:1px solid var(--border);padding-top:24px}
+  .scr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .scr-card{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+  .scr-card .hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .scr-card .bar{width:4px;height:16px;border-radius:4px;flex-shrink:0}
+  .scr-card .lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--fg2)}
+  .scr-card .cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--fg4)}
+  .scr-list{display:flex;flex-direction:column;gap:6px}
+  .scr-row{display:flex;gap:8px;align-items:baseline;font-size:12.5px}
+  .scr-id{font-family:var(--mono);font-size:10px;color:var(--fg4);flex-shrink:0;width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .scr-nm{color:var(--fg1)}
 </style>
 </head>
 <body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" rx="18" fill="#1DB88A"/>
+    <text x="50" y="68" font-family="sans-serif" font-weight="800" font-size="52" fill="#fff" text-anchor="middle">G</text>
+  </svg>
+</template>
+
 <div class="wrap">
-  <div class="eyebrow">GeniusLink · Flutter</div>
-  <h1>GeniusLink Mobile — Full App</h1>
-  <p class="lede">A Flutter port of the complete GeniusLink mobile app: authentication, the four bottom tabs,
-    and every sub-screen reachable from the <strong style="color:var(--fg1)">More</strong> menu — 60+ screens in all.
-    Dark-only (matching the web demo), bilingual EN/AR strings, structured with a strict Model · View · Controller split.</p>
-  <div class="meta">
-    <span class="chip"><span class="dot" style="background:var(--blue)"></span>Controller — NavController (ChangeNotifier)</span>
-    <span class="chip"><span class="dot" style="background:var(--green)"></span>View — screens + shared kit</span>
-    <span class="chip">60+ screens</span>
-    <span class="chip">No 3rd-party packages</span>
+
+  <header>
+    <div class="eyebrow">Flutter · Clean Architecture · Mobile</div>
+    <h1>GeniusLink Mobile</h1>
+    <div class="sub">geniuslink_design_system_mobile · full mobile ERP port</div>
+    <p class="lede">Auth gate, four bottom tabs, 60+ sub-screens — dark-only, bilingual EN/AR. Rebuilt from MVC into clean architecture: <code>app/</code> · <code>core/</code> · <code>design_system/</code> · <code>workspace/</code> · <code>features/</code> · <code>shared/</code>.</p>
+  </header>
+
+  <div class="row">
+    <div class="stat"><div class="n" style="color:var(--blue)">60+</div><div class="l">Screens</div></div>
+    <div class="stat"><div class="n" style="color:var(--green)">14</div><div class="l">Features</div></div>
+    <div class="stat"><div class="n" style="color:var(--orange)">4</div><div class="l">Bottom tabs</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">Arch layers</div></div>
   </div>
 
-  <div class="sec"><span class="bar" style="background:var(--blue)"></span><h2>Architecture</h2></div>
-  <div class="card">
-    <div class="tree"><span class="c">lib/</span>
-  <span class="f">main.dart</span>                 <span class="c">MaterialApp (dark) → AppRoot</span>
-  <span class="c">controllers/</span>
-    <span class="f">nav_controller.dart</span>     <span class="c">auth gate · active tab · sub-screen stack</span>
-  <span class="c">views/</span>
-    <span class="f">app_root.dart</span>           <span class="c">navigator shell (auth → tabs → sub-stack)</span>
-    <span class="f">screen_registry.dart</span>    <span class="c">id → title/back (SUB_TITLES) + id → widget</span>
-    <span class="c">kit/</span>                    <span class="c">shared widgets — ports of window._mob / _mui / _minv / banking</span>
-      <span class="f">m_colors · m_icons · m_widgets · m_inputs · m_shell · m_inv_kit · m_bank_kit</span>
-    <span class="c">screens/</span>                <span class="c">one file per feature area (14 files)</span>
-      <span class="f">auth · dashboard · accounts(+extra) · stores · more</span>
-      <span class="f">ledger · journal · banking_cash · banking_transfer</span>
-      <span class="f">inventory · inventory_extras · currencies · contacts · reports · users</span>
-      <span class="f">settings_org · settings_team · settings_platform</span></div>
-  </div>
+  <!-- Project layout -->
+  <section>
+    <h2>Project layout</h2>
+    <pre><span class="cm">lib/</span>
+<span class="hl">├── main.dart</span>                        <span class="cm">entry point → runApp(GeniusLinkApp())</span>
+<span class="bl">├── app/</span>
+<span class="cm">│   ├── app.dart</span>                     <span class="cm">GeniusLinkApp (MaterialApp)</span>
+<span class="cm">│   ├── bootstrap.dart</span>               <span class="cm">WidgetsFlutterBinding + DI init</span>
+<span class="gr">│   ├── router/</span>
+<span class="cm">│   │   ├── app_router.dart</span>          <span class="cm">buildSubScreen() · buildTabScreen() · ScreenMeta · subTitles</span>
+<span class="cm">│   │   └── route_guards.dart</span>        <span class="cm">kFullBleedScreens</span>
+<span class="or">│   ├── theme/</span>
+<span class="cm">│   │   ├── app_theme.dart</span>           <span class="cm">buildMobileTheme() (dark ThemeData)</span>
+<span class="cm">│   │   ├── design_system_theme.dart</span> <span class="cm">kMobileTreeTheme · kMobileTableTheme · kMobileSuggestTheme</span>
+<span class="cm">│   │   └── super_packages_theme.dart</span><span class="cm">token documentation stub</span>
+<span class="cm">│   └── di/</span>
+<span class="cm">│       ├── service_locator.dart</span>
+<span class="cm">│       └── feature_registrars.dart</span>
+<span class="bl">├── core/</span>
+<span class="cm">│   ├── architecture/  error/  usecases/  value_objects/</span>
+<span class="cm">│   ├── services/  validation/  constants/</span>
+<span class="gr">├── design_system/</span>
+<span class="cm">│   ├── tokens/m_colors.dart</span>         <span class="cm">M class (surfaces · fg · brand) + tint()</span>
+<span class="cm">│   ├── components/</span>
+<span class="cm">│   │   layout/     m_icons · m_widgets</span>   <span class="cm">Eyebrow · MCard · MField · Mini · Avatar · KV · MScroll</span>
+<span class="cm">│   │   feedback/   m_feedback</span>        <span class="cm">PillTone · Pill</span>
+<span class="cm">│   │   buttons/    m_buttons</span>         <span class="cm">MBtnVariant · MBtn</span>
+<span class="cm">│   │   navigation/ m_shell</span>           <span class="cm">MAppBar · MTabBar</span>
+<span class="cm">│   ├── adapters/</span>
+<span class="cm">│   │   form/       m_inputs</span>          <span class="cm">TInput · TPassword · TSelect · TSwitch · TCheckbox · MSuggest…</span>
+<span class="cm">│   │   table/      m_table</span>           <span class="cm">MCol · mcell · MTable (ReadableTable wrapper)</span>
+<span class="cm">│   │   banking/    m_bank_kit</span>        <span class="cm">MMoney · MMethod · JournalPreview · FromToFlow · FxTiles…</span>
+<span class="cm">│   │   inventory/  m_inv_kit</span>         <span class="cm">ISection · IField · ProductRow · QtyStepper · Scanner…</span>
+<span class="cm">│   └── kit.dart</span>                     <span class="cm">← single barrel; screens import only this (+ banking/inv as needed)</span>
+<span class="or">├── workspace/</span>
+<span class="cm">│   ├── domain/  entities · repositories · usecases</span>
+<span class="cm">│   ├── data/    datasources · models · repositories</span>
+<span class="cm">│   └── presentation/</span>
+<span class="cm">│       ├── bloc/nav_cubit.dart</span>           <span class="cm">auth gate · active tab · sub-screen stack</span>
+<span class="cm">│       ├── bloc/tenant_cubit.dart</span>        <span class="cm">available + active tenant (DB-per-tenant)</span>
+<span class="cm">│       ├── pages/workspace_page.dart</span>          <span class="cm">navigator shell (auth → tabs → sub-stack)</span>
+<span class="cm">│       └── widgets/workspace_shell.dart</span>
+<span class="bl">├── features/</span>  <span class="cm">auth · dashboard · accounts · ledger · inventory · stores</span>
+<span class="cm">│             banking · contacts · reports · config · admin · settings</span>
+<span class="cm">│             more · mobile_dashboard</span>
+<span class="cm">│   each: domain/ · data/ · presentation/pages/</span>
+<span class="gr">└── shared/</span>
+    <span class="cm">presentation/  domain/entities/  data/</span></pre>
+  </section>
 
-  <div class="sec"><span class="bar" style="background:var(--green)"></span><h2>Screens ported (every entry routes)</h2></div>
-  <div class="grid" id="screens"></div>
-
-  <div class="sec"><span class="bar" style="background:var(--blue)"></span><h2>Design-system components (path dep · v2.8.1)</h2></div>
-  <div class="card">
-    <p class="note">The app consumes the sibling <code>geniuslink_design_system</code> package for its three data components; their theme extensions are registered on the dark theme in <code>main.dart</code> so all three blend with the MCard chrome.</p>
-    <div class="tree"><span class="f">Tree</span>               <span class="c">Account Tree screen — typed <code>Tree&lt;Account&gt;</code>, builders read <code>row.node.value</code> (search · expand/collapse · indent guides · roll-up balances)</span>
-<span class="f">ReadableTable</span>      <span class="c">wrapped as <code>MTable</code> (m_widgets) — Trial Balance · Inventory Valuation · Audit Log; click-to-sort + TSV copy (keys from cell text) + opt-in quick-search</span>
-<span class="f">AutoSuggestionsBox</span> <span class="c">wrapped as <code>MSuggest</code> (m_inputs) — Create-Account Parent/Currency pickers · journal-line account combo · the More menu is a spotlight over every screen</span></div>
-  </div>
-
-  <div class="sec"><span class="bar" style="background:var(--orange)"></span><h2>Run it</h2></div>
-  <div class="card">
-    <div class="run"><span class="cm"># from the project root</span>
-cd geniuslink_design_system_mobile
-flutter pub get
-flutter run   <span class="cm"># device / emulator / -d chrome</span></div>
-    <p class="note">Sign in on the login screen (any credentials enter the app). One path dependency (<code>geniuslink_design_system</code>, synced to v2.8.1) supplies the Tree / ReadableTable / AutoSuggestionsBox components; everything else is <code>flutter</code> only.
-    Fonts fall back to the platform UI font until the GL families are dropped into <code>assets/fonts/</code>.</p>
-  </div>
-</div>
-<script>
-  const groups = [
-    ['Auth', 'var(--blue)', [['login','Sign In'],['signup','Create workspace'],['forgot','Forgot password']]],
-    ['Tabs', 'var(--green)', [['dashboard','Dashboard'],['accounts','Accounts'],['stores','Stores'],['more','More menu'],['mobileDashboard','Mobile Dashboard v2 ★']]],
-    ['Accounts', 'var(--blue)', [['createAccount','Create Account'],['accountDetail','Account Detail (full)'],['createGroup','Create Group'],['groupDetail','Group Detail'],['accountTree','Account Tree']]],
-    ['Stores', 'var(--green)', [['createStore','Create Store'],['storeDetail','Store Detail'],['issue','Issue Inventory']]],
-    ['Ledger & Journal', 'var(--orange)', [['journal','Opening Entry'],['opDetail','Operation Detail'],['journalList','Journal Entries'],['createJournalEntry','Create Entry'],['journalEntryDetail','Entry Detail']]],
-    ['Banking', 'var(--blue)', [['createDeposit','Deposit'],['depositDetail','Deposit Receipt'],['createWithdrawal','Withdrawal'],['withdrawalDetail','Voucher'],['createLocalTransfer','Local Transfer'],['localTransferDetail','Settlement'],['createExternalTransfer','External Wire'],['externalTransferDetail','Wire Detail']]],
-    ['Products & Inventory', 'var(--green)', [['productsList','Products'],['productDetail','Product Detail'],['createProduct','Create Product'],['issueDetail','Issue Detail'],['receiveCreate','Receive'],['receiveDetail','Receipt Detail'],['transferCreate','Transfer'],['transferDetail','Transfer Detail'],['adjustment','Adjustment']]],
-    ['Inventory Extras', 'var(--orange)', [['invDashboard','Inventory Dashboard'],['warehousesList','Warehouses'],['transferList','Stock Transfers'],['stockTake','Stock Take'],['categories','Categories'],['uom','Units of Measure'],['priceLists','Price Lists'],['barcodePrint','Barcode Print']]],
-    ['Currencies', 'var(--blue)', [['currenciesList','Currencies'],['createCurrency','Add Currency'],['currencyDetail','Currency Detail'],['exchangeRateSetup','Exchange Rates'],['fiscalYearSetup','Fiscal Year']]],
-    ['Contacts', 'var(--green)', [['customersList','Customers'],['customerDetail','Customer Detail'],['createCustomer','Add Customer'],['suppliersList','Suppliers'],['supplierDetail','Supplier Detail'],['createSupplier','Add Supplier']]],
-    ['Reports', 'var(--orange)', [['trialBalance','Trial Balance'],['incomeStatement','Income Statement'],['balanceSheet','Balance Sheet'],['inventoryValuation','Inventory Valuation'],['auditLog','Audit Log']]],
-    ['Users', 'var(--blue)', [['usersList','Users'],['userDetail','User Detail'],['createUser','Invite User'],['rolesPermissions','Roles & Permissions']]],
-    ['Settings · Org', 'var(--green)', [['settingsHub','Settings Hub'],['setCompany','Company Profile'],['setFinancial','Financial'],['setTaxes','Taxes'],['setCurrencies','Currencies'],['setNumbering','Numbering'],['setBranches','Branches & Stores']]],
-    ['Settings · Team', 'var(--orange)', [['rolesList','Roles'],['roleEditor','Role Editor'],['tenants','Workspaces']]],
-    ['Settings · Platform', 'var(--blue)', [['setIntegrations','Integrations'],['setWebhooks','Webhooks'],['setApiKeys','API Keys'],['setNotifications','Notifications'],['setBilling','Billing & Plan'],['setBackup','Backup & Export']]],
-  ];
-  const total = groups.reduce((s,g)=>s+g[2].length,0);
-  document.getElementById('screens').innerHTML = groups.map(([title,color,items])=>`
+  <!-- Design system -->
+  <section>
+    <h2 class="g">Design system layers</h2>
     <div class="card">
-      <div class="hd"><span class="bar" style="background:${color}"></span><span class="lbl">${title}</span><span class="count">${items.length}</span></div>
-      <div class="scr">${items.map(([id,nm])=>`<div class="row"><span class="id">${id}</span><span class="nm">${nm}</span></div>`).join('')}</div>
-    </div>`).join('');
+      <div class="kv">
+        <span class="k">tokens/m_colors.dart</span>
+        <span class="v">Single token file: the <code>M</code> class with surface, foreground, brand, and font constants. Dark-only (mobile is always dark). <code>tint(color, alphaHex)</code> and <code>tintPct(color, pct)</code> helpers used throughout.</span>
+      </div>
+      <div class="kv">
+        <span class="k">components/</span>
+        <span class="v"><b>layout:</b> <code>MIcons.of(name)</code> + <code>Eyebrow</code>, <code>MCard</code> (marker bar · title · sub · right slot), <code>MField</code> (read-only preview), <code>Mini</code> (stat tile), <code>Avatar</code>, <code>KV</code>, <code>MScroll</code> (gap-spaced ListView). <b>feedback:</b> <code>PillTone</code> enum + <code>Pill</code>. <b>buttons:</b> <code>MBtnVariant</code> + <code>MBtn</code> (Material InkWell, 48px). <b>navigation:</b> <code>MAppBar</code> (back · title · Arabic gloss · action slot) + <code>MTabBar</code> (4 tabs: Home · Accounts · Stores · More).</span>
+      </div>
+      <div class="kv">
+        <span class="k">adapters/form/m_inputs</span>
+        <span class="v"><code>TInput</code> (controlled, icon slot, RTL), <code>TPassword</code> (show/hide suffix), <code>TSelect</code> (dropdown), <code>TSwitch</code>, <code>TCheckbox</code>, <code>Segmented</code> (horizontal pill row), <code>SearchInput</code>, <code>MSuggest</code> (AutoSuggestionsBox wrapper), <code>mSuggestions()</code> helper.</span>
+      </div>
+      <div class="kv">
+        <span class="k">adapters/table/m_table</span>
+        <span class="v"><code>MCol</code> descriptor (flex / fixed / align / sortable / numeric) + <code>MTable</code> wrapping <code>ReadableTable&lt;List&lt;Widget&gt;&gt;</code>. Click-to-sort headers, TSV copy, opt-in quick-search bar (<code>showSearch</code>), whole-row tap (<code>onRowTap</code>). <code>mCellText()</code> walker powers sort keys and copy.</span>
+      </div>
+      <div class="kv">
+        <span class="k">adapters/banking/m_bank_kit</span>
+        <span class="v">Reusable banking primitives: <code>MMoney</code> (large accented amount field), <code>MMethod</code> (4-up payment chip selector), <code>JournalPreview</code> (debit/credit rows), <code>FromToFlow</code> (vertical card flow), <code>FxTiles</code> (3-up FX grid), <code>AuditGrid</code>, <code>BKV</code>, <code>BankNote</code>. Not in <code>kit.dart</code> — imported only by banking screens.</span>
+      </div>
+      <div class="kv">
+        <span class="k">adapters/inventory/m_inv_kit</span>
+        <span class="v">Reusable inventory/form primitives: <code>ISection</code> (collapsible card), <code>IField</code> (locked/select/icon variants), <code>ITextarea</code>, <code>Scanner</code> (barcode placeholder with corner brackets), <code>QtyStepper</code>, <code>ProductRow</code>, <code>AddProductBtn</code>/<code>AddLineBtn</code>, <code>UploadBox</code>, <code>IToggle</code>, <code>InfoNote</code>, <code>ActionRow</code>. Not in <code>kit.dart</code> — imported by inventory, journal, and ledger screens.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workspace shell -->
+  <section>
+    <h2 class="o">Workspace (NavCubit)</h2>
+    <div class="card">
+      <div class="kv">
+        <span class="k">NavCubit</span>
+        <span class="v"><code>Cubit&lt;NavState&gt;</code> at <code>workspace/presentation/bloc/</code>. State (Equatable): auth gate (<code>authed</code>, <code>authScreen</code>), active bottom tab (<code>tab</code>), sub-screen stack (<code>stack: List&lt;String&gt;</code>). API: <code>login()</code> · <code>logout()</code> · <code>showAuth()</code> · <code>selectTab()</code> · <code>go(id)</code> · <code>back(target?)</code> · <code>home()</code>.</span>
+      </div>
+      <div class="kv">
+        <span class="k">WorkspacePage</span>
+        <span class="v">Replaces the old <code>AppRoot</code>. Auth gate: routes to <code>LoginScreen</code>/<code>SignUpScreen</code>/<code>ForgotScreen</code>. Tab shell: <code>MAppBar</code> + tab body + <code>MTabBar</code>. Sub-screen: <code>MAppBar</code> (with back) + <code>buildSubScreen()</code>. Full-bleed screens (e.g. <code>mobileDashboard</code>) bypass the standard app bar.</span>
+      </div>
+      <div class="kv">
+        <span class="k">app/router/app_router.dart</span>
+        <span class="v">Houses <code>subTitles</code> map (screen id → title/ar/back), <code>portedScreens</code> set, <code>fullBleedScreens</code> set, <code>buildSubScreen()</code> switch dispatch, <code>buildTabScreen()</code>. Imports all 20 feature screen files.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- State management -->
+  <section>
+    <h2>State management</h2>
+    <div class="pills" style="margin-bottom:18px">
+      <span class="pill">flutter_bloc</span>
+      <span class="pill">Cubit-first</span>
+      <span class="pill">multi-tenant · DB-per-tenant</span>
+      <span class="pill">AppBlocObserver</span>
+    </div>
+    <div class="card">
+      <div class="kv"><span class="k">control-plane (root)</span><span class="v"><code>ThemeCubit</code> · <code>AuthBloc</code> · <code>TenantCubit</code> · <code>NavCubit</code> live above <code>MaterialApp</code> — tenant-agnostic, survive a switch.</span></div>
+      <div class="kv"><span class="k">tenant-scoped</span><span class="v">The authed tab/sub shell + every list/form/settings cubit + <code>MobileDashboardCubit</code> live <b>inside</b> <code>TenantScope</code>, under <code>ValueKey('tenant:&lt;id&gt;')</code>.</span></div>
+      <div class="kv"><span class="k">TenantScope</span><span class="v">watches <code>TenantCubit.activeTenantId</code>; a switch (or logout) re-keys the subtree → Flutter destroys the old tree, closing that tenant's <code>TenantDatabase</code>, and builds fresh. No tenant state survives.</span></div>
+      <div class="kv"><span class="k">isolation guard</span><span class="v"><code>TenantDatabase.guard(tenantId)</code> throws on cross-tenant access; each tenant routes to its own <code>tenant_&lt;id&gt;.db</code>.</span></div>
+      <div class="kv"><span class="k">shared</span><span class="v"><code>core/bloc/</code>: <code>LoadStatus</code> · generic <code>ListCubit&lt;T&gt;</code> · <code>FormCubit</code> (values/dirty/validate/submit).</span></div>
+    </div>
+  </section>
+
+  <!-- Feature internal structure -->
+  <section>
+    <h2 class="g">Feature internal structure</h2>
+    <p style="color:var(--fg3);font-size:13px;margin-bottom:16px">Each feature follows the same three-layer pattern. <code>auth</code> and <code>dashboard</code> shown as examples.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
+
+      <!-- auth feature -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="background:var(--card2);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:10px">
+          <span style="width:4px;height:18px;border-radius:4px;background:var(--blue);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)">features/auth/</span>
+        </div>
+        <pre style="border:none;border-radius:0;margin:0;padding:18px 20px"><span class="bl">features/auth/</span>
+<span class="cm">├── domain/</span>                    <span class="cm">← stub (future)</span>
+<span class="cm">│   └── .gitkeep</span>
+<span class="cm">├── data/</span>                      <span class="cm">← stub (future)</span>
+<span class="cm">│   └── .gitkeep</span>
+<span class="gr">└── presentation/</span>
+    <span class="cm">└── pages/</span>
+        <span class="hl">auth_screen.dart</span>       <span class="cm">LoginScreen</span>
+                               <span class="cm">SignUpScreen</span>
+                               <span class="cm">ForgotScreen</span>
+                               <span class="cm">_Brand · _authEyebrow</span>
+
+<span class="cm">Imports:</span>
+  <span class="or">../../../../workspace/presentation/</span>
+  <span class="or">  bloc/nav_cubit.dart</span>
+   <span class="or">../../../../design_system/kit.dart</span></pre>
+      </div>
+
+      <!-- dashboard feature -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="background:var(--card2);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:10px">
+          <span style="width:4px;height:18px;border-radius:4px;background:var(--green);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)">features/dashboard/</span>
+        </div>
+        <pre style="border:none;border-radius:0;margin:0;padding:18px 20px"><span class="gr">features/dashboard/</span>
+<span class="cm">├── domain/</span>                    <span class="cm">← stub (future)</span>
+<span class="cm">│   └── .gitkeep</span>
+<span class="cm">├── data/</span>                      <span class="cm">← stub (future)</span>
+<span class="cm">│   └── .gitkeep</span>
+<span class="gr">└── presentation/</span>
+    <span class="cm">└── pages/</span>
+        <span class="hl">dashboard_screen.dart</span>  <span class="cm">DashboardScreen</span>
+                               <span class="cm">_Kpi · _CashFlowBars</span>
+                               <span class="cm">_BalanceRow · _RecentRow</span>
+                               <span class="cm">_AlertRow · _Legend</span>
+
+<span class="cm">Imports:</span>
+  <span class="or">../../../../workspace/presentation/</span>
+  <span class="or">  bloc/nav_cubit.dart</span>
+   <span class="or">../../../../design_system/kit.dart</span></pre>
+      </div>
+
+      <!-- full pattern reference -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="background:var(--card2);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:10px">
+          <span style="width:4px;height:18px;border-radius:4px;background:var(--orange);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)">features/&lt;name&gt;/ — full pattern</span>
+        </div>
+        <pre style="border:none;border-radius:0;margin:0;padding:18px 20px"><span class="or">features/&lt;name&gt;/</span>
+<span class="bl">├── domain/</span>
+<span class="cm">│   ├── entities/</span>              <span class="cm">pure Dart models</span>
+<span class="cm">│   ├── repositories/</span>          <span class="cm">abstract interfaces</span>
+<span class="cm">│   └── usecases/</span>              <span class="cm">single-action use cases</span>
+<span class="gr">├── data/</span>
+<span class="cm">│   ├── datasources/</span>           <span class="cm">local / remote</span>
+<span class="cm">│   ├── models/</span>                <span class="cm">JSON-serialisable DTOs</span>
+<span class="cm">│   └── repositories/</span>          <span class="cm">implements domain interface</span>
+<span class="or">└── presentation/</span>
+    <span class="cm">├── bloc/</span>                <span class="cm">Cubit/Bloc + State (Equatable)</span>
+    <span class="cm">├── pages/</span>                 <span class="cm">screen widgets</span>
+    <span class="cm">└── widgets/</span>               <span class="cm">reusable sub-widgets</span>
+
+<span class="cm">Rule: domain/ imports nothing Flutter.</span>
+<span class="cm">      data/  imports domain/ only.</span>
+<span class="cm">      presentation/ imports domain/ + kit.</span></pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Feature screens -->
+  <section>
+    <h2>All feature screens</h2>
+    <div class="scr-grid" id="screens"></div>
+  </section>
+
+  <!-- Tokens -->
+  <section>
+    <h2 class="r">Design tokens</h2>
+    <div class="pills">
+      <span class="pill">geniuslink_design_system v2.8.1 · sidebar</span>
+      <span class="pill">super_form_field v1.0.0</span>
+      <span class="pill">super_auto_suggestion_box v0.5.0</span>
+      <span class="pill">super_table_field v1.0.0</span>
+      <span class="pill">super_tree_field v1.0.0</span>
+      <span class="pill">blue #4A7CFF</span>
+      <span class="pill">green #1DB88A</span>
+      <span class="pill">orange #F97316</span>
+      <span class="pill">red #EF4444</span>
+      <span class="pill">Manrope · display</span>
+      <span class="pill">Inter · body</span>
+      <span class="pill">JetBrains Mono · mono</span>
+      <span class="pill">Noto Naskh Arabic · RTL</span>
+      <span class="pill">dark-only</span>
+      <span class="pill">46px controls</span>
+      <span class="pill">12px card radius</span>
+    </div>
+  </section>
+
+  <footer>© 2024 GENIUSLINK · MOBILE FLUTTER PORT · CLEAN ARCHITECTURE · DARK · EN + AR</footer>
+</div>
+
+<script>
+const groups = [
+  { title:'Auth', color:'var(--blue)', path:'features/auth/presentation/pages/', screens:[
+    ['auth_screen','Login · Sign Up · Forgot Password (3 classes)'],
+  ]},
+  { title:'Dashboard', color:'var(--green)', path:'features/dashboard/presentation/pages/', screens:[
+    ['dashboard_screen','DashboardScreen (KPIs · cashflow · balances · alerts)'],
+  ]},
+  { title:'Mobile Dashboard', color:'var(--blue)', path:'features/mobile_dashboard/', screens:[
+    ['presentation/pages/mobile_dashboard_screen','MobileDashboardScreen (full-bleed)'],
+    ['data/datasources/mobile_dashboard_data','MdTab · MdCard · MdOp · mdTabs fixture'],
+  ]},
+  { title:'Accounts', color:'var(--orange)', path:'features/accounts/presentation/pages/', screens:[
+    ['accounts_screens','AccountsScreen · CreateAccountScreen · AccountDetailScreen · CreateGroupScreen · GroupDetailScreen'],
+    ['accounts_extra_screens','AccountTreeScreen + ReadableTable typed variant'],
+  ]},
+  { title:'Stores', color:'var(--blue)', path:'features/stores/presentation/pages/', screens:[
+    ['stores_screens','StoresScreen · CreateStoreScreen · StoreDetailScreen · IssueInventoryScreen'],
+  ]},
+  { title:'Ledger & Journal', color:'var(--green)', path:'features/ledger/presentation/pages/', screens:[
+    ['ledger_screens','OpeningJournalScreen · OpDetailScreen'],
+    ['journal_screens','JournalListScreen · CreateJournalEntryScreen · JournalEntryDetailScreen'],
+  ]},
+  { title:'Banking · Cash', color:'var(--orange)', path:'features/banking/presentation/pages/', screens:[
+    ['banking_cash_screens','CreateDeposit · DepositDetail · CreateWithdrawal · WithdrawalDetail'],
+    ['banking_transfer_screens','CreateLocalTransfer · LocalTransferDetail · CreateExternalTransfer · ExternalTransferDetail'],
+  ]},
+  { title:'Inventory', color:'var(--blue)', path:'features/inventory/presentation/pages/', screens:[
+    ['inventory_screens','ProductsList · ProductDetail · CreateProduct · IssueDetail · ReceiveCreate · ReceiveDetail · TransferCreate · TransferDetail · Adjustment'],
+    ['inventory_extras_screens','InvDashboard · StockTake · Categories · UoM · PriceLists · BarcodePrint · WarehousesList · TransferList'],
+  ]},
+  { title:'Config', color:'var(--green)', path:'features/config/presentation/pages/', screens:[
+    ['currencies_screens','CurrenciesList · CreateCurrency · CurrencyDetail · ExchangeRateSetup · FiscalYearSetup'],
+  ]},
+  { title:'Contacts', color:'var(--orange)', path:'features/contacts/presentation/pages/', screens:[
+    ['contacts_screens','CustomersList · CustomerDetail · CreateCustomer · SuppliersList · SupplierDetail · CreateSupplier'],
+  ]},
+  { title:'Reports', color:'var(--blue)', path:'features/reports/presentation/pages/', screens:[
+    ['reports_screens','TrialBalance · IncomeStatement · BalanceSheet · InventoryValuation · AuditLog'],
+  ]},
+  { title:'Admin (Users)', color:'var(--green)', path:'features/admin/presentation/pages/', screens:[
+    ['users_screens','UsersList · UserDetail · CreateUser · RolesPermissions'],
+  ]},
+  { title:'Settings', color:'var(--orange)', path:'features/settings/presentation/pages/', screens:[
+    ['settings_org_screens','SettingsHub · CompanyProfile · Financial · Taxes · Currencies · Numbering · Branches'],
+    ['settings_team_screens','RolesList · RoleEditor · Tenants'],
+    ['settings_platform_screens','Integrations · Webhooks · APIKeys · Notifications · Billing · Backup'],
+  ]},
+  { title:'More', color:'var(--blue)', path:'features/more/presentation/pages/', screens:[
+    ['more_screen','MoreScreen (spotlight search over all sub-screens)'],
+  ]},
+];
+
+document.getElementById('screens').innerHTML = groups.map(g => `
+  <div class="scr-card">
+    <div class="hd">
+      <span class="bar" style="background:${g.color}"></span>
+      <span class="lbl">${g.title}</span>
+      <span class="cnt">${g.screens.length} file${g.screens.length > 1 ? 's' : ''}</span>
+    </div>
+    <div class="scr-list">
+      ${g.screens.map(([id, nm]) => `
+        <div class="scr-row">
+          <span class="scr-id">${id}</span>
+          <span class="scr-nm">${nm}</span>
+        </div>`).join('')}
+    </div>
+  </div>`).join('');
 </script>
 </body>
 </html>

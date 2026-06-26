@@ -1,24 +1,37 @@
 // ============================================================
-// KIT — Interactive inputs (port of window._mui)
+// ADAPTERS — Interactive inputs  →  design_system/adapters/form/
 // ------------------------------------------------------------
-// TInput · TPassword · TSelect · TSwitch · TCheckbox · Segmented
-// · SearchInput. Real controlled widgets so screens behave.
+// TInput · TPassword · TSelect · TSwitch · TCheckbox  →  backed by
+// super_form_field. MSuggest · mSuggestions  →  backed by
+// super_auto_suggestion_box (the AutoSuggestionsBox). Segmented · SearchInput
+// stay hand-rolled (compact filter / plain search — not form fields).
+//
+// File placement:  lib/design_system/adapters/form/m_inputs.dart
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
+import 'package:super_form_field/super_form_field.dart';
+import '../../tokens/m_colors.dart';
 import '../../components/layout/m_icons.dart';
-import '../../components/layout/m_widgets.dart';
 
+// Surface the package suggestion API so screens reach AutoSuggestion /
+// AutoSuggestionsBox through the kit barrel — no direct monolith import.
+export 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart'
+    show
+        AutoSuggestion,
+        AutoSuggestionsBox,
+        AutoSuggestionsBoxController,
+        SuggestionSources,
+        AutoSuggestionMatch;
+
+/// Single-line text input. `obscure` → password type; `ar` mirrors the field.
 class TInput extends StatefulWidget {
   final String? label;
   final String defaultValue;
   final String? placeholder;
-  final bool mono;
-  final bool ar;
-  final bool obscure;
+  final bool mono, ar, obscure, required;
   final String? icon;
-  final bool required;
   final Widget? suffix;
   const TInput({
     super.key,
@@ -32,86 +45,95 @@ class TInput extends StatefulWidget {
     this.required = false,
     this.suffix,
   });
-
   @override
   State<TInput> createState() => _TInputState();
 }
 
 class _TInputState extends State<TInput> {
-  late final TextEditingController _c = TextEditingController(text: widget.defaultValue);
-  final _focus = FocusNode();
-
+  SuperTextFieldController? _c;
   @override
   void initState() {
     super.initState();
-    _focus.addListener(() => setState(() {}));
+    if (widget.defaultValue.isNotEmpty) _c = SuperTextFieldController(initialValue: widget.defaultValue);
   }
 
   @override
   void dispose() {
-    _c.dispose();
-    _focus.dispose();
+    _c?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: widget.ar ? TextDirection.rtl : TextDirection.ltr,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.label != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 7),
-              child: Text.rich(TextSpan(children: [
-                TextSpan(text: widget.label!.toUpperCase()),
-                if (widget.required) const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-              ], style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg2))),
-            ),
-          Container(
-            height: 46,
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            decoration: BoxDecoration(
-              color: M.input,
-              border: Border.all(color: _focus.hasFocus ? M.blue : M.borderStrong),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                if (widget.icon != null) ...[Icon(MIcons.of(widget.icon!), size: 16, color: M.fg3), const SizedBox(width: 10)],
-                Expanded(
-                  child: TextField(
-                    controller: _c,
-                    focusNode: _focus,
-                    obscureText: widget.obscure,
-                    textAlign: widget.ar ? TextAlign.right : TextAlign.left,
-                    style: TextStyle(fontFamily: widget.mono ? M.mono : (widget.ar ? M.arabic : M.body), fontSize: 14, color: M.fg1),
-                    cursorColor: M.blue,
-                    decoration: InputDecoration(
-                      isCollapsed: true,
-                      border: InputBorder.none,
-                      hintText: widget.placeholder,
-                      hintStyle: const TextStyle(fontFamily: M.body, fontSize: 14, color: M.fg3),
-                    ),
-                  ),
-                ),
-                if (widget.suffix != null) widget.suffix!,
-              ],
-            ),
-          ),
-        ],
-      ),
+    final field = SuperTextFormField(
+      controller: _c,
+      label: widget.label,
+      placeholder: widget.placeholder,
+      required: widget.required,
+      type: widget.obscure ? SuperTextType.password : SuperTextType.text,
     );
+    return widget.ar ? Directionality(textDirection: TextDirection.rtl, child: field) : field;
   }
 }
 
-/// Searchable picker (label + the design-system **AutoSuggestionsBox**). Use
-/// instead of [TSelect] when the option set is long or benefits from
-/// type-to-filter, grouped sections, or a code/description second line — e.g.
-/// account / currency / customer pickers. Strict-pick by default
-/// (`allowFreeText: false`) so only a real option commits via [onSelected].
-/// Build plain-string rows quickly with [mSuggestions].
+/// Password input — the package field owns its own show/hide toggle.
+class TPassword extends StatelessWidget {
+  final String? label;
+  final String placeholder;
+  final bool required;
+  const TPassword({super.key, this.label, this.placeholder = 'Minimum 10 characters', this.required = false});
+  @override
+  Widget build(BuildContext context) => SuperTextFormField(
+        label: label,
+        placeholder: placeholder,
+        required: required,
+        type: SuperTextType.password,
+      );
+}
+
+/// Single-select dropdown over a plain string list.
+class TSelect extends StatelessWidget {
+  final String? label;
+  final String? value;
+  final List<String> options;
+  final bool required;
+  const TSelect({super.key, this.label, this.value, required this.options, this.required = false});
+  @override
+  Widget build(BuildContext context) => SuperSelectFormField<String>(
+        label: label,
+        required: required,
+        initialValue: value,
+        searchable: options.length > 8,
+        options: [for (final o in options) SuperOption<String>(value: o, label: o)],
+      );
+}
+
+/// Boolean toggle row.
+class TSwitch extends StatelessWidget {
+  final String label;
+  final bool defaultOn;
+  const TSwitch({super.key, required this.label, this.defaultOn = false});
+  @override
+  Widget build(BuildContext context) => SuperBoolFormField(label: label, initialValue: defaultOn);
+}
+
+/// Statement checkbox (acknowledgement style).
+class TCheckbox extends StatelessWidget {
+  final String label;
+  final bool defaultChecked;
+  const TCheckbox({super.key, required this.label, this.defaultChecked = false});
+  @override
+  Widget build(BuildContext context) => SuperBoolFormField(
+        style: SuperBoolStyle.checkbox,
+        title: label,
+        initialValue: defaultChecked,
+      );
+}
+
+/// Searchable strict-pick picker (label + the **AutoSuggestionsBox** from
+/// super_auto_suggestion_box).
+/// Use instead of [TSelect] when the option set is long or benefits from
+/// type-to-filter, grouped sections, or a code/description second line.
 class MSuggest extends StatefulWidget {
   final String? label;
   final List<AutoSuggestion<String>> items;
@@ -138,7 +160,7 @@ class MSuggest extends StatefulWidget {
 
 class _MSuggestState extends State<MSuggest> {
   late final AutoSuggestionsBoxController<String> _box = AutoSuggestionsBoxController<String>(
-    source: AutoSuggestionsSource<String>.list(widget.items),
+    source: SuggestionSources.list<String>(widget.items),
     initialText: widget.value,
     allowFreeText: widget.allowFreeText,
   );
@@ -180,163 +202,7 @@ class _MSuggestState extends State<MSuggest> {
 List<AutoSuggestion<String>> mSuggestions(List<String> options, {String? group}) =>
     [for (final o in options) AutoSuggestion<String>(value: o, label: o, group: group)];
 
-class TPassword extends StatefulWidget {
-  final String? label;
-  final String placeholder;
-  final bool required;
-  const TPassword({super.key, this.label, this.placeholder = 'Minimum 10 characters', this.required = false});
-
-  @override
-  State<TPassword> createState() => _TPasswordState();
-}
-
-class _TPasswordState extends State<TPassword> {
-  bool _show = false;
-  @override
-  Widget build(BuildContext context) {
-    return TInput(
-      label: widget.label,
-      placeholder: widget.placeholder,
-      required: widget.required,
-      obscure: !_show,
-      suffix: GestureDetector(
-        onTap: () => setState(() => _show = !_show),
-        child: Text(_show ? 'HIDE' : 'SHOW',
-            style: const TextStyle(fontFamily: M.body, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: M.fg3)),
-      ),
-    );
-  }
-}
-
-class TSelect extends StatefulWidget {
-  final String? label;
-  final String? value;
-  final List<String> options;
-  final bool required;
-  const TSelect({super.key, this.label, this.value, required this.options, this.required = false});
-
-  @override
-  State<TSelect> createState() => _TSelectState();
-}
-
-class _TSelectState extends State<TSelect> {
-  late String _v = widget.value ?? widget.options.first;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (widget.label != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 7),
-            child: Text.rich(TextSpan(children: [
-              TextSpan(text: widget.label!.toUpperCase()),
-              if (widget.required) const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-            ], style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg2))),
-          ),
-        Container(
-          height: 46,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: _v,
-              isExpanded: true,
-              dropdownColor: M.card2,
-              icon: const Icon(Icons.keyboard_arrow_down_rounded, color: M.fg3, size: 18),
-              style: const TextStyle(fontFamily: M.body, fontSize: 14, color: M.fg1),
-              items: [for (final o in widget.options) DropdownMenuItem(value: o, child: Text(o))],
-              onChanged: (v) => setState(() => _v = v ?? _v),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TSwitch extends StatefulWidget {
-  final String label;
-  final bool defaultOn;
-  const TSwitch({super.key, required this.label, this.defaultOn = false});
-  @override
-  State<TSwitch> createState() => _TSwitchState();
-}
-
-class _TSwitchState extends State<TSwitch> {
-  late bool _on = widget.defaultOn;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => _on = !_on),
-      behavior: HitTestBehavior.opaque,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Eyebrow(widget.label),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              width: 42,
-              height: 24,
-              decoration: BoxDecoration(
-                color: _on ? M.blue : M.input,
-                border: Border.all(color: _on ? M.blue : M.borderStrong),
-                borderRadius: BorderRadius.circular(999),
-              ),
-              child: AnimatedAlign(
-                duration: const Duration(milliseconds: 150),
-                alignment: _on ? Alignment.centerRight : Alignment.centerLeft,
-                child: Container(
-                  width: 18, height: 18,
-                  margin: const EdgeInsets.symmetric(horizontal: 2),
-                  decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TCheckbox extends StatefulWidget {
-  final String label;
-  final bool defaultChecked;
-  const TCheckbox({super.key, required this.label, this.defaultChecked = false});
-  @override
-  State<TCheckbox> createState() => _TCheckboxState();
-}
-
-class _TCheckboxState extends State<TCheckbox> {
-  late bool _on = widget.defaultChecked;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => _on = !_on),
-      behavior: HitTestBehavior.opaque,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 18, height: 18, margin: const EdgeInsets.only(top: 1),
-            decoration: BoxDecoration(
-              color: _on ? M.blue : Colors.transparent,
-              border: Border.all(color: _on ? M.blue : M.borderStrong),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: _on ? const Icon(Icons.check_rounded, size: 12, color: Colors.white) : null,
-          ),
-          const SizedBox(width: 10),
-          Expanded(child: Text(widget.label, style: const TextStyle(fontFamily: M.body, fontSize: 12.5, color: M.fg3, height: 1.5))),
-        ],
-      ),
-    );
-  }
-}
-
+/// Compact horizontal segmented filter (not a form field — stays hand-rolled).
 class Segmented extends StatelessWidget {
   final List<String> options;
   final String value;
@@ -374,6 +240,7 @@ class Segmented extends StatelessWidget {
   }
 }
 
+/// Search box (not a form field — stays hand-rolled).
 class SearchInput extends StatelessWidget {
   final String placeholder;
   final String value;

@@ -94,9 +94,8 @@ const mdCurrencies = [('SAR', 'Saudi Riyal'), ('USD', 'US Dollar'), ('AED', 'UAE
 
 const mdWorkspaces = [
   MdWorkspace('rashid', 'Al-Rashid Trading Co.', 'Tenant 9', 1),
-  MdWorkspace('najd', 'Najd Holding Group', 'Tenant 4', 1.46),
-  MdWorkspace('gulf', 'Gulf Logistics LLC', 'Tenant 12', 0.58),
-  MdWorkspace('coastal', 'Coastal Cement Co.', 'Tenant 7', 0.83),
+  MdWorkspace('najd', 'Najd Holdings', 'Tenant 14', 1.46),
+  MdWorkspace('coastal', 'Coastal Logistics', 'Tenant 22', 0.83),
 ];
 
 const mdAttention = [

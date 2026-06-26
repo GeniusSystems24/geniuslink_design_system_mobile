@@ -6,11 +6,15 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../core/bloc/list_cubit.dart';
+import '../../../../core/bloc/form_cubit.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
-const _users = [
+typedef _UserRow = (int, String, String, String, String, Color);
+
+const List<_UserRow> _users = [
   (5, 'Admin User', 'admin@geniuslink.sa', 'Administrator', 'active', M.blue),
   (12, 'Layla Ahmed', 'layla.a@geniuslink.sa', 'Accountant', 'active', M.orange),
   (3, 'Controller', 'controller@geniuslink.sa', 'Controller', 'active', M.green),
@@ -21,54 +25,75 @@ const _users = [
 
 PillTone _uTone(String s) => s == 'active' ? PillTone.success : (s == 'pending' ? PillTone.warning : PillTone.neutral);
 
-class UsersListScreen extends StatefulWidget {
-  final NavController nav;
-  const UsersListScreen({super.key, required this.nav});
-  @override
-  State<UsersListScreen> createState() => _UsersListScreenState();
+bool _userPredicate(_UserRow u, String q, Map<String, Object?> f) {
+  final role = (f['role'] as String?) ?? 'All';
+  if (role != 'All' && u.$4 != role) return false;
+  final ql = q.trim().toLowerCase();
+  return ql.isEmpty || u.$2.toLowerCase().contains(ql) || u.$3.toLowerCase().contains(ql);
 }
 
-class _UsersListScreenState extends State<UsersListScreen> {
-  String _q = '';
-  String _role = 'All';
+class UsersListScreen extends StatelessWidget {
+  final NavCubit nav;
+  const UsersListScreen({super.key, required this.nav});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ListCubit<_UserRow>>(
+      create: (_) => ListCubit<_UserRow>(
+        source: () => _users,
+        predicate: _userPredicate,
+        initialFilters: const {'role': 'All'},
+      )..load(),
+      child: _UsersListView(nav: nav),
+    );
+  }
+}
+
+class _UsersListView extends StatelessWidget {
+  final NavCubit nav;
+  const _UsersListView({required this.nav});
   @override
   Widget build(BuildContext context) {
     const roles = ['All', 'Administrator', 'Controller', 'Accountant', 'Store Manager', 'Viewer'];
-    final ql = _q.trim().toLowerCase();
-    final visible = _users.where((u) => (_role == 'All' || u.$4 == _role) && (ql.isEmpty || u.$2.toLowerCase().contains(ql) || u.$3.toLowerCase().contains(ql))).toList();
-    return MScroll([
-      SearchInput(placeholder: 'Search name or email…', value: _q, onChange: (v) => setState(() => _q = v)),
-      Segmented(options: roles, value: _role, onChange: (v) => setState(() => _role = v)),
-      MCard(pad: 8, children: [
-        for (int i = 0; i < visible.length; i++)
-          GestureDetector(
-            onTap: () => widget.nav.go('userDetail'),
-            behavior: HitTestBehavior.opaque,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              decoration: BoxDecoration(border: i < visible.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-              child: Row(children: [
-                Avatar(visible[i].$2, size: 38),
-                const SizedBox(width: 12),
-                Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(visible[i].$2, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                  const SizedBox(height: 2),
-                  Text(visible[i].$3, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
-                  const SizedBox(height: 4),
-                  Row(children: [
-                    Container(width: 6, height: 6, decoration: BoxDecoration(color: visible[i].$6, shape: BoxShape.circle)),
-                    const SizedBox(width: 6),
-                    Text(visible[i].$4, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+    final cubit = context.read<ListCubit<_UserRow>>();
+    return BlocBuilder<ListCubit<_UserRow>, ListState<_UserRow>>(
+      builder: (context, state) {
+        final visible = state.results;
+        final role = (state.filters['role'] as String?) ?? 'All';
+        return MScroll([
+          SearchInput(placeholder: 'Search name or email…', value: state.query, onChange: cubit.setQuery),
+          Segmented(options: roles, value: role, onChange: (v) => cubit.setFilter('role', v)),
+          MCard(pad: 8, children: [
+            for (int i = 0; i < visible.length; i++)
+              GestureDetector(
+                onTap: () => nav.go('userDetail'),
+                behavior: HitTestBehavior.opaque,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  decoration: BoxDecoration(border: i < visible.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                  child: Row(children: [
+                    Avatar(visible[i].$2, size: 38),
+                    const SizedBox(width: 12),
+                    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(visible[i].$2, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                      const SizedBox(height: 2),
+                      Text(visible[i].$3, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                      const SizedBox(height: 4),
+                      Row(children: [
+                        Container(width: 6, height: 6, decoration: BoxDecoration(color: visible[i].$6, shape: BoxShape.circle)),
+                        const SizedBox(width: 6),
+                        Text(visible[i].$4, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+                      ]),
+                    ])),
+                    Pill(visible[i].$5, tone: _uTone(visible[i].$5)),
                   ]),
-                ])),
-                Pill(visible[i].$5, tone: _uTone(visible[i].$5)),
-              ]),
-            ),
-          ),
-        if (visible.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No users match.', style: TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
-      ]),
-      const _SessionBanner(),
-    ]);
+                ),
+              ),
+            if (visible.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No users match.', style: TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
+          ]),
+          const _SessionBanner(),
+        ]);
+      },
+    );
   }
 }
 
@@ -289,71 +314,90 @@ class CreateUserScreen extends StatelessWidget {
 const _permOrder = ['none', 'view', 'edit', 'full'];
 const _permMeta = {'full': (M.green, 'Full'), 'edit': (M.blue, 'Edit'), 'view': (M.fg3, 'View'), 'none': (M.fg4, '—')};
 
-class RolesPermissionsScreen extends StatefulWidget {
+const _roleModules = ['Accounts', 'Stores', 'Inventory', 'Banking', 'Ledger', 'Reports', 'Users'];
+const _roleNames = ['Admin', 'Controller', 'Accountant', 'Manager', 'Viewer'];
+Map<String, List<String>> _defaultMatrix() => {
+      'Accounts': ['full', 'edit', 'edit', 'view', 'view'], 'Stores': ['full', 'edit', 'view', 'edit', 'view'],
+      'Inventory': ['full', 'edit', 'edit', 'edit', 'view'], 'Banking': ['full', 'full', 'edit', 'none', 'none'],
+      'Ledger': ['full', 'full', 'edit', 'view', 'view'], 'Reports': ['full', 'full', 'view', 'view', 'view'],
+      'Users': ['full', 'view', 'none', 'none', 'none'],
+    };
+
+class RolesPermissionsScreen extends StatelessWidget {
   const RolesPermissionsScreen({super.key});
   @override
-  State<RolesPermissionsScreen> createState() => _RolesPermissionsScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(
+        initial: {'role': 'Admin', 'matrix': _defaultMatrix()},
+        onSubmit: (_) async {}, // later: await rolesRepo.save(matrix)
+      ),
+      child: const _RolesPermissionsView(),
+    );
+  }
 }
 
-class _RolesPermissionsScreenState extends State<RolesPermissionsScreen> {
-  static const _modules = ['Accounts', 'Stores', 'Inventory', 'Banking', 'Ledger', 'Reports', 'Users'];
-  static const _roles = ['Admin', 'Controller', 'Accountant', 'Manager', 'Viewer'];
-  final _matrix = <String, List<String>>{
-    'Accounts': ['full', 'edit', 'edit', 'view', 'view'], 'Stores': ['full', 'edit', 'view', 'edit', 'view'],
-    'Inventory': ['full', 'edit', 'edit', 'edit', 'view'], 'Banking': ['full', 'full', 'edit', 'none', 'none'],
-    'Ledger': ['full', 'full', 'edit', 'view', 'view'], 'Reports': ['full', 'full', 'view', 'view', 'view'],
-    'Users': ['full', 'view', 'none', 'none', 'none'],
-  };
-  String _role = 'Admin';
-
+class _RolesPermissionsView extends StatelessWidget {
+  const _RolesPermissionsView();
   @override
   Widget build(BuildContext context) {
-    final ri = _roles.indexOf(_role);
-    return MScroll([
-      MCard(marker: M.blue, title: 'Select Role', sub: "Tap a module's badge to cycle its access level", children: [
-        Segmented(options: _roles, value: _role, onChange: (v) => setState(() => _role = v)),
-      ]),
-      MCard(pad: 8, children: [
-        for (int i = 0; i < _modules.length; i++)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
-            decoration: BoxDecoration(border: i < _modules.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(_modules[i], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-              GestureDetector(
-                onTap: () => setState(() {
-                  final cur = _matrix[_modules[i]]![ri];
-                  final next = _permOrder[(_permOrder.indexOf(cur) + 1) % _permOrder.length];
-                  _matrix[_modules[i]]![ri] = next;
-                }),
-                child: () {
-                  final lvl = _matrix[_modules[i]]![ri];
-                  final meta = _permMeta[lvl]!;
-                  final hasColor = lvl != 'none';
-                  return Container(
-                    constraints: const BoxConstraints(minWidth: 72),
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                    decoration: BoxDecoration(color: hasColor ? tint(meta.$1, 0x26) : Colors.transparent, border: hasColor ? null : Border.all(color: M.border), borderRadius: BorderRadius.circular(999)),
-                    child: Text(meta.$2.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, fontFamily: M.body, color: hasColor ? meta.$1 : M.fg4)),
-                  );
-                }(),
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, state) {
+        final role = state.value<String>('role') ?? 'Admin';
+        final matrix = state.value<Map<String, List<String>>>('matrix') ?? _defaultMatrix();
+        final ri = _roleNames.indexOf(role);
+
+        void cycle(String module) {
+          final next = {for (final e in matrix.entries) e.key: [...e.value]};
+          final cur = next[module]![ri];
+          next[module]![ri] = _permOrder[(_permOrder.indexOf(cur) + 1) % _permOrder.length];
+          form.setField('matrix', next);
+        }
+
+        return MScroll([
+          MCard(marker: M.blue, title: 'Select Role', sub: "Tap a module's badge to cycle its access level", children: [
+            Segmented(options: _roleNames, value: role, onChange: (v) => form.setField('role', v)),
+          ]),
+          MCard(pad: 8, children: [
+            for (int i = 0; i < _roleModules.length; i++)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
+                decoration: BoxDecoration(border: i < _roleModules.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text(_roleModules[i], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                  GestureDetector(
+                    onTap: () => cycle(_roleModules[i]),
+                    child: () {
+                      final lvl = matrix[_roleModules[i]]![ri];
+                      final meta = _permMeta[lvl]!;
+                      final hasColor = lvl != 'none';
+                      return Container(
+                        constraints: const BoxConstraints(minWidth: 72),
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                        decoration: BoxDecoration(color: hasColor ? tint(meta.$1, 0x26) : Colors.transparent, border: hasColor ? null : Border.all(color: M.border), borderRadius: BorderRadius.circular(999)),
+                        child: Text(meta.$2.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, fontFamily: M.body, color: hasColor ? meta.$1 : M.fg4)),
+                      );
+                    }(),
+                  ),
+                ]),
               ),
+          ]),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: Wrap(spacing: 18, runSpacing: 8, children: [
+              for (final e in _permMeta.entries)
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  Container(width: 9, height: 9, decoration: BoxDecoration(color: e.key == 'none' ? Colors.transparent : e.value.$1, border: e.key == 'none' ? Border.all(color: M.borderStrong) : null, shape: BoxShape.circle)),
+                  const SizedBox(width: 7),
+                  Text(e.value.$2 == '—' ? 'No access' : e.value.$2, style: const TextStyle(fontSize: 11.5, color: M.fg2, fontFamily: M.body)),
+                ]),
             ]),
           ),
-      ]),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2),
-        child: Wrap(spacing: 18, runSpacing: 8, children: [
-          for (final e in _permMeta.entries)
-            Row(mainAxisSize: MainAxisSize.min, children: [
-              Container(width: 9, height: 9, decoration: BoxDecoration(color: e.key == 'none' ? Colors.transparent : e.value.$1, border: e.key == 'none' ? Border.all(color: M.borderStrong) : null, shape: BoxShape.circle)),
-              const SizedBox(width: 7),
-              Text(e.value.$2 == '—' ? 'No access' : e.value.$2, style: const TextStyle(fontSize: 11.5, color: M.fg2, fontFamily: M.body)),
-            ]),
-        ]),
-      ),
-      const MBtn('Save Permissions', icon: 'check', full: true),
-    ]);
+          MBtn('Save Permissions', icon: 'check', full: true, onTap: form.submit),
+        ]);
+      },
+    );
   }
 }

@@ -28,3 +28,7 @@ export 'adapters/form/m_inputs.dart';
 
 // Table adapter
 export 'adapters/table/m_table.dart';
+
+// Banking & Inventory kits
+export 'adapters/banking/m_bank_kit.dart';
+export 'adapters/inventory/m_inv_kit.dart';

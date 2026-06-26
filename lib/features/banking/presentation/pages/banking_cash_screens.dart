@@ -4,10 +4,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/banking/m_bank_kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class CreateDepositScreen extends StatelessWidget {
   const CreateDepositScreen({super.key});
@@ -36,7 +35,7 @@ class CreateDepositScreen extends StatelessWidget {
 }
 
 class DepositDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const DepositDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -97,7 +96,7 @@ class CreateWithdrawalScreen extends StatelessWidget {
 }
 
 class WithdrawalDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const WithdrawalDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {

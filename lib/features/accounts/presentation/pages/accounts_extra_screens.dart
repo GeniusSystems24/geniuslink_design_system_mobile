@@ -4,12 +4,12 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:geniuslink_design_system/geniuslink_design_system.dart';
 import '../../../../design_system/kit.dart';
-import 'package:geniuslink_design_system/geniuslink_tree.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class AccountDetailFullScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const AccountDetailFullScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -20,15 +20,15 @@ class AccountDetailFullScreen extends StatelessWidget {
       ('JV-2024-0071', 'Dec 18, 16:33', 'Petty cash reimbursement', '+650.00', true, '5,100.00'),
     ];
     return MScroll([
-      MCard(marker: M.green, title: 'Current Balance', sub: 'As of Dec 18, 2025 16:33', right: const Pill('Active'), children:  [
+      MCard(marker: M.green, title: 'Current Balance', sub: 'As of Dec 18, 2025 16:33', right: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text('42,500.00', style: TextStyle(fontFamily: M.mono, fontSize: 32, fontWeight: FontWeight.w700, color: M.green, letterSpacing: -0.6)),
         ]),
-        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: [
-          Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
-          Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
+        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: [
+          const Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
+          const Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
         ]),
       ]),
       const MCard(marker: M.blue, title: 'Account Information', children: [
@@ -173,7 +173,7 @@ String _fmtAmount(int n) {
 }
 
 class AccountTreeScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const AccountTreeScreen({super.key, required this.nav});
   @override
   State<AccountTreeScreen> createState() => _AccountTreeScreenState();

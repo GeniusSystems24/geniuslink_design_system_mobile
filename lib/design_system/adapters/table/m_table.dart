@@ -5,7 +5,7 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:geniuslink_design_system/geniuslink_readable_table.dart';
+import 'package:geniuslink_design_system/geniuslink_design_system.dart';
 import '../../tokens/m_colors.dart';
 import '../../components/feedback/m_feedback.dart';
 
@@ -30,12 +30,7 @@ class MCol {
   final TextAlign align;
   final bool sortable;
   final bool numeric;
-  const MCol(this.label,
-      {this.flex = 1,
-      this.fixed,
-      this.align = TextAlign.left,
-      this.sortable = true,
-      bool? numeric})
+  const MCol(this.label, {this.flex = 1, this.fixed, this.align = TextAlign.left, this.sortable = true, bool? numeric})
       : numeric = numeric ?? (align == TextAlign.right);
 }
 
@@ -76,17 +71,10 @@ String mCellText(Widget? w) {
   return '';
 }
 
-num _mNumKey(String s) =>
-    double.tryParse(s.replaceAll(RegExp(r'[^0-9.\-]'), '')) ??
-    double.negativeInfinity;
+num _mNumKey(String s) => double.tryParse(s.replaceAll(RegExp(r'[^0-9.\-]'), '')) ?? double.negativeInfinity;
 
 /// Styled text cell for an [MTable] row.
-Widget mcell(String text,
-    {bool mono = false,
-    bool muted = false,
-    bool bold = false,
-    Color? color,
-    TextAlign align = TextAlign.left}) {
+Widget mcell(String text, {bool mono = false, bool muted = false, bool bold = false, Color? color, TextAlign align = TextAlign.left}) {
   return Text(text,
       textAlign: align,
       maxLines: 1,
@@ -134,28 +122,20 @@ class MTable extends StatelessWidget {
               TextAlign.center => ReadableAlign.center,
               _ => ReadableAlign.start,
             },
-            sortable:
-                sortable && columns[i].sortable && columns[i].label.isNotEmpty,
+            sortable: sortable && columns[i].sortable && columns[i].label.isNotEmpty,
             sortKey: (row) {
               final t = i < row.length ? mCellText(row[i]) : '';
-              if (columns[i].numeric) {
-                return _mNumKey(t);
-              } else {
-                return t.toLowerCase();
-              }
+              return (columns[i].numeric ? _mNumKey(t) : t.toLowerCase()) as Comparable<dynamic>?;
             },
             copyText: (row) => i < row.length ? mCellText(row[i]) : '',
-            cell: (ctx, row) =>
-                i < row.length ? row[i] : const SizedBox.shrink(),
+            cell: (ctx, row) => i < row.length ? row[i] : const SizedBox.shrink(),
           ),
       ],
       rows: rows,
       hoverHighlight: true,
       rowMinHeight: 0,
       cellPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      selectionMode: onRowTap != null
-          ? ReadableSelectionMode.singleRow
-          : ReadableSelectionMode.none,
+      selectionMode: onRowTap != null ? ReadableSelectionMode.singleRow : ReadableSelectionMode.none,
       onRowTap: onRowTap == null ? null : (row, i) => onRowTap!(i),
       showFilterBar: showSearch,
       filterSearchHint: searchHint,

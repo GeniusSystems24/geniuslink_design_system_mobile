@@ -9,7 +9,11 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/bloc/load_status.dart';
 import '../../../../design_system/kit.dart';
+import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
+import '../bloc/mobile_dashboard_cubit.dart';
 import '../../data/datasources/mobile_dashboard_data.dart';
 
 class MobileDashboardScreen extends StatefulWidget {
@@ -19,17 +23,28 @@ class MobileDashboardScreen extends StatefulWidget {
 }
 
 class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
-  String _tab = 'banking';
-  String _cur = 'SAR';
-  String _period = 'week';
-  String _view = 'cards';
-  String? _chartMetric;
-  MdWorkspace _ws = mdWorkspaces[0];
+  // Dashboard view state lives in MobileDashboardCubit; these getters read it.
+  late final MobileDashboardCubit _dash;
+  String get _tab => _dash.state.tab;
+  String get _cur => _dash.state.cur;
+  String get _period => _dash.state.period;
+  String get _view => _dash.state.view;
+  String? get _chartMetric => _dash.state.chartMetric;
+  bool get _loading => _dash.state.status.isLoading;
+  // Active tenant id mirrored from TenantCubit (persists across the tenant
+  // scope rebuild that a switch triggers). `_ws` is derived from it.
+  String _activeTenantId = '9';
+  // Ephemeral overlay state — pure UI, stays local.
   bool _wsOpen = false;
   bool _drawerOpen = false;
   bool _online = true;
-  bool _loading = false;
   final _scrollCtrl = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _dash = MobileDashboardCubit();
+  }
 
   MdTab get _cfg => mdTabs.firstWhere((t) => t.id == _tab);
 
@@ -43,14 +58,23 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       ));
   }
 
-  Future<void> _refresh() async {
-    setState(() => _loading = true);
-    await Future<void>.delayed(const Duration(milliseconds: 900));
-    if (mounted) setState(() => _loading = false);
-  }
+  Future<void> _refresh() => _dash.refresh();
+
+  // The displayed workspace is whichever catalog entry maps to the active
+  // tenant; falls back to the first. Tenant id is parsed from the "Tenant N"
+  // tag so the demo's per-tenant currency factor still applies.
+  MdWorkspace get _ws => mdWorkspaces.firstWhere(
+        (w) => _tenantIdOf(w) == _activeTenantId,
+        orElse: () => mdWorkspaces[0],
+      );
+  String _tenantIdOf(MdWorkspace w) => w.tag.split(' ').last;
 
   void _switchWorkspace(MdWorkspace w) {
-    setState(() { _wsOpen = false; _ws = w; });
+    // Real, isolated tenant switch: TenantCubit.switchTo changes the
+    // ValueKey(tenantId) on TenantScope, tearing down this tenant's scope
+    // and rebuilding fresh. _ws then reflects the new active tenant.
+    setState(() => _wsOpen = false);
+    context.read<TenantCubit>().switchTo(_tenantIdOf(w));
     if (_scrollCtrl.hasClients) _scrollCtrl.jumpTo(0);
     _refresh();
   }
@@ -60,13 +84,20 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   @override
   void dispose() {
+    _dash.close();
     _scrollCtrl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // Mirror the active tenant so `_ws` (and its factor) follow the real
+    // TenantCubit selection — it survives the scope rebuild a switch causes.
+    _activeTenantId = context.watch<TenantCubit>().state.activeTenantId ?? _activeTenantId;
+    return BlocProvider<MobileDashboardCubit>.value(
+      value: _dash,
+      child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
+        builder: (context, _) => Scaffold(
       backgroundColor: M.bg,
       body: Stack(children: [
         Column(children: [
@@ -105,6 +136,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         if (_wsOpen) _wsPopup(),
         _drawer(),
       ]),
+        ),
+      ),
     );
   }
 
@@ -191,7 +224,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                     behavior: HitTestBehavior.opaque,
                     child: Container(
                       padding: const EdgeInsets.all(10), constraints: const BoxConstraints(minHeight: 48),
-                      decoration: BoxDecoration(color: w.id == _ws.id ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(8)),
+                      decoration: BoxDecoration(color: w.id == _ws.id ? M.hover : Colors.transparent, borderRadius: BorderRadius.circular(8)),
                       child: Row(children: [
                         Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: w.id == _ws.id ? M.blue : M.input, borderRadius: BorderRadius.circular(9)), child: Text(w.name[0], style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 14, color: w.id == _ws.id ? Colors.white : M.fg3))),
                         const SizedBox(width: 11),
@@ -335,7 +368,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _domainTab(MdTab t) {
     final on = t.id == _tab;
     return GestureDetector(
-      onTap: () => setState(() { _tab = t.id; _chartMetric = null; }),
+      onTap: () => _dash.selectTab(t.id),
       behavior: HitTestBehavior.opaque,
       child: Container(
         constraints: const BoxConstraints(minHeight: 44),
@@ -362,7 +395,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _viewToggle() {
     final isChart = _view == 'chart';
     return GestureDetector(
-      onTap: () => setState(() => _view = isChart ? 'cards' : 'chart'),
+      onTap: () => _dash.toggleView(),
       child: Container(
         height: 34, padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
@@ -380,7 +413,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       tooltip: 'Display currency',
       color: M.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: M.borderStrong)),
-      onSelected: (v) => setState(() => _cur = v),
+      onSelected: (v) => _dash.setCurrency(v),
       itemBuilder: (_) => [
         for (final c in mdCurrencies)
           PopupMenuItem<String>(value: c.$1, child: Row(children: [
@@ -419,7 +452,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     final on = p == _period;
     final label = p == 'day' ? 'Day' : (p == 'week' ? 'Week' : 'Month');
     return GestureDetector(
-      onTap: () => setState(() => _period = p),
+      onTap: () => _dash.setPeriod(p),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150), constraints: const BoxConstraints(minHeight: 28),
         alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 11),
@@ -489,7 +522,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
           final on = c.id == sel.id;
           final mc = mdMarker(c.marker);
           return GestureDetector(
-            onTap: () => setState(() => _chartMetric = c.id),
+            onTap: () => _dash.setChartMetric(c.id),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(color: on ? tint(mc, 0x29) : M.input, border: Border.all(color: on ? Colors.transparent : M.border), borderRadius: BorderRadius.circular(999)),

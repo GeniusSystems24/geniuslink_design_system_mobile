@@ -6,8 +6,9 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/m_inv_kit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../design_system/kit.dart';
+import '../../../../core/bloc/form_cubit.dart';
 
 class _PToggle extends StatelessWidget {
   final bool on;
@@ -38,214 +39,262 @@ class _PMono extends StatelessWidget {
       );
 }
 
-class IntegrationsScreen extends StatefulWidget {
+const _integrationGroups = [
+  ('Banking & Payments', M.blue, [('SAMA Open Banking', Color(0xFF4A7CFF), 'Statement sync', true), ('Mada Gateway', Color(0xFF1DB88A), 'Local card acquiring', true), ('Stripe', Color(0xFF635BFF), 'International cards', false)]),
+  ('E-commerce', M.green, [('Salla', Color(0xFF1DB88A), 'Orders & inventory', true), ('Zid', Color(0xFFF97316), 'Order import', false), ('Shopify', Color(0xFF95BF47), 'Multi-channel', false)]),
+  ('Email & Comms', M.orange, [('SendGrid', Color(0xFF4A7CFF), 'Document email', true), ('Slack', Color(0xFFE01E5A), 'Alert notifications', false)]),
+];
+
+class IntegrationsScreen extends StatelessWidget {
   const IntegrationsScreen({super.key});
   @override
-  State<IntegrationsScreen> createState() => _IntegrationsScreenState();
-}
-
-class _IntegrationsScreenState extends State<IntegrationsScreen> {
-  final _state = <String, bool>{};
-  final _groups = [
-    ('Banking & Payments', M.blue, [('SAMA Open Banking', Color(0xFF4A7CFF), 'Statement sync', true), ('Mada Gateway', Color(0xFF1DB88A), 'Local card acquiring', true), ('Stripe', Color(0xFF635BFF), 'International cards', false)]),
-    ('E-commerce', M.green, [('Salla', Color(0xFF1DB88A), 'Orders & inventory', true), ('Zid', Color(0xFFF97316), 'Order import', false), ('Shopify', Color(0xFF95BF47), 'Multi-channel', false)]),
-    ('Email & Comms', M.orange, [('SendGrid', Color(0xFF4A7CFF), 'Document email', true), ('Slack', Color(0xFFE01E5A), 'Alert notifications', false)]),
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    for (final g in _groups) {
-      for (final it in g.$3) {
-        _state[it.$1] = it.$4;
-      }
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MScroll([
-      for (final g in _groups)
-        MCard(title: g.$1, marker: g.$2, pad: 8, children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(children: [
-              for (int i = 0; i < g.$3.length; i++)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(border: i < g.$3.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-                  child: Row(children: [
-                    _PMono(name: g.$3[i].$1, tone: g.$3[i].$2),
-                    const SizedBox(width: 12),
-                    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(g.$3[i].$1, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                      const SizedBox(height: 1),
-                      Text(g.$3[i].$3, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
-                    ])),
-                    if (_state[g.$3[i].$1] == true) const Padding(padding: EdgeInsets.only(right: 8), child: Pill('On')),
-                    _PToggle(on: _state[g.$3[i].$1] ?? false, onTap: () => setState(() => _state[g.$3[i].$1] = !(_state[g.$3[i].$1] ?? false))),
-                  ]),
-                ),
-            ]),
-          ),
-        ]),
-    ]);
+    final init = <String, bool>{};
+    for (final g in _integrationGroups) { for (final it in g.$3) { init[it.$1] = it.$4; } }
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: {'state': init}, onSubmit: (_) async {}),
+      child: const _IntegrationsView(),
+    );
   }
 }
 
-class WebhooksScreen extends StatefulWidget {
-  const WebhooksScreen({super.key});
-  @override
-  State<WebhooksScreen> createState() => _WebhooksScreenState();
-}
-
-class _WebhooksScreenState extends State<WebhooksScreen> {
-  final _hooks = [
-    ['erp.acme.sa/hooks/postings', 'journal.posted,deposit.created', true, '200 · 2m'],
-    ['api.najd.io/gl/inventory', 'inventory.adjusted,transfer.created', true, '200 · 1h'],
-    ['hooks.slack.com/services/T0…', 'approval.requested', false, '410 · 3d'],
-  ];
+class _IntegrationsView extends StatelessWidget {
+  const _IntegrationsView();
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      MCard(marker: M.blue, title: '${_hooks.length} Endpoints', sub: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < _hooks.length; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < _hooks.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, fstate) {
+        final st = Map<String, bool>.from(fstate.value<Map>('state') ?? const {});
+        void toggle(String k) => form.setField('state', {...st, k: !(st[k] ?? false)});
+        return MScroll([
+          for (final g in _integrationGroups)
+            MCard(title: g.$1, marker: g.$2, pad: 8, children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(children: [
-                  Row(children: [
-                    Icon(MIcons.of('link'), size: 15, color: _hooks[i][2] as bool ? M.green : M.fg4),
-                    const SizedBox(width: 10),
-                    Expanded(child: Text(_hooks[i][0] as String, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg1))),
-                    _PToggle(on: _hooks[i][2] as bool, onTap: () => setState(() => _hooks[i][2] = !(_hooks[i][2] as bool))),
-                  ]),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: Row(children: [
-                      Expanded(child: Wrap(spacing: 6, runSpacing: 6, children: [
-                        for (final e in (_hooks[i][1] as String).split(','))
-                          Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2), decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(4)), child: Text(e, style: const TextStyle(fontFamily: M.mono, fontSize: 10, color: M.fg2))),
-                      ])),
-                      Text(_hooks[i][3] as String, style: TextStyle(fontFamily: M.mono, fontSize: 10, color: (_hooks[i][3] as String).startsWith('2') ? M.green : M.red)),
-                    ]),
-                  ),
-                ]),
-              ),
-          ]),
-        ),
-      ]),
-      const MBtn('Add Endpoint', icon: 'plus', full: true),
-    ]);
-  }
-}
-
-class ApiKeysScreen extends StatefulWidget {
-  const ApiKeysScreen({super.key});
-  @override
-  State<ApiKeysScreen> createState() => _ApiKeysScreenState();
-}
-
-class _ApiKeysScreenState extends State<ApiKeysScreen> {
-  final _keys = [
-    ['Production · Server', 'gl_live_8f2a', 'read, write', '2m ago', false],
-    ['Reporting · Read-only', 'gl_live_3b71', 'read', 'Yesterday', false],
-    ['Staging', 'gl_test_aa90', 'read, write', 'Never', false],
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return MScroll([
-      const InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: M.orange),
-      MCard(marker: M.green, title: '${_keys.length} Active Keys', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < _keys.length; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < _keys.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Text(_keys[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                    GestureDetector(onTap: () => setState(() => _keys.removeAt(i)), child: const Text('Revoke', style: TextStyle(color: M.red, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
-                  ]),
-                  const SizedBox(height: 6),
-                  Row(children: [
-                    Expanded(child: Text(_keys[i][4] as bool ? '${_keys[i][1]}_4d9e1c7b22f0' : '${_keys[i][1]}••••••••', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg2))),
-                    GestureDetector(onTap: () => setState(() => _keys[i][4] = !(_keys[i][4] as bool)), child: Text(_keys[i][4] as bool ? 'Hide' : 'Reveal', style: const TextStyle(color: M.blue, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
-                  ]),
-                  const SizedBox(height: 4),
-                  Text('${_keys[i][2]} · used ${_keys[i][3]}', style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
-                ]),
-              ),
-          ]),
-        ),
-      ]),
-      const MBtn('Create Key', icon: 'plus', full: true),
-    ]);
-  }
-}
-
-class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({super.key});
-  @override
-  State<NotificationsScreen> createState() => _NotificationsScreenState();
-}
-
-class _NotificationsScreenState extends State<NotificationsScreen> {
-  static const _cats = [('Postings & Ledger', 'Entries posted, reversed'), ('Approvals', 'Wires & adjustments'), ('Inventory', 'Low stock, transfers'), ('Security', 'Sign-ins, key changes'), ('Billing', 'Invoices & usage')];
-  static const _chans = ['Email', 'In-app', 'SMS'];
-  final _prefs = [[true, true, false], [true, true, true], [true, true, false], [true, true, true], [true, false, false]];
-  @override
-  Widget build(BuildContext context) {
-    return MScroll([
-      MCard(marker: M.blue, title: 'Preferences', sub: 'Toggle a channel per category', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.only(bottom: 10),
-              decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
-              child: Row(children: [
-                const Spacer(),
-                for (final c in _chans) SizedBox(width: 50, child: Center(child: Text(c.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 9, letterSpacing: 0.4, color: M.fg3, fontFamily: M.body)))),
-              ]),
-            ),
-            for (int ci = 0; ci < _cats.length; ci++)
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: ci < _cats.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
-                child: Row(children: [
-                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(_cats[ci].$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                    const SizedBox(height: 1),
-                    Text(_cats[ci].$2, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
-                  ])),
-                  for (int chi = 0; chi < _chans.length; chi++)
-                    SizedBox(
-                      width: 50,
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () => setState(() => _prefs[ci][chi] = !_prefs[ci][chi]),
-                          child: Container(
-                            width: 26, height: 26, alignment: Alignment.center,
-                            decoration: BoxDecoration(color: _prefs[ci][chi] ? M.blue : M.input, border: Border.all(color: _prefs[ci][chi] ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(7)),
-                            child: _prefs[ci][chi] ? const Icon(Icons.check_rounded, size: 14, color: Colors.white) : null,
-                          ),
-                        ),
-                      ),
+                  for (int i = 0; i < g.$3.length; i++)
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      decoration: BoxDecoration(border: i < g.$3.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                      child: Row(children: [
+                        _PMono(name: g.$3[i].$1, tone: g.$3[i].$2),
+                        const SizedBox(width: 12),
+                        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(g.$3[i].$1, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                          const SizedBox(height: 1),
+                          Text(g.$3[i].$3, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                        ])),
+                        if (st[g.$3[i].$1] == true) const Padding(padding: EdgeInsets.only(right: 8), child: Pill('On')),
+                        _PToggle(on: st[g.$3[i].$1] ?? false, onTap: () => toggle(g.$3[i].$1)),
+                      ]),
                     ),
                 ]),
               ),
+            ]),
+        ]);
+      },
+    );
+  }
+}
+
+class WebhooksScreen extends StatelessWidget {
+  const WebhooksScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {
+        'hooks': [
+          ['erp.acme.sa/hooks/postings', 'journal.posted,deposit.created', true, '200 · 2m'],
+          ['api.najd.io/gl/inventory', 'inventory.adjusted,transfer.created', true, '200 · 1h'],
+          ['hooks.slack.com/services/T0…', 'approval.requested', false, '410 · 3d'],
+        ]
+      }, onSubmit: (_) async {}),
+      child: const _WebhooksView(),
+    );
+  }
+}
+
+class _WebhooksView extends StatelessWidget {
+  const _WebhooksView();
+  @override
+  Widget build(BuildContext context) {
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, fstate) {
+        final hooks = [for (final h in (fstate.value<List>('hooks') ?? const [])) List<Object>.from(h as List)];
+        void toggle(int i) { final n = [for (final h in hooks) List<Object>.from(h)]; n[i][2] = !(n[i][2] as bool); form.setField('hooks', n); }
+        return MScroll([
+          MCard(marker: M.blue, title: '${hooks.length} Endpoints', sub: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < hooks.length; i++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(border: i < hooks.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    child: Column(children: [
+                      Row(children: [
+                        Icon(MIcons.of('link'), size: 15, color: hooks[i][2] as bool ? M.green : M.fg4),
+                        const SizedBox(width: 10),
+                        Expanded(child: Text(hooks[i][0] as String, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg1))),
+                        _PToggle(on: hooks[i][2] as bool, onTap: () => toggle(i)),
+                      ]),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: Row(children: [
+                          Expanded(child: Wrap(spacing: 6, runSpacing: 6, children: [
+                            for (final e in (hooks[i][1] as String).split(','))
+                              Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2), decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(4)), child: Text(e, style: const TextStyle(fontFamily: M.mono, fontSize: 10, color: M.fg2))),
+                          ])),
+                          Text(hooks[i][3] as String, style: TextStyle(fontFamily: M.mono, fontSize: 10, color: (hooks[i][3] as String).startsWith('2') ? M.green : M.red)),
+                        ]),
+                      ),
+                    ]),
+                  ),
+              ]),
+            ),
           ]),
-        ),
-      ]),
-      const MBtn('Save Preferences', icon: 'check', full: true),
-    ]);
+          const MBtn('Add Endpoint', icon: 'plus', full: true),
+        ]);
+      },
+    );
+  }
+}
+
+class ApiKeysScreen extends StatelessWidget {
+  const ApiKeysScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {
+        'keys': [
+          ['Production · Server', 'gl_live_8f2a', 'read, write', '2m ago', false],
+          ['Reporting · Read-only', 'gl_live_3b71', 'read', 'Yesterday', false],
+          ['Staging', 'gl_test_aa90', 'read, write', 'Never', false],
+        ]
+      }, onSubmit: (_) async {}),
+      child: const _ApiKeysView(),
+    );
+  }
+}
+
+class _ApiKeysView extends StatelessWidget {
+  const _ApiKeysView();
+  @override
+  Widget build(BuildContext context) {
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, fstate) {
+        final keys = [for (final k in (fstate.value<List>('keys') ?? const [])) List<Object>.from(k as List)];
+        List<List<Object>> clone() => [for (final k in keys) List<Object>.from(k)];
+        void toggleReveal(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('keys', n); }
+        void revoke(int i) { final n = clone()..removeAt(i); form.setField('keys', n); }
+        return MScroll([
+          const InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: M.orange),
+          MCard(marker: M.green, title: '${keys.length} Active Keys', pad: 8, children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < keys.length; i++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(border: i < keys.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Text(keys[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                        GestureDetector(onTap: () => revoke(i), child: const Text('Revoke', style: TextStyle(color: M.red, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
+                      ]),
+                      const SizedBox(height: 6),
+                      Row(children: [
+                        Expanded(child: Text(keys[i][4] as bool ? '${keys[i][1]}_4d9e1c7b22f0' : '${keys[i][1]}••••••••', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg2))),
+                        GestureDetector(onTap: () => toggleReveal(i), child: Text(keys[i][4] as bool ? 'Hide' : 'Reveal', style: const TextStyle(color: M.blue, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
+                      ]),
+                      const SizedBox(height: 4),
+                      Text('${keys[i][2]} · used ${keys[i][3]}', style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                    ]),
+                  ),
+              ]),
+            ),
+          ]),
+          const MBtn('Create Key', icon: 'plus', full: true),
+        ]);
+      },
+    );
+  }
+}
+
+class NotificationsScreen extends StatelessWidget {
+  const NotificationsScreen({super.key});
+  static const _cats = [('Postings & Ledger', 'Entries posted, reversed'), ('Approvals', 'Wires & adjustments'), ('Inventory', 'Low stock, transfers'), ('Security', 'Sign-ins, key changes'), ('Billing', 'Invoices & usage')];
+  static const _chans = ['Email', 'In-app', 'SMS'];
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {
+        'prefs': [[true, true, false], [true, true, true], [true, true, false], [true, true, true], [true, false, false]]
+      }, onSubmit: (_) async {}),
+      child: const _NotificationsView(),
+    );
+  }
+}
+
+class _NotificationsView extends StatelessWidget {
+  const _NotificationsView();
+  @override
+  Widget build(BuildContext context) {
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, fstate) {
+        final prefs = [for (final r in (fstate.value<List>('prefs') ?? const [])) List<bool>.from(r as List)];
+        void toggle(int ci, int chi) { final n = [for (final r in prefs) List<bool>.from(r)]; n[ci][chi] = !n[ci][chi]; form.setField('prefs', n); }
+        return MScroll([
+          MCard(marker: M.blue, title: 'Preferences', sub: 'Toggle a channel per category', pad: 8, children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                  child: Row(children: [
+                    const Spacer(),
+                    for (final c in NotificationsScreen._chans) SizedBox(width: 50, child: Center(child: Text(c.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 9, letterSpacing: 0.4, color: M.fg3, fontFamily: M.body)))),
+                  ]),
+                ),
+                for (int ci = 0; ci < NotificationsScreen._cats.length; ci++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(border: ci < NotificationsScreen._cats.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    child: Row(children: [
+                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Text(NotificationsScreen._cats[ci].$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                        const SizedBox(height: 1),
+                        Text(NotificationsScreen._cats[ci].$2, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+                      ])),
+                      for (int chi = 0; chi < NotificationsScreen._chans.length; chi++)
+                        SizedBox(
+                          width: 50,
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: () => toggle(ci, chi),
+                              child: Container(
+                                width: 26, height: 26, alignment: Alignment.center,
+                                decoration: BoxDecoration(color: prefs[ci][chi] ? M.blue : M.input, border: Border.all(color: prefs[ci][chi] ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(7)),
+                                child: prefs[ci][chi] ? const Icon(Icons.check_rounded, size: 14, color: Colors.white) : null,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ]),
+                  ),
+              ]),
+            ),
+          ]),
+          MBtn('Save Preferences', icon: 'check', full: true, onTap: form.submit),
+        ]);
+      },
+    );
   }
 }
 
@@ -337,86 +386,101 @@ class _UsageBar extends StatelessWidget {
   }
 }
 
-class BackupScreen extends StatefulWidget {
+class BackupScreen extends StatelessWidget {
   const BackupScreen({super.key});
   @override
-  State<BackupScreen> createState() => _BackupScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<FormCubit>(
+      create: (_) => FormCubit(initial: const {
+        'auto': true,
+        'scope': {'Ledger': true, 'Inventory': true, 'Contacts': true, 'Documents': false},
+      }, onSubmit: (_) async {}),
+      child: const _BackupView(),
+    );
+  }
 }
 
-class _BackupScreenState extends State<BackupScreen> {
-  bool _auto = true;
-  final _scope = {'Ledger': true, 'Inventory': true, 'Contacts': true, 'Documents': false};
+class _BackupView extends StatelessWidget {
+  const _BackupView();
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      MCard(marker: M.green, title: 'Automatic Backups', right: const Pill('Healthy'), children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-            SizedBox(height: 3),
-            Text('Last · Dec 19 03:00 · 248 MB', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
-          ])),
-          _PToggle(on: _auto, onTap: () => setState(() => _auto = !_auto)),
-        ]),
-      ]),
-      ISection(icon: 'download', title: 'Manual Export', sub: 'Download a portable copy', marker: M.blue, children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Data Scope')),
-          GridView.count(
-            crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 4.4,
-            children: [
-              for (final k in _scope.keys)
-                GestureDetector(
-                  onTap: () => setState(() => _scope[k] = !_scope[k]!),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-                    decoration: BoxDecoration(color: _scope[k]! ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: _scope[k]! ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
+    final form = context.read<FormCubit>();
+    return BlocBuilder<FormCubit, FormData>(
+      builder: (context, fstate) {
+        final auto = fstate.value<bool>('auto') ?? true;
+        final scope = Map<String, bool>.from(fstate.value<Map>('scope') ?? const {});
+        void toggleScope(String k) => form.setField('scope', {...scope, k: !(scope[k] ?? false)});
+        return MScroll([
+          MCard(marker: M.green, title: 'Automatic Backups', right: const Pill('Healthy'), children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                SizedBox(height: 3),
+                Text('Last · Dec 19 03:00 · 248 MB', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+              ])),
+              _PToggle(on: auto, onTap: () => form.setField('auto', !auto)),
+            ]),
+          ]),
+          ISection(icon: 'download', title: 'Manual Export', sub: 'Download a portable copy', marker: M.blue, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Data Scope')),
+              GridView.count(
+                crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 4.4,
+                children: [
+                  for (final k in scope.keys)
+                    GestureDetector(
+                      onTap: () => toggleScope(k),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+                        decoration: BoxDecoration(color: scope[k]! ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: scope[k]! ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
+                        child: Row(children: [
+                          Container(width: 18, height: 18, alignment: Alignment.center, decoration: BoxDecoration(color: scope[k]! ? M.blue : Colors.transparent, border: Border.all(color: scope[k]! ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(4)), child: scope[k]! ? const Icon(Icons.check_rounded, size: 12, color: Colors.white) : null),
+                          const SizedBox(width: 9),
+                          Text(k, style: const TextStyle(fontSize: 13, color: M.fg1, fontFamily: M.body)),
+                        ]),
+                      ),
+                    ),
+                ],
+              ),
+            ]),
+            const TSelect(label: 'Format', value: 'CSV (zipped)', options: ['CSV (zipped)', 'JSON', 'Excel (XLSX)']),
+            const MBtn('Generate Export', icon: 'download', full: true),
+          ]),
+          MCard(marker: M.orange, title: 'Export History', pad: 8, children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (final f in const [('full-export-2025-12-15.zip', '248 MB · Dec 15'), ('ledger-q4-2025.csv', '12 MB · Dec 02'), ('contacts-2025-11.json', '1.1 MB · Nov 20')])
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
                     child: Row(children: [
-                      Container(width: 18, height: 18, alignment: Alignment.center, decoration: BoxDecoration(color: _scope[k]! ? M.blue : Colors.transparent, border: Border.all(color: _scope[k]! ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(4)), child: _scope[k]! ? const Icon(Icons.check_rounded, size: 12, color: Colors.white) : null),
-                      const SizedBox(width: 9),
-                      Text(k, style: const TextStyle(fontSize: 13, color: M.fg1, fontFamily: M.body)),
+                      Icon(MIcons.of('doc'), size: 16, color: M.blue),
+                      const SizedBox(width: 10),
+                      Expanded(child: Text(f.$1, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg1))),
+                      Text(f.$2, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                      const SizedBox(width: 10),
+                      Icon(MIcons.of('download'), size: 15, color: M.fg3),
                     ]),
                   ),
-                ),
-            ],
-          ),
-        ]),
-        const TSelect(label: 'Format', value: 'CSV (zipped)', options: ['CSV (zipped)', 'JSON', 'Excel (XLSX)']),
-        const MBtn('Generate Export', icon: 'download', full: true),
-      ]),
-      MCard(marker: M.orange, title: 'Export History', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (final f in const [('full-export-2025-12-15.zip', '248 MB · Dec 15'), ('ledger-q4-2025.csv', '12 MB · Dec 02'), ('contacts-2025-11.json', '1.1 MB · Nov 20')])
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
-                child: Row(children: [
-                  Icon(MIcons.of('doc'), size: 16, color: M.blue),
-                  const SizedBox(width: 10),
-                  Expanded(child: Text(f.$1, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg1))),
-                  Text(f.$2, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
-                  const SizedBox(width: 10),
-                  Icon(MIcons.of('download'), size: 15, color: M.fg3),
-                ]),
-              ),
+              ]),
+            ),
           ]),
-        ),
-      ]),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(color: tint(M.red, 0x0F), border: Border.all(color: tint(M.red, 0x4D)), borderRadius: BorderRadius.circular(10)),
-        child: Row(children: [
-          const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-            SizedBox(height: 2),
-            Text('30-day grace period.', style: TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
-          ])),
-          const MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
-        ]),
-      ),
-    ]);
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(color: tint(M.red, 0x0F), border: Border.all(color: tint(M.red, 0x4D)), borderRadius: BorderRadius.circular(10)),
+            child: Row(children: [
+              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                SizedBox(height: 2),
+                Text('30-day grace period.', style: TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+              ])),
+              const MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
+            ]),
+          ),
+        ]);
+      },
+    );
   }
 }

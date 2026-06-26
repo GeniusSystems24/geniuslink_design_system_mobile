@@ -8,7 +8,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 /* ───────── 1 · INVENTORY DASHBOARD ───────── */
 class InvDashboardScreen extends StatelessWidget {
@@ -112,8 +112,8 @@ class StockTakeScreen extends StatelessWidget {
             FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: M.blue)),
           ])),
         ]),
-         GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: [
-          Mini(label: 'Match', value: '1'), Mini(label: 'Short', value: '2'), Mini(label: 'Over', value: '0'),
+        GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: [
+          const Mini(label: 'Match', value: '1'), const Mini(label: 'Short', value: '2'), const Mini(label: 'Over', value: '0'),
         ]),
       ]),
       MCard(marker: M.green, title: 'Count Sheet', pad: 8, children: [
@@ -507,7 +507,7 @@ class _WarehouseRow extends StatelessWidget {
 
 /* ───────── 8 · TRANSFER LIST ───────── */
 class TransferListScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const TransferListScreen({super.key, required this.nav});
   @override
   State<TransferListScreen> createState() => _TransferListScreenState();

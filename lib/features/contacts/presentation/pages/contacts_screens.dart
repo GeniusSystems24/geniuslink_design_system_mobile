@@ -5,9 +5,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _ContactKind {
   final String label, labelPl, balanceLabel, control;
@@ -45,10 +44,10 @@ PillTone _kTone(String s) => s == 'active' ? PillTone.success : (s == 'pending' 
 class ContactListScreen extends StatefulWidget {
   final _ContactKind kind;
   final String detailKey;
-  final NavController nav;
+  final NavCubit nav;
   const ContactListScreen._(this.kind, this.detailKey, this.nav, {super.key});
-  factory ContactListScreen.customers(NavController nav) => ContactListScreen._(_customer, 'customerDetail', nav);
-  factory ContactListScreen.suppliers(NavController nav) => ContactListScreen._(_supplier, 'supplierDetail', nav);
+  factory ContactListScreen.customers(NavCubit nav) => ContactListScreen._(_customer, 'customerDetail', nav);
+  factory ContactListScreen.suppliers(NavCubit nav) => ContactListScreen._(_supplier, 'supplierDetail', nav);
   @override
   State<ContactListScreen> createState() => _ContactListScreenState();
 }

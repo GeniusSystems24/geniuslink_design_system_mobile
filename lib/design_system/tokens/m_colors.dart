@@ -10,6 +10,7 @@ class M {
   static const bg           = Color(0xFF111318);
   static const surface      = Color(0xFF1E2025);
   static const card2        = Color(0xFF292D38);
+  static const hover        = Color(0xFF2F3540);
   static const input        = Color(0xFF33353A);
   static const border       = Color(0x8043464F);
   static const borderStrong = Color(0xFF43464F);

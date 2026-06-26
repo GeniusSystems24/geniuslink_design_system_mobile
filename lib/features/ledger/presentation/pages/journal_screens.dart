@@ -4,11 +4,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/adapters/banking/m_bank_kit.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
-import 'package:geniuslink_design_system/geniuslink_design_system.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 // Chart-of-accounts corpus for the journal-line account picker (MSuggest).
 const _coa = <(String, String)>[
@@ -28,7 +26,7 @@ const _entries = [
 ];
 
 class JournalListScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const JournalListScreen({super.key, required this.nav});
   @override
   State<JournalListScreen> createState() => _JournalListScreenState();
@@ -184,7 +182,7 @@ class _Total extends StatelessWidget {
 }
 
 class JournalEntryDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const JournalEntryDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -193,8 +191,8 @@ class JournalEntryDetailScreen extends StatelessWidget {
         Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
         Text('Mixed sale & revenue recognition', style: TextStyle(fontSize: 14, color: M.fg1, fontFamily: M.body)),
       ]),
-       MCard(marker: M.green, title: 'Lines', pad: 16, children: [
-       const JournalPreview(numbered: true, rows: [
+      const MCard(marker: M.green, title: 'Lines', pad: 16, children: [
+        JournalPreview(numbered: true, rows: [
           ('Bank · NCB Main (1100)', '6,600.00', null),
           ('Sales Revenue (4001)', null, '6,000.00'),
           ('VAT Payable (2100)', null, '600.00'),

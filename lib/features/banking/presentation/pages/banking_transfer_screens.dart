@@ -5,10 +5,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/banking/m_bank_kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class CreateLocalTransferScreen extends StatelessWidget {
   const CreateLocalTransferScreen({super.key});
@@ -36,7 +35,7 @@ class CreateLocalTransferScreen extends StatelessWidget {
 }
 
 class LocalTransferDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const LocalTransferDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
 }
 
 class ExternalTransferDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const ExternalTransferDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {

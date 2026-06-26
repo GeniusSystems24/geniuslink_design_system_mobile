@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class OpeningJournalScreen extends StatelessWidget {
   const OpeningJournalScreen({super.key});
@@ -56,7 +56,7 @@ class OpeningJournalScreen extends StatelessWidget {
 }
 
 class OpDetailScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const OpDetailScreen({super.key, required this.nav});
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _Flow {
   final String m;
@@ -41,7 +41,7 @@ const _alerts = [
 ];
 
 class DashboardScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const DashboardScreen({super.key, required this.nav});
 
   @override

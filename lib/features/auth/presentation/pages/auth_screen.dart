@@ -4,9 +4,23 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/kit.dart';
 import 'package:flutter/gestures.dart';
-import '../../../../workspace/presentation/controllers/nav_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../design_system/kit.dart';
+import '../../../../workspace/presentation/bloc/nav_cubit.dart';
+import '../bloc/auth_bloc.dart';
+
+// Dispatch the control-plane auth event, then run the existing nav gate.
+// The root BlocListener (app.dart) activates the tenant on authentication,
+// so the visible flow is unchanged.
+void _enterMobile(
+  BuildContext context,
+  NavCubit nav, {
+  required AuthEvent event,
+}) {
+  context.read<AuthBloc>().add(event);
+  nav.login();
+}
 
 class _Brand extends StatelessWidget {
   const _Brand();
@@ -29,7 +43,7 @@ Widget _authEyebrow(String text) => Text(text.toUpperCase(),
     style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.6, color: M.blue));
 
 class LoginScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const LoginScreen({super.key, required this.nav});
 
   @override
@@ -61,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              MBtn('Sign In to GeniusLink', full: true, onTap: nav.login),
+              MBtn('Sign In to GeniusLink', full: true, onTap: () => _enterMobile(context, nav, event: const AuthLoginRequested('layla.a@geniuslink.sa', ''))),
               const SizedBox(height: 16),
               Center(
                 child: Text.rich(TextSpan(children: [
@@ -96,7 +110,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class SignUpScreen extends StatelessWidget {
-  final NavController nav;
+  final NavCubit nav;
   const SignUpScreen({super.key, required this.nav});
 
   @override
@@ -128,7 +142,7 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 16),
               const TCheckbox(label: 'I agree to the Terms of Service and Data Processing Agreement.', defaultChecked: true),
               const SizedBox(height: 16),
-              MBtn('Create Workspace', full: true, onTap: nav.login),
+              MBtn('Create Workspace', full: true, onTap: () => _enterMobile(context, nav, event: const AuthSignUpRequested('owner@new-co.example', 'New Workspace'))),
               const SizedBox(height: 16),
               Center(
                 child: Text.rich(TextSpan(children: [
@@ -149,7 +163,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class ForgotScreen extends StatefulWidget {
-  final NavController nav;
+  final NavCubit nav;
   const ForgotScreen({super.key, required this.nav});
   @override
   State<ForgotScreen> createState() => _ForgotScreenState();
