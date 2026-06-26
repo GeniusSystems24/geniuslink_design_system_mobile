@@ -51,7 +51,7 @@ class AuthState extends Equatable {
   const AuthState.unauthenticated()
       : status = AuthStatus.unauthenticated,
         user = AuthUser.empty,
-        availableTenants = const [],
+        availableTenants = const [TenantRef(id: "1", name: "Tenant1")],
         error = null;
 
   bool get isAuthenticated => status == AuthStatus.authenticated;

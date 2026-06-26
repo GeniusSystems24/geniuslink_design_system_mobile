@@ -64,7 +64,8 @@ class GeniusLinkApp extends StatelessWidget {
                 state.availableTenants.isNotEmpty) {
               tenant.switchTo(state.availableTenants.first.id);
             }
-          } else {
+            context.read<NavCubit>().login();
+          } else if (state.status == AuthStatus.unauthenticated) {
             tenant.clear();
             context.read<NavCubit>().logout();
           }
