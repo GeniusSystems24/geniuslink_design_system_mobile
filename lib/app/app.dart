@@ -26,8 +26,8 @@ import '../features/auth/presentation/bloc/auth_bloc.dart';
 import '../features/auth/presentation/bloc/auth_state.dart';
 import '../workspace/presentation/bloc/tenant_cubit.dart';
 import '../workspace/presentation/bloc/nav_cubit.dart';
-import '../app/router/app_router.dart';
-import '../workspace/presentation/pages/workspace_page.dart';
+import 'router/app_router.dart';
+import 'router/router.dart' show router, authNotifier;
 
 class GeniusLinkApp extends StatelessWidget {
   const GeniusLinkApp({super.key});
@@ -59,6 +59,7 @@ class GeniusLinkApp extends StatelessWidget {
         listener: (context, state) {
           final tenant = context.read<TenantCubit>();
           if (state.isAuthenticated) {
+            authNotifier.setAuthed(true);
             tenant.setAvailable(state.availableTenants);
             if (tenant.state.activeTenantId == null &&
                 state.availableTenants.isNotEmpty) {
@@ -66,15 +67,16 @@ class GeniusLinkApp extends StatelessWidget {
             }
             context.read<NavCubit>().login();
           } else if (state.status == AuthStatus.unauthenticated) {
+            authNotifier.setAuthed(false);
             tenant.clear();
             context.read<NavCubit>().logout();
           }
         },
-        child: MaterialApp(
+        child: MaterialApp.router(
           title: 'GeniusLink',
           debugShowCheckedModeBanner: false,
           theme: buildMobileTheme(),
-          home: const Scaffold(body: WorkspacePage()),
+          routerConfig: router,
         ),
       ),
     );
