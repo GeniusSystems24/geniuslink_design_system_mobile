@@ -18,36 +18,180 @@ class Eyebrow extends StatelessWidget {
   Widget build(BuildContext context) => Text(text.toUpperCase(), style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: size, letterSpacing: 0.6, color: color ?? M.fg2));
 }
 
-class MCard extends StatelessWidget {
+class MCard extends StatefulWidget {
   final List<Widget> children;
-  final Color? marker;
-  final String? title, sub;
-  final Widget? right;
+  final Color? accentColor;
+  final String? title, subtitle;
+  final Widget? trailing;
+  final IconData? icon;
   final double pad;
-  const MCard({super.key, this.children = const [], this.marker, this.title, this.sub, this.right, this.pad = 16});
+  final bool collapsible;
+  final bool initiallyExpanded;
+
+  const MCard({
+    super.key,
+    this.children = const [],
+    this.accentColor,
+    this.title,
+    this.subtitle,
+    this.trailing,
+    this.icon,
+    this.pad = 16,
+    this.collapsible = false,
+    this.initiallyExpanded = true,
+  });
+
+  @override
+  State<MCard> createState() => _MCardState();
+}
+
+class _MCardState extends State<MCard> {
+  late bool _expanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _expanded = widget.initiallyExpanded;
+  }
+
+  void _toggle() {
+    if (widget.collapsible) setState(() => _expanded = !_expanded);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final accent = widget.accentColor;
+
     return Container(
-      padding: EdgeInsets.all(pad),
-      decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(12)),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        if (title != null) ...[
-          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            if (marker != null) Container(width: 4, constraints: const BoxConstraints(minHeight: 32), margin: const EdgeInsetsDirectional.only(end: 10), decoration: BoxDecoration(color: marker, borderRadius: BorderRadius.circular(12))),
-            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(title!, style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
-              if (sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(sub!, style: const TextStyle(fontFamily: M.body, fontSize: 11.5, color: M.fg3))),
-            ])),
-            if (right != null) right!,
-          ]),
-          if (children.isNotEmpty) const SizedBox(height: 14),
+      padding: EdgeInsets.all(widget.pad),
+      decoration: BoxDecoration(
+        color: M.surface,
+        border: Border.all(color: M.border),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.title != null) ...[
+            GestureDetector(
+              onTap: widget.collapsible ? _toggle : null,
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _MCardTitle(
+                      title: widget.title!,
+                      subtitle: widget.subtitle,
+                      accentColor: accent,
+                      icon: widget.icon,
+                      trailing: widget.trailing,
+                    ),
+                  ),
+                  if (widget.collapsible)
+                    AnimatedRotation(
+                      turns: _expanded ? 0.5 : 0,
+                      duration: const Duration(milliseconds: 200),
+                      child: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: M.fg3,
+                        size: 22,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+          ClipRect(
+            child: AnimatedAlign(
+              alignment: Alignment.topCenter,
+              heightFactor: _expanded ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.title != null)
+                    const SizedBox(height: 14),
+                  ...widget.children,
+                ],
+              ),
+            ),
+          ),
         ],
-        for (int i = 0; i < children.length; i++) ...[
-          if (i > 0) const SizedBox(height: 14),
-          children[i],
+      ),
+    );
+  }
+}
+
+class _MCardTitle extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final Color? accentColor;
+  final IconData? icon;
+  final Widget? trailing;
+
+  const _MCardTitle({
+    required this.title,
+    this.subtitle,
+    this.accentColor,
+    this.icon,
+    this.trailing,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        if (icon != null)
+          Container(
+            width: 24,
+            height: subtitle != null ? 40 : 24,
+            decoration: BoxDecoration(
+              color: accentColor?.withValues(alpha: 0.12),
+              borderRadius: const BorderRadiusDirectional.horizontal(
+                start: Radius.circular(2),
+              ),
+            ),
+            child: Icon(icon, size: 14, color: accentColor),
+          ),
+        Container(
+          width: 4,
+          height: subtitle != null ? 40 : 24,
+          decoration: BoxDecoration(
+            color: accentColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1),
+              ),
+              if (subtitle != null) ...[
+                const SizedBox(height: 4),
+                Tooltip(
+                  message: subtitle!,
+                  child: Text(
+                    subtitle!.toUpperCase(),
+                    style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg3),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        if (trailing != null) ...[
+          const SizedBox(width: 12),
+          trailing!,
         ],
-      ]),
+      ],
     );
   }
 }

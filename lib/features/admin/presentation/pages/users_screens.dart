@@ -7,10 +7,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../core/bloc/list_cubit.dart';
 import '../../../../core/bloc/form_cubit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 typedef _UserRow = (int, String, String, String, String, Color);
 
@@ -33,8 +33,7 @@ bool _userPredicate(_UserRow u, String q, Map<String, Object?> f) {
 }
 
 class UsersListScreen extends StatelessWidget {
-  final NavCubit nav;
-  const UsersListScreen({super.key, required this.nav});
+  const UsersListScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ListCubit<_UserRow>>(
@@ -43,14 +42,13 @@ class UsersListScreen extends StatelessWidget {
         predicate: _userPredicate,
         initialFilters: const {'role': 'All'},
       )..load(),
-      child: _UsersListView(nav: nav),
+      child: const _UsersListView(),
     );
   }
 }
 
 class _UsersListView extends StatelessWidget {
-  final NavCubit nav;
-  const _UsersListView({required this.nav});
+  const _UsersListView();
   @override
   Widget build(BuildContext context) {
     const roles = ['All', 'Administrator', 'Controller', 'Accountant', 'Store Manager', 'Viewer'];
@@ -59,13 +57,16 @@ class _UsersListView extends StatelessWidget {
       builder: (context, state) {
         final visible = state.results;
         final role = (state.filters['role'] as String?) ?? 'All';
-        return MScroll([
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Users')),
+      body: MScroll([
           SearchInput(placeholder: 'Search name or email…', value: state.query, onChange: cubit.setQuery),
           Segmented(options: roles, value: role, onChange: (v) => cubit.setFilter('role', v)),
           MCard(pad: 8, children: [
             for (int i = 0; i < visible.length; i++)
               GestureDetector(
-                onTap: () => nav.go('userDetail'),
+                onTap: () => context.goTo('userDetail'),
                 behavior: HitTestBehavior.opaque,
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -91,7 +92,8 @@ class _UsersListView extends StatelessWidget {
             if (visible.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No users match.', style: TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
           ]),
           const _SessionBanner(),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -183,7 +185,10 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   Widget build(BuildContext context) {
     const activity = [('Posted JV-2024-0226', 'Dec 19, 10:14'), ('Created DEP-2024-0182', 'Dec 18, 09:42'), ('Edited account 1200', 'Dec 17, 16:20')];
     const sessions = [('MacBook Pro · Chrome', 'Riyadh · 10.4.22.18 · now', true), ('iPhone 15 · App', 'Riyadh · 10.4.22.51 · 2h ago', false), ('Windows · Edge', 'Jeddah · 94.12.8.140 · Yesterday', false)];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('User Detail')),
+      body: MScroll([
       const MCard(children: [
         Row(children: [
           Avatar('Layla Ahmed', size: 56),
@@ -206,7 +211,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         TInput(label: 'Work Email', defaultValue: 'layla.a@geniuslink.sa', mono: true),
         TInput(label: 'Employee ID', defaultValue: 'EMP-0012', mono: true),
       ]),
-      MCard(marker: M.green, title: 'Security', children: [
+      MCard(accentColor: M.green, title: 'Security', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text('Two-Factor Authentication', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
@@ -223,7 +228,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ]),
       ]),
-      MCard(marker: M.orange, title: 'Active Sessions', sub: 'Devices currently signed in', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Active Sessions', subtitle: 'Devices currently signed in', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -248,7 +253,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ]),
         ),
       ]),
-      MCard(marker: M.green, title: 'Recent Activity', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Recent Activity', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -265,7 +270,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         ),
       ]),
       const MBtn('Deactivate User', variant: MBtnVariant.danger, icon: 'trash', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -290,7 +296,10 @@ class CreateUserScreen extends StatelessWidget {
   const CreateUserScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Invite User')),
+      body: MScroll([
       const ISection(icon: 'user', title: 'Identity', sub: "The new member's name and contact", marker: M.blue, children: [
         TInput(label: 'Name English', placeholder: 'e.g. Omar Hassan', required: true),
         TInput(label: 'الاسم بالعربية', placeholder: 'مثال: عمر حسن', ar: true),
@@ -307,7 +316,8 @@ class CreateUserScreen extends StatelessWidget {
         SizedBox(width: 10),
         Expanded(child: MBtn('Send Invitation', icon: 'check', full: true)),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -355,8 +365,11 @@ class _RolesPermissionsView extends StatelessWidget {
           form.setField('matrix', next);
         }
 
-        return MScroll([
-          MCard(marker: M.blue, title: 'Select Role', sub: "Tap a module's badge to cycle its access level", children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Roles & Permissions')),
+      body: MScroll([
+          MCard(accentColor: M.blue, title: 'Select Role', subtitle: "Tap a module's badge to cycle its access level", children: [
             Segmented(options: _roleNames, value: role, onChange: (v) => form.setField('role', v)),
           ]),
           MCard(pad: 8, children: [
@@ -396,7 +409,8 @@ class _RolesPermissionsView extends StatelessWidget {
             ]),
           ),
           MBtn('Save Permissions', icon: 'check', full: true, onTap: form.submit),
-        ]);
+        ]),
+    );
       },
     );
   }

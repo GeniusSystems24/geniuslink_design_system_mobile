@@ -32,7 +32,10 @@ class InvDashboardScreen extends StatelessWidget {
     const kpis = [('Stock Value', '2.82M', 'SAR · 5 stores', M.blue), ('SKUs', '4,891', '+18 this week', M.blue), ('Low Stock', '47', 'reorder needed', M.orange), ('Out of Stock', '12', 'urgent', M.red)];
     const ops = [('INV-REC-0241', 'Receive', '+24,200', M.green), ('INV-ISS-0089', 'Issue', '-5,400', M.red), ('INV-TRF-0117', 'Transfer', '+20,970', M.blue), ('INV-ADJ-0058', 'Adjustment', '-307', M.orange)];
     const low = [('AGG-21044', 'Coarse Aggregate 20mm', 46, 80, 58), ('TMR-19080', 'Timber 2×4 Treated', 24, 60, 40), ('RBR-71203', 'Reinforcement Bar #6', 0, 100, 0)];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Inventory')),
+      body: MScroll([
       GridView.count(
         crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
         mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.8,
@@ -51,7 +54,7 @@ class InvDashboardScreen extends StatelessWidget {
             ),
         ],
       ),
-      MCard(marker: M.blue, title: 'Recent Operations', pad: 8, children: [
+      MCard(accentColor: M.blue, title: 'Recent Operations', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -71,10 +74,11 @@ class InvDashboardScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MCard(marker: M.orange, title: 'Reorder Alerts', sub: '3 products at or below reorder level', children: [
+      MCard(accentColor: M.orange, title: 'Reorder Alerts', subtitle: '3 products at or below reorder level', children: [
         for (final p in low) _ReorderBar(p: p),
         const MBtn('Generate Purchase Order', icon: 'paperclip', full: true),
       ]),
-    ]);
+    ]),
+    );
   }
 }

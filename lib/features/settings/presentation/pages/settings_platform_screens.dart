@@ -67,9 +67,12 @@ class _IntegrationsView extends StatelessWidget {
       builder: (context, fstate) {
         final st = Map<String, bool>.from(fstate.value<Map>('state') ?? const {});
         void toggle(String k) => form.setField('state', {...st, k: !(st[k] ?? false)});
-        return MScroll([
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Integrations')),
+      body: MScroll([
           for (final g in _integrationGroups)
-            MCard(title: g.$1, marker: g.$2, pad: 8, children: [
+            MCard(title: g.$1, accentColor: g.$2, pad: 8, children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(children: [
@@ -92,7 +95,8 @@ class _IntegrationsView extends StatelessWidget {
                 ]),
               ),
             ]),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -124,8 +128,11 @@ class _WebhooksView extends StatelessWidget {
       builder: (context, fstate) {
         final hooks = [for (final h in (fstate.value<List>('hooks') ?? const [])) List<Object>.from(h as List)];
         void toggle(int i) { final n = [for (final h in hooks) List<Object>.from(h)]; n[i][2] = !(n[i][2] as bool); form.setField('hooks', n); }
-        return MScroll([
-          MCard(marker: M.blue, title: '${hooks.length} Endpoints', sub: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Webhooks')),
+      body: MScroll([
+          MCard(accentColor: M.blue, title: '${hooks.length} Endpoints', subtitle: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -157,7 +164,8 @@ class _WebhooksView extends StatelessWidget {
             ),
           ]),
           const MBtn('Add Endpoint', icon: 'plus', full: true),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -191,9 +199,12 @@ class _ApiKeysView extends StatelessWidget {
         List<List<Object>> clone() => [for (final k in keys) List<Object>.from(k)];
         void toggleReveal(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('keys', n); }
         void revoke(int i) { final n = clone()..removeAt(i); form.setField('keys', n); }
-        return MScroll([
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('API Keys')),
+      body: MScroll([
           const InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: M.orange),
-          MCard(marker: M.green, title: '${keys.length} Active Keys', pad: 8, children: [
+          MCard(accentColor: M.green, title: '${keys.length} Active Keys', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -219,7 +230,8 @@ class _ApiKeysView extends StatelessWidget {
             ),
           ]),
           const MBtn('Create Key', icon: 'plus', full: true),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -249,8 +261,11 @@ class _NotificationsView extends StatelessWidget {
       builder: (context, fstate) {
         final prefs = [for (final r in (fstate.value<List>('prefs') ?? const [])) List<bool>.from(r as List)];
         void toggle(int ci, int chi) { final n = [for (final r in prefs) List<bool>.from(r)]; n[ci][chi] = !n[ci][chi]; form.setField('prefs', n); }
-        return MScroll([
-          MCard(marker: M.blue, title: 'Preferences', sub: 'Toggle a channel per category', pad: 8, children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Notifications')),
+      body: MScroll([
+          MCard(accentColor: M.blue, title: 'Preferences', subtitle: 'Toggle a channel per category', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -292,7 +307,8 @@ class _NotificationsView extends StatelessWidget {
             ),
           ]),
           MBtn('Save Preferences', icon: 'check', full: true, onTap: form.submit),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -304,8 +320,11 @@ class BillingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const usage = [('Users', 6.0, 25.0, ''), ('Transactions · MTD', 4120.0, 100000.0, ''), ('Storage', 2.4, 50.0, ' GB')];
     const plans = [('Starter', '0', 'free', ['1 workspace', '3 users', '500 entries/mo'], false), ('Business', '349', '/mo', ['Unlimited entries', '25 users', 'All integrations'], true), ('Enterprise', 'Custom', '', ['SSO & SAML', 'Dedicated support', 'Audit retention 10y'], false)];
-    return MScroll([
-      MCard(marker: M.green, title: 'Current Plan', right: const Pill('Active'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Billing')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Current Plan', trailing: const Pill('Active'), children: [
         const Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('Business', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 22, color: M.fg1)),
           SizedBox(width: 10),
@@ -338,7 +357,7 @@ class BillingScreen extends StatelessWidget {
             if (p.$5) PositionedDirectional(top: 0, end: 0, child: Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: tint(M.blue, 0x24), borderRadius: BorderRadius.circular(4)), child: const Text('CURRENT', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: M.blue, fontFamily: M.body)))),
           ]),
         ),
-      MCard(marker: M.orange, title: 'Recent Invoices', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Recent Invoices', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -358,7 +377,8 @@ class BillingScreen extends StatelessWidget {
           ]),
         ),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -410,8 +430,11 @@ class _BackupView extends StatelessWidget {
         final auto = fstate.value<bool>('auto') ?? true;
         final scope = Map<String, bool>.from(fstate.value<Map>('scope') ?? const {});
         void toggleScope(String k) => form.setField('scope', {...scope, k: !(scope[k] ?? false)});
-        return MScroll([
-          MCard(marker: M.green, title: 'Automatic Backups', right: const Pill('Healthy'), children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Backup')),
+      body: MScroll([
+          MCard(accentColor: M.green, title: 'Automatic Backups', trailing: const Pill('Healthy'), children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
@@ -447,7 +470,7 @@ class _BackupView extends StatelessWidget {
             const TSelect(label: 'Format', value: 'CSV (zipped)', options: ['CSV (zipped)', 'JSON', 'Excel (XLSX)']),
             const MBtn('Generate Export', icon: 'download', full: true),
           ]),
-          MCard(marker: M.orange, title: 'Export History', pad: 8, children: [
+          MCard(accentColor: M.orange, title: 'Export History', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -479,7 +502,8 @@ class _BackupView extends StatelessWidget {
               const MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
             ]),
           ),
-        ]);
+        ]),
+    );
       },
     );
   }

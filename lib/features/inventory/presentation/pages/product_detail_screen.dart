@@ -6,21 +6,20 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
-import 'package:gl_mobile_app/workspace/presentation/bloc/nav_cubit.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const ProductDetailScreen({
-    Key? key,
-    required this.nav,
-  }) : super(key: key);
+  const ProductDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const byStore = [('ST-001', 'Downtown Central', 88, '39,600.00'), ('ST-002', 'King Fahd Warehouse', 42, '18,900.00'), ('ST-003', 'Jeddah Showroom', 12, '5,400.00')];
     const moves = [('INV-ISS-0089', 'Issue', '−12', 'Dec 18'), ('INV-REC-0241', 'Receive', '+32', 'Dec 16'), ('INV-TRF-0117', 'Transfer', '±18', 'Dec 14')];
-    return MScroll([
-      MCard(marker: M.green, title: 'Stock Summary', sub: 'Aggregated across all stores', right: const Pill('In Stock'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Product Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Stock Summary', subtitle: 'Aggregated across all stores', trailing: const Pill('In Stock'), children: [
         GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: [
           const Mini(label: 'Total On Hand', value: '142', sub: 'PCS', hi: true),
           const Mini(label: 'Stock Value', value: '63,900', sub: 'SAR'),
@@ -28,11 +27,11 @@ class ProductDetailScreen extends StatelessWidget {
           const Mini(label: 'Reorder Level', value: '50', sub: 'PCS'),
         ]),
       ]),
-      const MCard(marker: M.blue, title: 'Product Information', children: [
+      const MCard(accentColor: M.blue, title: 'Product Information', children: [
         KV('SKU', 'STL-44021', mono: true), KV('Barcode', '6 281000 044021', mono: true),
         KV('Category', 'Steel'), KV('Unit', 'PCS'), KV('Selling Price', '540.00 SAR'), KV('VAT Rate', '15%'),
       ]),
-      MCard(marker: M.green, title: 'Stock by Store', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Stock by Store', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -51,7 +50,7 @@ class ProductDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MCard(marker: M.orange, title: 'Recent Movements', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Recent Movements', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -71,7 +70,8 @@ class ProductDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MBtn('Back to Products', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('productsList')),
-    ]);
+      MBtn('Back to Products', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('productsList')),
+    ]),
+    );
   }
 }

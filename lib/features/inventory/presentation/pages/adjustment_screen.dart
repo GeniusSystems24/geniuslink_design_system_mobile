@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class _AdjLine extends StatelessWidget {
@@ -74,7 +74,10 @@ class AdjustmentScreen extends StatelessWidget {
       ),
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46, 'Spillage · 2 tons'),
     ];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Inventory Adjustment')),
+      body: MScroll([
       const ISection(
           icon: 'box',
           title: 'Adjustment Details',
@@ -99,9 +102,9 @@ class AdjustmentScreen extends StatelessWidget {
                 icon: 'calendar'),
           ]),
       const MCard(
-          marker: M.orange,
+          accentColor: M.orange,
           title: 'Variance Summary',
-          sub: 'Net financial impact of this reconciliation',
+          subtitle: 'Net financial impact of this reconciliation',
           children: [
             Row(children: [
               Expanded(child: Mini(label: 'Lines Adjusted', value: '3')),
@@ -111,7 +114,7 @@ class AdjustmentScreen extends StatelessWidget {
                       label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
             ]),
           ]),
-      MCard(marker: M.green, title: 'Adjustment Lines', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Adjustment Lines', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -133,6 +136,7 @@ class AdjustmentScreen extends StatelessWidget {
                 'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.'),
           ]),
       const ActionRow(primary: 'Post Adjustment'),
-    ]);
+    ]),
+    );
   }
 }

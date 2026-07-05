@@ -1,19 +1,21 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 import 'inventory_shared_widgets.dart';
 
 class IssueDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const IssueDetailScreen({super.key, required this.nav});
+  const IssueDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Issue Detail')),
+      body: MScroll([
       MCard(
-          marker: M.green,
+          accentColor: M.green,
           title: 'Issued Value',
-          sub: 'INV-ISS-2024-0089 · Dec 18, 2025',
-          right: const Pill('Posted'),
+          subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
+          trailing: const Pill('Posted'),
           children: const [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -32,14 +34,14 @@ class IssueDetailScreen extends StatelessWidget {
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      const MCard(marker: M.blue, title: 'Issue Information', children: [
+      const MCard(accentColor: M.blue, title: 'Issue Information', children: [
         KV('Serial No', 'INV-ISS-2024-0089', mono: true),
         KV('Store', 'Downtown Central'),
         KV('Customer', 'Project A-92'),
         KV('Currency', 'USD — US Dollar'),
       ]),
       const MCard(
-          marker: M.green,
+          accentColor: M.green,
           title: 'Accounting Distribution',
           pad: 16,
           children: [
@@ -59,7 +61,8 @@ class IssueDetailScreen extends StatelessWidget {
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,
-          onTap: () => nav.back('more')),
-    ]);
+          onTap: () => context.goTo('more')),
+    ]),
+    );
   }
 }

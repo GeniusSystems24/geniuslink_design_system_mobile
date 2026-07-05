@@ -6,9 +6,7 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
-import 'package:gl_mobile_app/workspace/presentation/bloc/nav_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 class WorkspaceShell extends StatelessWidget {
@@ -19,11 +17,9 @@ class WorkspaceShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).matchedLocation;
     final tab = location.replaceAll('/', '');
-    final (title, action) = _tabChrome(context, tab);
 
     return Column(
       children: [
-        MAppBar(title: title, action: action),
         Expanded(child: navigationShell),
         MTabBar(
           active: tab,
@@ -32,27 +28,6 @@ class WorkspaceShell extends StatelessWidget {
       ],
     );
   }
-
-  (String, Widget?) _tabChrome(BuildContext context, String tab) {
-    final nav = context.read<NavCubit>();
-    switch (tab) {
-      case 'accounts':
-        return ('Accounts', _actionBtn(context, 'plus', () => nav.go('createAccount')));
-      case 'stores':
-        return ('Stores', _actionBtn(context, 'plus', () => nav.go('createStore')));
-      case 'more':
-        return ('More', null);
-      case 'dashboard':
-      default:
-        return ('Dashboard', _actionBtn(context, 'bell', () {}));
-    }
-  }
-
-  Widget _actionBtn(BuildContext context, String icon, VoidCallback onTap) => GestureDetector(
-    onTap: onTap,
-    behavior: HitTestBehavior.opaque,
-    child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: M.blue)),
-  );
 }
 
 // ════════════════════════════════════════════════════════════

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 import 'inventory_shared_widgets.dart';
 
 class _TransferFlowCard extends StatelessWidget {
@@ -66,19 +66,21 @@ class _TransferFlowCard extends StatelessWidget {
 }
 
 class TransferDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const TransferDetailScreen({super.key, required this.nav});
+  const TransferDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const items = [
       ('Coarse Aggregate 20mm', '18 TON × 125.00', '2,250.00'),
       ('Reinforcement Bar #6', '240 PCS × 78.00', '18,720.00')
     ];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Transfer Detail')),
+      body: MScroll([
       MCard(
-          marker: M.blue,
+          accentColor: M.blue,
           title: 'In Transit',
-          right: const Pill('In Transit', tone: PillTone.warning),
+          trailing: const Pill('In Transit', tone: PillTone.warning),
           children: [
             const Padding(
                 padding: EdgeInsets.only(bottom: 2),
@@ -122,9 +124,9 @@ class TransferDetailScreen extends StatelessWidget {
             ),
           ]),
       MCard(
-          marker: M.green,
+          accentColor: M.green,
           title: 'Items in Transit',
-          sub: '2 lines · 258 units',
+          subtitle: '2 lines · 258 units',
           pad: 8,
           children: [
             Padding(
@@ -135,7 +137,7 @@ class TransferDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      const MCard(marker: M.blue, title: 'Logistics & Tracking', children: [
+      const MCard(accentColor: M.blue, title: 'Logistics & Tracking', children: [
         KV('Carrier', 'Plate 4892-RKD'),
         KV('Driver', 'Mohammed S.'),
         KV('Expected Arrival', 'Dec 20, 2025', mono: true),
@@ -144,7 +146,8 @@ class TransferDetailScreen extends StatelessWidget {
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,
-          onTap: () => nav.back('transferList')),
-    ]);
+          onTap: () => context.goTo('transferList')),
+    ]),
+    );
   }
 }

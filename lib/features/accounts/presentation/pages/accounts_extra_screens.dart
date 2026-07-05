@@ -6,14 +6,13 @@
 import 'package:flutter/material.dart';
 import 'package:super_tab_bar/super_tab_bar.dart';
 import 'package:super_tree_field/super_tree.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 // ── Tab wrapper ──────────────────────────────────────────────
 
 class AccountsExtraTabs extends StatefulWidget {
-  final NavCubit nav;
-  const AccountsExtraTabs({super.key, required this.nav});
+  const AccountsExtraTabs({super.key});
   @override
   State<AccountsExtraTabs> createState() => _AccountsExtraTabsState();
 }
@@ -43,9 +42,9 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
       pageBuilder: (context, tab) {
         switch (tab.id) {
           case 1:
-            return AccountTreeScreen(nav: widget.nav);
+            return const AccountTreeScreen();
           case 2:
-            return AccountDetailFullScreen(nav: widget.nav);
+            return const AccountDetailFullScreen();
           default:
             return const SizedBox.shrink();
         }
@@ -59,8 +58,7 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 // ════════════════════════════════════════════════════════════════
 
 class AccountDetailFullScreen extends StatelessWidget {
-  final NavCubit nav;
-  const AccountDetailFullScreen({super.key, required this.nav});
+  const AccountDetailFullScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const tx = [
@@ -69,8 +67,11 @@ class AccountDetailFullScreen extends StatelessWidget {
       ('TR-9042', 'Dec 17, 11:48', 'Transfer to NCB Bank', '-1,800.00', false, '4,450.00'),
       ('JV-2024-0071', 'Dec 18, 16:33', 'Petty cash reimbursement', '+650.00', true, '5,100.00'),
     ];
-    return MScroll([
-      MCard(marker: M.green, title: 'Current Balance', sub: 'As of Dec 18, 2025 16:33', right: const Pill('Active'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Account Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           const SizedBox(width: 8),
@@ -81,13 +82,13 @@ class AccountDetailFullScreen extends StatelessWidget {
           const Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
         ]),
       ]),
-      const MCard(marker: M.blue, title: 'Account Information', children: [
+      const MCard(accentColor: M.blue, title: 'Account Information', children: [
         KV('Code', '1001', mono: true), KV('Type', 'Asset · Cash Equivalents'),
         KV('Name English', 'Cash Box'), KV('Name Arabic', 'الصندوق', ar: true),
         KV('Account Tree', 'Assets Tree (1)'), KV('Currency', 'SAR — Saudi Riyal'),
         KV('Parent Group', 'Current Assets (1000)'), KV('Tenant ID', '9', mono: true),
       ]),
-      MCard(marker: M.green, title: 'Recent Transactions', sub: 'Latest entries · running balance', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Recent Transactions', subtitle: 'Latest entries · running balance', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -110,15 +111,16 @@ class AccountDetailFullScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      const MCard(marker: M.orange, title: 'Audit Information', children: [
+      const MCard(accentColor: M.orange, title: 'Audit Information', children: [
         _AuditGrid(rows: [('Created By', 'Admin User (ID: 5)'), ('Created At', 'Apr 12, 2024 09:21'), ('Modified By', 'Layla A. (ID: 12)'), ('Modified At', 'Nov 02, 2025 15:48')]),
       ]),
       Row(children: [
         const Expanded(child: MBtn('Export', variant: MBtnVariant.secondary, icon: 'download', full: true)),
         const SizedBox(width: 10),
-        Expanded(child: MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('accounts'))),
+        Expanded(child: MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('accounts'))),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -211,8 +213,7 @@ String _fmtAmount(num n) {
 }
 
 class AccountTreeScreen extends StatefulWidget {
-  final NavCubit nav;
-  const AccountTreeScreen({super.key, required this.nav});
+  const AccountTreeScreen({super.key});
   @override
   State<AccountTreeScreen> createState() => _AccountTreeScreenState();
 }
@@ -221,7 +222,7 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   late final SuperTreeController<Account> _c = SuperTreeController<Account>(
     roots: _accountRoots,
     searchText: (n) => '${n.code} ${n.name} ${n.value?.type ?? ''}',
-    onOpenLeaf: (node) => widget.nav.go('accountDetail'),
+    onOpenLeaf: (node) => context.goTo('accountDetail'),
   );
 
   @override
@@ -238,17 +239,21 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: SuperTree<Account>(
-        controller: _c,
-        leadingBuilder: _leading,
-        trailingBuilder: _trailing,
-        title: 'Chart of Accounts',
-        subtitle: 'Roll-up balances · bilingual',
-        nameColumnLabel: 'Account',
-        trailingColumnLabel: 'Balance (SAR)',
-        enableEditing: false,
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Account Tree')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SuperTree<Account>(
+          controller: _c,
+          leadingBuilder: _leading,
+          trailingBuilder: _trailing,
+          title: 'Chart of Accounts',
+          subtitle: 'Roll-up balances · bilingual',
+          nameColumnLabel: 'Account',
+          trailingColumnLabel: 'Balance (SAR)',
+          enableEditing: false,
+        ),
       ),
     );
   }

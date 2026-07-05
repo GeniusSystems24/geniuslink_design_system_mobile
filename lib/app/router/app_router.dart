@@ -4,7 +4,6 @@ import 'package:gl_mobile_app/features/accounts/presentation/pages/create_group_
 import 'package:gl_mobile_app/features/accounts/presentation/pages/group_detail_screen.dart';
 import 'package:gl_mobile_app/features/inventory/presentation/pages/create_product_screen.dart';
 import 'package:gl_mobile_app/features/inventory/presentation/pages/product_detail_screen.dart';
-import '../../workspace/presentation/bloc/nav_cubit.dart';
 import '../../design_system/kit.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/accounts/presentation/pages/accounts_screens.dart';
@@ -132,45 +131,45 @@ const Set<String> fullBleedScreens = {'mobileDashboard'};
 
 /// Build a sub-screen widget. Falls back to [PendingScreen] for ids
 /// scheduled in a later batch.
-Widget buildSubScreen(String id, NavCubit nav) {
+Widget buildSubScreen(String id) {
   switch (id) {
     // Full-bleed (own chrome)
     case 'mobileDashboard': return const MobileDashboardScreen();
     // Accounts
     case 'createAccount': return const CreateAccountScreen();
-    case 'accountDetail': return AccountDetailFullScreen(nav: nav);
+    case 'accountDetail': return const AccountDetailFullScreen();
     case 'createGroup': return const CreateGroupScreen();
-    case 'groupDetail': return GroupDetailScreen(nav: nav);
+    case 'groupDetail': return const GroupDetailScreen();
     // Stores
     case 'createStore': return const CreateStoreScreen();
-    case 'storeDetail': return StoreDetailScreen(nav: nav);
+    case 'storeDetail': return const StoreDetailScreen();
     case 'issue': return const IssueInventoryScreen();
     // Batch 2 — Ledger
     case 'journal': return const OpeningJournalScreen();
-    case 'opDetail': return OpDetailScreen(nav: nav);
+    case 'opDetail': return const OpDetailScreen();
     // Batch 2 — Journal
-    case 'journalList': return JournalListScreen(nav: nav);
+    case 'journalList': return const JournalListScreen();
     case 'createJournalEntry': return const CreateJournalEntryScreen();
-    case 'journalEntryDetail': return JournalEntryDetailScreen(nav: nav);
+    case 'journalEntryDetail': return const JournalEntryDetailScreen();
     // Batch 2 — Banking · Cash
     case 'createDeposit': return const CreateDepositScreen();
-    case 'depositDetail': return DepositDetailScreen(nav: nav);
+    case 'depositDetail': return const DepositDetailScreen();
     case 'createWithdrawal': return const CreateWithdrawalScreen();
-    case 'withdrawalDetail': return WithdrawalDetailScreen(nav: nav);
+    case 'withdrawalDetail': return const WithdrawalDetailScreen();
     // Batch 2 — Banking · Transfers
     case 'createLocalTransfer': return const CreateLocalTransferScreen();
-    case 'localTransferDetail': return LocalTransferDetailScreen(nav: nav);
+    case 'localTransferDetail': return const LocalTransferDetailScreen();
     case 'createExternalTransfer': return const CreateExternalTransferScreen();
-    case 'externalTransferDetail': return ExternalTransferDetailScreen(nav: nav);
+    case 'externalTransferDetail': return const ExternalTransferDetailScreen();
     // Batch 3 — Products & inventory ops
-    case 'productsList': return ProductsListScreen(nav: nav);
-    case 'productDetail': return ProductDetailScreen(nav: nav);
+    case 'productsList': return const ProductsListScreen();
+    case 'productDetail': return const ProductDetailScreen();
     case 'createProduct': return const CreateProductScreen();
-    case 'issueDetail': return IssueDetailScreen(nav: nav);
+    case 'issueDetail': return const IssueDetailScreen();
     case 'receiveCreate': return const ReceiveCreateScreen();
-    case 'receiveDetail': return ReceiveDetailScreen(nav: nav);
+    case 'receiveDetail': return const ReceiveDetailScreen();
     case 'transferCreate': return const TransferCreateScreen();
-    case 'transferDetail': return TransferDetailScreen(nav: nav);
+    case 'transferDetail': return const TransferDetailScreen();
     case 'adjustment': return const AdjustmentScreen();
     // Batch 3 — Inventory extras
     case 'invDashboard': return const InvDashboardScreen();
@@ -180,20 +179,20 @@ Widget buildSubScreen(String id, NavCubit nav) {
     case 'priceLists': return const PriceListsScreen();
     case 'barcodePrint': return const BarcodePrintScreen();
     case 'warehousesList': return const WarehousesListScreen();
-    case 'transferList': return TransferListScreen(nav: nav);
+    case 'transferList': return const TransferListScreen();
     // Batch 3 — Accounts parity (full detail overrides simple one + tree)
-    case 'accountTree': return AccountTreeScreen(nav: nav);
+    case 'accountTree': return const AccountTreeScreen();
     // Batch 4 — Currencies
-    case 'currenciesList': return CurrenciesListScreen(nav: nav);
+    case 'currenciesList': return const CurrenciesListScreen();
     case 'createCurrency': return const CreateCurrencyScreen();
-    case 'currencyDetail': return CurrencyDetailScreen(nav: nav);
+    case 'currencyDetail': return const CurrencyDetailScreen();
     case 'exchangeRateSetup': return const ExchangeRateSetupScreen();
     case 'fiscalYearSetup': return const FiscalYearSetupScreen();
     // Batch 4 — Contacts
-    case 'customersList': return ContactListScreen.customers(nav);
+    case 'customersList': return ContactListScreen.customers();
     case 'customerDetail': return ContactDetailScreen.customer();
     case 'createCustomer': return CreateContactScreen.customer();
-    case 'suppliersList': return ContactListScreen.suppliers(nav);
+    case 'suppliersList': return ContactListScreen.suppliers();
     case 'supplierDetail': return ContactDetailScreen.supplier();
     case 'createSupplier': return CreateContactScreen.supplier();
     // Batch 4 — Reports
@@ -203,12 +202,12 @@ Widget buildSubScreen(String id, NavCubit nav) {
     case 'inventoryValuation': return const InventoryValuationScreen();
     case 'auditLog': return const AuditLogScreen();
     // Batch 4 — Users
-    case 'usersList': return UsersListScreen(nav: nav);
+    case 'usersList': return const UsersListScreen();
     case 'userDetail': return const UserDetailScreen();
     case 'createUser': return const CreateUserScreen();
     case 'rolesPermissions': return const RolesPermissionsScreen();
     // Batch 5 — Settings · Organization
-    case 'settingsHub': return SettingsHubScreen(nav: nav);
+    case 'settingsHub': return const SettingsHubScreen();
     case 'setCompany': return const CompanyProfileScreen();
     case 'setFinancial': return const FinancialSettingsScreen();
     case 'setTaxes': return const TaxesSettingsScreen();
@@ -216,7 +215,7 @@ Widget buildSubScreen(String id, NavCubit nav) {
     case 'setNumbering': return const NumberingScreen();
     case 'setBranches': return const BranchesStoresScreen();
     // Batch 5 — Settings · Team & Security
-    case 'rolesList': return RolesListScreen(nav: nav);
+    case 'rolesList': return const RolesListScreen();
     case 'roleEditor': return const RoleEditorScreen();
     case 'tenants': return const TenantsScreen();
     // Batch 5 — Settings · Platform
@@ -232,14 +231,14 @@ Widget buildSubScreen(String id, NavCubit nav) {
 }
 
 /// Build a bottom-tab screen.
-Widget buildTabScreen(String tab, NavCubit nav) {
+Widget buildTabScreen(String tab) {
   switch (tab) {
-    case 'accounts': return AccountsScreen(nav: nav);
-    case 'stores': return StoresScreen(nav: nav);
-    case 'more': return MoreScreen(nav: nav);
+    case 'accounts': return const AccountsScreen();
+    case 'stores': return const StoresScreen();
+    case 'more': return const MoreScreen();
     case 'dashboard':
     default:
-      return DashboardScreen(nav: nav);
+      return const DashboardScreen();
   }
 }
 

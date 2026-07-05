@@ -4,9 +4,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 // Chart-of-accounts corpus for the journal-line account picker (MSuggest).
 const _coa = <(String, String)>[
@@ -26,8 +26,7 @@ const _entries = [
 ];
 
 class JournalListScreen extends StatefulWidget {
-  final NavCubit nav;
-  const JournalListScreen({super.key, required this.nav});
+  const JournalListScreen({super.key});
   @override
   State<JournalListScreen> createState() => _JournalListScreenState();
 }
@@ -45,13 +44,16 @@ class _JournalListScreenState extends State<JournalListScreen> {
       return hit && fil;
     }).toList();
 
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Journal Entries')),
+      body: MScroll([
       SearchInput(placeholder: 'Search entries…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Posted', 'Draft'], value: _filter, onChange: (v) => setState(() => _filter = v)),
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)
           GestureDetector(
-            onTap: () => widget.nav.go('journalEntryDetail'),
+            onTap: () => context.goTo('journalEntryDetail'),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -79,7 +81,8 @@ class _JournalListScreenState extends State<JournalListScreen> {
           ),
         if (rows.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 28), child: Center(child: Text('No entries match.', style: TextStyle(color: M.fg3, fontFamily: M.body)))),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -87,14 +90,17 @@ class CreateJournalEntryScreen extends StatelessWidget {
   const CreateJournalEntryScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const ISection(icon: 'doc', title: 'Entry Header', marker: M.blue, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Journal Entry')),
+      body: MScroll([
+      const ISection(icon: 'doc', title: 'Entry Header', accentColor: M.blue, children: [
         IField(label: 'Serial No', value: 'JV-2024-0227', mono: true, locked: true),
         IField(label: 'Date', value: 'Dec 19, 2025', icon: 'calendar'),
         IField(label: 'Currency', value: 'SAR — Saudi Riyal', select: true),
         ITextarea(label: 'Description', placeholder: 'Describe this journal entry…'),
       ]),
-      ISection(icon: 'ledger', title: 'Journal Lines', marker: M.green, sub: '2 lines · balanced', children: [
+      ISection(icon: 'ledger', title: 'Journal Lines', accentColor: M.green, sub: '2 lines · balanced', children: [
         _LineEditor(account: 'Bank · NCB Main (1100)', side: 'Debit', amount: '6,600.00'),
         _LineEditor(account: 'Sales Revenue (4001)', side: 'Credit', amount: '6,600.00'),
         const AddLineBtn(),
@@ -109,7 +115,8 @@ class CreateJournalEntryScreen extends StatelessWidget {
         ),
       ]),
       const ActionRow(primary: 'Post Entry'),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -182,23 +189,25 @@ class _Total extends StatelessWidget {
 }
 
 class JournalEntryDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const JournalEntryDetailScreen({super.key, required this.nav});
+  const JournalEntryDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      MCard(marker: M.green, title: 'Journal Entry', right: const Pill('Posted'), children: const [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Journal Entry Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Journal Entry', trailing: const Pill('Posted'), children: const [
         Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
         Text('Mixed sale & revenue recognition', style: TextStyle(fontSize: 14, color: M.fg1, fontFamily: M.body)),
       ]),
-      const MCard(marker: M.green, title: 'Lines', pad: 16, children: [
+      const MCard(accentColor: M.green, title: 'Lines', pad: 16, children: [
         JournalPreview(numbered: true, rows: [
           ('Bank · NCB Main (1100)', '6,600.00', null),
           ('Sales Revenue (4001)', null, '6,000.00'),
           ('VAT Payable (2100)', null, '600.00'),
         ]),
       ]),
-      const MCard(marker: M.blue, title: 'Audit', children: [
+      const MCard(accentColor: M.blue, title: 'Audit', children: [
         AuditGrid(rows: [
           ('Created By', 'Layla Ahmed', false),
           ('Created At', 'Dec 18, 09:21', true),
@@ -206,7 +215,8 @@ class JournalEntryDetailScreen extends StatelessWidget {
           ('Reference', 'INV-S-2291', true),
         ]),
       ]),
-      MBtn('Back to Entries', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('journalList')),
-    ]);
+      MBtn('Back to Entries', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('journalList')),
+    ]),
+    );
   }
 }

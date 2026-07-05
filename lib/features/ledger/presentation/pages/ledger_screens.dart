@@ -4,8 +4,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class OpeningJournalScreen extends StatelessWidget {
   const OpeningJournalScreen({super.key});
@@ -15,13 +15,16 @@ class OpeningJournalScreen extends StatelessWidget {
       ('Cash Box (1001)', '+5,000.00', true, 'Opening balance'),
       ('Capital Account (3001)', '-5,000.00', false, 'Owner investment'),
     ];
-    return MScroll([
-      const MCard(marker: M.blue, title: 'Entry Details', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Opening Journal')),
+      body: MScroll([
+      const MCard(accentColor: M.blue, title: 'Entry Details', children: [
         MField(label: 'Serial No', value: 'JV-2024-0042', mono: true),
         MField(label: 'Currency', value: 'SAR — Saudi Riyal'),
         MField(label: 'Fiscal Year', value: '2024', mono: true),
       ]),
-      MCard(marker: M.green, title: 'Transfer Lines', sub: '2 lines · balanced', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Transfer Lines', subtitle: '2 lines · balanced', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -51,13 +54,13 @@ class OpeningJournalScreen extends StatelessWidget {
         ),
       ]),
       const MBtn('Create Entry', icon: 'check', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
 class OpDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const OpDetailScreen({super.key, required this.nav});
+  const OpDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const lines = [
@@ -70,8 +73,11 @@ class OpDetailScreen extends StatelessWidget {
       ('Submitted for review', 'Layla A. · Dec 18, 09:24'),
       ('Approved & posted', 'Controller · Dec 18, 10:05'),
     ];
-    return MScroll([
-      MCard(marker: M.green, title: 'Operation Summary', right: const Pill('Posted'), children: const [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Financial Operation')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Operation Summary', trailing: const Pill('Posted'), children: const [
         Text('OP-2024-0883', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
         Row(children: [
           Expanded(child: Mini(label: 'Total Debits', value: '6,600.00', sub: 'SAR')),
@@ -79,7 +85,7 @@ class OpDetailScreen extends StatelessWidget {
           Expanded(child: Mini(label: 'Difference', value: '0.00', sub: 'SAR', hi: true)),
         ]),
       ]),
-      MCard(marker: M.green, title: 'Ledger Lines', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Ledger Lines', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -101,7 +107,7 @@ class OpDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MCard(marker: M.blue, title: 'Activity', children: [
+      MCard(accentColor: M.blue, title: 'Activity', children: [
         Column(children: [
           for (int i = 0; i < timeline.length; i++)
             IntrinsicHeight(
@@ -125,7 +131,8 @@ class OpDetailScreen extends StatelessWidget {
             ),
         ]),
       ]),
-      MBtn('Back to Operations', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('more')),
-    ]);
+      MBtn('Back to Operations', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),
+    ]),
+    );
   }
 }

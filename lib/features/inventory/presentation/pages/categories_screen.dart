@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -18,8 +18,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ('timber', 'CAT-004', 'Timber & Wood', 184, '484,210', [('CAT-004-01', 'Sawn Lumber', 92), ('CAT-004-02', 'Plywood', 92)]),
       ('finish', 'CAT-005', 'Finishing Materials', 128, '184,390', <(String, String, int)>[]),
     ];
-    return MScroll([
-      MCard(marker: M.blue, title: 'Category Tree', sub: '5 top-level groups', pad: 8, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Categories')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'Category Tree', subtitle: '5 top-level groups', pad: 8, children: [
         for (final node in tree) ...[
           GestureDetector(
             onTap: () => setState(() => _open.contains(node.$1) ? _open.remove(node.$1) : _open.add(node.$1)),
@@ -65,6 +68,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         IField(label: 'الاسم بالعربية', placeholder: 'مثال: لاصقات', ar: true, required: true),
         ActionRow(primary: 'Create Category'),
       ]),
-    ]);
+    ]),
+    );
   }
 }

@@ -4,8 +4,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _accounts = [
   ('1001', 'Cash Box', 'الصندوق', '42,500.00', false),
@@ -16,12 +16,18 @@ const _accounts = [
 ];
 
 class AccountsScreen extends StatelessWidget {
-  final NavCubit nav;
-  const AccountsScreen({super.key, required this.nav});
+  const AccountsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(
+        backgroundColor: M.bg,
+        elevation: 0,
+        title: const Text('Accounts'),
+      ),
+      body: MScroll([
       Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -41,9 +47,10 @@ class AccountsScreen extends StatelessWidget {
           _AccountRow(
               row: _accounts[i],
               last: i == _accounts.length - 1,
-              onTap: () => nav.go('accountDetail')),
+              onTap: () => context.goTo('accountDetail')),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 

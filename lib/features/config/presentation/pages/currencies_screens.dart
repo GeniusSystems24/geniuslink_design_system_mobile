@@ -5,8 +5,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _currencies = [
   ('SAR', 'Saudi Riyal', '﷼', '1.000000', true, 'active'),
@@ -18,15 +18,17 @@ const _currencies = [
 ];
 
 class CurrenciesListScreen extends StatelessWidget {
-  final NavCubit nav;
-  const CurrenciesListScreen({super.key, required this.nav});
+  const CurrenciesListScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Currencies')),
+      body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < _currencies.length; i++)
           GestureDetector(
-            onTap: () => nav.go('currencyDetail'),
+            onTap: () => context.goTo('currencyDetail'),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
@@ -51,7 +53,8 @@ class CurrenciesListScreen extends StatelessWidget {
             ),
           ),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -59,31 +62,37 @@ class CreateCurrencyScreen extends StatelessWidget {
   const CreateCurrencyScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const ISection(icon: 'swap', title: 'Currency Definition', sub: 'ISO code, display names and symbol', marker: M.blue, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Add Currency')),
+      body: MScroll([
+      const ISection(icon: 'swap', title: 'Currency Definition', subtitle: 'ISO code, display names and symbol', accentColor: M.blue, children: [
         IField(label: 'ISO Code', placeholder: 'e.g. USD', mono: true, required: true),
         IField(label: 'Symbol', placeholder: 'e.g. \$', required: true),
         IField(label: 'Name English', placeholder: 'e.g. US Dollar', required: true),
         IField(label: 'الاسم بالعربية', placeholder: 'مثال: دولار أمريكي', ar: true, required: true),
       ]),
-      const ISection(icon: 'ledger', title: 'Precision & Rate', sub: 'Decimal places and exchange rate against base', marker: M.green, children: [
+      const ISection(icon: 'ledger', title: 'Precision & Rate', subtitle: 'Decimal places and exchange rate against base', accentColor: M.green, children: [
         IField(label: 'Decimal Places', value: '2', select: true),
         IField(label: 'Exchange Rate (per 1 SAR)', placeholder: 'e.g. 3.750200', mono: true),
         IToggle(label: 'Set as base currency', on: false),
       ]),
       const ActionRow(primary: 'Add Currency'),
-    ]);
+    ]),
+    );
   }
 }
 
 class CurrencyDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const CurrencyDetailScreen({super.key, required this.nav});
+  const CurrencyDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const history = [('Dec 18, 2025', '3.750200', 'System · ECB feed'), ('Dec 11, 2025', '3.751400', 'System · ECB feed'), ('Dec 04, 2025', '3.749800', 'Layla A. (manual)'), ('Nov 27, 2025', '3.752100', 'System · ECB feed')];
-    return MScroll([
-      MCard(marker: M.green, title: 'Current Rate', sub: 'Per 1 SAR · updated Dec 18, 2025', right: const Pill('Active'), children: const [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Currency Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Current Rate', subtitle: 'Per 1 SAR · updated Dec 18, 2025', trailing: const Pill('Active'), children: const [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('USD', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           SizedBox(width: 10),
@@ -92,12 +101,12 @@ class CurrencyDetailScreen extends StatelessWidget {
           Text('▲ 0.03%', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.green)),
         ]),
       ]),
-      const MCard(marker: M.blue, title: 'Definition', children: [
+      const MCard(accentColor: M.blue, title: 'Definition', children: [
         KV('ISO Code', 'USD', mono: true), KV('Symbol', '\$'),
         KV('Name English', 'US Dollar'), KV('Name Arabic', 'دولار أمريكي', ar: true),
         KV('Decimal Places', '2', mono: true), KV('Source', 'ECB Daily Feed'),
       ]),
-      MCard(marker: M.orange, title: 'Rate History', sub: 'Last 4 updates', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Rate History', subtitle: 'Last 4 updates', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -115,8 +124,9 @@ class CurrencyDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('currenciesList')),
-    ]);
+      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('currenciesList')),
+    ]),
+    );
   }
 }
 
@@ -125,8 +135,11 @@ class ExchangeRateSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const pairs = [('USD', 'US Dollar', '3.750200', '3.751400', true), ('EUR', 'Euro', '4.082100', '4.079800', true), ('GBP', 'British Pound', '4.761000', '4.758200', true), ('AED', 'UAE Dirham', '1.020800', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', '12.17200', false)];
-    return MScroll([
-      MCard(marker: M.blue, title: 'Base Currency', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Exchange Rates')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(children: [
             const Text('SAR', style: TextStyle(fontFamily: M.mono, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
@@ -136,7 +149,7 @@ class ExchangeRateSetupScreen extends StatelessWidget {
         ]),
         const MBtn('Pull ECB Feed', variant: MBtnVariant.secondary, icon: 'download', full: true),
       ]),
-      MCard(marker: M.green, title: 'Rates per 1 SAR', sub: 'Auto-fed pairs sync daily; manual pairs are editable', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Rates per 1 SAR', subtitle: 'Auto-fed pairs sync daily; manual pairs are editable', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -169,7 +182,8 @@ class ExchangeRateSetupScreen extends StatelessWidget {
         ),
       ]),
       const ActionRow(primary: 'Save Rates'),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -178,13 +192,16 @@ class FiscalYearSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return MScroll([
-      const ISection(icon: 'calendar', title: 'Year Definition', sub: 'Define the active fiscal year boundaries', marker: M.blue, right: Pill('Open'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Fiscal Year')),
+      body: MScroll([
+      const ISection(icon: 'calendar', title: 'Year Definition', subtitle: 'Define the active fiscal year boundaries', accentColor: M.blue, trailing: Pill('Open'), children: [
         IField(label: 'Fiscal Year', value: '2024', mono: true),
         IField(label: 'Start Date', value: '01/01/2024', mono: true),
         IField(label: 'End Date', value: '12/31/2024', mono: true),
       ]),
-      MCard(marker: M.green, title: 'Accounting Periods', sub: '12 monthly periods · lock to prevent back-dated postings', children: [
+      MCard(accentColor: M.green, title: 'Accounting Periods', subtitle: '12 monthly periods · lock to prevent back-dated postings', children: [
         GridView.count(
           crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.7,
@@ -195,7 +212,8 @@ class FiscalYearSetupScreen extends StatelessWidget {
       ]),
       const InfoNote('Closing a period locks all postings dated within it. A locked period can only be reopened by a controller with audit justification.'),
       const ActionRow(primary: 'Save Configuration'),
-    ]);
+    ]),
+    );
   }
 }
 

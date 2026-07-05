@@ -66,9 +66,15 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: M.bg,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(
+        backgroundColor: M.bg,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: const Text('Sign In'),
+      ),
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 48, 28, 40),
           child: Column(
@@ -167,9 +173,10 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: M.bg,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Account')),
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
           child: Column(
@@ -265,9 +272,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
   @override
   Widget build(BuildContext context) {
     final nav = widget.nav;
-    return Container(
-      color: M.bg,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Forgot Password')),
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
           child: Column(

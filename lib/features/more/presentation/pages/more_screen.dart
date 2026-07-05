@@ -3,8 +3,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _Group {
   final String title;
@@ -81,8 +81,7 @@ const _menu = <_Group>[
 ];
 
 class MoreScreen extends StatefulWidget {
-  final NavCubit nav;
-  const MoreScreen({super.key, required this.nav});
+  const MoreScreen({super.key});
   @override
   State<MoreScreen> createState() => _MoreScreenState();
 }
@@ -98,23 +97,26 @@ class _MoreScreenState extends State<MoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('More')),
+      body: MScroll([
       AutoSuggestionsBox<String>(
         items: _spotlight,
         hintText: 'Search every screen…',
         fieldHeight: 46,
         leading: Icon(MIcons.of('search'), size: 16, color: M.fg3),
         highlightMatch: AutoSuggestionMatch.contains,
-        onSelected: (s) => widget.nav.go(s.value),
+        onSelected: (s) => context.goTo(s.value),
       ),
       for (final g in _menu)
-        MCard(title: g.title, marker: M.blue, pad: 8, children: [
+        MCard(title: g.title, accentColor: M.blue, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
               for (int i = 0; i < g.items.length; i++)
                 GestureDetector(
-                  onTap: () => widget.nav.go(g.items[i].$2),
+                  onTap: () => context.goTo(g.items[i].$2),
                   behavior: HitTestBehavior.opaque,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 13),
@@ -138,6 +140,7 @@ class _MoreScreenState extends State<MoreScreen> {
             ]),
           ),
         ]),
-    ]);
+      ]),
+    );
   }
 }

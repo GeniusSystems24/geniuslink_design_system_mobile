@@ -5,11 +5,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../core/bloc/form_cubit.dart';
 import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
 import '../../../../workspace/presentation/bloc/tenant_state.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _roles = [
   ('admin', 'Administrator', M.blue, 1, 'Full access to every module and settings.', [('Accounts', 'Full'), ('Banking', 'Full'), ('Users', 'Full')]),
@@ -22,11 +22,13 @@ const _roles = [
 Color? _lvlColor(String l) => switch (l) { 'Full' => M.green, 'Edit' => M.blue, 'View' => M.fg3, _ => null };
 
 class RolesListScreen extends StatelessWidget {
-  final NavCubit nav;
-  const RolesListScreen({super.key, required this.nav});
+  const RolesListScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Roles List')),
+      body: MScroll([
       for (final r in _roles)
         MCard(children: [
           Row(children: [
@@ -54,10 +56,11 @@ class RolesListScreen extends StatelessWidget {
                 ),
             ]),
           ),
-          MBtn('Edit Role', variant: MBtnVariant.secondary, icon: 'edit', full: true, onTap: () => nav.go('roleEditor')),
+          MBtn('Edit Role', variant: MBtnVariant.secondary, icon: 'edit', full: true, onTap: () => context.goTo('roleEditor')),
         ]),
-      MBtn('New Role', icon: 'plus', full: true, onTap: () => nav.go('roleEditor')),
-    ]);
+      MBtn('New Role', icon: 'plus', full: true, onTap: () => context.goTo('roleEditor')),
+    ]),
+    );
   }
 }
 
@@ -93,11 +96,14 @@ class _RoleEditorView extends StatelessWidget {
           n[mod]![ci] = !n[mod]![ci];
           form.setField('perms', n);
         }
-        return MScroll([
-          const MCard(marker: M.blue, title: 'Accountant', sub: '2 members assigned', children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Role Editor')),
+      body: MScroll([
+          const MCard(accentColor: M.blue, title: 'Accountant', subtitle: '2 members assigned', children: [
             TInput(label: 'Role Name', defaultValue: 'Accountant'),
           ]),
-          MCard(marker: M.green, title: 'Permission Matrix', sub: 'Tap a cell to toggle access', pad: 8, children: [
+          MCard(accentColor: M.green, title: 'Permission Matrix', subtitle: 'Tap a cell to toggle access', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -135,7 +141,8 @@ class _RoleEditorView extends StatelessWidget {
             ),
           ]),
           MBtn('Save Role', icon: 'check', full: true, onTap: form.submit),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -150,7 +157,10 @@ class TenantsScreen extends StatelessWidget {
       buildWhen: (a, b) => a.activeTenantId != b.activeTenantId,
       builder: (context, tstate) {
         final activeId = tstate.activeTenantId;
-        return MScroll([
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Workspaces')),
+      body: MScroll([
           for (final t in tenants)
             MCard(children: [
               Row(children: [
@@ -172,7 +182,8 @@ class TenantsScreen extends StatelessWidget {
                 MBtn('Switch to this Workspace', icon: 'switch2', full: true, onTap: () => context.read<TenantCubit>().switchTo(t.$1.toString())),
             ]),
           const MBtn('New Workspace', icon: 'plus', full: true),
-        ]);
+        ]),
+    );
       },
     );
   }

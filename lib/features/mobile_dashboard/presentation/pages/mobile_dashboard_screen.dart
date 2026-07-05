@@ -99,9 +99,12 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
         builder: (context, _) => Scaffold(
       backgroundColor: M.bg,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).padding.top + 64),
+        child: _appBar(),
+      ),
       body: Stack(children: [
         Column(children: [
-          _appBar(),
           if (!_online) _offlineBanner(),
           Expanded(
             child: RefreshIndicator(

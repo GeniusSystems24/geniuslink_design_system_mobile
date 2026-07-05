@@ -5,8 +5,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _ContactKind {
   final String label, labelPl, balanceLabel, control;
@@ -44,10 +44,9 @@ PillTone _kTone(String s) => s == 'active' ? PillTone.success : (s == 'pending' 
 class ContactListScreen extends StatefulWidget {
   final _ContactKind kind;
   final String detailKey;
-  final NavCubit nav;
-  const ContactListScreen._(this.kind, this.detailKey, this.nav, {super.key});
-  factory ContactListScreen.customers(NavCubit nav) => ContactListScreen._(_customer, 'customerDetail', nav);
-  factory ContactListScreen.suppliers(NavCubit nav) => ContactListScreen._(_supplier, 'supplierDetail', nav);
+  const ContactListScreen._(this.kind, this.detailKey, {super.key});
+  factory ContactListScreen.customers() => const ContactListScreen._(_customer, 'customerDetail');
+  factory ContactListScreen.suppliers() => const ContactListScreen._(_supplier, 'supplierDetail');
   @override
   State<ContactListScreen> createState() => _ContactListScreenState();
 }
@@ -60,13 +59,16 @@ class _ContactListScreenState extends State<ContactListScreen> {
     final d = widget.kind;
     final ql = _q.trim().toLowerCase();
     final visible = d.rows.where((c) => (_status == 'All' || c.$7 == _status.toLowerCase()) && (ql.isEmpty || c.$2.toLowerCase().contains(ql) || c.$1.toLowerCase().contains(ql) || c.$3.contains(_q))).toList();
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text(d.labelPl)),
+      body: MScroll([
       SearchInput(placeholder: 'Search ${d.labelPl.toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Active', 'Pending', 'Inactive'], value: _status, onChange: (v) => setState(() => _status = v)),
       MCard(pad: 8, children: [
         for (int i = 0; i < visible.length; i++)
           GestureDetector(
-            onTap: () => widget.nav.go(widget.detailKey),
+            onTap: () => context.goTo(widget.detailKey),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
@@ -92,7 +94,8 @@ class _ContactListScreenState extends State<ContactListScreen> {
           ),
         if (visible.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No ${d.labelPl.toLowerCase()} match.', style: const TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -104,8 +107,11 @@ class CreateContactScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final d = kind;
-    return MScroll([
-      ISection(icon: 'user', title: '${d.label} Identity', sub: 'Legal name and contact details', marker: M.blue, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text('Add ${d.label}')),
+      body: MScroll([
+      ISection(icon: 'user', title: '${d.label} Identity', subtitle: 'Legal name and contact details', accentColor: M.blue, children: [
         TInput(label: 'Name English', placeholder: d.label == 'Customer' ? 'e.g. Riyadh Construction Co.' : 'e.g. Global Steel Imports LLC', required: true),
         const TInput(label: 'الاسم بالعربية', placeholder: 'مثال: شركة الرياض للإنشاءات', ar: true),
         const TInput(label: 'Contact Person', placeholder: 'e.g. Ahmed K.'),
@@ -113,13 +119,13 @@ class CreateContactScreen extends StatelessWidget {
         const TInput(label: 'Email', placeholder: 'name@company.com'),
         const TInput(label: 'City', placeholder: 'e.g. Riyadh'),
       ]),
-      ISection(icon: 'swap', title: 'Financial', sub: 'Linked control account and terms', marker: M.green, children: [
+      ISection(icon: 'swap', title: 'Financial', subtitle: 'Linked control account and terms', accentColor: M.green, children: [
         TSelect(label: 'Control Account', value: d.control, options: [d.control]),
         const TSelect(label: 'Payment Terms', value: 'Net 30', options: ['Net 15', 'Net 30', 'Net 60', 'On Receipt']),
         const TInput(label: 'Tax / VAT Number', placeholder: '3XXXXXXXXXXXXX3', mono: true),
         const TInput(label: 'Credit Limit (SAR)', placeholder: 'e.g. 100,000.00', mono: true),
       ]),
-      ISection(icon: 'doc', title: 'Notes', marker: M.orange, children: [
+      ISection(icon: 'doc', title: 'Notes', accentColor: M.orange, children: [
         ITextarea(label: 'Notes', placeholder: 'Internal notes about this ${d.label.toLowerCase()}…'),
       ]),
       Row(children: [
@@ -127,7 +133,8 @@ class CreateContactScreen extends StatelessWidget {
         const SizedBox(width: 10),
         Expanded(child: MBtn('Add ${d.label}', icon: 'check', full: true)),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -140,20 +147,23 @@ class ContactDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final d = kind;
     final c = d.rows.first;
-    return MScroll([
-      MCard(marker: M.green, title: 'Outstanding ${d.balanceLabel}', sub: '${c.$6} orders · since Apr 2024', right: const Pill('Active'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text('${d.label} Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Outstanding ${d.balanceLabel}', subtitle: '${c.$6} orders · since Apr 2024', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           const Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           const SizedBox(width: 8),
           Text(c.$5, style: TextStyle(fontFamily: M.mono, fontSize: 32, fontWeight: FontWeight.w700, color: d.tone, letterSpacing: -0.6)),
         ]),
       ]),
-      MCard(marker: M.blue, title: '${d.label} Information', children: [
+      MCard(accentColor: M.blue, title: '${d.label} Information', children: [
         KV('Code', c.$1, mono: true), KV('City', c.$4), const KV('Contact Person', 'Ahmed K.'),
         const KV('Phone', '+966 55 124 9020', mono: true),
         KV('Control Account', d.label == 'Customer' ? '1300 — A/R' : '2001 — A/P'), const KV('Payment Terms', 'Net 30'),
       ]),
-      MCard(marker: M.orange, title: 'Transaction History', sub: 'Recent invoices and payments', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Transaction History', subtitle: 'Recent invoices and payments', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -178,6 +188,7 @@ class ContactDetailScreen extends StatelessWidget {
         SizedBox(width: 10),
         Expanded(child: MBtn('Archive', variant: MBtnVariant.danger, icon: 'trash', full: true)),
       ]),
-    ]);
+    ]),
+    );
   }
 }

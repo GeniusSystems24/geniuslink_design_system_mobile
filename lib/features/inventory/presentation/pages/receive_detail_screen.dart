@@ -1,23 +1,25 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 import 'inventory_shared_widgets.dart';
 
 class ReceiveDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const ReceiveDetailScreen({super.key, required this.nav});
+  const ReceiveDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const items = [
       ('Portland Cement Type I', '400 BAG × 24.50', '9,800.00'),
       ('Structural Steel I-Beam', '32 PCS × 450.00', '14,400.00')
     ];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Receive Detail')),
+      body: MScroll([
       MCard(
-          marker: M.green,
+          accentColor: M.green,
           title: 'Received Value',
-          sub: 'INV-REC-2024-0241 · Dec 16, 2025',
-          right: const Pill('Posted'),
+          subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
+          trailing: const Pill('Posted'),
           children: const [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -36,16 +38,16 @@ class ReceiveDetailScreen extends StatelessWidget {
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      const MCard(marker: M.blue, title: 'Receipt Information', children: [
+      const MCard(accentColor: M.blue, title: 'Receipt Information', children: [
         KV('Serial No', 'INV-REC-2024-0241', mono: true),
         KV('Receiving Store', 'King Fahd Warehouse'),
         KV('Supplier', 'ABC Trading Co.'),
         KV('PO Reference', 'PO-2024-1182', mono: true),
       ]),
       MCard(
-          marker: M.green,
+          accentColor: M.green,
           title: 'Items',
-          sub: '2 lines · 432 units',
+          subtitle: '2 lines · 432 units',
           pad: 8,
           children: [
             Padding(
@@ -56,7 +58,7 @@ class ReceiveDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      const MCard(marker: M.orange, title: 'Audit Information', children: [
+      const MCard(accentColor: M.orange, title: 'Audit Information', children: [
         AuditGridLite(rows: [
           ('Received By', 'Layla A. (ID: 12)', false),
           ('Received At', 'Dec 16, 14:32', true),
@@ -68,8 +70,9 @@ class ReceiveDetailScreen extends StatelessWidget {
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,
-          onTap: () => nav.back('more')),
-    ]);
+          onTap: () => context.goTo('more')),
+    ]),
+    );
   }
 }
 

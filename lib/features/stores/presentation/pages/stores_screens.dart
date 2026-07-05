@@ -4,8 +4,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _stores = [
   ('ST-001', 'Downtown Central', 'وسط المدينة', '342,820', '1,248'),
@@ -14,15 +14,17 @@ const _stores = [
 ];
 
 class StoresScreen extends StatelessWidget {
-  final NavCubit nav;
-  const StoresScreen({super.key, required this.nav});
+  const StoresScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Stores')),
+      body: MScroll([
       for (final s in _stores)
         GestureDetector(
-          onTap: () => nav.go('storeDetail'),
+          onTap: () => context.goTo('storeDetail'),
           behavior: HitTestBehavior.opaque,
           child: Container(
             padding: const EdgeInsets.all(16),
@@ -58,7 +60,8 @@ class StoresScreen extends StatelessWidget {
             ),
           ),
         ),
-    ]);
+      ]),
+    );
   }
 
   Widget _stat(String label, String value) => Column(
@@ -75,8 +78,11 @@ class CreateStoreScreen extends StatelessWidget {
   const CreateStoreScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const MCard(marker: M.blue, title: 'Store Details', sub: 'Name and location', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Store')),
+      body: MScroll([
+      const MCard(accentColor: M.blue, title: 'Store Details', subtitle: 'Name and location', children: [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),
         MField(label: 'الاسم بالعربية', placeholder: 'مثال: متجر وسط المدينة', ar: true, required: true),
         MField(label: 'Location Code', value: 'ST-001', mono: true),
@@ -88,13 +94,13 @@ class CreateStoreScreen extends StatelessWidget {
         SizedBox(width: 10),
         Expanded(child: MBtn('Create', icon: 'check', full: true)),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
 class StoreDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const StoreDetailScreen({super.key, required this.nav});
+  const StoreDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const items = [
@@ -102,15 +108,18 @@ class StoreDetailScreen extends StatelessWidget {
       ('AGG-21044', 'Aggregate 20mm', '46', 'low'),
       ('RBR-71203', 'Rebar #6', '0', 'out'),
     ];
-    return MScroll([
-      const MCard(marker: M.green, title: 'Store Summary', right: Pill('Active'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Store Detail')),
+      body: MScroll([
+      const MCard(accentColor: M.green, title: 'Store Summary', trailing: Pill('Active'), children: [
         Row(children: [
           Expanded(child: Mini(label: 'Stock Value', value: '342,820', sub: 'SAR', hi: true)),
           SizedBox(width: 12),
           Expanded(child: Mini(label: 'SKUs', value: '1,248')),
         ]),
       ]),
-      MCard(marker: M.green, title: 'Stock On Hand', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Stock On Hand', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -118,8 +127,9 @@ class StoreDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('stores')),
-    ]);
+      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('stores')),
+    ]),
+    );
   }
 
   Widget _stockRow((String, String, String, String) it, bool last) {
@@ -149,13 +159,16 @@ class IssueInventoryScreen extends StatelessWidget {
   const IssueInventoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const MCard(marker: M.blue, title: 'Issue Details', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Issue Inventory')),
+      body: MScroll([
+      const MCard(accentColor: M.blue, title: 'Issue Details', children: [
         MField(label: 'Serial No', value: 'INV-ISS-2024-0089', mono: true),
         MField(label: 'Store', placeholder: 'Search store…', required: true),
         MField(label: 'Currency', value: 'USD — US Dollar'),
       ]),
-      MCard(marker: M.green, title: 'Items', sub: '1 line · 12 units', children: [
+      MCard(accentColor: M.green, title: 'Items', subtitle: '1 line · 12 units', children: [
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(color: M.bg, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
@@ -172,7 +185,7 @@ class IssueInventoryScreen extends StatelessWidget {
         ),
         _dashedAdd('scan', 'Scan to Add Item'),
       ]),
-      const MCard(marker: M.green, title: 'Total', children: [
+      const MCard(accentColor: M.green, title: 'Total', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Eyebrow('Total Value', color: M.fg3, size: 12),
           Text.rich(TextSpan(children: [
@@ -182,7 +195,8 @@ class IssueInventoryScreen extends StatelessWidget {
         ]),
       ]),
       const MBtn('Issue Inventory', icon: 'check', full: true),
-    ]);
+    ]),
+    );
   }
 
   static Widget _dashedAdd(String icon, String label) => Container(

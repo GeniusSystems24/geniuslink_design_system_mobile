@@ -1,8 +1,8 @@
 // ============================================================
-// GeniusLink Mobile — GoRouter with typed routes
-// ------------------------------------------------------------
-// All route definitions live here. build_runner generates
-// router.g.dart from @TypedGoRoute annotations.
+// GeniusLink Mobile — GoRouter (manual configuration)
+// Sub-screen routes are top-level with parentNavigatorKey:
+// rootNavigatorKey so they push above the shell.  Navigation
+// calls use push() (not go()) so the back stack is preserved.
 // ============================================================
 
 import 'package:flutter/material.dart';
@@ -49,725 +49,16 @@ import '../../features/mobile_dashboard/presentation/pages/mobile_dashboard_scre
 import '../../workspace/presentation/bloc/nav_cubit.dart';
 import 'workspace_shell.dart';
 
-part 'router.g.dart';
-
 // ════════════════════════════════════════════════════════════
-// Navigators
+// Root navigator key
 // ════════════════════════════════════════════════════════════
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
-
 // ════════════════════════════════════════════════════════════
-// Auth routes (no shell)
-// ════════════════════════════════════════════════════════════
-
-@TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData with $LoginRoute {
-  const LoginRoute({this.from});
-  final String? from;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return Scaffold(body: LoginScreen(nav: context.read<NavCubit>()));
-  }
-}
-
-@TypedGoRoute<SignUpRoute>(path: '/signup')
-class SignUpRoute extends GoRouteData with $SignUpRoute {
-  const SignUpRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return Scaffold(body: SignUpScreen(nav: context.read<NavCubit>()));
-  }
-}
-
-@TypedGoRoute<ForgotRoute>(path: '/forgot')
-class ForgotRoute extends GoRouteData with $ForgotRoute {
-  const ForgotRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return Scaffold(body: ForgotScreen(nav: context.read<NavCubit>()));
-  }
-}
-
-// ════════════════════════════════════════════════════════════
-// Tab routes — rendered inside StatefulShellRoute (manual)
-// (no @TypedGoRoute annotations — they conflict with the
-//  manual StatefulShellRoute branches in goRouterConfig)
+// Auth redirect
 // ════════════════════════════════════════════════════════════
 
-// ════════════════════════════════════════════════════════════
-// Sub-screen routes (above shell, via $parentNavigatorKey)
-// ════════════════════════════════════════════════════════════
-
-// ── Mobile Dashboard (full bleed) ──────────────────────────
-@TypedGoRoute<MobileDashboardRoute>(path: '/mobile-dashboard')
-class MobileDashboardRoute extends GoRouteData with $MobileDashboardRoute {
-  const MobileDashboardRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: MobileDashboardScreen());
-}
-
-// ── Accounts ────────────────────────────────────────────────
-@TypedGoRoute<CreateAccountRoute>(path: '/accounts/create')
-class CreateAccountRoute extends GoRouteData with $CreateAccountRoute {
-  const CreateAccountRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateAccountScreen());
-}
-
-@TypedGoRoute<AccountDetailRoute>(path: '/accounts/detail')
-class AccountDetailRoute extends GoRouteData with $AccountDetailRoute {
-  const AccountDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return AccountDetailFullScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateGroupRoute>(path: '/accounts/create-group')
-class CreateGroupRoute extends GoRouteData with $CreateGroupRoute {
-  const CreateGroupRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateGroupScreen());
-}
-
-@TypedGoRoute<GroupDetailRoute>(path: '/accounts/group-detail')
-class GroupDetailRoute extends GoRouteData with $GroupDetailRoute {
-  const GroupDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return GroupDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<AccountTreeRoute>(path: '/account-tree')
-class AccountTreeRoute extends GoRouteData with $AccountTreeRoute {
-  const AccountTreeRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return AccountTreeScreen(nav: context.read<NavCubit>());
-  }
-}
-
-// ── Stores ──────────────────────────────────────────────────
-@TypedGoRoute<CreateStoreRoute>(path: '/stores/create')
-class CreateStoreRoute extends GoRouteData with $CreateStoreRoute {
-  const CreateStoreRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateStoreScreen());
-}
-
-@TypedGoRoute<StoreDetailRoute>(path: '/stores/detail')
-class StoreDetailRoute extends GoRouteData with $StoreDetailRoute {
-  const StoreDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return StoreDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<IssueInventoryRoute>(path: '/stores/issue')
-class IssueInventoryRoute extends GoRouteData with $IssueInventoryRoute {
-  const IssueInventoryRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: IssueInventoryScreen());
-}
-
-// ── Ledger ──────────────────────────────────────────────────
-@TypedGoRoute<OpeningJournalRoute>(path: '/ledger/opening')
-class OpeningJournalRoute extends GoRouteData with $OpeningJournalRoute {
-  const OpeningJournalRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: OpeningJournalScreen());
-}
-
-@TypedGoRoute<OpDetailRoute>(path: '/ledger/operation-detail')
-class OpDetailRoute extends GoRouteData with $OpDetailRoute {
-  const OpDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return OpDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<JournalListRoute>(path: '/journal-entries')
-class JournalListRoute extends GoRouteData with $JournalListRoute {
-  const JournalListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return JournalListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateJournalEntryRoute>(path: '/journal-entries/create')
-class CreateJournalEntryRoute extends GoRouteData with $CreateJournalEntryRoute {
-  const CreateJournalEntryRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateJournalEntryScreen());
-}
-
-@TypedGoRoute<JournalEntryDetailRoute>(path: '/journal-entries/detail')
-class JournalEntryDetailRoute extends GoRouteData with $JournalEntryDetailRoute {
-  const JournalEntryDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return JournalEntryDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-// ── Banking · Cash ──────────────────────────────────────────
-@TypedGoRoute<CreateDepositRoute>(path: '/banking/deposits/create')
-class CreateDepositRoute extends GoRouteData with $CreateDepositRoute {
-  const CreateDepositRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateDepositScreen());
-}
-
-@TypedGoRoute<DepositDetailRoute>(path: '/banking/deposits/detail')
-class DepositDetailRoute extends GoRouteData with $DepositDetailRoute {
-  const DepositDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return DepositDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateWithdrawalRoute>(path: '/banking/withdrawals/create')
-class CreateWithdrawalRoute extends GoRouteData with $CreateWithdrawalRoute {
-  const CreateWithdrawalRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateWithdrawalScreen());
-}
-
-@TypedGoRoute<WithdrawalDetailRoute>(path: '/banking/withdrawals/detail')
-class WithdrawalDetailRoute extends GoRouteData with $WithdrawalDetailRoute {
-  const WithdrawalDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return WithdrawalDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-// ── Banking · Transfers ─────────────────────────────────────
-@TypedGoRoute<CreateLocalTransferRoute>(path: '/banking/transfers/local/create')
-class CreateLocalTransferRoute extends GoRouteData with $CreateLocalTransferRoute {
-  const CreateLocalTransferRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateLocalTransferScreen());
-}
-
-@TypedGoRoute<LocalTransferDetailRoute>(path: '/banking/transfers/local/detail')
-class LocalTransferDetailRoute extends GoRouteData with $LocalTransferDetailRoute {
-  const LocalTransferDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return LocalTransferDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateExternalTransferRoute>(path: '/banking/transfers/external/create')
-class CreateExternalTransferRoute extends GoRouteData with $CreateExternalTransferRoute {
-  const CreateExternalTransferRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateExternalTransferScreen());
-}
-
-@TypedGoRoute<ExternalTransferDetailRoute>(path: '/banking/transfers/external/detail')
-class ExternalTransferDetailRoute extends GoRouteData with $ExternalTransferDetailRoute {
-  const ExternalTransferDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ExternalTransferDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-// ── Products ────────────────────────────────────────────────
-@TypedGoRoute<ProductsListRoute>(path: '/products')
-class ProductsListRoute extends GoRouteData with $ProductsListRoute {
-  const ProductsListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ProductsListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<ProductDetailRoute>(path: '/products/detail')
-class ProductDetailRoute extends GoRouteData with $ProductDetailRoute {
-  const ProductDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ProductDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateProductRoute>(path: '/products/create')
-class CreateProductRoute extends GoRouteData with $CreateProductRoute {
-  const CreateProductRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateProductScreen());
-}
-
-// ── Inventory ───────────────────────────────────────────────
-@TypedGoRoute<InvDashboardRoute>(path: '/inventory')
-class InvDashboardRoute extends GoRouteData with $InvDashboardRoute {
-  const InvDashboardRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: InvDashboardScreen());
-}
-
-@TypedGoRoute<WarehousesListRoute>(path: '/warehouses')
-class WarehousesListRoute extends GoRouteData with $WarehousesListRoute {
-  const WarehousesListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: WarehousesListScreen());
-}
-
-@TypedGoRoute<TransferListRoute>(path: '/stock-transfers')
-class TransferListRoute extends GoRouteData with $TransferListRoute {
-  const TransferListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return TransferListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<IssueDetailRoute>(path: '/inventory/issue-detail')
-class IssueDetailRoute extends GoRouteData with $IssueDetailRoute {
-  const IssueDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return IssueDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<ReceiveCreateRoute>(path: '/inventory/receive')
-class ReceiveCreateRoute extends GoRouteData with $ReceiveCreateRoute {
-  const ReceiveCreateRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: ReceiveCreateScreen());
-}
-
-@TypedGoRoute<ReceiveDetailRoute>(path: '/inventory/receive-detail')
-class ReceiveDetailRoute extends GoRouteData with $ReceiveDetailRoute {
-  const ReceiveDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ReceiveDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<TransferCreateRoute>(path: '/inventory/transfers/create')
-class TransferCreateRoute extends GoRouteData with $TransferCreateRoute {
-  const TransferCreateRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: TransferCreateScreen());
-}
-
-@TypedGoRoute<TransferDetailRoute>(path: '/inventory/transfers/detail')
-class TransferDetailRoute extends GoRouteData with $TransferDetailRoute {
-  const TransferDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return TransferDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<AdjustmentRoute>(path: '/inventory/adjustment')
-class AdjustmentRoute extends GoRouteData with $AdjustmentRoute {
-  const AdjustmentRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: AdjustmentScreen());
-}
-
-@TypedGoRoute<StockTakeRoute>(path: '/inventory/stocktake')
-class StockTakeRoute extends GoRouteData with $StockTakeRoute {
-  const StockTakeRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: StockTakeScreen());
-}
-
-@TypedGoRoute<CategoriesRoute>(path: '/inventory/categories')
-class CategoriesRoute extends GoRouteData with $CategoriesRoute {
-  const CategoriesRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CategoriesScreen());
-}
-
-@TypedGoRoute<UomRoute>(path: '/inventory/uom')
-class UomRoute extends GoRouteData with $UomRoute {
-  const UomRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: UomScreen());
-}
-
-@TypedGoRoute<PriceListsRoute>(path: '/price-lists')
-class PriceListsRoute extends GoRouteData with $PriceListsRoute {
-  const PriceListsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: PriceListsScreen());
-}
-
-@TypedGoRoute<BarcodePrintRoute>(path: '/barcode-print')
-class BarcodePrintRoute extends GoRouteData with $BarcodePrintRoute {
-  const BarcodePrintRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: BarcodePrintScreen());
-}
-
-// ── Currencies ────────────────────────────────────────────────
-@TypedGoRoute<CurrenciesListRoute>(path: '/currencies')
-class CurrenciesListRoute extends GoRouteData with $CurrenciesListRoute {
-  const CurrenciesListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return CurrenciesListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CreateCurrencyRoute>(path: '/currencies/create')
-class CreateCurrencyRoute extends GoRouteData with $CreateCurrencyRoute {
-  const CreateCurrencyRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateCurrencyScreen());
-}
-
-@TypedGoRoute<CurrencyDetailRoute>(path: '/currencies/detail')
-class CurrencyDetailRoute extends GoRouteData with $CurrencyDetailRoute {
-  const CurrencyDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return CurrencyDetailScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<ExchangeRateSetupRoute>(path: '/exchange-rates')
-class ExchangeRateSetupRoute extends GoRouteData with $ExchangeRateSetupRoute {
-  const ExchangeRateSetupRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: ExchangeRateSetupScreen());
-}
-
-@TypedGoRoute<FiscalYearSetupRoute>(path: '/fiscal-year')
-class FiscalYearSetupRoute extends GoRouteData with $FiscalYearSetupRoute {
-  const FiscalYearSetupRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: FiscalYearSetupScreen());
-}
-
-// ── Customers ──────────────────────────────────────────────
-@TypedGoRoute<CustomersListRoute>(path: '/customers')
-class CustomersListRoute extends GoRouteData with $CustomersListRoute {
-  const CustomersListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ContactListScreen.customers(context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CustomerDetailRoute>(path: '/customers/detail')
-class CustomerDetailRoute extends GoRouteData with $CustomerDetailRoute {
-  const CustomerDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => Scaffold(body: ContactDetailScreen.customer());
-}
-
-@TypedGoRoute<CreateCustomerRoute>(path: '/customers/create')
-class CreateCustomerRoute extends GoRouteData with $CreateCustomerRoute {
-  const CreateCustomerRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => Scaffold(body: CreateContactScreen.customer());
-}
-
-// ── Suppliers ───────────────────────────────────────────────
-@TypedGoRoute<SuppliersListRoute>(path: '/suppliers')
-class SuppliersListRoute extends GoRouteData with $SuppliersListRoute {
-  const SuppliersListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ContactListScreen.suppliers(context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<SupplierDetailRoute>(path: '/suppliers/detail')
-class SupplierDetailRoute extends GoRouteData with $SupplierDetailRoute {
-  const SupplierDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => Scaffold(body: ContactDetailScreen.supplier());
-}
-
-@TypedGoRoute<CreateSupplierRoute>(path: '/suppliers/create')
-class CreateSupplierRoute extends GoRouteData with $CreateSupplierRoute {
-  const CreateSupplierRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => Scaffold(body: CreateContactScreen.supplier());
-}
-
-// ── Reports ──────────────────────────────────────────────────
-@TypedGoRoute<TrialBalanceRoute>(path: '/reports/trial-balance')
-class TrialBalanceRoute extends GoRouteData with $TrialBalanceRoute {
-  const TrialBalanceRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: TrialBalanceScreen());
-}
-
-@TypedGoRoute<IncomeStatementRoute>(path: '/reports/income-statement')
-class IncomeStatementRoute extends GoRouteData with $IncomeStatementRoute {
-  const IncomeStatementRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: IncomeStatementScreen());
-}
-
-@TypedGoRoute<BalanceSheetRoute>(path: '/reports/balance-sheet')
-class BalanceSheetRoute extends GoRouteData with $BalanceSheetRoute {
-  const BalanceSheetRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: BalanceSheetScreen());
-}
-
-@TypedGoRoute<InventoryValuationRoute>(path: '/reports/inventory-valuation')
-class InventoryValuationRoute extends GoRouteData with $InventoryValuationRoute {
-  const InventoryValuationRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: InventoryValuationScreen());
-}
-
-@TypedGoRoute<AuditLogRoute>(path: '/reports/audit-log')
-class AuditLogRoute extends GoRouteData with $AuditLogRoute {
-  const AuditLogRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: AuditLogScreen());
-}
-
-// ── Administration ──────────────────────────────────────────
-@TypedGoRoute<UsersListRoute>(path: '/admin/users')
-class UsersListRoute extends GoRouteData with $UsersListRoute {
-  const UsersListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return UsersListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<UserDetailRoute>(path: '/admin/users/detail')
-class UserDetailRoute extends GoRouteData with $UserDetailRoute {
-  const UserDetailRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: UserDetailScreen());
-}
-
-@TypedGoRoute<CreateUserRoute>(path: '/admin/users/create')
-class CreateUserRoute extends GoRouteData with $CreateUserRoute {
-  const CreateUserRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CreateUserScreen());
-}
-
-@TypedGoRoute<RolesPermissionsRoute>(path: '/admin/roles')
-class RolesPermissionsRoute extends GoRouteData with $RolesPermissionsRoute {
-  const RolesPermissionsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: RolesPermissionsScreen());
-}
-
-// ── Settings ────────────────────────────────────────────────
-@TypedGoRoute<SettingsHubRoute>(path: '/settings')
-class SettingsHubRoute extends GoRouteData with $SettingsHubRoute {
-  const SettingsHubRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return SettingsHubScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<CompanyProfileRoute>(path: '/settings/company')
-class CompanyProfileRoute extends GoRouteData with $CompanyProfileRoute {
-  const CompanyProfileRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CompanyProfileScreen());
-}
-
-@TypedGoRoute<FinancialSettingsRoute>(path: '/settings/financial')
-class FinancialSettingsRoute extends GoRouteData with $FinancialSettingsRoute {
-  const FinancialSettingsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: FinancialSettingsScreen());
-}
-
-@TypedGoRoute<TaxesSettingsRoute>(path: '/settings/taxes')
-class TaxesSettingsRoute extends GoRouteData with $TaxesSettingsRoute {
-  const TaxesSettingsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: TaxesSettingsScreen());
-}
-
-@TypedGoRoute<CurrenciesSettingsRoute>(path: '/settings/currencies')
-class CurrenciesSettingsRoute extends GoRouteData with $CurrenciesSettingsRoute {
-  const CurrenciesSettingsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: CurrenciesSettingsScreen());
-}
-
-@TypedGoRoute<NumberingRoute>(path: '/settings/numbering')
-class NumberingRoute extends GoRouteData with $NumberingRoute {
-  const NumberingRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: NumberingScreen());
-}
-
-@TypedGoRoute<BranchesStoresRoute>(path: '/settings/branches')
-class BranchesStoresRoute extends GoRouteData with $BranchesStoresRoute {
-  const BranchesStoresRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: BranchesStoresScreen());
-}
-
-@TypedGoRoute<RolesListRoute>(path: '/admin/roles-list')
-class RolesListRoute extends GoRouteData with $RolesListRoute {
-  const RolesListRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return RolesListScreen(nav: context.read<NavCubit>());
-  }
-}
-
-@TypedGoRoute<RoleEditorRoute>(path: '/admin/roles/edit')
-class RoleEditorRoute extends GoRouteData with $RoleEditorRoute {
-  const RoleEditorRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: RoleEditorScreen());
-}
-
-@TypedGoRoute<TenantsRoute>(path: '/settings/workspaces')
-class TenantsRoute extends GoRouteData with $TenantsRoute {
-  const TenantsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: TenantsScreen());
-}
-
-@TypedGoRoute<IntegrationsRoute>(path: '/settings/integrations')
-class IntegrationsRoute extends GoRouteData with $IntegrationsRoute {
-  const IntegrationsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: IntegrationsScreen());
-}
-
-@TypedGoRoute<WebhooksRoute>(path: '/settings/webhooks')
-class WebhooksRoute extends GoRouteData with $WebhooksRoute {
-  const WebhooksRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: WebhooksScreen());
-}
-
-@TypedGoRoute<ApiKeysRoute>(path: '/settings/api-keys')
-class ApiKeysRoute extends GoRouteData with $ApiKeysRoute {
-  const ApiKeysRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: ApiKeysScreen());
-}
-
-@TypedGoRoute<NotificationsRoute>(path: '/settings/notifications')
-class NotificationsRoute extends GoRouteData with $NotificationsRoute {
-  const NotificationsRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: NotificationsScreen());
-}
-
-@TypedGoRoute<BillingRoute>(path: '/settings/billing')
-class BillingRoute extends GoRouteData with $BillingRoute {
-  const BillingRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: BillingScreen());
-}
-
-@TypedGoRoute<BackupRoute>(path: '/settings/backup')
-class BackupRoute extends GoRouteData with $BackupRoute {
-  const BackupRoute();
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = rootNavigatorKey;
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const Scaffold(body: BackupScreen());
-}
-
-// ════════════════════════════════════════════════════════════
-// GoRouter configuration
-// ════════════════════════════════════════════════════════════
-
-/// Auth notifier — bridges AuthBloc/NavCubit state to go_router redirect.
 class AuthNotifier extends ChangeNotifier {
   bool _authed = false;
   bool get authed => _authed;
@@ -783,15 +74,40 @@ final authNotifier = AuthNotifier();
 String? _authRedirect(BuildContext context, GoRouterState state) {
   final authed = authNotifier.authed;
   final location = state.matchedLocation;
-
-  if (!authed && location != '/login' && location != '/signup' && location != '/forgot') {
+  if (!authed &&
+      location != '/login' &&
+      location != '/signup' &&
+      location != '/forgot') {
     return '/login';
   }
-  if (authed && (location == '/login' || location == '/signup' || location == '/forgot')) {
+  if (authed &&
+      (location == '/login' ||
+          location == '/signup' ||
+          location == '/forgot')) {
     return '/dashboard';
   }
   return null;
 }
+
+// ════════════════════════════════════════════════════════════
+// Helper — top-level sub-route pushed above the shell.
+// GoRouter v17 requires routes with parentNavigatorKey:
+// rootNavigatorKey to be at the top level of routes (not inside
+// a StatefulShellBranch). They push full-screen above the shell;
+// the back stack is maintained via goTo() using push().
+// ════════════════════════════════════════════════════════════
+
+GoRoute _sub(String path, Widget Function(BuildContext, GoRouterState) builder) {
+  return GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: path,
+    builder: builder,
+  );
+}
+
+// ════════════════════════════════════════════════════════════
+// Router
+// ════════════════════════════════════════════════════════════
 
 final GoRouter router = GoRouter(
   navigatorKey: rootNavigatorKey,
@@ -799,34 +115,158 @@ final GoRouter router = GoRouter(
   refreshListenable: authNotifier,
   redirect: _authRedirect,
   routes: [
-    ...$appRoutes,
+    // ── Auth (top-level, no shell) ────────────────────────
+    GoRoute(
+      path: '/login',
+      builder: (ctx, state) => LoginScreen(nav: ctx.read<NavCubit>()),
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (ctx, state) => SignUpScreen(nav: ctx.read<NavCubit>()),
+    ),
+    GoRoute(
+      path: '/forgot',
+      builder: (ctx, state) => ForgotScreen(nav: ctx.read<NavCubit>()),
+    ),
+
+    // ── Sub-screens (top-level, pushed above the shell) ───
+    // GoRouter v17 requires parentNavigatorKey: rootNavigatorKey
+    // routes to be top-level siblings of the StatefulShellRoute,
+    // not nested inside a branch. Navigation uses push() so the
+    // back stack always contains the shell as the previous entry.
+
+    // Mobile dashboard
+    _sub('/mobile-dashboard', (ctx, state) => const MobileDashboardScreen()),
+
+    // Accounts
+    _sub('/accounts/create',      (ctx, state) => const CreateAccountScreen()),
+    _sub('/accounts/detail',      (ctx, state) => const AccountDetailFullScreen()),
+    _sub('/accounts/create-group', (ctx, state) => const CreateGroupScreen()),
+    _sub('/accounts/group-detail', (ctx, state) => const GroupDetailScreen()),
+    _sub('/account-tree',          (ctx, state) => const AccountTreeScreen()),
+
+    // Stores
+    _sub('/stores/create', (ctx, state) => const CreateStoreScreen()),
+    _sub('/stores/detail', (ctx, state) => const StoreDetailScreen()),
+    _sub('/stores/issue',  (ctx, state) => const IssueInventoryScreen()),
+
+    // Ledger
+    _sub('/ledger/opening',          (ctx, state) => const OpeningJournalScreen()),
+    _sub('/ledger/operation-detail', (ctx, state) => const OpDetailScreen()),
+    _sub('/journal-entries',         (ctx, state) => const JournalListScreen()),
+    _sub('/journal/create',          (ctx, state) => const CreateJournalEntryScreen()),
+    _sub('/journal/detail',          (ctx, state) => const JournalEntryDetailScreen()),
+
+    // Banking · Cash
+    _sub('/banking/deposits/create',    (ctx, state) => const CreateDepositScreen()),
+    _sub('/banking/deposits/detail',    (ctx, state) => const DepositDetailScreen()),
+    _sub('/banking/withdrawals/create', (ctx, state) => const CreateWithdrawalScreen()),
+    _sub('/banking/withdrawals/detail', (ctx, state) => const WithdrawalDetailScreen()),
+
+    // Banking · Transfers
+    _sub('/banking/transfers/local/create',    (ctx, state) => const CreateLocalTransferScreen()),
+    _sub('/banking/transfers/local/detail',    (ctx, state) => const LocalTransferDetailScreen()),
+    _sub('/banking/transfers/external/create', (ctx, state) => const CreateExternalTransferScreen()),
+    _sub('/banking/transfers/external/detail', (ctx, state) => const ExternalTransferDetailScreen()),
+
+    // Products
+    _sub('/products',        (ctx, state) => const ProductsListScreen()),
+    _sub('/products/detail', (ctx, state) => const ProductDetailScreen()),
+    _sub('/products/create', (ctx, state) => const CreateProductScreen()),
+
+    // Inventory
+    _sub('/inventory',                    (ctx, state) => const InvDashboardScreen()),
+    _sub('/warehouses',                   (ctx, state) => const WarehousesListScreen()),
+    _sub('/stock-transfers',              (ctx, state) => const TransferListScreen()),
+    _sub('/inventory/issue-detail',       (ctx, state) => const IssueDetailScreen()),
+    _sub('/inventory/receive',            (ctx, state) => const ReceiveCreateScreen()),
+    _sub('/inventory/receive-detail',     (ctx, state) => const ReceiveDetailScreen()),
+    _sub('/inventory/transfers/create',   (ctx, state) => const TransferCreateScreen()),
+    _sub('/inventory/transfers/detail',   (ctx, state) => const TransferDetailScreen()),
+    _sub('/inventory/adjustment',         (ctx, state) => const AdjustmentScreen()),
+    _sub('/inventory/stocktake',          (ctx, state) => const StockTakeScreen()),
+    _sub('/inventory/categories',         (ctx, state) => const CategoriesScreen()),
+    _sub('/inventory/uom',                (ctx, state) => const UomScreen()),
+    _sub('/price-lists',                  (ctx, state) => const PriceListsScreen()),
+    _sub('/barcode-print',                (ctx, state) => const BarcodePrintScreen()),
+
+    // Currencies / Config
+    _sub('/currencies',        (ctx, state) => const CurrenciesListScreen()),
+    _sub('/currencies/create', (ctx, state) => const CreateCurrencyScreen()),
+    _sub('/currencies/detail', (ctx, state) => const CurrencyDetailScreen()),
+    _sub('/exchange-rates',    (ctx, state) => const ExchangeRateSetupScreen()),
+    _sub('/fiscal-year',       (ctx, state) => const FiscalYearSetupScreen()),
+
+    // Contacts — Customers
+    _sub('/customers',        (ctx, state) => ContactListScreen.customers()),
+    _sub('/customers/detail', (ctx, state) => ContactDetailScreen.customer()),
+    _sub('/customers/create', (ctx, state) => CreateContactScreen.customer()),
+
+    // Contacts — Suppliers
+    _sub('/suppliers',        (ctx, state) => ContactListScreen.suppliers()),
+    _sub('/suppliers/detail', (ctx, state) => ContactDetailScreen.supplier()),
+    _sub('/suppliers/create', (ctx, state) => CreateContactScreen.supplier()),
+
+    // Reports
+    _sub('/reports/trial-balance',       (ctx, state) => const TrialBalanceScreen()),
+    _sub('/reports/income-statement',    (ctx, state) => const IncomeStatementScreen()),
+    _sub('/reports/balance-sheet',       (ctx, state) => const BalanceSheetScreen()),
+    _sub('/reports/inventory-valuation', (ctx, state) => const InventoryValuationScreen()),
+    _sub('/reports/audit-log',           (ctx, state) => const AuditLogScreen()),
+
+    // Administration
+    _sub('/admin/users',        (ctx, state) => const UsersListScreen()),
+    _sub('/admin/users/detail', (ctx, state) => const UserDetailScreen()),
+    _sub('/admin/users/create', (ctx, state) => const CreateUserScreen()),
+    _sub('/admin/roles',        (ctx, state) => const RolesPermissionsScreen()),
+    _sub('/admin/roles-list',   (ctx, state) => const RolesListScreen()),
+    _sub('/admin/roles/edit',   (ctx, state) => const RoleEditorScreen()),
+
+    // Settings — Organisation
+    _sub('/settings',              (ctx, state) => const SettingsHubScreen()),
+    _sub('/settings/company',      (ctx, state) => const CompanyProfileScreen()),
+    _sub('/settings/financial',    (ctx, state) => const FinancialSettingsScreen()),
+    _sub('/settings/taxes',        (ctx, state) => const TaxesSettingsScreen()),
+    _sub('/settings/currencies',   (ctx, state) => const CurrenciesSettingsScreen()),
+    _sub('/settings/numbering',    (ctx, state) => const NumberingScreen()),
+    _sub('/settings/branches',     (ctx, state) => const BranchesStoresScreen()),
+    _sub('/settings/workspaces',   (ctx, state) => const TenantsScreen()),
+
+    // Settings — Platform
+    _sub('/settings/integrations',  (ctx, state) => const IntegrationsScreen()),
+    _sub('/settings/webhooks',      (ctx, state) => const WebhooksScreen()),
+    _sub('/settings/api-keys',      (ctx, state) => const ApiKeysScreen()),
+    _sub('/settings/notifications', (ctx, state) => const NotificationsScreen()),
+    _sub('/settings/billing',       (ctx, state) => const BillingScreen()),
+    _sub('/settings/backup',        (ctx, state) => const BackupScreen()),
+
+    // ── Shell with four tab branches ─────────────────────
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return Scaffold(body: WorkspaceShell(navigationShell: navigationShell));
-      },
+      builder: (ctx, state, shell) =>
+          Scaffold(body: WorkspaceShell(navigationShell: shell)),
       branches: [
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/dashboard',
-            builder: (context, state) => Scaffold(body: DashboardScreen(nav: context.read<NavCubit>())),
+            builder: (ctx, state) => const DashboardScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/accounts',
-            builder: (context, state) => Scaffold(body: AccountsScreen(nav: context.read<NavCubit>())),
+            builder: (ctx, state) => const AccountsScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/stores',
-            builder: (context, state) => Scaffold(body: StoresScreen(nav: context.read<NavCubit>())),
+            builder: (ctx, state) => const StoresScreen(),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/more',
-            builder: (context, state) => Scaffold(body: MoreScreen(nav: context.read<NavCubit>())),
+            builder: (ctx, state) => const MoreScreen(),
           ),
         ]),
       ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 const _products = [
   ('STL-44021', 'Structural Steel I-Beam', 'Steel', 'PCS', 142, 'in'),
@@ -18,8 +18,7 @@ String _statusLabel(String s) =>
     s == 'in' ? 'In Stock' : (s == 'low' ? 'Low' : 'Out');
 
 class ProductsListScreen extends StatefulWidget {
-  final NavCubit nav;
-  const ProductsListScreen({super.key, required this.nav});
+  const ProductsListScreen({super.key});
   @override
   State<ProductsListScreen> createState() => _ProductsListScreenState();
 }
@@ -32,7 +31,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     final rows = _cat == 'All'
         ? _products
         : _products.where((p) => p.$3 == _cat).toList();
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Products')),
+      body: MScroll([
       Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -79,7 +81,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)
           GestureDetector(
-            onTap: () => widget.nav.go('productDetail'),
+            onTap: () => context.goTo('productDetail'),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
@@ -138,6 +140,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             ),
           ),
       ]),
-    ]);
+    ]),
+    );
   }
 }

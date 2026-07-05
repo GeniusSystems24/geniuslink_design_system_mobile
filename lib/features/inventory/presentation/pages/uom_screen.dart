@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class UomScreen extends StatefulWidget {
@@ -18,7 +18,10 @@ class _UomScreenState extends State<UomScreen> {
       'volume': ('Volume', 'L', M.blue, [('ML', 'Milliliter', '0.001', false), ('L', 'Liter', '1', true), ('M3', 'Cubic Meter', '1000', false)]),
     };
     final cur = groups[_active]!;
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Units of Measure')),
+      body: MScroll([
       GridView.count(
         crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
         mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 2.1,
@@ -40,7 +43,7 @@ class _UomScreenState extends State<UomScreen> {
             ),
         ],
       ),
-      MCard(marker: cur.$3, title: '${cur.$1} Units', sub: 'Convert to base ${cur.$2}', pad: 8, children: [
+      MCard(accentColor: cur.$3, title: '${cur.$1} Units', subtitle: 'Convert to base ${cur.$2}', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -58,6 +61,7 @@ class _UomScreenState extends State<UomScreen> {
           ]),
         ),
       ]),
-    ]);
+    ]),
+    );
   }
 }

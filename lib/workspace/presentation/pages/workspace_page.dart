@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/nav_cubit.dart';
 import '../widgets/tenant_scope.dart';
+import '../../../app/router/navigation_extensions.dart';
 import '../../../design_system/kit.dart';
 import '../../../app/router/app_router.dart';
 import '../../../features/auth/presentation/pages/auth_screen.dart';
@@ -58,47 +59,47 @@ class WorkspacePage extends StatelessWidget {
     // Authed → the tab/sub shell lives inside the tenant scope.
     return TenantScope(
       fallbackBuilder: (_) => const _TenantLoading(),
-      child: _authedBody(nav, state),
+      child: _authedBody(context, nav, state),
     );
   }
 
-  Widget _authedBody(NavCubit nav, NavState state) {
+  Widget _authedBody(BuildContext context, NavCubit nav, NavState state) {
     // sub-screen route
     final sub = state.sub;
     if (sub != null) {
       // full-bleed screens render their own app bar + nav
       if (fullBleedScreens.contains(sub)) {
         return WillPopScope(
-          onWillPop: () async { nav.back(subTitles[sub]?.back); return false; },
-          child: buildSubScreen(sub, nav),
+          onWillPop: () async { context.goTo(subTitles[sub]?.back ?? ''); return false; },
+          child: buildSubScreen(sub),
         );
       }
       final meta = subTitles[sub] ?? ScreenMeta(sub, back: state.tab);
       return Column(
         children: [
-          MAppBar(title: meta.title, ar: meta.ar, onBack: () => nav.back(meta.back)),
-          Expanded(child: buildSubScreen(sub, nav)),
+          MAppBar(title: meta.title, ar: meta.ar, onBack: () => context.goTo(meta.back)),
+          Expanded(child: buildSubScreen(sub)),
         ],
       );
     }
 
     // tab shell
-    final (title, action) = _tabChrome(nav, state.tab);
+    final (title, action) = _tabChrome(context, state.tab);
     return Column(
       children: [
-        MAppBar(title: title, action: action),
-        Expanded(child: buildTabScreen(state.tab, nav)),
+        if (state.tab != 'dashboard') MAppBar(title: title, action: action),
+        Expanded(child: buildTabScreen(state.tab)),
         MTabBar(active: state.tab, onChange: nav.selectTab),
       ],
     );
   }
 
-  (String, Widget?) _tabChrome(NavCubit nav, String tab) {
+  (String, Widget?) _tabChrome(BuildContext context, String tab) {
     switch (tab) {
       case 'accounts':
-        return ('Accounts', _actionBtn('plus', () => nav.go('createAccount')));
+        return ('Accounts', _actionBtn('plus', () => context.goTo('createAccount')));
       case 'stores':
-        return ('Stores', _actionBtn('plus', () => nav.go('createStore')));
+        return ('Stores', _actionBtn('plus', () => context.goTo('createStore')));
       case 'more':
         return ('More', null);
       case 'dashboard':

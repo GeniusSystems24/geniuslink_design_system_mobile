@@ -4,20 +4,22 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
-import 'package:gl_mobile_app/workspace/presentation/bloc/nav_cubit.dart';
 
 class GroupDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const GroupDetailScreen({super.key, required this.nav});
+  const GroupDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      const MCard(marker: M.blue, title: 'Group Information', right: Pill('Active'), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Group Detail')),
+      body: MScroll([
+      const MCard(accentColor: M.blue, title: 'Group Information', trailing: Pill('Active'), children: [
         KV('ID', '1042', mono: true), KV('Name English', 'Current Assets'),
         KV('Name Arabic', 'الأصول المتداولة', ar: true), KV('Account Tree', 'Assets Tree (1)'),
       ]),
-      MCard(marker: M.orange, title: 'Notes', children: [
+      MCard(accentColor: M.orange, title: 'Notes', children: [
         Directionality(
           textDirection: TextDirection.rtl,
           child: Container(
@@ -27,10 +29,11 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
       ]),
-      const MCard(marker: M.green, title: 'Audit', children: [
+      const MCard(accentColor: M.green, title: 'Audit', children: [
         KV('Created By', 'Admin User (ID: 5)'), KV('Created At', 'Dec 04, 2025 11:58 PM'),
       ]),
-      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('accounts')),
-    ]);
+      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('accounts')),
+    ]),
+    );
   }
 }

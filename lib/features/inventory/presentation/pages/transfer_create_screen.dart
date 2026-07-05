@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 
@@ -66,7 +66,10 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Transfer Inventory')),
+      body: MScroll([
       ISection(
           icon: 'box',
           title: 'Transfer Details',
@@ -132,6 +135,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
         ),
       ]),
       ActionRow(primary: 'Transfer Inventory', onPrimary: _submit),
-    ]);
+    ]),
+    );
   }
 }

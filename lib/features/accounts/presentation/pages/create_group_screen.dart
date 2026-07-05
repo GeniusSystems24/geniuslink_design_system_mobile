@@ -41,8 +41,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
-      MCard(marker: M.blue, title: 'Group Details', sub: 'Name and tree association', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Account Group')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'Group Details', subtitle: 'Name and tree association', children: [
         SuperTextFormField(
           label: 'Name English',
           placeholder: 'e.g. Current Assets',
@@ -66,7 +69,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           hintText: 'Select a tree…',
         ),
       ]),
-      MCard(marker: M.orange, title: 'Additional Information', children: [
+      MCard(accentColor: M.orange, title: 'Additional Information', children: [
         SuperTextFormField(
           label: 'Note',
           placeholder: 'Add any notes about this group…',
@@ -81,6 +84,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           child: MBtn('Create', icon: 'check', full: true, onTap: _submit),
         ),
       ]),
-    ]);
+    ]),
+    );
   }
 }

@@ -6,9 +6,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../core/bloc/form_cubit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class _NavItem {
   final String id, label, icon, desc;
@@ -41,11 +41,13 @@ const _settingsNav = [
 ];
 
 class SettingsHubScreen extends StatelessWidget {
-  final NavCubit nav;
-  const SettingsHubScreen({super.key, required this.nav});
+  const SettingsHubScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Settings')),
+      body: MScroll([
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Row(children: [
@@ -58,13 +60,13 @@ class SettingsHubScreen extends StatelessWidget {
         ]),
       ),
       for (final g in _settingsNav)
-        MCard(title: g.$1, marker: M.blue, pad: 8, children: [
+        MCard(title: g.$1, accentColor: M.blue, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
               for (int i = 0; i < g.$2.length; i++)
                 GestureDetector(
-                  onTap: () => nav.go(g.$2[i].id),
+                  onTap: () => context.goTo(g.$2[i].id),
                   behavior: HitTestBehavior.opaque,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -84,7 +86,8 @@ class SettingsHubScreen extends StatelessWidget {
             ]),
           ),
         ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -92,7 +95,10 @@ class CompanyProfileScreen extends StatelessWidget {
   const CompanyProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Company Profile')),
+      body: MScroll([
       ISection(icon: 'building', title: 'Identity', sub: 'Names shown on documents', marker: M.blue, children: [
         Row(children: [
           Container(width: 64, height: 64, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('building'), size: 26, color: M.fg3)),
@@ -116,7 +122,8 @@ class CompanyProfileScreen extends StatelessWidget {
         TSelect(label: 'Tax Authority', value: 'ZATCA (Saudi Arabia)', options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT']),
       ]),
       const MBtn('Save Changes', icon: 'check', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -139,7 +146,10 @@ class _FinancialSettingsView extends StatelessWidget {
     return BlocBuilder<FormCubit, FormData>(
       builder: (context, state) {
         final basis = state.value<String>('basis') ?? 'accrual';
-        return MScroll([
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Financial Settings')),
+      body: MScroll([
           ISection(icon: 'globe', title: 'Currency & Calendar', marker: M.blue, children: [
             const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
             const TSelect(label: 'Fiscal Year Start', value: 'January', options: ['January', 'April', 'July', 'October']),
@@ -170,7 +180,8 @@ class _FinancialSettingsView extends StatelessWidget {
             TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
           ]),
           MBtn('Save Changes', icon: 'check', full: true, onTap: form.submit),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -206,8 +217,11 @@ class _TaxesSettingsView extends StatelessWidget {
         List<List<Object>> clone() => [for (final r in rules) List<Object>.from(r)];
         void toggle(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('rules', n); }
         void add() { final n = clone()..add(['New Rule', '0', 'VAT', '—', false]); form.setField('rules', n); }
-        return MScroll([
-          MCard(marker: M.green, title: 'Tax Rules', sub: '$active active · applied at line level', pad: 8, children: [
+        return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Taxes')),
+      body: MScroll([
+          MCard(accentColor: M.green, title: 'Tax Rules', subtitle: '$active active · applied at line level', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
@@ -242,7 +256,8 @@ class _TaxesSettingsView extends StatelessWidget {
           ]),
           MBtn('Add Tax Rule', variant: MBtnVariant.secondary, icon: 'plus', full: true, onTap: add),
           MBtn('Save Changes', icon: 'check', full: true, onTap: form.submit),
-        ]);
+        ]),
+    );
       },
     );
   }
@@ -253,8 +268,11 @@ class CurrenciesSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const pairs = [('USD', 'US Dollar', '3.750200', true), ('EUR', 'Euro', '4.082100', true), ('GBP', 'British Pound', '4.761000', true), ('AED', 'UAE Dirham', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', false)];
-    return MScroll([
-      MCard(marker: M.blue, title: 'Base Currency', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Currencies')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(children: [
             const Text('SAR', style: TextStyle(fontFamily: M.mono, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
@@ -264,7 +282,7 @@ class CurrenciesSettingsScreen extends StatelessWidget {
         ]),
         const MBtn('Pull ECB Feed', variant: MBtnVariant.secondary, icon: 'refresh', full: true),
       ]),
-      MCard(marker: M.green, title: 'Rates per 1 SAR', sub: 'Auto pairs sync daily; manual editable', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Rates per 1 SAR', subtitle: 'Auto pairs sync daily; manual editable', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -293,7 +311,8 @@ class CurrenciesSettingsScreen extends StatelessWidget {
         ),
       ]),
       const MBtn('Save Rates', icon: 'check', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -302,8 +321,11 @@ class NumberingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const seqs = [('Sales Invoice', 'INV', '0412'), ('Journal Voucher', 'JV', '0227'), ('Deposit', 'DEP', '0183'), ('Purchase Order', 'PO', '0212'), ('Inventory Transfer', 'INV-TRF', '0118')];
-    return MScroll([
-      MCard(marker: M.blue, title: 'Document Sequences', sub: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Numbering')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'Document Sequences', subtitle: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -328,7 +350,8 @@ class NumberingScreen extends StatelessWidget {
         ),
       ]),
       const MBtn('Save Changes', icon: 'check', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -337,7 +360,10 @@ class BranchesStoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const rows = [('ST-001', 'Downtown Central', 'وسط المدينة', 'Riyadh', 'Store', 'active'), ('ST-002', 'King Fahd Warehouse', 'مستودع الملك فهد', 'Riyadh', 'Warehouse', 'active'), ('ST-003', 'Jeddah Showroom', 'صالة عرض جدة', 'Jeddah', 'Store', 'active'), ('BR-010', 'Dammam Branch', 'فرع الدمام', 'Dammam', 'Branch', 'inactive')];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Branches & Stores')),
+      body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)
           Container(
@@ -363,6 +389,7 @@ class BranchesStoresScreen extends StatelessWidget {
           ),
       ]),
       const MBtn('Add Branch', icon: 'plus', full: true),
-    ]);
+    ]),
+    );
   }
 }

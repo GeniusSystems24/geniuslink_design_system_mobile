@@ -93,9 +93,12 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     const rows = [('1001', 'Cash Box', 42500, 0), ('1100', 'Bank · NCB Main', 186420, 0), ('1200', 'Inventory (WIP)', 54890, 0), ('2001', 'Accounts Payable', 0, 23140), ('3001', 'Owner Capital', 0, 260670), ('4001', 'Sales Revenue', 0, 89200), ('5001', 'Cost of Goods Sold', 34120, 0), ('5200', 'Operating Expense', 55080, 0)];
     final totDr = rows.fold<int>(0, (s, r) => s + r.$3);
     final totCr = rows.fold<int>(0, (s, r) => s + r.$4);
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Trial Balance')),
+      body: MScroll([
       _ReportMeta(period: _period, onPeriod: (v) => setState(() => _period = v), badges: const [('Currency', 'SAR'), ('Basis', 'Accrual'), ('Status', 'Balanced')]),
-      MCard(marker: M.green, title: 'All Accounts', sub: 'Debit & credit balances as of period end', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'All Accounts', subtitle: 'Debit & credit balances as of period end', pad: 8, children: [
         MTable(
           columns: [
             const MCol('code', 'Code', fixed: 60, mono: true),
@@ -125,7 +128,8 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
         ),
       ]),
       const MBtn('Export PDF', variant: MBtnVariant.secondary, icon: 'download', full: true),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -144,7 +148,10 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
       ('Cost of Sales', M.orange, [('5001', 'Cost of Goods Sold', -34120)], -34120),
       ('Operating Expenses', M.orange, [('5200', 'Operating Expense', -55080), ('5300', 'Bank Charges', -1240)], -56320),
     ];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Income Statement')),
+      body: MScroll([
       _ReportMeta(period: _period, onPeriod: (v) => setState(() => _period = v), badges: const [('Currency', 'SAR'), ('Basis', 'Accrual')]),
       for (final s in sections)
         ISection(icon: 'ledger', title: s.$1, marker: s.$2, children: [
@@ -152,7 +159,7 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
             _RRow(left: s.$3[i].$2, sub: s.$3[i].$1, right: s.$3[i].$3 < 0 ? '(${_money(s.$3[i].$3)})' : _money(s.$3[i].$3), rightTone: s.$3[i].$3 < 0 ? M.red : M.fg1, last: i == s.$3.length - 1),
           _TotalBar(label: 'Total ${s.$1}', value: s.$4 < 0 ? '(${_money(s.$4)})' : _money(s.$4), tone: s.$2),
         ]),
-      const MCard(marker: M.green, children: [
+      const MCard(accentColor: M.green, children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('Net Income', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: M.fg1, fontFamily: M.body)),
           Text.rich(TextSpan(children: [
@@ -161,7 +168,8 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
           ])),
         ]),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -180,10 +188,13 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
       ('Liabilities', M.orange, [('Accounts Payable', 23140), ('Long-Term Debt', 80000)], 103140),
       ('Equity', M.green, [('Owner Capital', 260670), ('Retained Earnings', 61980)], 322650),
     ];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Balance Sheet')),
+      body: MScroll([
       _ReportMeta(period: _period, onPeriod: (v) => setState(() => _period = v), badges: const [('Currency', 'SAR'), ('Check', 'A = L + E')]),
       for (final b in blocks)
-        MCard(marker: b.$2, title: b.$1, pad: 8, children: [
+        MCard(accentColor: b.$2, title: b.$1, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
@@ -202,7 +213,8 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
           ]),
         ]),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -219,7 +231,10 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
     const rows = [('STL-44021', 'Structural Steel I-Beam', 142, 450.0, 'Downtown'), ('CMT-90112', 'Portland Cement Type I', 1820, 24.5, 'King Fahd'), ('AGG-21044', 'Coarse Aggregate 20mm', 46, 125.0, 'Downtown'), ('PLY-30022', 'Plywood Sheet 18mm', 312, 92.0, 'Jeddah'), ('RBR-71203', 'Reinforcement Bar #6', 0, 78.0, 'Downtown')];
     final visible = _store == 'All' ? rows : rows.where((r) => r.$5 == _store).toList();
     final total = visible.fold<double>(0, (s, r) => s + r.$3 * r.$4);
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Inventory Valuation')),
+      body: MScroll([
       MCard(pad: 14, children: [
         Segmented(options: const ['All', 'Downtown', 'King Fahd', 'Jeddah'], value: _store, onChange: (v) => setState(() => _store = v)),
         Row(children: const [
@@ -228,7 +243,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
           Text('Weighted Avg', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w600, color: M.fg1)),
         ]),
       ]),
-      MCard(marker: M.green, title: 'Stock Valuation', sub: 'Quantity × weighted-average unit cost', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Stock Valuation', subtitle: 'Quantity × weighted-average unit cost', pad: 8, children: [
         MTable(
           showSearch: true,
           searchHint: 'Search SKU, product or store…',
@@ -248,7 +263,8 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
           child: _TotalBar(label: 'Total Inventory Value', value: _money(total)),
         ),
       ]),
-    ]);
+    ]),
+    );
   }
 }
 
@@ -272,9 +288,12 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
       ('2025-12-01 00:00:01', 'System', 'LOCK', 'Period Nov 2024', 'internal', PillTone.neutral),
     ];
     final visible = logs.where((l) => _act == 'All' || l.$3 == _act).toList();
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Audit Log')),
+      body: MScroll([
       Segmented(options: const ['All', 'POST', 'CREATE', 'APPROVE', 'EDIT', 'VOID', 'LOCK'], value: _act, onChange: (v) => setState(() => _act = v)),
-      MCard(marker: M.orange, title: 'Immutable Activity Trail', sub: 'Every state-changing action · 7-year retention', pad: 8, children: [
+      MCard(accentColor: M.orange, title: 'Immutable Activity Trail', subtitle: 'Every state-changing action · 7-year retention', pad: 8, children: [
         MTable(
           showSearch: true,
           searchHint: 'Search entity or user…',
@@ -290,6 +309,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
         ),
         if (visible.isEmpty) const Padding(padding: EdgeInsets.symmetric(vertical: 32), child: Center(child: Text('No log entries match.', style: TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
       ]),
-    ]);
+    ]),
+    );
   }
 }

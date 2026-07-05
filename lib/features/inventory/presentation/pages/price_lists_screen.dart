@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class PriceListsScreen extends StatefulWidget {
@@ -13,7 +13,10 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
   Widget build(BuildContext context) {
     const lists = [('retail', 'Retail · Standard', 'SAR', 'List', 412, M.blue), ('whole', 'Wholesale · Tier 1', 'SAR', 'Discount 15%', 412, M.green), ('whole2', 'Wholesale · Tier 2', 'SAR', 'Discount 25%', 412, M.green), ('export', 'Export · USD', 'USD', 'Markup 8%', 188, M.orange)];
     const items = [('STL-44021', 'Structural Steel I-Beam', '540.00', '459.00'), ('CMT-90112', 'Portland Cement Type I', '28.00', '23.80'), ('AGG-21044', 'Coarse Aggregate 20mm', '140.00', '119.00'), ('PLY-30022', 'Plywood Sheet 18mm', '105.00', '89.25'), ('PNT-55310', 'Epoxy Floor Coating', '44.00', '37.40')];
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Price Lists')),
+      body: MScroll([
       for (final l in lists)
         GestureDetector(
           onTap: () => setState(() => _active = l.$1),
@@ -32,7 +35,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
             ]),
           ),
         ),
-      MCard(marker: M.green, title: 'Item Prices', sub: '5 items · 15% discount applied', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Item Prices', subtitle: '5 items · 15% discount applied', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -55,6 +58,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
           ]),
         ),
       ]),
-    ]);
+    ]),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class _CountRow extends StatelessWidget {
@@ -44,8 +44,11 @@ class StockTakeScreen extends StatelessWidget {
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46), ('PLY-30022', 'Plywood Sheet 18mm', 312, -1),
       ('PNT-55310', 'Epoxy Floor Coating', 88, -1), ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
-    return MScroll([
-      MCard(marker: M.blue, title: 'STK-2024-0014', sub: 'King Fahd Warehouse · Started Dec 18, 09:14', right: const Pill('In Progress', tone: PillTone.warning), children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Stock Take')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
             Eyebrow('3 of 6 counted', size: 10),
@@ -61,7 +64,7 @@ class StockTakeScreen extends StatelessWidget {
           const Mini(label: 'Match', value: '1'), const Mini(label: 'Short', value: '2'), const Mini(label: 'Over', value: '0'),
         ]),
       ]),
-      MCard(marker: M.green, title: 'Count Sheet', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Count Sheet', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -70,6 +73,7 @@ class StockTakeScreen extends StatelessWidget {
         ),
       ]),
       const ActionRow(primary: 'Post Stock Take'),
-    ]);
+    ]),
+    );
   }
 }

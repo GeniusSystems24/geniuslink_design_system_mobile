@@ -19,7 +19,14 @@ class MMoney extends StatelessWidget {
   final Color accent;
   final bool required;
   final String sign;
-  const MMoney({super.key, required this.label, required this.value, this.currency = 'SAR', this.accent = M.blue, this.required = false, this.sign = ''});
+  const MMoney(
+      {super.key,
+      required this.label,
+      required this.value,
+      this.currency = 'SAR',
+      this.accent = M.blue,
+      this.required = false,
+      this.sign = ''});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,19 +34,41 @@ class MMoney extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 7),
-          child: Text.rich(TextSpan(children: [
-            TextSpan(text: label.toUpperCase()),
-            if (required) const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-          ], style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg2))),
+          child: Text.rich(TextSpan(
+              children: [
+                TextSpan(text: label.toUpperCase()),
+                if (required)
+                  const TextSpan(text: ' *', style: TextStyle(color: M.red)),
+              ],
+              style: const TextStyle(
+                  fontFamily: M.body,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 10,
+                  letterSpacing: 0.5,
+                  color: M.fg2))),
         ),
         Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(color: M.input, border: Border.all(color: accent), borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(
+              color: M.input,
+              border: Border.all(color: accent),
+              borderRadius: BorderRadius.circular(10)),
           child: Row(children: [
-            Text(currency, style: const TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg3)),
+            Text(currency,
+                style: const TextStyle(
+                    fontFamily: M.mono,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: M.fg3)),
             const SizedBox(width: 10),
-            Text('$sign$value', style: TextStyle(fontFamily: M.mono, fontSize: 26, fontWeight: FontWeight.w700, color: accent, letterSpacing: -0.3)),
+            Text('$sign$value',
+                style: TextStyle(
+                    fontFamily: M.mono,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: accent,
+                    letterSpacing: -0.3)),
           ]),
         ),
       ],
@@ -53,11 +82,18 @@ class MMethod extends StatelessWidget {
   const MMethod({super.key, required this.value});
   @override
   Widget build(BuildContext context) {
-    const methods = [('cash', 'Cash'), ('cheque', 'Cheque'), ('wire', 'Wire'), ('card', 'Card')];
+    const methods = [
+      ('cash', 'Cash'),
+      ('cheque', 'Cheque'),
+      ('wire', 'Wire'),
+      ('card', 'Card')
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Payment Method')),
+        const Padding(
+            padding: EdgeInsets.only(bottom: 7),
+            child: Eyebrow('Payment Method')),
         Row(children: [
           for (int i = 0; i < methods.length; i++) ...[
             if (i > 0) const SizedBox(width: 8),
@@ -78,7 +114,12 @@ class MMethod extends StatelessWidget {
         border: Border.all(color: on ? M.blue : M.border),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(label, style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, fontFamily: M.body, color: on ? M.blue : M.fg2)),
+      child: Text(label,
+          style: TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w700,
+              fontFamily: M.body,
+              color: on ? M.blue : M.fg2)),
     );
   }
 }
@@ -94,24 +135,42 @@ class JournalPreview extends StatelessWidget {
       for (int i = 0; i < rows.length; i++)
         Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(border: i == rows.length - 1 ? null : const Border(bottom: BorderSide(color: M.border))),
+          decoration: BoxDecoration(
+              border: i == rows.length - 1
+                  ? null
+                  : const Border(bottom: BorderSide(color: M.border))),
           child: Row(children: [
             if (numbered) ...[
-              SizedBox(width: 20, child: Text((i + 1).toString().padLeft(2, '0'), style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg4))),
+              SizedBox(
+                  width: 20,
+                  child: Text((i + 1).toString().padLeft(2, '0'),
+                      style: const TextStyle(
+                          fontFamily: M.mono, fontSize: 11, color: M.fg4))),
               const SizedBox(width: 12),
             ],
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(rows[i].$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                  Text(rows[i].$1,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: M.fg1,
+                          fontFamily: M.body)),
                   const SizedBox(height: 4),
-                  Pill(rows[i].$2 != null ? 'Debit' : 'Credit', tone: rows[i].$2 != null ? PillTone.info : PillTone.danger),
+                  Pill(rows[i].$2 != null ? 'Debit' : 'Credit',
+                      tone:
+                          rows[i].$2 != null ? PillTone.info : PillTone.danger),
                 ],
               ),
             ),
             Text(rows[i].$2 ?? rows[i].$3 ?? '',
-                style: TextStyle(fontFamily: M.mono, fontSize: 13.5, fontWeight: FontWeight.w600, color: rows[i].$2 != null ? M.green : M.red)),
+                style: TextStyle(
+                    fontFamily: M.mono,
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w600,
+                    color: rows[i].$2 != null ? M.green : M.red)),
           ]),
         ),
     ]);
@@ -122,7 +181,14 @@ class FlowCardData {
   final String label, title;
   final String? sub, meta;
   final Color? metaColor;
-  const FlowCardData({required this.label, required this.title, this.sub, this.meta, this.metaColor});
+  const FlowCardData(
+      {required this.label,
+      required this.title,
+      String? sub,
+      String? subtitle,
+      this.meta,
+      this.metaColor})
+      : sub = sub ?? subtitle;
 }
 
 /// Vertical From → To flow with a circular arrow between cards.
@@ -136,23 +202,41 @@ class FromToFlow extends StatelessWidget {
       Transform.translate(
         offset: const Offset(0, -6),
         child: Container(
-          width: 36, height: 36,
-          decoration: BoxDecoration(color: M.blue, shape: BoxShape.circle, boxShadow: [BoxShadow(color: tint(M.blue, 0x99), blurRadius: 18, offset: const Offset(0, 6))]),
-          child: const Icon(Icons.keyboard_arrow_down_rounded, size: 22, color: Colors.white),
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+              color: M.blue,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: tint(M.blue, 0x99),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6))
+              ]),
+          child: const Icon(Icons.keyboard_arrow_down_rounded,
+              size: 22, color: Colors.white),
         ),
       ),
-      Transform.translate(offset: const Offset(0, -6), child: _card(M.green, to)),
+      Transform.translate(
+          offset: const Offset(0, -6), child: _card(M.green, to)),
     ]);
   }
 
   Widget _card(Color tone, FlowCardData d) => Container(
         width: double.infinity,
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: tint(tone, 0x0F), border: Border.all(color: tint(tone, 0x40)), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: tint(tone, 0x0F),
+            border: Border.all(color: tint(tone, 0x40)),
+            borderRadius: BorderRadius.circular(10)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(width: 4, height: 48, decoration: BoxDecoration(color: tone, borderRadius: BorderRadius.circular(12))),
+            Container(
+                width: 4,
+                height: 48,
+                decoration: BoxDecoration(
+                    color: tone, borderRadius: BorderRadius.circular(12))),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -160,15 +244,34 @@ class FromToFlow extends StatelessWidget {
                 children: [
                   Eyebrow(d.label, color: tone, size: 9.5),
                   const SizedBox(height: 6),
-                  Text(d.title, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                  if (d.sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(d.sub!, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3))),
-                  if (d.meta != null) Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    padding: const EdgeInsets.only(top: 10),
-                    width: double.infinity,
-                    decoration: const BoxDecoration(border: Border(top: BorderSide(color: M.border))),
-                    child: Text(d.meta!, style: TextStyle(fontFamily: M.mono, fontSize: 11.5, fontWeight: FontWeight.w600, color: d.metaColor ?? M.fg2)),
-                  ),
+                  Text(d.title,
+                      style: const TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w600,
+                          color: M.fg1,
+                          fontFamily: M.body)),
+                  if (d.sub != null)
+                    Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Text(d.sub!,
+                            style: const TextStyle(
+                                fontFamily: M.mono,
+                                fontSize: 11,
+                                color: M.fg3))),
+                  if (d.meta != null)
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          border: Border(top: BorderSide(color: M.border))),
+                      child: Text(d.meta!,
+                          style: TextStyle(
+                              fontFamily: M.mono,
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w600,
+                              color: d.metaColor ?? M.fg2)),
+                    ),
                 ],
               ),
             ),
@@ -193,15 +296,26 @@ class FxTiles extends StatelessWidget {
 
   Widget _tile((String, String, String, Color?) t) => Container(
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(color: M.bg, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: M.bg,
+            border: Border.all(color: M.border),
+            borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Eyebrow(t.$1, color: M.fg3, size: 8.5),
             const SizedBox(height: 6),
-            Text(t.$2, style: TextStyle(fontFamily: M.mono, fontSize: 17, fontWeight: FontWeight.w700, color: t.$4 ?? M.fg1, letterSpacing: -0.3)),
+            Text(t.$2,
+                style: TextStyle(
+                    fontFamily: M.mono,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: t.$4 ?? M.fg1,
+                    letterSpacing: -0.3)),
             const SizedBox(height: 3),
-            Text(t.$3, style: const TextStyle(fontFamily: M.mono, fontSize: 9.5, color: M.fg3)),
+            Text(t.$3,
+                style: const TextStyle(
+                    fontFamily: M.mono, fontSize: 9.5, color: M.fg3)),
           ],
         ),
       );
@@ -217,7 +331,9 @@ class AuditGrid extends StatelessWidget {
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 16, crossAxisSpacing: 16, childAspectRatio: 4.2,
+      mainAxisSpacing: 16,
+      crossAxisSpacing: 16,
+      childAspectRatio: 4.2,
       children: [
         for (final r in rows)
           Column(
@@ -226,7 +342,11 @@ class AuditGrid extends StatelessWidget {
             children: [
               Eyebrow(r.$1, color: M.fg3, size: 9.5),
               const SizedBox(height: 5),
-              Text(r.$2, style: TextStyle(fontSize: 12.5, color: M.fg1, fontFamily: r.$3 ? M.mono : M.body)),
+              Text(r.$2,
+                  style: TextStyle(
+                      fontSize: 12.5,
+                      color: M.fg1,
+                      fontFamily: r.$3 ? M.mono : M.body)),
             ],
           ),
       ],
@@ -251,13 +371,26 @@ class BankNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(color: tint(tone, 0x14), border: Border.all(color: tint(tone, 0x40)), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+          color: tint(tone, 0x14),
+          border: Border.all(color: tint(tone, 0x40)),
+          borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(width: 7, height: 7, margin: const EdgeInsets.only(top: 5), decoration: BoxDecoration(color: tone, shape: BoxShape.circle)),
+          Container(
+              width: 7,
+              height: 7,
+              margin: const EdgeInsets.only(top: 5),
+              decoration: BoxDecoration(color: tone, shape: BoxShape.circle)),
           const SizedBox(width: 10),
-          Expanded(child: Text(text, style: const TextStyle(fontSize: 11.5, color: M.fg2, height: 1.5, fontFamily: M.body))),
+          Expanded(
+              child: Text(text,
+                  style: const TextStyle(
+                      fontSize: 11.5,
+                      color: M.fg2,
+                      height: 1.5,
+                      fontFamily: M.body))),
         ],
       ),
     );

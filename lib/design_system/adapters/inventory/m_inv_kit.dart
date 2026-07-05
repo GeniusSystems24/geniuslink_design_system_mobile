@@ -8,7 +8,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart' hide FieldDensity;
+import 'package:gl_mobile_app/design_system/components/feedback/m_feedback.dart';
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart'
+    hide FieldDensity;
 import 'package:super_form_field/super_form_field.dart';
 import '../../tokens/m_colors.dart';
 import '../../components/layout/m_icons.dart';
@@ -28,12 +30,17 @@ class ISection extends StatefulWidget {
     super.key,
     required this.icon,
     required this.title,
-    this.marker = M.blue,
-    this.sub,
+    Color? marker,
+    Color? accentColor,
+    String? sub,
+    String? subtitle,
     this.defaultOpen = true,
     this.children = const [],
-    this.right,
-  });
+    Widget? right,
+    Widget? trailing,
+  })  : marker = marker ?? accentColor ?? M.blue,
+        sub = sub ?? subtitle,
+        right = right ?? trailing;
 
   @override
   State<ISection> createState() => _ISectionState();
@@ -45,7 +52,10 @@ class _ISectionState extends State<ISection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+          color: M.surface,
+          border: Border.all(color: M.border),
+          borderRadius: BorderRadius.circular(12)),
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,12 +67,22 @@ class _ISectionState extends State<ISection> {
               padding: const EdgeInsets.fromLTRB(0, 14, 16, 14),
               child: Row(
                 children: [
-                  Container(width: 4, height: 36, decoration: BoxDecoration(color: widget.marker, borderRadius: const BorderRadius.horizontal(right: Radius.circular(12)))),
+                  Container(
+                      width: 4,
+                      height: 36,
+                      decoration: BoxDecoration(
+                          color: widget.marker,
+                          borderRadius: const BorderRadius.horizontal(
+                              right: Radius.circular(12)))),
                   const SizedBox(width: 12),
                   Container(
-                    width: 30, height: 30,
-                    decoration: BoxDecoration(color: tint(widget.marker, 0x1F), borderRadius: BorderRadius.circular(8)),
-                    child: Icon(MIcons.of(widget.icon), size: 16, color: widget.marker),
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: tint(widget.marker, 0x1F),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Icon(MIcons.of(widget.icon),
+                        size: 16, color: widget.marker),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -70,11 +90,21 @@ class _ISectionState extends State<ISection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.title.toUpperCase(),
-                            style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 12.5, letterSpacing: 0.7, color: M.fg1)),
-                        if (widget.sub != null) Padding(
-                          padding: const EdgeInsets.only(top: 3),
-                          child: Text(widget.sub!, style: const TextStyle(fontFamily: M.body, fontSize: 11.5, color: M.fg3)),
-                        ),
+                            style: const TextStyle(
+                                fontFamily: M.body,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12.5,
+                                letterSpacing: 0.7,
+                                color: M.fg1)),
+                        if (widget.sub != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3),
+                            child: Text(widget.sub!,
+                                style: const TextStyle(
+                                    fontFamily: M.body,
+                                    fontSize: 11.5,
+                                    color: M.fg3)),
+                          ),
                       ],
                     ),
                   ),
@@ -82,7 +112,8 @@ class _ISectionState extends State<ISection> {
                   AnimatedRotation(
                     turns: _open ? 0 : -0.25,
                     duration: const Duration(milliseconds: 150),
-                    child: const Icon(Icons.keyboard_arrow_down_rounded, size: 18, color: M.fg3),
+                    child: const Icon(Icons.keyboard_arrow_down_rounded,
+                        size: 18, color: M.fg3),
                   ),
                 ],
               ),
@@ -141,25 +172,47 @@ class IField extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 7),
-            child: Text.rich(TextSpan(children: [
-              TextSpan(text: label.toUpperCase()),
-              if (required) const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-            ], style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg2))),
+            child: Text.rich(TextSpan(
+                children: [
+                  TextSpan(text: label.toUpperCase()),
+                  if (required)
+                    const TextSpan(text: ' *', style: TextStyle(color: M.red)),
+                ],
+                style: const TextStyle(
+                    fontFamily: M.body,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 10,
+                    letterSpacing: 0.5,
+                    color: M.fg2))),
           ),
           Container(
             height: 46,
             padding: const EdgeInsets.symmetric(horizontal: 14),
-            decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+                color: M.input,
+                border: Border.all(color: M.borderStrong),
+                borderRadius: BorderRadius.circular(8)),
             child: Row(
               children: [
-                if (icon != null) ...[Icon(MIcons.of(icon!), size: 16, color: M.fg3), const SizedBox(width: 10)],
+                if (icon != null) ...[
+                  Icon(MIcons.of(icon!), size: 16, color: M.fg3),
+                  const SizedBox(width: 10)
+                ],
                 Expanded(
                   child: Text(hasValue ? value! : (placeholder ?? ''),
-                      maxLines: 1, overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontFamily: mono ? M.mono : (ar ? M.arabic : M.body), fontSize: 14, color: hasValue ? M.fg1 : M.fg3)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontFamily: mono ? M.mono : (ar ? M.arabic : M.body),
+                          fontSize: 14,
+                          color: hasValue ? M.fg1 : M.fg3)),
                 ),
-                if (locked) const Icon(Icons.lock_outline_rounded, size: 14, color: M.fg3),
-                if (select) const Icon(Icons.keyboard_arrow_down_rounded, size: 15, color: M.fg3),
+                if (locked)
+                  const Icon(Icons.lock_outline_rounded,
+                      size: 14, color: M.fg3),
+                if (select)
+                  const Icon(Icons.keyboard_arrow_down_rounded,
+                      size: 15, color: M.fg3),
               ],
             ),
           ),
@@ -178,13 +231,19 @@ class ITextarea extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(padding: const EdgeInsets.only(bottom: 7), child: Eyebrow(label)),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 7), child: Eyebrow(label)),
         Container(
           constraints: const BoxConstraints(minHeight: 88),
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
-          child: Text(placeholder ?? '', style: const TextStyle(fontFamily: M.body, fontSize: 14, color: M.fg3)),
+          decoration: BoxDecoration(
+              color: M.input,
+              border: Border.all(color: M.borderStrong),
+              borderRadius: BorderRadius.circular(8)),
+          child: Text(placeholder ?? '',
+              style: const TextStyle(
+                  fontFamily: M.body, fontSize: 14, color: M.fg3)),
         ),
       ],
     );
@@ -199,7 +258,8 @@ class UploadBox extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 110),
       width: double.infinity,
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(
+          color: M.input, borderRadius: BorderRadius.circular(10)),
       child: CustomPaint(
         painter: _DashRect(),
         child: const Column(
@@ -207,9 +267,16 @@ class UploadBox extends StatelessWidget {
           children: [
             Icon(Icons.cloud_upload_outlined, size: 26, color: M.fg3),
             SizedBox(height: 8),
-            Text('Click to upload or drag and drop', style: TextStyle(fontSize: 13, color: M.fg1, fontFamily: M.body, fontWeight: FontWeight.w600)),
+            Text('Click to upload or drag and drop',
+                style: TextStyle(
+                    fontSize: 13,
+                    color: M.fg1,
+                    fontFamily: M.body,
+                    fontWeight: FontWeight.w600)),
             SizedBox(height: 4),
-            Text('PDF, JPG, PNG (MAX 10MB)', style: TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+            Text('PDF, JPG, PNG (MAX 10MB)',
+                style: TextStyle(
+                    fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
           ],
         ),
       ),
@@ -228,11 +295,20 @@ class IToggle extends StatelessWidget {
       children: [
         Eyebrow(label),
         Container(
-          width: 42, height: 24,
-          decoration: BoxDecoration(color: on ? M.blue : M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(999)),
+          width: 42,
+          height: 24,
+          decoration: BoxDecoration(
+              color: on ? M.blue : M.input,
+              border: Border.all(color: M.borderStrong),
+              borderRadius: BorderRadius.circular(999)),
           child: Align(
             alignment: on ? Alignment.centerRight : Alignment.centerLeft,
-            child: Container(width: 18, height: 18, margin: const EdgeInsets.symmetric(horizontal: 2), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle)),
+            child: Container(
+                width: 18,
+                height: 18,
+                margin: const EdgeInsets.symmetric(horizontal: 2),
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle)),
           ),
         ),
       ],
@@ -248,13 +324,22 @@ class InfoNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(color: tint(tone, 0x14), border: Border.all(color: tint(tone, 0x40)), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+          color: tint(tone, 0x14),
+          border: Border.all(color: tint(tone, 0x40)),
+          borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.info_outline_rounded, size: 14, color: tone),
           const SizedBox(width: 10),
-          Expanded(child: Text(text, style: const TextStyle(fontSize: 11.5, color: M.fg2, height: 1.5, fontFamily: M.body))),
+          Expanded(
+              child: Text(text,
+                  style: const TextStyle(
+                      fontSize: 11.5,
+                      color: M.fg2,
+                      height: 1.5,
+                      fontFamily: M.body))),
         ],
       ),
     );
@@ -267,11 +352,19 @@ class ActionRow extends StatelessWidget {
   final String icon;
   final VoidCallback? onSecondary;
   final VoidCallback? onPrimary;
-  const ActionRow({super.key, this.secondary = 'Cancel', required this.primary, this.icon = 'check', this.onSecondary, this.onPrimary});
+  const ActionRow(
+      {super.key,
+      this.secondary = 'Cancel',
+      required this.primary,
+      this.icon = 'check',
+      this.onSecondary,
+      this.onPrimary});
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Expanded(child: MBtn(secondary, variant: MBtnVariant.secondary, full: true, onTap: onSecondary)),
+      Expanded(
+          child: MBtn(secondary,
+              variant: MBtnVariant.secondary, full: true, onTap: onSecondary)),
       const SizedBox(width: 10),
       Expanded(child: MBtn(primary, icon: icon, full: true, onTap: onPrimary)),
     ]);
@@ -284,12 +377,22 @@ class ProductRow extends StatelessWidget {
   final SuperNumericFieldController qtyController;
   final String price, total, currency;
   final bool last;
-  const ProductRow({super.key, required this.name, required this.sku, required this.qtyController, required this.price, required this.total, this.currency = '\$', this.last = false});
+  const ProductRow(
+      {super.key,
+      required this.name,
+      required this.sku,
+      required this.qtyController,
+      required this.price,
+      required this.total,
+      this.currency = '\$',
+      this.last = false});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(
+          border:
+              last ? null : const Border(bottom: BorderSide(color: M.border))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -300,9 +403,16 @@ class ProductRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                    Text(name,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: M.fg1,
+                            fontFamily: M.body)),
                     const SizedBox(height: 2),
-                    Text('SKU: $sku', style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                    Text('SKU: $sku',
+                        style: const TextStyle(
+                            fontFamily: M.mono, fontSize: 11, color: M.fg3)),
                   ],
                 ),
               ),
@@ -332,9 +442,16 @@ class ProductRow extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('$currency$price / unit', style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                  Text('$currency$price / unit',
+                      style: const TextStyle(
+                          fontFamily: M.mono, fontSize: 11, color: M.fg3)),
                   const SizedBox(height: 2),
-                  Text('$currency$total', style: const TextStyle(fontFamily: M.mono, fontSize: 16, fontWeight: FontWeight.w700, color: M.fg1)),
+                  Text('$currency$total',
+                      style: const TextStyle(
+                          fontFamily: M.mono,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: M.fg1)),
                 ],
               ),
             ],
@@ -388,7 +505,8 @@ class _ScannerState extends State<Scanner> {
       children: [
         Container(
           height: 168,
-          decoration: BoxDecoration(color: M.card2, borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(
+              color: M.card2, borderRadius: BorderRadius.circular(12)),
           child: CustomPaint(
             painter: _ScanBrackets(),
             child: const Column(
@@ -396,7 +514,9 @@ class _ScannerState extends State<Scanner> {
               children: [
                 Icon(Icons.qr_code_2_rounded, size: 42, color: M.fg4),
                 SizedBox(height: 12),
-                Text('Point your camera at a barcode to scan', style: TextStyle(fontSize: 12, color: M.fg3, fontFamily: M.body)),
+                Text('Point your camera at a barcode to scan',
+                    style: TextStyle(
+                        fontSize: 12, color: M.fg3, fontFamily: M.body)),
               ],
             ),
           ),
@@ -437,7 +557,12 @@ class _DashedButton extends StatelessWidget {
         painter: _DashRect(),
         child: Center(
           child: Text(label.toUpperCase(),
-              style: const TextStyle(color: M.blue, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.7, fontFamily: M.body)),
+              style: const TextStyle(
+                  color: M.blue,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 12,
+                  letterSpacing: 0.7,
+                  fontFamily: M.body)),
         ),
       ),
     );
@@ -455,8 +580,13 @@ class AddLineBtn extends StatelessWidget {
 class _DashRect extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = M.borderStrong..style = PaintingStyle.stroke..strokeWidth = 1.5;
-    final path = Path()..addRRect(RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(10)));
+    final paint = Paint()
+      ..color = M.borderStrong
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+    final path = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+          Offset.zero & size, const Radius.circular(10)));
     const dash = 6.0, gap = 4.0;
     for (final m in path.computeMetrics()) {
       double d = 0;
@@ -474,12 +604,17 @@ class _DashRect extends CustomPainter {
 class _ScanBrackets extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final p = Paint()..color = tint(M.blue, 0x99)..style = PaintingStyle.stroke..strokeWidth = 2..strokeCap = StrokeCap.round;
+    final p = Paint()
+      ..color = tint(M.blue, 0x99)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round;
     const m = 18.0, len = 26.0;
     void corner(Offset o, int sx, int sy) {
       canvas.drawLine(o, o.translate(len * sx, 0), p);
       canvas.drawLine(o, o.translate(0, len * sy), p);
     }
+
     corner(const Offset(m, m), 1, 1);
     corner(Offset(size.width - m, m), -1, 1);
     corner(Offset(m, size.height - m), 1, -1);

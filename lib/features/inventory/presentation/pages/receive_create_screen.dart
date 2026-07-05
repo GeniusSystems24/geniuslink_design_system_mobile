@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
@@ -89,7 +89,10 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Receive Inventory')),
+      body: MScroll([
       ISection(
           icon: 'box',
           title: 'Receive Details',
@@ -172,6 +175,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
         ),
       ]),
       ActionRow(primary: 'Receive Inventory', onPrimary: _submit),
-    ]);
+    ]),
+    );
   }
 }

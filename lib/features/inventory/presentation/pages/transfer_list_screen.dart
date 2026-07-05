@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../workspace/presentation/bloc/nav_cubit.dart';
 
 class TransferListScreen extends StatefulWidget {
-  final NavCubit nav;
-  const TransferListScreen({super.key, required this.nav});
+  const TransferListScreen({super.key});
   @override
   State<TransferListScreen> createState() => _TransferListScreenState();
 }
@@ -22,7 +21,10 @@ class _TransferListScreenState extends State<TransferListScreen> {
     final visible = transfers.where((t) => _status == 'all' || t.$6 == _status).toList();
     PillTone tone(String s) => s == 'delivered' ? PillTone.success : (s == 'in-transit' ? PillTone.warning : (s == 'cancelled' ? PillTone.danger : PillTone.neutral));
     String label(String s) => s == 'in-transit' ? 'Transit' : (s[0].toUpperCase() + s.substring(1));
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Stock Transfers')),
+      body: MScroll([
       SizedBox(
         height: 32,
         child: ListView.separated(
@@ -54,10 +56,10 @@ class _TransferListScreenState extends State<TransferListScreen> {
           Icon(MIcons.of('chevD'), size: 13, color: M.fg3),
         ]),
       ),
-      MCard(marker: M.blue, title: '${visible.length} Transfers', pad: 8, children: [
+      MCard(accentColor: M.blue, title: '${visible.length} Transfers', pad: 8, children: [
         for (int i = 0; i < visible.length; i++)
           GestureDetector(
-            onTap: () => widget.nav.go('transferDetail'),
+            onTap: () => context.goTo('transferDetail'),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
@@ -82,6 +84,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
             ),
           ),
       ]),
-    ]);
+    ]),
+    );
   }
 }

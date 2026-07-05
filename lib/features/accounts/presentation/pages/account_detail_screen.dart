@@ -4,28 +4,30 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
-import 'package:gl_mobile_app/workspace/presentation/bloc/nav_cubit.dart';
 
 class AccountDetailScreen extends StatelessWidget {
-  final NavCubit nav;
-  const AccountDetailScreen({super.key, required this.nav});
+  const AccountDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
     const tx = [('JV-2024-0042', '+5,000.00', true), ('TR-9042', '-1,800.00', false), ('JV-2024-0071', '+650.00', true)];
-    return MScroll([
-      MCard(marker: M.green, title: 'Current Balance', right: const Pill('Active'), children: const [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Account Detail')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Current Balance', trailing: const Pill('Active'), children: const [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           SizedBox(width: 8),
           Text('42,500.00', style: TextStyle(fontFamily: M.mono, fontSize: 32, fontWeight: FontWeight.w700, letterSpacing: -0.6, color: M.green)),
         ]),
       ]),
-      const MCard(marker: M.blue, title: 'Information', children: [
+      const MCard(accentColor: M.blue, title: 'Information', children: [
         KV('Code', '1001', mono: true), KV('Type', 'Asset · Cash'),
         KV('Tree', 'Assets Tree (1)'), KV('Currency', 'SAR'),
       ]),
-      MCard(marker: M.green, title: 'Recent Transactions', pad: 8, children: [
+      MCard(accentColor: M.green, title: 'Recent Transactions', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -41,7 +43,8 @@ class AccountDetailScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => nav.back('accounts')),
-    ]);
+      MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('accounts')),
+    ]),
+    );
   }
 }

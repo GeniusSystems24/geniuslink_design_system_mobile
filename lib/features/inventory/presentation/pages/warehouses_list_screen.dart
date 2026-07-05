@@ -45,10 +45,14 @@ class WarehousesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const stores = [('ST-001', 'Downtown Central', 1248, 1800, 'Layla Ahmed', '342.8K'), ('ST-002', 'King Fahd Warehouse', 4892, 6000, 'Mohammed Saleh', '1.82M'), ('ST-003', 'Jeddah Showroom', 412, 600, 'Sara Al-Otaibi', '128.6K'), ('ST-004', 'Dammam Distribution', 2104, 2400, 'Khalid Al-Rashid', '624.2K'), ('ST-005', 'Madinah Outlet', 0, 500, '— Unassigned —', '0.00')];
-    return MScroll([
-      MCard(marker: M.blue, title: '5 Warehouses', sub: 'Capacity & assigned manager', pad: 8, children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Warehouses')),
+      body: MScroll([
+      MCard(accentColor: M.blue, title: '5 Warehouses', subtitle: 'Capacity & assigned manager', pad: 8, children: [
         for (int i = 0; i < stores.length; i++) _WarehouseRow(s: stores[i], last: i == stores.length - 1),
       ]),
-    ]);
+    ]),
+    );
   }
 }

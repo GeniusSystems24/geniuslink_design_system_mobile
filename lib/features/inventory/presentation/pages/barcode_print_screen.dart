@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
@@ -31,8 +31,11 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
   Widget build(BuildContext context) {
     const tpls = [('sm', 'Small Tag', '38×19'), ('md', 'Medium Label', '50×30'), ('lg', 'Large Shelf', '80×40'), ('sh', 'Shipping', '100×50')];
     final size = tpls.firstWhere((t) => t.$1 == _tpl).$3;
-    return MScroll([
-      MCard(marker: M.green, title: 'Preview', sub: 'Code 128 · $size mm', children: [
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Barcode Print')),
+      body: MScroll([
+      MCard(accentColor: M.green, title: 'Preview', subtitle: 'Code 128 · $size mm', children: [
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
@@ -97,6 +100,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
       ]),
       const ActionRow(primary: 'Print 24 Labels'),
-    ]);
+    ]),
+    );
   }
 }

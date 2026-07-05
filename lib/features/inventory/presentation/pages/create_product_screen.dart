@@ -62,7 +62,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MScroll([
+    return Scaffold(
+      backgroundColor: M.bg,
+      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Product')),
+      body: MScroll([
       ISection(
           icon: 'box',
           title: 'Product Definition',
@@ -165,6 +168,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             ),
           ]),
       ActionRow(primary: 'Create Product', onPrimary: _submit),
-    ]);
+    ]),
+    );
   }
 }
