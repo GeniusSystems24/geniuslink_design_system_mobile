@@ -6,7 +6,6 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../app/router/navigation_extensions.dart';
-import '../../../../design_system/adapters/banking/m_bank_kit.dart';
 
 class CreateDepositScreen extends StatelessWidget {
   const CreateDepositScreen({super.key});
@@ -15,24 +14,24 @@ class CreateDepositScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Deposit')),
-      body: MScroll([
-      const ISection(icon: 'download', title: 'Deposit Amount', accentColor: M.green, children: [
+      body: const MScroll([
+      ISection(icon: 'download', title: 'Deposit Amount', accentColor: M.green, children: [
         MMoney(label: 'Amount', value: '120,000.00', accent: M.green, required: true, sign: '+'),
         MMethod(value: 'cash'),
       ]),
-      const ISection(icon: 'card', title: 'Destination', accentColor: M.blue, children: [
+      ISection(icon: 'card', title: 'Destination', accentColor: M.blue, children: [
         IField(label: 'Deposit To', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Reference', placeholder: 'e.g. Counter slip no.'),
         IField(label: 'Value Date', value: 'Dec 19, 2025', icon: 'calendar'),
       ]),
-      const ISection(icon: 'ledger', title: 'Journal Preview', accentColor: M.green, defaultOpen: false, children: [
+      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: M.green, defaultOpen: false, children: [
         JournalPreview(rows: [
           ('Bank · NCB Main (1100)', '120,000.00', null),
           ('Cash Box (1001)', null, '120,000.00'),
         ]),
       ]),
-      const ITextarea(label: 'Memo', placeholder: 'Optional note for this deposit…'),
-      const ActionRow(primary: 'Create Deposit'),
+      ITextarea(label: 'Memo', placeholder: 'Optional note for this deposit…'),
+      ActionRow(primary: 'Create Deposit'),
     ]),
     );
   }
@@ -49,7 +48,7 @@ class DepositDetailScreen extends StatelessWidget {
       Container(
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(color: tint(M.green, 0x14), border: Border.all(color: tint(M.green, 0x40)), borderRadius: BorderRadius.circular(12)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Eyebrow('Deposit Receipt · DEP-2024-0182', color: M.green, size: 10),
           SizedBox(height: 10),
           Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
@@ -88,19 +87,19 @@ class CreateWithdrawalScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Withdrawal')),
-      body: MScroll([
-      const ISection(icon: 'card', title: 'Withdrawal Amount', accentColor: M.red, children: [
+      body: const MScroll([
+      ISection(icon: 'card', title: 'Withdrawal Amount', accentColor: M.red, children: [
         MMoney(label: 'Amount', value: '12,045.00', accent: M.red, required: true, sign: '−'),
         MMethod(value: 'wire'),
       ]),
-      const ISection(icon: 'building', title: 'Source & Purpose', accentColor: M.blue, children: [
+      ISection(icon: 'building', title: 'Source & Purpose', accentColor: M.blue, children: [
         IField(label: 'Withdraw From', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Payee', placeholder: 'e.g. Global Steel Imports', required: true),
         IField(label: 'Expense Account', value: 'Cost of Goods Sold (5001)', select: true),
         IField(label: 'Value Date', value: 'Dec 19, 2025', icon: 'calendar'),
       ]),
-      const InfoNote('Withdrawals above 10,000 SAR require a second approval before posting.', tone: M.orange),
-      const ActionRow(primary: 'Submit for Approval'),
+      InfoNote('Withdrawals above 10,000 SAR require a second approval before posting.', tone: M.orange),
+      ActionRow(primary: 'Submit for Approval'),
     ]),
     );
   }
@@ -117,13 +116,13 @@ class WithdrawalDetailScreen extends StatelessWidget {
       Container(
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(color: tint(M.red, 0x14), border: Border.all(color: tint(M.red, 0x40)), borderRadius: BorderRadius.circular(12)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Eyebrow('Withdrawal Voucher · WD-2024-0311', color: M.red, size: 10),
             Pill('Approved'),
           ]),
-          const SizedBox(height: 10),
-          const Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+          SizedBox(height: 10),
+          Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
             Text('−12,045.00 ', style: TextStyle(fontFamily: M.mono, fontSize: 30, fontWeight: FontWeight.w700, color: M.red, letterSpacing: -0.5)),
             Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 13, color: M.fg3)),
           ]),

@@ -80,7 +80,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               forceError: _force,
               onValidity: (e) => _skuErr = e,
             ),
-            SuperTextFormField(
+            const SuperTextFormField(
               label: 'Barcode',
               placeholder: 'Scan or type',
               leadingIcon: Icons.qr_code_scanner_rounded,
@@ -118,13 +118,13 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           title: 'Costing & Pricing',
           marker: M.green,
           children: [
-            SuperNumericFormField(
+            const SuperNumericFormField(
               label: 'Unit Cost (SAR)',
               prefix: 'SAR',
               decimals: 2,
               min: 0,
             ),
-            SuperNumericFormField(
+            const SuperNumericFormField(
               label: 'Selling Price (SAR)',
               prefix: 'SAR',
               decimals: 2,
@@ -141,7 +141,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           title: 'Inventory Settings',
           marker: M.orange,
           children: [
-            SuperNumericFormField(
+            const SuperNumericFormField(
               label: 'Reorder Level',
               min: 0,
               step: 1,
@@ -152,7 +152,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               label: 'Default Store',
               hintText: 'Select store…',
             ),
-            SuperNumericFormField(
+            const SuperNumericFormField(
               label: 'Opening Stock',
               min: 0,
               step: 1,

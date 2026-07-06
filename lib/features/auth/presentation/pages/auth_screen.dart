@@ -142,16 +142,16 @@ class LoginScreen extends StatelessWidget {
                     color: M.input,
                     border: Border.all(color: M.border),
                     borderRadius: BorderRadius.circular(8)),
-                child: Row(
+                child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.lock_outline_rounded,
+                    Icon(Icons.lock_outline_rounded,
                         size: 14, color: M.blue),
-                    const SizedBox(width: 9),
+                    SizedBox(width: 9),
                     Expanded(
                         child: Text(
                             'Sessions are recorded in the audit log with timestamp and device.',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontFamily: M.body,
                                 fontSize: 11.5,
                                 color: M.fg3,

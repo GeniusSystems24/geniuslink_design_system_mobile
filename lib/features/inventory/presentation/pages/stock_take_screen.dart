@@ -60,8 +60,8 @@ class StockTakeScreen extends StatelessWidget {
             FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: M.blue)),
           ])),
         ]),
-        GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: [
-          const Mini(label: 'Match', value: '1'), const Mini(label: 'Short', value: '2'), const Mini(label: 'Over', value: '0'),
+        GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: const [
+          Mini(label: 'Match', value: '1'), Mini(label: 'Short', value: '2'), Mini(label: 'Over', value: '0'),
         ]),
       ]),
       MCard(accentColor: M.green, title: 'Count Sheet', pad: 8, children: [

@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeCubit extends Cubit<ThemeMode> {
-  ThemeCubit([ThemeMode initial = ThemeMode.dark]) : super(initial);
+  ThemeCubit([super.initial = ThemeMode.dark]);
 
   bool get isDark => state == ThemeMode.dark;
 

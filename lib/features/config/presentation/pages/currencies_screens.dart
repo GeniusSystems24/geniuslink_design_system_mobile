@@ -65,19 +65,19 @@ class CreateCurrencyScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Add Currency')),
-      body: MScroll([
-      const ISection(icon: 'swap', title: 'Currency Definition', subtitle: 'ISO code, display names and symbol', accentColor: M.blue, children: [
+      body: const MScroll([
+      ISection(icon: 'swap', title: 'Currency Definition', subtitle: 'ISO code, display names and symbol', accentColor: M.blue, children: [
         IField(label: 'ISO Code', placeholder: 'e.g. USD', mono: true, required: true),
         IField(label: 'Symbol', placeholder: 'e.g. \$', required: true),
         IField(label: 'Name English', placeholder: 'e.g. US Dollar', required: true),
         IField(label: 'الاسم بالعربية', placeholder: 'مثال: دولار أمريكي', ar: true, required: true),
       ]),
-      const ISection(icon: 'ledger', title: 'Precision & Rate', subtitle: 'Decimal places and exchange rate against base', accentColor: M.green, children: [
+      ISection(icon: 'ledger', title: 'Precision & Rate', subtitle: 'Decimal places and exchange rate against base', accentColor: M.green, children: [
         IField(label: 'Decimal Places', value: '2', select: true),
         IField(label: 'Exchange Rate (per 1 SAR)', placeholder: 'e.g. 3.750200', mono: true),
         IToggle(label: 'Set as base currency', on: false),
       ]),
-      const ActionRow(primary: 'Add Currency'),
+      ActionRow(primary: 'Add Currency'),
     ]),
     );
   }
@@ -92,7 +92,7 @@ class CurrencyDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Currency Detail')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Current Rate', subtitle: 'Per 1 SAR · updated Dec 18, 2025', trailing: const Pill('Active'), children: const [
+      const MCard(accentColor: M.green, title: 'Current Rate', subtitle: 'Per 1 SAR · updated Dec 18, 2025', trailing: Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('USD', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           SizedBox(width: 10),

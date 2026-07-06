@@ -16,7 +16,7 @@ class AccountDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Account Detail')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Current Balance', trailing: const Pill('Active'), children: const [
+      const MCard(accentColor: M.green, title: 'Current Balance', trailing: Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
           SizedBox(width: 8),

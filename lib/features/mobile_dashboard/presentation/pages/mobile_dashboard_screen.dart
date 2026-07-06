@@ -351,7 +351,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   }
 
   Widget _title() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
+    return const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text('GOOD MORNING', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.3, color: M.blue)),
       SizedBox(height: 3),
       Text('Dashboard', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -0.8, color: M.fg1)),
@@ -482,7 +482,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
         decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
         child: _loading
-            ? Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: const [
+            ? const Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
                 _Bone(w: 80, h: 9), SizedBox(height: 12), _Bone(w: 110, h: 20), SizedBox(height: 12), _Bone(w: 60, h: 9),
               ])
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -708,7 +708,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
-      child: Column(children: const [
+      child: const Column(children: [
         Row(children: [Expanded(child: _Bone(w: 160, h: 13)), SizedBox(width: 12), _Bone(w: 64, h: 13)]),
         SizedBox(height: 9),
         Row(children: [_Bone(w: 110, h: 9), Spacer(), _Bone(w: 40, h: 9)]),
@@ -907,13 +907,17 @@ class _TrendPainter extends CustomPainter {
     final pts = [for (int i = 0; i < n; i++) Offset(xx(i), yy(values[i]))];
 
     final area = Path()..moveTo(pts.first.dx, padT + ih);
-    for (final p in pts) area.lineTo(p.dx, p.dy);
+    for (final p in pts) {
+      area.lineTo(p.dx, p.dy);
+    }
     area.lineTo(pts.last.dx, padT + ih);
     area.close();
     canvas.drawPath(area, Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [color.withOpacity(0.30), color.withOpacity(0.02)]).createShader(Rect.fromLTWH(0, padT, size.width, ih)));
 
     final line = Path()..moveTo(pts.first.dx, pts.first.dy);
-    for (final p in pts.skip(1)) line.lineTo(p.dx, p.dy);
+    for (final p in pts.skip(1)) {
+      line.lineTo(p.dx, p.dy);
+    }
     canvas.drawPath(line, Paint()..color = color..style = PaintingStyle.stroke..strokeWidth = 2.4..strokeCap = StrokeCap.round..strokeJoin = StrokeJoin.round);
 
     canvas.drawCircle(pts.last, 4.5, Paint()..color = color);

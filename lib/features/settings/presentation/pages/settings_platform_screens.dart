@@ -493,13 +493,13 @@ class _BackupView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(color: tint(M.red, 0x0F), border: Border.all(color: tint(M.red, 0x4D)), borderRadius: BorderRadius.circular(10)),
-            child: Row(children: [
-              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: const Row(children: [
+              Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
                 SizedBox(height: 2),
                 Text('30-day grace period.', style: TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
               ])),
-              const MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
+              MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
             ]),
           ),
         ]),

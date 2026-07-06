@@ -98,7 +98,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           title: 'Receive Details',
           marker: M.blue,
           children: [
-            SuperTextFormField(
+            const SuperTextFormField(
               label: 'Serial No',
               initialValue: 'INV-REC-2024-0241',
               readOnly: true,
@@ -159,7 +159,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             _BalancedRow(value: '24,200.00'),
           ]),
       ISection(icon: 'doc', title: 'Notes & Docs', marker: M.orange, children: [
-        SuperTextFormField(
+        const SuperTextFormField(
           label: 'Receipt Notes',
           placeholder: 'PO number, delivery note, inspection results…',
           multiline: true,

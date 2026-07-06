@@ -6,7 +6,6 @@
 import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
-import '../../../../design_system/adapters/inventory/m_inv_kit.dart';
 
 // Chart-of-accounts corpus for the journal-line account picker (MSuggest).
 const _coa = <(String, String)>[
@@ -101,13 +100,13 @@ class CreateJournalEntryScreen extends StatelessWidget {
         ITextarea(label: 'Description', placeholder: 'Describe this journal entry…'),
       ]),
       ISection(icon: 'ledger', title: 'Journal Lines', accentColor: M.green, sub: '2 lines · balanced', children: [
-        _LineEditor(account: 'Bank · NCB Main (1100)', side: 'Debit', amount: '6,600.00'),
-        _LineEditor(account: 'Sales Revenue (4001)', side: 'Credit', amount: '6,600.00'),
+        const _LineEditor(account: 'Bank · NCB Main (1100)', side: 'Debit', amount: '6,600.00'),
+        const _LineEditor(account: 'Sales Revenue (4001)', side: 'Credit', amount: '6,600.00'),
         const AddLineBtn(),
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(color: M.bg, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
-          child: Row(children: const [
+          child: const Row(children: [
             Expanded(child: _Total('Debits', '6,600.00', M.fg1)),
             Expanded(child: _Total('Credits', '6,600.00', M.fg1)),
             Expanded(child: _Total('Diff', '0.00', M.green)),
@@ -196,7 +195,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Journal Entry Detail')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Journal Entry', trailing: const Pill('Posted'), children: const [
+      const MCard(accentColor: M.green, title: 'Journal Entry', trailing: Pill('Posted'), children: [
         Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
         Text('Mixed sale & revenue recognition', style: TextStyle(fontSize: 14, color: M.fg1, fontFamily: M.body)),
       ]),

@@ -7,7 +7,6 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../app/router/navigation_extensions.dart';
-import '../../../../design_system/adapters/banking/m_bank_kit.dart';
 
 class CreateLocalTransferScreen extends StatelessWidget {
   const CreateLocalTransferScreen({super.key});
@@ -16,23 +15,23 @@ class CreateLocalTransferScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Local Transfer')),
-      body: MScroll([
-      const ISection(icon: 'swap', title: 'Transfer Amount', accentColor: M.blue, children: [
+      body: const MScroll([
+      ISection(icon: 'swap', title: 'Transfer Amount', accentColor: M.blue, children: [
         MMoney(label: 'Amount', value: '50,000.00', accent: M.blue, required: true),
       ]),
-      const ISection(icon: 'building', title: 'Accounts', accentColor: M.green, children: [
+      ISection(icon: 'building', title: 'Accounts', accentColor: M.green, children: [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'To Account', value: 'Bank · Al Rajhi (1101)', select: true, required: true),
         IField(label: 'Value Date', value: 'Dec 19, 2025', icon: 'calendar'),
         IField(label: 'Reference', placeholder: 'Internal note / slip no.'),
       ]),
-      const ISection(icon: 'ledger', title: 'Journal Preview', accentColor: M.green, defaultOpen: false, children: [
+      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: M.green, defaultOpen: false, children: [
         JournalPreview(rows: [
           ('Bank · Al Rajhi (1101)', '50,000.00', null),
           ('Bank · NCB Main (1100)', null, '50,000.00'),
         ]),
       ]),
-      const ActionRow(primary: 'Create Transfer'),
+      ActionRow(primary: 'Create Transfer'),
     ]),
     );
   }
@@ -46,7 +45,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Local Transfer Detail')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Inter-Account Settlement', trailing: const Pill('Posted'), children: const [
+      const MCard(accentColor: M.blue, title: 'Inter-Account Settlement', trailing: Pill('Posted'), children: [
         Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
       ]),
       const MCard(accentColor: M.blue, title: 'Flow', pad: 16, children: [
@@ -80,25 +79,25 @@ class CreateExternalTransferScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create External Transfer')),
-      body: MScroll([
-      const ISection(icon: 'globe', title: 'Transfer Amount', accentColor: M.orange, children: [
+      body: const MScroll([
+      ISection(icon: 'globe', title: 'Transfer Amount', accentColor: M.orange, children: [
         MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: M.orange, required: true),
       ]),
-      const ISection(icon: 'percent', title: 'FX Conversion', accentColor: M.blue, children: [
+      ISection(icon: 'percent', title: 'FX Conversion', accentColor: M.blue, children: [
         FxTiles(tiles: [
           ('Rate', '3.7500', 'USD → SAR', null),
           ('Converted', '41,250.00', 'SAR', M.fg1),
           ('Fee', '75.00', 'SAR', M.orange),
         ]),
       ]),
-      const ISection(icon: 'building', title: 'Beneficiary', accentColor: M.green, children: [
+      ISection(icon: 'building', title: 'Beneficiary', accentColor: M.green, children: [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Beneficiary', value: 'Global Steel Imports', select: true, required: true),
         IField(label: 'IBAN / SWIFT', value: 'DE89 3704 0044 0532 0130 00', mono: true),
         IField(label: 'Purpose Code', value: 'GSD — Goods', select: true),
       ]),
-      const InfoNote('External wires settle in 1–2 business days and require dual approval.', tone: M.blue),
-      const ActionRow(primary: 'Submit Wire'),
+      InfoNote('External wires settle in 1–2 business days and require dual approval.', tone: M.blue),
+      ActionRow(primary: 'Submit Wire'),
     ]),
     );
   }
@@ -112,7 +111,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('External Wire Detail')),
       body: MScroll([
-      MCard(accentColor: M.orange, title: 'External Wire', trailing: const Pill('Pending', tone: PillTone.warning), children: const [
+      const MCard(accentColor: M.orange, title: 'External Wire', trailing: Pill('Pending', tone: PillTone.warning), children: [
         Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
       ]),
       const MCard(accentColor: M.orange, title: 'Amount & FX', children: [

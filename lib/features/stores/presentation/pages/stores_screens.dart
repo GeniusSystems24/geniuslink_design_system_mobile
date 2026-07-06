@@ -81,15 +81,15 @@ class CreateStoreScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Store')),
-      body: MScroll([
-      const MCard(accentColor: M.blue, title: 'Store Details', subtitle: 'Name and location', children: [
+      body: const MScroll([
+      MCard(accentColor: M.blue, title: 'Store Details', subtitle: 'Name and location', children: [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),
         MField(label: 'الاسم بالعربية', placeholder: 'مثال: متجر وسط المدينة', ar: true, required: true),
         MField(label: 'Location Code', value: 'ST-001', mono: true),
         MField(label: 'Store Category', value: 'Retail'),
         MField(label: 'Note', placeholder: 'Add internal notes…'),
       ]),
-      const Row(children: [
+      Row(children: [
         Expanded(child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true)),
         SizedBox(width: 10),
         Expanded(child: MBtn('Create', icon: 'check', full: true)),
@@ -172,7 +172,7 @@ class IssueInventoryScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(color: M.bg, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [
+          child: const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Structural Steel', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),

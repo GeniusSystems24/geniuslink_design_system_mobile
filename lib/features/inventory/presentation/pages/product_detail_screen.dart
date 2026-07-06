@@ -20,11 +20,11 @@ class ProductDetailScreen extends StatelessWidget {
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Product Detail')),
       body: MScroll([
       MCard(accentColor: M.green, title: 'Stock Summary', subtitle: 'Aggregated across all stores', trailing: const Pill('In Stock'), children: [
-        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: [
-          const Mini(label: 'Total On Hand', value: '142', sub: 'PCS', hi: true),
-          const Mini(label: 'Stock Value', value: '63,900', sub: 'SAR'),
-          const Mini(label: 'Avg Unit Cost', value: '450.00', sub: 'SAR'),
-          const Mini(label: 'Reorder Level', value: '50', sub: 'PCS'),
+        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: const [
+          Mini(label: 'Total On Hand', value: '142', sub: 'PCS', hi: true),
+          Mini(label: 'Stock Value', value: '63,900', sub: 'SAR'),
+          Mini(label: 'Avg Unit Cost', value: '450.00', sub: 'SAR'),
+          Mini(label: 'Reorder Level', value: '50', sub: 'PCS'),
         ]),
       ]),
       const MCard(accentColor: M.blue, title: 'Product Information', children: [

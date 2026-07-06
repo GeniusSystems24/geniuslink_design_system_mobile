@@ -15,12 +15,12 @@ class ReceiveDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Receive Detail')),
       body: MScroll([
-      MCard(
+      const MCard(
           accentColor: M.green,
           title: 'Received Value',
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
-          trailing: const Pill('Posted'),
-          children: const [
+          trailing: Pill('Posted'),
+          children: [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,

@@ -278,7 +278,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 class _RoleChip extends StatelessWidget {
   const _RoleChip();
   @override
-  Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: const [
+  Widget build(BuildContext context) => const Row(mainAxisSize: MainAxisSize.min, children: [
         _Dot(M.orange),
         SizedBox(width: 5),
         Text('Accountant', style: TextStyle(fontSize: 12, color: M.fg2, fontFamily: M.body)),
@@ -299,19 +299,19 @@ class CreateUserScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Invite User')),
-      body: MScroll([
-      const ISection(icon: 'user', title: 'Identity', sub: "The new member's name and contact", marker: M.blue, children: [
+      body: const MScroll([
+      ISection(icon: 'user', title: 'Identity', sub: "The new member's name and contact", marker: M.blue, children: [
         TInput(label: 'Name English', placeholder: 'e.g. Omar Hassan', required: true),
         TInput(label: 'الاسم بالعربية', placeholder: 'مثال: عمر حسن', ar: true),
         TInput(label: 'Work Email', placeholder: 'name@geniuslink.sa', required: true),
         TInput(label: 'Employee ID', placeholder: 'Optional', mono: true),
       ]),
-      const ISection(icon: 'lock', title: 'Access', sub: 'Role determines default permissions', marker: M.green, children: [
+      ISection(icon: 'lock', title: 'Access', sub: 'Role determines default permissions', marker: M.green, children: [
         TSelect(label: 'Role', value: 'Accountant', options: ['Administrator', 'Controller', 'Accountant', 'Store Manager', 'Viewer']),
         TSelect(label: 'Default Store', value: 'All Stores', options: ['All Stores', 'Downtown Central', 'King Fahd Warehouse', 'Jeddah Showroom']),
         InfoNote('An invitation email with a single-use setup link will be sent. The account stays Pending until the user sets a password.', tone: M.blue),
       ]),
-      const Row(children: [
+      Row(children: [
         Expanded(child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true)),
         SizedBox(width: 10),
         Expanded(child: MBtn('Send Invitation', icon: 'check', full: true)),

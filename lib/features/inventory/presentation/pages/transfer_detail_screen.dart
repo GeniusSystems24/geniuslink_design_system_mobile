@@ -87,7 +87,7 @@ class TransferDetailScreen extends StatelessWidget {
                 child: Text('INV-TRF-2024-0117',
                     style: TextStyle(
                         fontFamily: M.mono, fontSize: 12, color: M.blue))),
-            _TransferFlowCard(
+            const _TransferFlowCard(
                 tone: M.orange,
                 label: 'From Store',
                 store: 'ST-001 · Downtown Central',

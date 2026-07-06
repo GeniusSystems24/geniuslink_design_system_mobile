@@ -45,7 +45,7 @@ class OpeningJournalScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               padding: const EdgeInsets.only(top: 12),
               decoration: const BoxDecoration(border: Border(top: BorderSide(color: M.borderStrong, width: 2))),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [
+              child: const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Eyebrow('Balanced · Diff 0.00', color: M.green, size: 11),
                 Text('5,000.00', style: TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1)),
               ]),
@@ -77,7 +77,7 @@ class OpDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Financial Operation')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Operation Summary', trailing: const Pill('Posted'), children: const [
+      const MCard(accentColor: M.green, title: 'Operation Summary', trailing: Pill('Posted'), children: [
         Text('OP-2024-0883', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
         Row(children: [
           Expanded(child: Mini(label: 'Total Debits', value: '6,600.00', sub: 'SAR')),

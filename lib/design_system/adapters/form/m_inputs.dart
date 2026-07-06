@@ -54,8 +54,9 @@ class _TInputState extends State<TInput> {
   @override
   void initState() {
     super.initState();
-    if (widget.defaultValue.isNotEmpty)
+    if (widget.defaultValue.isNotEmpty) {
       _c = SuperTextFieldController(initialValue: widget.defaultValue);
+    }
   }
 
   @override

@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 
 class WorkspaceShell extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
-  const WorkspaceShell({required this.navigationShell});
+  const WorkspaceShell({super.key, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class WorkspaceShell extends StatelessWidget {
 class MAppBar extends StatelessWidget {
   final String title;
   final Widget? action;
-  const MAppBar({required this.title, this.action});
+  const MAppBar({super.key, required this.title, this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class MAppBar extends StatelessWidget {
 class MTabBar extends StatelessWidget {
   final String active;
   final ValueChanged<int> onChange;
-  const MTabBar({required this.active, required this.onChange});
+  const MTabBar({super.key, required this.active, required this.onChange});
 
   @override
   Widget build(BuildContext context) {

@@ -75,7 +75,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           title: 'Transfer Details',
           marker: M.blue,
           children: [
-            SuperTextFormField(
+            const SuperTextFormField(
               label: 'Serial No',
               initialValue: 'INV-TRF-2024-0117',
               readOnly: true,
@@ -119,7 +119,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             const AddProductBtn(),
           ]),
       ISection(icon: 'doc', title: 'Notes & Docs', marker: M.orange, children: [
-        SuperTextFormField(
+        const SuperTextFormField(
           label: 'Notes',
           placeholder: 'Enter transfer notes or internal instructions…',
           multiline: true,

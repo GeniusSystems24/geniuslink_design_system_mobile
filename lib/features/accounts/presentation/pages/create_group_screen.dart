@@ -69,7 +69,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           hintText: 'Select a tree…',
         ),
       ]),
-      MCard(accentColor: M.orange, title: 'Additional Information', children: [
+      const MCard(accentColor: M.orange, title: 'Additional Information', children: [
         SuperTextFormField(
           label: 'Note',
           placeholder: 'Add any notes about this group…',

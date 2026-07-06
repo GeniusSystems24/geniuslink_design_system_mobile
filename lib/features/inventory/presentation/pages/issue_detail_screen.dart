@@ -11,12 +11,12 @@ class IssueDetailScreen extends StatelessWidget {
       backgroundColor: M.bg,
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Issue Detail')),
       body: MScroll([
-      MCard(
+      const MCard(
           accentColor: M.green,
           title: 'Issued Value',
           subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
-          trailing: const Pill('Posted'),
-          children: const [
+          trailing: Pill('Posted'),
+          children: [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,

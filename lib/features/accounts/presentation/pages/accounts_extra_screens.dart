@@ -72,14 +72,14 @@ class AccountDetailFullScreen extends StatelessWidget {
       appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Account Detail')),
       body: MScroll([
       MCard(accentColor: M.green, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
-        Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+        const Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text('42,500.00', style: TextStyle(fontFamily: M.mono, fontSize: 32, fontWeight: FontWeight.w700, color: M.green, letterSpacing: -0.6)),
         ]),
-        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: [
-          const Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
-          const Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
+        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: const [
+          Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
+          Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
         ]),
       ]),
       const MCard(accentColor: M.blue, title: 'Account Information', children: [
