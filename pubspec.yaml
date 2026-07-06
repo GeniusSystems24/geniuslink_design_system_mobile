@@ -21,14 +21,14 @@ dependencies:
   # migrated). Path-resolved against the project root.
   geniuslink_design_system: ^2.8.1
   # Focused GeniusLink form-field package — consumed by adapters/form/m_inputs.dart.
-  super_form_field: ^1.0.0
+  super_form_field: ^1.0.2
   # Focused GeniusLink suggestion / combobox package — the AutoSuggestionsBox
   # behind MSuggest (local + remote sources, prefix/contains/fuzzy, free-text).
   # Consumed by adapters/form/m_inputs.dart.
-  super_auto_suggestion_box: ^0.5.0
+  super_auto_suggestion_box: ^0.7.0
   # Focused GeniusLink table package — backs MTable (ReadableTable<T> read grid).
   # Consumed by adapters/table/m_table.dart.
-  super_table_field: ^1.0.0
+  super_table_field: ^2.1.1
   # Focused GeniusLink tree package — the hierarchical Tree<T> behind the
   # Account Tree screen (TreeNode<T> · TreeController<T> · search · expand /
   # collapse · keyboard nav · indent guides). Consumed by accounts screens.
