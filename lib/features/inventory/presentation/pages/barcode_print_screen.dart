@@ -32,10 +32,10 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
     const tpls = [('sm', 'Small Tag', '38×19'), ('md', 'Medium Label', '50×30'), ('lg', 'Large Shelf', '80×40'), ('sh', 'Shipping', '100×50')];
     final size = tpls.firstWhere((t) => t.$1 == _tpl).$3;
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Barcode Print')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Barcode Print')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Preview', subtitle: 'Code 128 · $size mm', children: [
+      MCard(accentColor: SuperTokens.success, title: 'Preview', subtitle: 'Code 128 · $size mm', children: [
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
@@ -59,7 +59,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
       ]),
-      ISection(icon: 'box', title: 'Label Template', marker: M.blue, children: [
+      ISection(icon: 'box', title: 'Label Template', marker: SuperTokens.accent, children: [
         GridView.count(
           crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 2.6,
@@ -69,33 +69,33 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
                 onTap: () => setState(() => _tpl = t.$1),
                 child: Container(
                   padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(color: _tpl == t.$1 ? tint(M.blue, 0x14) : M.input, border: Border.all(color: _tpl == t.$1 ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(color: _tpl == t.$1 ? superCoreTint(SuperTokens.accent, 0x14) : SuperThemeData.dark.inputBg, border: Border.all(color: _tpl == t.$1 ? SuperTokens.accent : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(t.$2, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: M.fg1, fontFamily: M.body)),
+                    Text(t.$2, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                     const SizedBox(height: 4),
-                    Text('${t.$3} mm', style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                    Text('${t.$3} mm', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                   ]),
                 ),
               ),
           ],
         ),
       ]),
-      const ISection(icon: 'scan', title: 'Print Settings', marker: M.green, children: [
+      const ISection(icon: 'scan', title: 'Print Settings', marker: SuperTokens.success, children: [
         IField(label: 'Symbology', value: 'Code 128', select: true),
         IField(label: 'Paper', value: 'A4 (210 × 297 mm)', select: true),
         IField(label: 'Copies per Item', placeholder: '1', mono: true),
       ]),
-      ISection(icon: 'doc', title: 'Queue', sub: '4 products · 12 labels · 1 sheet', marker: M.orange, children: [
+      ISection(icon: 'doc', title: 'Queue', sub: '4 products · 12 labels · 1 sheet', marker: SuperTokens.warning, children: [
         for (final q in const [('STL-44021', 'Structural Steel I-Beam', 4), ('CMT-90112', 'Portland Cement Type I', 12), ('AGG-21044', 'Coarse Aggregate 20mm', 2), ('PLY-30022', 'Plywood Sheet 18mm', 6)])
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(children: [
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(q.$2, style: const TextStyle(fontSize: 12.5, color: M.fg1, fontWeight: FontWeight.w500, fontFamily: M.body)),
+                Text(q.$2, style: TextStyle(fontSize: 12.5, color: SuperThemeData.dark.fg1, fontWeight: FontWeight.w500, fontFamily: SuperTokens.bodyFont)),
                 const SizedBox(height: 2),
-                Text(q.$1, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                Text(q.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
               ])),
-              Text('×${q.$3}', style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.fg1)),
+              Text('×${q.$3}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
             ]),
           ),
       ]),

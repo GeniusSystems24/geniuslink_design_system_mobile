@@ -19,8 +19,8 @@ class _TransferFlowCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-          color: tint(tone, 0x0F),
-          border: Border.all(color: tint(tone, 0x40)),
+          color: superCoreTint(tone, 0x0F),
+          border: Border.all(color: superCoreTint(tone, 0x40)),
           borderRadius: BorderRadius.circular(10)),
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
@@ -35,25 +35,25 @@ class _TransferFlowCard extends StatelessWidget {
             Eyebrow(label, color: tone, size: 9.5),
             const SizedBox(height: 6),
             Text(store,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: M.fg1,
-                    fontFamily: M.body)),
+                    color: SuperThemeData.dark.fg1,
+                    fontFamily: SuperTokens.bodyFont)),
             Directionality(
                 textDirection: TextDirection.rtl,
                 child: Text(ar,
-                    style: const TextStyle(
-                        fontFamily: M.arabic, fontSize: 12, color: M.fg3))),
+                    style: TextStyle(
+                        fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
             Container(
               margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.only(top: 10),
               width: double.infinity,
-              decoration: const BoxDecoration(
-                  border: Border(top: BorderSide(color: M.border))),
+              decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
               child: Text(delta,
                   style: TextStyle(
-                      fontFamily: M.mono,
+                      fontFamily: SuperTokens.monoFont,
                       fontSize: 11.5,
                       fontWeight: FontWeight.w600,
                       color: deltaColor)),
@@ -74,11 +74,11 @@ class TransferDetailScreen extends StatelessWidget {
       ('Reinforcement Bar #6', '240 PCS × 78.00', '18,720.00')
     ];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Transfer Detail')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Transfer Detail')),
       body: MScroll([
       MCard(
-          accentColor: M.blue,
+          accentColor: SuperTokens.accent,
           title: 'In Transit',
           trailing: const Pill('In Transit', tone: PillTone.warning),
           children: [
@@ -86,25 +86,25 @@ class TransferDetailScreen extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 2),
                 child: Text('INV-TRF-2024-0117',
                     style: TextStyle(
-                        fontFamily: M.mono, fontSize: 12, color: M.blue))),
+                        fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent))),
             const _TransferFlowCard(
-                tone: M.orange,
+                tone: SuperTokens.warning,
                 label: 'From Store',
                 store: 'ST-001 · Downtown Central',
                 ar: 'متجر وسط المدينة',
                 delta: '-54,892 SAR',
-                deltaColor: M.red),
+                deltaColor: SuperTokens.danger),
             Transform.translate(
               offset: const Offset(0, -6),
               child: Container(
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                    color: M.blue,
+                    color: SuperTokens.accent,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                          color: tint(M.blue, 0x99),
+                          color: superCoreTint(SuperTokens.accent, 0x99),
                           blurRadius: 18,
                           offset: const Offset(0, 6))
                     ]),
@@ -115,16 +115,16 @@ class TransferDetailScreen extends StatelessWidget {
             Transform.translate(
               offset: const Offset(0, -6),
               child: const _TransferFlowCard(
-                  tone: M.green,
+                  tone: SuperTokens.success,
                   label: 'To Store',
                   store: 'ST-002 · King Fahd Warehouse',
                   ar: 'مستودع الملك فهد',
                   delta: '+54,892 SAR',
-                  deltaColor: M.green),
+                  deltaColor: SuperTokens.success),
             ),
           ]),
       MCard(
-          accentColor: M.green,
+          accentColor: SuperTokens.success,
           title: 'Items in Transit',
           subtitle: '2 lines · 258 units',
           pad: 8,
@@ -137,7 +137,7 @@ class TransferDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      const MCard(accentColor: M.blue, title: 'Logistics & Tracking', children: [
+      const MCard(accentColor: SuperTokens.accent, title: 'Logistics & Tracking', children: [
         KV('Carrier', 'Plate 4892-RKD'),
         KV('Driver', 'Mohammed S.'),
         KV('Expected Arrival', 'Dec 20, 2025', mono: true),

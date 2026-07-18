@@ -5,17 +5,16 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../tokens/m_colors.dart';
-
-export '../../tokens/m_colors.dart';
-
+import 'package:super_form_field/super_form_field.dart';
+import 'package:super_core/super_core.dart';
+import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 class Eyebrow extends StatelessWidget {
   final String text;
   final Color? color;
   final double size;
   const Eyebrow(this.text, {super.key, this.color, this.size = 10});
   @override
-  Widget build(BuildContext context) => Text(text.toUpperCase(), style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: size, letterSpacing: 0.6, color: color ?? M.fg2));
+  Widget build(BuildContext context) => Text(text.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: size, letterSpacing: 0.6, color: color ?? SuperThemeData.dark.fg2));
 }
 
 class MCard extends StatefulWidget {
@@ -65,8 +64,8 @@ class _MCardState extends State<MCard> {
     return Container(
       padding: EdgeInsets.all(widget.pad),
       decoration: BoxDecoration(
-        color: M.surface,
-        border: Border.all(color: M.border),
+        color: SuperThemeData.dark.surface,
+        border: Border.all(color: SuperThemeData.dark.border),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -91,9 +90,9 @@ class _MCardState extends State<MCard> {
                     AnimatedRotation(
                       turns: _expanded ? 0.5 : 0,
                       duration: const Duration(milliseconds: 200),
-                      child: const Icon(
+                      child: Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: M.fg3,
+                        color: SuperThemeData.dark.fg3,
                         size: 22,
                       ),
                     ),
@@ -170,7 +169,7 @@ class _MCardTitle extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1),
+                style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 15, color: SuperThemeData.dark.fg1),
               ),
               if (subtitle != null) ...[
                 const SizedBox(height: 4),
@@ -178,7 +177,7 @@ class _MCardTitle extends StatelessWidget {
                   message: subtitle!,
                   child: Text(
                     subtitle!.toUpperCase(),
-                    style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg3),
+                    style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: SuperThemeData.dark.fg3),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -200,28 +199,26 @@ class MField extends StatelessWidget {
   final String label;
   final String? placeholder, value;
   final bool ar, mono, required;
-  const MField({super.key, required this.label, this.placeholder, this.value, this.ar = false, this.mono = false, this.required = false});
+
+  const MField({
+    super.key,
+    required this.label,
+    this.placeholder,
+    this.value,
+    this.ar = false,
+    this.mono = false,
+    this.required = false,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final hasValue = value != null && value!.isNotEmpty;
-    return Directionality(
-      textDirection: ar ? TextDirection.rtl : TextDirection.ltr,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Padding(padding: const EdgeInsets.only(bottom: 7), child: Text.rich(TextSpan(children: [
-          TextSpan(text: label.toUpperCase()),
-          if (required) const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-        ], style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: M.fg2)))),
-        Container(
-          height: 46, padding: const EdgeInsets.symmetric(horizontal: 14),
-          alignment: ar ? Alignment.centerRight : Alignment.centerLeft,
-          decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
-          child: Text(hasValue ? value! : (placeholder ?? ''), maxLines: 1, overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontFamily: mono ? M.mono : (ar ? M.arabic : M.body), fontSize: 14, color: hasValue ? M.fg1 : M.fg3)),
-        ),
-      ]),
-    );
-  }
+  Widget build(BuildContext context) => SuperTextFormField(
+        label: label,
+        initialValue: value ?? '',
+        placeholder: placeholder,
+        required: required,
+        arabic: ar,
+        readOnly: true,
+      );
 }
 
 class Mini extends StatelessWidget {
@@ -233,11 +230,11 @@ class Mini extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: hi ? tint(M.green, 0x14) : M.bg, border: Border.all(color: hi ? tint(M.green, 0x4D) : M.border), borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(color: hi ? superCoreTint(SuperTokens.success, 0x14) : SuperThemeData.dark.bg, border: Border.all(color: hi ? superCoreTint(SuperTokens.success, 0x4D) : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(10)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Eyebrow(label, color: M.fg3, size: 9.5),
-        Padding(padding: const EdgeInsets.only(top: 6), child: Text(value, style: TextStyle(fontFamily: M.mono, fontSize: 20, fontWeight: FontWeight.w600, color: hi ? M.green : M.fg1))),
-        if (sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(sub!, style: const TextStyle(fontFamily: M.mono, fontSize: 10, color: M.fg3))),
+        Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9.5),
+        Padding(padding: const EdgeInsets.only(top: 6), child: Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 20, fontWeight: FontWeight.w600, color: hi ? SuperTokens.success : SuperThemeData.dark.fg1))),
+        if (sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(sub!, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg3))),
       ]),
     );
   }
@@ -253,8 +250,8 @@ class Avatar extends StatelessWidget {
     final initials = parts.take(2).map((w) => w.isEmpty ? '' : w[0]).join();
     return Container(
       width: size, height: size, alignment: Alignment.center,
-      decoration: BoxDecoration(color: M.input, shape: BoxShape.circle, border: Border.all(color: M.borderStrong)),
-      child: Text(initials, style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: size * 0.36, color: M.fg2)),
+      decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, shape: BoxShape.circle, border: Border.all(color: SuperThemeData.dark.borderStrong)),
+      child: Text(initials, style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: size * 0.36, color: SuperThemeData.dark.fg2)),
     );
   }
 }
@@ -265,9 +262,9 @@ class KV extends StatelessWidget {
   const KV(this.k, this.v, {super.key, this.mono = false, this.ar = false});
   @override
   Widget build(BuildContext context) => Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Eyebrow(k, color: M.fg3),
+        Eyebrow(k, color: SuperThemeData.dark.fg3),
         const SizedBox(width: 12),
-        Expanded(child: Text(v, textAlign: TextAlign.end, style: TextStyle(fontSize: 13.5, color: M.fg1, fontFamily: ar ? M.arabic : (mono ? M.mono : M.body)))),
+        Expanded(child: Text(v, textAlign: TextAlign.end, style: TextStyle(fontSize: 13.5, color: SuperThemeData.dark.fg1, fontFamily: ar ? SuperTokens.arabicFont : (mono ? SuperTokens.monoFont : SuperTokens.bodyFont)))),
       ]);
 }
 

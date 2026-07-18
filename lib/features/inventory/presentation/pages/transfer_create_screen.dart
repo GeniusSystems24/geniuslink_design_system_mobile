@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 
@@ -18,7 +18,7 @@ class TransferCreateScreen extends StatefulWidget {
 }
 
 class _TransferCreateScreenState extends State<TransferCreateScreen> {
-  final _fromCtl = AutoSuggestionsBoxController<String>(
+  final _fromController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'Downtown Central',
       'North Warehouse',
@@ -26,7 +26,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _toCtl = AutoSuggestionsBoxController<String>(
+  final _toController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'North Warehouse',
       'Downtown Central',
@@ -34,7 +34,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _currencyCtl = AutoSuggestionsBoxController<String>(
+  final _currencyController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'SAR — Saudi Riyal',
       'USD — US Dollar',
@@ -47,9 +47,9 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
   @override
   void dispose() {
     for (final l in _lines) { l.dispose(); }
-    _fromCtl.dispose();
-    _toCtl.dispose();
-    _currencyCtl.dispose();
+    _fromController.dispose();
+    _toController.dispose();
+    _currencyController.dispose();
     super.dispose();
   }
 
@@ -67,13 +67,13 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Transfer Inventory')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Transfer Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Transfer Details',
-          marker: M.blue,
+          marker: SuperTokens.accent,
           children: [
             const SuperTextFormField(
               label: 'Serial No',
@@ -81,17 +81,17 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
               readOnly: true,
             ),
             AutoSuggestionsBox<String>(
-              controller: _currencyCtl,
+              controller: _currencyController,
               label: 'Currency',
               hintText: 'Select currency…',
             ),
             AutoSuggestionsBox<String>(
-              controller: _fromCtl,
+              controller: _fromController,
               label: 'From Store',
               hintText: 'Search origin warehouse…',
             ),
             AutoSuggestionsBox<String>(
-              controller: _toCtl,
+              controller: _toController,
               label: 'To Store',
               hintText: 'Search destination…',
             ),
@@ -100,7 +100,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           icon: 'cart',
           title: 'Products',
           sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
-          marker: M.blue,
+          marker: SuperTokens.accent,
           children: [
             Scanner(onPick: _addLine),
             ..._lines.asMap().entries.map((e) {
@@ -118,7 +118,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             }),
             const AddProductBtn(),
           ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: M.orange, children: [
+      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperTokens.warning, children: [
         const SuperTextFormField(
           label: 'Notes',
           placeholder: 'Enter transfer notes or internal instructions…',
@@ -131,7 +131,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           maxSizeMB: 10,
           maxFiles: 5,
           multiple: true,
-          onBrowse: () async => [],
+          onBrowse: () async => const <SuperFile>[],
         ),
       ]),
       ActionRow(primary: 'Transfer Inventory', onPrimary: _submit),

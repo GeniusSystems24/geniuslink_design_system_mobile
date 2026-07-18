@@ -18,26 +18,24 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   bool _force = false;
   String? _skuErr, _nameEnErr, _nameArErr;
 
-  final _categoryCtl = AutoSuggestionsBoxController<String>(
+  final _categoryController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'Steel', 'Concrete', 'Lumber', 'Fasteners', 'Tools',
     ]),
     allowFreeText: false,
   );
-  final _uomCtl = AutoSuggestionsBoxController<String>(
+  final _uomController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'PCS', 'KG', 'TON', 'M', 'M²', 'LTR',
     ]),
     allowFreeText: false,
   );
-  final _vatCtl = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
-      '0%', '5%', '15%',
-    ]),
+  final _vatController = AutoSuggestionsBoxController<String>(
+    source: SuggestionSources.strings(['0%', '5%', '15%']),
     allowFreeText: false,
     initialText: '15%',
   );
-  final _storeCtl = AutoSuggestionsBoxController<String>(
+  final _storeController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'Downtown Central', 'North Warehouse', 'East Distribution',
     ]),
@@ -46,10 +44,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
   @override
   void dispose() {
-    _categoryCtl.dispose();
-    _uomCtl.dispose();
-    _vatCtl.dispose();
-    _storeCtl.dispose();
+    _categoryController.dispose();
+    _uomController.dispose();
+    _vatController.dispose();
+    _storeController.dispose();
     super.dispose();
   }
 
@@ -63,14 +61,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Product')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Product')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Product Definition',
           sub: 'SKU, names and classification',
-          marker: M.blue,
+          marker: SuperTokens.accent,
           children: [
             SuperTextFormField(
               label: 'SKU',
@@ -103,12 +101,12 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               onValidity: (e) => _nameArErr = e,
             ),
             AutoSuggestionsBox<String>(
-              controller: _categoryCtl,
+              controller: _categoryController,
               label: 'Category',
               hintText: 'Select category…',
             ),
             AutoSuggestionsBox<String>(
-              controller: _uomCtl,
+              controller: _uomController,
               label: 'Unit of Measure',
               hintText: 'Select unit…',
             ),
@@ -116,7 +114,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       ISection(
           icon: 'swap',
           title: 'Costing & Pricing',
-          marker: M.green,
+          marker: SuperTokens.success,
           children: [
             const SuperNumericFormField(
               label: 'Unit Cost (SAR)',
@@ -131,7 +129,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               min: 0,
             ),
             AutoSuggestionsBox<String>(
-              controller: _vatCtl,
+              controller: _vatController,
               label: 'VAT Rate',
               hintText: 'Select rate…',
             ),
@@ -139,7 +137,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       ISection(
           icon: 'store',
           title: 'Inventory Settings',
-          marker: M.orange,
+          marker: SuperTokens.warning,
           children: [
             const SuperNumericFormField(
               label: 'Reorder Level',
@@ -148,7 +146,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               decimals: 0,
             ),
             AutoSuggestionsBox<String>(
-              controller: _storeCtl,
+              controller: _storeController,
               label: 'Default Store',
               hintText: 'Select store…',
             ),
@@ -164,7 +162,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               maxSizeMB: 10,
               maxFiles: 5,
               multiple: true,
-              onBrowse: () async => [],
+              onBrowse: () async => const <SuperFile>[],
             ),
           ]),
       ActionRow(primary: 'Create Product', onPrimary: _submit),

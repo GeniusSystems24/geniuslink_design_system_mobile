@@ -18,27 +18,27 @@ class DistRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : const Border(bottom: BorderSide(color: M.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Row(children: [
         Expanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(account,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: M.fg1,
-                    fontFamily: M.body)),
+                    color: SuperThemeData.dark.fg1,
+                    fontFamily: SuperTokens.bodyFont)),
             const SizedBox(height: 4),
             Pill(side, tone: side == 'Debit' ? PillTone.info : PillTone.danger),
           ]),
         ),
         Text(amount,
             style: TextStyle(
-                fontFamily: M.mono,
+                fontFamily: SuperTokens.monoFont,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
-                color: amount.startsWith('+') ? M.green : M.red)),
+                color: amount.startsWith('+') ? SuperTokens.success : SuperTokens.danger)),
       ]),
     );
   }
@@ -55,29 +55,29 @@ class ItemLine extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : const Border(bottom: BorderSide(color: M.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Row(children: [
         Expanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(item.$1,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: M.fg1,
-                    fontFamily: M.body)),
+                    color: SuperThemeData.dark.fg1,
+                    fontFamily: SuperTokens.bodyFont)),
             const SizedBox(height: 2),
             Text(item.$2,
-                style: const TextStyle(
-                    fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                style: TextStyle(
+                    fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
           ]),
         ),
         Text(item.$3,
-            style: const TextStyle(
-                fontFamily: M.mono,
+            style: TextStyle(
+                fontFamily: SuperTokens.monoFont,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: M.fg1)),
+                color: SuperThemeData.dark.fg1)),
       ]),
     );
   }

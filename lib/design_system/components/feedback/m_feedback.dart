@@ -4,8 +4,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../tokens/m_colors.dart';
-
+import 'package:super_core/super_core.dart' hide PillTone;
+import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 enum PillTone { success, info, warning, danger, neutral }
 
 class Pill extends StatelessWidget {
@@ -15,16 +15,16 @@ class Pill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = switch (tone) {
-      PillTone.success => M.green,
-      PillTone.info    => M.blue,
-      PillTone.warning => M.orange,
-      PillTone.danger  => M.red,
-      PillTone.neutral => M.fg3,
+      PillTone.success => SuperTokens.success,
+      PillTone.info    => SuperTokens.accent,
+      PillTone.warning => SuperTokens.warning,
+      PillTone.danger  => SuperTokens.danger,
+      PillTone.neutral => SuperThemeData.dark.fg3,
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
-      decoration: BoxDecoration(color: tint(c, 0x26), borderRadius: BorderRadius.circular(10)),
-      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: M.body, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: c)),
+      decoration: BoxDecoration(color: superCoreTint(c, 0x26), borderRadius: BorderRadius.circular(10)),
+      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: c)),
     );
   }
 }

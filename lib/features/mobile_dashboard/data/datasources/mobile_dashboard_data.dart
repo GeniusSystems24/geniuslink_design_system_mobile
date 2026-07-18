@@ -7,8 +7,7 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import '../../../../design_system/tokens/m_colors.dart';
-
+import 'package:super_core/super_core.dart';
 class MdTrend {
   final bool up;
   final double pct;
@@ -55,15 +54,15 @@ class MdWorkspace {
   const MdWorkspace(this.id, this.name, this.tag, this.factor);
 }
 
-Color mdMarker(String m) => m == 'green' ? M.green : (m == 'orange' ? M.orange : M.blue);
-Color mdTone(String t) => switch (t) { 'success' => M.green, 'info' => M.blue, 'warning' => M.orange, 'danger' => M.red, _ => M.fg3 };
+Color mdMarker(String m) => m == 'green' ? SuperTokens.success : (m == 'orange' ? SuperTokens.warning : SuperTokens.accent);
+Color mdTone(String t) => switch (t) { 'success' => SuperTokens.success, 'info' => SuperTokens.accent, 'warning' => SuperTokens.warning, 'danger' => SuperTokens.danger, _ => SuperThemeData.dark.fg3 };
 
 MdTrend _u(double p) => MdTrend(true, p);
 MdTrend _d(double p) => MdTrend(false, p);
 Map<String, double> _v(double s, double u, double a) => {'SAR': s, 'USD': u, 'AED': a};
 
 // ── chart series (mirrors data.jsx _genSeries) ──
-const _pts = {'day': 12, 'week': 7, 'month': 8};
+final _pts = {'day': 12, 'week': 7, 'month': 8};
 double _wob(int i, double seed) => math.sin(i * 1.73 + seed) * 0.5 + math.sin(i * 0.61 + seed * 2.1) * 0.5;
 List<double> _gen(double pct, int n, double seed) {
   final start = 1 / (1 + (pct == 0 ? 2 : pct) / 100);
@@ -90,15 +89,15 @@ MdCard _card(int ti, int ci, String id, String label, String marker, Map<String,
     MdCard(id: id, label: label, marker: marker, val: val, trend: trend, series: _series(trend, ti, ci));
 
 // ── currencies / workspaces / attention ──
-const mdCurrencies = [('SAR', 'Saudi Riyal'), ('USD', 'US Dollar'), ('AED', 'UAE Dirham')];
+final mdCurrencies = [('SAR', 'Saudi Riyal'), ('USD', 'US Dollar'), ('AED', 'UAE Dirham')];
 
-const mdWorkspaces = [
+final mdWorkspaces = [
   MdWorkspace('rashid', 'Al-Rashid Trading Co.', 'Tenant 9', 1),
   MdWorkspace('najd', 'Najd Holdings', 'Tenant 14', 1.46),
   MdWorkspace('coastal', 'Coastal Logistics', 'Tenant 22', 0.83),
 ];
 
-const mdAttention = [
+final mdAttention = [
   MdAttention('oob', 'danger', 'alert', 2, 'Out-of-balance entries', "Debits and credits don't match"),
   MdAttention('approvals', 'warning', 'inbox', 5, 'Pending approvals', 'Vouchers awaiting your sign-off'),
   MdAttention('sync', 'info', 'alert', 1, 'Sync conflict', 'A draft edited on two devices'),
@@ -180,7 +179,7 @@ final List<MdTab> mdTabs = [
   ),
 ];
 
-const mdAxis = {
+final mdAxis = {
   'day': ['9a', '12p', '3p', '6p', 'now'],
   'week': ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
   'month': ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'],

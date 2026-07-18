@@ -5,8 +5,10 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_table_field/super_table_field.dart';
-import '../../tokens/m_colors.dart';
+import 'package:super_table_field/super_table_field.dart'
+    hide FieldDensity, PillTone, SuperThemeData;
+import 'package:super_form_field/super_form_field.dart' hide PillTone;
+import 'package:super_core/super_core.dart' hide PillTone, FieldDensity;
 import '../../components/feedback/m_feedback.dart';
 
 // ============================================================
@@ -42,8 +44,7 @@ export 'package:super_table_field/super_table_field.dart'
         SuperPill,
         SuperTableSkin,
         SuperDensity,
-        SuperThemeData,
-        AutoSuggestionsBoxThemeData;
+        SuperThemeData;
 
 // ============================================================
 // MTable — mobile wrapper over the design-system SuperTable
@@ -142,10 +143,10 @@ Widget mcell(
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        fontFamily: mono ? M.mono : M.body,
+        fontFamily: mono ? SuperTokens.monoFont : SuperTokens.bodyFont,
         fontSize: 12.5,
         fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-        color: color ?? (muted ? M.fg3 : M.fg1),
+        color: color ?? (muted ? SuperThemeData.dark.fg3 : SuperThemeData.dark.fg1),
       ));
 }
 
@@ -179,7 +180,7 @@ class MTable extends StatefulWidget {
 
 class _MTableState extends State<MTable> {
   late SuperTableController<Map<String, dynamic>> _controller;
-  final TextEditingController _searchCtrl = TextEditingController();
+  final SuperTextFieldController _searchCtrl = SuperTextFieldController();
 
   @override
   void initState() {
@@ -299,22 +300,13 @@ class _MTableState extends State<MTable> {
   Widget _buildSearchBar() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: TextField(
+      child: SuperTextFormField(
         controller: _searchCtrl,
-        onChanged: (v) => _controller.setSearch(v),
-        decoration: InputDecoration(
-          hintText: widget.searchHint,
-          prefixIcon: const Icon(Icons.search_rounded, size: 18),
-          isDense: true,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
-          filled: true,
-          fillColor: M.input,
-        ),
+        placeholder: widget.searchHint,
+        leadingIcon: Icons.search_rounded,
+        clearable: true,
+        density: FieldDensity.compact,
+        onChanged: _controller.setSearch,
       ),
     );
   }

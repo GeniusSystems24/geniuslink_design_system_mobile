@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
-const _stores = [
+final _stores = [
   ('ST-001', 'Downtown Central', 'وسط المدينة', '342,820', '1,248'),
   ('ST-002', 'King Fahd Warehouse', 'مستودع الملك فهد', '1,820,460', '4,892'),
   ('ST-003', 'Jeddah Showroom', 'صالة عرض جدة', '128,640', '412'),
@@ -19,8 +19,8 @@ class StoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Stores')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Stores')),
       body: MScroll([
       for (final s in _stores)
         GestureDetector(
@@ -28,7 +28,7 @@ class StoresScreen extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           child: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(12)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,18 +39,18 @@ class StoresScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(s.$2, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                          Text(s.$2, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                           const SizedBox(height: 2),
                           Directionality(textDirection: TextDirection.rtl,
-                              child: Text(s.$3, style: const TextStyle(fontFamily: M.arabic, fontSize: 12.5, color: M.fg3))),
+                              child: Text(s.$3, style: TextStyle(fontFamily: SuperTokens.arabicFont, fontSize: 12.5, color: SuperThemeData.dark.fg3))),
                         ],
                       ),
                     ),
-                    Text(s.$1, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                    Text(s.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                   ],
                 ),
                 Container(margin: const EdgeInsets.only(top: 14), padding: const EdgeInsets.only(top: 14),
-                    decoration: const BoxDecoration(border: Border(top: BorderSide(color: M.border))),
+                    decoration: BoxDecoration(border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
                     child: Row(children: [
                       _stat('Value', '${s.$4} SAR'),
                       const SizedBox(width: 20),
@@ -67,9 +67,9 @@ class StoresScreen extends StatelessWidget {
   Widget _stat(String label, String value) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Eyebrow(label, color: M.fg3, size: 9.5),
+          Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9.5),
           const SizedBox(height: 3),
-          Text(value, style: const TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w600, color: M.fg1)),
+          Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
         ],
       );
 }
@@ -79,10 +79,10 @@ class CreateStoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Store')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Store')),
       body: const MScroll([
-      MCard(accentColor: M.blue, title: 'Store Details', subtitle: 'Name and location', children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Store Details', subtitle: 'Name and location', children: [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),
         MField(label: 'الاسم بالعربية', placeholder: 'مثال: متجر وسط المدينة', ar: true, required: true),
         MField(label: 'Location Code', value: 'ST-001', mono: true),
@@ -109,17 +109,17 @@ class StoreDetailScreen extends StatelessWidget {
       ('RBR-71203', 'Rebar #6', '0', 'out'),
     ];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Store Detail')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Store Detail')),
       body: MScroll([
-      const MCard(accentColor: M.green, title: 'Store Summary', trailing: Pill('Active'), children: [
+      const MCard(accentColor: SuperTokens.success, title: 'Store Summary', trailing: Pill('Active'), children: [
         Row(children: [
           Expanded(child: Mini(label: 'Stock Value', value: '342,820', sub: 'SAR', hi: true)),
           SizedBox(width: 12),
           Expanded(child: Mini(label: 'SKUs', value: '1,248')),
         ]),
       ]),
-      MCard(accentColor: M.green, title: 'Stock On Hand', pad: 8, children: [
+      MCard(accentColor: SuperTokens.success, title: 'Stock On Hand', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -133,21 +133,21 @@ class StoreDetailScreen extends StatelessWidget {
   }
 
   Widget _stockRow((String, String, String, String) it, bool last) {
-    final qtyColor = it.$3 == '0' ? M.red : (it.$4 == 'low' ? M.orange : M.fg1);
+    final qtyColor = it.$3 == '0' ? SuperTokens.danger : (it.$4 == 'low' ? SuperTokens.warning : SuperThemeData.dark.fg1);
     final tone = it.$4 == 'in' ? PillTone.success : (it.$4 == 'low' ? PillTone.warning : PillTone.danger);
     final tlabel = it.$4 == 'in' ? 'In' : (it.$4 == 'low' ? 'Low' : 'Out');
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Row(children: [
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(it.$2, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+            Text(it.$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
             const SizedBox(height: 2),
-            Text(it.$1, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+            Text(it.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
           ]),
         ),
-        Text(it.$3, style: TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w600, color: qtyColor)),
+        Text(it.$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w600, color: qtyColor)),
         const SizedBox(width: 12),
         Pill(tlabel, tone: tone),
       ]),
@@ -160,37 +160,37 @@ class IssueInventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Issue Inventory')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Issue Inventory')),
       body: MScroll([
-      const MCard(accentColor: M.blue, title: 'Issue Details', children: [
+      const MCard(accentColor: SuperTokens.accent, title: 'Issue Details', children: [
         MField(label: 'Serial No', value: 'INV-ISS-2024-0089', mono: true),
         MField(label: 'Store', placeholder: 'Search store…', required: true),
         MField(label: 'Currency', value: 'USD — US Dollar'),
       ]),
-      MCard(accentColor: M.green, title: 'Items', subtitle: '1 line · 12 units', children: [
+      MCard(accentColor: SuperTokens.success, title: 'Items', subtitle: '1 line · 12 units', children: [
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: M.bg, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
-          child: const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          decoration: BoxDecoration(color: SuperThemeData.dark.bg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Structural Steel', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                Text('Structural Steel', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                 SizedBox(height: 2),
-                Text('12 PCS × 450.00', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                Text('12 PCS × 450.00', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
               ]),
             ),
-            Text('5,400.00', style: TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w600, color: M.fg1)),
+            Text('5,400.00', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
           ]),
         ),
         _dashedAdd('scan', 'Scan to Add Item'),
       ]),
-      const MCard(accentColor: M.green, title: 'Total', children: [
+      MCard(accentColor: SuperTokens.success, title: 'Total', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Eyebrow('Total Value', color: M.fg3, size: 12),
+          Eyebrow('Total Value', color: SuperThemeData.dark.fg3, size: 12),
           Text.rich(TextSpan(children: [
-            TextSpan(text: '5,400.00 ', style: TextStyle(fontFamily: M.mono, fontSize: 24, fontWeight: FontWeight.w700, color: M.fg1)),
-            TextSpan(text: 'USD', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg3)),
+            TextSpan(text: '5,400.00 ', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 24, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
+            TextSpan(text: 'USD', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
           ])),
         ]),
       ]),
@@ -204,9 +204,9 @@ class IssueInventoryScreen extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: DottedBorderBox(
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(MIcons.of(icon), size: 16, color: M.blue),
+            Icon(MIcons.of(icon), size: 16, color: SuperTokens.accent),
             const SizedBox(width: 8),
-            Text(label, style: const TextStyle(color: M.blue, fontWeight: FontWeight.w600, fontSize: 13, fontFamily: M.body)),
+            Text(label, style: const TextStyle(color: SuperTokens.accent, fontWeight: FontWeight.w600, fontSize: 13, fontFamily: SuperTokens.bodyFont)),
           ]),
         ),
       );
@@ -229,7 +229,7 @@ class _DashPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = M.borderStrong
+      ..color = SuperThemeData.dark.borderStrong
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     final rrect = RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(8));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
-const _products = [
+final _products = [
   ('STL-44021', 'Structural Steel I-Beam', 'Steel', 'PCS', 142, 'in'),
   ('CMT-90112', 'Portland Cement Type I', 'Cement', 'BAG', 1820, 'in'),
   ('AGG-21044', 'Coarse Aggregate 20mm', 'Aggregate', 'TON', 46, 'low'),
@@ -32,21 +32,21 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ? _products
         : _products.where((p) => p.$3 == _cat).toList();
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Products')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Products')),
       body: MScroll([
       Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-            color: M.input,
-            border: Border.all(color: M.borderStrong),
+            color: SuperThemeData.dark.inputBg,
+            border: Border.all(color: SuperThemeData.dark.borderStrong),
             borderRadius: BorderRadius.circular(10)),
-        child: const Row(children: [
-          Icon(Icons.search_rounded, size: 16, color: M.fg3),
+        child: Row(children: [
+          Icon(Icons.search_rounded, size: 16, color: SuperThemeData.dark.fg3),
           SizedBox(width: 10),
           Text('Search product or SKU…',
-              style: TextStyle(color: M.fg3, fontSize: 14, fontFamily: M.body))
+              style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 14, fontFamily: SuperTokens.bodyFont))
         ]),
       ),
       SizedBox(
@@ -63,16 +63,16 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: on ? M.blue : M.input,
-                    border: Border.all(color: on ? M.blue : M.border),
+                    color: on ? SuperTokens.accent : SuperThemeData.dark.inputBg,
+                    border: Border.all(color: on ? SuperTokens.accent : SuperThemeData.dark.border),
                     borderRadius: BorderRadius.circular(999)),
                 child: Text(cats[i].toUpperCase(),
                     style: TextStyle(
-                        fontFamily: M.body,
+                        fontFamily: SuperTokens.bodyFont,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.4,
-                        color: on ? Colors.white : M.fg3)),
+                        color: on ? Colors.white : SuperThemeData.dark.fg3)),
               ),
             );
           },
@@ -87,7 +87,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
               decoration: BoxDecoration(
                   border: i < rows.length - 1
-                      ? const Border(bottom: BorderSide(color: M.border))
+                      ? Border(bottom: BorderSide(color: SuperThemeData.dark.border))
                       : null),
               child: Row(children: [
                 Expanded(
@@ -95,25 +95,25 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(rows[i].$2,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w600,
-                                color: M.fg1,
-                                fontFamily: M.body)),
+                                color: SuperThemeData.dark.fg1,
+                                fontFamily: SuperTokens.bodyFont)),
                         const SizedBox(height: 3),
                         Row(children: [
                           Text(rows[i].$1,
-                              style: const TextStyle(
-                                  fontFamily: M.mono,
+                              style: TextStyle(
+                                  fontFamily: SuperTokens.monoFont,
                                   fontSize: 11,
-                                  color: M.fg3)),
-                          const Text('  ·  ',
-                              style: TextStyle(color: M.fg4, fontSize: 11)),
+                                  color: SuperThemeData.dark.fg3)),
+                          Text('  ·  ',
+                              style: TextStyle(color: SuperThemeData.dark.fg4, fontSize: 11)),
                           Text(rows[i].$3,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 11,
-                                  color: M.fg3,
-                                  fontFamily: M.body)),
+                                  color: SuperThemeData.dark.fg3,
+                                  fontFamily: SuperTokens.bodyFont)),
                         ]),
                       ]),
                 ),
@@ -122,16 +122,16 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     TextSpan(
                         text: '${rows[i].$5} ',
                         style: TextStyle(
-                            fontFamily: M.mono,
+                            fontFamily: SuperTokens.monoFont,
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: rows[i].$5 == 0
-                                ? M.red
-                                : (rows[i].$6 == 'low' ? M.orange : M.fg1))),
+                                ? SuperTokens.danger
+                                : (rows[i].$6 == 'low' ? SuperTokens.warning : SuperThemeData.dark.fg1))),
                     TextSpan(
                         text: rows[i].$4,
-                        style: const TextStyle(
-                            fontFamily: M.mono, fontSize: 10, color: M.fg3)),
+                        style: TextStyle(
+                            fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg3)),
                   ])),
                   const SizedBox(height: 4),
                   Pill(_statusLabel(rows[i].$6), tone: _statusTone(rows[i].$6)),

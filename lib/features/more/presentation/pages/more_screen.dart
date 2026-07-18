@@ -12,7 +12,7 @@ class _Group {
   const _Group(this.title, this.items);
 }
 
-const _menu = <_Group>[
+final _menu = <_Group>[
   _Group('Workspace',
       [('Mobile Dashboard', 'mobileDashboard'), ('Settings', 'settingsHub')]),
   _Group('Accounts', [
@@ -87,30 +87,30 @@ class MoreScreen extends StatefulWidget {
 }
 
 class _MoreScreenState extends State<MoreScreen> {
-  // Every menu item, flattened + grouped — the corpus for the spotlight
-  // AutoSuggestionsBox (search across all modules, jump straight to a screen).
+  // Every menu item, grouped for the AutoSuggestionsBox spotlight search.
   late final List<AutoSuggestion<String>> _spotlight = [
-    for (final g in _menu)
-      for (final it in g.items)
-        AutoSuggestion<String>(value: it.$2, label: it.$1, group: g.title),
+    for (final group in _menu)
+      for (final item in group.items)
+        AutoSuggestion<String>(
+          value: item.$2,
+          label: item.$1,
+          group: group.title,
+        ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('More')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('More')),
       body: MScroll([
-      AutoSuggestionsBox<String>(
+      MSuggest(
         items: _spotlight,
-        hintText: 'Search every screen…',
-        fieldHeight: 46,
-        leading: Icon(MIcons.of('search'), size: 16, color: M.fg3),
-        highlightMatch: AutoSuggestionMatch.contains,
-        onSelected: (s) => context.goTo(s.value),
+        placeholder: 'Search every screen…',
+        onSelected: context.goTo,
       ),
       for (final g in _menu)
-        MCard(title: g.title, accentColor: M.blue, pad: 8, children: [
+        MCard(title: g.title, accentColor: SuperTokens.accent, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
@@ -123,17 +123,17 @@ class _MoreScreenState extends State<MoreScreen> {
                     decoration: BoxDecoration(
                         border: i == g.items.length - 1
                             ? null
-                            : const Border(
-                                bottom: BorderSide(color: M.border))),
+                            : Border(
+                                bottom: BorderSide(color: SuperThemeData.dark.border))),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(g.items[i].$1,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 14,
-                                  color: M.fg1,
-                                  fontFamily: M.body)),
-                          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+                                  color: SuperThemeData.dark.fg1,
+                                  fontFamily: SuperTokens.bodyFont)),
+                          Icon(MIcons.of('chevR'), size: 16, color: SuperThemeData.dark.fg4),
                         ]),
                   ),
                 ),

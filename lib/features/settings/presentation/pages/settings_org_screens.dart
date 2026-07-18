@@ -15,7 +15,7 @@ class _NavItem {
   const _NavItem(this.id, this.label, this.icon, this.desc);
 }
 
-const _settingsNav = [
+final _settingsNav = [
   ('Organization', [
     _NavItem('setCompany', 'Company Profile', 'building', 'Legal name, logo, address, tax IDs'),
     _NavItem('setFinancial', 'Financial', 'globe', 'Base currency, fiscal year'),
@@ -45,22 +45,22 @@ class SettingsHubScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Settings')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Settings')),
       body: MScroll([
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Row(children: [
-          Container(width: 40, height: 40, alignment: Alignment.center, decoration: BoxDecoration(color: tint(M.blue, 0x1F), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of('building'), size: 20, color: M.blue)),
+          Container(width: 40, height: 40, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x1F), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of('building'), size: 20, color: SuperTokens.accent)),
           const SizedBox(width: 12),
-          const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Al-Rashid Trading Co.', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1, fontFamily: M.body)),
-            Text('Tenant 9 · GeniusLink ERP', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Al-Rashid Trading Co.', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+            Text('Tenant 9 · GeniusLink ERP', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
           ]),
         ]),
       ),
       for (final g in _settingsNav)
-        MCard(title: g.$1, accentColor: M.blue, pad: 8, children: [
+        MCard(title: g.$1, accentColor: SuperTokens.accent, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
@@ -70,16 +70,16 @@ class SettingsHubScreen extends StatelessWidget {
                   behavior: HitTestBehavior.opaque,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: i < g.$2.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    decoration: BoxDecoration(border: i < g.$2.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                     child: Row(children: [
-                      Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of(g.$2[i].icon), size: 16, color: M.fg2)),
+                      Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of(g.$2[i].icon), size: 16, color: SuperThemeData.dark.fg2)),
                       const SizedBox(width: 12),
                       Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(g.$2[i].label, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                        Text(g.$2[i].label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                         const SizedBox(height: 1),
-                        Text(g.$2[i].desc, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                        Text(g.$2[i].desc, style: TextStyle(fontSize: 11.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                       ])),
-                      Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+                      Icon(MIcons.of('chevR'), size: 16, color: SuperThemeData.dark.fg4),
                     ]),
                   ),
                 ),
@@ -96,12 +96,12 @@ class CompanyProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Company Profile')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Company Profile')),
       body: MScroll([
-      ISection(icon: 'building', title: 'Identity', sub: 'Names shown on documents', marker: M.blue, children: [
+      ISection(icon: 'building', title: 'Identity', sub: 'Names shown on documents', marker: SuperTokens.accent, children: [
         Row(children: [
-          Container(width: 64, height: 64, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('building'), size: 26, color: M.fg3)),
+          Container(width: 64, height: 64, alignment: Alignment.center, decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('building'), size: 26, color: SuperThemeData.dark.fg3)),
           const SizedBox(width: 14),
           const MBtn('Upload Logo', variant: MBtnVariant.secondary, icon: 'download'),
         ]),
@@ -110,13 +110,13 @@ class CompanyProfileScreen extends StatelessWidget {
         const TInput(label: 'Trade Name', defaultValue: 'GeniusLink'),
         const TInput(label: 'Commercial Registration', defaultValue: '1010234567', mono: true),
       ]),
-      const ISection(icon: 'pin', title: 'Registered Address', marker: M.green, children: [
+      const ISection(icon: 'pin', title: 'Registered Address', marker: SuperTokens.success, children: [
         TSelect(label: 'Country', value: 'Saudi Arabia', options: ['Saudi Arabia', 'United Arab Emirates', 'Kuwait', 'Qatar']),
         TInput(label: 'City', defaultValue: 'Riyadh'),
         TInput(label: 'Street Address', defaultValue: 'King Fahd Rd, Olaya'),
         TInput(label: 'Postal Code', defaultValue: '12211', mono: true),
       ]),
-      const ISection(icon: 'percent', title: 'Tax Registration', marker: M.orange, children: [
+      const ISection(icon: 'percent', title: 'Tax Registration', marker: SuperTokens.warning, children: [
         TInput(label: 'VAT Number', defaultValue: '300123456700003', mono: true, required: true),
         TInput(label: 'Tax Identification No.', defaultValue: '9100234567', mono: true),
         TSelect(label: 'Tax Authority', value: 'ZATCA (Saudi Arabia)', options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT']),
@@ -147,10 +147,10 @@ class _FinancialSettingsView extends StatelessWidget {
       builder: (context, state) {
         final basis = state.value<String>('basis') ?? 'accrual';
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Financial Settings')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Financial Settings')),
       body: MScroll([
-          ISection(icon: 'globe', title: 'Currency & Calendar', marker: M.blue, children: [
+          ISection(icon: 'globe', title: 'Currency & Calendar', marker: SuperTokens.accent, children: [
             const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
             const TSelect(label: 'Fiscal Year Start', value: 'January', options: ['January', 'April', 'July', 'October']),
             const TSelect(label: 'Rounding Precision', value: '2 decimals', options: ['0 decimals', '2 decimals', '3 decimals']),
@@ -163,19 +163,19 @@ class _FinancialSettingsView extends StatelessWidget {
                     onTap: () => form.setField('basis', e.$1),
                     child: Container(
                       padding: const EdgeInsets.all(12), alignment: Alignment.center,
-                      decoration: BoxDecoration(color: basis == e.$1 ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: basis == e.$1 ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
-                      child: Text(e.$2.toUpperCase(), style: TextStyle(color: basis == e.$1 ? M.blue : M.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: M.body)),
+                      decoration: BoxDecoration(color: basis == e.$1 ? superCoreTint(SuperTokens.accent, 0x1F) : SuperThemeData.dark.inputBg, border: Border.all(color: basis == e.$1 ? SuperTokens.accent : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+                      child: Text(e.$2.toUpperCase(), style: TextStyle(color: basis == e.$1 ? SuperTokens.accent : SuperThemeData.dark.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: SuperTokens.bodyFont)),
                     ),
                   )),
                 ],
               ]),
             ]),
           ]),
-          const ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: M.green, children: [
+          const ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: SuperTokens.success, children: [
             TSelect(label: 'Retained Earnings', value: '3100 — Retained Earnings', options: ['3100 — Retained Earnings', '3001 — Owner Capital']),
             TSelect(label: 'Default Tax Account', value: '2200 — VAT Payable', options: ['2200 — VAT Payable', '1350 — VAT Receivable']),
           ]),
-          const ISection(icon: 'lock', title: 'Posting Rules', marker: M.orange, children: [
+          const ISection(icon: 'lock', title: 'Posting Rules', marker: SuperTokens.warning, children: [
             TSwitch(label: 'Lock postings to open periods only', defaultOn: true),
             TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
           ]),
@@ -218,34 +218,34 @@ class _TaxesSettingsView extends StatelessWidget {
         void toggle(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('rules', n); }
         void add() { final n = clone()..add(['New Rule', '0', 'VAT', '—', false]); form.setField('rules', n); }
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Taxes')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Taxes')),
       body: MScroll([
-          MCard(accentColor: M.green, title: 'Tax Rules', subtitle: '$active active · applied at line level', pad: 8, children: [
+          MCard(accentColor: SuperTokens.success, title: 'Tax Rules', subtitle: '$active active · applied at line level', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
                 for (int i = 0; i < rules.length; i++)
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: i < rules.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    decoration: BoxDecoration(border: i < rules.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                     child: Row(children: [
                       Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Row(children: [
-                          Text(rules[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                          Text(rules[i][0] as String, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                           const SizedBox(width: 8),
                           Pill(rules[i][2] as String, tone: rules[i][2] == 'VAT' ? PillTone.info : PillTone.warning),
                         ]),
                         const SizedBox(height: 3),
-                        Text(rules[i][3] as String, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                        Text(rules[i][3] as String, style: TextStyle(fontSize: 11.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                       ])),
-                      Text('${rules[i][1]}%', style: const TextStyle(fontFamily: M.mono, fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1)),
+                      Text('${rules[i][1]}%', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
                       const SizedBox(width: 12),
                       GestureDetector(
                         onTap: () => toggle(i),
                         child: Container(
                           width: 42, height: 24,
-                          decoration: BoxDecoration(color: rules[i][4] as bool ? M.blue : M.input, border: Border.all(color: rules[i][4] as bool ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(999)),
+                          decoration: BoxDecoration(color: rules[i][4] as bool ? SuperTokens.accent : SuperThemeData.dark.inputBg, border: Border.all(color: rules[i][4] as bool ? SuperTokens.accent : SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(999)),
                           child: AnimatedAlign(duration: const Duration(milliseconds: 150), alignment: rules[i][4] as bool ? Alignment.centerRight : Alignment.centerLeft, child: Container(width: 18, height: 18, margin: const EdgeInsets.symmetric(horizontal: 2), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle))),
                         ),
                       ),
@@ -269,41 +269,41 @@ class CurrenciesSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const pairs = [('USD', 'US Dollar', '3.750200', true), ('EUR', 'Euro', '4.082100', true), ('GBP', 'British Pound', '4.761000', true), ('AED', 'UAE Dirham', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', false)];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Currencies')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Currencies')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Base Currency', children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(children: [
-            const Text('SAR', style: TextStyle(fontFamily: M.mono, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
-            Container(margin: const EdgeInsets.only(left: 7), padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2), decoration: BoxDecoration(color: tint(M.blue, 0x24), borderRadius: BorderRadius.circular(4)), child: const Text('BASE', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: M.blue, fontFamily: M.body))),
+            Text('SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontWeight: FontWeight.w700, fontSize: 15, color: SuperThemeData.dark.fg1)),
+            Container(margin: const EdgeInsets.only(left: 7), padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2), decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x24), borderRadius: BorderRadius.circular(4)), child: const Text('BASE', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: SuperTokens.accent, fontFamily: SuperTokens.bodyFont))),
           ]),
-          const Text('Eff. Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+          Text('Eff. Dec 18, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
         ]),
         const MBtn('Pull ECB Feed', variant: MBtnVariant.secondary, icon: 'refresh', full: true),
       ]),
-      MCard(accentColor: M.green, title: 'Rates per 1 SAR', subtitle: 'Auto pairs sync daily; manual editable', pad: 8, children: [
+      MCard(accentColor: SuperTokens.success, title: 'Rates per 1 SAR', subtitle: 'Auto pairs sync daily; manual editable', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
             for (int i = 0; i < pairs.length; i++)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < pairs.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                decoration: BoxDecoration(border: i < pairs.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                 child: Row(children: [
                   Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Row(children: [
-                      Text(pairs[i].$1, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.fg1)),
+                      Text(pairs[i].$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
                       const SizedBox(width: 7),
                       Pill(pairs[i].$4 ? 'Auto' : 'Manual', tone: pairs[i].$4 ? PillTone.info : PillTone.neutral),
                     ]),
                     const SizedBox(height: 2),
-                    Text(pairs[i].$2, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                    Text(pairs[i].$2, style: TextStyle(fontSize: 11.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                   ])),
                   Container(
                     padding: pairs[i].$4 ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: pairs[i].$4 ? null : BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(6)),
-                    child: Text(pairs[i].$3, style: const TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1)),
+                    decoration: pairs[i].$4 ? null : BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(6)),
+                    child: Text(pairs[i].$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
                   ),
                 ]),
               ),
@@ -322,27 +322,27 @@ class NumberingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const seqs = [('Sales Invoice', 'INV', '0412'), ('Journal Voucher', 'JV', '0227'), ('Deposit', 'DEP', '0183'), ('Purchase Order', 'PO', '0212'), ('Inventory Transfer', 'INV-TRF', '0118')];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Numbering')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Numbering')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Document Sequences', subtitle: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Document Sequences', subtitle: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
             for (int i = 0; i < seqs.length; i++)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < seqs.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                decoration: BoxDecoration(border: i < seqs.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                 child: Column(children: [
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Text(seqs[i].$1, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                    Text('${seqs[i].$2}-2024-${seqs[i].$3}', style: const TextStyle(fontFamily: M.mono, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.blue)),
+                    Text(seqs[i].$1, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                    Text('${seqs[i].$2}-2024-${seqs[i].$3}', style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperTokens.accent)),
                   ]),
                   const SizedBox(height: 8),
                   Row(children: [
                     Expanded(child: TInput(defaultValue: seqs[i].$2, mono: true)),
                     const SizedBox(width: 10),
-                    Container(width: 90, height: 46, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)), child: Text('Next ${seqs[i].$3}', style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg3))),
+                    Container(width: 90, height: 46, alignment: Alignment.center, decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)), child: Text('Next ${seqs[i].$3}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
                   ]),
                 ]),
               ),
@@ -361,23 +361,23 @@ class BranchesStoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const rows = [('ST-001', 'Downtown Central', 'وسط المدينة', 'Riyadh', 'Store', 'active'), ('ST-002', 'King Fahd Warehouse', 'مستودع الملك فهد', 'Riyadh', 'Warehouse', 'active'), ('ST-003', 'Jeddah Showroom', 'صالة عرض جدة', 'Jeddah', 'Store', 'active'), ('BR-010', 'Dammam Branch', 'فرع الدمام', 'Dammam', 'Branch', 'inactive')];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Branches & Stores')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Branches & Stores')),
       body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
-            decoration: BoxDecoration(border: i < rows.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+            decoration: BoxDecoration(border: i < rows.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
             child: Row(children: [
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(rows[i].$2, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                Directionality(textDirection: TextDirection.rtl, child: Text(rows[i].$3, style: const TextStyle(fontFamily: M.arabic, fontSize: 12, color: M.fg3))),
+                Text(rows[i].$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                Directionality(textDirection: TextDirection.rtl, child: Text(rows[i].$3, style: TextStyle(fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
                 const SizedBox(height: 3),
                 Row(children: [
-                  Text(rows[i].$1, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
-                  const Text('  ·  ', style: TextStyle(color: M.fg4, fontSize: 10.5)),
-                  Text(rows[i].$4, style: const TextStyle(fontSize: 10.5, color: M.fg3, fontFamily: M.body)),
+                  Text(rows[i].$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
+                  Text('  ·  ', style: TextStyle(color: SuperThemeData.dark.fg4, fontSize: 10.5)),
+                  Text(rows[i].$4, style: TextStyle(fontSize: 10.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                 ]),
               ])),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [

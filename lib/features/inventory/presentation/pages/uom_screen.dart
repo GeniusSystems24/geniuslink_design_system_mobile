@@ -12,15 +12,15 @@ class _UomScreenState extends State<UomScreen> {
   @override
   Widget build(BuildContext context) {
     final groups = {
-      'count': ('Count', 'PCS', M.blue, [('PCS', 'Piece', '1', true), ('DZN', 'Dozen', '12', false), ('BOX', 'Box', '24', false), ('CTN', 'Carton', '144', false), ('PLT', 'Pallet', '600', false)]),
-      'weight': ('Weight', 'KG', M.green, [('G', 'Gram', '0.001', false), ('KG', 'Kilogram', '1', true), ('TON', 'Tonne', '1000', false), ('BAG', 'Bag 50kg', '50', false)]),
-      'length': ('Length', 'M', M.orange, [('CM', 'Centimeter', '0.01', false), ('M', 'Meter', '1', true), ('KM', 'Kilometer', '1000', false)]),
-      'volume': ('Volume', 'L', M.blue, [('ML', 'Milliliter', '0.001', false), ('L', 'Liter', '1', true), ('M3', 'Cubic Meter', '1000', false)]),
+      'count': ('Count', 'PCS', SuperTokens.accent, [('PCS', 'Piece', '1', true), ('DZN', 'Dozen', '12', false), ('BOX', 'Box', '24', false), ('CTN', 'Carton', '144', false), ('PLT', 'Pallet', '600', false)]),
+      'weight': ('Weight', 'KG', SuperTokens.success, [('G', 'Gram', '0.001', false), ('KG', 'Kilogram', '1', true), ('TON', 'Tonne', '1000', false), ('BAG', 'Bag 50kg', '50', false)]),
+      'length': ('Length', 'M', SuperTokens.warning, [('CM', 'Centimeter', '0.01', false), ('M', 'Meter', '1', true), ('KM', 'Kilometer', '1000', false)]),
+      'volume': ('Volume', 'L', SuperTokens.accent, [('ML', 'Milliliter', '0.001', false), ('L', 'Liter', '1', true), ('M3', 'Cubic Meter', '1000', false)]),
     };
     final cur = groups[_active]!;
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Units of Measure')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Units of Measure')),
       body: MScroll([
       GridView.count(
         crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
@@ -31,13 +31,13 @@ class _UomScreenState extends State<UomScreen> {
               onTap: () => setState(() => _active = e.key),
               child: Container(
                 padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(color: _active == e.key ? tint(e.value.$3, 0x14) : M.surface, border: Border.all(color: _active == e.key ? e.value.$3 : M.border), borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: _active == e.key ? superCoreTint(e.value.$3, 0x14) : SuperThemeData.dark.surface, border: Border.all(color: _active == e.key ? e.value.$3 : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(10)),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Eyebrow(e.value.$1, color: M.fg3, size: 10),
+                  Eyebrow(e.value.$1, color: SuperThemeData.dark.fg3, size: 10),
                   const SizedBox(height: 6),
-                  Text('${e.value.$4.length} units', style: TextStyle(fontFamily: M.mono, fontSize: 16, fontWeight: FontWeight.w700, color: e.value.$3)),
+                  Text('${e.value.$4.length} units', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 16, fontWeight: FontWeight.w700, color: e.value.$3)),
                   const SizedBox(height: 2),
-                  Text('base · ${e.value.$2}', style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                  Text('base · ${e.value.$2}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                 ]),
               ),
             ),
@@ -50,11 +50,11 @@ class _UomScreenState extends State<UomScreen> {
             for (int i = 0; i < cur.$4.length; i++)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 13),
-                decoration: BoxDecoration(border: i < cur.$4.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                decoration: BoxDecoration(border: i < cur.$4.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                 child: Row(children: [
-                  SizedBox(width: 50, child: Text(cur.$4[i].$1, style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: cur.$4[i].$4 ? cur.$3 : M.fg2))),
-                  Expanded(child: Text(cur.$4[i].$2, style: const TextStyle(fontSize: 13, color: M.fg1, fontFamily: M.body))),
-                  Text('×${cur.$4[i].$3}', style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w600, color: M.fg2)),
+                  SizedBox(width: 50, child: Text(cur.$4[i].$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, fontWeight: FontWeight.w700, color: cur.$4[i].$4 ? cur.$3 : SuperThemeData.dark.fg2))),
+                  Expanded(child: Text(cur.$4[i].$2, style: TextStyle(fontSize: 13, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont))),
+                  Text('×${cur.$4[i].$3}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg2)),
                   if (cur.$4[i].$4) const Padding(padding: EdgeInsets.only(left: 10), child: Pill('Base', tone: PillTone.info)),
                 ]),
               ),

@@ -19,10 +19,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ('finish', 'CAT-005', 'Finishing Materials', 128, '184,390', <(String, String, int)>[]),
     ];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Categories')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Categories')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Category Tree', subtitle: '5 top-level groups', pad: 8, children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Category Tree', subtitle: '5 top-level groups', pad: 8, children: [
         for (final node in tree) ...[
           GestureDetector(
             onTap: () => setState(() => _open.contains(node.$1) ? _open.remove(node.$1) : _open.add(node.$1)),
@@ -32,16 +32,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: Row(children: [
                 Container(
                   width: 22, height: 22, alignment: Alignment.center,
-                  decoration: BoxDecoration(color: tint(M.blue, 0x1F), borderRadius: BorderRadius.circular(6)),
-                  child: Icon(node.$6.isNotEmpty ? (_open.contains(node.$1) ? Icons.keyboard_arrow_down_rounded : Icons.chevron_right_rounded) : Icons.description_outlined, size: 13, color: M.blue),
+                  decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x1F), borderRadius: BorderRadius.circular(6)),
+                  child: Icon(node.$6.isNotEmpty ? (_open.contains(node.$1) ? Icons.keyboard_arrow_down_rounded : Icons.chevron_right_rounded) : Icons.description_outlined, size: 13, color: SuperTokens.accent),
                 ),
                 const SizedBox(width: 10),
                 Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(node.$3, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                  Text(node.$3, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                   const SizedBox(height: 2),
-                  Text('${node.$2} · ${node.$4} SKUs', style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                  Text('${node.$2} · ${node.$4} SKUs', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                 ])),
-                Text(node.$5, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                Text(node.$5, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
               ]),
             ),
           ),
@@ -50,18 +50,18 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 36, right: 4, top: 2, bottom: 12),
                 child: Row(children: [
-                  Icon(MIcons.of('doc'), size: 11, color: M.fg4),
+                  Icon(MIcons.of('doc'), size: 11, color: SuperThemeData.dark.fg4),
                   const SizedBox(width: 10),
                   Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(ch.$2, style: const TextStyle(fontSize: 12.5, color: M.fg2, fontFamily: M.body)),
-                    Text(ch.$1, style: const TextStyle(fontFamily: M.mono, fontSize: 10, color: M.fg4)),
+                    Text(ch.$2, style: TextStyle(fontSize: 12.5, color: SuperThemeData.dark.fg2, fontFamily: SuperTokens.bodyFont)),
+                    Text(ch.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg4)),
                   ])),
-                  Text('${ch.$3}', style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                  Text('${ch.$3}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                 ]),
               ),
         ],
       ]),
-      const ISection(icon: 'briefcase', title: 'New Category', sub: 'Quick inline form', marker: M.green, defaultOpen: false, children: [
+      const ISection(icon: 'briefcase', title: 'New Category', sub: 'Quick inline form', marker: SuperTokens.success, defaultOpen: false, children: [
         IField(label: 'Code', placeholder: 'e.g. CAT-006', mono: true, required: true),
         IField(label: 'Parent', value: '— Top Level —', select: true),
         IField(label: 'Name (English)', placeholder: 'e.g. Adhesives & Sealants', required: true),

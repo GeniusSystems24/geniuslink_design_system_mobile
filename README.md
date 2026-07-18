@@ -4,6 +4,13 @@ A Flutter port of the entire GeniusLink mobile app (`ui_kits/genius_link/mobile.
 auth, the four bottom tabs, and the 60+ sub-screens reachable from the **More**
 menu. Dark-only (matches the web demo), bilingual EN/AR strings, MVC structure.
 
+## Input libraries
+
+- `super_core` supplies the application `ThemeData`, tokens and shared visual foundation.
+- `super_form_field` supplies standard text, numeric, date, select, attachment and boolean form fields.
+- `super_auto_suggestion_box` remains the autocomplete/typeahead implementation for searchable master-data selectors, SKU entry and the global screen spotlight.
+
+
 ## Run
 ```bash
 cd geniuslink_design_system_mobile
@@ -22,7 +29,7 @@ lib/
     app_root.dart                # navigator shell (auth → tabs → sub-stack)
     screen_registry.dart         # id → title/back (SUB_TITLES) + id → widget
     kit/                         # shared widget kit (ports window._mob / window._mui)
-      m_colors.dart              #   palette + font families
+      super_core_theme_helpers.dart # opacity helpers; colors/type come from super_core
       m_icons.dart               #   icon-name → Material icon
       m_widgets.dart             #   Pill · MCard · MField · MBtn · Mini · Avatar · KV · MScroll · MTable (ReadableTable)
       m_inputs.dart              #   TInput · TPassword · TSelect · MSuggest (AutoSuggestionsBox) · TSwitch · TCheckbox · Segmented · SearchInput
@@ -58,26 +65,20 @@ FAB and bottom nav. Reachable from **More → Workspace → Mobile Dashboard**
 (screen id `mobileDashboard`).
 
 ## Notes
-- The app consumes the sibling **`geniuslink_design_system`** package (a `path:`
-  dependency) for its three data components — synced to library **v2.8.1**, with
-  the Tree / ReadableTable / AutoSuggestionsBox theme extensions registered on
-  the dark theme in `main.dart` so all three blend with the MCard chrome:
-  - **`Tree`** — the **Account Tree** screen (`accountTree`) is a typed
-    `Tree<Account>` (search · expand/collapse · indent guides · roll-up balances;
-    builders read `row.node.value`).
-  - **`ReadableTable`** — wrapped as **`MTable`** (`m_widgets.dart`) for the
-    genuinely tabular reports: **Trial Balance**, **Inventory Valuation** and the
-    **Audit Log** now render in the DS grid with click-to-sort headers + TSV copy
-    (keys derived from the cell text), and an opt-in quick-search bar
-    (`showSearch`). Card-style lists stay as cards.
-  - **`AutoSuggestionsBox`** — wrapped as **`MSuggest`** (`m_inputs.dart`, a
-    strict-pick label+box; `mSuggestions([...])` builds plain rows). Used for the
-    **Create Account** Parent-Group + Currency pickers, the **journal-line account
-    picker** (combo · free text · grouped by account class), and the **More** menu
-    is now a spotlight `AutoSuggestionsBox` over every screen (grouped, jump to
-    open). Run `flutter pub get` after pulling so the path dependency resolves.
+- The app uses the focused GeniusLink packages directly:
+  - **`super_core`** for the complete Material theme and shared tokens.
+  - **`super_form_field`** for standard text, numeric, date, select, attachment,
+    boolean and choice fields.
+  - **`super_auto_suggestion_box`** for the `MSuggest` adapter, account-tree and
+    master-data typeaheads, manual SKU/product entry, and the grouped **More**
+    spotlight search.
+  - **`super_table_field`**, **`super_tree_field`** and **`super_tab_bar`** for
+    their respective focused interfaces.
+- `pubspec.lock` is intentionally omitted because this environment cannot run
+  Flutter. Run `flutter pub get` after extraction to resolve the declared
+  package versions and generate a fresh lockfile.
+
 - Icons map to Material equivalents (the web kit drew inline SVG paths) — dependency-free.
 - Fonts fall back to the platform UI font until the GL families are dropped into `assets/fonts/`.
 - A separate single-screen project (`flutter_mobile_dashboard/`) ports the standalone
   "Mobile Dashboard" with light/dark + RTL; this project is the full multi-screen app.
-```

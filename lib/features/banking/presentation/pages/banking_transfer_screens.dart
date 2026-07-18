@@ -13,19 +13,19 @@ class CreateLocalTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Local Transfer')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Local Transfer')),
       body: const MScroll([
-      ISection(icon: 'swap', title: 'Transfer Amount', accentColor: M.blue, children: [
-        MMoney(label: 'Amount', value: '50,000.00', accent: M.blue, required: true),
+      ISection(icon: 'swap', title: 'Transfer Amount', accentColor: SuperTokens.accent, children: [
+        MMoney(label: 'Amount', value: '50,000.00', accent: SuperTokens.accent, required: true),
       ]),
-      ISection(icon: 'building', title: 'Accounts', accentColor: M.green, children: [
+      ISection(icon: 'building', title: 'Accounts', accentColor: SuperTokens.success, children: [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'To Account', value: 'Bank · Al Rajhi (1101)', select: true, required: true),
         IField(label: 'Value Date', value: 'Dec 19, 2025', icon: 'calendar'),
         IField(label: 'Reference', placeholder: 'Internal note / slip no.'),
       ]),
-      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: M.green, defaultOpen: false, children: [
+      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: SuperTokens.success, defaultOpen: false, children: [
         JournalPreview(rows: [
           ('Bank · Al Rajhi (1101)', '50,000.00', null),
           ('Bank · NCB Main (1100)', null, '50,000.00'),
@@ -42,28 +42,28 @@ class LocalTransferDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Local Transfer Detail')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Local Transfer Detail')),
       body: MScroll([
-      const MCard(accentColor: M.blue, title: 'Inter-Account Settlement', trailing: Pill('Posted'), children: [
-        Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
+      const MCard(accentColor: SuperTokens.accent, title: 'Inter-Account Settlement', trailing: Pill('Posted'), children: [
+        Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
       ]),
-      const MCard(accentColor: M.blue, title: 'Flow', pad: 16, children: [
+      const MCard(accentColor: SuperTokens.accent, title: 'Flow', pad: 16, children: [
         FromToFlow(
           from: FlowCardData(label: 'From', title: 'Bank · NCB Main', subtitle: '1100', meta: 'Balance after  ·  136,420.00'),
-          to: FlowCardData(label: 'To', title: 'Bank · Al Rajhi', subtitle: '1101', meta: 'Balance after  ·  56,240.00', metaColor: M.green),
+          to: FlowCardData(label: 'To', title: 'Bank · Al Rajhi', subtitle: '1101', meta: 'Balance after  ·  56,240.00', metaColor: SuperTokens.success),
         ),
       ]),
-      const MCard(accentColor: M.green, title: 'Amount', children: [
+      MCard(accentColor: SuperTokens.success, title: 'Amount', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Eyebrow('Transferred', color: M.fg3, size: 11),
+          Eyebrow('Transferred', color: SuperThemeData.dark.fg3, size: 11),
           Text.rich(TextSpan(children: [
-            TextSpan(text: '50,000.00 ', style: TextStyle(fontFamily: M.mono, fontSize: 24, fontWeight: FontWeight.w700, color: M.fg1)),
-            TextSpan(text: 'SAR', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg3)),
+            TextSpan(text: '50,000.00 ', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 24, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
+            TextSpan(text: 'SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
           ])),
         ]),
       ]),
-      const MCard(accentColor: M.blue, title: 'Audit', children: [
+      const MCard(accentColor: SuperTokens.accent, title: 'Audit', children: [
         AuditGrid(rows: [('Created By', 'Layla Ahmed', false), ('Created At', 'Dec 18, 14:02', true)]),
       ]),
       MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),
@@ -77,26 +77,26 @@ class CreateExternalTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create External Transfer')),
-      body: const MScroll([
-      ISection(icon: 'globe', title: 'Transfer Amount', accentColor: M.orange, children: [
-        MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: M.orange, required: true),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create External Transfer')),
+      body: MScroll([
+      ISection(icon: 'globe', title: 'Transfer Amount', accentColor: SuperTokens.warning, children: [
+        MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: SuperTokens.warning, required: true),
       ]),
-      ISection(icon: 'percent', title: 'FX Conversion', accentColor: M.blue, children: [
+      ISection(icon: 'percent', title: 'FX Conversion', accentColor: SuperTokens.accent, children: [
         FxTiles(tiles: [
           ('Rate', '3.7500', 'USD → SAR', null),
-          ('Converted', '41,250.00', 'SAR', M.fg1),
-          ('Fee', '75.00', 'SAR', M.orange),
+          ('Converted', '41,250.00', 'SAR', SuperThemeData.dark.fg1),
+          ('Fee', '75.00', 'SAR', SuperTokens.warning),
         ]),
       ]),
-      ISection(icon: 'building', title: 'Beneficiary', accentColor: M.green, children: [
+      ISection(icon: 'building', title: 'Beneficiary', accentColor: SuperTokens.success, children: [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Beneficiary', value: 'Global Steel Imports', select: true, required: true),
         IField(label: 'IBAN / SWIFT', value: 'DE89 3704 0044 0532 0130 00', mono: true),
         IField(label: 'Purpose Code', value: 'GSD — Goods', select: true),
       ]),
-      InfoNote('External wires settle in 1–2 business days and require dual approval.', tone: M.blue),
+      InfoNote('External wires settle in 1–2 business days and require dual approval.', tone: SuperTokens.accent),
       ActionRow(primary: 'Submit Wire'),
     ]),
     );
@@ -108,30 +108,30 @@ class ExternalTransferDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('External Wire Detail')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('External Wire Detail')),
       body: MScroll([
-      const MCard(accentColor: M.orange, title: 'External Wire', trailing: Pill('Pending', tone: PillTone.warning), children: [
-        Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
+      const MCard(accentColor: SuperTokens.warning, title: 'External Wire', trailing: Pill('Pending', tone: PillTone.warning), children: [
+        Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
       ]),
-      const MCard(accentColor: M.orange, title: 'Amount & FX', children: [
+      MCard(accentColor: SuperTokens.warning, title: 'Amount & FX', children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Text('−11,000.00 ', style: TextStyle(fontFamily: M.mono, fontSize: 26, fontWeight: FontWeight.w700, color: M.red)),
-          Text('USD', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg3)),
+          Text('−11,000.00 ', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 26, fontWeight: FontWeight.w700, color: SuperTokens.danger)),
+          Text('USD', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
         ]),
         FxTiles(tiles: [
           ('Rate', '3.7500', 'USD → SAR', null),
-          ('Debited', '41,250.00', 'SAR', M.fg1),
-          ('Fee', '75.00', 'SAR', M.orange),
+          ('Debited', '41,250.00', 'SAR', SuperThemeData.dark.fg1),
+          ('Fee', '75.00', 'SAR', SuperTokens.warning),
         ]),
       ]),
-      const MCard(accentColor: M.green, title: 'Beneficiary', children: [
+      const MCard(accentColor: SuperTokens.success, title: 'Beneficiary', children: [
         BKV('Name', 'Global Steel Imports'),
         BKV('IBAN', 'DE89 3704 0044 0532 0130 00', mono: true),
         BKV('SWIFT', 'COBADEFFXXX', mono: true),
         BKV('Purpose', 'GSD — Goods'),
       ]),
-      const BankNote('Awaiting controller approval. Funds are reserved until the wire is released or cancelled.', tone: M.orange),
+      const BankNote('Awaiting controller approval. Funds are reserved until the wire is released or cancelled.', tone: SuperTokens.warning),
       MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),
     ]),
     );

@@ -11,10 +11,10 @@ class CreateAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Account')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Account')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Account Details', subtitle: 'Identify and place in the tree', children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Account Details', subtitle: 'Identify and place in the tree', children: [
         const MField(label: 'Account Code', placeholder: 'e.g. 1102', mono: true, required: true),
         const MField(label: 'Account Type', value: 'Asset'),
         const MField(label: 'Name English', placeholder: 'e.g. Bank · Al Rajhi', required: true),
@@ -27,7 +27,7 @@ class CreateAccountScreen extends StatelessWidget {
           items: mSuggestions(const ['Current Assets (1000)', 'Fixed Assets (1500)', 'Liabilities (2000)', 'Equity (3000)']),
         ),
       ]),
-      MCard(accentColor: M.green, title: 'Settings', children: [
+      MCard(accentColor: SuperTokens.success, title: 'Settings', children: [
         MSuggest(
           label: 'Currency',
           value: 'SAR — Saudi Riyal',
@@ -59,11 +59,11 @@ class CreateAccountScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: on ? tint(M.green, 0x14) : M.input,
-          border: Border.all(color: on ? M.green : M.border),
+          color: on ? superCoreTint(SuperTokens.success, 0x14) : SuperThemeData.dark.inputBg,
+          border: Border.all(color: on ? SuperTokens.success : SuperThemeData.dark.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(label.toUpperCase(),
-            style: TextStyle(color: on ? M.green : M.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: M.body)),
+            style: TextStyle(color: on ? SuperTokens.success : SuperThemeData.dark.fg2, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4, fontFamily: SuperTokens.bodyFont)),
       );
 }

@@ -17,7 +17,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   bool _force = false;
   String? _nameEnErr, _nameArErr;
 
-  final _treeCtl = AutoSuggestionsBoxController<String>(
+  final _treeController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'Assets Tree (1)',
       'Liabilities Tree (2)',
@@ -28,7 +28,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
 
   @override
   void dispose() {
-    _treeCtl.dispose();
+    _treeController.dispose();
     super.dispose();
   }
 
@@ -42,10 +42,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Account Group')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Account Group')),
       body: MScroll([
-      MCard(accentColor: M.blue, title: 'Group Details', subtitle: 'Name and tree association', children: [
+      MCard(accentColor: SuperTokens.accent, title: 'Group Details', subtitle: 'Name and tree association', children: [
         SuperTextFormField(
           label: 'Name English',
           placeholder: 'e.g. Current Assets',
@@ -64,12 +64,13 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           onValidity: (e) => _nameArErr = e,
         ),
         AutoSuggestionsBox<String>(
-          controller: _treeCtl,
+          controller: _treeController,
           label: 'Account Tree',
           hintText: 'Select a tree…',
+          required: true,
         ),
       ]),
-      const MCard(accentColor: M.orange, title: 'Additional Information', children: [
+      const MCard(accentColor: SuperTokens.warning, title: 'Additional Information', children: [
         SuperTextFormField(
           label: 'Note',
           placeholder: 'Add any notes about this group…',

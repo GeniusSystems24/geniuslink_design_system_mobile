@@ -106,7 +106,7 @@
 <span class="cm">│   ├── architecture/  error/  usecases/  value_objects/</span>
 <span class="cm">│   ├── services/  validation/  constants/</span>
 <span class="gr">├── design_system/</span>
-<span class="cm">│   ├── tokens/m_colors.dart</span>         <span class="cm">M class (surfaces · fg · brand) + tint()</span>
+<span class="cm">│   ├── theme/super_core_theme_helpers.dart</span> <span class="cm">opacity helpers; tokens come from super_core</span>
 <span class="cm">│   ├── components/</span>
 <span class="cm">│   │   layout/     m_icons · m_widgets</span>   <span class="cm">Eyebrow · MCard · MField · Mini · Avatar · KV · MScroll</span>
 <span class="cm">│   │   feedback/   m_feedback</span>        <span class="cm">PillTone · Pill</span>
@@ -139,7 +139,7 @@
     <h2 class="g">Design system layers</h2>
     <div class="card">
       <div class="kv">
-        <span class="k">tokens/m_colors.dart</span>
+        <span class="k">package:super_core/super_core.dart</span>
         <span class="v">Single token file: the <code>M</code> class with surface, foreground, brand, and font constants. Dark-only (mobile is always dark). <code>tint(color, alphaHex)</code> and <code>tintPct(color, pct)</code> helpers used throughout.</span>
       </div>
       <div class="kv">
@@ -295,8 +295,8 @@
     <h2 class="r">Design tokens</h2>
     <div class="pills">
       <span class="pill">geniuslink_design_system v2.8.1 · sidebar</span>
-      <span class="pill">super_form_field v1.0.0</span>
-      <span class="pill">super_auto_suggestion_box v0.5.0</span>
+      <span class="pill">super_form_field v1.2.0</span>
+      <span class="pill">super_auto_suggestion_box v0.8.0</span>
       <span class="pill">super_table_field v1.0.0</span>
       <span class="pill">super_tree_field v1.0.0</span>
       <span class="pill">blue #4A7CFF</span>

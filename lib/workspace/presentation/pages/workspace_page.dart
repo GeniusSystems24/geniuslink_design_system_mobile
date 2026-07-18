@@ -35,8 +35,8 @@ class WorkspacePage extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 430),
               child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: M.bg,
+                decoration: BoxDecoration(
+                  color: SuperThemeData.dark.bg,
                   boxShadow: [BoxShadow(color: Color(0x10FFFFFF), blurRadius: 0, spreadRadius: 1)],
                 ),
                 child: _buildBody(context, nav, state),
@@ -111,7 +111,7 @@ class WorkspacePage extends StatelessWidget {
   Widget _actionBtn(String icon, VoidCallback onTap) => GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
-        child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: M.blue)),
+        child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: SuperTokens.accent)),
       );
 }
 
@@ -120,13 +120,13 @@ class _TenantLoading extends StatelessWidget {
   const _TenantLoading();
   @override
   Widget build(BuildContext context) {
-    return const ColoredBox(
-      color: M.bg,
+    return ColoredBox(
+      color: SuperThemeData.dark.bg,
       child: Center(
         child: SizedBox(
           width: 22,
           height: 22,
-          child: CircularProgressIndicator(strokeWidth: 2, color: M.fg3),
+          child: CircularProgressIndicator(strokeWidth: 2, color: SuperThemeData.dark.fg3),
         ),
       ),
     );

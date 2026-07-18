@@ -9,32 +9,32 @@ class _AdjLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final delta = item.$4 - item.$3;
     final pos = delta > 0;
-    final tone = delta == 0 ? M.fg2 : (pos ? M.green : M.red);
+    final tone = delta == 0 ? SuperThemeData.dark.fg2 : (pos ? SuperTokens.success : SuperTokens.danger);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : const Border(bottom: BorderSide(color: M.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(item.$2,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w600,
-                      color: M.fg1,
-                      fontFamily: M.body)),
+                      color: SuperThemeData.dark.fg1,
+                      fontFamily: SuperTokens.bodyFont)),
               const SizedBox(height: 2),
               Text('${item.$1} · ${item.$5}',
-                  style: const TextStyle(
-                      fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                  style: TextStyle(
+                      fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
             ]),
           ),
           Text('${pos ? '+' : ''}$delta',
               style: TextStyle(
-                  fontFamily: M.mono,
+                  fontFamily: SuperTokens.monoFont,
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: tone)),
@@ -42,17 +42,17 @@ class _AdjLine extends StatelessWidget {
         const SizedBox(height: 8),
         Row(children: [
           Text.rich(TextSpan(children: [
-            const TextSpan(text: 'System ', style: TextStyle(color: M.fg3)),
-            TextSpan(text: '${item.$3}', style: const TextStyle(color: M.fg2))
-          ], style: const TextStyle(fontFamily: M.mono, fontSize: 11))),
+            TextSpan(text: 'System ', style: TextStyle(color: SuperThemeData.dark.fg3)),
+            TextSpan(text: '${item.$3}', style: TextStyle(color: SuperThemeData.dark.fg2))
+          ], style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11))),
           const SizedBox(width: 16),
           Text.rich(TextSpan(children: [
-            const TextSpan(text: 'Counted ', style: TextStyle(color: M.fg3)),
+            TextSpan(text: 'Counted ', style: TextStyle(color: SuperThemeData.dark.fg3)),
             TextSpan(
                 text: '${item.$4}',
                 style:
-                    const TextStyle(color: M.fg1, fontWeight: FontWeight.w600))
-          ], style: const TextStyle(fontFamily: M.mono, fontSize: 11))),
+                    TextStyle(color: SuperThemeData.dark.fg1, fontWeight: FontWeight.w600))
+          ], style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11))),
         ]),
       ]),
     );
@@ -75,13 +75,13 @@ class AdjustmentScreen extends StatelessWidget {
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46, 'Spillage · 2 tons'),
     ];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Inventory Adjustment')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Inventory Adjustment')),
       body: MScroll([
       const ISection(
           icon: 'box',
           title: 'Adjustment Details',
-          marker: M.blue,
+          marker: SuperTokens.accent,
           children: [
             IField(
                 label: 'Serial No',
@@ -102,7 +102,7 @@ class AdjustmentScreen extends StatelessWidget {
                 icon: 'calendar'),
           ]),
       const MCard(
-          accentColor: M.orange,
+          accentColor: SuperTokens.warning,
           title: 'Variance Summary',
           subtitle: 'Net financial impact of this reconciliation',
           children: [
@@ -114,7 +114,7 @@ class AdjustmentScreen extends StatelessWidget {
                       label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
             ]),
           ]),
-      MCard(accentColor: M.green, title: 'Adjustment Lines', pad: 8, children: [
+      MCard(accentColor: SuperTokens.success, title: 'Adjustment Lines', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -126,7 +126,7 @@ class AdjustmentScreen extends StatelessWidget {
       const ISection(
           icon: 'doc',
           title: 'Documentation & Approval',
-          marker: M.orange,
+          marker: SuperTokens.warning,
           children: [
             ITextarea(
                 label: 'Adjustment Notes',

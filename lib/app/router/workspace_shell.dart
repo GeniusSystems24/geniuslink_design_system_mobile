@@ -43,10 +43,10 @@ class MAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(16, MediaQuery.of(context).padding.top + 14, 16, 12),
-      decoration: const BoxDecoration(color: Color(0xEB111318), border: Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(color: SuperThemeData.dark.bg.withAlpha(0xEB), border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Row(children: [
         Expanded(child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 19, letterSpacing: -0.4, color: M.fg1))),
+            style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 19, letterSpacing: -0.4, color: SuperThemeData.dark.fg1))),
         if (action != null) action!,
       ]),
     );
@@ -61,7 +61,7 @@ class MTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Color(0xE6111318), border: Border(top: BorderSide(color: M.border))),
+      decoration: BoxDecoration(color: SuperThemeData.dark.bg.withAlpha(0xE6), border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
       padding: EdgeInsets.only(top: 8, bottom: 8 + MediaQuery.of(context).padding.bottom),
       child: Row(children: [
         for (int i = 0; i < _tabs.length; i++)
@@ -69,9 +69,9 @@ class MTabBar extends StatelessWidget {
             onTap: () => onChange(i),
             behavior: HitTestBehavior.opaque,
             child: Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Icon(MIcons.of(_tabs[i].$3), size: 22, color: active == _tabs[i].$1 ? M.blue : M.fg3),
+              Icon(MIcons.of(_tabs[i].$3), size: 22, color: active == _tabs[i].$1 ? SuperTokens.accent : SuperThemeData.dark.fg3),
               const SizedBox(height: 4),
-              Text(_tabs[i].$2, style: TextStyle(fontFamily: M.body, fontSize: 10, fontWeight: active == _tabs[i].$1 ? FontWeight.w700 : FontWeight.w500, color: active == _tabs[i].$1 ? M.blue : M.fg3)),
+              Text(_tabs[i].$2, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 10, fontWeight: active == _tabs[i].$1 ? FontWeight.w700 : FontWeight.w500, color: active == _tabs[i].$1 ? SuperTokens.accent : SuperThemeData.dark.fg3)),
             ])),
           )),
       ]),

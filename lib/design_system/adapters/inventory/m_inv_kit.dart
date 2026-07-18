@@ -8,13 +8,14 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart'
-    hide FieldDensity;
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart' as suggest;
 import 'package:super_form_field/super_form_field.dart';
 import '../../components/layout/m_icons.dart';
 import '../../components/layout/m_widgets.dart';
 import '../../components/buttons/m_buttons.dart';
 
+import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
+import 'package:super_core/super_core.dart' hide FieldDensity;
 /// Collapsible section card: colored marker · icon · title · chevron.
 class ISection extends StatefulWidget {
   final String icon;
@@ -36,7 +37,7 @@ class ISection extends StatefulWidget {
     this.children = const [],
     Widget? right,
     Widget? trailing,
-  })  : marker = marker ?? accentColor ?? M.blue,
+  })  : marker = marker ?? accentColor ?? SuperTokens.accent,
         sub = sub ?? subtitle,
         right = right ?? trailing;
 
@@ -51,8 +52,8 @@ class _ISectionState extends State<ISection> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: M.surface,
-          border: Border.all(color: M.border),
+          color: SuperThemeData.dark.surface,
+          border: Border.all(color: SuperThemeData.dark.border),
           borderRadius: BorderRadius.circular(12)),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -77,7 +78,7 @@ class _ISectionState extends State<ISection> {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                        color: tint(widget.marker, 0x1F),
+                        color: superCoreTint(widget.marker, 0x1F),
                         borderRadius: BorderRadius.circular(8)),
                     child: Icon(MIcons.of(widget.icon),
                         size: 16, color: widget.marker),
@@ -88,20 +89,20 @@ class _ISectionState extends State<ISection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.title.toUpperCase(),
-                            style: const TextStyle(
-                                fontFamily: M.body,
+                            style: TextStyle(
+                                fontFamily: SuperTokens.bodyFont,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12.5,
                                 letterSpacing: 0.7,
-                                color: M.fg1)),
+                                color: SuperThemeData.dark.fg1)),
                         if (widget.sub != null)
                           Padding(
                             padding: const EdgeInsets.only(top: 3),
                             child: Text(widget.sub!,
-                                style: const TextStyle(
-                                    fontFamily: M.body,
+                                style: TextStyle(
+                                    fontFamily: SuperTokens.bodyFont,
                                     fontSize: 11.5,
-                                    color: M.fg3)),
+                                    color: SuperThemeData.dark.fg3)),
                           ),
                       ],
                     ),
@@ -110,8 +111,8 @@ class _ISectionState extends State<ISection> {
                   AnimatedRotation(
                     turns: _open ? 0 : -0.25,
                     duration: const Duration(milliseconds: 150),
-                    child: const Icon(Icons.keyboard_arrow_down_rounded,
-                        size: 18, color: M.fg3),
+                    child: Icon(Icons.keyboard_arrow_down_rounded,
+                        size: 18, color: SuperThemeData.dark.fg3),
                   ),
                 ],
               ),
@@ -147,6 +148,7 @@ class IField extends StatelessWidget {
   final bool mono;
   final bool ar;
   final bool required;
+
   const IField({
     super.key,
     required this.label,
@@ -162,60 +164,34 @@ class IField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasValue = value != null && value!.isNotEmpty;
-    return Directionality(
-      textDirection: ar ? TextDirection.rtl : TextDirection.ltr,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 7),
-            child: Text.rich(TextSpan(
-                children: [
-                  TextSpan(text: label.toUpperCase()),
-                  if (required)
-                    const TextSpan(text: ' *', style: TextStyle(color: M.red)),
-                ],
-                style: const TextStyle(
-                    fontFamily: M.body,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 10,
-                    letterSpacing: 0.5,
-                    color: M.fg2))),
-          ),
-          Container(
-            height: 46,
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            decoration: BoxDecoration(
-                color: M.input,
-                border: Border.all(color: M.borderStrong),
-                borderRadius: BorderRadius.circular(8)),
-            child: Row(
-              children: [
-                if (icon != null) ...[
-                  Icon(MIcons.of(icon!), size: 16, color: M.fg3),
-                  const SizedBox(width: 10)
-                ],
-                Expanded(
-                  child: Text(hasValue ? value! : (placeholder ?? ''),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontFamily: mono ? M.mono : (ar ? M.arabic : M.body),
-                          fontSize: 14,
-                          color: hasValue ? M.fg1 : M.fg3)),
-                ),
-                if (locked)
-                  const Icon(Icons.lock_outline_rounded,
-                      size: 14, color: M.fg3),
-                if (select)
-                  const Icon(Icons.keyboard_arrow_down_rounded,
-                      size: 15, color: M.fg3),
-              ],
-            ),
-          ),
-        ],
-      ),
+    final leadingIcon = icon == null ? null : MIcons.of(icon!);
+    if (select) {
+      final options = value == null || value!.isEmpty
+          ? const <SuperOption<String>>[]
+          : <SuperOption<String>>[
+              SuperOption<String>(value: value!, label: value!),
+            ];
+      return SuperSelectFormField<String>(
+        label: label,
+        options: options,
+        initialValue: value,
+        placeholder: placeholder,
+        required: required,
+        readOnly: true,
+        searchable: options.length > 8,
+        leadingIcon: leadingIcon,
+        arabic: ar,
+      );
+    }
+
+    return SuperTextFormField(
+      label: label,
+      initialValue: value ?? '',
+      placeholder: placeholder,
+      required: required,
+      readOnly: true,
+      leadingIcon: leadingIcon,
+      arabic: ar,
     );
   }
 }
@@ -223,108 +199,57 @@ class IField extends StatelessWidget {
 class ITextarea extends StatelessWidget {
   final String label;
   final String? placeholder;
+
   const ITextarea({super.key, required this.label, this.placeholder});
+
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-            padding: const EdgeInsets.only(bottom: 7), child: Eyebrow(label)),
-        Container(
-          constraints: const BoxConstraints(minHeight: 88),
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          decoration: BoxDecoration(
-              color: M.input,
-              border: Border.all(color: M.borderStrong),
-              borderRadius: BorderRadius.circular(8)),
-          child: Text(placeholder ?? '',
-              style: const TextStyle(
-                  fontFamily: M.body, fontSize: 14, color: M.fg3)),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => SuperTextFormField(
+        label: label,
+        placeholder: placeholder,
+        multiline: true,
+        rows: 3,
+      );
 }
 
 class UploadBox extends StatelessWidget {
   const UploadBox({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: 110),
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          color: M.input, borderRadius: BorderRadius.circular(10)),
-      child: CustomPaint(
-        painter: _DashRect(),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.cloud_upload_outlined, size: 26, color: M.fg3),
-            SizedBox(height: 8),
-            Text('Click to upload or drag and drop',
-                style: TextStyle(
-                    fontSize: 13,
-                    color: M.fg1,
-                    fontFamily: M.body,
-                    fontWeight: FontWeight.w600)),
-            SizedBox(height: 4),
-            Text('PDF, JPG, PNG (MAX 10MB)',
-                style: TextStyle(
-                    fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SuperAttachmentFormField(
+        label: 'Attachments',
+        accept: '.pdf,.jpg,.jpeg,.png',
+        maxSizeMB: 10,
+        maxFiles: 5,
+        multiple: true,
+        onBrowse: () async => const <SuperFile>[],
+      );
 }
 
 class IToggle extends StatelessWidget {
   final String label;
   final bool on;
+
   const IToggle({super.key, required this.label, this.on = false});
+
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Eyebrow(label),
-        Container(
-          width: 42,
-          height: 24,
-          decoration: BoxDecoration(
-              color: on ? M.blue : M.input,
-              border: Border.all(color: M.borderStrong),
-              borderRadius: BorderRadius.circular(999)),
-          child: Align(
-            alignment: on ? Alignment.centerRight : Alignment.centerLeft,
-            child: Container(
-                width: 18,
-                height: 18,
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                decoration: const BoxDecoration(
-                    color: Colors.white, shape: BoxShape.circle)),
-          ),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => SuperBoolFormField(
+        title: label,
+        initialValue: on,
+        readOnly: true,
+      );
 }
 
 class InfoNote extends StatelessWidget {
   final Color tone;
   final String text;
-  const InfoNote(this.text, {super.key, this.tone = M.orange});
+  const InfoNote(this.text, {super.key, this.tone = SuperTokens.warning});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: tint(tone, 0x14),
-          border: Border.all(color: tint(tone, 0x40)),
+          color: superCoreTint(tone, 0x14),
+          border: Border.all(color: superCoreTint(tone, 0x40)),
           borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -333,11 +258,11 @@ class InfoNote extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
               child: Text(text,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 11.5,
-                      color: M.fg2,
+                      color: SuperThemeData.dark.fg2,
                       height: 1.5,
-                      fontFamily: M.body))),
+                      fontFamily: SuperTokens.bodyFont))),
         ],
       ),
     );
@@ -390,7 +315,7 @@ class ProductRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
           border:
-              last ? null : const Border(bottom: BorderSide(color: M.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -402,19 +327,19 @@ class ProductRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(name,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: M.fg1,
-                            fontFamily: M.body)),
+                            color: SuperThemeData.dark.fg1,
+                            fontFamily: SuperTokens.bodyFont)),
                     const SizedBox(height: 2),
                     Text('SKU: $sku',
-                        style: const TextStyle(
-                            fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                        style: TextStyle(
+                            fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                   ],
                 ),
               ),
-              const Icon(Icons.delete_outline_rounded, size: 16, color: M.fg3),
+              Icon(Icons.delete_outline_rounded, size: 16, color: SuperThemeData.dark.fg3),
             ],
           ),
           const SizedBox(height: 12),
@@ -422,7 +347,7 @@ class ProductRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(children: [
-                const Eyebrow('Qty', color: M.fg3, size: 9.5),
+                Eyebrow('Qty', color: SuperThemeData.dark.fg3, size: 9.5),
                 const SizedBox(width: 10),
                 SizedBox(
                   width: 140,
@@ -441,15 +366,15 @@ class ProductRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text('$currency$price / unit',
-                      style: const TextStyle(
-                          fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                      style: TextStyle(
+                          fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                   const SizedBox(height: 2),
                   Text('$currency$total',
-                      style: const TextStyle(
-                          fontFamily: M.mono,
+                      style: TextStyle(
+                          fontFamily: SuperTokens.monoFont,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: M.fg1)),
+                          color: SuperThemeData.dark.fg1)),
                 ],
               ),
             ],
@@ -467,18 +392,20 @@ class AddProductBtn extends StatelessWidget {
   Widget build(BuildContext context) => _DashedButton(label: label);
 }
 
-/// Barcode scanner with manual SKU typeahead. Fires [onPick] when a product
-/// is selected (raw label, e.g. "CMT-90112 — Portland Cement Type I").
+/// Barcode scanner with a searchable product picker. Fires [onPick] when a
+/// product is selected (raw label, e.g. "CMT-90112 — Portland Cement Type I").
 class Scanner extends StatefulWidget {
   final ValueChanged<String>? onPick;
+
   const Scanner({super.key, this.onPick});
+
   @override
   State<Scanner> createState() => _ScannerState();
 }
 
 class _ScannerState extends State<Scanner> {
-  final _skuCtl = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _skuController = suggest.AutoSuggestionsBoxController<String>(
+    source: suggest.SuggestionSources.strings([
       'CMT-90112 — Portland Cement Type I',
       'STL-44021 — Structural Steel I-Beam',
       'RBR-33210 — Rebar 16mm',
@@ -491,9 +418,17 @@ class _ScannerState extends State<Scanner> {
 
   @override
   void dispose() {
-    _skuCtl.dispose();
+    _skuController.dispose();
     _focusNode.dispose();
     super.dispose();
+  }
+
+  void _commit(String value) {
+    final normalized = value.trim();
+    if (normalized.isEmpty) return;
+    widget.onPick?.call(normalized);
+    _skuController.clear();
+    _focusNode.requestFocus();
   }
 
   @override
@@ -504,38 +439,31 @@ class _ScannerState extends State<Scanner> {
         Container(
           height: 168,
           decoration: BoxDecoration(
-              color: M.card2, borderRadius: BorderRadius.circular(12)),
+              color: SuperPalette.bluePalette.darkSurface2, borderRadius: BorderRadius.circular(12)),
           child: CustomPaint(
             painter: _ScanBrackets(),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.qr_code_2_rounded, size: 42, color: M.fg4),
+                Icon(Icons.qr_code_2_rounded, size: 42, color: SuperThemeData.dark.fg4),
                 SizedBox(height: 12),
                 Text('Point your camera at a barcode to scan',
                     style: TextStyle(
-                        fontSize: 12, color: M.fg3, fontFamily: M.body)),
+                        fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
               ],
             ),
           ),
         ),
         const SizedBox(height: 12),
-        AutoSuggestionsBox<String>(
-          controller: _skuCtl,
+        suggest.AutoSuggestionsBox<String>(
+          controller: _skuController,
           focusNode: _focusNode,
           hintText: 'Search or type SKU manually…',
           bare: true,
           fieldHeight: 46,
-          onSelected: (s) {
-            widget.onPick?.call(s.label);
-            _skuCtl.clear();
-            _focusNode.requestFocus();
-          },
-          onSubmitted: (raw) {
-            widget.onPick?.call(raw);
-            _skuCtl.clear();
-            _focusNode.requestFocus();
-          },
+          leading: const Icon(Icons.qr_code_scanner_rounded, size: 18),
+          onSelected: (item) => _commit(item.label),
+          onSubmitted: _commit,
         ),
       ],
     );
@@ -556,11 +484,11 @@ class _DashedButton extends StatelessWidget {
         child: Center(
           child: Text(label.toUpperCase(),
               style: const TextStyle(
-                  color: M.blue,
+                  color: SuperTokens.accent,
                   fontWeight: FontWeight.w700,
                   fontSize: 12,
                   letterSpacing: 0.7,
-                  fontFamily: M.body)),
+                  fontFamily: SuperTokens.bodyFont)),
         ),
       ),
     );
@@ -579,7 +507,7 @@ class _DashRect extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = M.borderStrong
+      ..color = SuperThemeData.dark.borderStrong
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     final path = Path()
@@ -603,7 +531,7 @@ class _ScanBrackets extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final p = Paint()
-      ..color = tint(M.blue, 0x99)
+      ..color = superCoreTint(SuperTokens.accent, 0x99)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;

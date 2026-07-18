@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
-const _accounts = [
+final _accounts = [
   ('1001', 'Cash Box', 'الصندوق', '42,500.00', false),
   ('1100', 'Bank · NCB Main', 'البنك الأهلي', '186,420.00', false),
   ('1200', 'Inventory (WIP)', 'مخزون', '54,890.00', false),
@@ -21,9 +21,9 @@ class AccountsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
+      backgroundColor: SuperThemeData.dark.bg,
       appBar: AppBar(
-        backgroundColor: M.bg,
+        backgroundColor: SuperThemeData.dark.bg,
         elevation: 0,
         title: const Text('Accounts'),
       ),
@@ -32,14 +32,14 @@ class AccountsScreen extends StatelessWidget {
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-            color: M.input,
-            border: Border.all(color: M.borderStrong),
+            color: SuperThemeData.dark.inputBg,
+            border: Border.all(color: SuperThemeData.dark.borderStrong),
             borderRadius: BorderRadius.circular(10)),
-        child: const Row(children: [
-          Icon(Icons.search_rounded, size: 16, color: M.fg3),
+        child: Row(children: [
+          Icon(Icons.search_rounded, size: 16, color: SuperThemeData.dark.fg3),
           SizedBox(width: 10),
           Text('Search accounts…',
-              style: TextStyle(color: M.fg3, fontSize: 14, fontFamily: M.body)),
+              style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 14, fontFamily: SuperTokens.bodyFont)),
         ]),
       ),
       MCard(pad: 8, children: [
@@ -70,42 +70,42 @@ class _AccountRow extends StatelessWidget {
         decoration: BoxDecoration(
             border: last
                 ? null
-                : const Border(bottom: BorderSide(color: M.border))),
+                : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
         child: Row(
           children: [
             SizedBox(
                 width: 36,
                 child: Text(row.$1,
-                    style: const TextStyle(
-                        fontFamily: M.mono, fontSize: 12, color: M.fg3))),
+                    style: TextStyle(
+                        fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(row.$2,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w600,
-                          color: M.fg1,
-                          fontFamily: M.body)),
+                          color: SuperThemeData.dark.fg1,
+                          fontFamily: SuperTokens.bodyFont)),
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: Text(row.$3,
-                        style: const TextStyle(
-                            fontFamily: M.arabic, fontSize: 12, color: M.fg3)),
+                        style: TextStyle(
+                            fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
                   ),
                 ],
               ),
             ),
             Text(row.$4,
                 style: TextStyle(
-                    fontFamily: M.mono,
+                    fontFamily: SuperTokens.monoFont,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: row.$5 ? M.red : M.fg1)),
+                    color: row.$5 ? SuperTokens.danger : SuperThemeData.dark.fg1)),
             const SizedBox(width: 6),
-            Icon(MIcons.of('chevR'), size: 15, color: M.fg4),
+            Icon(MIcons.of('chevR'), size: 15, color: SuperThemeData.dark.fg4),
           ],
         ),
       ),

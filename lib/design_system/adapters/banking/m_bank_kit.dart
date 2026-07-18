@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import '../../components/layout/m_widgets.dart';
 import '../../components/feedback/m_feedback.dart';
 
+import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
+import 'package:super_core/super_core.dart' hide PillTone;
 /// Large money input — currency prefix + big mono figure, accent border.
 class MMoney extends StatelessWidget {
   final String label;
@@ -21,7 +23,7 @@ class MMoney extends StatelessWidget {
       required this.label,
       required this.value,
       this.currency = 'SAR',
-      this.accent = M.blue,
+      this.accent = SuperTokens.accent,
       this.required = false,
       this.sign = ''});
   @override
@@ -35,33 +37,33 @@ class MMoney extends StatelessWidget {
               children: [
                 TextSpan(text: label.toUpperCase()),
                 if (required)
-                  const TextSpan(text: ' *', style: TextStyle(color: M.red)),
+                  const TextSpan(text: ' *', style: TextStyle(color: SuperTokens.danger)),
               ],
-              style: const TextStyle(
-                  fontFamily: M.body,
+              style: TextStyle(
+                  fontFamily: SuperTokens.bodyFont,
                   fontWeight: FontWeight.w700,
                   fontSize: 10,
                   letterSpacing: 0.5,
-                  color: M.fg2))),
+                  color: SuperThemeData.dark.fg2))),
         ),
         Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-              color: M.input,
+              color: SuperThemeData.dark.inputBg,
               border: Border.all(color: accent),
               borderRadius: BorderRadius.circular(10)),
           child: Row(children: [
             Text(currency,
-                style: const TextStyle(
-                    fontFamily: M.mono,
+                style: TextStyle(
+                    fontFamily: SuperTokens.monoFont,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: M.fg3)),
+                    color: SuperThemeData.dark.fg3)),
             const SizedBox(width: 10),
             Text('$sign$value',
                 style: TextStyle(
-                    fontFamily: M.mono,
+                    fontFamily: SuperTokens.monoFont,
                     fontSize: 26,
                     fontWeight: FontWeight.w700,
                     color: accent,
@@ -107,16 +109,16 @@ class MMethod extends StatelessWidget {
       height: 48,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: on ? tint(M.blue, 0x1F) : M.input,
-        border: Border.all(color: on ? M.blue : M.border),
+        color: on ? superCoreTint(SuperTokens.accent, 0x1F) : SuperThemeData.dark.inputBg,
+        border: Border.all(color: on ? SuperTokens.accent : SuperThemeData.dark.border),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(label,
           style: TextStyle(
               fontSize: 12.5,
               fontWeight: FontWeight.w700,
-              fontFamily: M.body,
-              color: on ? M.blue : M.fg2)),
+              fontFamily: SuperTokens.bodyFont,
+              color: on ? SuperTokens.accent : SuperThemeData.dark.fg2)),
     );
   }
 }
@@ -135,14 +137,14 @@ class JournalPreview extends StatelessWidget {
           decoration: BoxDecoration(
               border: i == rows.length - 1
                   ? null
-                  : const Border(bottom: BorderSide(color: M.border))),
+                  : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
           child: Row(children: [
             if (numbered) ...[
               SizedBox(
                   width: 20,
                   child: Text((i + 1).toString().padLeft(2, '0'),
-                      style: const TextStyle(
-                          fontFamily: M.mono, fontSize: 11, color: M.fg4))),
+                      style: TextStyle(
+                          fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg4))),
               const SizedBox(width: 12),
             ],
             Expanded(
@@ -150,11 +152,11 @@ class JournalPreview extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(rows[i].$1,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: M.fg1,
-                          fontFamily: M.body)),
+                          color: SuperThemeData.dark.fg1,
+                          fontFamily: SuperTokens.bodyFont)),
                   const SizedBox(height: 4),
                   Pill(rows[i].$2 != null ? 'Debit' : 'Credit',
                       tone:
@@ -164,10 +166,10 @@ class JournalPreview extends StatelessWidget {
             ),
             Text(rows[i].$2 ?? rows[i].$3 ?? '',
                 style: TextStyle(
-                    fontFamily: M.mono,
+                    fontFamily: SuperTokens.monoFont,
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: rows[i].$2 != null ? M.green : M.red)),
+                    color: rows[i].$2 != null ? SuperTokens.success : SuperTokens.danger)),
           ]),
         ),
     ]);
@@ -195,18 +197,18 @@ class FromToFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      _card(M.orange, from),
+      _card(SuperTokens.warning, from),
       Transform.translate(
         offset: const Offset(0, -6),
         child: Container(
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-              color: M.blue,
+              color: SuperTokens.accent,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                    color: tint(M.blue, 0x99),
+                    color: superCoreTint(SuperTokens.accent, 0x99),
                     blurRadius: 18,
                     offset: const Offset(0, 6))
               ]),
@@ -215,7 +217,7 @@ class FromToFlow extends StatelessWidget {
         ),
       ),
       Transform.translate(
-          offset: const Offset(0, -6), child: _card(M.green, to)),
+          offset: const Offset(0, -6), child: _card(SuperTokens.success, to)),
     ]);
   }
 
@@ -223,8 +225,8 @@ class FromToFlow extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-            color: tint(tone, 0x0F),
-            border: Border.all(color: tint(tone, 0x40)),
+            color: superCoreTint(tone, 0x0F),
+            border: Border.all(color: superCoreTint(tone, 0x40)),
             borderRadius: BorderRadius.circular(10)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,32 +244,32 @@ class FromToFlow extends StatelessWidget {
                   Eyebrow(d.label, color: tone, size: 9.5),
                   const SizedBox(height: 6),
                   Text(d.title,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w600,
-                          color: M.fg1,
-                          fontFamily: M.body)),
+                          color: SuperThemeData.dark.fg1,
+                          fontFamily: SuperTokens.bodyFont)),
                   if (d.sub != null)
                     Padding(
                         padding: const EdgeInsets.only(top: 3),
                         child: Text(d.sub!,
-                            style: const TextStyle(
-                                fontFamily: M.mono,
+                            style: TextStyle(
+                                fontFamily: SuperTokens.monoFont,
                                 fontSize: 11,
-                                color: M.fg3))),
+                                color: SuperThemeData.dark.fg3))),
                   if (d.meta != null)
                     Container(
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.only(top: 10),
                       width: double.infinity,
-                      decoration: const BoxDecoration(
-                          border: Border(top: BorderSide(color: M.border))),
+                      decoration: BoxDecoration(
+                          border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
                       child: Text(d.meta!,
                           style: TextStyle(
-                              fontFamily: M.mono,
+                              fontFamily: SuperTokens.monoFont,
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: d.metaColor ?? M.fg2)),
+                              color: d.metaColor ?? SuperThemeData.dark.fg2)),
                     ),
                 ],
               ),
@@ -294,25 +296,25 @@ class FxTiles extends StatelessWidget {
   Widget _tile((String, String, String, Color?) t) => Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-            color: M.bg,
-            border: Border.all(color: M.border),
+            color: SuperThemeData.dark.bg,
+            border: Border.all(color: SuperThemeData.dark.border),
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Eyebrow(t.$1, color: M.fg3, size: 8.5),
+            Eyebrow(t.$1, color: SuperThemeData.dark.fg3, size: 8.5),
             const SizedBox(height: 6),
             Text(t.$2,
                 style: TextStyle(
-                    fontFamily: M.mono,
+                    fontFamily: SuperTokens.monoFont,
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
-                    color: t.$4 ?? M.fg1,
+                    color: t.$4 ?? SuperThemeData.dark.fg1,
                     letterSpacing: -0.3)),
             const SizedBox(height: 3),
             Text(t.$3,
-                style: const TextStyle(
-                    fontFamily: M.mono, fontSize: 9.5, color: M.fg3)),
+                style: TextStyle(
+                    fontFamily: SuperTokens.monoFont, fontSize: 9.5, color: SuperThemeData.dark.fg3)),
           ],
         ),
       );
@@ -337,13 +339,13 @@ class AuditGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Eyebrow(r.$1, color: M.fg3, size: 9.5),
+              Eyebrow(r.$1, color: SuperThemeData.dark.fg3, size: 9.5),
               const SizedBox(height: 5),
               Text(r.$2,
                   style: TextStyle(
                       fontSize: 12.5,
-                      color: M.fg1,
-                      fontFamily: r.$3 ? M.mono : M.body)),
+                      color: SuperThemeData.dark.fg1,
+                      fontFamily: r.$3 ? SuperTokens.monoFont : SuperTokens.bodyFont)),
             ],
           ),
       ],
@@ -363,14 +365,14 @@ class BKV extends StatelessWidget {
 class BankNote extends StatelessWidget {
   final Color tone;
   final String text;
-  const BankNote(this.text, {super.key, this.tone = M.orange});
+  const BankNote(this.text, {super.key, this.tone = SuperTokens.warning});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: tint(tone, 0x14),
-          border: Border.all(color: tint(tone, 0x40)),
+          color: superCoreTint(tone, 0x14),
+          border: Border.all(color: superCoreTint(tone, 0x40)),
           borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,11 +385,11 @@ class BankNote extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
               child: Text(text,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 11.5,
-                      color: M.fg2,
+                      color: SuperThemeData.dark.fg2,
                       height: 1.5,
-                      fontFamily: M.body))),
+                      fontFamily: SuperTokens.bodyFont))),
         ],
       ),
     );

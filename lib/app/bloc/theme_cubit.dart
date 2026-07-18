@@ -3,9 +3,8 @@
 // ------------------------------------------------------------
 // Control-plane theme selection (tenant-agnostic — lives at the
 // app root, ABOVE TenantScope, so the theme survives tenant
-// switches). Mobile is dark-only: the cubit is seeded dark and
-// `toggle()` is a deliberate no-op (kept for API symmetry with the
-// desktop app and any future light theme).
+// switches). Mobile remains dark-only: the cubit is seeded dark and
+// `toggle()` stays a deliberate no-op for API symmetry with desktop.
 //
 // State is the bare ThemeMode enum — no wrapper class needed for a
 // single value.
@@ -21,7 +20,7 @@ class ThemeCubit extends Cubit<ThemeMode> {
 
   bool get isDark => state == ThemeMode.dark;
 
-  /// Mobile is dark-only — no-op. Present for symmetry with desktop.
+  /// Mobile remains dark-only; the application theme comes from super_core.
   void toggle() {}
 
   void set(ThemeMode mode) => emit(mode);

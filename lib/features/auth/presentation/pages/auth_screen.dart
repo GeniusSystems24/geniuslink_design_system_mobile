@@ -31,22 +31,22 @@ class _Brand extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-                color: M.blue, borderRadius: BorderRadius.circular(7)),
+                color: SuperTokens.accent, borderRadius: BorderRadius.circular(7)),
             alignment: Alignment.center,
             child: const Text('G',
                 style: TextStyle(
-                    fontFamily: M.display,
+                    fontFamily: SuperTokens.displayFont,
                     fontWeight: FontWeight.w800,
                     fontSize: 17,
                     color: Colors.white)),
           ),
           const SizedBox(width: 10),
-          const Text('GeniusLink',
+          Text('GeniusLink',
               style: TextStyle(
-                  fontFamily: M.display,
+                  fontFamily: SuperTokens.displayFont,
                   fontWeight: FontWeight.w800,
                   fontSize: 20,
-                  color: M.fg1,
+                  color: SuperThemeData.dark.fg1,
                   letterSpacing: -0.2)),
         ],
       );
@@ -54,11 +54,11 @@ class _Brand extends StatelessWidget {
 
 Widget _authEyebrow(String text) => Text(text.toUpperCase(),
     style: const TextStyle(
-        fontFamily: M.body,
+        fontFamily: SuperTokens.bodyFont,
         fontWeight: FontWeight.w700,
         fontSize: 11,
         letterSpacing: 1.6,
-        color: M.blue));
+        color: SuperTokens.accent));
 
 class LoginScreen extends StatelessWidget {
   final NavCubit nav;
@@ -67,9 +67,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
+      backgroundColor: SuperThemeData.dark.bg,
       appBar: AppBar(
-        backgroundColor: M.bg,
+        backgroundColor: SuperThemeData.dark.bg,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: const Text('Sign In'),
@@ -84,14 +84,14 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 40),
               _authEyebrow('Sign In'),
               const SizedBox(height: 14),
-              const Text('Access your workspace',
+              Text('Access your workspace',
                   style: TextStyle(
-                      fontFamily: M.display,
+                      fontFamily: SuperTokens.displayFont,
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
                       height: 1.25,
                       letterSpacing: -0.7,
-                      color: M.fg1)),
+                      color: SuperThemeData.dark.fg1)),
               const SizedBox(height: 28),
               const TInput(
                   label: 'Email',
@@ -107,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                   child: const Text('Forgot password?',
                       style: TextStyle(
                           fontSize: 12.5,
-                          color: M.blue,
+                          color: SuperTokens.accent,
                           fontWeight: FontWeight.w600)),
                 ),
               ),
@@ -120,16 +120,16 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: Text.rich(TextSpan(children: [
-                  const TextSpan(
+                  TextSpan(
                       text: 'New organization?  ',
                       style: TextStyle(
-                          fontFamily: M.body, fontSize: 12.5, color: M.fg3)),
+                          fontFamily: SuperTokens.bodyFont, fontSize: 12.5, color: SuperThemeData.dark.fg3)),
                   TextSpan(
                     text: 'Create a workspace',
                     style: const TextStyle(
-                        fontFamily: M.body,
+                        fontFamily: SuperTokens.bodyFont,
                         fontSize: 12.5,
-                        color: M.blue,
+                        color: SuperTokens.accent,
                         fontWeight: FontWeight.w600),
                     recognizer: _tap(() => nav.showAuth(AuthScreen.signup)),
                   ),
@@ -139,22 +139,22 @@ class LoginScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                    color: M.input,
-                    border: Border.all(color: M.border),
+                    color: SuperThemeData.dark.inputBg,
+                    border: Border.all(color: SuperThemeData.dark.border),
                     borderRadius: BorderRadius.circular(8)),
-                child: const Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.lock_outline_rounded,
-                        size: 14, color: M.blue),
+                        size: 14, color: SuperTokens.accent),
                     SizedBox(width: 9),
                     Expanded(
                         child: Text(
                             'Sessions are recorded in the audit log with timestamp and device.',
                             style: TextStyle(
-                                fontFamily: M.body,
+                                fontFamily: SuperTokens.bodyFont,
                                 fontSize: 11.5,
-                                color: M.fg3,
+                                color: SuperThemeData.dark.fg3,
                                 height: 1.5))),
                   ],
                 ),
@@ -174,8 +174,8 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Create Account')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Account')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -186,18 +186,18 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 32),
               _authEyebrow('Create Account'),
               const SizedBox(height: 12),
-              const Text('Provision a workspace',
+              Text('Provision a workspace',
                   style: TextStyle(
-                      fontFamily: M.display,
+                      fontFamily: SuperTokens.displayFont,
                       fontWeight: FontWeight.w700,
                       fontSize: 26,
                       height: 1.25,
                       letterSpacing: -0.65,
-                      color: M.fg1)),
+                      color: SuperThemeData.dark.fg1)),
               const SizedBox(height: 8),
-              const Text("You'll be the workspace administrator.",
+              Text("You'll be the workspace administrator.",
                   style: TextStyle(
-                      fontFamily: M.body, fontSize: 13, color: M.fg3)),
+                      fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
               const SizedBox(height: 24),
               const TInput(
                   label: 'Full Name',
@@ -229,16 +229,16 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: Text.rich(TextSpan(children: [
-                  const TextSpan(
+                  TextSpan(
                       text: 'Already have an account?  ',
                       style: TextStyle(
-                          fontFamily: M.body, fontSize: 13, color: M.fg3)),
+                          fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
                   TextSpan(
                     text: 'Sign in',
                     style: const TextStyle(
-                        fontFamily: M.body,
+                        fontFamily: SuperTokens.bodyFont,
                         fontSize: 13,
-                        color: M.blue,
+                        color: SuperTokens.accent,
                         fontWeight: FontWeight.w600),
                     recognizer: _tap(() => nav.showAuth(AuthScreen.login)),
                   ),
@@ -261,7 +261,7 @@ class ForgotScreen extends StatefulWidget {
 
 class _ForgotScreenState extends State<ForgotScreen> {
   bool _sent = false;
-  final _email = TextEditingController();
+  final _email = SuperTextFieldController();
 
   @override
   void dispose() {
@@ -273,8 +273,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
   Widget build(BuildContext context) {
     final nav = widget.nav;
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Forgot Password')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Forgot Password')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -286,38 +286,25 @@ class _ForgotScreenState extends State<ForgotScreen> {
               if (!_sent) ...[
                 _authEyebrow('Password Reset'),
                 const SizedBox(height: 12),
-                const Text('Forgot password?',
+                Text('Forgot password?',
                     style: TextStyle(
-                        fontFamily: M.display,
+                        fontFamily: SuperTokens.displayFont,
                         fontWeight: FontWeight.w700,
                         fontSize: 26,
                         height: 1.25,
                         letterSpacing: -0.65,
-                        color: M.fg1)),
+                        color: SuperThemeData.dark.fg1)),
                 const SizedBox(height: 8),
-                const Text('Enter the email tied to your account.',
+                Text('Enter the email tied to your account.',
                     style: TextStyle(
-                        fontFamily: M.body, fontSize: 13, color: M.fg3)),
+                        fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
                 const SizedBox(height: 16),
-                Container(
-                  height: 46,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  decoration: BoxDecoration(
-                      color: M.input,
-                      border: Border.all(color: M.borderStrong),
-                      borderRadius: BorderRadius.circular(8)),
-                  alignment: Alignment.centerLeft,
-                  child: TextField(
-                    controller: _email,
-                    cursorColor: M.blue,
-                    style: const TextStyle(
-                        fontFamily: M.body, fontSize: 14, color: M.fg1),
-                    decoration: const InputDecoration(
-                        isCollapsed: true,
-                        border: InputBorder.none,
-                        hintText: 'you@company.com',
-                        hintStyle: TextStyle(color: M.fg3)),
-                  ),
+                SuperTextFormField(
+                  controller: _email,
+                  placeholder: 'you@company.com',
+                  type: SuperTextType.email,
+                  leadingIcon: Icons.email_outlined,
+                  clearable: true,
                 ),
                 const SizedBox(height: 16),
                 MBtn('Send Reset Link',
@@ -329,7 +316,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         child: const Text('Back to sign in',
                             style: TextStyle(
                                 fontSize: 13,
-                                color: M.blue,
+                                color: SuperTokens.accent,
                                 fontWeight: FontWeight.w600)))),
               ] else ...[
                 Center(
@@ -339,36 +326,36 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         width: 56,
                         height: 56,
                         decoration: BoxDecoration(
-                            color: tint(M.green, 0x1F),
+                            color: superCoreTint(SuperTokens.success, 0x1F),
                             shape: BoxShape.circle,
-                            border: Border.all(color: tint(M.green, 0x66))),
+                            border: Border.all(color: superCoreTint(SuperTokens.success, 0x66))),
                         child: const Icon(Icons.check_rounded,
-                            size: 24, color: M.green),
+                            size: 24, color: SuperTokens.success),
                       ),
                       const SizedBox(height: 20),
-                      const Text('Check your inbox',
+                      Text('Check your inbox',
                           style: TextStyle(
-                              fontFamily: M.display,
+                              fontFamily: SuperTokens.displayFont,
                               fontWeight: FontWeight.w700,
                               fontSize: 22,
-                              color: M.fg1)),
+                              color: SuperThemeData.dark.fg1)),
                       const SizedBox(height: 12),
                       Text.rich(
                         TextSpan(children: [
                           const TextSpan(text: 'A reset link was sent to\n'),
                           TextSpan(
-                              text: _email.text.isEmpty
+                              text: _email.text.text.isEmpty
                                   ? 'you@company.com'
-                                  : _email.text,
-                              style: const TextStyle(
-                                  color: M.fg1, fontFamily: M.mono)),
+                                  : _email.text.text,
+                              style: TextStyle(
+                                  color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.monoFont)),
                           const TextSpan(text: '. It expires in 30 minutes.'),
                         ]),
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontFamily: M.body,
+                        style: TextStyle(
+                            fontFamily: SuperTokens.bodyFont,
                             fontSize: 13,
-                            color: M.fg3,
+                            color: SuperThemeData.dark.fg3,
                             height: 1.6),
                       ),
                       const SizedBox(height: 28),
@@ -382,7 +369,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                           child: const Text('Back to sign in',
                               style: TextStyle(
                                   fontSize: 13,
-                                  color: M.blue,
+                                  color: SuperTokens.accent,
                                   fontWeight: FontWeight.w600))),
                     ],
                   ),

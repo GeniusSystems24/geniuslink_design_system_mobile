@@ -52,8 +52,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
-        content: Row(mainAxisSize: MainAxisSize.min, children: [const Icon(Icons.check_rounded, size: 15, color: M.bg), const SizedBox(width: 8), Text(msg, style: const TextStyle(color: M.bg, fontWeight: FontWeight.w600, fontFamily: M.body))]),
-        backgroundColor: M.fg1, behavior: SnackBarBehavior.floating, duration: const Duration(milliseconds: 1600),
+        content: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.check_rounded, size: 15, color: SuperThemeData.dark.bg), const SizedBox(width: 8), Text(msg, style: TextStyle(color: SuperThemeData.dark.bg, fontWeight: FontWeight.w600, fontFamily: SuperTokens.bodyFont))]),
+        backgroundColor: SuperThemeData.dark.fg1, behavior: SnackBarBehavior.floating, duration: const Duration(milliseconds: 1600),
         shape: const StadiumBorder(), width: 280,
       ));
   }
@@ -98,7 +98,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       value: _dash,
       child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
         builder: (context, _) => Scaffold(
-      backgroundColor: M.bg,
+      backgroundColor: SuperThemeData.dark.bg,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).padding.top + 64),
         child: _appBar(),
@@ -109,8 +109,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
           Expanded(
             child: RefreshIndicator(
               onRefresh: _refresh,
-              color: M.blue,
-              backgroundColor: M.surface,
+              color: SuperTokens.accent,
+              backgroundColor: SuperThemeData.dark.surface,
               child: ListView(
                 controller: _scrollCtrl,
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -151,19 +151,19 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
         child: Container(
           padding: EdgeInsets.fromLTRB(18, MediaQuery.of(context).padding.top + 14, 18, 12),
-          decoration: const BoxDecoration(color: Color(0xE6111318), border: Border(bottom: BorderSide(color: M.border))),
+          decoration: BoxDecoration(color: SuperThemeData.dark.bg.withAlpha(0xE6), border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
           child: Row(children: [
             Expanded(
               child: _Press(
                 onTap: () => setState(() => _wsOpen = !_wsOpen),
                 child: Row(children: [
-                  Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: tint(M.blue, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of('grid'), size: 19, color: M.blue)),
+                  Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of('grid'), size: 19, color: SuperTokens.accent)),
                   const SizedBox(width: 10),
                   Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 14, color: M.fg1)),
-                    Text(_ws.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                    Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 14, color: SuperThemeData.dark.fg1)),
+                    Text(_ws.tag, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                   ])),
-                  AnimatedRotation(turns: _wsOpen ? 0.5 : 0, duration: const Duration(milliseconds: 200), child: Icon(MIcons.of('chevD'), size: 15, color: M.fg3)),
+                  AnimatedRotation(turns: _wsOpen ? 0.5 : 0, duration: const Duration(milliseconds: 200), child: Icon(MIcons.of('chevD'), size: 15, color: SuperThemeData.dark.fg3)),
                 ]),
               ),
             ),
@@ -180,12 +180,12 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _offlineBanner() {
     return Container(
       width: double.infinity,
-      color: tint(M.orange, 0x29),
+      color: superCoreTint(SuperTokens.warning, 0x29),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
       child: Row(children: [
-        Icon(MIcons.of('ban'), size: 15, color: M.orange),
+        Icon(MIcons.of('ban'), size: 15, color: SuperTokens.warning),
         const SizedBox(width: 8),
-        const Expanded(child: Text("You're offline — showing last-known data", style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: FontWeight.w600, color: M.orange))),
+        const Expanded(child: Text("You're offline — showing last-known data", style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, fontWeight: FontWeight.w600, color: SuperTokens.warning))),
       ]),
     );
   }
@@ -195,13 +195,13 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       onTap: onTap,
       child: Container(
         width: 38, height: 38, alignment: Alignment.center,
-        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
         child: Stack(clipBehavior: Clip.none, alignment: Alignment.center, children: [
-          Icon(MIcons.of(icon), size: 18, color: M.fg1),
+          Icon(MIcons.of(icon), size: 18, color: SuperThemeData.dark.fg1),
           if (badge != null) Positioned(top: -8, right: -8, child: Container(
             constraints: const BoxConstraints(minWidth: 15), height: 15, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 3),
-            decoration: BoxDecoration(color: M.red, borderRadius: BorderRadius.circular(999), border: Border.all(color: M.bg, width: 1.5)),
-            child: Text(badge, style: const TextStyle(fontFamily: M.mono, fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white)),
+            decoration: BoxDecoration(color: SuperTokens.danger, borderRadius: BorderRadius.circular(999), border: Border.all(color: SuperThemeData.dark.bg, width: 1.5)),
+            child: Text(badge, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white)),
           )),
         ]),
       ),
@@ -218,24 +218,24 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
             color: Colors.transparent,
             child: Container(
               padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(14), boxShadow: const [BoxShadow(color: Color(0x80000000), blurRadius: 28, offset: Offset(0, 12))]),
+              decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(14), boxShadow: const [BoxShadow(color: Color(0x80000000), blurRadius: 28, offset: Offset(0, 12))]),
               child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                const Padding(padding: EdgeInsets.fromLTRB(10, 8, 10, 6), child: Text('SWITCH WORKSPACE', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: M.fg3))),
+                Padding(padding: EdgeInsets.fromLTRB(10, 8, 10, 6), child: Text('SWITCH WORKSPACE', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: SuperThemeData.dark.fg3))),
                 for (final w in mdWorkspaces)
                   GestureDetector(
                     onTap: () => _switchWorkspace(w),
                     behavior: HitTestBehavior.opaque,
                     child: Container(
                       padding: const EdgeInsets.all(10), constraints: const BoxConstraints(minHeight: 48),
-                      decoration: BoxDecoration(color: w.id == _ws.id ? M.hover : Colors.transparent, borderRadius: BorderRadius.circular(8)),
+                      decoration: BoxDecoration(color: w.id == _ws.id ? SuperThemeData.dark.hover : Colors.transparent, borderRadius: BorderRadius.circular(8)),
                       child: Row(children: [
-                        Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: w.id == _ws.id ? M.blue : M.input, borderRadius: BorderRadius.circular(9)), child: Text(w.name[0], style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 14, color: w.id == _ws.id ? Colors.white : M.fg3))),
+                        Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: w.id == _ws.id ? SuperTokens.accent : SuperThemeData.dark.inputBg, borderRadius: BorderRadius.circular(9)), child: Text(w.name[0], style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 14, color: w.id == _ws.id ? Colors.white : SuperThemeData.dark.fg3))),
                         const SizedBox(width: 11),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Text(w.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1)),
-                          Text(w.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                          Text(w.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
+                          Text(w.tag, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                         ])),
-                        if (w.id == _ws.id) Icon(MIcons.of('check'), size: 16, color: M.blue),
+                        if (w.id == _ws.id) Icon(MIcons.of('check'), size: 16, color: SuperTokens.accent),
                       ]),
                     ),
                   ),
@@ -263,18 +263,18 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
             left: _drawerOpen ? 0 : -300,
             width: 300,
             child: Material(
-              color: M.surface,
+              color: SuperThemeData.dark.surface,
               child: Column(children: [
                 // workspace header
                 Container(
                   padding: EdgeInsets.fromLTRB(18, MediaQuery.of(context).padding.top + 18, 18, 16),
-                  decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                  decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
                   child: Row(children: [
-                    Container(width: 42, height: 42, alignment: Alignment.center, decoration: BoxDecoration(color: tint(M.blue, 0x29), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('grid'), size: 20, color: M.blue)),
+                    Container(width: 42, height: 42, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x29), borderRadius: BorderRadius.circular(12)), child: Icon(MIcons.of('grid'), size: 20, color: SuperTokens.accent)),
                     const SizedBox(width: 12),
                     Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 15, color: M.fg1)),
-                      Text(_ws.tag, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                      Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 15, color: SuperThemeData.dark.fg1)),
+                      Text(_ws.tag, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
                     ])),
                   ]),
                 ),
@@ -282,22 +282,22 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                 Expanded(child: ListView(padding: const EdgeInsets.all(10), children: [
                   for (final it in const [('Home', 'home'), ('Accounts', 'inbox'), ('Journal', 'doc'), ('Contacts', 'user'), ('Reports', 'poll'), ('Settings', 'dots')])
                     _drawerItem(it.$1, it.$2),
-                  Container(margin: const EdgeInsets.symmetric(vertical: 8), height: 1, color: M.border),
-                  const Padding(padding: EdgeInsets.fromLTRB(12, 2, 12, 6), child: Text('PREFERENCES', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+                  Container(margin: const EdgeInsets.symmetric(vertical: 8), height: 1, color: SuperThemeData.dark.border),
+                  Padding(padding: EdgeInsets.fromLTRB(12, 2, 12, 6), child: Text('PREFERENCES', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperThemeData.dark.fg3))),
                   _drawerSeg('Connection', _online ? 0 : 1, const ['Online', 'Offline'], (i) => setState(() => _online = i == 0)),
                 ])),
                 // sign out
                 Container(
-                  decoration: const BoxDecoration(border: Border(top: BorderSide(color: M.border))),
+                  decoration: BoxDecoration(border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
                   padding: EdgeInsets.fromLTRB(10, 12, 10, MediaQuery.of(context).padding.bottom + 14),
                   child: _Press(
                     onTap: () { setState(() => _drawerOpen = false); _toast('Sign out'); },
                     child: Container(
                       constraints: const BoxConstraints(minHeight: 48), padding: const EdgeInsets.all(12),
                       child: Row(children: [
-                        Icon(MIcons.of('ban'), size: 19, color: M.red),
+                        Icon(MIcons.of('ban'), size: 19, color: SuperTokens.danger),
                         const SizedBox(width: 12),
-                        const Text('Sign out', style: TextStyle(fontFamily: M.body, fontSize: 14.5, fontWeight: FontWeight.w600, color: M.red)),
+                        const Text('Sign out', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 14.5, fontWeight: FontWeight.w600, color: SuperTokens.danger)),
                       ]),
                     ),
                   ),
@@ -316,10 +316,10 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       child: Container(
         constraints: const BoxConstraints(minHeight: 48), padding: const EdgeInsets.all(12),
         child: Row(children: [
-          Icon(MIcons.of(icon), size: 19, color: M.fg2),
+          Icon(MIcons.of(icon), size: 19, color: SuperThemeData.dark.fg2),
           const SizedBox(width: 12),
-          Expanded(child: Text(label, style: const TextStyle(fontFamily: M.body, fontSize: 14.5, fontWeight: FontWeight.w600, color: M.fg1))),
-          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+          Expanded(child: Text(label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 14.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1))),
+          Icon(MIcons.of('chevR'), size: 16, color: SuperThemeData.dark.fg4),
         ]),
       ),
     );
@@ -329,19 +329,19 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(label, style: const TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.fg2)),
+        Text(label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg2)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
           child: Row(children: [
             for (int i = 0; i < options.length; i++)
               Expanded(child: GestureDetector(
                 onTap: () => onChange(i),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 150), constraints: const BoxConstraints(minHeight: 32), alignment: Alignment.center,
-                  decoration: BoxDecoration(color: i == value ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(6)),
-                  child: Text(options[i], style: TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: i == value ? FontWeight.w700 : FontWeight.w500, color: i == value ? Colors.white : M.fg3)),
+                  decoration: BoxDecoration(color: i == value ? SuperTokens.accent : Colors.transparent, borderRadius: BorderRadius.circular(6)),
+                  child: Text(options[i], style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12.5, fontWeight: i == value ? FontWeight.w700 : FontWeight.w500, color: i == value ? Colors.white : SuperThemeData.dark.fg3)),
                 ),
               )),
           ]),
@@ -351,17 +351,17 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   }
 
   Widget _title() {
-    return const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('GOOD MORNING', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.3, color: M.blue)),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text('GOOD MORNING', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.3, color: SuperTokens.accent)),
       SizedBox(height: 3),
-      Text('Dashboard', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -0.8, color: M.fg1)),
+      Text('Dashboard', style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -0.8, color: SuperThemeData.dark.fg1)),
     ]);
   }
 
   // ── domain tabs ──
   Widget _domainTabs() {
     return Container(
-      decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Row(children: [
         for (final t in mdTabs) Expanded(child: _domainTab(t)),
       ]),
@@ -377,8 +377,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         constraints: const BoxConstraints(minHeight: 44),
         padding: const EdgeInsets.fromLTRB(4, 10, 4, 12),
         child: Stack(alignment: Alignment.bottomCenter, children: [
-          Center(child: Text(t.label, style: TextStyle(fontFamily: M.body, fontSize: 15, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? M.fg1 : M.fg3))),
-          AnimatedContainer(duration: const Duration(milliseconds: 200), margin: const EdgeInsets.symmetric(horizontal: 6), height: 2.5, decoration: BoxDecoration(color: M.blue.withOpacity(on ? 1 : 0), borderRadius: BorderRadius.circular(3))),
+          Center(child: Text(t.label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 15, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? SuperThemeData.dark.fg1 : SuperThemeData.dark.fg3))),
+          AnimatedContainer(duration: const Duration(milliseconds: 200), margin: const EdgeInsets.symmetric(horizontal: 6), height: 2.5, decoration: BoxDecoration(color: SuperTokens.accent.withOpacity(on ? 1 : 0), borderRadius: BorderRadius.circular(3))),
         ]),
       ),
     );
@@ -401,11 +401,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       onTap: () => _dash.toggleView(),
       child: Container(
         height: 34, padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Icon(MIcons.of(isChart ? 'poll' : 'grid'), size: 16, color: M.fg1),
+          Icon(MIcons.of(isChart ? 'poll' : 'grid'), size: 16, color: SuperThemeData.dark.fg1),
           const SizedBox(width: 5),
-          Text(isChart ? 'Charts' : 'Cards', style: const TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.fg1)),
+          Text(isChart ? 'Charts' : 'Cards', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
         ]),
       ),
     );
@@ -414,24 +414,24 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _currencyPopup() {
     return PopupMenuButton<String>(
       tooltip: 'Display currency',
-      color: M.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: M.borderStrong)),
+      color: SuperThemeData.dark.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: SuperThemeData.dark.borderStrong)),
       onSelected: (v) => _dash.setCurrency(v),
       itemBuilder: (_) => [
         for (final c in mdCurrencies)
           PopupMenuItem<String>(value: c.$1, child: Row(children: [
-            SizedBox(width: 42, child: Text(c.$1, style: TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: c.$1 == _cur ? M.blue : M.fg1))),
-            Expanded(child: Text(c.$2, style: const TextStyle(fontFamily: M.body, fontSize: 13, color: M.fg2))),
-            if (c.$1 == _cur) Icon(MIcons.of('check'), size: 16, color: M.blue),
+            SizedBox(width: 42, child: Text(c.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w700, color: c.$1 == _cur ? SuperTokens.accent : SuperThemeData.dark.fg1))),
+            Expanded(child: Text(c.$2, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg2))),
+            if (c.$1 == _cur) Icon(MIcons.of('check'), size: 16, color: SuperTokens.accent),
           ])),
       ],
       child: Container(
         height: 34, padding: const EdgeInsets.symmetric(horizontal: 11),
-        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(8)),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w700, color: M.fg1)),
+          Text(_cur, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
           const SizedBox(width: 4),
-          Icon(MIcons.of('chevD'), size: 14, color: M.fg3),
+          Icon(MIcons.of('chevD'), size: 14, color: SuperThemeData.dark.fg3),
         ]),
       ),
     );
@@ -439,11 +439,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   Widget _periodSeg() {
     return Row(mainAxisSize: MainAxisSize.min, children: [
-      const Text('COMPARE', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: M.fg3)),
+      Text('COMPARE', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: SuperThemeData.dark.fg3)),
       const SizedBox(width: 8),
       Container(
         padding: const EdgeInsets.all(3),
-        decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           for (final p in const ['day', 'week', 'month']) _periodOpt(p),
         ]),
@@ -459,8 +459,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150), constraints: const BoxConstraints(minHeight: 28),
         alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 11),
-        decoration: BoxDecoration(color: on ? M.blue : Colors.transparent, borderRadius: BorderRadius.circular(6)),
-        child: Text(label, style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? Colors.white : M.fg3)),
+        decoration: BoxDecoration(color: on ? SuperTokens.accent : Colors.transparent, borderRadius: BorderRadius.circular(6)),
+        child: Text(label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? Colors.white : SuperThemeData.dark.fg3)),
       ),
     );
   }
@@ -476,30 +476,30 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   Widget _metricCard(MdCard c) {
     final tr = c.trend[_period];
-    final trColor = tr == null ? M.fg4 : (tr.up ? M.green : M.red);
+    final trColor = tr == null ? SuperThemeData.dark.fg4 : (tr.up ? SuperTokens.success : SuperTokens.danger);
     return Stack(children: [
       Container(
         padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
-        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
         child: _loading
             ? const Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
                 _Bone(w: 80, h: 9), SizedBox(height: 12), _Bone(w: 110, h: 20), SizedBox(height: 12), _Bone(w: 60, h: 9),
               ])
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(c.label.toUpperCase(), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10.5, letterSpacing: 0.5, color: M.fg2)),
+                Text(c.label.toUpperCase(), maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10.5, letterSpacing: 0.5, color: SuperThemeData.dark.fg2)),
                 const SizedBox(height: 9),
                 Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-                  Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 10, fontWeight: FontWeight.w500, color: M.fg3)),
+                  Text(_cur, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, fontWeight: FontWeight.w500, color: SuperThemeData.dark.fg3)),
                   const SizedBox(width: 5),
-                  Flexible(child: Text(mdNum(_cardVal(c)), maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: M.fg1))),
+                  Flexible(child: Text(mdNum(_cardVal(c)), maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: SuperThemeData.dark.fg1))),
                 ]),
                 const SizedBox(height: 9),
                 SizedBox(height: 16, child: tr == null
-                    ? const Text('—', style: TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg4))
+                    ? Text('—', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg4))
                     : Row(children: [
                         Text(tr.up ? '▲' : '▼', style: TextStyle(fontSize: 10, height: 1, color: trColor)),
                         const SizedBox(width: 5),
-                        Text('${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
+                        Text('${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
                       ])),
               ]),
       ),
@@ -512,7 +512,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     final cards = _cfg.cards;
     final sel = cards.firstWhere((c) => c.id == _chartMetric, orElse: () => cards.first);
     final tr = sel.trend[_period];
-    final trColor = tr == null ? M.fg4 : (tr.up ? M.green : M.red);
+    final trColor = tr == null ? SuperThemeData.dark.fg4 : (tr.up ? SuperTokens.success : SuperTokens.danger);
     final axis = mdAxis[_period]!;
     final maxVal = cards.map(_cardVal).fold(0.0, (a, b) => a > b ? a : b);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -528,11 +528,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
             onTap: () => _dash.setChartMetric(c.id),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(color: on ? tint(mc, 0x29) : M.input, border: Border.all(color: on ? Colors.transparent : M.border), borderRadius: BorderRadius.circular(999)),
+              decoration: BoxDecoration(color: on ? superCoreTint(mc, 0x29) : SuperThemeData.dark.inputBg, border: Border.all(color: on ? Colors.transparent : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(999)),
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 Container(width: 7, height: 7, decoration: BoxDecoration(color: mc, shape: BoxShape.circle)),
                 const SizedBox(width: 7),
-                Text(c.label, style: TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? mc : M.fg3)),
+                Text(c.label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? mc : SuperThemeData.dark.fg3)),
               ]),
             ),
           );
@@ -542,22 +542,22 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       // chart card
       Container(
         padding: const EdgeInsets.fromLTRB(14, 16, 14, 10),
-        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Trend over · ${_period[0].toUpperCase()}${_period.substring(1)}', style: const TextStyle(fontFamily: M.body, fontSize: 11, fontWeight: FontWeight.w600, color: M.fg3)),
+              Text('Trend over · ${_period[0].toUpperCase()}${_period.substring(1)}', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg3)),
               const SizedBox(height: 4),
               Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-                Text(_cur, style: const TextStyle(fontFamily: M.mono, fontSize: 11, fontWeight: FontWeight.w500, color: M.fg3)),
+                Text(_cur, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, fontWeight: FontWeight.w500, color: SuperThemeData.dark.fg3)),
                 const SizedBox(width: 5),
-                Text(mdNum(_cardVal(sel)), style: const TextStyle(fontFamily: M.mono, fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: M.fg1)),
+                Text(mdNum(_cardVal(sel)), style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: -0.8, color: SuperThemeData.dark.fg1)),
               ]),
             ])),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
-              decoration: BoxDecoration(color: tint(trColor, 0x24), borderRadius: BorderRadius.circular(999)),
-              child: Text(tr == null ? '—' : '${tr.up ? '▲' : '▼'} ${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
+              decoration: BoxDecoration(color: superCoreTint(trColor, 0x24), borderRadius: BorderRadius.circular(999)),
+              child: Text(tr == null ? '—' : '${tr.up ? '▲' : '▼'} ${mdNum(tr.pct, decimals: 1)}%', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, fontWeight: FontWeight.w700, color: trColor)),
             ),
           ]),
           const SizedBox(height: 6),
@@ -571,11 +571,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       // breakdown bars
       Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text('Breakdown', style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 13.5, color: M.fg1)),
+          Text('Breakdown', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 13.5, color: SuperThemeData.dark.fg1)),
           const SizedBox(height: 1),
-          const Text('Share of this domain', style: TextStyle(fontFamily: M.body, fontSize: 11, color: M.fg3)),
+          Text('Share of this domain', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
           const SizedBox(height: 13),
           for (final c in cards) _breakdownBar(c, maxVal),
         ]),
@@ -588,13 +588,13 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       padding: const EdgeInsets.only(bottom: 13),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Expanded(child: Text(c.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 12, fontWeight: FontWeight.w600, color: M.fg2))),
+          Expanded(child: Text(c.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg2))),
           const SizedBox(width: 10),
-          Text('$_cur ${mdNum(_cardVal(c))}', style: const TextStyle(fontFamily: M.mono, fontSize: 12.5, fontWeight: FontWeight.w700, color: M.fg1)),
+          Text('$_cur ${mdNum(_cardVal(c))}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12.5, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
         ]),
         const SizedBox(height: 6),
         ClipRRect(borderRadius: BorderRadius.circular(6), child: Stack(children: [
-          Container(height: 8, color: M.input),
+          Container(height: 8, color: SuperThemeData.dark.inputBg),
           LayoutBuilder(builder: (_, cns) => AnimatedContainer(
             duration: const Duration(milliseconds: 500), curve: Curves.easeOut,
             height: 8, width: (max == 0 ? 0 : _cardVal(c) / max).clamp(0.04, 1.0) * cns.maxWidth,
@@ -614,8 +614,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
         mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
         children: [
-          for (final a in actions) _actionTile(a.icon, a.label, M.blue, () => _toast('Opening ${a.label}')),
-          _actionTile('dots', 'View all', M.fg3, _openActions, isMore: true),
+          for (final a in actions) _actionTile(a.icon, a.label, SuperTokens.accent, () => _toast('Opening ${a.label}')),
+          _actionTile('dots', 'View all', SuperThemeData.dark.fg3, _openActions, isMore: true),
         ],
       ),
     ]);
@@ -628,34 +628,34 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         Container(
           width: 46, height: 46, alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isMore ? Colors.transparent : tint(color, 0x21),
-            border: isMore ? Border.all(color: M.borderStrong, width: 1.5) : null,
+            color: isMore ? Colors.transparent : superCoreTint(color, 0x21),
+            border: isMore ? Border.all(color: SuperThemeData.dark.borderStrong, width: 1.5) : null,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Icon(MIcons.of(icon), size: 20, color: color),
         ),
         const SizedBox(height: 7),
-        Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: const TextStyle(fontFamily: M.body, fontSize: 11, fontWeight: FontWeight.w600, color: M.fg2)),
+        Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg2)),
       ]),
     );
   }
 
   void _openActions() {
     showModalBottomSheet<void>(
-      context: context, backgroundColor: M.surface, isScrollControlled: true,
+      context: context, backgroundColor: SuperThemeData.dark.surface, isScrollControlled: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
       builder: (ctx) => Padding(
         padding: EdgeInsets.fromLTRB(18, 8, 18, MediaQuery.of(ctx).padding.bottom + 24),
         child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 14), decoration: BoxDecoration(color: M.borderStrong, borderRadius: BorderRadius.circular(4)))),
-          const Padding(padding: EdgeInsets.only(bottom: 12), child: Text('All Actions', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 18, color: M.fg1))),
+          Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 14), decoration: BoxDecoration(color: SuperThemeData.dark.borderStrong, borderRadius: BorderRadius.circular(4)))),
+          Padding(padding: EdgeInsets.only(bottom: 12), child: Text('All Actions', style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w800, fontSize: 18, color: SuperThemeData.dark.fg1))),
           for (final group in const [('create', 'Create new'), ('manage', 'Manage')])
             if (_cfg.actions.any((a) => a.group == group.$1)) ...[
-              Padding(padding: const EdgeInsets.only(bottom: 10, top: 4), child: Text(group.$2.toUpperCase(), style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+              Padding(padding: const EdgeInsets.only(bottom: 10, top: 4), child: Text(group.$2.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperThemeData.dark.fg3))),
               GridView.count(
                 crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
-                children: [for (final a in _cfg.actions.where((a) => a.group == group.$1)) _actionTile(a.icon, a.label, M.blue, () { Navigator.of(ctx).pop(); _toast('Opening ${a.label}'); })],
+                children: [for (final a in _cfg.actions.where((a) => a.group == group.$1)) _actionTile(a.icon, a.label, SuperTokens.accent, () { Navigator.of(ctx).pop(); _toast('Opening ${a.label}'); })],
               ),
               const SizedBox(height: 18),
             ],
@@ -671,7 +671,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       _secHead('Recent Operations', 'green', sub: 'Latest 5 in this domain', trailing: _viewAllBtn(() => _toast('Open journal'))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
         child: Column(children: [
           if (_loading) for (int i = 0; i < 5; i++) _opSkeleton(i == 4)
           else for (int i = 0; i < ops.length; i++) _opRow(ops[i], i == ops.length - 1),
@@ -681,24 +681,24 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   }
 
   Widget _opRow(MdOp op, bool last) {
-    final amtColor = op.isCredit ? M.green : M.red;
+    final amtColor = op.isCredit ? SuperTokens.success : SuperTokens.danger;
     final sign = op.isCredit ? '+' : '−';
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Column(children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1))),
+          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 14, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1))),
           const SizedBox(width: 10),
-          Text('$sign$_cur ${mdNum(_opAmt(op), decimals: 2)}', style: TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
+          Text('$sign$_cur ${mdNum(_opAmt(op), decimals: 2)}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
         ]),
         const SizedBox(height: 7),
         Row(children: [
-          Text(op.ref, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.blue)),
+          Text(op.ref, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperTokens.accent)),
           const SizedBox(width: 8),
           _pill(op.type, mdTone(op.tone)),
           const Spacer(),
-          Text(op.time, style: const TextStyle(fontFamily: M.body, fontSize: 11, color: M.fg3)),
+          Text(op.time, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
         ]),
       ]),
     );
@@ -707,7 +707,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _opSkeleton(bool last) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: const Column(children: [
         Row(children: [Expanded(child: _Bone(w: 160, h: 13)), SizedBox(width: 12), _Bone(w: 64, h: 13)]),
         SizedBox(height: 9),
@@ -719,10 +719,10 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   // ── needs attention ──
   Widget _attention() {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      _secHead('Needs Attention', 'orange', trailing: const Text('All domains', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3))),
+      _secHead('Needs Attention', 'orange', trailing: Text('All domains', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
         child: Column(children: [
           for (int i = 0; i < mdAttention.length; i++) _attnRow(mdAttention[i], i == mdAttention.length - 1),
         ]),
@@ -736,19 +736,19 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       onTap: () => _toast(it.label),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+        decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
         child: Row(children: [
-          Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: tint(c, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of(it.icon), size: 18, color: c)),
+          Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(c, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of(it.icon), size: 18, color: c)),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(it.label, style: const TextStyle(fontFamily: M.body, fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1)),
+            Text(it.label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
             const SizedBox(height: 1),
-            Text(it.desc, style: const TextStyle(fontFamily: M.body, fontSize: 11.5, color: M.fg3)),
+            Text(it.desc, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11.5, color: SuperThemeData.dark.fg3)),
           ])),
           const SizedBox(width: 8),
-          Container(constraints: const BoxConstraints(minWidth: 24), height: 24, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 7), decoration: BoxDecoration(color: tint(c, 0x29), borderRadius: BorderRadius.circular(999)), child: Text('${it.count}', style: TextStyle(fontFamily: M.mono, fontSize: 12, fontWeight: FontWeight.w700, color: c))),
+          Container(constraints: const BoxConstraints(minWidth: 24), height: 24, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 7), decoration: BoxDecoration(color: superCoreTint(c, 0x29), borderRadius: BorderRadius.circular(999)), child: Text('${it.count}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, fontWeight: FontWeight.w700, color: c))),
           const SizedBox(width: 6),
-          Icon(MIcons.of('chevR'), size: 16, color: M.fg4),
+          Icon(MIcons.of('chevR'), size: 16, color: SuperThemeData.dark.fg4),
         ]),
       ),
     );
@@ -762,8 +762,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         Container(width: 4, height: 22, decoration: BoxDecoration(color: mdMarker(marker), borderRadius: BorderRadius.circular(4))),
         const SizedBox(width: 10),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title, style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 16, color: M.fg1)),
-          if (sub != null) Padding(padding: const EdgeInsets.only(top: 2), child: Text(sub, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body))),
+          Text(title, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 16, color: SuperThemeData.dark.fg1)),
+          if (sub != null) Padding(padding: const EdgeInsets.only(top: 2), child: Text(sub, style: TextStyle(fontSize: 11.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont))),
         ])),
         if (trailing != null) trailing,
       ]),
@@ -775,8 +775,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        const Text('View all', style: TextStyle(fontFamily: M.body, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.blue)),
-        Icon(MIcons.of('chevR'), size: 14, color: M.blue),
+        const Text('View all', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperTokens.accent)),
+        Icon(MIcons.of('chevR'), size: 14, color: SuperTokens.accent),
       ]),
     );
   }
@@ -784,8 +784,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _pill(String label, Color c) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: tint(c, 0x24), borderRadius: BorderRadius.circular(999)),
-      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: M.body, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: c)),
+      decoration: BoxDecoration(color: superCoreTint(c, 0x24), borderRadius: BorderRadius.circular(999)),
+      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: c)),
     );
   }
 
@@ -797,7 +797,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         onTap: _openSearch,
         child: Container(
           width: 54, height: 54, alignment: Alignment.center,
-          decoration: BoxDecoration(color: M.blue, borderRadius: BorderRadius.circular(18), boxShadow: [BoxShadow(color: tint(M.blue, 0xB3), blurRadius: 22, offset: const Offset(0, 8))]),
+          decoration: BoxDecoration(color: SuperTokens.accent, borderRadius: BorderRadius.circular(18), boxShadow: [BoxShadow(color: superCoreTint(SuperTokens.accent, 0xB3), blurRadius: 22, offset: const Offset(0, 8))]),
           child: const Icon(Icons.search_rounded, size: 24, color: Colors.white),
         ),
       ),
@@ -806,7 +806,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   void _openSearch() {
     showModalBottomSheet<void>(
-      context: context, backgroundColor: M.bg, isScrollControlled: true, useSafeArea: true,
+      context: context, backgroundColor: SuperThemeData.dark.bg, isScrollControlled: true, useSafeArea: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
       builder: (_) => _SearchSheet(cur: _cur, factor: _ws.factor),
     );
@@ -821,16 +821,16 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         child: BackdropFilter(
           filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
           child: Container(
-            decoration: const BoxDecoration(color: Color(0xEB111318), border: Border(top: BorderSide(color: M.border))),
+            decoration: BoxDecoration(color: SuperThemeData.dark.bg.withAlpha(0xEB), border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
             padding: EdgeInsets.only(top: 8, bottom: MediaQuery.of(context).padding.bottom + 10),
             child: Row(children: [
               for (final it in items)
                 Expanded(child: _Press(
                   onTap: () => it.$3 ? null : _toast(it.$2),
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Icon(MIcons.of(it.$1), size: 21, color: it.$3 ? M.blue : M.fg3),
+                    Icon(MIcons.of(it.$1), size: 21, color: it.$3 ? SuperTokens.accent : SuperThemeData.dark.fg3),
                     const SizedBox(height: 4),
-                    Text(it.$2, style: TextStyle(fontFamily: M.body, fontSize: 10, fontWeight: it.$3 ? FontWeight.w700 : FontWeight.w500, color: it.$3 ? M.blue : M.fg3)),
+                    Text(it.$2, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 10, fontWeight: it.$3 ? FontWeight.w700 : FontWeight.w500, color: it.$3 ? SuperTokens.accent : SuperThemeData.dark.fg3)),
                   ]),
                 )),
             ]),
@@ -846,7 +846,7 @@ class _Bone extends StatelessWidget {
   final double w, h;
   const _Bone({required this.w, required this.h});
   @override
-  Widget build(BuildContext context) => Container(width: w, height: h, decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(6)));
+  Widget build(BuildContext context) => Container(width: w, height: h, decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, borderRadius: BorderRadius.circular(6)));
 }
 
 /// Tap target with a subtle press-scale (matches the web's :active feedback).
@@ -899,7 +899,7 @@ class _TrendPainter extends CustomPainter {
     double yy(double v) => padT + ih - ((v - lo) / (hi - lo)) * ih;
 
     // dashed midline
-    final gp = Paint()..color = M.border..strokeWidth = 1;
+    final gp = Paint()..color = SuperThemeData.dark.border..strokeWidth = 1;
     final gy = padT + ih * 0.5;
     double dx = padL;
     while (dx < size.width - padR) { canvas.drawLine(Offset(dx, gy), Offset(dx + 3, gy), gp); dx += 7; }
@@ -921,11 +921,11 @@ class _TrendPainter extends CustomPainter {
     canvas.drawPath(line, Paint()..color = color..style = PaintingStyle.stroke..strokeWidth = 2.4..strokeCap = StrokeCap.round..strokeJoin = StrokeJoin.round);
 
     canvas.drawCircle(pts.last, 4.5, Paint()..color = color);
-    canvas.drawCircle(pts.last, 4.5, Paint()..color = M.surface..style = PaintingStyle.stroke..strokeWidth = 2.5);
+    canvas.drawCircle(pts.last, 4.5, Paint()..color = SuperThemeData.dark.surface..style = PaintingStyle.stroke..strokeWidth = 2.5);
 
     for (int i = 0; i < axis.length; i++) {
       final idx = ((i / (axis.length - 1)) * (n - 1)).round();
-      final tp = TextPainter(text: TextSpan(text: axis[i], style: const TextStyle(color: M.fg3, fontSize: 10, fontFamily: M.mono)), textDirection: TextDirection.ltr)..layout();
+      final tp = TextPainter(text: TextSpan(text: axis[i], style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 10, fontFamily: SuperTokens.monoFont)), textDirection: TextDirection.ltr)..layout();
       tp.paint(canvas, Offset(xx(idx) - tp.width / 2, size.height - 16));
     }
   }
@@ -956,34 +956,31 @@ class _SearchSheetState extends State<_SearchSheet> {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           child: Row(children: [
-            GestureDetector(onTap: () => Navigator.of(context).pop(), child: Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of('back'), size: 18, color: M.fg1))),
+            GestureDetector(onTap: () => Navigator.of(context).pop(), child: Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of('back'), size: 18, color: SuperThemeData.dark.fg1))),
             const SizedBox(width: 10),
-            Expanded(child: Container(
-              height: 42, padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(color: M.input, border: Border.all(color: M.borderStrong), borderRadius: BorderRadius.circular(10)),
-              child: Row(children: [
-                const Icon(Icons.search_rounded, size: 17, color: M.fg3),
-                const SizedBox(width: 9),
-                Expanded(child: TextField(
-                  autofocus: true, onChanged: (v) => setState(() => _q = v), cursorColor: M.blue,
-                  style: const TextStyle(fontFamily: M.body, fontSize: 14, color: M.fg1),
-                  decoration: const InputDecoration(isCollapsed: true, border: InputBorder.none, hintText: 'Search all operations…', hintStyle: TextStyle(color: M.fg3, fontFamily: M.body)),
-                )),
-              ]),
-            )),
+            Expanded(
+              child: SuperTextFormField(
+                autofocus: true,
+                placeholder: 'Search all operations…',
+                leadingIcon: Icons.search_rounded,
+                clearable: true,
+                density: FieldDensity.compact,
+                onChanged: (value) => setState(() => _q = value),
+              ),
+            ),
           ]),
         ),
-        const Divider(height: 1, color: M.border),
+        Divider(height: 1, color: SuperThemeData.dark.border),
         Flexible(child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 14, 16, 28), shrinkWrap: true,
           children: [
-            Padding(padding: const EdgeInsets.only(bottom: 10), child: Text(_q.trim().isEmpty ? 'SEARCH ACROSS BANKING, ACCOUNTING & COMMERCIAL' : 'RESULTS · ${results.length}', style: const TextStyle(fontFamily: M.body, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: M.fg3))),
+            Padding(padding: const EdgeInsets.only(bottom: 10), child: Text(_q.trim().isEmpty ? 'SEARCH ACROSS BANKING, ACCOUNTING & COMMERCIAL' : 'RESULTS · ${results.length}', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperThemeData.dark.fg3))),
             if (results.isEmpty)
-              const Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: Text('No matching operations', style: TextStyle(color: M.fg2, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: M.body))))
+              Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: Text('No matching operations', style: TextStyle(color: SuperThemeData.dark.fg2, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: SuperTokens.bodyFont))))
             else
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(color: M.surface, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(14)),
+                decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(14)),
                 child: Column(children: [
                   for (int i = 0; i < results.length; i++) _row(results[i].$1, results[i].$2, i == results.length - 1),
                 ]),
@@ -995,22 +992,22 @@ class _SearchSheetState extends State<_SearchSheet> {
   }
 
   Widget _row(MdOp op, String domain, bool last) {
-    final amtColor = op.isCredit ? M.green : M.red;
+    final amtColor = op.isCredit ? SuperTokens.success : SuperTokens.danger;
     final sign = op.isCredit ? '+' : '−';
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : const Border(bottom: BorderSide(color: M.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
       child: Column(children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.body, fontSize: 14, fontWeight: FontWeight.w600, color: M.fg1))),
+          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 14, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1))),
           const SizedBox(width: 10),
-          Text('$sign${widget.cur} ${mdNum((op.amt[widget.cur] ?? 0) * widget.factor, decimals: 2)}', style: TextStyle(fontFamily: M.mono, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
+          Text('$sign${widget.cur} ${mdNum((op.amt[widget.cur] ?? 0) * widget.factor, decimals: 2)}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
         ]),
         const SizedBox(height: 7),
         Row(children: [
-          Text(op.ref, style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.blue)),
+          Text(op.ref, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperTokens.accent)),
           const Spacer(),
-          Text(domain.toUpperCase(), style: const TextStyle(fontFamily: M.body, fontSize: 10.5, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: M.fg3)),
+          Text(domain.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 10.5, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: SuperThemeData.dark.fg3)),
         ]),
       ]),
     );

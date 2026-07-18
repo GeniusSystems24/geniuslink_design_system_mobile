@@ -16,7 +16,7 @@ class _ContactKind {
   const _ContactKind(this.label, this.labelPl, this.balanceLabel, this.tone, this.control, this.rows, this.history);
 }
 
-const _customer = _ContactKind('Customer', 'Customers', 'Receivable', M.green, '1300 — Accounts Receivable', [
+final _customer = _ContactKind('Customer', 'Customers', 'Receivable', SuperTokens.success, '1300 — Accounts Receivable', [
   ('CUST-102', 'Riyadh Construction Co.', 'شركة الرياض للإنشاءات', 'Riyadh', '24,500.00', 18, 'active'),
   ('CUST-118', 'Najd Developers', 'مطوّرو نجد', 'Riyadh', '8,200.00', 6, 'active'),
   ('CUST-134', 'Coastal Projects LLC', 'مشاريع الساحل', 'Jeddah', '0.00', 2, 'active'),
@@ -28,7 +28,7 @@ const _customer = _ContactKind('Customer', 'Customers', 'Receivable', M.green, '
   ('INV-2024-0388', 'Sales invoice', '+17,100.00', 'Dec 02'),
 ]);
 
-const _supplier = _ContactKind('Supplier', 'Suppliers', 'Payable', M.red, '2001 — Accounts Payable', [
+final _supplier = _ContactKind('Supplier', 'Suppliers', 'Payable', SuperTokens.danger, '2001 — Accounts Payable', [
   ('SUP-201', 'Global Steel Imports LLC', 'الاستيراد العالمي للصلب', 'London', '12,000.00', 9, 'active'),
   ('SUP-210', 'Saudi Cement Company', 'شركة الأسمنت السعودية', 'Riyadh', '34,890.00', 22, 'active'),
   ('SUP-218', 'Gulf Aggregates', 'حصى الخليج', 'Dammam', '4,200.00', 14, 'active'),
@@ -45,8 +45,8 @@ class ContactListScreen extends StatefulWidget {
   final _ContactKind kind;
   final String detailKey;
   const ContactListScreen._(this.kind, this.detailKey, {super.key});
-  factory ContactListScreen.customers() => const ContactListScreen._(_customer, 'customerDetail');
-  factory ContactListScreen.suppliers() => const ContactListScreen._(_supplier, 'supplierDetail');
+  factory ContactListScreen.customers() => ContactListScreen._(_customer, 'customerDetail');
+  factory ContactListScreen.suppliers() => ContactListScreen._(_supplier, 'supplierDetail');
   @override
   State<ContactListScreen> createState() => _ContactListScreenState();
 }
@@ -60,8 +60,8 @@ class _ContactListScreenState extends State<ContactListScreen> {
     final ql = _q.trim().toLowerCase();
     final visible = d.rows.where((c) => (_status == 'All' || c.$7 == _status.toLowerCase()) && (ql.isEmpty || c.$2.toLowerCase().contains(ql) || c.$1.toLowerCase().contains(ql) || c.$3.contains(_q))).toList();
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text(d.labelPl)),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: Text(d.labelPl)),
       body: MScroll([
       SearchInput(placeholder: 'Search ${d.labelPl.toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Active', 'Pending', 'Inactive'], value: _status, onChange: (v) => setState(() => _status = v)),
@@ -72,27 +72,27 @@ class _ContactListScreenState extends State<ContactListScreen> {
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
-              decoration: BoxDecoration(border: i < visible.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+              decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
               child: Row(children: [
                 Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(visible[i].$2, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                  Directionality(textDirection: TextDirection.rtl, child: Text(visible[i].$3, style: const TextStyle(fontFamily: M.arabic, fontSize: 12, color: M.fg3))),
+                  Text(visible[i].$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                  Directionality(textDirection: TextDirection.rtl, child: Text(visible[i].$3, style: TextStyle(fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
                   const SizedBox(height: 3),
                   Row(children: [
-                    Text(visible[i].$1, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
-                    const Text('  ·  ', style: TextStyle(color: M.fg4, fontSize: 10.5)),
-                    Text(visible[i].$4, style: const TextStyle(fontSize: 10.5, color: M.fg3, fontFamily: M.body)),
+                    Text(visible[i].$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
+                    Text('  ·  ', style: TextStyle(color: SuperThemeData.dark.fg4, fontSize: 10.5)),
+                    Text(visible[i].$4, style: TextStyle(fontSize: 10.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                   ]),
                 ])),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  Text(visible[i].$5, style: TextStyle(fontFamily: M.mono, fontSize: 13, fontWeight: FontWeight.w600, color: double.parse(visible[i].$5.replaceAll(',', '')) == 0 ? M.fg4 : d.tone)),
+                  Text(visible[i].$5, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w600, color: double.parse(visible[i].$5.replaceAll(',', '')) == 0 ? SuperThemeData.dark.fg4 : d.tone)),
                   const SizedBox(height: 4),
                   Pill(visible[i].$7, tone: _kTone(visible[i].$7)),
                 ]),
               ]),
             ),
           ),
-        if (visible.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No ${d.labelPl.toLowerCase()} match.', style: const TextStyle(color: M.fg3, fontSize: 13, fontFamily: M.body)))),
+        if (visible.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No ${d.labelPl.toLowerCase()} match.', style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 13, fontFamily: SuperTokens.bodyFont)))),
       ]),
     ]),
     );
@@ -102,16 +102,16 @@ class _ContactListScreenState extends State<ContactListScreen> {
 class CreateContactScreen extends StatelessWidget {
   final _ContactKind kind;
   const CreateContactScreen._(this.kind, {super.key});
-  factory CreateContactScreen.customer() => const CreateContactScreen._(_customer);
-  factory CreateContactScreen.supplier() => const CreateContactScreen._(_supplier);
+  factory CreateContactScreen.customer() => CreateContactScreen._(_customer);
+  factory CreateContactScreen.supplier() => CreateContactScreen._(_supplier);
   @override
   Widget build(BuildContext context) {
     final d = kind;
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text('Add ${d.label}')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: Text('Add ${d.label}')),
       body: MScroll([
-      ISection(icon: 'user', title: '${d.label} Identity', subtitle: 'Legal name and contact details', accentColor: M.blue, children: [
+      ISection(icon: 'user', title: '${d.label} Identity', subtitle: 'Legal name and contact details', accentColor: SuperTokens.accent, children: [
         TInput(label: 'Name English', placeholder: d.label == 'Customer' ? 'e.g. Riyadh Construction Co.' : 'e.g. Global Steel Imports LLC', required: true),
         const TInput(label: 'الاسم بالعربية', placeholder: 'مثال: شركة الرياض للإنشاءات', ar: true),
         const TInput(label: 'Contact Person', placeholder: 'e.g. Ahmed K.'),
@@ -119,13 +119,13 @@ class CreateContactScreen extends StatelessWidget {
         const TInput(label: 'Email', placeholder: 'name@company.com'),
         const TInput(label: 'City', placeholder: 'e.g. Riyadh'),
       ]),
-      ISection(icon: 'swap', title: 'Financial', subtitle: 'Linked control account and terms', accentColor: M.green, children: [
+      ISection(icon: 'swap', title: 'Financial', subtitle: 'Linked control account and terms', accentColor: SuperTokens.success, children: [
         TSelect(label: 'Control Account', value: d.control, options: [d.control]),
         const TSelect(label: 'Payment Terms', value: 'Net 30', options: ['Net 15', 'Net 30', 'Net 60', 'On Receipt']),
         const TInput(label: 'Tax / VAT Number', placeholder: '3XXXXXXXXXXXXX3', mono: true),
         const TInput(label: 'Credit Limit (SAR)', placeholder: 'e.g. 100,000.00', mono: true),
       ]),
-      ISection(icon: 'doc', title: 'Notes', accentColor: M.orange, children: [
+      ISection(icon: 'doc', title: 'Notes', accentColor: SuperTokens.warning, children: [
         ITextarea(label: 'Notes', placeholder: 'Internal notes about this ${d.label.toLowerCase()}…'),
       ]),
       Row(children: [
@@ -141,43 +141,43 @@ class CreateContactScreen extends StatelessWidget {
 class ContactDetailScreen extends StatelessWidget {
   final _ContactKind kind;
   const ContactDetailScreen._(this.kind, {super.key});
-  factory ContactDetailScreen.customer() => const ContactDetailScreen._(_customer);
-  factory ContactDetailScreen.supplier() => const ContactDetailScreen._(_supplier);
+  factory ContactDetailScreen.customer() => ContactDetailScreen._(_customer);
+  factory ContactDetailScreen.supplier() => ContactDetailScreen._(_supplier);
   @override
   Widget build(BuildContext context) {
     final d = kind;
     final c = d.rows.first;
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: Text('${d.label} Detail')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: Text('${d.label} Detail')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Outstanding ${d.balanceLabel}', subtitle: '${c.$6} orders · since Apr 2024', trailing: const Pill('Active'), children: [
+      MCard(accentColor: SuperTokens.success, title: 'Outstanding ${d.balanceLabel}', subtitle: '${c.$6} orders · since Apr 2024', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          const Text('SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg3)),
+          Text('SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, color: SuperThemeData.dark.fg3)),
           const SizedBox(width: 8),
-          Text(c.$5, style: TextStyle(fontFamily: M.mono, fontSize: 32, fontWeight: FontWeight.w700, color: d.tone, letterSpacing: -0.6)),
+          Text(c.$5, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 32, fontWeight: FontWeight.w700, color: d.tone, letterSpacing: -0.6)),
         ]),
       ]),
-      MCard(accentColor: M.blue, title: '${d.label} Information', children: [
+      MCard(accentColor: SuperTokens.accent, title: '${d.label} Information', children: [
         KV('Code', c.$1, mono: true), KV('City', c.$4), const KV('Contact Person', 'Ahmed K.'),
         const KV('Phone', '+966 55 124 9020', mono: true),
         KV('Control Account', d.label == 'Customer' ? '1300 — A/R' : '2001 — A/P'), const KV('Payment Terms', 'Net 30'),
       ]),
-      MCard(accentColor: M.orange, title: 'Transaction History', subtitle: 'Recent invoices and payments', pad: 8, children: [
+      MCard(accentColor: SuperTokens.warning, title: 'Transaction History', subtitle: 'Recent invoices and payments', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
             for (int i = 0; i < d.history.length; i++)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < d.history.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                decoration: BoxDecoration(border: i < d.history.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                 child: Row(children: [
                   Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(d.history[i].$1, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue)),
+                    Text(d.history[i].$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
                     const SizedBox(height: 2),
-                    Text('${d.history[i].$2} · ${d.history[i].$4}', style: const TextStyle(fontSize: 12, color: M.fg3, fontFamily: M.body)),
+                    Text('${d.history[i].$2} · ${d.history[i].$4}', style: TextStyle(fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                   ])),
-                  Text(d.history[i].$3, style: TextStyle(fontFamily: M.mono, fontSize: 13.5, fontWeight: FontWeight.w600, color: d.history[i].$3.startsWith('+') ? M.green : M.red)),
+                  Text(d.history[i].$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13.5, fontWeight: FontWeight.w600, color: d.history[i].$3.startsWith('+') ? SuperTokens.success : SuperTokens.danger)),
                 ]),
               ),
           ]),

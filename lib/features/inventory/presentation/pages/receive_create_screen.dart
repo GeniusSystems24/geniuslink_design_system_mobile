@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
@@ -10,16 +10,16 @@ class _BalancedRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 10),
-      decoration: const BoxDecoration(
-          border: Border(top: BorderSide(color: M.borderStrong, width: 2))),
+      decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: SuperThemeData.dark.borderStrong, width: 2))),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const Eyebrow('Balanced · Diff 0.00', color: M.green, size: 11),
+        const Eyebrow('Balanced · Diff 0.00', color: SuperTokens.success, size: 11),
         Text(value,
-            style: const TextStyle(
-                fontFamily: M.mono,
+            style: TextStyle(
+                fontFamily: SuperTokens.monoFont,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: M.fg1)),
+                color: SuperThemeData.dark.fg1)),
       ]),
     );
   }
@@ -41,7 +41,7 @@ class ReceiveCreateScreen extends StatefulWidget {
 }
 
 class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
-  final _storeCtl = AutoSuggestionsBoxController<String>(
+  final _storeController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'Downtown Central',
       'North Warehouse',
@@ -49,7 +49,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _supplierCtl = AutoSuggestionsBoxController<String>(
+  final _supplierController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'ABC Trading Co.',
       'SteelMart LLC',
@@ -57,7 +57,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _currencyCtl = AutoSuggestionsBoxController<String>(
+  final _currencyController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
       'SAR — Saudi Riyal',
       'USD — US Dollar',
@@ -70,9 +70,9 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
   @override
   void dispose() {
     for (final l in _lines) { l.dispose(); }
-    _storeCtl.dispose();
-    _supplierCtl.dispose();
-    _currencyCtl.dispose();
+    _storeController.dispose();
+    _supplierController.dispose();
+    _currencyController.dispose();
     super.dispose();
   }
 
@@ -90,13 +90,13 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Receive Inventory')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Receive Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Receive Details',
-          marker: M.blue,
+          marker: SuperTokens.accent,
           children: [
             const SuperTextFormField(
               label: 'Serial No',
@@ -104,17 +104,17 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               readOnly: true,
             ),
             AutoSuggestionsBox<String>(
-              controller: _currencyCtl,
+              controller: _currencyController,
               label: 'Currency',
               hintText: 'Select currency…',
             ),
             AutoSuggestionsBox<String>(
-              controller: _storeCtl,
+              controller: _storeController,
               label: 'Receiving Store',
               hintText: 'Search store…',
             ),
             AutoSuggestionsBox<String>(
-              controller: _supplierCtl,
+              controller: _supplierController,
               label: 'Supplier Account',
               hintText: 'e.g. ABC Trading Co.',
             ),
@@ -123,7 +123,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           icon: 'cart',
           title: 'Inventory Items',
           sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
-          marker: M.green,
+          marker: SuperTokens.success,
           children: [
             Scanner(onPick: _addLine),
             ..._lines.asMap().entries.map((e) {
@@ -144,7 +144,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
       const ISection(
           icon: 'swap',
           title: 'Accounting Distribution',
-          marker: M.green,
+          marker: SuperTokens.success,
           children: [
             DistRow(
                 account: '1200 — Inventory (WIP)',
@@ -158,7 +158,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 last: true),
             _BalancedRow(value: '24,200.00'),
           ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: M.orange, children: [
+      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperTokens.warning, children: [
         const SuperTextFormField(
           label: 'Receipt Notes',
           placeholder: 'PO number, delivery note, inspection results…',
@@ -171,7 +171,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           maxSizeMB: 10,
           maxFiles: 5,
           multiple: true,
-          onBrowse: () async => [],
+          onBrowse: () async => const <SuperFile>[],
         ),
       ]),
       ActionRow(primary: 'Receive Inventory', onPrimary: _submit),

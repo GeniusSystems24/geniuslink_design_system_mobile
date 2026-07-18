@@ -4,9 +4,10 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../tokens/m_colors.dart';
+import 'package:super_core/super_core.dart';
 import '../layout/m_icons.dart';
 
+import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 enum MBtnVariant { primary, secondary, danger }
 
 class MBtn extends StatelessWidget {
@@ -20,16 +21,16 @@ class MBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg, border) = switch (variant) {
-      MBtnVariant.primary   => (M.blue, Colors.white, null),
-      MBtnVariant.secondary => (Colors.transparent, M.fg1, M.borderStrong),
-      MBtnVariant.danger    => (Colors.transparent, M.red, tint(M.red, 0x66)),
+      MBtnVariant.primary   => (SuperTokens.accent, Colors.white, null),
+      MBtnVariant.secondary => (Colors.transparent, SuperThemeData.dark.fg1, SuperThemeData.dark.borderStrong),
+      MBtnVariant.danger    => (Colors.transparent, SuperTokens.danger, superCoreTint(SuperTokens.danger, 0x66)),
     };
     final child = Row(
       mainAxisSize: full ? MainAxisSize.max : MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[Icon(MIcons.of(icon!), size: 17, color: fg), const SizedBox(width: 8)],
-        Text(label, style: TextStyle(fontFamily: M.body, fontWeight: FontWeight.w600, fontSize: 15, color: fg)),
+        Text(label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w600, fontSize: 15, color: fg)),
       ],
     );
     return SizedBox(

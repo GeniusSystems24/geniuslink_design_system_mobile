@@ -13,18 +13,20 @@ import '../../../../core/bloc/form_cubit.dart';
 class _PToggle extends StatelessWidget {
   final bool on;
   final VoidCallback onTap;
+
   const _PToggle({required this.on, required this.onTap});
+
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 42, height: 24,
-        decoration: BoxDecoration(color: on ? M.blue : M.input, border: Border.all(color: on ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(999)),
-        child: AnimatedAlign(duration: const Duration(milliseconds: 150), alignment: on ? Alignment.centerRight : Alignment.centerLeft, child: Container(width: 18, height: 18, margin: const EdgeInsets.symmetric(horizontal: 2), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle))),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox(
+        width: 64,
+        child: SuperBoolFormField(
+          key: ValueKey(on),
+          initialValue: on,
+          enabledLabel: '',
+          disabledLabel: '',
+          onChanged: (_) => onTap(),
+        ),
+      );
 }
 
 class _PMono extends StatelessWidget {
@@ -34,15 +36,15 @@ class _PMono extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         width: 36, height: 36, alignment: Alignment.center,
-        decoration: BoxDecoration(color: tint(tone, 0x1F), borderRadius: BorderRadius.circular(8)),
-        child: Text(name[0], style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w800, fontSize: 15, color: tone)),
+        decoration: BoxDecoration(color: superCoreTint(tone, 0x1F), borderRadius: BorderRadius.circular(8)),
+        child: Text(name[0], style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w800, fontSize: 15, color: tone)),
       );
 }
 
-const _integrationGroups = [
-  ('Banking & Payments', M.blue, [('SAMA Open Banking', Color(0xFF4A7CFF), 'Statement sync', true), ('Mada Gateway', Color(0xFF1DB88A), 'Local card acquiring', true), ('Stripe', Color(0xFF635BFF), 'International cards', false)]),
-  ('E-commerce', M.green, [('Salla', Color(0xFF1DB88A), 'Orders & inventory', true), ('Zid', Color(0xFFF97316), 'Order import', false), ('Shopify', Color(0xFF95BF47), 'Multi-channel', false)]),
-  ('Email & Comms', M.orange, [('SendGrid', Color(0xFF4A7CFF), 'Document email', true), ('Slack', Color(0xFFE01E5A), 'Alert notifications', false)]),
+final _integrationGroups = [
+  ('Banking & Payments', SuperTokens.accent, [('SAMA Open Banking', SuperTokens.accent, 'Statement sync', true), ('Mada Gateway', SuperTokens.success, 'Local card acquiring', true), ('Stripe', Color(0xFF635BFF), 'International cards', false)]),
+  ('E-commerce', SuperTokens.success, [('Salla', SuperTokens.success, 'Orders & inventory', true), ('Zid', SuperTokens.warning, 'Order import', false), ('Shopify', Color(0xFF95BF47), 'Multi-channel', false)]),
+  ('Email & Comms', SuperTokens.warning, [('SendGrid', SuperTokens.accent, 'Document email', true), ('Slack', Color(0xFFE01E5A), 'Alert notifications', false)]),
 ];
 
 class IntegrationsScreen extends StatelessWidget {
@@ -68,8 +70,8 @@ class _IntegrationsView extends StatelessWidget {
         final st = Map<String, bool>.from(fstate.value<Map>('state') ?? const {});
         void toggle(String k) => form.setField('state', {...st, k: !(st[k] ?? false)});
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Integrations')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Integrations')),
       body: MScroll([
           for (final g in _integrationGroups)
             MCard(title: g.$1, accentColor: g.$2, pad: 8, children: [
@@ -79,14 +81,14 @@ class _IntegrationsView extends StatelessWidget {
                   for (int i = 0; i < g.$3.length; i++)
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: BoxDecoration(border: i < g.$3.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                      decoration: BoxDecoration(border: i < g.$3.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                       child: Row(children: [
                         _PMono(name: g.$3[i].$1, tone: g.$3[i].$2),
                         const SizedBox(width: 12),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Text(g.$3[i].$1, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                          Text(g.$3[i].$1, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                           const SizedBox(height: 1),
-                          Text(g.$3[i].$3, style: const TextStyle(fontSize: 11.5, color: M.fg3, fontFamily: M.body)),
+                          Text(g.$3[i].$3, style: TextStyle(fontSize: 11.5, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                         ])),
                         if (st[g.$3[i].$1] == true) const Padding(padding: EdgeInsets.only(right: 8), child: Pill('On')),
                         _PToggle(on: st[g.$3[i].$1] ?? false, onTap: () => toggle(g.$3[i].$1)),
@@ -129,22 +131,22 @@ class _WebhooksView extends StatelessWidget {
         final hooks = [for (final h in (fstate.value<List>('hooks') ?? const [])) List<Object>.from(h as List)];
         void toggle(int i) { final n = [for (final h in hooks) List<Object>.from(h)]; n[i][2] = !(n[i][2] as bool); form.setField('hooks', n); }
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Webhooks')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Webhooks')),
       body: MScroll([
-          MCard(accentColor: M.blue, title: '${hooks.length} Endpoints', subtitle: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
+          MCard(accentColor: SuperTokens.accent, title: '${hooks.length} Endpoints', subtitle: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
                 for (int i = 0; i < hooks.length; i++)
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: i < hooks.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    decoration: BoxDecoration(border: i < hooks.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                     child: Column(children: [
                       Row(children: [
-                        Icon(MIcons.of('link'), size: 15, color: hooks[i][2] as bool ? M.green : M.fg4),
+                        Icon(MIcons.of('link'), size: 15, color: hooks[i][2] as bool ? SuperTokens.success : SuperThemeData.dark.fg4),
                         const SizedBox(width: 10),
-                        Expanded(child: Text(hooks[i][0] as String, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg1))),
+                        Expanded(child: Text(hooks[i][0] as String, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg1))),
                         _PToggle(on: hooks[i][2] as bool, onTap: () => toggle(i)),
                       ]),
                       const SizedBox(height: 8),
@@ -153,9 +155,9 @@ class _WebhooksView extends StatelessWidget {
                         child: Row(children: [
                           Expanded(child: Wrap(spacing: 6, runSpacing: 6, children: [
                             for (final e in (hooks[i][1] as String).split(','))
-                              Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2), decoration: BoxDecoration(color: M.input, border: Border.all(color: M.border), borderRadius: BorderRadius.circular(4)), child: Text(e, style: const TextStyle(fontFamily: M.mono, fontSize: 10, color: M.fg2))),
+                              Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2), decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(4)), child: Text(e, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg2))),
                           ])),
-                          Text(hooks[i][3] as String, style: TextStyle(fontFamily: M.mono, fontSize: 10, color: (hooks[i][3] as String).startsWith('2') ? M.green : M.red)),
+                          Text(hooks[i][3] as String, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: (hooks[i][3] as String).startsWith('2') ? SuperTokens.success : SuperTokens.danger)),
                         ]),
                       ),
                     ]),
@@ -200,30 +202,30 @@ class _ApiKeysView extends StatelessWidget {
         void toggleReveal(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('keys', n); }
         void revoke(int i) { final n = clone()..removeAt(i); form.setField('keys', n); }
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('API Keys')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('API Keys')),
       body: MScroll([
-          const InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: M.orange),
-          MCard(accentColor: M.green, title: '${keys.length} Active Keys', pad: 8, children: [
+          const InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: SuperTokens.warning),
+          MCard(accentColor: SuperTokens.success, title: '${keys.length} Active Keys', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
                 for (int i = 0; i < keys.length; i++)
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: i < keys.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    decoration: BoxDecoration(border: i < keys.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                        Text(keys[i][0] as String, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
-                        GestureDetector(onTap: () => revoke(i), child: const Text('Revoke', style: TextStyle(color: M.red, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
+                        Text(keys[i][0] as String, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                        GestureDetector(onTap: () => revoke(i), child: const Text('Revoke', style: TextStyle(color: SuperTokens.danger, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: SuperTokens.bodyFont))),
                       ]),
                       const SizedBox(height: 6),
                       Row(children: [
-                        Expanded(child: Text(keys[i][4] as bool ? '${keys[i][1]}_4d9e1c7b22f0' : '${keys[i][1]}••••••••', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg2))),
-                        GestureDetector(onTap: () => toggleReveal(i), child: Text(keys[i][4] as bool ? 'Hide' : 'Reveal', style: const TextStyle(color: M.blue, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: M.body))),
+                        Expanded(child: Text(keys[i][4] as bool ? '${keys[i][1]}_4d9e1c7b22f0' : '${keys[i][1]}••••••••', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11.5, color: SuperThemeData.dark.fg2))),
+                        GestureDetector(onTap: () => toggleReveal(i), child: Text(keys[i][4] as bool ? 'Hide' : 'Reveal', style: const TextStyle(color: SuperTokens.accent, fontSize: 11, fontWeight: FontWeight.w700, fontFamily: SuperTokens.bodyFont))),
                       ]),
                       const SizedBox(height: 4),
-                      Text('${keys[i][2]} · used ${keys[i][3]}', style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                      Text('${keys[i][2]} · used ${keys[i][3]}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                     ]),
                   ),
               ]),
@@ -262,30 +264,30 @@ class _NotificationsView extends StatelessWidget {
         final prefs = [for (final r in (fstate.value<List>('prefs') ?? const [])) List<bool>.from(r as List)];
         void toggle(int ci, int chi) { final n = [for (final r in prefs) List<bool>.from(r)]; n[ci][chi] = !n[ci][chi]; form.setField('prefs', n); }
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Notifications')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Notifications')),
       body: MScroll([
-          MCard(accentColor: M.blue, title: 'Preferences', subtitle: 'Toggle a channel per category', pad: 8, children: [
+          MCard(accentColor: SuperTokens.accent, title: 'Preferences', subtitle: 'Toggle a channel per category', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
                 Container(
                   padding: const EdgeInsets.only(bottom: 10),
-                  decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                  decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
                   child: Row(children: [
                     const Spacer(),
-                    for (final c in NotificationsScreen._chans) SizedBox(width: 50, child: Center(child: Text(c.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 9, letterSpacing: 0.4, color: M.fg3, fontFamily: M.body)))),
+                    for (final c in NotificationsScreen._chans) SizedBox(width: 50, child: Center(child: Text(c.toUpperCase(), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 9, letterSpacing: 0.4, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)))),
                   ]),
                 ),
                 for (int ci = 0; ci < NotificationsScreen._cats.length; ci++)
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: ci < NotificationsScreen._cats.length - 1 ? const Border(bottom: BorderSide(color: M.border)) : null),
+                    decoration: BoxDecoration(border: ci < NotificationsScreen._cats.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
                     child: Row(children: [
                       Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(NotificationsScreen._cats[ci].$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                        Text(NotificationsScreen._cats[ci].$1, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                         const SizedBox(height: 1),
-                        Text(NotificationsScreen._cats[ci].$2, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+                        Text(NotificationsScreen._cats[ci].$2, style: TextStyle(fontSize: 11, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                       ])),
                       for (int chi = 0; chi < NotificationsScreen._chans.length; chi++)
                         SizedBox(
@@ -295,7 +297,7 @@ class _NotificationsView extends StatelessWidget {
                               onTap: () => toggle(ci, chi),
                               child: Container(
                                 width: 26, height: 26, alignment: Alignment.center,
-                                decoration: BoxDecoration(color: prefs[ci][chi] ? M.blue : M.input, border: Border.all(color: prefs[ci][chi] ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(7)),
+                                decoration: BoxDecoration(color: prefs[ci][chi] ? SuperTokens.accent : SuperThemeData.dark.inputBg, border: Border.all(color: prefs[ci][chi] ? SuperTokens.accent : SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(7)),
                                 child: prefs[ci][chi] ? const Icon(Icons.check_rounded, size: 14, color: Colors.white) : null,
                               ),
                             ),
@@ -321,55 +323,55 @@ class BillingScreen extends StatelessWidget {
     const usage = [('Users', 6.0, 25.0, ''), ('Transactions · MTD', 4120.0, 100000.0, ''), ('Storage', 2.4, 50.0, ' GB')];
     const plans = [('Starter', '0', 'free', ['1 workspace', '3 users', '500 entries/mo'], false), ('Business', '349', '/mo', ['Unlimited entries', '25 users', 'All integrations'], true), ('Enterprise', 'Custom', '', ['SSO & SAML', 'Dedicated support', 'Audit retention 10y'], false)];
     return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Billing')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Billing')),
       body: MScroll([
-      MCard(accentColor: M.green, title: 'Current Plan', trailing: const Pill('Active'), children: [
-        const Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Text('Business', style: TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 22, color: M.fg1)),
+      MCard(accentColor: SuperTokens.success, title: 'Current Plan', trailing: const Pill('Active'), children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+          Text('Business', style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 22, color: SuperThemeData.dark.fg1)),
           SizedBox(width: 10),
-          Text.rich(TextSpan(children: [TextSpan(text: '349.00 SAR', style: TextStyle(fontFamily: M.mono, fontSize: 14, color: M.fg2)), TextSpan(text: '/mo', style: TextStyle(fontSize: 11, color: M.fg3))])),
+          Text.rich(TextSpan(children: [TextSpan(text: '349.00 SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, color: SuperThemeData.dark.fg2)), TextSpan(text: '/mo', style: TextStyle(fontSize: 11, color: SuperThemeData.dark.fg3))])),
         ]),
-        const Text('Renews Jan 1, 2026', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+        Text('Renews Jan 1, 2026', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
         Column(children: [
           for (final u in usage) _UsageBar(label: u.$1, val: u.$2, max: u.$3, unit: u.$4),
         ]),
       ]),
       for (final p in plans)
         Container(
-          decoration: BoxDecoration(color: M.surface, border: Border.all(color: p.$5 ? M.blue : M.border), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: p.$5 ? SuperTokens.accent : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(12)),
           padding: const EdgeInsets.all(18),
           child: Stack(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              Text(p.$1, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: M.fg1, fontFamily: M.body)),
+              Text(p.$1, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
               const SizedBox(height: 14),
               Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-                Text(p.$2, style: const TextStyle(fontFamily: M.mono, fontSize: 26, fontWeight: FontWeight.w700, color: M.fg1, letterSpacing: -0.5)),
+                Text(p.$2, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 26, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1, letterSpacing: -0.5)),
                 const SizedBox(width: 4),
-                Text(p.$3, style: const TextStyle(fontSize: 12, color: M.fg3, fontFamily: M.body)),
+                Text(p.$3, style: TextStyle(fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
               ]),
               const SizedBox(height: 14),
               for (final f in p.$4)
-                Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(children: [Icon(MIcons.of('check'), size: 14, color: M.green), const SizedBox(width: 8), Text(f, style: const TextStyle(fontSize: 12.5, color: M.fg2, fontFamily: M.body))])),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(children: [Icon(MIcons.of('check'), size: 14, color: SuperTokens.success), const SizedBox(width: 8), Text(f, style: TextStyle(fontSize: 12.5, color: SuperThemeData.dark.fg2, fontFamily: SuperTokens.bodyFont))])),
               const SizedBox(height: 14),
               MBtn(p.$5 ? 'Current Plan' : (p.$1 == 'Enterprise' ? 'Contact Sales' : 'Upgrade'), variant: p.$5 ? MBtnVariant.secondary : MBtnVariant.primary, full: true),
             ]),
-            if (p.$5) PositionedDirectional(top: 0, end: 0, child: Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: tint(M.blue, 0x24), borderRadius: BorderRadius.circular(4)), child: const Text('CURRENT', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: M.blue, fontFamily: M.body)))),
+            if (p.$5) PositionedDirectional(top: 0, end: 0, child: Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: superCoreTint(SuperTokens.accent, 0x24), borderRadius: BorderRadius.circular(4)), child: const Text('CURRENT', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: SuperTokens.accent, fontFamily: SuperTokens.bodyFont)))),
           ]),
         ),
-      MCard(accentColor: M.orange, title: 'Recent Invoices', pad: 8, children: [
+      MCard(accentColor: SuperTokens.warning, title: 'Recent Invoices', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
             for (final inv in const [('INV-GL-2025-012', 'Dec 01', '349.00'), ('INV-GL-2025-011', 'Nov 01', '349.00'), ('INV-GL-2025-010', 'Oct 01', '349.00')])
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
                 child: Row(children: [
-                  Expanded(child: Text(inv.$1, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.blue))),
-                  Text(inv.$2, style: const TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+                  Expanded(child: Text(inv.$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent))),
+                  Text(inv.$2, style: TextStyle(fontSize: 11, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
                   const SizedBox(width: 12),
-                  Text(inv.$3, style: const TextStyle(fontFamily: M.mono, fontSize: 12.5, fontWeight: FontWeight.w600, color: M.fg1)),
+                  Text(inv.$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
                   const SizedBox(width: 10),
                   const Pill('Paid'),
                 ]),
@@ -396,11 +398,11 @@ class _UsageBar extends StatelessWidget {
       padding: const EdgeInsets.only(top: 12),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Eyebrow(label, color: M.fg3, size: 10),
-          Text('$fmt$unit / $maxFmt', style: const TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg2)),
+          Eyebrow(label, color: SuperThemeData.dark.fg3, size: 10),
+          Text('$fmt$unit / $maxFmt', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg2)),
         ]),
         const SizedBox(height: 5),
-        ClipRRect(borderRadius: BorderRadius.circular(999), child: Stack(children: [Container(height: 6, color: M.input), FractionallySizedBox(widthFactor: pct / 100, child: Container(height: 6, color: pct > 85 ? M.orange : M.blue))])),
+        ClipRRect(borderRadius: BorderRadius.circular(999), child: Stack(children: [Container(height: 6, color: SuperThemeData.dark.inputBg), FractionallySizedBox(widthFactor: pct / 100, child: Container(height: 6, color: pct > 85 ? SuperTokens.warning : SuperTokens.accent))])),
       ]),
     );
   }
@@ -431,20 +433,20 @@ class _BackupView extends StatelessWidget {
         final scope = Map<String, bool>.from(fstate.value<Map>('scope') ?? const {});
         void toggleScope(String k) => form.setField('scope', {...scope, k: !(scope[k] ?? false)});
         return Scaffold(
-      backgroundColor: M.bg,
-      appBar: AppBar(backgroundColor: M.bg, elevation: 0, title: const Text('Backup')),
+      backgroundColor: SuperThemeData.dark.bg,
+      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Backup')),
       body: MScroll([
-          MCard(accentColor: M.green, title: 'Automatic Backups', trailing: const Pill('Healthy'), children: [
+          MCard(accentColor: SuperTokens.success, title: 'Automatic Backups', trailing: const Pill('Healthy'), children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+              Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                 SizedBox(height: 3),
-                Text('Last · Dec 19 03:00 · 248 MB', style: TextStyle(fontFamily: M.mono, fontSize: 11, color: M.fg3)),
+                Text('Last · Dec 19 03:00 · 248 MB', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
               ])),
               _PToggle(on: auto, onTap: () => form.setField('auto', !auto)),
             ]),
           ]),
-          ISection(icon: 'download', title: 'Manual Export', sub: 'Download a portable copy', marker: M.blue, children: [
+          ISection(icon: 'download', title: 'Manual Export', sub: 'Download a portable copy', marker: SuperTokens.accent, children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Data Scope')),
               GridView.count(
@@ -456,11 +458,11 @@ class _BackupView extends StatelessWidget {
                       onTap: () => toggleScope(k),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-                        decoration: BoxDecoration(color: scope[k]! ? tint(M.blue, 0x1F) : M.input, border: Border.all(color: scope[k]! ? M.blue : M.border), borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(color: scope[k]! ? superCoreTint(SuperTokens.accent, 0x1F) : SuperThemeData.dark.inputBg, border: Border.all(color: scope[k]! ? SuperTokens.accent : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
                         child: Row(children: [
-                          Container(width: 18, height: 18, alignment: Alignment.center, decoration: BoxDecoration(color: scope[k]! ? M.blue : Colors.transparent, border: Border.all(color: scope[k]! ? M.blue : M.borderStrong), borderRadius: BorderRadius.circular(4)), child: scope[k]! ? const Icon(Icons.check_rounded, size: 12, color: Colors.white) : null),
+                          Container(width: 18, height: 18, alignment: Alignment.center, decoration: BoxDecoration(color: scope[k]! ? SuperTokens.accent : Colors.transparent, border: Border.all(color: scope[k]! ? SuperTokens.accent : SuperThemeData.dark.borderStrong), borderRadius: BorderRadius.circular(4)), child: scope[k]! ? const Icon(Icons.check_rounded, size: 12, color: Colors.white) : null),
                           const SizedBox(width: 9),
-                          Text(k, style: const TextStyle(fontSize: 13, color: M.fg1, fontFamily: M.body)),
+                          Text(k, style: TextStyle(fontSize: 13, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                         ]),
                       ),
                     ),
@@ -470,21 +472,21 @@ class _BackupView extends StatelessWidget {
             const TSelect(label: 'Format', value: 'CSV (zipped)', options: ['CSV (zipped)', 'JSON', 'Excel (XLSX)']),
             const MBtn('Generate Export', icon: 'download', full: true),
           ]),
-          MCard(accentColor: M.orange, title: 'Export History', pad: 8, children: [
+          MCard(accentColor: SuperTokens.warning, title: 'Export History', pad: 8, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(children: [
                 for (final f in const [('full-export-2025-12-15.zip', '248 MB · Dec 15'), ('ledger-q4-2025.csv', '12 MB · Dec 02'), ('contacts-2025-11.json', '1.1 MB · Nov 20')])
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: M.border))),
+                    decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
                     child: Row(children: [
-                      Icon(MIcons.of('doc'), size: 16, color: M.blue),
+                      Icon(MIcons.of('doc'), size: 16, color: SuperTokens.accent),
                       const SizedBox(width: 10),
-                      Expanded(child: Text(f.$1, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontFamily: M.mono, fontSize: 11.5, color: M.fg1))),
-                      Text(f.$2, style: const TextStyle(fontFamily: M.mono, fontSize: 10.5, color: M.fg3)),
+                      Expanded(child: Text(f.$1, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11.5, color: SuperThemeData.dark.fg1))),
+                      Text(f.$2, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
                       const SizedBox(width: 10),
-                      Icon(MIcons.of('download'), size: 15, color: M.fg3),
+                      Icon(MIcons.of('download'), size: 15, color: SuperThemeData.dark.fg3),
                     ]),
                   ),
               ]),
@@ -492,12 +494,12 @@ class _BackupView extends StatelessWidget {
           ]),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: BoxDecoration(color: tint(M.red, 0x0F), border: Border.all(color: tint(M.red, 0x4D)), borderRadius: BorderRadius.circular(10)),
-            child: const Row(children: [
+            decoration: BoxDecoration(color: superCoreTint(SuperTokens.danger, 0x0F), border: Border.all(color: superCoreTint(SuperTokens.danger, 0x4D)), borderRadius: BorderRadius.circular(10)),
+            child: Row(children: [
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: M.fg1, fontFamily: M.body)),
+                Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
                 SizedBox(height: 2),
-                Text('30-day grace period.', style: TextStyle(fontSize: 11, color: M.fg3, fontFamily: M.body)),
+                Text('30-day grace period.', style: TextStyle(fontSize: 11, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
               ])),
               MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
             ]),

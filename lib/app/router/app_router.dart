@@ -45,7 +45,7 @@ class ScreenMeta {
   const ScreenMeta(this.title, {this.ar, this.back = 'more'});
 }
 
-const Map<String, ScreenMeta> subTitles = {
+Map<String, ScreenMeta> subTitles = {
   'accountDetail': ScreenMeta('Cash Box', ar: 'الصندوق', back: 'accounts'),
   'createAccount': ScreenMeta('Create Account', back: 'accounts'),
   'groupDetail': ScreenMeta('Current Assets', ar: 'الأصول المتداولة', back: 'accounts'),
@@ -127,7 +127,7 @@ const Map<String, ScreenMeta> subTitles = {
 final Set<String> portedScreens = subTitles.keys.toSet();
 
 /// Screens that render their own chrome (no standard MAppBar wrapper).
-const Set<String> fullBleedScreens = {'mobileDashboard'};
+Set<String> fullBleedScreens = {'mobileDashboard'};
 
 /// Build a sub-screen widget. Falls back to [PendingScreen] for ids
 /// scheduled in a later batch.
@@ -256,19 +256,19 @@ class PendingScreen extends StatelessWidget {
           children: [
             Container(
               width: 56, height: 56,
-              decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(16), border: Border.all(color: M.border)),
-              child: const Icon(Icons.construction_rounded, color: M.fg3, size: 26),
+              decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, borderRadius: BorderRadius.circular(16), border: Border.all(color: SuperThemeData.dark.border)),
+              child: Icon(Icons.construction_rounded, color: SuperThemeData.dark.fg3, size: 26),
             ),
             const SizedBox(height: 16),
-            Text(title, style: const TextStyle(fontFamily: M.display, fontWeight: FontWeight.w700, fontSize: 18, color: M.fg1)),
+            Text(title, style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: 18, color: SuperThemeData.dark.fg1)),
             const SizedBox(height: 6),
-            const Text('This screen is scheduled in an upcoming porting batch.',
-                textAlign: TextAlign.center, style: TextStyle(fontFamily: M.body, fontSize: 13, color: M.fg3, height: 1.5)),
+            Text('This screen is scheduled in an upcoming porting batch.',
+                textAlign: TextAlign.center, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3, height: 1.5)),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(color: M.input, borderRadius: BorderRadius.circular(6)),
-              child: Text(id, style: const TextStyle(fontFamily: M.mono, fontSize: 12, color: M.fg2)),
+              decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, borderRadius: BorderRadius.circular(6)),
+              child: Text(id, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg2)),
             ),
           ],
         ),

@@ -7,8 +7,9 @@
 // File placement:  lib/design_system/kit.dart
 // ============================================================
 
-// Tokens
-export 'tokens/m_colors.dart';
+// Theme foundation
+export 'package:super_core/super_core.dart' hide PillTone, FieldDensity;
+export 'theme/super_core_theme_helpers.dart';
 
 // Layout
 export 'components/layout/m_icons.dart';
