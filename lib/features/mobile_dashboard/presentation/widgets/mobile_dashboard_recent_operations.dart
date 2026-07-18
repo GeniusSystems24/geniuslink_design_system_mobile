@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
 import 'mobile_dashboard_shared.dart';
-import 'mobile_dashboard_skeleton.dart';
 import 'mobile_dashboard_theme.dart';
 
 typedef MobileDashboardOperationAmountResolver = double Function(
@@ -12,18 +11,18 @@ typedef MobileDashboardOperationAmountResolver = double Function(
 class MobileDashboardRecentOperations extends StatelessWidget {
   final List<MdOperation> operations;
   final String currency;
-  final bool loading;
   final MobileDashboardOperationAmountResolver amountFor;
   final VoidCallback onViewAll;
-  final int skeletonCount;
+  final String title;
+  final String subtitle;
 
   const MobileDashboardRecentOperations({
     required this.operations,
     required this.currency,
-    required this.loading,
     required this.amountFor,
     required this.onViewAll,
-    this.skeletonCount = 5,
+    this.title = 'Recent Operations',
+    this.subtitle = 'Latest 5 in this domain',
     super.key,
   });
 
@@ -33,9 +32,9 @@ class MobileDashboardRecentOperations extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         MobileDashboardSectionHeader(
-          title: 'Recent Operations',
+          title: title,
           marker: MdMarker.positive,
-          subtitle: 'Latest 5 in this domain',
+          subtitle: subtitle,
           trailing: MobileDashboardViewAllButton(onTap: onViewAll),
         ),
         Container(
@@ -47,19 +46,13 @@ class MobileDashboardRecentOperations extends StatelessWidget {
           ),
           child: Column(
             children: [
-              if (loading)
-                for (var index = 0; index < skeletonCount; index++)
-                  MobileDashboardOperationSkeleton(
-                    last: index == skeletonCount - 1,
-                  )
-              else
-                for (var index = 0; index < operations.length; index++)
-                  MobileDashboardOperationRow(
-                    operation: operations[index],
-                    currency: currency,
-                    amount: amountFor(operations[index]),
-                    last: index == operations.length - 1,
-                  ),
+              for (var index = 0; index < operations.length; index++)
+                MobileDashboardOperationRow(
+                  operation: operations[index],
+                  currency: currency,
+                  amount: amountFor(operations[index]),
+                  last: index == operations.length - 1,
+                ),
             ],
           ),
         ),
@@ -151,48 +144,6 @@ class MobileDashboardOperationRow extends StatelessWidget {
                   color: context.mdTheme.fg3,
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MobileDashboardOperationSkeleton extends StatelessWidget {
-  final bool last;
-
-  const MobileDashboardOperationSkeleton({
-    required this.last,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        border: last
-            ? null
-            : Border(bottom: BorderSide(color: context.mdTheme.border)),
-      ),
-      child: const Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: MobileDashboardSkeleton(width: 160, height: 13),
-              ),
-              SizedBox(width: 12),
-              MobileDashboardSkeleton(width: 64, height: 13),
-            ],
-          ),
-          SizedBox(height: 9),
-          Row(
-            children: [
-              MobileDashboardSkeleton(width: 110, height: 9),
-              Spacer(),
-              MobileDashboardSkeleton(width: 40, height: 9),
             ],
           ),
         ],

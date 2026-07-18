@@ -14,11 +14,15 @@ String mobileDashboardAttentionIcon(String id) => switch (id) {
 class MobileDashboardAttentionList extends StatelessWidget {
   final List<MdAttention> items;
   final ValueChanged<MdAttention> onItemTap;
+  final String title;
+  final String? subtitle;
   final Widget? trailing;
 
   const MobileDashboardAttentionList({
     required this.items,
     required this.onItemTap,
+    this.title = 'Needs Attention',
+    this.subtitle,
     this.trailing,
     super.key,
   });
@@ -29,8 +33,9 @@ class MobileDashboardAttentionList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         MobileDashboardSectionHeader(
-          title: 'Needs Attention',
+          title: title,
           marker: MdMarker.warning,
+          subtitle: subtitle,
           trailing: trailing ??
               Text(
                 'All domains',

@@ -108,12 +108,104 @@ class MdCurrency extends Equatable {
   List<Object?> get props => [code, name];
 }
 
+
+class MdStatusItem extends Equatable {
+  final String id;
+  final String label;
+  final String value;
+  final String description;
+  final MdTone tone;
+
+  const MdStatusItem({
+    required this.id,
+    required this.label,
+    required this.value,
+    required this.description,
+    required this.tone,
+  });
+
+  @override
+  List<Object?> get props => [id, label, value, description, tone];
+}
+
+class MdWorkflowItem extends Equatable {
+  final String id;
+  final String title;
+  final String description;
+  final String value;
+  final MdTone tone;
+
+  const MdWorkflowItem({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.value,
+    required this.tone,
+  });
+
+  @override
+  List<Object?> get props => [id, title, description, value, tone];
+}
+
+class MdDashboardProfile extends Equatable {
+  final String sectionId;
+  final String eyebrow;
+  final String title;
+  final String subtitle;
+  final String primaryActionId;
+  final String primaryActionLabel;
+  final String statusTitle;
+  final String workflowTitle;
+  final String workflowSubtitle;
+  final String operationsTitle;
+  final String attentionTitle;
+  final List<MdStatusItem> statusItems;
+  final List<MdWorkflowItem> workflowItems;
+  final List<MdAttention> attentionItems;
+
+  const MdDashboardProfile({
+    required this.sectionId,
+    required this.eyebrow,
+    required this.title,
+    required this.subtitle,
+    required this.primaryActionId,
+    required this.primaryActionLabel,
+    required this.statusTitle,
+    required this.workflowTitle,
+    required this.workflowSubtitle,
+    required this.operationsTitle,
+    required this.attentionTitle,
+    required this.statusItems,
+    required this.workflowItems,
+    required this.attentionItems,
+  });
+
+  @override
+  List<Object?> get props => [
+        sectionId,
+        eyebrow,
+        title,
+        subtitle,
+        primaryActionId,
+        primaryActionLabel,
+        statusTitle,
+        workflowTitle,
+        workflowSubtitle,
+        operationsTitle,
+        attentionTitle,
+        statusItems,
+        workflowItems,
+        attentionItems,
+      ];
+}
+
 class MobileDashboardCatalog extends Equatable {
   final List<MdTab> tabs;
   final List<MdWorkspace> workspaces;
   final List<MdAttention> attention;
   final List<MdCurrency> currencies;
   final Map<String, List<String>> axisLabels;
+  final Map<String, MdDashboardProfile> profiles;
 
   const MobileDashboardCatalog({
     required this.tabs,
@@ -121,8 +213,16 @@ class MobileDashboardCatalog extends Equatable {
     required this.attention,
     required this.currencies,
     required this.axisLabels,
+    required this.profiles,
   });
 
   @override
-  List<Object?> get props => [tabs, workspaces, attention, currencies, axisLabels];
+  List<Object?> get props => [
+        tabs,
+        workspaces,
+        attention,
+        currencies,
+        axisLabels,
+        profiles,
+      ];
 }

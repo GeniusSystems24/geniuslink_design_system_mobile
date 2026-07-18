@@ -56,7 +56,7 @@ import '../../features/admin/presentation/pages/users_screens.dart';
 import '../../features/settings/presentation/pages/settings_org_screens.dart';
 import '../../features/settings/presentation/pages/settings_team_screens.dart';
 import '../../features/settings/presentation/pages/settings_platform_screens.dart';
-import '../../features/mobile_dashboard/presentation/pages/mobile_dashboard_screen.dart';
+import '../../features/mobile_dashboard/presentation/pages/pages.dart';
 import '../../workspace/presentation/bloc/nav_cubit.dart';
 import 'workspace_shell.dart';
 
@@ -146,8 +146,23 @@ final GoRouter router = GoRouter(
     // not nested inside a branch. Navigation uses push() so the
     // back stack always contains the shell as the previous entry.
 
-    // Mobile dashboard
-    _sub('/mobile-dashboard', (ctx, state) => MobileDashboardScreen(catalog: mobileDashboardCatalog)),
+    // Mobile dashboards
+    _sub(
+      '/mobile-dashboard',
+      (ctx, state) => BankingDashboardScreen(catalog: mobileDashboardCatalog),
+    ),
+    _sub(
+      '/mobile-dashboard/banking',
+      (ctx, state) => BankingDashboardScreen(catalog: mobileDashboardCatalog),
+    ),
+    _sub(
+      '/mobile-dashboard/accounting',
+      (ctx, state) => AccountingDashboardScreen(catalog: mobileDashboardCatalog),
+    ),
+    _sub(
+      '/mobile-dashboard/commercial',
+      (ctx, state) => CommercialDashboardScreen(catalog: mobileDashboardCatalog),
+    ),
 
     // Accounts
     _sub('/accounts/create',      (ctx, state) => const CreateAccountScreen()),

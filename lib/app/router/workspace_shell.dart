@@ -61,7 +61,7 @@ class MTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.bg.withAlpha(0xE6), border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
+      decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).bottomNavigationBarTheme.backgroundColor?.withAlpha(0xE6), border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       padding: EdgeInsets.only(top: 8, bottom: 8 + MediaQuery.of(context).padding.bottom),
       child: Row(children: [
         for (int i = 0; i < _tabs.length; i++)

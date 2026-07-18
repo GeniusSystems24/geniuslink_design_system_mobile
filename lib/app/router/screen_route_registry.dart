@@ -19,7 +19,10 @@ class ScreenRouteRegistry {
     'more': '/more',
 
     // ── Mobile Dashboard ──
-    'mobileDashboard': '/mobile-dashboard',
+    'mobileDashboard': '/mobile-dashboard/banking',
+    'mobileBankingDashboard': '/mobile-dashboard/banking',
+    'mobileAccountingDashboard': '/mobile-dashboard/accounting',
+    'mobileCommercialDashboard': '/mobile-dashboard/commercial',
 
     // ── Accounts ──
     'accountDetail': '/accounts/detail',

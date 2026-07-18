@@ -46,7 +46,7 @@ import '../../features/admin/presentation/pages/users_screens.dart';
 import '../../features/settings/presentation/pages/settings_org_screens.dart';
 import '../../features/settings/presentation/pages/settings_team_screens.dart';
 import '../../features/settings/presentation/pages/settings_platform_screens.dart';
-import '../../features/mobile_dashboard/presentation/pages/mobile_dashboard_screen.dart';
+import '../../features/mobile_dashboard/presentation/pages/pages.dart';
 
 class ScreenMeta {
   final String title;
@@ -115,7 +115,10 @@ const Map<String, ScreenMeta> subTitles = {
   'createSupplier': ScreenMeta('Add Supplier', ar: 'إضافة مورد'),
   'accountTree': ScreenMeta('Account Tree', ar: 'شجرة الحسابات'),
   'settingsHub': ScreenMeta('Settings', ar: 'الإعدادات'),
-  'mobileDashboard': ScreenMeta('Mobile Dashboard', ar: 'لوحة الموبايل'),
+  'mobileDashboard': ScreenMeta('Banking Dashboard', ar: 'لوحة البنوك'),
+  'mobileBankingDashboard': ScreenMeta('Banking Dashboard', ar: 'لوحة البنوك'),
+  'mobileAccountingDashboard': ScreenMeta('Accounting Dashboard', ar: 'لوحة المحاسبة'),
+  'mobileCommercialDashboard': ScreenMeta('Commercial Dashboard', ar: 'اللوحة التجارية'),
   'setCompany': ScreenMeta('Company Profile', ar: 'ملف الشركة', back: 'settingsHub'),
   'setFinancial': ScreenMeta('Financial Settings', ar: 'الإعدادات المالية', back: 'settingsHub'),
   'setTaxes': ScreenMeta('Taxes', ar: 'الضرائب', back: 'settingsHub'),
@@ -137,14 +140,25 @@ const Map<String, ScreenMeta> subTitles = {
 final Set<String> portedScreens = subTitles.keys.toSet();
 
 /// Screens that render their own chrome (no standard MAppBar wrapper).
-Set<String> fullBleedScreens = {'mobileDashboard'};
+Set<String> fullBleedScreens = {
+  'mobileDashboard',
+  'mobileBankingDashboard',
+  'mobileAccountingDashboard',
+  'mobileCommercialDashboard',
+};
 
 /// Build a sub-screen widget. Falls back to [PendingScreen] for ids
 /// scheduled in a later batch.
 Widget buildSubScreen(String id) {
   switch (id) {
     // Full-bleed (own chrome)
-    case 'mobileDashboard': return MobileDashboardScreen(catalog: mobileDashboardCatalog);
+    case 'mobileDashboard':
+    case 'mobileBankingDashboard':
+      return BankingDashboardScreen(catalog: mobileDashboardCatalog);
+    case 'mobileAccountingDashboard':
+      return AccountingDashboardScreen(catalog: mobileDashboardCatalog);
+    case 'mobileCommercialDashboard':
+      return CommercialDashboardScreen(catalog: mobileDashboardCatalog);
     // Accounts
     case 'createAccount': return const CreateAccountScreen();
     case 'accountDetail': return const AccountDetailFullScreen();

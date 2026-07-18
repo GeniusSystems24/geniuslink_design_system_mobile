@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import 'mobile_dashboard_pressable.dart';
-import 'mobile_dashboard_skeleton.dart';
 import 'mobile_dashboard_theme.dart';
 import 'mobile_dashboard_trend_chart.dart';
 
@@ -15,14 +14,12 @@ class MobileDashboardMetricGrid extends StatelessWidget {
   final List<MdCard> cards;
   final String currency;
   final String period;
-  final bool loading;
   final MobileDashboardCardValueResolver valueFor;
 
   const MobileDashboardMetricGrid({
     required this.cards,
     required this.currency,
     required this.period,
-    required this.loading,
     required this.valueFor,
     super.key,
   });
@@ -48,7 +45,6 @@ class MobileDashboardMetricGrid extends StatelessWidget {
             card: card,
             currency: currency,
             period: period,
-            loading: loading,
             value: valueFor(card),
           ),
       ],
@@ -60,14 +56,12 @@ class MobileDashboardMetricCard extends StatelessWidget {
   final MdCard card;
   final String currency;
   final String period;
-  final bool loading;
   final double value;
 
   const MobileDashboardMetricCard({
     required this.card,
     required this.currency,
     required this.period,
-    required this.loading,
     required this.value,
     super.key,
   });
@@ -92,19 +86,7 @@ class MobileDashboardMetricCard extends StatelessWidget {
               border: Border.all(color: context.mdTheme.border),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: loading
-                ? const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MobileDashboardSkeleton(width: 80, height: 9),
-                      SizedBox(height: 12),
-                      MobileDashboardSkeleton(width: 110, height: 20),
-                      SizedBox(height: 12),
-                      MobileDashboardSkeleton(width: 60, height: 9),
-                    ],
-                  )
-                : Column(
+            child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(

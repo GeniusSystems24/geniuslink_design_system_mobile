@@ -62,7 +62,10 @@ class MobileDashboardState extends Equatable {
 }
 
 class MobileDashboardCubit extends Cubit<MobileDashboardState> {
-  MobileDashboardCubit() : super(const MobileDashboardState());
+  int _refreshGeneration = 0;
+
+  MobileDashboardCubit({String initialTab = 'banking'})
+      : super(MobileDashboardState(tab: initialTab));
 
   void selectTab(String tab) =>
       emit(state.copyWith(tab: tab, clearChartMetric: true));
@@ -74,8 +77,12 @@ class MobileDashboardCubit extends Cubit<MobileDashboardState> {
 
   /// Simulated pull-to-refresh. Replace the delay with a tenant-repo read.
   Future<void> refresh() async {
+    final generation = ++_refreshGeneration;
     emit(state.copyWith(status: LoadStatus.loading));
     await Future<void>.delayed(const Duration(milliseconds: 900));
+    if (isClosed || generation != _refreshGeneration) {
+      return;
+    }
     emit(state.copyWith(status: LoadStatus.ready));
   }
 }

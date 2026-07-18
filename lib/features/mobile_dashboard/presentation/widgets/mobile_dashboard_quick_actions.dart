@@ -25,12 +25,14 @@ class MobileDashboardQuickActions extends StatelessWidget {
   final List<MdAction> actions;
   final ValueChanged<MdAction> onActionTap;
   final VoidCallback onViewAll;
+  final String title;
   final int previewLimit;
 
   const MobileDashboardQuickActions({
     required this.actions,
     required this.onActionTap,
     required this.onViewAll,
+    this.title = 'Quick Actions',
     this.previewLimit = 7,
     super.key,
   });
@@ -42,7 +44,7 @@ class MobileDashboardQuickActions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         MobileDashboardSectionHeader(
-          title: 'Quick Actions',
+          title: title,
           marker: MdMarker.primary,
           trailing: MobileDashboardViewAllButton(onTap: onViewAll),
         ),

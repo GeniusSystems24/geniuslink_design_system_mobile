@@ -45,98 +45,6 @@ class MobileDashboardTitle extends StatelessWidget {
   }
 }
 
-class MobileDashboardDomainTabs extends StatelessWidget {
-  final List<MdTab> tabs;
-  final String selectedTabId;
-  final ValueChanged<String> onSelected;
-
-  const MobileDashboardDomainTabs({
-    required this.tabs,
-    required this.selectedTabId,
-    required this.onSelected,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: context.mdTheme.border)),
-      ),
-      child: Row(
-        children: [
-          for (final tab in tabs)
-            Expanded(
-              child: _DomainTab(
-                tab: tab,
-                selected: tab.id == selectedTabId,
-                onTap: () => onSelected(tab.id),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DomainTab extends StatelessWidget {
-  final MdTab tab;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _DomainTab({
-    required this.tab,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      selected: selected,
-      label: tab.label,
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 44),
-          padding: const EdgeInsets.fromLTRB(4, 10, 4, 12),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Center(
-                child: Text(
-                  tab.label,
-                  style: TextStyle(
-                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                    fontSize: 15,
-                    fontWeight:
-                        selected ? FontWeight.w700 : FontWeight.w500,
-                    color: selected
-                        ? context.mdTheme.fg1
-                        : context.mdTheme.fg3,
-                  ),
-                ),
-              ),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                margin: const EdgeInsets.symmetric(horizontal: 6),
-                height: 2.5,
-                decoration: BoxDecoration(
-                  color: context.mdColors.primary
-                      .withValues(alpha: selected ? 1 : 0),
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class MobileDashboardControls extends StatelessWidget {
   final String view;
   final String currency;
@@ -159,24 +67,34 @@ class MobileDashboardControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MobileDashboardViewToggle(
-          view: view,
-          onTap: onToggleView,
-        ),
-        const SizedBox(width: 8),
-        MobileDashboardCurrencyMenu(
-          currency: currency,
-          currencies: currencies,
-          onChanged: onCurrencyChanged,
-        ),
-        const Spacer(),
-        MobileDashboardPeriodSelector(
-          period: period,
-          onChanged: onPeriodChanged,
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: context.mdTheme.surface,
+        border: Border.all(color: context.mdTheme.border),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          MobileDashboardViewToggle(
+            view: view,
+            onTap: onToggleView,
+          ),
+          const SizedBox(width: 8),
+          MobileDashboardCurrencyMenu(
+            currency: currency,
+            currencies: currencies,
+            onChanged: onCurrencyChanged,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: MobileDashboardPeriodSelector(
+              period: period,
+              onChanged: onPeriodChanged,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -194,38 +112,42 @@ class MobileDashboardViewToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isChart = view == 'chart';
-    return Semantics(
-      button: true,
-      label: isChart ? 'Show cards' : 'Show charts',
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 34,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: context.mdTheme.inputBg,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                MIcons.of(isChart ? 'poll' : 'grid'),
-                size: 16,
-                color: context.mdTheme.fg1,
+    final tooltip = isChart ? 'Show cards' : 'Show charts';
+
+    return Tooltip(
+      message: tooltip,
+      child: Semantics(
+        button: true,
+        label: tooltip,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(9),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 160),
+              width: 38,
+              height: 38,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: context.mdTheme.inputBg,
+                border: Border.all(color: context.mdTheme.borderStrong),
+                borderRadius: BorderRadius.circular(9),
               ),
-              const SizedBox(width: 5),
-              Text(
-                isChart ? 'Charts' : 'Cards',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w600,
-                  color: context.mdTheme.fg1,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 160),
+                transitionBuilder: (child, animation) => ScaleTransition(
+                  scale: animation,
+                  child: child,
+                ),
+                child: Icon(
+                  MIcons.of(isChart ? 'poll' : 'grid'),
+                  key: ValueKey<String>(view),
+                  size: 18,
+                  color: context.mdColors.primary,
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -296,12 +218,12 @@ class MobileDashboardCurrencyMenu extends StatelessWidget {
           ),
       ],
       child: Container(
-        height: 34,
-        padding: const EdgeInsets.symmetric(horizontal: 11),
+        height: 38,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: context.mdTheme.inputBg,
           border: Border.all(color: context.mdTheme.borderStrong),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(9),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -315,8 +237,12 @@ class MobileDashboardCurrencyMenu extends StatelessWidget {
                 color: context.mdTheme.fg1,
               ),
             ),
-            const SizedBox(width: 4),
-            Icon(MIcons.of('chevD'), size: 14, color: context.mdTheme.fg3),
+            const SizedBox(width: 5),
+            Icon(
+              MIcons.of('chevD'),
+              size: 14,
+              color: context.mdTheme.fg3,
+            ),
           ],
         ),
       ),
@@ -332,46 +258,34 @@ class MobileDashboardPeriodSelector extends StatelessWidget {
   const MobileDashboardPeriodSelector({
     required this.period,
     required this.onChanged,
-    this.periods = const ['day', 'week', 'month'],
+    this.periods = const ['week', 'month'],
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          'COMPARE',
-          style: TextStyle(
-            fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-            fontWeight: FontWeight.w700,
-            fontSize: 10,
-            letterSpacing: 0.8,
-            color: context.mdTheme.fg3,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Container(
-          padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: context.mdTheme.inputBg,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final item in periods)
-                _PeriodOption(
-                  period: item,
-                  selected: item == period,
-                  onTap: () => onChanged(item),
-                ),
-            ],
-          ),
-        ),
-      ],
+    final activePeriod = periods.contains(period) ? period : periods.first;
+
+    return Container(
+      height: 38,
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: context.mdTheme.inputBg,
+        border: Border.all(color: context.mdTheme.border),
+        borderRadius: BorderRadius.circular(9),
+      ),
+      child: Row(
+        children: [
+          for (final item in periods)
+            Expanded(
+              child: _PeriodOption(
+                period: item,
+                selected: item == activePeriod,
+                onTap: () => onChanged(item),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -390,32 +304,49 @@ class _PeriodOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = switch (period) {
-      'day' => 'Day',
       'week' => 'Week',
       'month' => 'Month',
       _ => period,
     };
 
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        constraints: const BoxConstraints(minHeight: 28),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 11),
-        decoration: BoxDecoration(
-          color: selected ? context.mdColors.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-            fontSize: 12,
-            fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-            color: selected
-                ? context.mdColors.onPrimary
-                : context.mdTheme.fg3,
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: '$label comparison period',
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(7),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 160),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: selected ? context.mdColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(7),
+              boxShadow: selected
+                  ? [
+                      BoxShadow(
+                        color: context.mdColors.primary.withValues(alpha: 0.18),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                fontSize: 12,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+                color: selected
+                    ? context.mdColors.onPrimary
+                    : context.mdTheme.fg3,
+              ),
+            ),
           ),
         ),
       ),

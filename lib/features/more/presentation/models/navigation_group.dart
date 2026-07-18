@@ -11,7 +11,24 @@ class NavigationGroup {
 }
 
 const defaultMoreNavigationGroups = <NavigationGroup>[
-  NavigationGroup(title: 'Workspace', items: [NavigationItem(label: 'Mobile Dashboard', routeId: 'mobileDashboard'), NavigationItem(label: 'Settings', routeId: 'settingsHub')]),
+  NavigationGroup(
+    title: 'Workspace',
+    items: [
+      NavigationItem(
+        label: 'Banking Dashboard',
+        routeId: 'mobileBankingDashboard',
+      ),
+      NavigationItem(
+        label: 'Accounting Dashboard',
+        routeId: 'mobileAccountingDashboard',
+      ),
+      NavigationItem(
+        label: 'Commercial Dashboard',
+        routeId: 'mobileCommercialDashboard',
+      ),
+      NavigationItem(label: 'Settings', routeId: 'settingsHub'),
+    ],
+  ),
   NavigationGroup(title: 'Accounts', items: [NavigationItem(label: 'Account Tree', routeId: 'accountTree'), NavigationItem(label: 'Create Account Group', routeId: 'createGroup')]),
   NavigationGroup(title: 'Products', items: [NavigationItem(label: 'Products List', routeId: 'productsList'), NavigationItem(label: 'Create Product', routeId: 'createProduct')]),
   NavigationGroup(title: 'Inventory', items: [
