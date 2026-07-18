@@ -101,8 +101,8 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('More')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('More')),
       body: MScroll([
       MSuggest(
         items: _spotlight,
@@ -110,7 +110,7 @@ class _MoreScreenState extends State<MoreScreen> {
         onSelected: context.goTo,
       ),
       for (final g in _menu)
-        MCard(title: g.title, accentColor: SuperTokens.accent, pad: 8, children: [
+        MCard(title: g.title, accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, pad: 8, children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(children: [
@@ -124,16 +124,16 @@ class _MoreScreenState extends State<MoreScreen> {
                         border: i == g.items.length - 1
                             ? null
                             : Border(
-                                bottom: BorderSide(color: SuperThemeData.dark.border))),
+                                bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(g.items[i].$1,
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: SuperThemeData.dark.fg1,
-                                  fontFamily: SuperTokens.bodyFont)),
-                          Icon(MIcons.of('chevR'), size: 16, color: SuperThemeData.dark.fg4),
+                                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                          Icon(MIcons.of('chevR'), size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg4),
                         ]),
                   ),
                 ),

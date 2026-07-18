@@ -61,14 +61,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Product')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Product')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Product Definition',
           sub: 'SKU, names and classification',
-          marker: SuperTokens.accent,
+          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             SuperTextFormField(
               label: 'SKU',
@@ -114,7 +114,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       ISection(
           icon: 'swap',
           title: 'Costing & Pricing',
-          marker: SuperTokens.success,
+          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
             const SuperNumericFormField(
               label: 'Unit Cost (SAR)',
@@ -137,7 +137,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       ISection(
           icon: 'store',
           title: 'Inventory Settings',
-          marker: SuperTokens.warning,
+          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           children: [
             const SuperNumericFormField(
               label: 'Reorder Level',

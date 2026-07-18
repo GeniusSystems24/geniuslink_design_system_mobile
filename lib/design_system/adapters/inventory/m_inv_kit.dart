@@ -20,7 +20,7 @@ import 'package:super_core/super_core.dart' hide FieldDensity;
 class ISection extends StatefulWidget {
   final String icon;
   final String title;
-  final Color marker;
+  final Color? marker;
   final String? sub;
   final bool defaultOpen;
   final List<Widget> children;
@@ -37,7 +37,7 @@ class ISection extends StatefulWidget {
     this.children = const [],
     Widget? right,
     Widget? trailing,
-  })  : marker = marker ?? accentColor ?? SuperTokens.accent,
+  })  : marker = marker ?? accentColor,
         sub = sub ?? subtitle,
         right = right ?? trailing;
 
@@ -50,10 +50,11 @@ class _ISectionState extends State<ISection> {
 
   @override
   Widget build(BuildContext context) {
+    final marker = widget.marker ?? SuperMaterialThemeData.of(context).colorScheme.primary;
     return Container(
       decoration: BoxDecoration(
-          color: SuperThemeData.dark.surface,
-          border: Border.all(color: SuperThemeData.dark.border),
+          color: SuperMaterialThemeData.of(context).superTheme.surface,
+          border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
           borderRadius: BorderRadius.circular(12)),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -70,7 +71,7 @@ class _ISectionState extends State<ISection> {
                       width: 4,
                       height: 36,
                       decoration: BoxDecoration(
-                          color: widget.marker,
+                          color: marker,
                           borderRadius: const BorderRadius.horizontal(
                               right: Radius.circular(12)))),
                   const SizedBox(width: 12),
@@ -78,10 +79,10 @@ class _ISectionState extends State<ISection> {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                        color: superCoreTint(widget.marker, 0x1F),
+                        color: superCoreTint(marker, 0x1F),
                         borderRadius: BorderRadius.circular(8)),
                     child: Icon(MIcons.of(widget.icon),
-                        size: 16, color: widget.marker),
+                        size: 16, color: marker),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -90,19 +91,19 @@ class _ISectionState extends State<ISection> {
                       children: [
                         Text(widget.title.toUpperCase(),
                             style: TextStyle(
-                                fontFamily: SuperTokens.bodyFont,
+                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12.5,
                                 letterSpacing: 0.7,
-                                color: SuperThemeData.dark.fg1)),
+                                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                         if (widget.sub != null)
                           Padding(
                             padding: const EdgeInsets.only(top: 3),
                             child: Text(widget.sub!,
                                 style: TextStyle(
-                                    fontFamily: SuperTokens.bodyFont,
+                                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                                     fontSize: 11.5,
-                                    color: SuperThemeData.dark.fg3)),
+                                    color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                           ),
                       ],
                     ),
@@ -112,7 +113,7 @@ class _ISectionState extends State<ISection> {
                     turns: _open ? 0 : -0.25,
                     duration: const Duration(milliseconds: 150),
                     child: Icon(Icons.keyboard_arrow_down_rounded,
-                        size: 18, color: SuperThemeData.dark.fg3),
+                        size: 18, color: SuperMaterialThemeData.of(context).superTheme.fg3),
                   ),
                 ],
               ),
@@ -240,29 +241,30 @@ class IToggle extends StatelessWidget {
 }
 
 class InfoNote extends StatelessWidget {
-  final Color tone;
+  final Color? tone;
   final String text;
-  const InfoNote(this.text, {super.key, this.tone = SuperTokens.warning});
+  const InfoNote(this.text, {super.key, this.tone});
   @override
   Widget build(BuildContext context) {
+    final resolvedTone = tone ?? SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: superCoreTint(tone, 0x14),
-          border: Border.all(color: superCoreTint(tone, 0x40)),
+          color: superCoreTint(resolvedTone, 0x14),
+          border: Border.all(color: superCoreTint(resolvedTone, 0x40)),
           borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.info_outline_rounded, size: 14, color: tone),
+          Icon(Icons.info_outline_rounded, size: 14, color: resolvedTone),
           const SizedBox(width: 10),
           Expanded(
               child: Text(text,
                   style: TextStyle(
                       fontSize: 11.5,
-                      color: SuperThemeData.dark.fg2,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg2,
                       height: 1.5,
-                      fontFamily: SuperTokens.bodyFont))),
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
         ],
       ),
     );
@@ -315,7 +317,7 @@ class ProductRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
           border:
-              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -330,16 +332,16 @@ class ProductRow extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: SuperThemeData.dark.fg1,
-                            fontFamily: SuperTokens.bodyFont)),
+                            color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                     const SizedBox(height: 2),
                     Text('SKU: $sku',
                         style: TextStyle(
-                            fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ],
                 ),
               ),
-              Icon(Icons.delete_outline_rounded, size: 16, color: SuperThemeData.dark.fg3),
+              Icon(Icons.delete_outline_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3),
             ],
           ),
           const SizedBox(height: 12),
@@ -347,7 +349,7 @@ class ProductRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(children: [
-                Eyebrow('Qty', color: SuperThemeData.dark.fg3, size: 9.5),
+                Eyebrow('Qty', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
                 const SizedBox(width: 10),
                 SizedBox(
                   width: 140,
@@ -367,14 +369,14 @@ class ProductRow extends StatelessWidget {
                 children: [
                   Text('$currency$price / unit',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   const SizedBox(height: 2),
                   Text('$currency$total',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: SuperThemeData.dark.fg1)),
+                          color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                 ],
               ),
             ],
@@ -441,15 +443,15 @@ class _ScannerState extends State<Scanner> {
           decoration: BoxDecoration(
               color: SuperPalette.bluePalette.darkSurface2, borderRadius: BorderRadius.circular(12)),
           child: CustomPaint(
-            painter: _ScanBrackets(),
+            painter: _ScanBrackets(SuperMaterialThemeData.of(context).colorScheme.primary),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.qr_code_2_rounded, size: 42, color: SuperThemeData.dark.fg4),
+                Icon(Icons.qr_code_2_rounded, size: 42, color: SuperMaterialThemeData.of(context).superTheme.fg4),
                 SizedBox(height: 12),
                 Text('Point your camera at a barcode to scan',
                     style: TextStyle(
-                        fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
+                        fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ],
             ),
           ),
@@ -480,15 +482,15 @@ class _DashedButton extends StatelessWidget {
       height: 46,
       width: double.infinity,
       child: CustomPaint(
-        painter: _DashRect(),
+        painter: _DashRect(SuperMaterialThemeData.of(context).superTheme.borderStrong),
         child: Center(
           child: Text(label.toUpperCase(),
-              style: const TextStyle(
-                  color: SuperTokens.accent,
+              style: TextStyle(
+                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w700,
                   fontSize: 12,
                   letterSpacing: 0.7,
-                  fontFamily: SuperTokens.bodyFont)),
+                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
         ),
       ),
     );
@@ -504,10 +506,13 @@ class AddLineBtn extends StatelessWidget {
 }
 
 class _DashRect extends CustomPainter {
+  final Color borderColor;
+  const _DashRect(this.borderColor);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = SuperThemeData.dark.borderStrong
+      ..color = borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     final path = Path()
@@ -524,14 +529,17 @@ class _DashRect extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
+  bool shouldRepaint(covariant _DashRect old) => old.borderColor != borderColor;
 }
 
 class _ScanBrackets extends CustomPainter {
+  final Color accentColor;
+  const _ScanBrackets(this.accentColor);
+
   @override
   void paint(Canvas canvas, Size size) {
     final p = Paint()
-      ..color = superCoreTint(SuperTokens.accent, 0x99)
+      ..color = superCoreTint(accentColor, 0x99)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
@@ -548,5 +556,5 @@ class _ScanBrackets extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
+  bool shouldRepaint(covariant _ScanBrackets old) => old.accentColor != accentColor;
 }

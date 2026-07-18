@@ -138,16 +138,19 @@ Widget mcell(
   Color? color,
   TextAlign align = TextAlign.left,
 }) {
-  return Text(text,
-      textAlign: align,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontFamily: mono ? SuperTokens.monoFont : SuperTokens.bodyFont,
-        fontSize: 12.5,
-        fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-        color: color ?? (muted ? SuperThemeData.dark.fg3 : SuperThemeData.dark.fg1),
-      ));
+  return Builder(builder: (context) {
+    final theme = SuperMaterialThemeData.of(context).superTheme;
+    return Text(text,
+        textAlign: align,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontFamily: mono ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
+          fontSize: 12.5,
+          fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+          color: color ?? (muted ? theme.fg3 : theme.fg1),
+        ));
+  });
 }
 
 // ── main widget ──────────────────────────────────────────────

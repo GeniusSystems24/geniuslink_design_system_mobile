@@ -21,16 +21,16 @@ class MBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg, border) = switch (variant) {
-      MBtnVariant.primary   => (SuperTokens.accent, Colors.white, null),
-      MBtnVariant.secondary => (Colors.transparent, SuperThemeData.dark.fg1, SuperThemeData.dark.borderStrong),
-      MBtnVariant.danger    => (Colors.transparent, SuperTokens.danger, superCoreTint(SuperTokens.danger, 0x66)),
+      MBtnVariant.primary   => (SuperMaterialThemeData.of(context).colorScheme.primary, Colors.white, null),
+      MBtnVariant.secondary => (Colors.transparent, SuperMaterialThemeData.of(context).superTheme.fg1, SuperMaterialThemeData.of(context).superTheme.borderStrong),
+      MBtnVariant.danger    => (Colors.transparent, SuperMaterialThemeData.of(context).colorScheme.error, superCoreTint(SuperMaterialThemeData.of(context).colorScheme.error, 0x66)),
     };
     final child = Row(
       mainAxisSize: full ? MainAxisSize.max : MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[Icon(MIcons.of(icon!), size: 17, color: fg), const SizedBox(width: 8)],
-        Text(label, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w600, fontSize: 15, color: fg)),
+        Text(label, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w600, fontSize: 15, color: fg)),
       ],
     );
     return SizedBox(

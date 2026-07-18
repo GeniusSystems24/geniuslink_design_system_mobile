@@ -9,26 +9,26 @@ class _CountRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final pending = item.$4 == -1;
     final delta = pending ? 0 : item.$4 - item.$3;
-    final tone = pending ? SuperThemeData.dark.fg3 : (delta == 0 ? SuperTokens.success : (delta < 0 ? SuperTokens.danger : SuperTokens.warning));
+    final tone = pending ? SuperMaterialThemeData.of(context).superTheme.fg3 : (delta == 0 ? SuperMaterialThemeData.of(context).colorScheme.secondary : (delta < 0 ? SuperMaterialThemeData.of(context).colorScheme.error : SuperMaterialThemeData.of(context).colorScheme.tertiary));
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 13),
-      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(item.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+          Text(item.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
           const SizedBox(height: 2),
-          Text('${item.$1} · exp ${item.$3}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+          Text('${item.$1} · exp ${item.$3}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
         ])),
         if (pending)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(6)),
-            child: Text('COUNT', style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: SuperThemeData.dark.fg3)),
+            decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(6)),
+            child: Text('COUNT', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           )
         else
           Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            Text('${item.$4}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
-            Text('${delta > 0 ? '+' : ''}$delta', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, fontWeight: FontWeight.w700, color: tone)),
+            Text('${item.$4}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+            Text('${delta > 0 ? '+' : ''}$delta', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, fontWeight: FontWeight.w700, color: tone)),
           ]),
       ]),
     );
@@ -45,26 +45,26 @@ class StockTakeScreen extends StatelessWidget {
       ('PNT-55310', 'Epoxy Floor Coating', 88, -1), ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Stock Take')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stock Take')),
       body: MScroll([
-      MCard(accentColor: SuperTokens.accent, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
             Eyebrow('3 of 6 counted', size: 10),
-            Text('50%', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 22, fontWeight: FontWeight.w700, color: SuperTokens.accent)),
+            Text('50%', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           ]),
           const SizedBox(height: 8),
           ClipRRect(borderRadius: BorderRadius.circular(999), child: Stack(children: [
-            Container(height: 8, color: SuperThemeData.dark.inputBg),
-            FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: SuperTokens.accent)),
+            Container(height: 8, color: SuperMaterialThemeData.of(context).superTheme.inputBg),
+            FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           ])),
         ]),
         GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: const [
           Mini(label: 'Match', value: '1'), Mini(label: 'Short', value: '2'), Mini(label: 'Over', value: '0'),
         ]),
       ]),
-      MCard(accentColor: SuperTokens.success, title: 'Count Sheet', pad: 8, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Count Sheet', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [

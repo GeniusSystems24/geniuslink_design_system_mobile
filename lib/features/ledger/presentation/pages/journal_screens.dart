@@ -44,8 +44,8 @@ class _JournalListScreenState extends State<JournalListScreen> {
     }).toList();
 
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Journal Entries')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Journal Entries')),
       body: MScroll([
       SearchInput(placeholder: 'Search entries…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Posted', 'Draft'], value: _filter, onChange: (v) => setState(() => _filter = v)),
@@ -56,29 +56,29 @@ class _JournalListScreenState extends State<JournalListScreen> {
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              decoration: BoxDecoration(border: i == rows.length - 1 ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              decoration: BoxDecoration(border: i == rows.length - 1 ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
               child: Row(children: [
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Row(children: [
-                      Text(rows[i].$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
+                      Text(rows[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
                       const SizedBox(width: 8),
                       Pill(rows[i].$4, tone: rows[i].$4 == 'Posted' ? PillTone.success : PillTone.warning),
                     ]),
                     const SizedBox(height: 4),
-                    Text(rows[i].$2, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, color: SuperThemeData.dark.fg2, fontFamily: SuperTokens.bodyFont)),
+                    Text(rows[i].$2, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg2, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   ]),
                 ),
                 const SizedBox(width: 10),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  Text(rows[i].$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
+                  Text(rows[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                   const SizedBox(height: 2),
-                  Text(rows[i].$5, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
+                  Text(rows[i].$5, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                 ]),
               ]),
             ),
           ),
-        if (rows.isEmpty) Padding(padding: EdgeInsets.symmetric(vertical: 28), child: Center(child: Text('No entries match.', style: TextStyle(color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)))),
+        if (rows.isEmpty) Padding(padding: EdgeInsets.symmetric(vertical: 28), child: Center(child: Text('No entries match.', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
       ]),
     ]),
     );
@@ -90,26 +90,26 @@ class CreateJournalEntryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Journal Entry')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Journal Entry')),
       body: MScroll([
-      const ISection(icon: 'doc', title: 'Entry Header', accentColor: SuperTokens.accent, children: [
+      ISection(icon: 'doc', title: 'Entry Header', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         IField(label: 'Serial No', value: 'JV-2024-0227', mono: true, locked: true),
         IField(label: 'Date', value: 'Dec 19, 2025', icon: 'calendar'),
         IField(label: 'Currency', value: 'SAR — Saudi Riyal', select: true),
         ITextarea(label: 'Description', placeholder: 'Describe this journal entry…'),
       ]),
-      ISection(icon: 'ledger', title: 'Journal Lines', accentColor: SuperTokens.success, sub: '2 lines · balanced', children: [
+      ISection(icon: 'ledger', title: 'Journal Lines', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, sub: '2 lines · balanced', children: [
         const _LineEditor(account: 'Bank · NCB Main (1100)', side: 'Debit', amount: '6,600.00'),
         const _LineEditor(account: 'Sales Revenue (4001)', side: 'Credit', amount: '6,600.00'),
         const AddLineBtn(),
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: SuperThemeData.dark.bg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.bg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(8)),
           child: Row(children: [
-            Expanded(child: _Total('Debits', '6,600.00', SuperThemeData.dark.fg1)),
-            Expanded(child: _Total('Credits', '6,600.00', SuperThemeData.dark.fg1)),
-            Expanded(child: _Total('Diff', '0.00', SuperTokens.success)),
+            Expanded(child: _Total('Debits', '6,600.00', SuperMaterialThemeData.of(context).superTheme.fg1)),
+            Expanded(child: _Total('Credits', '6,600.00', SuperMaterialThemeData.of(context).superTheme.fg1)),
+            Expanded(child: _Total('Diff', '0.00', SuperMaterialThemeData.of(context).colorScheme.secondary)),
           ]),
         ),
       ]),
@@ -126,7 +126,7 @@ class _LineEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: SuperThemeData.dark.bg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.bg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(8)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Row(children: [
           // Searchable account picker seeded with this line's current account.
@@ -152,17 +152,17 @@ class _LineEditor extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Padding(padding: const EdgeInsets.only(top: 4), child: Icon(MIcons.of('trash'), size: 15, color: SuperThemeData.dark.fg3)),
+          Padding(padding: const EdgeInsets.only(top: 4), child: Icon(MIcons.of('trash'), size: 15, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
         ]),
         const SizedBox(height: 10),
         Row(children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(color: superCoreTint(side == 'Debit' ? SuperTokens.accent : SuperTokens.danger, 0x1F), borderRadius: BorderRadius.circular(6)),
-            child: Text(side.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: side == 'Debit' ? SuperTokens.accent : SuperTokens.danger)),
+            decoration: BoxDecoration(color: superCoreTint(side == 'Debit' ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).colorScheme.error, 0x1F), borderRadius: BorderRadius.circular(6)),
+            child: Text(side.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: side == 'Debit' ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).colorScheme.error)),
           ),
           const Spacer(),
-          Text(amount, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
+          Text(amount, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 15, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
         ]),
       ]),
     );
@@ -177,9 +177,9 @@ class _Total extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9),
+          Eyebrow(label, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9),
           const SizedBox(height: 4),
-          Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13.5, fontWeight: FontWeight.w700, color: color)),
+          Text(value, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13.5, fontWeight: FontWeight.w700, color: color)),
         ],
       );
 }
@@ -189,21 +189,21 @@ class JournalEntryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Journal Entry Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Journal Entry Detail')),
       body: MScroll([
-      MCard(accentColor: SuperTokens.success, title: 'Journal Entry', trailing: Pill('Posted'), children: [
-        Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
-        Text('Mixed sale & revenue recognition', style: TextStyle(fontSize: 14, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Journal Entry', trailing: Pill('Posted'), children: [
+        Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+        Text('Mixed sale & revenue recognition', style: TextStyle(fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
       ]),
-      const MCard(accentColor: SuperTokens.success, title: 'Lines', pad: 16, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Lines', pad: 16, children: [
         JournalPreview(numbered: true, rows: [
           ('Bank · NCB Main (1100)', '6,600.00', null),
           ('Sales Revenue (4001)', null, '6,000.00'),
           ('VAT Payable (2100)', null, '600.00'),
         ]),
       ]),
-      const MCard(accentColor: SuperTokens.accent, title: 'Audit', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Audit', children: [
         AuditGrid(rows: [
           ('Created By', 'Layla Ahmed', false),
           ('Created At', 'Dec 18, 09:21', true),

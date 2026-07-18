@@ -36,8 +36,8 @@ class WorkspacePage extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 430),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: SuperThemeData.dark.bg,
-                  boxShadow: [BoxShadow(color: Color(0x10FFFFFF), blurRadius: 0, spreadRadius: 1)],
+                  color: SuperMaterialThemeData.of(context).superTheme.bg,
+                  boxShadow: const [BoxShadow(color: Color(0x10FFFFFF), blurRadius: 0, spreadRadius: 1)],
                 ),
                 child: _buildBody(context, nav, state),
               ),
@@ -69,8 +69,11 @@ class WorkspacePage extends StatelessWidget {
     if (sub != null) {
       // full-bleed screens render their own app bar + nav
       if (fullBleedScreens.contains(sub)) {
-        return WillPopScope(
-          onWillPop: () async { context.goTo(subTitles[sub]?.back ?? ''); return false; },
+        return PopScope<Object?>(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop) context.goTo(subTitles[sub]?.back ?? '');
+          },
           child: buildSubScreen(sub),
         );
       }
@@ -97,21 +100,21 @@ class WorkspacePage extends StatelessWidget {
   (String, Widget?) _tabChrome(BuildContext context, String tab) {
     switch (tab) {
       case 'accounts':
-        return ('Accounts', _actionBtn('plus', () => context.goTo('createAccount')));
+        return ('Accounts', _actionBtn(context, 'plus', () => context.goTo('createAccount')));
       case 'stores':
-        return ('Stores', _actionBtn('plus', () => context.goTo('createStore')));
+        return ('Stores', _actionBtn(context, 'plus', () => context.goTo('createStore')));
       case 'more':
         return ('More', null);
       case 'dashboard':
       default:
-        return ('Dashboard', _actionBtn('bell', () {}));
+        return ('Dashboard', _actionBtn(context, 'bell', () {}));
     }
   }
 
-  Widget _actionBtn(String icon, VoidCallback onTap) => GestureDetector(
+  Widget _actionBtn(BuildContext context, String icon, VoidCallback onTap) => GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
-        child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: SuperTokens.accent)),
+        child: Padding(padding: const EdgeInsets.only(left: 8), child: Icon(MIcons.of(icon), size: 22, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
       );
 }
 
@@ -121,12 +124,12 @@ class _TenantLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: SuperThemeData.dark.bg,
+      color: SuperMaterialThemeData.of(context).superTheme.bg,
       child: Center(
         child: SizedBox(
           width: 22,
           height: 22,
-          child: CircularProgressIndicator(strokeWidth: 2, color: SuperThemeData.dark.fg3),
+          child: CircularProgressIndicator(strokeWidth: 2, color: SuperMaterialThemeData.of(context).superTheme.fg3),
         ),
       ),
     );

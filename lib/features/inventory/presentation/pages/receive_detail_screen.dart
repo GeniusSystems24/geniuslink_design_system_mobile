@@ -12,11 +12,11 @@ class ReceiveDetailScreen extends StatelessWidget {
       ('Structural Steel I-Beam', '32 PCS × 450.00', '14,400.00')
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Receive Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Receive Detail')),
       body: MScroll([
       MCard(
-          accentColor: SuperTokens.success,
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Received Value',
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
           trailing: Pill('Posted'),
@@ -27,25 +27,25 @@ class ReceiveDetailScreen extends StatelessWidget {
                 children: [
                   Text('SAR',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont, fontSize: 14, color: SuperThemeData.dark.fg3)),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   SizedBox(width: 8),
                   Text('+24,200.00',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          color: SuperTokens.success,
+                          color: SuperMaterialThemeData.of(context).colorScheme.secondary,
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      const MCard(accentColor: SuperTokens.accent, title: 'Receipt Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Receipt Information', children: [
         KV('Serial No', 'INV-REC-2024-0241', mono: true),
         KV('Receiving Store', 'King Fahd Warehouse'),
         KV('Supplier', 'ABC Trading Co.'),
         KV('PO Reference', 'PO-2024-1182', mono: true),
       ]),
       MCard(
-          accentColor: SuperTokens.success,
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Items',
           subtitle: '2 lines · 432 units',
           pad: 8,
@@ -58,7 +58,7 @@ class ReceiveDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      const MCard(accentColor: SuperTokens.warning, title: 'Audit Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: [
         AuditGridLite(rows: [
           ('Received By', 'Layla A. (ID: 12)', false),
           ('Received At', 'Dec 16, 14:32', true),
@@ -94,13 +94,13 @@ class AuditGridLite extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Eyebrow(r.$1, color: SuperThemeData.dark.fg3, size: 9.5),
+                Eyebrow(r.$1, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
                 const SizedBox(height: 5),
                 Text(r.$2,
                     style: TextStyle(
                         fontSize: 12.5,
-                        color: SuperThemeData.dark.fg1,
-                        fontFamily: r.$3 ? SuperTokens.monoFont : SuperTokens.bodyFont)),
+                        color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                        fontFamily: r.$3 ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ]),
       ],
     );

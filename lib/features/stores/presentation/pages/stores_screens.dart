@@ -19,8 +19,8 @@ class StoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Stores')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stores')),
       body: MScroll([
       for (final s in _stores)
         GestureDetector(
@@ -28,7 +28,7 @@ class StoresScreen extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           child: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.surface, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(12)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,22 +39,22 @@ class StoresScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(s.$2, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                          Text(s.$2, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                           const SizedBox(height: 2),
                           Directionality(textDirection: TextDirection.rtl,
-                              child: Text(s.$3, style: TextStyle(fontFamily: SuperTokens.arabicFont, fontSize: 12.5, color: SuperThemeData.dark.fg3))),
+                              child: Text(s.$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12.5, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
                         ],
                       ),
                     ),
-                    Text(s.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                    Text(s.$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ],
                 ),
                 Container(margin: const EdgeInsets.only(top: 14), padding: const EdgeInsets.only(top: 14),
-                    decoration: BoxDecoration(border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
+                    decoration: BoxDecoration(border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
                     child: Row(children: [
-                      _stat('Value', '${s.$4} SAR'),
+                      _stat(context, 'Value', '${s.$4} SAR'),
                       const SizedBox(width: 20),
-                      _stat('SKUs', s.$5),
+                      _stat(context, 'SKUs', s.$5),
                     ])),
               ],
             ),
@@ -64,12 +64,12 @@ class StoresScreen extends StatelessWidget {
     );
   }
 
-  Widget _stat(String label, String value) => Column(
+  Widget _stat(BuildContext context, String label, String value) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9.5),
+          Eyebrow(label, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
           const SizedBox(height: 3),
-          Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
+          Text(value, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 15, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
         ],
       );
 }
@@ -79,17 +79,17 @@ class CreateStoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Store')),
-      body: const MScroll([
-      MCard(accentColor: SuperTokens.accent, title: 'Store Details', subtitle: 'Name and location', children: [
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Store')),
+      body: MScroll([
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Store Details', subtitle: 'Name and location', children: const [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),
         MField(label: 'الاسم بالعربية', placeholder: 'مثال: متجر وسط المدينة', ar: true, required: true),
         MField(label: 'Location Code', value: 'ST-001', mono: true),
         MField(label: 'Store Category', value: 'Retail'),
         MField(label: 'Note', placeholder: 'Add internal notes…'),
       ]),
-      Row(children: [
+      const Row(children: [
         Expanded(child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true)),
         SizedBox(width: 10),
         Expanded(child: MBtn('Create', icon: 'check', full: true)),
@@ -109,21 +109,21 @@ class StoreDetailScreen extends StatelessWidget {
       ('RBR-71203', 'Rebar #6', '0', 'out'),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Store Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Store Detail')),
       body: MScroll([
-      const MCard(accentColor: SuperTokens.success, title: 'Store Summary', trailing: Pill('Active'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Store Summary', trailing: const Pill('Active'), children: const [
         Row(children: [
           Expanded(child: Mini(label: 'Stock Value', value: '342,820', sub: 'SAR', hi: true)),
           SizedBox(width: 12),
           Expanded(child: Mini(label: 'SKUs', value: '1,248')),
         ]),
       ]),
-      MCard(accentColor: SuperTokens.success, title: 'Stock On Hand', pad: 8, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Stock On Hand', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
-            for (int i = 0; i < items.length; i++) _stockRow(items[i], i == items.length - 1),
+            for (int i = 0; i < items.length; i++) _stockRow(context, items[i], i == items.length - 1),
           ]),
         ),
       ]),
@@ -132,22 +132,22 @@ class StoreDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _stockRow((String, String, String, String) it, bool last) {
-    final qtyColor = it.$3 == '0' ? SuperTokens.danger : (it.$4 == 'low' ? SuperTokens.warning : SuperThemeData.dark.fg1);
+  Widget _stockRow(BuildContext context, (String, String, String, String) it, bool last) {
+    final qtyColor = it.$3 == '0' ? SuperMaterialThemeData.of(context).colorScheme.error : (it.$4 == 'low' ? SuperMaterialThemeData.of(context).colorScheme.tertiary : SuperMaterialThemeData.of(context).superTheme.fg1);
     final tone = it.$4 == 'in' ? PillTone.success : (it.$4 == 'low' ? PillTone.warning : PillTone.danger);
     final tlabel = it.$4 == 'in' ? 'In' : (it.$4 == 'low' ? 'Low' : 'Out');
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(it.$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+            Text(it.$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
             const SizedBox(height: 2),
-            Text(it.$1, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+            Text(it.$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ]),
         ),
-        Text(it.$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, fontWeight: FontWeight.w600, color: qtyColor)),
+        Text(it.$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: qtyColor)),
         const SizedBox(width: 12),
         Pill(tlabel, tone: tone),
       ]),
@@ -160,37 +160,37 @@ class IssueInventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Issue Inventory')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Issue Inventory')),
       body: MScroll([
-      const MCard(accentColor: SuperTokens.accent, title: 'Issue Details', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Details', children: const [
         MField(label: 'Serial No', value: 'INV-ISS-2024-0089', mono: true),
         MField(label: 'Store', placeholder: 'Search store…', required: true),
         MField(label: 'Currency', value: 'USD — US Dollar'),
       ]),
-      MCard(accentColor: SuperTokens.success, title: 'Items', subtitle: '1 line · 12 units', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Items', subtitle: '1 line · 12 units', children: [
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: SuperThemeData.dark.bg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.bg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(8)),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Structural Steel', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
-                SizedBox(height: 2),
-                Text('12 PCS × 450.00', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                Text('Structural Steel', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                const SizedBox(height: 2),
+                Text('12 PCS × 450.00', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
               ]),
             ),
-            Text('5,400.00', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 15, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
+            Text('5,400.00', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 15, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
           ]),
         ),
-        _dashedAdd('scan', 'Scan to Add Item'),
+        _dashedAdd(context, 'scan', 'Scan to Add Item'),
       ]),
-      MCard(accentColor: SuperTokens.success, title: 'Total', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Total', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Eyebrow('Total Value', color: SuperThemeData.dark.fg3, size: 12),
+          Eyebrow('Total Value', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 12),
           Text.rich(TextSpan(children: [
-            TextSpan(text: '5,400.00 ', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 24, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
-            TextSpan(text: 'USD', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
+            TextSpan(text: '5,400.00 ', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 24, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+            TextSpan(text: 'USD', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ])),
         ]),
       ]),
@@ -199,14 +199,14 @@ class IssueInventoryScreen extends StatelessWidget {
     );
   }
 
-  static Widget _dashedAdd(String icon, String label) => Container(
+  static Widget _dashedAdd(BuildContext context, String icon, String label) => Container(
         height: 44,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: DottedBorderBox(
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(MIcons.of(icon), size: 16, color: SuperTokens.accent),
+            Icon(MIcons.of(icon), size: 16, color: SuperMaterialThemeData.of(context).colorScheme.primary),
             const SizedBox(width: 8),
-            Text(label, style: const TextStyle(color: SuperTokens.accent, fontWeight: FontWeight.w600, fontSize: 13, fontFamily: SuperTokens.bodyFont)),
+            Text(label, style: TextStyle(color: SuperMaterialThemeData.of(context).colorScheme.primary, fontWeight: FontWeight.w600, fontSize: 13, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
           ]),
         ),
       );
@@ -219,17 +219,20 @@ class DottedBorderBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _DashPainter(),
+      painter: _DashPainter(SuperMaterialThemeData.of(context).superTheme.borderStrong),
       child: Center(child: child),
     );
   }
 }
 
 class _DashPainter extends CustomPainter {
+  final Color borderColor;
+  const _DashPainter(this.borderColor);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = SuperThemeData.dark.borderStrong
+      ..color = borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     final rrect = RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(8));
@@ -245,5 +248,5 @@ class _DashPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
+  bool shouldRepaint(covariant _DashPainter old) => old.borderColor != borderColor;
 }

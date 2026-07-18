@@ -11,15 +11,15 @@ class _BalancedRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: SuperThemeData.dark.borderStrong, width: 2))),
+          border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.borderStrong, width: 2))),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const Eyebrow('Balanced · Diff 0.00', color: SuperTokens.success, size: 11),
+        Eyebrow('Balanced · Diff 0.00', color: SuperMaterialThemeData.of(context).colorScheme.secondary, size: 11),
         Text(value,
             style: TextStyle(
-                fontFamily: SuperTokens.monoFont,
+                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: SuperThemeData.dark.fg1)),
+                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
       ]),
     );
   }
@@ -90,13 +90,13 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Receive Inventory')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Receive Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Receive Details',
-          marker: SuperTokens.accent,
+          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             const SuperTextFormField(
               label: 'Serial No',
@@ -123,7 +123,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           icon: 'cart',
           title: 'Inventory Items',
           sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
-          marker: SuperTokens.success,
+          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
             Scanner(onPick: _addLine),
             ..._lines.asMap().entries.map((e) {
@@ -141,10 +141,10 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             }),
             const AddProductBtn(),
           ]),
-      const ISection(
+      ISection(
           icon: 'swap',
           title: 'Accounting Distribution',
-          marker: SuperTokens.success,
+          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
             DistRow(
                 account: '1200 — Inventory (WIP)',
@@ -158,7 +158,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 last: true),
             _BalancedRow(value: '24,200.00'),
           ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperTokens.warning, children: [
+      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         const SuperTextFormField(
           label: 'Receipt Notes',
           placeholder: 'PO number, delivery note, inspection results…',

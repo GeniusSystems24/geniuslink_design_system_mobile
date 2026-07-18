@@ -14,7 +14,7 @@ class Eyebrow extends StatelessWidget {
   final double size;
   const Eyebrow(this.text, {super.key, this.color, this.size = 10});
   @override
-  Widget build(BuildContext context) => Text(text.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: size, letterSpacing: 0.6, color: color ?? SuperThemeData.dark.fg2));
+  Widget build(BuildContext context) => Text(text.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: size, letterSpacing: 0.6, color: color ?? SuperMaterialThemeData.of(context).superTheme.fg2));
 }
 
 class MCard extends StatefulWidget {
@@ -64,8 +64,8 @@ class _MCardState extends State<MCard> {
     return Container(
       padding: EdgeInsets.all(widget.pad),
       decoration: BoxDecoration(
-        color: SuperThemeData.dark.surface,
-        border: Border.all(color: SuperThemeData.dark.border),
+        color: SuperMaterialThemeData.of(context).superTheme.surface,
+        border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -92,7 +92,7 @@ class _MCardState extends State<MCard> {
                       duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: SuperThemeData.dark.fg3,
+                        color: SuperMaterialThemeData.of(context).superTheme.fg3,
                         size: 22,
                       ),
                     ),
@@ -169,7 +169,7 @@ class _MCardTitle extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 15, color: SuperThemeData.dark.fg1),
+                style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 15, color: SuperMaterialThemeData.of(context).superTheme.fg1),
               ),
               if (subtitle != null) ...[
                 const SizedBox(height: 4),
@@ -177,7 +177,7 @@ class _MCardTitle extends StatelessWidget {
                   message: subtitle!,
                   child: Text(
                     subtitle!.toUpperCase(),
-                    style: TextStyle(fontFamily: SuperTokens.bodyFont, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: SuperThemeData.dark.fg3),
+                    style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.5, color: SuperMaterialThemeData.of(context).superTheme.fg3),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -230,11 +230,11 @@ class Mini extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: hi ? superCoreTint(SuperTokens.success, 0x14) : SuperThemeData.dark.bg, border: Border.all(color: hi ? superCoreTint(SuperTokens.success, 0x4D) : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(color: hi ? superCoreTint(SuperMaterialThemeData.of(context).colorScheme.secondary, 0x14) : SuperMaterialThemeData.of(context).superTheme.bg, border: Border.all(color: hi ? superCoreTint(SuperMaterialThemeData.of(context).colorScheme.secondary, 0x4D) : SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(10)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9.5),
-        Padding(padding: const EdgeInsets.only(top: 6), child: Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 20, fontWeight: FontWeight.w600, color: hi ? SuperTokens.success : SuperThemeData.dark.fg1))),
-        if (sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(sub!, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg3))),
+        Eyebrow(label, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
+        Padding(padding: const EdgeInsets.only(top: 6), child: Text(value, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 20, fontWeight: FontWeight.w600, color: hi ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).superTheme.fg1))),
+        if (sub != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(sub!, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
       ]),
     );
   }
@@ -250,8 +250,8 @@ class Avatar extends StatelessWidget {
     final initials = parts.take(2).map((w) => w.isEmpty ? '' : w[0]).join();
     return Container(
       width: size, height: size, alignment: Alignment.center,
-      decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, shape: BoxShape.circle, border: Border.all(color: SuperThemeData.dark.borderStrong)),
-      child: Text(initials, style: TextStyle(fontFamily: SuperTokens.displayFont, fontWeight: FontWeight.w700, fontSize: size * 0.36, color: SuperThemeData.dark.fg2)),
+      decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, shape: BoxShape.circle, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong)),
+      child: Text(initials, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: size * 0.36, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
     );
   }
 }
@@ -262,9 +262,9 @@ class KV extends StatelessWidget {
   const KV(this.k, this.v, {super.key, this.mono = false, this.ar = false});
   @override
   Widget build(BuildContext context) => Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Eyebrow(k, color: SuperThemeData.dark.fg3),
+        Eyebrow(k, color: SuperMaterialThemeData.of(context).superTheme.fg3),
         const SizedBox(width: 12),
-        Expanded(child: Text(v, textAlign: TextAlign.end, style: TextStyle(fontSize: 13.5, color: SuperThemeData.dark.fg1, fontFamily: ar ? SuperTokens.arabicFont : (mono ? SuperTokens.monoFont : SuperTokens.bodyFont)))),
+        Expanded(child: Text(v, textAlign: TextAlign.end, style: TextStyle(fontSize: 13.5, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: ar ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : (mono ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
       ]);
 }
 

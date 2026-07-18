@@ -21,9 +21,9 @@ class AccountsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-        backgroundColor: SuperThemeData.dark.bg,
+        backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
         elevation: 0,
         title: const Text('Accounts'),
       ),
@@ -32,14 +32,14 @@ class AccountsScreen extends StatelessWidget {
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-            color: SuperThemeData.dark.inputBg,
-            border: Border.all(color: SuperThemeData.dark.borderStrong),
+            color: SuperMaterialThemeData.of(context).superTheme.inputBg,
+            border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong),
             borderRadius: BorderRadius.circular(10)),
         child: Row(children: [
-          Icon(Icons.search_rounded, size: 16, color: SuperThemeData.dark.fg3),
+          Icon(Icons.search_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3),
           SizedBox(width: 10),
           Text('Search accounts…',
-              style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 14, fontFamily: SuperTokens.bodyFont)),
+              style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 14, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
         ]),
       ),
       MCard(pad: 8, children: [
@@ -70,14 +70,14 @@ class _AccountRow extends StatelessWidget {
         decoration: BoxDecoration(
             border: last
                 ? null
-                : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+                : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
         child: Row(
           children: [
             SizedBox(
                 width: 36,
                 child: Text(row.$1,
                     style: TextStyle(
-                        fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -87,25 +87,25 @@ class _AccountRow extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w600,
-                          color: SuperThemeData.dark.fg1,
-                          fontFamily: SuperTokens.bodyFont)),
+                          color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: Text(row.$3,
                         style: TextStyle(
-                            fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3)),
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ),
                 ],
               ),
             ),
             Text(row.$4,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: row.$5 ? SuperTokens.danger : SuperThemeData.dark.fg1)),
+                    color: row.$5 ? SuperMaterialThemeData.of(context).colorScheme.error : SuperMaterialThemeData.of(context).superTheme.fg1)),
             const SizedBox(width: 6),
-            Icon(MIcons.of('chevR'), size: 15, color: SuperThemeData.dark.fg4),
+            Icon(MIcons.of('chevR'), size: 15, color: SuperMaterialThemeData.of(context).superTheme.fg4),
           ],
         ),
       ),

@@ -32,21 +32,21 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ? _products
         : _products.where((p) => p.$3 == _cat).toList();
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Products')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Products')),
       body: MScroll([
       Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-            color: SuperThemeData.dark.inputBg,
-            border: Border.all(color: SuperThemeData.dark.borderStrong),
+            color: SuperMaterialThemeData.of(context).superTheme.inputBg,
+            border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong),
             borderRadius: BorderRadius.circular(10)),
         child: Row(children: [
-          Icon(Icons.search_rounded, size: 16, color: SuperThemeData.dark.fg3),
+          Icon(Icons.search_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3),
           SizedBox(width: 10),
           Text('Search product or SKU…',
-              style: TextStyle(color: SuperThemeData.dark.fg3, fontSize: 14, fontFamily: SuperTokens.bodyFont))
+              style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 14, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))
         ]),
       ),
       SizedBox(
@@ -63,16 +63,16 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: on ? SuperTokens.accent : SuperThemeData.dark.inputBg,
-                    border: Border.all(color: on ? SuperTokens.accent : SuperThemeData.dark.border),
+                    color: on ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.inputBg,
+                    border: Border.all(color: on ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.border),
                     borderRadius: BorderRadius.circular(999)),
                 child: Text(cats[i].toUpperCase(),
                     style: TextStyle(
-                        fontFamily: SuperTokens.bodyFont,
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.4,
-                        color: on ? Colors.white : SuperThemeData.dark.fg3)),
+                        color: on ? Colors.white : SuperMaterialThemeData.of(context).superTheme.fg3)),
               ),
             );
           },
@@ -87,7 +87,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
               decoration: BoxDecoration(
                   border: i < rows.length - 1
-                      ? Border(bottom: BorderSide(color: SuperThemeData.dark.border))
+                      ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))
                       : null),
               child: Row(children: [
                 Expanded(
@@ -98,22 +98,22 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                             style: TextStyle(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w600,
-                                color: SuperThemeData.dark.fg1,
-                                fontFamily: SuperTokens.bodyFont)),
+                                color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                         const SizedBox(height: 3),
                         Row(children: [
                           Text(rows[i].$1,
                               style: TextStyle(
-                                  fontFamily: SuperTokens.monoFont,
+                                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                                   fontSize: 11,
-                                  color: SuperThemeData.dark.fg3)),
+                                  color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                           Text('  ·  ',
-                              style: TextStyle(color: SuperThemeData.dark.fg4, fontSize: 11)),
+                              style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 11)),
                           Text(rows[i].$3,
                               style: TextStyle(
                                   fontSize: 11,
-                                  color: SuperThemeData.dark.fg3,
-                                  fontFamily: SuperTokens.bodyFont)),
+                                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                         ]),
                       ]),
                 ),
@@ -122,16 +122,16 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     TextSpan(
                         text: '${rows[i].$5} ',
                         style: TextStyle(
-                            fontFamily: SuperTokens.monoFont,
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: rows[i].$5 == 0
-                                ? SuperTokens.danger
-                                : (rows[i].$6 == 'low' ? SuperTokens.warning : SuperThemeData.dark.fg1))),
+                                ? SuperMaterialThemeData.of(context).colorScheme.error
+                                : (rows[i].$6 == 'low' ? SuperMaterialThemeData.of(context).colorScheme.tertiary : SuperMaterialThemeData.of(context).superTheme.fg1))),
                     TextSpan(
                         text: rows[i].$4,
                         style: TextStyle(
-                            fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg3)),
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ])),
                   const SizedBox(height: 4),
                   Pill(_statusLabel(rows[i].$6), tone: _statusTone(rows[i].$6)),

@@ -42,10 +42,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Account Group')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Account Group')),
       body: MScroll([
-      MCard(accentColor: SuperTokens.accent, title: 'Group Details', subtitle: 'Name and tree association', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Details', subtitle: 'Name and tree association', children: [
         SuperTextFormField(
           label: 'Name English',
           placeholder: 'e.g. Current Assets',
@@ -70,7 +70,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           required: true,
         ),
       ]),
-      const MCard(accentColor: SuperTokens.warning, title: 'Additional Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Additional Information', children: [
         SuperTextFormField(
           label: 'Note',
           placeholder: 'Add any notes about this group…',

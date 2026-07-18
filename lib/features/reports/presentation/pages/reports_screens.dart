@@ -34,14 +34,14 @@ class _ReportMeta extends StatelessWidget {
       Wrap(spacing: 16, runSpacing: 8, children: [
         for (final b in badges)
           Row(mainAxisSize: MainAxisSize.min, children: [
-            Eyebrow(b.$1, color: SuperThemeData.dark.fg3, size: 9.5),
+            Eyebrow(b.$1, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
             const SizedBox(width: 7),
             Text(b.$2,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg1)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1)),
           ]),
       ]),
     ]);
@@ -67,7 +67,7 @@ class _RRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         Expanded(
             child:
@@ -76,21 +76,21 @@ class _RRow extends StatelessWidget {
               style: TextStyle(
                   fontSize: 13,
                   fontWeight: bold ? FontWeight.w700 : FontWeight.w600,
-                  color: SuperThemeData.dark.fg1,
-                  fontFamily: SuperTokens.bodyFont)),
+                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
           if (sub != null)
             Padding(
                 padding: const EdgeInsets.only(top: 2),
                 child: Text(sub!,
                     style: TextStyle(
-                        fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3))),
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
         ])),
         Text(right,
             style: TextStyle(
-                fontFamily: SuperTokens.monoFont,
+                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                 fontSize: 13.5,
                 fontWeight: bold ? FontWeight.w700 : FontWeight.w600,
-                color: rightTone ?? SuperThemeData.dark.fg1)),
+                color: rightTone ?? SuperMaterialThemeData.of(context).superTheme.fg1)),
       ]),
     );
   }
@@ -98,26 +98,26 @@ class _RRow extends StatelessWidget {
 
 class _TotalBar extends StatelessWidget {
   final String label, value;
-  final Color tone;
-  const _TotalBar(
-      {required this.label, required this.value, this.tone = SuperTokens.success});
+  final Color? tone;
+  const _TotalBar({required this.label, required this.value, this.tone});
   @override
   Widget build(BuildContext context) {
+    final resolvedTone = tone ?? SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Container(
       margin: const EdgeInsets.only(top: 4),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: superCoreTint(tone, 0x14),
-          border: Border.all(color: superCoreTint(tone, 0x4D)),
+          color: superCoreTint(resolvedTone, 0x14),
+          border: Border.all(color: superCoreTint(resolvedTone, 0x4D)),
           borderRadius: BorderRadius.circular(8)),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Eyebrow(label, color: tone, size: 11),
+        Eyebrow(label, color: resolvedTone, size: 11),
         Text(value,
             style: TextStyle(
-                fontFamily: SuperTokens.monoFont,
+                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: SuperThemeData.dark.fg1)),
+                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
       ]),
     );
   }
@@ -146,9 +146,9 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     final totDr = rows.fold<int>(0, (s, r) => s + r.$3);
     final totCr = rows.fold<int>(0, (s, r) => s + r.$4);
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-          backgroundColor: SuperThemeData.dark.bg,
+          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
           elevation: 0,
           title: const Text('Trial Balance')),
       body: MScroll([
@@ -161,7 +161,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
               ('Status', 'Balanced')
             ]),
         MCard(
-            accentColor: SuperTokens.success,
+            accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
             title: 'All Accounts',
             subtitle: 'Debit & credit balances as of period end',
             pad: 8,
@@ -180,9 +180,9 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                           },
                       styles: {
                         (_, __, row, cell) => (cell.value as num?) != 0:
-                            const CellStyle(foreground: SuperTokens.success),
+                            CellStyle(foreground: SuperMaterialThemeData.of(context).colorScheme.secondary),
                         (_, __, row, cell) => true:
-                            CellStyle(foreground: SuperThemeData.dark.fg4),
+                            CellStyle(foreground: SuperMaterialThemeData.of(context).superTheme.fg4),
                       }),
                   MCol('credit', 'Credit',
                       fixed: 110,
@@ -194,9 +194,9 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                           },
                       styles: {
                         (_, __, row, cell) => (cell.value as num?) != 0:
-                            const CellStyle(foreground: SuperTokens.danger),
+                            CellStyle(foreground: SuperMaterialThemeData.of(context).colorScheme.error),
                         (_, __, row, cell) => true:
-                            CellStyle(foreground: SuperThemeData.dark.fg4),
+                            CellStyle(foreground: SuperMaterialThemeData.of(context).superTheme.fg4),
                       }),
                 ],
                 rows: [
@@ -212,27 +212,27 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(children: [
-                  const Expanded(
+                  Expanded(
                       child: Eyebrow('Totals · balanced',
-                          color: SuperTokens.success, size: 10)),
+                          color: SuperMaterialThemeData.of(context).colorScheme.secondary, size: 10)),
                   SizedBox(
                       width: 110,
                       child: Text(_money(totDr),
                           textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              fontFamily: SuperTokens.monoFont,
+                          style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: SuperTokens.success))),
+                              color: SuperMaterialThemeData.of(context).colorScheme.secondary))),
                   SizedBox(
                       width: 110,
                       child: Text(_money(totCr),
                           textAlign: TextAlign.right,
-                          style: const TextStyle(
-                              fontFamily: SuperTokens.monoFont,
+                          style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: SuperTokens.success))),
+                              color: SuperMaterialThemeData.of(context).colorScheme.secondary))),
                 ]),
               ),
             ]),
@@ -256,19 +256,19 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
     final sections = [
       (
         'Revenue',
-        SuperTokens.success,
+        SuperMaterialThemeData.of(context).colorScheme.secondary,
         [('4001', 'Sales Revenue', 89200), ('4002', 'Service Revenue', 14600)],
         103800
       ),
       (
         'Cost of Sales',
-        SuperTokens.warning,
+        SuperMaterialThemeData.of(context).colorScheme.tertiary,
         [('5001', 'Cost of Goods Sold', -34120)],
         -34120
       ),
       (
         'Operating Expenses',
-        SuperTokens.warning,
+        SuperMaterialThemeData.of(context).colorScheme.tertiary,
         [
           ('5200', 'Operating Expense', -55080),
           ('5300', 'Bank Charges', -1240)
@@ -277,9 +277,9 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
       ),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-          backgroundColor: SuperThemeData.dark.bg,
+          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
           elevation: 0,
           title: const Text('Income Statement')),
       body: MScroll([
@@ -296,14 +296,14 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
                   right: s.$3[i].$3 < 0
                       ? '(${_money(s.$3[i].$3)})'
                       : _money(s.$3[i].$3),
-                  rightTone: s.$3[i].$3 < 0 ? SuperTokens.danger : SuperThemeData.dark.fg1,
+                  rightTone: s.$3[i].$3 < 0 ? SuperMaterialThemeData.of(context).colorScheme.error : SuperMaterialThemeData.of(context).superTheme.fg1,
                   last: i == s.$3.length - 1),
             _TotalBar(
                 label: 'Total ${s.$1}',
                 value: s.$4 < 0 ? '(${_money(s.$4)})' : _money(s.$4),
                 tone: s.$2),
           ]),
-        MCard(accentColor: SuperTokens.success, children: [
+        MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -313,19 +313,19 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
-                        color: SuperThemeData.dark.fg1,
-                        fontFamily: SuperTokens.bodyFont)),
+                        color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                 Text.rich(TextSpan(children: [
                   TextSpan(
                       text: '13,360.00 ',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
-                          color: SuperTokens.success)),
+                          color: SuperMaterialThemeData.of(context).colorScheme.secondary)),
                   TextSpan(
                       text: 'SAR',
-                      style: TextStyle(fontSize: 12, color: SuperThemeData.dark.fg3)),
+                      style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                 ])),
               ]),
         ]),
@@ -347,27 +347,27 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
     final blocks = [
       (
         'Assets',
-        SuperTokens.accent,
+        SuperMaterialThemeData.of(context).colorScheme.primary,
         [('Current Assets', 283790), ('Fixed Assets', 142000)],
         425790
       ),
       (
         'Liabilities',
-        SuperTokens.warning,
+        SuperMaterialThemeData.of(context).colorScheme.tertiary,
         [('Accounts Payable', 23140), ('Long-Term Debt', 80000)],
         103140
       ),
       (
         'Equity',
-        SuperTokens.success,
+        SuperMaterialThemeData.of(context).colorScheme.secondary,
         [('Owner Capital', 260670), ('Retained Earnings', 61980)],
         322650
       ),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-          backgroundColor: SuperThemeData.dark.bg,
+          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
           elevation: 0,
           title: const Text('Balance Sheet')),
       body: MScroll([
@@ -392,16 +392,16 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
           ]),
         MCard(children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Eyebrow('Balance Check', color: SuperThemeData.dark.fg3, size: 12),
+            Eyebrow('Balance Check', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 12),
             Row(mainAxisSize: MainAxisSize.min, children: [
-              Icon(MIcons.of('check'), size: 15, color: SuperTokens.success),
+              Icon(MIcons.of('check'), size: 15, color: SuperMaterialThemeData.of(context).colorScheme.secondary),
               const SizedBox(width: 7),
-              const Text('425,790 = 425,790',
+              Text('425,790 = 425,790',
                   style: TextStyle(
-                      fontFamily: SuperTokens.monoFont,
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: SuperTokens.success)),
+                      color: SuperMaterialThemeData.of(context).colorScheme.secondary)),
             ]),
           ]),
         ]),
@@ -432,9 +432,9 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
         _store == 'All' ? rows : rows.where((r) => r.$5 == _store).toList();
     final total = visible.fold<double>(0, (s, r) => s + r.$3 * r.$4);
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-          backgroundColor: SuperThemeData.dark.bg,
+          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
           elevation: 0,
           title: const Text('Inventory Valuation')),
       body: MScroll([
@@ -444,18 +444,18 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
               value: _store,
               onChange: (v) => setState(() => _store = v)),
           Row(children: [
-            Eyebrow('Method', color: SuperThemeData.dark.fg3, size: 9.5),
+            Eyebrow('Method', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
             SizedBox(width: 7),
             Text('Weighted Avg',
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg1)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1)),
           ]),
         ]),
         MCard(
-            accentColor: SuperTokens.success,
+            accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
             title: 'Stock Valuation',
             subtitle: 'Quantity × weighted-average unit cost',
             pad: 8,
@@ -571,9 +571,9 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
     ];
     final visible = logs.where((l) => _act == 'All' || l.$3 == _act).toList();
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-          backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Audit Log')),
+          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Audit Log')),
       body: MScroll([
         Segmented(options: const [
           'All',
@@ -585,7 +585,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
           'LOCK'
         ], value: _act, onChange: (v) => setState(() => _act = v)),
         MCard(
-            accentColor: SuperTokens.warning,
+            accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
             title: 'Immutable Activity Trail',
             subtitle: 'Every state-changing action · 7-year retention',
             pad: 8,
@@ -613,9 +613,9 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
                     child: Center(
                         child: Text('No log entries match.',
                             style: TextStyle(
-                                color: SuperThemeData.dark.fg3,
+                                color: SuperMaterialThemeData.of(context).superTheme.fg3,
                                 fontSize: 13,
-                                fontFamily: SuperTokens.bodyFont)))),
+                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
             ]),
       ]),
     );

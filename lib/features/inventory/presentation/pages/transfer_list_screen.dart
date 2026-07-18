@@ -17,13 +17,13 @@ class _TransferListScreenState extends State<TransferListScreen> {
       ('INV-TRF-2024-0115', 'ST-004', 'ST-001', '12,840', 'Dec 10', 'delivered'), ('INV-TRF-2024-0114', 'ST-001', 'ST-005', '5,400', 'Dec 09', 'draft'),
       ('INV-TRF-2024-0113', 'ST-002', 'ST-001', '88,400', 'Dec 07', 'delivered'), ('INV-TRF-2024-0112', 'ST-003', 'ST-002', '14,200', 'Dec 05', 'cancelled'),
     ];
-    final filters = <(String, String, Color)>[('all', 'All', SuperThemeData.dark.fg2), ('draft', 'Draft', SuperThemeData.dark.fg2), ('in-transit', 'Transit', SuperTokens.warning), ('delivered', 'Delivered', SuperTokens.success), ('cancelled', 'Cancelled', SuperTokens.danger)];
+    final filters = <(String, String, Color)>[('all', 'All', SuperMaterialThemeData.of(context).superTheme.fg2), ('draft', 'Draft', SuperMaterialThemeData.of(context).superTheme.fg2), ('in-transit', 'Transit', SuperMaterialThemeData.of(context).colorScheme.tertiary), ('delivered', 'Delivered', SuperMaterialThemeData.of(context).colorScheme.secondary), ('cancelled', 'Cancelled', SuperMaterialThemeData.of(context).colorScheme.error)];
     final visible = transfers.where((t) => _status == 'all' || t.$6 == _status).toList();
     PillTone tone(String s) => s == 'delivered' ? PillTone.success : (s == 'in-transit' ? PillTone.warning : (s == 'cancelled' ? PillTone.danger : PillTone.neutral));
     String label(String s) => s == 'in-transit' ? 'Transit' : (s[0].toUpperCase() + s.substring(1));
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Stock Transfers')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stock Transfers')),
       body: MScroll([
       SizedBox(
         height: 32,
@@ -38,8 +38,8 @@ class _TransferListScreenState extends State<TransferListScreen> {
               onTap: () => setState(() => _status = f.$1),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14), alignment: Alignment.center,
-                decoration: BoxDecoration(color: on ? superCoreTint(f.$3, 0x1F) : SuperThemeData.dark.inputBg, border: Border.all(color: on ? f.$3 : SuperThemeData.dark.border), borderRadius: BorderRadius.circular(999)),
-                child: Text(f.$2.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: on ? f.$3 : SuperThemeData.dark.fg3)),
+                decoration: BoxDecoration(color: on ? superCoreTint(f.$3, 0x1F) : SuperMaterialThemeData.of(context).superTheme.inputBg, border: Border.all(color: on ? f.$3 : SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(999)),
+                child: Text(f.$2.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, color: on ? f.$3 : SuperMaterialThemeData.of(context).superTheme.fg3)),
               ),
             );
           },
@@ -47,36 +47,36 @@ class _TransferListScreenState extends State<TransferListScreen> {
       ),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-        decoration: BoxDecoration(color: SuperThemeData.dark.inputBg, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(8)),
         child: Row(children: [
-          Icon(MIcons.of('clock'), size: 13, color: SuperThemeData.dark.fg3),
+          Icon(MIcons.of('clock'), size: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3),
           const SizedBox(width: 8),
-          Text('Dec 01 – Dec 31, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperThemeData.dark.fg2)),
+          Text('Dec 01 – Dec 31, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
           const Spacer(),
-          Icon(MIcons.of('chevD'), size: 13, color: SuperThemeData.dark.fg3),
+          Icon(MIcons.of('chevD'), size: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3),
         ]),
       ),
-      MCard(accentColor: SuperTokens.accent, title: '${visible.length} Transfers', pad: 8, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: '${visible.length} Transfers', pad: 8, children: [
         for (int i = 0; i < visible.length; i++)
           GestureDetector(
             onTap: () => context.goTo('transferDetail'),
             behavior: HitTestBehavior.opaque,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
-              decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
+              decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
               child: Row(children: [
                 Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(visible[i].$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11.5, color: SuperTokens.accent)),
+                  Text(visible[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
                   const SizedBox(height: 4),
                   Row(children: [
-                    Text(visible[i].$2, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, color: SuperThemeData.dark.fg2)),
-                    Icon(MIcons.of('chevR'), size: 11, color: SuperThemeData.dark.fg4),
-                    Text(visible[i].$3, style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 12, color: SuperThemeData.dark.fg2)),
-                    Text('  · ${visible[i].$5}', style: TextStyle(color: SuperThemeData.dark.fg4, fontSize: 12, fontFamily: SuperTokens.bodyFont)),
+                    Text(visible[i].$2, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                    Icon(MIcons.of('chevR'), size: 11, color: SuperMaterialThemeData.of(context).superTheme.fg4),
+                    Text(visible[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                    Text('  · ${visible[i].$5}', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 12, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   ]),
                 ])),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  Text(visible[i].$4, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w700, color: SuperThemeData.dark.fg1)),
+                  Text(visible[i].$4, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                   const SizedBox(height: 4),
                   Pill(label(visible[i].$6), tone: tone(visible[i].$6)),
                 ]),

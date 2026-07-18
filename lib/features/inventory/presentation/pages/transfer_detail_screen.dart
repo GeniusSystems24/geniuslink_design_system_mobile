@@ -38,22 +38,22 @@ class _TransferFlowCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg1,
-                    fontFamily: SuperTokens.bodyFont)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
             Directionality(
                 textDirection: TextDirection.rtl,
                 child: Text(ar,
                     style: TextStyle(
-                        fontFamily: SuperTokens.arabicFont, fontSize: 12, color: SuperThemeData.dark.fg3))),
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
             Container(
               margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.only(top: 10),
               width: double.infinity,
               decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
+                  border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
               child: Text(delta,
                   style: TextStyle(
-                      fontFamily: SuperTokens.monoFont,
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                       fontSize: 11.5,
                       fontWeight: FontWeight.w600,
                       color: deltaColor)),
@@ -74,37 +74,37 @@ class TransferDetailScreen extends StatelessWidget {
       ('Reinforcement Bar #6', '240 PCS × 78.00', '18,720.00')
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Transfer Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Transfer Detail')),
       body: MScroll([
       MCard(
-          accentColor: SuperTokens.accent,
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
           title: 'In Transit',
           trailing: const Pill('In Transit', tone: PillTone.warning),
           children: [
-            const Padding(
+            Padding(
                 padding: EdgeInsets.only(bottom: 2),
                 child: Text('INV-TRF-2024-0117',
                     style: TextStyle(
-                        fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent))),
-            const _TransferFlowCard(
-                tone: SuperTokens.warning,
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary))),
+            _TransferFlowCard(
+                tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
                 label: 'From Store',
                 store: 'ST-001 · Downtown Central',
                 ar: 'متجر وسط المدينة',
                 delta: '-54,892 SAR',
-                deltaColor: SuperTokens.danger),
+                deltaColor: SuperMaterialThemeData.of(context).colorScheme.error),
             Transform.translate(
               offset: const Offset(0, -6),
               child: Container(
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                    color: SuperTokens.accent,
+                    color: SuperMaterialThemeData.of(context).colorScheme.primary,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                          color: superCoreTint(SuperTokens.accent, 0x99),
+                          color: superCoreTint(SuperMaterialThemeData.of(context).colorScheme.primary, 0x99),
                           blurRadius: 18,
                           offset: const Offset(0, 6))
                     ]),
@@ -114,17 +114,17 @@ class TransferDetailScreen extends StatelessWidget {
             ),
             Transform.translate(
               offset: const Offset(0, -6),
-              child: const _TransferFlowCard(
-                  tone: SuperTokens.success,
+              child: _TransferFlowCard(
+                  tone: SuperMaterialThemeData.of(context).colorScheme.secondary,
                   label: 'To Store',
                   store: 'ST-002 · King Fahd Warehouse',
                   ar: 'مستودع الملك فهد',
                   delta: '+54,892 SAR',
-                  deltaColor: SuperTokens.success),
+                  deltaColor: SuperMaterialThemeData.of(context).colorScheme.secondary),
             ),
           ]),
       MCard(
-          accentColor: SuperTokens.success,
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Items in Transit',
           subtitle: '2 lines · 258 units',
           pad: 8,
@@ -137,7 +137,7 @@ class TransferDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      const MCard(accentColor: SuperTokens.accent, title: 'Logistics & Tracking', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Logistics & Tracking', children: [
         KV('Carrier', 'Plate 4892-RKD'),
         KV('Driver', 'Mohammed S.'),
         KV('Expected Arrival', 'Dec 20, 2025', mono: true),

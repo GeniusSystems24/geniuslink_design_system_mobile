@@ -33,12 +33,15 @@ final _recent = [
   ('INV-ISS-0089', 'Issue · Project A-92', '−6,600.00', false, '08:30'),
 ];
 
-final _alerts = [
-  (SuperTokens.warning, 'info', '1 entry out of balance', 'JV-2024-0225 · draft'),
-  (SuperTokens.danger, 'info', '2 SKUs out of stock', 'Downtown Central Store'),
-  (SuperTokens.accent, 'lock', '3 wires await approval', 'External transfers · 41,200 SAR'),
-  (SuperTokens.success, 'check', 'Period Nov 2024 closed', 'Locked Dec 01'),
-];
+List<(Color, String, String, String)> _alerts(BuildContext context) {
+  final colors = SuperMaterialThemeData.of(context).colorScheme;
+  return [
+    (colors.tertiary, 'info', '1 entry out of balance', 'JV-2024-0225 · draft'),
+    (colors.error, 'info', '2 SKUs out of stock', 'Downtown Central Store'),
+    (colors.primary, 'lock', '3 wires await approval', 'External transfers · 41,200 SAR'),
+    (colors.secondary, 'check', 'Period Nov 2024 closed', 'Locked Dec 01'),
+  ];
+}
 
 // ── DashboardScreen ─────────────────────────────────────────
 class DashboardScreen extends StatelessWidget {
@@ -47,21 +50,21 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-        backgroundColor: SuperThemeData.dark.bg,
+        backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
         elevation: 0,
         title: const Text('Dashboard'),
       ),
-      body: _buildDashboardContent(),
+      body: _buildDashboardContent(context),
     );
   }
 
-  Widget _buildDashboardContent() {
+  Widget _buildDashboardContent(BuildContext context) {
     return MScroll([
       Padding(
         padding: EdgeInsets.only(top: 0),
-        child: Text('Fiscal 2024 · as of Dec 19, 2025', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11.5, color: SuperThemeData.dark.fg3)),
+        child: Text('Fiscal 2024 · as of Dec 19, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
       ),
       // KPI grid
       GridView.count(
@@ -69,26 +72,26 @@ class DashboardScreen extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.55,
-        children: const [
+        children: [
           _Kpi(label: 'Total Assets', value: '289,050', delta: '+4.2%', up: true),
           _Kpi(label: 'Cash Position', value: '235,160', delta: '+1.8%', up: true),
-          _Kpi(label: 'Revenue · MTD', value: '89,200', delta: '+12.4%', up: true, accent: SuperTokens.success),
+          _Kpi(label: 'Revenue · MTD', value: '89,200', delta: '+12.4%', up: true, accent: SuperMaterialThemeData.of(context).colorScheme.secondary),
           _Kpi(label: 'Net Income · MTD', value: '34,120', delta: '−2.1%', up: false),
         ],
       ),
       // Cash flow
       MCard(
-        accentColor: SuperTokens.success,
+        accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
         title: 'Cash Flow',
         subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
         trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-          _Legend(color: SuperTokens.accent, label: 'In'), SizedBox(width: 12), _Legend(color: SuperThemeData.dark.fg4, label: 'Out'),
+          _Legend(color: SuperMaterialThemeData.of(context).colorScheme.primary, label: 'In'), SizedBox(width: 12), _Legend(color: SuperMaterialThemeData.of(context).superTheme.fg4, label: 'Out'),
         ]),
         children: [_CashFlowBars()],
       ),
       // Balances
       MCard(
-        accentColor: SuperTokens.accent,
+        accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
         title: 'Cash & Asset Accounts',
         subtitle: 'Top balances',
         children: [
@@ -97,7 +100,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Recent ops
       MCard(
-        accentColor: SuperTokens.success,
+        accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
         title: 'Recent Operations',
         pad: 8,
         children: [
@@ -112,10 +115,10 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Alerts
       MCard(
-        accentColor: SuperTokens.warning,
+        accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
         title: 'Needs Attention',
         children: [
-          for (final a in _alerts) _AlertRow(tone: a.$1, icon: a.$2, title: a.$3, sub: a.$4),
+          for (final a in _alerts(context)) _AlertRow(tone: a.$1, icon: a.$2, title: a.$3, sub: a.$4),
         ],
       ),
     ]);
@@ -132,20 +135,20 @@ class _Kpi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: SuperThemeData.dark.surface, border: Border.all(color: SuperThemeData.dark.border), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.surface, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(12)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Eyebrow(label, color: SuperThemeData.dark.fg3, size: 9.5),
+          Eyebrow(label, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
           const SizedBox(height: 8),
           Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-            Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.4, color: accent ?? SuperThemeData.dark.fg1)),
+            Text(value, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.4, color: accent ?? SuperMaterialThemeData.of(context).superTheme.fg1)),
             const SizedBox(width: 5),
-            Text('SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10, color: SuperThemeData.dark.fg3)),
+            Text('SAR', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ]),
           const SizedBox(height: 4),
-          Text('${up ? '▲' : '▼'} $delta', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11, color: up ? SuperTokens.success : SuperTokens.danger)),
+          Text('${up ? '▲' : '▼'} $delta', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: up ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
         ],
       ),
     );
@@ -160,7 +163,7 @@ class _Legend extends StatelessWidget {
   Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
         Container(width: 9, height: 9, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(2))),
         const SizedBox(width: 5),
-        Text(label, style: TextStyle(fontSize: 10.5, color: SuperThemeData.dark.fg3, fontWeight: FontWeight.w600, fontFamily: SuperTokens.bodyFont)),
+        Text(label, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontWeight: FontWeight.w600, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
       ]);
 }
 
@@ -186,14 +189,14 @@ class _CashFlowBars extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _bar(d.inV / maxV, SuperTokens.accent),
+                          _bar(d.inV / maxV, SuperMaterialThemeData.of(context).colorScheme.primary),
                           const SizedBox(width: 2),
-                          _bar(d.outV / maxV, SuperThemeData.dark.fg4),
+                          _bar(d.outV / maxV, SuperMaterialThemeData.of(context).superTheme.fg4),
                         ],
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(d.m, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 8.5, color: SuperThemeData.dark.fg3)),
+                    Text(d.m, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 8.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ],
                 ),
               ),
@@ -228,23 +231,23 @@ class _BalanceRow extends StatelessWidget {
             Expanded(
               child: Text.rich(
                 TextSpan(children: [
-                  TextSpan(text: '$code  ', style: TextStyle(fontFamily: SuperTokens.monoFont, color: SuperThemeData.dark.fg3)),
+                  TextSpan(text: '$code  ', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   TextSpan(text: name),
                 ]),
                 maxLines: 1, overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 12.5, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont),
+                style: TextStyle(fontSize: 12.5, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily),
               ),
             ),
             const SizedBox(width: 10),
-            Text(value, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1)),
+            Text(value, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
           ],
         ),
         const SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(999),
           child: Stack(children: [
-            Container(height: 6, color: SuperThemeData.dark.inputBg),
-            FractionallySizedBox(widthFactor: pct / 100, child: Container(height: 6, color: SuperTokens.accent)),
+            Container(height: 6, color: SuperMaterialThemeData.of(context).superTheme.inputBg),
+            FractionallySizedBox(widthFactor: pct / 100, child: Container(height: 6, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           ]),
         ),
       ],
@@ -260,25 +263,25 @@ class _RecentRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(r.$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
+                Text(r.$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
                 const SizedBox(height: 2),
-                Text(r.$2, style: TextStyle(fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
+                Text(r.$2, style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ],
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(r.$3, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w600, color: r.$4 ? SuperTokens.success : SuperTokens.danger)),
+              Text(r.$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: r.$4 ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
               const SizedBox(height: 2),
-              Text(r.$5, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 10.5, color: SuperThemeData.dark.fg3)),
+              Text(r.$5, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
             ],
           ),
         ],
@@ -305,9 +308,9 @@ class _AlertRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+                Text(title, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                 const SizedBox(height: 2),
-                Text(sub, style: TextStyle(fontSize: 11, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont)),
+                Text(sub, style: TextStyle(fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ],
             ),
           ),

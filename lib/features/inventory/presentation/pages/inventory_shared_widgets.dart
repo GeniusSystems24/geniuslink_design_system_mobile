@@ -18,7 +18,7 @@ class DistRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         Expanded(
           child:
@@ -27,18 +27,18 @@ class DistRow extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg1,
-                    fontFamily: SuperTokens.bodyFont)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
             const SizedBox(height: 4),
             Pill(side, tone: side == 'Debit' ? PillTone.info : PillTone.danger),
           ]),
         ),
         Text(amount,
             style: TextStyle(
-                fontFamily: SuperTokens.monoFont,
+                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
-                color: amount.startsWith('+') ? SuperTokens.success : SuperTokens.danger)),
+                color: amount.startsWith('+') ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
       ]),
     );
   }
@@ -55,7 +55,7 @@ class ItemLine extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         Expanded(
           child:
@@ -64,20 +64,20 @@ class ItemLine extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg1,
-                    fontFamily: SuperTokens.bodyFont)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
             const SizedBox(height: 2),
             Text(item.$2,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ]),
         ),
         Text(item.$3,
             style: TextStyle(
-                fontFamily: SuperTokens.monoFont,
+                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: SuperThemeData.dark.fg1)),
+                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
       ]),
     );
   }

@@ -15,7 +15,7 @@ class MMoney extends StatelessWidget {
   final String label;
   final String value;
   final String currency;
-  final Color accent;
+  final Color? accent;
   final bool required;
   final String sign;
   const MMoney(
@@ -23,11 +23,12 @@ class MMoney extends StatelessWidget {
       required this.label,
       required this.value,
       this.currency = 'SAR',
-      this.accent = SuperTokens.accent,
+      this.accent,
       this.required = false,
       this.sign = ''});
   @override
   Widget build(BuildContext context) {
+    final resolvedAccent = accent ?? SuperMaterialThemeData.of(context).colorScheme.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,36 +38,36 @@ class MMoney extends StatelessWidget {
               children: [
                 TextSpan(text: label.toUpperCase()),
                 if (required)
-                  const TextSpan(text: ' *', style: TextStyle(color: SuperTokens.danger)),
+                  TextSpan(text: ' *', style: TextStyle(color: SuperMaterialThemeData.of(context).colorScheme.error)),
               ],
               style: TextStyle(
-                  fontFamily: SuperTokens.bodyFont,
+                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                   fontWeight: FontWeight.w700,
                   fontSize: 10,
                   letterSpacing: 0.5,
-                  color: SuperThemeData.dark.fg2))),
+                  color: SuperMaterialThemeData.of(context).superTheme.fg2))),
         ),
         Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-              color: SuperThemeData.dark.inputBg,
-              border: Border.all(color: accent),
+              color: SuperMaterialThemeData.of(context).superTheme.inputBg,
+              border: Border.all(color: resolvedAccent),
               borderRadius: BorderRadius.circular(10)),
           child: Row(children: [
             Text(currency,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: SuperThemeData.dark.fg3)),
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3)),
             const SizedBox(width: 10),
             Text('$sign$value',
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 26,
                     fontWeight: FontWeight.w700,
-                    color: accent,
+                    color: resolvedAccent,
                     letterSpacing: -0.3)),
           ]),
         ),
@@ -96,29 +97,29 @@ class MMethod extends StatelessWidget {
         Row(children: [
           for (int i = 0; i < methods.length; i++) ...[
             if (i > 0) const SizedBox(width: 8),
-            Expanded(child: _chip(methods[i].$1, methods[i].$2)),
+            Expanded(child: _chip(context, methods[i].$1, methods[i].$2)),
           ],
         ]),
       ],
     );
   }
 
-  Widget _chip(String id, String label) {
+  Widget _chip(BuildContext context, String id, String label) {
     final on = id == value;
     return Container(
       height: 48,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: on ? superCoreTint(SuperTokens.accent, 0x1F) : SuperThemeData.dark.inputBg,
-        border: Border.all(color: on ? SuperTokens.accent : SuperThemeData.dark.border),
+        color: on ? superCoreTint(SuperMaterialThemeData.of(context).colorScheme.primary, 0x1F) : SuperMaterialThemeData.of(context).superTheme.inputBg,
+        border: Border.all(color: on ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.border),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(label,
           style: TextStyle(
               fontSize: 12.5,
               fontWeight: FontWeight.w700,
-              fontFamily: SuperTokens.bodyFont,
-              color: on ? SuperTokens.accent : SuperThemeData.dark.fg2)),
+              fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
+              color: on ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.fg2)),
     );
   }
 }
@@ -137,14 +138,14 @@ class JournalPreview extends StatelessWidget {
           decoration: BoxDecoration(
               border: i == rows.length - 1
                   ? null
-                  : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+                  : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
           child: Row(children: [
             if (numbered) ...[
               SizedBox(
                   width: 20,
                   child: Text((i + 1).toString().padLeft(2, '0'),
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg4))),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg4))),
               const SizedBox(width: 12),
             ],
             Expanded(
@@ -155,8 +156,8 @@ class JournalPreview extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: SuperThemeData.dark.fg1,
-                          fontFamily: SuperTokens.bodyFont)),
+                          color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   const SizedBox(height: 4),
                   Pill(rows[i].$2 != null ? 'Debit' : 'Credit',
                       tone:
@@ -166,10 +167,10 @@ class JournalPreview extends StatelessWidget {
             ),
             Text(rows[i].$2 ?? rows[i].$3 ?? '',
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 13.5,
                     fontWeight: FontWeight.w600,
-                    color: rows[i].$2 != null ? SuperTokens.success : SuperTokens.danger)),
+                    color: rows[i].$2 != null ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
           ]),
         ),
     ]);
@@ -197,18 +198,18 @@ class FromToFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      _card(SuperTokens.warning, from),
+      _card(context, SuperMaterialThemeData.of(context).colorScheme.tertiary, from),
       Transform.translate(
         offset: const Offset(0, -6),
         child: Container(
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-              color: SuperTokens.accent,
+              color: SuperMaterialThemeData.of(context).colorScheme.primary,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                    color: superCoreTint(SuperTokens.accent, 0x99),
+                    color: superCoreTint(SuperMaterialThemeData.of(context).colorScheme.primary, 0x99),
                     blurRadius: 18,
                     offset: const Offset(0, 6))
               ]),
@@ -217,11 +218,11 @@ class FromToFlow extends StatelessWidget {
         ),
       ),
       Transform.translate(
-          offset: const Offset(0, -6), child: _card(SuperTokens.success, to)),
+          offset: const Offset(0, -6), child: _card(context, SuperMaterialThemeData.of(context).colorScheme.secondary, to)),
     ]);
   }
 
-  Widget _card(Color tone, FlowCardData d) => Container(
+  Widget _card(BuildContext context, Color tone, FlowCardData d) => Container(
         width: double.infinity,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
@@ -247,29 +248,29 @@ class FromToFlow extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w600,
-                          color: SuperThemeData.dark.fg1,
-                          fontFamily: SuperTokens.bodyFont)),
+                          color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   if (d.sub != null)
                     Padding(
                         padding: const EdgeInsets.only(top: 3),
                         child: Text(d.sub!,
                             style: TextStyle(
-                                fontFamily: SuperTokens.monoFont,
+                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                                 fontSize: 11,
-                                color: SuperThemeData.dark.fg3))),
+                                color: SuperMaterialThemeData.of(context).superTheme.fg3))),
                   if (d.meta != null)
                     Container(
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.only(top: 10),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          border: Border(top: BorderSide(color: SuperThemeData.dark.border))),
+                          border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
                       child: Text(d.meta!,
                           style: TextStyle(
-                              fontFamily: SuperTokens.monoFont,
+                              fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: d.metaColor ?? SuperThemeData.dark.fg2)),
+                              color: d.metaColor ?? SuperMaterialThemeData.of(context).superTheme.fg2)),
                     ),
                 ],
               ),
@@ -288,33 +289,33 @@ class FxTiles extends StatelessWidget {
     return Row(children: [
       for (int i = 0; i < tiles.length; i++) ...[
         if (i > 0) const SizedBox(width: 8),
-        Expanded(child: _tile(tiles[i])),
+        Expanded(child: _tile(context, tiles[i])),
       ],
     ]);
   }
 
-  Widget _tile((String, String, String, Color?) t) => Container(
+  Widget _tile(BuildContext context, (String, String, String, Color?) t) => Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-            color: SuperThemeData.dark.bg,
-            border: Border.all(color: SuperThemeData.dark.border),
+            color: SuperMaterialThemeData.of(context).superTheme.bg,
+            border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Eyebrow(t.$1, color: SuperThemeData.dark.fg3, size: 8.5),
+            Eyebrow(t.$1, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 8.5),
             const SizedBox(height: 6),
             Text(t.$2,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
-                    color: t.$4 ?? SuperThemeData.dark.fg1,
+                    color: t.$4 ?? SuperMaterialThemeData.of(context).superTheme.fg1,
                     letterSpacing: -0.3)),
             const SizedBox(height: 3),
             Text(t.$3,
                 style: TextStyle(
-                    fontFamily: SuperTokens.monoFont, fontSize: 9.5, color: SuperThemeData.dark.fg3)),
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 9.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ],
         ),
       );
@@ -339,13 +340,13 @@ class AuditGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Eyebrow(r.$1, color: SuperThemeData.dark.fg3, size: 9.5),
+              Eyebrow(r.$1, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
               const SizedBox(height: 5),
               Text(r.$2,
                   style: TextStyle(
                       fontSize: 12.5,
-                      color: SuperThemeData.dark.fg1,
-                      fontFamily: r.$3 ? SuperTokens.monoFont : SuperTokens.bodyFont)),
+                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                      fontFamily: r.$3 ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
             ],
           ),
       ],
@@ -363,16 +364,17 @@ class BKV extends StatelessWidget {
 }
 
 class BankNote extends StatelessWidget {
-  final Color tone;
+  final Color? tone;
   final String text;
-  const BankNote(this.text, {super.key, this.tone = SuperTokens.warning});
+  const BankNote(this.text, {super.key, this.tone});
   @override
   Widget build(BuildContext context) {
+    final resolvedTone = tone ?? SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: superCoreTint(tone, 0x14),
-          border: Border.all(color: superCoreTint(tone, 0x40)),
+          color: superCoreTint(resolvedTone, 0x14),
+          border: Border.all(color: superCoreTint(resolvedTone, 0x40)),
           borderRadius: BorderRadius.circular(8)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -381,15 +383,15 @@ class BankNote extends StatelessWidget {
               width: 7,
               height: 7,
               margin: const EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(color: tone, shape: BoxShape.circle)),
+              decoration: BoxDecoration(color: resolvedTone, shape: BoxShape.circle)),
           const SizedBox(width: 10),
           Expanded(
               child: Text(text,
                   style: TextStyle(
                       fontSize: 11.5,
-                      color: SuperThemeData.dark.fg2,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg2,
                       height: 1.5,
-                      fontFamily: SuperTokens.bodyFont))),
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
         ],
       ),
     );

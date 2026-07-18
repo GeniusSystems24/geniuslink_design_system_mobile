@@ -31,11 +31,11 @@ class _Brand extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-                color: SuperTokens.accent, borderRadius: BorderRadius.circular(7)),
+                color: SuperMaterialThemeData.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(7)),
             alignment: Alignment.center,
-            child: const Text('G',
+            child: Text('G',
                 style: TextStyle(
-                    fontFamily: SuperTokens.displayFont,
+                    fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                     fontWeight: FontWeight.w800,
                     fontSize: 17,
                     color: Colors.white)),
@@ -43,22 +43,22 @@ class _Brand extends StatelessWidget {
           const SizedBox(width: 10),
           Text('GeniusLink',
               style: TextStyle(
-                  fontFamily: SuperTokens.displayFont,
+                  fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                   fontWeight: FontWeight.w800,
                   fontSize: 20,
-                  color: SuperThemeData.dark.fg1,
+                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
                   letterSpacing: -0.2)),
         ],
       );
 }
 
-Widget _authEyebrow(String text) => Text(text.toUpperCase(),
-    style: const TextStyle(
-        fontFamily: SuperTokens.bodyFont,
+Widget _authEyebrow(BuildContext context, String text) => Text(text.toUpperCase(),
+    style: TextStyle(
+        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
         fontWeight: FontWeight.w700,
         fontSize: 11,
         letterSpacing: 1.6,
-        color: SuperTokens.accent));
+        color: SuperMaterialThemeData.of(context).colorScheme.primary));
 
 class LoginScreen extends StatelessWidget {
   final NavCubit nav;
@@ -67,9 +67,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
       appBar: AppBar(
-        backgroundColor: SuperThemeData.dark.bg,
+        backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: const Text('Sign In'),
@@ -82,16 +82,16 @@ class LoginScreen extends StatelessWidget {
             children: [
               const _Brand(),
               const SizedBox(height: 40),
-              _authEyebrow('Sign In'),
+              _authEyebrow(context, 'Sign In'),
               const SizedBox(height: 14),
               Text('Access your workspace',
                   style: TextStyle(
-                      fontFamily: SuperTokens.displayFont,
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
                       height: 1.25,
                       letterSpacing: -0.7,
-                      color: SuperThemeData.dark.fg1)),
+                      color: SuperMaterialThemeData.of(context).superTheme.fg1)),
               const SizedBox(height: 28),
               const TInput(
                   label: 'Email',
@@ -104,10 +104,10 @@ class LoginScreen extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () => nav.showAuth(AuthScreen.forgot),
-                  child: const Text('Forgot password?',
+                  child: Text('Forgot password?',
                       style: TextStyle(
                           fontSize: 12.5,
-                          color: SuperTokens.accent,
+                          color: SuperMaterialThemeData.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w600)),
                 ),
               ),
@@ -123,13 +123,13 @@ class LoginScreen extends StatelessWidget {
                   TextSpan(
                       text: 'New organization?  ',
                       style: TextStyle(
-                          fontFamily: SuperTokens.bodyFont, fontSize: 12.5, color: SuperThemeData.dark.fg3)),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   TextSpan(
                     text: 'Create a workspace',
-                    style: const TextStyle(
-                        fontFamily: SuperTokens.bodyFont,
+                    style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                         fontSize: 12.5,
-                        color: SuperTokens.accent,
+                        color: SuperMaterialThemeData.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w600),
                     recognizer: _tap(() => nav.showAuth(AuthScreen.signup)),
                   ),
@@ -139,22 +139,22 @@ class LoginScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                    color: SuperThemeData.dark.inputBg,
-                    border: Border.all(color: SuperThemeData.dark.border),
+                    color: SuperMaterialThemeData.of(context).superTheme.inputBg,
+                    border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
                     borderRadius: BorderRadius.circular(8)),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.lock_outline_rounded,
-                        size: 14, color: SuperTokens.accent),
-                    SizedBox(width: 9),
+                        size: 14, color: SuperMaterialThemeData.of(context).colorScheme.primary),
+                    const SizedBox(width: 9),
                     Expanded(
                         child: Text(
                             'Sessions are recorded in the audit log with timestamp and device.',
                             style: TextStyle(
-                                fontFamily: SuperTokens.bodyFont,
+                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                                 fontSize: 11.5,
-                                color: SuperThemeData.dark.fg3,
+                                color: SuperMaterialThemeData.of(context).superTheme.fg3,
                                 height: 1.5))),
                   ],
                 ),
@@ -174,8 +174,8 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Create Account')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Account')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -184,20 +184,20 @@ class SignUpScreen extends StatelessWidget {
             children: [
               const _Brand(),
               const SizedBox(height: 32),
-              _authEyebrow('Create Account'),
+              _authEyebrow(context, 'Create Account'),
               const SizedBox(height: 12),
               Text('Provision a workspace',
                   style: TextStyle(
-                      fontFamily: SuperTokens.displayFont,
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                       fontWeight: FontWeight.w700,
                       fontSize: 26,
                       height: 1.25,
                       letterSpacing: -0.65,
-                      color: SuperThemeData.dark.fg1)),
+                      color: SuperMaterialThemeData.of(context).superTheme.fg1)),
               const SizedBox(height: 8),
               Text("You'll be the workspace administrator.",
                   style: TextStyle(
-                      fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
               const SizedBox(height: 24),
               const TInput(
                   label: 'Full Name',
@@ -232,13 +232,13 @@ class SignUpScreen extends StatelessWidget {
                   TextSpan(
                       text: 'Already have an account?  ',
                       style: TextStyle(
-                          fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   TextSpan(
                     text: 'Sign in',
-                    style: const TextStyle(
-                        fontFamily: SuperTokens.bodyFont,
+                    style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                         fontSize: 13,
-                        color: SuperTokens.accent,
+                        color: SuperMaterialThemeData.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w600),
                     recognizer: _tap(() => nav.showAuth(AuthScreen.login)),
                   ),
@@ -273,8 +273,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
   Widget build(BuildContext context) {
     final nav = widget.nav;
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Forgot Password')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Forgot Password')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -284,20 +284,20 @@ class _ForgotScreenState extends State<ForgotScreen> {
               const _Brand(),
               const SizedBox(height: 40),
               if (!_sent) ...[
-                _authEyebrow('Password Reset'),
+                _authEyebrow(context, 'Password Reset'),
                 const SizedBox(height: 12),
                 Text('Forgot password?',
                     style: TextStyle(
-                        fontFamily: SuperTokens.displayFont,
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                         fontWeight: FontWeight.w700,
                         fontSize: 26,
                         height: 1.25,
                         letterSpacing: -0.65,
-                        color: SuperThemeData.dark.fg1)),
+                        color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                 const SizedBox(height: 8),
                 Text('Enter the email tied to your account.',
                     style: TextStyle(
-                        fontFamily: SuperTokens.bodyFont, fontSize: 13, color: SuperThemeData.dark.fg3)),
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                 const SizedBox(height: 16),
                 SuperTextFormField(
                   controller: _email,
@@ -313,10 +313,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 Center(
                     child: GestureDetector(
                         onTap: () => nav.showAuth(AuthScreen.login),
-                        child: const Text('Back to sign in',
+                        child: Text('Back to sign in',
                             style: TextStyle(
                                 fontSize: 13,
-                                color: SuperTokens.accent,
+                                color: SuperMaterialThemeData.of(context).colorScheme.primary,
                                 fontWeight: FontWeight.w600)))),
               ] else ...[
                 Center(
@@ -326,36 +326,36 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         width: 56,
                         height: 56,
                         decoration: BoxDecoration(
-                            color: superCoreTint(SuperTokens.success, 0x1F),
+                            color: superCoreTint(SuperMaterialThemeData.of(context).colorScheme.secondary, 0x1F),
                             shape: BoxShape.circle,
-                            border: Border.all(color: superCoreTint(SuperTokens.success, 0x66))),
-                        child: const Icon(Icons.check_rounded,
-                            size: 24, color: SuperTokens.success),
+                            border: Border.all(color: superCoreTint(SuperMaterialThemeData.of(context).colorScheme.secondary, 0x66))),
+                        child: Icon(Icons.check_rounded,
+                            size: 24, color: SuperMaterialThemeData.of(context).colorScheme.secondary),
                       ),
                       const SizedBox(height: 20),
                       Text('Check your inbox',
                           style: TextStyle(
-                              fontFamily: SuperTokens.displayFont,
+                              fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily,
                               fontWeight: FontWeight.w700,
                               fontSize: 22,
-                              color: SuperThemeData.dark.fg1)),
+                              color: SuperMaterialThemeData.of(context).superTheme.fg1)),
                       const SizedBox(height: 12),
                       Text.rich(
                         TextSpan(children: [
                           const TextSpan(text: 'A reset link was sent to\n'),
                           TextSpan(
-                              text: _email.text.text.isEmpty
+                              text: _email.value.isEmpty
                                   ? 'you@company.com'
-                                  : _email.text.text,
+                                  : _email.value,
                               style: TextStyle(
-                                  color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.monoFont)),
+                                  color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                           const TextSpan(text: '. It expires in 30 minutes.'),
                         ]),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontFamily: SuperTokens.bodyFont,
+                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                             fontSize: 13,
-                            color: SuperThemeData.dark.fg3,
+                            color: SuperMaterialThemeData.of(context).superTheme.fg3,
                             height: 1.6),
                       ),
                       const SizedBox(height: 28),
@@ -366,10 +366,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       const SizedBox(height: 10),
                       GestureDetector(
                           onTap: () => nav.showAuth(AuthScreen.login),
-                          child: const Text('Back to sign in',
+                          child: Text('Back to sign in',
                               style: TextStyle(
                                   fontSize: 13,
-                                  color: SuperTokens.accent,
+                                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
                                   fontWeight: FontWeight.w600))),
                     ],
                   ),

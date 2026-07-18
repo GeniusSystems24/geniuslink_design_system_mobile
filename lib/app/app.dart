@@ -18,6 +18,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_core/super_core.dart'
+    show SuperPalette, SuperMaterialThemeData;
+import 'package:super_tab_bar/super_tab_bar.dart';
 
 import 'theme/app_theme.dart';
 import 'bloc/theme_cubit.dart';
@@ -36,6 +39,12 @@ class GeniusLinkApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const resolver = FakeTenantConnectionResolver();
 
+    var lightTheme = SuperMaterialThemeData.light(
+      palette: SuperPalette.bluePalette,
+    );
+    var darkTheme = SuperMaterialThemeData.dark(
+      palette: SuperPalette.bluePalette,
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
@@ -49,8 +58,8 @@ class GeniusLinkApp extends StatelessWidget {
           create: (_) => TenantCubit(resolver: resolver),
         ),
         BlocProvider<NavCubit>(
-          create: (_) => NavCubit()
-            ..registryHas = (id) => portedScreens.contains(id),
+          create: (_) =>
+              NavCubit()..registryHas = (id) => portedScreens.contains(id),
         ),
       ],
       child: BlocListener<AuthBloc, AuthState>(
@@ -75,7 +84,12 @@ class GeniusLinkApp extends StatelessWidget {
         child: MaterialApp.router(
           title: 'GeniusLink',
           debugShowCheckedModeBanner: false,
-          theme: buildMobileTheme(),
+          theme: lightTheme.copyWith(
+            extensions: [SuperTabBarThemeData.fromMaterialTheme(lightTheme)],
+          ),
+          darkTheme: darkTheme.copyWith(
+            extensions: [SuperTabBarThemeData.fromMaterialTheme(darkTheme)],
+          ),
           routerConfig: router,
         ),
       ),

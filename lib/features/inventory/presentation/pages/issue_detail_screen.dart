@@ -8,11 +8,11 @@ class IssueDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Issue Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Issue Detail')),
       body: MScroll([
       MCard(
-          accentColor: SuperTokens.success,
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Issued Value',
           subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
           trailing: Pill('Posted'),
@@ -23,25 +23,25 @@ class IssueDetailScreen extends StatelessWidget {
                 children: [
                   Text('USD',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont, fontSize: 14, color: SuperThemeData.dark.fg3)),
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   SizedBox(width: 8),
                   Text('5,400.00',
                       style: TextStyle(
-                          fontFamily: SuperTokens.monoFont,
+                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          color: SuperThemeData.dark.fg1,
+                          color: SuperMaterialThemeData.of(context).superTheme.fg1,
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      const MCard(accentColor: SuperTokens.accent, title: 'Issue Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Information', children: [
         KV('Serial No', 'INV-ISS-2024-0089', mono: true),
         KV('Store', 'Downtown Central'),
         KV('Customer', 'Project A-92'),
         KV('Currency', 'USD — US Dollar'),
       ]),
-      const MCard(
-          accentColor: SuperTokens.success,
+      MCard(
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Accounting Distribution',
           pad: 16,
           children: [

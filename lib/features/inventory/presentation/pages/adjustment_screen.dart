@@ -9,12 +9,12 @@ class _AdjLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final delta = item.$4 - item.$3;
     final pos = delta > 0;
-    final tone = delta == 0 ? SuperThemeData.dark.fg2 : (pos ? SuperTokens.success : SuperTokens.danger);
+    final tone = delta == 0 ? SuperMaterialThemeData.of(context).superTheme.fg2 : (pos ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           border:
-              last ? null : Border(bottom: BorderSide(color: SuperThemeData.dark.border))),
+              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
@@ -24,17 +24,17 @@ class _AdjLine extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w600,
-                      color: SuperThemeData.dark.fg1,
-                      fontFamily: SuperTokens.bodyFont)),
+                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               const SizedBox(height: 2),
               Text('${item.$1} · ${item.$5}',
                   style: TextStyle(
-                      fontFamily: SuperTokens.monoFont, fontSize: 11, color: SuperThemeData.dark.fg3)),
+                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
             ]),
           ),
           Text('${pos ? '+' : ''}$delta',
               style: TextStyle(
-                  fontFamily: SuperTokens.monoFont,
+                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: tone)),
@@ -42,17 +42,17 @@ class _AdjLine extends StatelessWidget {
         const SizedBox(height: 8),
         Row(children: [
           Text.rich(TextSpan(children: [
-            TextSpan(text: 'System ', style: TextStyle(color: SuperThemeData.dark.fg3)),
-            TextSpan(text: '${item.$3}', style: TextStyle(color: SuperThemeData.dark.fg2))
-          ], style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11))),
+            TextSpan(text: 'System ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+            TextSpan(text: '${item.$3}', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg2))
+          ], style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11))),
           const SizedBox(width: 16),
           Text.rich(TextSpan(children: [
-            TextSpan(text: 'Counted ', style: TextStyle(color: SuperThemeData.dark.fg3)),
+            TextSpan(text: 'Counted ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3)),
             TextSpan(
                 text: '${item.$4}',
                 style:
-                    TextStyle(color: SuperThemeData.dark.fg1, fontWeight: FontWeight.w600))
-          ], style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11))),
+                    TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg1, fontWeight: FontWeight.w600))
+          ], style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11))),
         ]),
       ]),
     );
@@ -75,13 +75,13 @@ class AdjustmentScreen extends StatelessWidget {
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46, 'Spillage · 2 tons'),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Inventory Adjustment')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Inventory Adjustment')),
       body: MScroll([
-      const ISection(
+      ISection(
           icon: 'box',
           title: 'Adjustment Details',
-          marker: SuperTokens.accent,
+          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             IField(
                 label: 'Serial No',
@@ -101,8 +101,8 @@ class AdjustmentScreen extends StatelessWidget {
                 mono: true,
                 icon: 'calendar'),
           ]),
-      const MCard(
-          accentColor: SuperTokens.warning,
+      MCard(
+          accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           title: 'Variance Summary',
           subtitle: 'Net financial impact of this reconciliation',
           children: [
@@ -114,7 +114,7 @@ class AdjustmentScreen extends StatelessWidget {
                       label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
             ]),
           ]),
-      MCard(accentColor: SuperTokens.success, title: 'Adjustment Lines', pad: 8, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Adjustment Lines', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
@@ -123,10 +123,10 @@ class AdjustmentScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      const ISection(
+      ISection(
           icon: 'doc',
           title: 'Documentation & Approval',
-          marker: SuperTokens.warning,
+          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           children: [
             ITextarea(
                 label: 'Adjustment Notes',

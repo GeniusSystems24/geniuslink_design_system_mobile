@@ -67,13 +67,13 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Transfer Inventory')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Transfer Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
           title: 'Transfer Details',
-          marker: SuperTokens.accent,
+          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             const SuperTextFormField(
               label: 'Serial No',
@@ -100,7 +100,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           icon: 'cart',
           title: 'Products',
           sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
-          marker: SuperTokens.accent,
+          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             Scanner(onPick: _addLine),
             ..._lines.asMap().entries.map((e) {
@@ -118,7 +118,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             }),
             const AddProductBtn(),
           ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperTokens.warning, children: [
+      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         const SuperTextFormField(
           label: 'Notes',
           placeholder: 'Enter transfer notes or internal instructions…',

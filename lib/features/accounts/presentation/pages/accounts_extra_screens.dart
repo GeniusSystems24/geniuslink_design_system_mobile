@@ -71,50 +71,50 @@ class AccountDetailFullScreen extends StatelessWidget {
       ('JV-2024-0071', 'Dec 18, 16:33', 'Petty cash reimbursement', '+650.00', true, '5,100.00'),
     ];
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Account Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Account Detail')),
       body: MScroll([
-      MCard(accentColor: SuperTokens.success, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-          Text('SAR', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 14, color: SuperThemeData.dark.fg3)),
+          Text('SAR', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           SizedBox(width: 8),
-          Text('42,500.00', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 32, fontWeight: FontWeight.w700, color: SuperTokens.success, letterSpacing: -0.6)),
+          Text('42,500.00', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 32, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.secondary, letterSpacing: -0.6)),
         ]),
         GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: const [
           Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
           Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
         ]),
       ]),
-      const MCard(accentColor: SuperTokens.accent, title: 'Account Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Account Information', children: [
         KV('Code', '1001', mono: true), KV('Type', 'Asset · Cash Equivalents'),
         KV('Name English', 'Cash Box'), KV('Name Arabic', 'الصندوق', ar: true),
         KV('Account Tree', 'Assets Tree (1)'), KV('Currency', 'SAR — Saudi Riyal'),
         KV('Parent Group', 'Current Assets (1000)'), KV('Tenant ID', '9', mono: true),
       ]),
-      MCard(accentColor: SuperTokens.success, title: 'Recent Transactions', subtitle: 'Latest entries · running balance', pad: 8, children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Recent Transactions', subtitle: 'Latest entries · running balance', pad: 8, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(children: [
             for (int i = 0; i < tx.length; i++)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(border: i < tx.length - 1 ? Border(bottom: BorderSide(color: SuperThemeData.dark.border)) : null),
+                decoration: BoxDecoration(border: i < tx.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
                 child: Column(children: [
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Text(tx[i].$1, style: const TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 12, color: SuperTokens.accent)),
-                    Text(tx[i].$4, style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 13, fontWeight: FontWeight.w600, color: tx[i].$5 ? SuperTokens.success : SuperTokens.danger)),
+                    Text(tx[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+                    Text(tx[i].$4, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: tx[i].$5 ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
                   ]),
                   const SizedBox(height: 4),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Expanded(child: Text('${tx[i].$3} · ${tx[i].$2}', style: TextStyle(fontSize: 12, color: SuperThemeData.dark.fg3, fontFamily: SuperTokens.bodyFont))),
-                    Text('Bal ${tx[i].$6}', style: TextStyle(fontFamily: SuperTokens.monoFont, fontSize: 11.5, color: SuperThemeData.dark.fg2)),
+                    Expanded(child: Text('${tx[i].$3} · ${tx[i].$2}', style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
+                    Text('Bal ${tx[i].$6}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
                   ]),
                 ]),
               ),
           ]),
         ),
       ]),
-      const MCard(accentColor: SuperTokens.warning, title: 'Audit Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: [
         _AuditGrid(rows: [('Created By', 'Admin User (ID: 5)'), ('Created At', 'Apr 12, 2024 09:21'), ('Modified By', 'Layla A. (ID: 12)'), ('Modified At', 'Nov 02, 2025 15:48')]),
       ]),
       Row(children: [
@@ -138,9 +138,9 @@ class _AuditGrid extends StatelessWidget {
       children: [
         for (final r in rows)
           Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-            Eyebrow(r.$1, color: SuperThemeData.dark.fg3, size: 9.5),
+            Eyebrow(r.$1, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
             const SizedBox(height: 5),
-            Text(r.$2, style: TextStyle(fontSize: 12.5, color: SuperThemeData.dark.fg1, fontFamily: SuperTokens.bodyFont)),
+            Text(r.$2, style: TextStyle(fontSize: 12.5, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
           ]),
       ],
     );
@@ -158,13 +158,16 @@ class _AuditGrid extends StatelessWidget {
 // ════════════════════════════════════════════════════════════
 
 /// Account-type colour key (matches the rest of the mobile app).
-Map<String, Color> _typeDot = {
-  'Asset': SuperTokens.accent,
-  'Liability': SuperTokens.warning,
-  'Equity': SuperTokens.success,
-  'Income': SuperTokens.success,
-  'Expense': SuperTokens.danger,
-};
+Map<String, Color> _typeDot(BuildContext context) {
+  final colors = SuperMaterialThemeData.of(context).colorScheme;
+  return {
+    'Asset': colors.primary,
+    'Liability': colors.tertiary,
+    'Equity': colors.secondary,
+    'Income': colors.secondary,
+    'Expense': colors.error,
+  };
+}
 
 /// Strongly-typed payload carried by every account node.
 class Account {
@@ -243,8 +246,8 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperThemeData.dark.bg,
-      appBar: AppBar(backgroundColor: SuperThemeData.dark.bg, elevation: 0, title: const Text('Account Tree')),
+      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Account Tree')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SuperTree<Account>(
@@ -262,7 +265,7 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   }
 
   static Widget _leading(BuildContext context, TreeNode<Account> node, TreeRowInfo info) {
-    final color = _typeDot[node.value?.type];
+    final color = _typeDot(context)[node.value?.type];
     if (color == null) return const SizedBox.shrink();
     return Container(width: 7, height: 7, decoration: BoxDecoration(color: color, shape: BoxShape.circle));
   }
@@ -271,10 +274,10 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
     return Text(
       _fmtAmount(_accTotal(node)),
       style: TextStyle(
-        fontFamily: SuperTokens.monoFont,
+        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
         fontSize: 12,
         fontWeight: info.depth == 0 ? FontWeight.w700 : FontWeight.w500,
-        color: SuperThemeData.dark.fg1,
+        color: SuperMaterialThemeData.of(context).superTheme.fg1,
       ),
     );
   }

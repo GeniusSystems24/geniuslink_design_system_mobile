@@ -15,16 +15,16 @@ class Pill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = switch (tone) {
-      PillTone.success => SuperTokens.success,
-      PillTone.info    => SuperTokens.accent,
-      PillTone.warning => SuperTokens.warning,
-      PillTone.danger  => SuperTokens.danger,
-      PillTone.neutral => SuperThemeData.dark.fg3,
+      PillTone.success => SuperMaterialThemeData.of(context).colorScheme.secondary,
+      PillTone.info    => SuperMaterialThemeData.of(context).colorScheme.primary,
+      PillTone.warning => SuperMaterialThemeData.of(context).colorScheme.tertiary,
+      PillTone.danger  => SuperMaterialThemeData.of(context).colorScheme.error,
+      PillTone.neutral => SuperMaterialThemeData.of(context).superTheme.fg3,
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
       decoration: BoxDecoration(color: superCoreTint(c, 0x26), borderRadius: BorderRadius.circular(10)),
-      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: SuperTokens.bodyFont, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: c)),
+      child: Text(label.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.6, color: c)),
     );
   }
 }

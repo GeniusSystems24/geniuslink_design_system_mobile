@@ -54,8 +54,8 @@ class MdWorkspace {
   const MdWorkspace(this.id, this.name, this.tag, this.factor);
 }
 
-Color mdMarker(String m) => m == 'green' ? SuperTokens.success : (m == 'orange' ? SuperTokens.warning : SuperTokens.accent);
-Color mdTone(String t) => switch (t) { 'success' => SuperTokens.success, 'info' => SuperTokens.accent, 'warning' => SuperTokens.warning, 'danger' => SuperTokens.danger, _ => SuperThemeData.dark.fg3 };
+Color mdMarker(BuildContext context, String m) => m == 'green' ? SuperMaterialThemeData.of(context).colorScheme.secondary : (m == 'orange' ? SuperMaterialThemeData.of(context).colorScheme.tertiary : SuperMaterialThemeData.of(context).colorScheme.primary);
+Color mdTone(BuildContext context, String t) => switch (t) { 'success' => SuperMaterialThemeData.of(context).colorScheme.secondary, 'info' => SuperMaterialThemeData.of(context).colorScheme.primary, 'warning' => SuperMaterialThemeData.of(context).colorScheme.tertiary, 'danger' => SuperMaterialThemeData.of(context).colorScheme.error, _ => SuperMaterialThemeData.of(context).superTheme.fg3 };
 
 MdTrend _u(double p) => MdTrend(true, p);
 MdTrend _d(double p) => MdTrend(false, p);
