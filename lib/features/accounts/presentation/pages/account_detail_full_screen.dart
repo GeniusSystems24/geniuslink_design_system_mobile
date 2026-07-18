@@ -1,0 +1,68 @@
+part of 'accounts_extra_screens.dart';
+
+class AccountDetailFullScreen extends StatelessWidget {
+  const AccountDetailFullScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    const tx = [
+      ('JV-2024-0042', 'Dec 15, 14:22', 'Opening balance', '+5,000.00', true, '5,000.00'),
+      ('JV-2024-0058', 'Dec 16, 09:14', 'Cash sale — Customer 102', '+1,250.00', true, '6,250.00'),
+      ('TR-9042', 'Dec 17, 11:48', 'Transfer to NCB Bank', '-1,800.00', false, '4,450.00'),
+      ('JV-2024-0071', 'Dec 18, 16:33', 'Petty cash reimbursement', '+650.00', true, '5,100.00'),
+    ];
+    return Scaffold(
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Account Detail'),
+      body: MScroll([
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
+          Text('SAR', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+          const SizedBox(width: 8),
+          Text('42,500.00', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 32, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.secondary, letterSpacing: -0.6)),
+        ]),
+        GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.4, children: const [
+          Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
+          Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
+        ]),
+      ]),
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Account Information', children: const [
+        KV('Code', '1001', mono: true), KV('Type', 'Asset · Cash Equivalents'),
+        KV('Name English', 'Cash Box'), KV('Name Arabic', 'الصندوق', ar: true),
+        KV('Account Tree', 'Assets Tree (1)'), KV('Currency', 'SAR — Saudi Riyal'),
+        KV('Parent Group', 'Current Assets (1000)'), KV('Tenant ID', '9', mono: true),
+      ]),
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Recent Transactions', subtitle: 'Latest entries · running balance', pad: 8, children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(children: [
+            for (int i = 0; i < tx.length; i++)
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(border: i < tx.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+                child: Column(children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Text(tx[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+                    Text(tx[i].$4, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: tx[i].$5 ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
+                  ]),
+                  const SizedBox(height: 4),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Expanded(child: Text('${tx[i].$3} · ${tx[i].$2}', style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
+                    Text('Bal ${tx[i].$6}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                  ]),
+                ]),
+              ),
+          ]),
+        ),
+      ]),
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: [
+        const AccountAuditGrid(rows: [('Created By', 'Admin User (ID: 5)'), ('Created At', 'Apr 12, 2024 09:21'), ('Modified By', 'Layla A. (ID: 12)'), ('Modified At', 'Nov 02, 2025 15:48')]),
+      ]),
+      Row(children: [
+        const Expanded(child: MBtn('Export', variant: MBtnVariant.secondary, icon: 'download', full: true)),
+        const SizedBox(width: 10),
+        Expanded(child: MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('accounts'))),
+      ]),
+    ]),
+    );
+  }
+}

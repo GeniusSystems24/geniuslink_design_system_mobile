@@ -65,20 +65,30 @@ FAB and bottom nav. Reachable from **More → Workspace → Mobile Dashboard**
 (screen id `mobileDashboard`).
 
 ## Notes
-- The app uses the focused GeniusLink packages directly:
-  - **`super_core`** for the complete Material theme and shared tokens.
-  - **`super_form_field`** for standard text, numeric, date, select, attachment,
-    boolean and choice fields.
-  - **`super_auto_suggestion_box`** for the `MSuggest` adapter, account-tree and
-    master-data typeaheads, manual SKU/product entry, and the grouped **More**
-    spotlight search.
-  - **`super_table_field`**, **`super_tree_field`** and **`super_tab_bar`** for
-    their respective focused interfaces.
-- `pubspec.lock` is intentionally omitted because this environment cannot run
-  Flutter. Run `flutter pub get` after extraction to resolve the declared
-  package versions and generate a fresh lockfile.
-
+- The app consumes the sibling **`geniuslink_design_system`** package (a `path:`
+  dependency) for its three data components — synced to library **v2.8.1**, with
+  the Tree / ReadableTable / AutoSuggestionsBox theme extensions registered on
+  the dark theme in `main.dart` so all three blend with the MCard chrome:
+  - **`Tree`** — the **Account Tree** screen (`accountTree`) is a typed
+    `Tree<Account>` (search · expand/collapse · indent guides · roll-up balances;
+    builders read `row.node.value`).
+  - **`ReadableTable`** — wrapped as **`MTable`** (`m_widgets.dart`) for the
+    genuinely tabular reports: **Trial Balance**, **Inventory Valuation** and the
+    **Audit Log** now render in the DS grid with click-to-sort headers + TSV copy
+    (keys derived from the cell text), and an opt-in quick-search bar
+    (`showSearch`). Card-style lists stay as cards.
+  - **`AutoSuggestionsBox`** — wrapped as **`MSuggest`** (`m_inputs.dart`, a
+    strict-pick label+box; `mSuggestions([...])` builds plain rows). Used for the
+    **Create Account** Parent-Group + Currency pickers, the **journal-line account
+    picker** (combo · free text · grouped by account class), and the **More** menu
+    is now a spotlight `AutoSuggestionsBox` over every screen (grouped, jump to
+    open). Run `flutter pub get` after pulling so the path dependency resolves.
 - Icons map to Material equivalents (the web kit drew inline SVG paths) — dependency-free.
 - Fonts fall back to the platform UI font until the GL families are dropped into `assets/fonts/`.
 - A separate single-screen project (`flutter_mobile_dashboard/`) ports the standalone
   "Mobile Dashboard" with light/dark + RTL; this project is the full multi-screen app.
+```
+
+## Presentation file structure
+
+Each screen now lives in its own file under `lib/features/**/presentation/pages/`. Reusable feature widgets live under `lib/features/**/presentation/widgets/` and are exported through each feature's `widgets.dart` barrel. Existing `*_screens.dart` imports remain compatible and now act as feature page barrels.

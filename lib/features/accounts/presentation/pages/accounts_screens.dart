@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
+import '../widgets/widgets.dart';
+export '../widgets/widgets.dart';
+part 'accounts_screen.dart';
+
 final _accounts = [
   ('1001', 'Cash Box', 'الصندوق', '42,500.00', false),
   ('1100', 'Bank · NCB Main', 'البنك الأهلي', '186,420.00', false),
@@ -14,97 +18,3 @@ final _accounts = [
   ('2001', 'Accounts Payable', 'الموردون', '-23,140.00', true),
   ('4001', 'Sales Revenue', 'المبيعات', '-89,200.00', true),
 ];
-
-class AccountsScreen extends StatelessWidget {
-  const AccountsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Accounts'),
-      body: MScroll([
-      Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        decoration: BoxDecoration(
-            color: SuperMaterialThemeData.of(context).superTheme.inputBg,
-            border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong),
-            borderRadius: BorderRadius.circular(10)),
-        child: Row(children: [
-          Icon(Icons.search_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3),
-          SizedBox(width: 10),
-          Text('Search accounts…',
-              style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 14, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-        ]),
-      ),
-      MCard(pad: 8, children: [
-        for (int i = 0; i < _accounts.length; i++)
-          _AccountRow(
-              row: _accounts[i],
-              last: i == _accounts.length - 1,
-              onTap: () => context.goTo('accountDetail')),
-      ]),
-    ]),
-    );
-  }
-}
-
-class _AccountRow extends StatelessWidget {
-  final (String, String, String, String, bool) row;
-  final bool last;
-  final VoidCallback onTap;
-  const _AccountRow(
-      {required this.row, required this.last, required this.onTap});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-        decoration: BoxDecoration(
-            border: last
-                ? null
-                : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
-        child: Row(
-          children: [
-            SizedBox(
-                width: 36,
-                child: Text(row.$1,
-                    style: TextStyle(
-                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(row.$2,
-                      style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w600,
-                          color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Text(row.$3,
-                        style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-                  ),
-                ],
-              ),
-            ),
-            Text(row.$4,
-                style: TextStyle(
-                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: row.$5 ? SuperMaterialThemeData.of(context).colorScheme.error : SuperMaterialThemeData.of(context).superTheme.fg1)),
-            const SizedBox(width: 6),
-            Icon(MIcons.of('chevR'), size: 15, color: SuperMaterialThemeData.of(context).superTheme.fg4),
-          ],
-        ),
-      ),
-    );
-  }
-}
