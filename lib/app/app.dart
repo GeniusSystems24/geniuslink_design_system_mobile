@@ -18,8 +18,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
 
-import 'theme/app_theme.dart';
 import 'bloc/theme_cubit.dart';
 import '../core/tenancy/tenant_connection.dart';
 import '../features/auth/presentation/bloc/auth_bloc.dart';
@@ -35,6 +35,8 @@ class GeniusLinkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const resolver = FakeTenantConnectionResolver();
+    var lightTheme = SuperMaterialThemeData.light(palette: SuperPalette.bluePalette);
+    var darkTheme = SuperMaterialThemeData.dark(palette: SuperPalette.bluePalette);
 
     return MultiBlocProvider(
       providers: [
@@ -75,7 +77,8 @@ class GeniusLinkApp extends StatelessWidget {
         child: MaterialApp.router(
           title: 'GeniusLink',
           debugShowCheckedModeBanner: false,
-          theme: buildMobileTheme(),
+          theme: lightTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme)]),
+          darkTheme: darkTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme)]),
           routerConfig: router,
         ),
       ),
