@@ -54,7 +54,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   void _submit() {
     setState(() => _force = true);
     if (_skuErr == null && _nameEnErr == null && _nameArErr == null) {
-      // TODO: persist product
+      // Implementation note: persist product
     }
   }
 

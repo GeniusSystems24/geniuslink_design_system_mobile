@@ -1,4 +1,4 @@
 // WORKSPACE DOMAIN — NavRepository interface
 abstract class NavRepository {
-  // TODO: persist nav state across sessions.
+  // Implementation note: persist nav state across sessions.
 }

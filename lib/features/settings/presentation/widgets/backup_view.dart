@@ -25,7 +25,7 @@ class BackupView extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Daily encrypted snapshot', style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                SizedBox(height: 3),
+                const SizedBox(height: 3),
                 Text('Last · Dec 19 03:00 · 248 MB', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
               ])),
               PlatformToggle(on: auto, onTap: () => form.setField('auto', !auto)),
@@ -83,10 +83,10 @@ class BackupView extends StatelessWidget {
             child: Row(children: [
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Delete workspace', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text('30-day grace period.', style: TextStyle(fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ])),
-              MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
+              const MBtn('Delete', variant: MBtnVariant.danger, icon: 'trash'),
             ]),
           ),
         ]),

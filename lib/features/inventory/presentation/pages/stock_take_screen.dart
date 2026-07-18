@@ -51,7 +51,7 @@ class StockTakeScreen extends StatelessWidget {
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-            Eyebrow('3 of 6 counted', size: 10),
+            const Eyebrow('3 of 6 counted', size: 10),
             Text('50%', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           ]),
           const SizedBox(height: 8),

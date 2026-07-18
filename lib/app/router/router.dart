@@ -11,6 +11,16 @@ import 'package:go_router/go_router.dart';
 import 'package:super_core/super_core.dart' as super_core;
 import '../../features/auth/presentation/pages/auth_screen.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
+import '../../features/accounts/data/data.dart';
+import '../../features/admin/data/data.dart';
+import '../../features/contacts/data/data.dart';
+import '../../features/dashboard/data/data.dart';
+import '../../features/mobile_dashboard/data/data.dart';
+import '../../features/config/data/data.dart';
+import '../../features/inventory/data/data.dart';
+import '../../features/ledger/data/data.dart';
+import '../../features/settings/data/data.dart';
+import '../../features/stores/data/data.dart';
 import '../../features/accounts/presentation/pages/accounts_screens.dart';
 import '../../features/stores/presentation/pages/stores_screens.dart';
 import '../../features/more/presentation/pages/more_screen.dart';
@@ -137,26 +147,26 @@ final GoRouter router = GoRouter(
     // back stack always contains the shell as the previous entry.
 
     // Mobile dashboard
-    _sub('/mobile-dashboard', (ctx, state) => const MobileDashboardScreen()),
+    _sub('/mobile-dashboard', (ctx, state) => MobileDashboardScreen(catalog: mobileDashboardCatalog)),
 
     // Accounts
     _sub('/accounts/create',      (ctx, state) => const CreateAccountScreen()),
     _sub('/accounts/detail',      (ctx, state) => const AccountDetailFullScreen()),
     _sub('/accounts/create-group', (ctx, state) => const CreateGroupScreen()),
     _sub('/accounts/group-detail', (ctx, state) => const GroupDetailScreen()),
-    _sub('/account-tree',          (ctx, state) => const AccountTreeScreen()),
+    _sub('/account-tree',          (ctx, state) => const AccountTreeScreen(roots: MockAccountsDataSource.chart)),
 
     // Stores
     _sub('/stores/create', (ctx, state) => const CreateStoreScreen()),
-    _sub('/stores/detail', (ctx, state) => const StoreDetailScreen()),
+    _sub('/stores/detail', (ctx, state) => StoreDetailScreen(store: MockStoresDataSource.stores.first)),
     _sub('/stores/issue',  (ctx, state) => const IssueInventoryScreen()),
 
     // Ledger
     _sub('/ledger/opening',          (ctx, state) => const OpeningJournalScreen()),
     _sub('/ledger/operation-detail', (ctx, state) => const OpDetailScreen()),
-    _sub('/journal-entries',         (ctx, state) => const JournalListScreen()),
-    _sub('/journal/create',          (ctx, state) => const CreateJournalEntryScreen()),
-    _sub('/journal/detail',          (ctx, state) => const JournalEntryDetailScreen()),
+    _sub('/journal-entries',         (ctx, state) => JournalListScreen(entries: MockLedgerDataSource.entries)),
+    _sub('/journal/create',          (ctx, state) => const CreateJournalEntryScreen(accounts: MockLedgerDataSource.accounts)),
+    _sub('/journal/detail',          (ctx, state) => JournalEntryDetailScreen(entry: MockLedgerDataSource.entries.first)),
 
     // Banking · Cash
     _sub('/banking/deposits/create',    (ctx, state) => const CreateDepositScreen()),
@@ -171,8 +181,8 @@ final GoRouter router = GoRouter(
     _sub('/banking/transfers/external/detail', (ctx, state) => const ExternalTransferDetailScreen()),
 
     // Products
-    _sub('/products',        (ctx, state) => const ProductsListScreen()),
-    _sub('/products/detail', (ctx, state) => const ProductDetailScreen()),
+    _sub('/products',        (ctx, state) => const ProductsListScreen(products: MockInventoryDataSource.products)),
+    _sub('/products/detail', (ctx, state) => ProductDetailScreen(detail: MockInventoryDataSource.productDetail)),
     _sub('/products/create', (ctx, state) => const CreateProductScreen()),
 
     // Inventory
@@ -192,21 +202,21 @@ final GoRouter router = GoRouter(
     _sub('/barcode-print',                (ctx, state) => const BarcodePrintScreen()),
 
     // Currencies / Config
-    _sub('/currencies',        (ctx, state) => const CurrenciesListScreen()),
+    _sub('/currencies',        (ctx, state) => CurrenciesListScreen(currencies: MockConfigDataSource.currencies)),
     _sub('/currencies/create', (ctx, state) => const CreateCurrencyScreen()),
-    _sub('/currencies/detail', (ctx, state) => const CurrencyDetailScreen()),
+    _sub('/currencies/detail', (ctx, state) => CurrencyDetailScreen(currency: MockConfigDataSource.currencies[1])),
     _sub('/exchange-rates',    (ctx, state) => const ExchangeRateSetupScreen()),
     _sub('/fiscal-year',       (ctx, state) => const FiscalYearSetupScreen()),
 
     // Contacts — Customers
-    _sub('/customers',        (ctx, state) => ContactListScreen.customers()),
-    _sub('/customers/detail', (ctx, state) => ContactDetailScreen.customer()),
-    _sub('/customers/create', (ctx, state) => CreateContactScreen.customer()),
+    _sub('/customers',        (ctx, state) => ContactListScreen(kind: MockContactsDataSource.customer, detailKey: 'customerDetail')),
+    _sub('/customers/detail', (ctx, state) => ContactDetailScreen(kind: MockContactsDataSource.customer)),
+    _sub('/customers/create', (ctx, state) => CreateContactScreen(kind: MockContactsDataSource.customer)),
 
     // Contacts — Suppliers
-    _sub('/suppliers',        (ctx, state) => ContactListScreen.suppliers()),
-    _sub('/suppliers/detail', (ctx, state) => ContactDetailScreen.supplier()),
-    _sub('/suppliers/create', (ctx, state) => CreateContactScreen.supplier()),
+    _sub('/suppliers',        (ctx, state) => ContactListScreen(kind: MockContactsDataSource.supplier, detailKey: 'supplierDetail')),
+    _sub('/suppliers/detail', (ctx, state) => ContactDetailScreen(kind: MockContactsDataSource.supplier)),
+    _sub('/suppliers/create', (ctx, state) => CreateContactScreen(kind: MockContactsDataSource.supplier)),
 
     // Reports
     _sub('/reports/trial-balance',       (ctx, state) => const TrialBalanceScreen()),
@@ -216,12 +226,12 @@ final GoRouter router = GoRouter(
     _sub('/reports/audit-log',           (ctx, state) => const AuditLogScreen()),
 
     // Administration
-    _sub('/admin/users',        (ctx, state) => const UsersListScreen()),
+    _sub('/admin/users',        (ctx, state) => const UsersListScreen(users: MockAdminDataSource.users)),
     _sub('/admin/users/detail', (ctx, state) => const UserDetailScreen()),
     _sub('/admin/users/create', (ctx, state) => const CreateUserScreen()),
     _sub('/admin/roles',        (ctx, state) => const RolesPermissionsScreen()),
     _sub('/admin/roles-list',   (ctx, state) => const RolesListScreen()),
-    _sub('/admin/roles/edit',   (ctx, state) => const RoleEditorScreen()),
+    _sub('/admin/roles/edit',   (ctx, state) => const RoleEditorScreen(modules: MockSettingsDataSource.roleModules, initialAccess: MockSettingsDataSource.roleAccess)),
 
     // Settings — Organisation
     _sub('/settings',              (ctx, state) => const SettingsHubScreen()),
@@ -234,10 +244,10 @@ final GoRouter router = GoRouter(
     _sub('/settings/workspaces',   (ctx, state) => const TenantsScreen()),
 
     // Settings — Platform
-    _sub('/settings/integrations',  (ctx, state) => const IntegrationsScreen()),
+    _sub('/settings/integrations',  (ctx, state) => const IntegrationsScreen(integrations: MockSettingsDataSource.integrations)),
     _sub('/settings/webhooks',      (ctx, state) => const WebhooksScreen()),
     _sub('/settings/api-keys',      (ctx, state) => const ApiKeysScreen()),
-    _sub('/settings/notifications', (ctx, state) => const NotificationsScreen()),
+    _sub('/settings/notifications', (ctx, state) => const NotificationsScreen(categories: MockSettingsDataSource.notificationCategories, channels: MockSettingsDataSource.notificationChannels)),
     _sub('/settings/billing',       (ctx, state) => const BillingScreen()),
     _sub('/settings/backup',        (ctx, state) => const BackupScreen()),
 
@@ -251,19 +261,19 @@ final GoRouter router = GoRouter(
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/dashboard',
-            builder: (ctx, state) => const DashboardScreen(),
+            builder: (ctx, state) => const DashboardScreen(snapshot: MockDashboardDataSource.snapshot),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/accounts',
-            builder: (ctx, state) => const AccountsScreen(),
+            builder: (ctx, state) => const AccountsScreen(accounts: MockAccountsDataSource.list),
           ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(
             path: '/stores',
-            builder: (ctx, state) => const StoresScreen(),
+            builder: (ctx, state) => const StoresScreen(stores: MockStoresDataSource.stores),
           ),
         ]),
         StatefulShellBranch(routes: [

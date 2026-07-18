@@ -21,11 +21,11 @@ class MAppBar extends StatelessWidget {
       decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.bg.withAlpha(0xEB), border: Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
         if (onBack != null)
-          GestureDetector(onTap: onBack, behavior: HitTestBehavior.opaque, child: Padding(padding: EdgeInsetsDirectional.only(end: 12), child: Icon(Icons.arrow_back_rounded, size: 22, color: SuperMaterialThemeData.of(context).colorScheme.primary))),
+          GestureDetector(onTap: onBack, behavior: HitTestBehavior.opaque, child: Padding(padding: const EdgeInsetsDirectional.only(end: 12), child: Icon(Icons.arrow_back_rounded, size: 22, color: SuperMaterialThemeData.of(context).colorScheme.primary))),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 19, letterSpacing: -0.4, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
           if (ar != null)
-            Directionality(textDirection: TextDirection.rtl, child: Text(ar!, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary.withOpacity(0.85)))),
+            Directionality(textDirection: TextDirection.rtl, child: Text(ar!, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary.withValues(alpha: 0.85)))),
         ])),
         if (action != null) action!,
       ]),

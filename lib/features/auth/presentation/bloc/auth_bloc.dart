@@ -18,6 +18,7 @@
 import 'package:bloc/bloc.dart';
 
 import '../../../../core/tenancy/tenant_connection.dart';
+import '../../domain/domain.dart';
 import 'auth_state.dart';
 
 // ----------------------------------------------------------------- events

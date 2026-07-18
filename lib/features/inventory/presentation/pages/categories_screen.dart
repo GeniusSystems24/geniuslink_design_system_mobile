@@ -61,7 +61,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
         ],
       ]),
-      ISection(icon: 'briefcase', title: 'New Category', sub: 'Quick inline form', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, defaultOpen: false, children: [
+      ISection(icon: 'briefcase', title: 'New Category', sub: 'Quick inline form', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, defaultOpen: false, children: const [
         IField(label: 'Code', placeholder: 'e.g. CAT-006', mono: true, required: true),
         IField(label: 'Parent', value: '— Top Level —', select: true),
         IField(label: 'Name (English)', placeholder: 'e.g. Adhesives & Sealants', required: true),

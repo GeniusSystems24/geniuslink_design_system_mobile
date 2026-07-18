@@ -11,4 +11,4 @@ Color superCoreTint(Color color, int alphaHex) =>
 
 /// Applies a percentage opacity to a color sourced from `super_core`.
 Color superCoreTintPct(Color color, double pct) =>
-    color.withOpacity(pct.clamp(0.0, 1.0).toDouble());
+    color.withValues(alpha: pct.clamp(0.0, 1.0).toDouble());

@@ -9,7 +9,7 @@ class FiscalYearSetupScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Fiscal Year'),
       body: MScroll([
-      ISection(icon: 'calendar', title: 'Year Definition', subtitle: 'Define the active fiscal year boundaries', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, trailing: Pill('Open'), children: [
+      ISection(icon: 'calendar', title: 'Year Definition', subtitle: 'Define the active fiscal year boundaries', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, trailing: const Pill('Open'), children: const [
         IField(label: 'Fiscal Year', value: '2024', mono: true),
         IField(label: 'Start Date', value: '01/01/2024', mono: true),
         IField(label: 'End Date', value: '12/31/2024', mono: true),

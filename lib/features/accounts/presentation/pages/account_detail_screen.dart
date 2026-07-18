@@ -16,14 +16,14 @@ class AccountDetailScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Account Detail'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', trailing: Pill('Active'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
           Text('SAR', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text('42,500.00', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 32, fontWeight: FontWeight.w700, letterSpacing: -0.6, color: SuperMaterialThemeData.of(context).colorScheme.secondary)),
         ]),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Information', children: const [
         KV('Code', '1001', mono: true), KV('Type', 'Asset · Cash'),
         KV('Tree', 'Assets Tree (1)'), KV('Currency', 'SAR'),
       ]),

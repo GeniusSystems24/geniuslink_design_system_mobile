@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
-
-class _ProductLine {
-  final String sku, name;
-  final SuperNumericFieldController qtyCtl;
-  _ProductLine(this.sku, this.name)
-      : qtyCtl = SuperNumericFieldController(initialValue: 1);
-
-  void dispose() => qtyCtl.dispose();
-}
+import '../../domain/domain.dart';
+import '../controllers/inventory_line_form_controller.dart';
 
 class TransferCreateScreen extends StatefulWidget {
-  const TransferCreateScreen({super.key});
+  final Future<void> Function(List<InventoryLine> lines)? onSubmit;
+
+  const TransferCreateScreen({this.onSubmit, super.key});
   @override
   State<TransferCreateScreen> createState() => _TransferCreateScreenState();
 }
@@ -42,7 +37,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _lines = <_ProductLine>[];
+  final _lines = <InventoryLineFormController>[];
 
   @override
   void dispose() {
@@ -57,11 +52,13 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     final parts = raw.split(' — ');
     final sku = parts.isNotEmpty ? parts[0] : raw;
     final name = parts.length > 1 ? parts[1] : raw;
-    setState(() => _lines.insert(0, _ProductLine(sku, name)));
+    setState(() => _lines.insert(0, InventoryLineFormController(InventoryLine(sku: sku, name: name))));
   }
 
-  void _submit() {
-    // TODO: persist transfer
+  Future<void> _submit() async {
+    await widget.onSubmit?.call(
+      _lines.map((line) => line.value).toList(growable: false),
+    );
   }
 
   @override
@@ -109,7 +106,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
               return ProductRow(
                 name: l.name,
                 sku: l.sku,
-                qtyController: l.qtyCtl,
+                qtyController: l.quantityController,
                 price: '—',
                 total: '—',
                 currency: '',

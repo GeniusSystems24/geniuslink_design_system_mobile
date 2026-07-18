@@ -8,12 +8,12 @@ class LocalTransferDetailScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Local Transfer Detail'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Inter-Account Settlement', trailing: Pill('Posted'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Inter-Account Settlement', trailing: const Pill('Posted'), children: [
         Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
       ]),
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Flow', pad: 16, children: [
         FromToFlow(
-          from: FlowCardData(label: 'From', title: 'Bank · NCB Main', subtitle: '1100', meta: 'Balance after  ·  136,420.00'),
+          from: const FlowCardData(label: 'From', title: 'Bank · NCB Main', subtitle: '1100', meta: 'Balance after  ·  136,420.00'),
           to: FlowCardData(label: 'To', title: 'Bank · Al Rajhi', subtitle: '1101', meta: 'Balance after  ·  56,240.00', metaColor: SuperMaterialThemeData.of(context).colorScheme.secondary),
         ),
       ]),
@@ -26,7 +26,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
           ])),
         ]),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Audit', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Audit', children: const [
         AuditGrid(rows: [('Created By', 'Layla Ahmed', false), ('Created At', 'Dec 18, 14:02', true)]),
       ]),
       MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),

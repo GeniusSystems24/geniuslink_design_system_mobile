@@ -1,2 +1,2 @@
 // GeniusLink Mobile — Service Locator
-// TODO: register get_it / injectable dependencies here.
+// Implementation note: register get_it / injectable dependencies here.

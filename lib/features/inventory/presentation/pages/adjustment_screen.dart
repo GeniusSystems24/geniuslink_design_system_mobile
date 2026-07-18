@@ -82,7 +82,7 @@ class AdjustmentScreen extends StatelessWidget {
           icon: 'box',
           title: 'Adjustment Details',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
-          children: [
+          children: const [
             IField(
                 label: 'Serial No',
                 value: 'INV-ADJ-2024-0058',
@@ -105,7 +105,7 @@ class AdjustmentScreen extends StatelessWidget {
           accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           title: 'Variance Summary',
           subtitle: 'Net financial impact of this reconciliation',
-          children: [
+          children: const [
             Row(children: [
               Expanded(child: Mini(label: 'Lines Adjusted', value: '3')),
               SizedBox(width: 12),
@@ -127,7 +127,7 @@ class AdjustmentScreen extends StatelessWidget {
           icon: 'doc',
           title: 'Documentation & Approval',
           marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-          children: [
+          children: const [
             ITextarea(
                 label: 'Adjustment Notes',
                 placeholder: 'Auditor name, witness, count session reference…'),

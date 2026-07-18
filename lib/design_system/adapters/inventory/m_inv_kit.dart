@@ -15,7 +15,6 @@ import '../../components/layout/m_widgets.dart';
 import '../../components/buttons/m_buttons.dart';
 
 import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
-import 'package:super_core/super_core.dart' hide FieldDensity;
 /// Collapsible section card: colored marker · icon · title · chevron.
 class ISection extends StatefulWidget {
   final String icon;
@@ -448,7 +447,7 @@ class _ScannerState extends State<Scanner> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.qr_code_2_rounded, size: 42, color: SuperMaterialThemeData.of(context).superTheme.fg4),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text('Point your camera at a barcode to scan',
                     style: TextStyle(
                         fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),

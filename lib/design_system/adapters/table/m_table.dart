@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:super_table_field/super_table_field.dart'
     hide FieldDensity, PillTone, SuperThemeData;
 import 'package:super_form_field/super_form_field.dart' hide PillTone;
-import 'package:super_core/super_core.dart' hide PillTone, FieldDensity;
 import '../../components/feedback/m_feedback.dart';
 
 // ============================================================

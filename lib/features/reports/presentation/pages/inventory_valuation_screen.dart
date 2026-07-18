@@ -32,7 +32,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
               onChange: (v) => setState(() => _store = v)),
           Row(children: [
             Eyebrow('Method', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
-            SizedBox(width: 7),
+            const SizedBox(width: 7),
             Text('Weighted Avg',
                 style: TextStyle(
                     fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,

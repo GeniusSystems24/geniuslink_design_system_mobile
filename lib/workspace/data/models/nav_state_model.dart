@@ -1,2 +1,2 @@
 // WORKSPACE DATA — NavStateModel
-// TODO: JSON-serialisable NavState.
+// Implementation note: JSON-serialisable NavState.

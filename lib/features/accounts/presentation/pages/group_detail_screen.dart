@@ -15,7 +15,7 @@ class GroupDetailScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Group Detail'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Information', trailing: Pill('Active'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Information', trailing: const Pill('Active'), children: const [
         KV('ID', '1042', mono: true), KV('Name English', 'Current Assets'),
         KV('Name Arabic', 'الأصول المتداولة', ar: true), KV('Account Tree', 'Assets Tree (1)'),
       ]),
@@ -29,7 +29,7 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Audit', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Audit', children: const [
         KV('Created By', 'Admin User (ID: 5)'), KV('Created At', 'Dec 04, 2025 11:58 PM'),
       ]),
       MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('accounts')),

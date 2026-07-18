@@ -1,11 +1,14 @@
 part of 'contacts_screens.dart';
 
 class ContactListScreen extends StatefulWidget {
-  final _ContactKind kind;
+  final ContactKind kind;
   final String detailKey;
-  const ContactListScreen._(this.kind, this.detailKey, {super.key});
-  factory ContactListScreen.customers() => ContactListScreen._(_customer, 'customerDetail');
-  factory ContactListScreen.suppliers() => ContactListScreen._(_supplier, 'supplierDetail');
+  const ContactListScreen({
+    required this.kind,
+    required this.detailKey,
+    super.key,
+  });
+
   @override
   State<ContactListScreen> createState() => _ContactListScreenState();
 }
@@ -17,12 +20,20 @@ class _ContactListScreenState extends State<ContactListScreen> {
   Widget build(BuildContext context) {
     final d = widget.kind;
     final ql = _q.trim().toLowerCase();
-    final visible = d.rows.where((c) => (_status == 'All' || c.$7 == _status.toLowerCase()) && (ql.isEmpty || c.$2.toLowerCase().contains(ql) || c.$1.toLowerCase().contains(ql) || c.$3.contains(_q))).toList();
+    final visible = d.contacts.where((contact) {
+      final statusMatches = _status == 'All' ||
+          contact.status.name == _status.toLowerCase();
+      final queryMatches = ql.isEmpty ||
+          contact.name.toLowerCase().contains(ql) ||
+          contact.code.toLowerCase().contains(ql) ||
+          contact.arabicName.contains(_q);
+      return statusMatches && queryMatches;
+    }).toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: d.labelPl),
+      appBar: SuperAppBar(title: contactPluralLabel(d.type)),
       body: MScroll([
-      SearchInput(placeholder: 'Search ${d.labelPl.toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
+      SearchInput(placeholder: 'Search ${contactPluralLabel(d.type).toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Active', 'Pending', 'Inactive'], value: _status, onChange: (v) => setState(() => _status = v)),
       MCard(pad: 8, children: [
         for (int i = 0; i < visible.length; i++)
@@ -34,24 +45,24 @@ class _ContactListScreenState extends State<ContactListScreen> {
               decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
               child: Row(children: [
                 Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(visible[i].$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                  Directionality(textDirection: TextDirection.rtl, child: Text(visible[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+                  Text(visible[i].name, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                  Directionality(textDirection: TextDirection.rtl, child: Text(visible[i].arabicName, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
                   const SizedBox(height: 3),
                   Row(children: [
-                    Text(visible[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                    Text(visible[i].code, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                     Text('  ·  ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 10.5)),
-                    Text(visible[i].$4, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                    Text(visible[i].city, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
                   ]),
                 ])),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  Text(visible[i].$5, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: double.parse(visible[i].$5.replaceAll(',', '')) == 0 ? SuperMaterialThemeData.of(context).superTheme.fg4 : d.tone(context))),
+                  Text(formatContactAmount(visible[i].balance), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: visible[i].balance == 0 ? SuperMaterialThemeData.of(context).superTheme.fg4 : contactTone(context, d))),
                   const SizedBox(height: 4),
-                  Pill(visible[i].$7, tone: _kTone(visible[i].$7)),
+                  Pill(visible[i].status.name, tone: contactStatusTone(visible[i].status)),
                 ]),
               ]),
             ),
           ),
-        if (visible.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No ${d.labelPl.toLowerCase()} match.', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 13, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
+        if (visible.isEmpty) Padding(padding: const EdgeInsets.symmetric(vertical: 36), child: Center(child: Text('No ${contactPluralLabel(d.type).toLowerCase()} match.', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 13, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
       ]),
     ]),
     );

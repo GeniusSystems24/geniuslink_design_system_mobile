@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
+import '../../domain/domain.dart';
 import '../../../../core/bloc/form_cubit.dart';
 import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
 import '../../../../workspace/presentation/bloc/tenant_state.dart';

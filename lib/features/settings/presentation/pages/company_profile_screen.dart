@@ -19,13 +19,13 @@ class CompanyProfileScreen extends StatelessWidget {
         const TInput(label: 'Trade Name', defaultValue: 'GeniusLink'),
         const TInput(label: 'Commercial Registration', defaultValue: '1010234567', mono: true),
       ]),
-      ISection(icon: 'pin', title: 'Registered Address', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
+      ISection(icon: 'pin', title: 'Registered Address', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
         TSelect(label: 'Country', value: 'Saudi Arabia', options: ['Saudi Arabia', 'United Arab Emirates', 'Kuwait', 'Qatar']),
         TInput(label: 'City', defaultValue: 'Riyadh'),
         TInput(label: 'Street Address', defaultValue: 'King Fahd Rd, Olaya'),
         TInput(label: 'Postal Code', defaultValue: '12211', mono: true),
       ]),
-      ISection(icon: 'percent', title: 'Tax Registration', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
+      ISection(icon: 'percent', title: 'Tax Registration', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: const [
         TInput(label: 'VAT Number', defaultValue: '300123456700003', mono: true, required: true),
         TInput(label: 'Tax Identification No.', defaultValue: '9100234567', mono: true),
         TSelect(label: 'Tax Authority', value: 'ZATCA (Saudi Arabia)', options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT']),

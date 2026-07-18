@@ -1,13 +1,19 @@
 part of 'users_screens.dart';
 
 class UsersListScreen extends StatelessWidget {
-  const UsersListScreen({super.key});
+  final List<UserSummary> users;
+
+  const UsersListScreen({
+    required this.users,
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ListCubit<_UserRow>>(
-      create: (_) => ListCubit<_UserRow>(
-        source: () => _users(context),
-        predicate: _userPredicate,
+    return BlocProvider<ListCubit<UserSummary>>(
+      create: (_) => ListCubit<UserSummary>(
+        source: () => users,
+        predicate: userPredicate,
         initialFilters: const {'role': 'All'},
       )..load(),
       child: const UsersListView(),

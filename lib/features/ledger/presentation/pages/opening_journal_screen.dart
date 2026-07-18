@@ -12,7 +12,7 @@ class OpeningJournalScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Opening Journal'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Entry Details', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Entry Details', children: const [
         MField(label: 'Serial No', value: 'JV-2024-0042', mono: true),
         MField(label: 'Currency', value: 'SAR — Saudi Riyal'),
         MField(label: 'Fiscal Year', value: '2024', mono: true),

@@ -57,7 +57,7 @@ class _UserSessionBannerState extends State<UserSessionBanner> {
                 const SizedBox(height: 1),
                 Text('Re-authenticate to stay signed in', style: TextStyle(fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
               ])),
-              GestureDetector(onTap: () => setState(() => _dismissed = true), child: Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('Dismiss', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 12, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
+              GestureDetector(onTap: () => setState(() => _dismissed = true), child: Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Text('Dismiss', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 12, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
               MBtn('Renew', icon: 'lock', onTap: () => setState(() => _reauth = true)),
             ])
           : Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

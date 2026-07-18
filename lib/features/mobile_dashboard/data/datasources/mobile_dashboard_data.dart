@@ -6,57 +6,7 @@
 // ============================================================
 
 import 'dart:math' as math;
-import 'package:flutter/material.dart';
-import 'package:super_core/super_core.dart';
-class MdTrend {
-  final bool up;
-  final double pct;
-  const MdTrend(this.up, this.pct);
-}
-
-class MdCard {
-  final String id, label, marker;
-  final Map<String, double> val;
-  final Map<String, MdTrend?> trend;
-  final Map<String, List<double>> series;
-  const MdCard({required this.id, required this.label, required this.marker, required this.val, required this.trend, required this.series});
-}
-
-class MdAction {
-  final String id, label, icon, group;
-  const MdAction(this.id, this.label, this.icon, this.group);
-}
-
-class MdOp {
-  final String ref, type, tone, desc, dir, time;
-  final Map<String, double> amt;
-  const MdOp({required this.ref, required this.type, required this.tone, required this.desc, required this.amt, required this.dir, required this.time});
-  bool get isCredit => dir == 'credit';
-}
-
-class MdAttention {
-  final String id, tone, icon, label, desc;
-  final int count;
-  const MdAttention(this.id, this.tone, this.icon, this.count, this.label, this.desc);
-}
-
-class MdTab {
-  final String id, label;
-  final List<MdCard> cards;
-  final List<MdAction> actions;
-  final List<MdOp> ops;
-  const MdTab({required this.id, required this.label, required this.cards, required this.actions, required this.ops});
-}
-
-class MdWorkspace {
-  final String id, name, tag;
-  final double factor;
-  const MdWorkspace(this.id, this.name, this.tag, this.factor);
-}
-
-Color mdMarker(BuildContext context, String m) => m == 'green' ? SuperMaterialThemeData.of(context).colorScheme.secondary : (m == 'orange' ? SuperMaterialThemeData.of(context).colorScheme.tertiary : SuperMaterialThemeData.of(context).colorScheme.primary);
-Color mdTone(BuildContext context, String t) => switch (t) { 'success' => SuperMaterialThemeData.of(context).colorScheme.secondary, 'info' => SuperMaterialThemeData.of(context).colorScheme.primary, 'warning' => SuperMaterialThemeData.of(context).colorScheme.tertiary, 'danger' => SuperMaterialThemeData.of(context).colorScheme.error, _ => SuperMaterialThemeData.of(context).superTheme.fg3 };
-
+import '../../domain/domain.dart';
 MdTrend _u(double p) => MdTrend(true, p);
 MdTrend _d(double p) => MdTrend(false, p);
 Map<String, double> _v(double s, double u, double a) => {'SAR': s, 'USD': u, 'AED': a};
@@ -85,22 +35,22 @@ Map<String, List<double>> _series(Map<String, MdTrend?> tr, int ti, int ci) {
   };
 }
 
-MdCard _card(int ti, int ci, String id, String label, String marker, Map<String, double> val, Map<String, MdTrend?> trend) =>
-    MdCard(id: id, label: label, marker: marker, val: val, trend: trend, series: _series(trend, ti, ci));
+MdCard _card(int ti, int ci, String id, String label, MdMarker marker, Map<String, double> val, Map<String, MdTrend?> trend) =>
+    MdCard(id: id, label: label, marker: marker, values: val, trends: trend, series: _series(trend, ti, ci));
 
 // ── currencies / workspaces / attention ──
-final mdCurrencies = [('SAR', 'Saudi Riyal'), ('USD', 'US Dollar'), ('AED', 'UAE Dirham')];
+const mdCurrencies = [MdCurrency('SAR', 'Saudi Riyal'), MdCurrency('USD', 'US Dollar'), MdCurrency('AED', 'UAE Dirham')];
 
 final mdWorkspaces = [
-  MdWorkspace('rashid', 'Al-Rashid Trading Co.', 'Tenant 9', 1),
-  MdWorkspace('najd', 'Najd Holdings', 'Tenant 14', 1.46),
-  MdWorkspace('coastal', 'Coastal Logistics', 'Tenant 22', 0.83),
+  const MdWorkspace('rashid', '9', 'Al-Rashid Trading Co.', 'Tenant 9', 1),
+  const MdWorkspace('najd', '14', 'Najd Holdings', 'Tenant 14', 1.46),
+  const MdWorkspace('coastal', '22', 'Coastal Logistics', 'Tenant 22', 0.83),
 ];
 
 final mdAttention = [
-  MdAttention('oob', 'danger', 'alert', 2, 'Out-of-balance entries', "Debits and credits don't match"),
-  MdAttention('approvals', 'warning', 'inbox', 5, 'Pending approvals', 'Vouchers awaiting your sign-off'),
-  MdAttention('sync', 'info', 'alert', 1, 'Sync conflict', 'A draft edited on two devices'),
+  const MdAttention('oob', MdTone.danger, 2, 'Out-of-balance entries', "Debits and credits don't match"),
+  const MdAttention('approvals', MdTone.warning, 5, 'Pending approvals', 'Vouchers awaiting your sign-off'),
+  const MdAttention('sync', MdTone.information, 1, 'Sync conflict', 'A draft edited on two devices'),
 ];
 
 // ── the three tabs (display order Banking → Accounting → Commercial) ──
@@ -109,72 +59,72 @@ final List<MdTab> mdTabs = [
   MdTab(
     id: 'banking', label: 'Banking',
     cards: [
-      _card(1, 0, 'balance', 'Total Balance', 'green', _v(2680900, 715000, 2625000), {'day': _u(0.7), 'week': _u(2.4), 'month': _u(6.1)}),
-      _card(1, 1, 'available', 'Available Cash', 'blue', _v(1942300, 517950, 1901500), {'day': _d(0.3), 'week': _u(1.1), 'month': _u(3.8)}),
-      _card(1, 2, 'inflow', 'Inflow', 'green', _v(512400, 136640, 501800), {'day': _u(4.9), 'week': _u(9.2), 'month': _u(14.0)}),
-      _card(1, 3, 'outflow', 'Outflow', 'orange', _v(318750, 85000, 312100), {'day': null, 'week': _d(2.7), 'month': _u(1.6)}),
+      _card(1, 0, 'balance', 'Total Balance', MdMarker.positive, _v(2680900, 715000, 2625000), {'day': _u(0.7), 'week': _u(2.4), 'month': _u(6.1)}),
+      _card(1, 1, 'available', 'Available Cash', MdMarker.primary, _v(1942300, 517950, 1901500), {'day': _d(0.3), 'week': _u(1.1), 'month': _u(3.8)}),
+      _card(1, 2, 'inflow', 'Inflow', MdMarker.positive, _v(512400, 136640, 501800), {'day': _u(4.9), 'week': _u(9.2), 'month': _u(14.0)}),
+      _card(1, 3, 'outflow', 'Outflow', MdMarker.warning, _v(318750, 85000, 312100), {'day': null, 'week': _d(2.7), 'month': _u(1.6)}),
     ],
     actions: const [
-      MdAction('deposit', 'Deposit', 'plus', 'create'), MdAction('withdraw', 'Withdrawal', 'back', 'create'),
-      MdAction('transfer', 'Transfer', 'send', 'create'), MdAction('statement', 'Statement', 'doc', 'create'),
-      MdAction('beneficiaries', 'Beneficiaries', 'user', 'manage'), MdAction('reconcile', 'Reconcile', 'check', 'manage'),
-      MdAction('cards', 'Cards', 'grid', 'manage'), MdAction('cheques', 'Cheques', 'doc', 'manage'),
-      MdAction('reports', 'Reports', 'poll', 'manage'), MdAction('accounts', 'Bank Accounts', 'lock', 'manage'),
+      MdAction('deposit', 'Deposit', 'create'), MdAction('withdraw', 'Withdrawal', 'create'),
+      MdAction('transfer', 'Transfer', 'create'), MdAction('statement', 'Statement', 'create'),
+      MdAction('beneficiaries', 'Beneficiaries', 'manage'), MdAction('reconcile', 'Reconcile', 'manage'),
+      MdAction('cards', 'Cards', 'manage'), MdAction('cheques', 'Cheques', 'manage'),
+      MdAction('reports', 'Reports', 'manage'), MdAction('accounts', 'Bank Accounts', 'manage'),
     ],
-    ops: const [
-      MdOp(ref: 'DEP-7741', type: 'Deposit', tone: 'success', desc: 'Cash deposit — Main', amt: {'SAR': 120000, 'USD': 32000, 'AED': 117500}, dir: 'credit', time: '1h ago'),
-      MdOp(ref: 'WTH-3320', type: 'Withdrawal', tone: 'danger', desc: 'Payroll release', amt: {'SAR': 215600, 'USD': 57500, 'AED': 211200}, dir: 'debit', time: '4h ago'),
-      MdOp(ref: 'TRF-1185', type: 'Transfer', tone: 'info', desc: 'Riyad Bank → Main', amt: {'SAR': 80000, 'USD': 21330, 'AED': 78300}, dir: 'credit', time: 'Yesterday'),
-      MdOp(ref: 'WTH-3319', type: 'Withdrawal', tone: 'danger', desc: 'Supplier wire', amt: {'SAR': 64250, 'USD': 17130, 'AED': 62900}, dir: 'debit', time: 'Yesterday'),
-      MdOp(ref: 'DEP-7738', type: 'Deposit', tone: 'success', desc: 'Customer settlement', amt: {'SAR': 38900, 'USD': 10370, 'AED': 38080}, dir: 'credit', time: '2 days ago'),
+    operations: const [
+      MdOperation(reference: 'DEP-7741', type: 'Deposit', tone: MdTone.success, description: 'Cash deposit — Main', amounts: {'SAR': 120000, 'USD': 32000, 'AED': 117500}, direction: MdDirection.credit, timeLabel: '1h ago'),
+      MdOperation(reference: 'WTH-3320', type: 'Withdrawal', tone: MdTone.danger, description: 'Payroll release', amounts: {'SAR': 215600, 'USD': 57500, 'AED': 211200}, direction: MdDirection.debit, timeLabel: '4h ago'),
+      MdOperation(reference: 'TRF-1185', type: 'Transfer', tone: MdTone.information, description: 'Riyad Bank → Main', amounts: {'SAR': 80000, 'USD': 21330, 'AED': 78300}, direction: MdDirection.credit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'WTH-3319', type: 'Withdrawal', tone: MdTone.danger, description: 'Supplier wire', amounts: {'SAR': 64250, 'USD': 17130, 'AED': 62900}, direction: MdDirection.debit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'DEP-7738', type: 'Deposit', tone: MdTone.success, description: 'Customer settlement', amounts: {'SAR': 38900, 'USD': 10370, 'AED': 38080}, direction: MdDirection.credit, timeLabel: '2 days ago'),
     ],
   ),
   // Accounting (source index 0)
   MdTab(
     id: 'accounting', label: 'Accounting',
     cards: [
-      _card(0, 0, 'assets', 'Total Assets', 'green', _v(4820400, 1285440, 4719600), {'day': _u(0.4), 'week': _u(3.1), 'month': _u(8.6)}),
-      _card(0, 1, 'cash', 'Cash', 'blue', _v(962150, 256570, 942100), {'day': null, 'week': _d(1.2), 'month': _u(4.0)}),
-      _card(0, 2, 'revenue', 'Revenue MTD', 'blue', _v(1340800, 357550, 1313000), {'day': _u(2.6), 'week': _u(6.4), 'month': _u(11.2)}),
-      _card(0, 3, 'net', 'Net Income', 'green', _v(388200, 103520, 380100), {'day': _d(0.9), 'week': _u(2.2), 'month': _u(5.5)}),
+      _card(0, 0, 'assets', 'Total Assets', MdMarker.positive, _v(4820400, 1285440, 4719600), {'day': _u(0.4), 'week': _u(3.1), 'month': _u(8.6)}),
+      _card(0, 1, 'cash', 'Cash', MdMarker.primary, _v(962150, 256570, 942100), {'day': null, 'week': _d(1.2), 'month': _u(4.0)}),
+      _card(0, 2, 'revenue', 'Revenue MTD', MdMarker.primary, _v(1340800, 357550, 1313000), {'day': _u(2.6), 'week': _u(6.4), 'month': _u(11.2)}),
+      _card(0, 3, 'net', 'Net Income', MdMarker.positive, _v(388200, 103520, 380100), {'day': _d(0.9), 'week': _u(2.2), 'month': _u(5.5)}),
     ],
     actions: const [
-      MdAction('journal', 'Journal Entry', 'edit', 'create'), MdAction('voucher', 'Voucher', 'doc', 'create'),
-      MdAction('receipt', 'Receipt', 'inbox', 'create'), MdAction('invoice', 'Invoice', 'doc', 'create'),
-      MdAction('reconcile', 'Reconcile', 'check', 'manage'), MdAction('reports', 'Reports', 'poll', 'manage'),
-      MdAction('customers', 'Customers', 'user', 'manage'), MdAction('suppliers', 'Suppliers', 'grid', 'manage'),
-      MdAction('fixed', 'Fixed Assets', 'lock', 'manage'), MdAction('coa', 'Chart of Accounts', 'dots', 'manage'),
+      MdAction('journal', 'Journal Entry', 'create'), MdAction('voucher', 'Voucher', 'create'),
+      MdAction('receipt', 'Receipt', 'create'), MdAction('invoice', 'Invoice', 'create'),
+      MdAction('reconcile', 'Reconcile', 'manage'), MdAction('reports', 'Reports', 'manage'),
+      MdAction('customers', 'Customers', 'manage'), MdAction('suppliers', 'Suppliers', 'manage'),
+      MdAction('fixed', 'Fixed Assets', 'manage'), MdAction('coa', 'Chart of Accounts', 'manage'),
     ],
-    ops: const [
-      MdOp(ref: 'JV-2024-0412', type: 'Journal', tone: 'info', desc: 'Depreciation — Q4', amt: {'SAR': 18400, 'USD': 4905, 'AED': 18020}, dir: 'debit', time: '2h ago'),
-      MdOp(ref: 'VCH-0188', type: 'Voucher', tone: 'neutral', desc: 'Office rent payment', amt: {'SAR': 45000, 'USD': 12000, 'AED': 44070}, dir: 'debit', time: '5h ago'),
-      MdOp(ref: 'JV-2024-0411', type: 'Journal', tone: 'info', desc: 'Revenue accrual', amt: {'SAR': 126500, 'USD': 33730, 'AED': 123880}, dir: 'credit', time: 'Yesterday'),
-      MdOp(ref: 'VCH-0187', type: 'Voucher', tone: 'neutral', desc: 'Utilities — Nov', amt: {'SAR': 9320, 'USD': 2485, 'AED': 9130}, dir: 'debit', time: 'Yesterday'),
-      MdOp(ref: 'JV-2024-0410', type: 'Journal', tone: 'info', desc: 'FX revaluation', amt: {'SAR': 4110, 'USD': 1095, 'AED': 4025}, dir: 'credit', time: '2 days ago'),
+    operations: const [
+      MdOperation(reference: 'JV-2024-0412', type: 'Journal', tone: MdTone.information, description: 'Depreciation — Q4', amounts: {'SAR': 18400, 'USD': 4905, 'AED': 18020}, direction: MdDirection.debit, timeLabel: '2h ago'),
+      MdOperation(reference: 'VCH-0188', type: 'Voucher', tone: MdTone.neutral, description: 'Office rent payment', amounts: {'SAR': 45000, 'USD': 12000, 'AED': 44070}, direction: MdDirection.debit, timeLabel: '5h ago'),
+      MdOperation(reference: 'JV-2024-0411', type: 'Journal', tone: MdTone.information, description: 'Revenue accrual', amounts: {'SAR': 126500, 'USD': 33730, 'AED': 123880}, direction: MdDirection.credit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'VCH-0187', type: 'Voucher', tone: MdTone.neutral, description: 'Utilities — Nov', amounts: {'SAR': 9320, 'USD': 2485, 'AED': 9130}, direction: MdDirection.debit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'JV-2024-0410', type: 'Journal', tone: MdTone.information, description: 'FX revaluation', amounts: {'SAR': 4110, 'USD': 1095, 'AED': 4025}, direction: MdDirection.credit, timeLabel: '2 days ago'),
     ],
   ),
   // Commercial (source index 2)
   MdTab(
     id: 'commercial', label: 'Commercial',
     cards: [
-      _card(2, 0, 'sales', 'Sales MTD', 'green', _v(1875300, 500000, 1836000), {'day': _u(3.4), 'week': _u(7.8), 'month': _u(12.5)}),
-      _card(2, 1, 'purchases', 'Purchases MTD', 'blue', _v(1124600, 299900, 1101000), {'day': _u(1.0), 'week': _u(4.2), 'month': _u(9.0)}),
-      _card(2, 2, 'receivables', 'Receivables', 'orange', _v(642800, 171410, 629400), {'day': _d(0.6), 'week': _d(2.1), 'month': _u(2.9)}),
-      _card(2, 3, 'payables', 'Payables', 'blue', _v(489050, 130410, 478800), {'day': null, 'week': _u(1.8), 'month': _u(4.6)}),
+      _card(2, 0, 'sales', 'Sales MTD', MdMarker.positive, _v(1875300, 500000, 1836000), {'day': _u(3.4), 'week': _u(7.8), 'month': _u(12.5)}),
+      _card(2, 1, 'purchases', 'Purchases MTD', MdMarker.primary, _v(1124600, 299900, 1101000), {'day': _u(1.0), 'week': _u(4.2), 'month': _u(9.0)}),
+      _card(2, 2, 'receivables', 'Receivables', MdMarker.warning, _v(642800, 171410, 629400), {'day': _d(0.6), 'week': _d(2.1), 'month': _u(2.9)}),
+      _card(2, 3, 'payables', 'Payables', MdMarker.primary, _v(489050, 130410, 478800), {'day': null, 'week': _u(1.8), 'month': _u(4.6)}),
     ],
     actions: const [
-      MdAction('sale', 'Sale', 'plus', 'create'), MdAction('purchase', 'Purchase', 'inbox', 'create'),
-      MdAction('quotation', 'Quotation', 'doc', 'create'), MdAction('return', 'Return', 'back', 'create'),
-      MdAction('customers', 'Customers', 'user', 'manage'), MdAction('suppliers', 'Suppliers', 'grid', 'manage'),
-      MdAction('inventory', 'Inventory', 'inbox', 'manage'), MdAction('pricelist', 'Price Lists', 'doc', 'manage'),
-      MdAction('reports', 'Reports', 'poll', 'manage'), MdAction('items', 'Items', 'lock', 'manage'),
+      MdAction('sale', 'Sale', 'create'), MdAction('purchase', 'Purchase', 'create'),
+      MdAction('quotation', 'Quotation', 'create'), MdAction('return', 'Return', 'create'),
+      MdAction('customers', 'Customers', 'manage'), MdAction('suppliers', 'Suppliers', 'manage'),
+      MdAction('inventory', 'Inventory', 'manage'), MdAction('pricelist', 'Price Lists', 'manage'),
+      MdAction('reports', 'Reports', 'manage'), MdAction('items', 'Items', 'manage'),
     ],
-    ops: const [
-      MdOp(ref: 'INV-S-2291', type: 'Sale', tone: 'success', desc: 'Gulf Contracting Ltd', amt: {'SAR': 96400, 'USD': 25700, 'AED': 94380}, dir: 'credit', time: '30m ago'),
-      MdOp(ref: 'INV-P-0884', type: 'Purchase', tone: 'info', desc: 'Saudi Steel Co', amt: {'SAR': 142800, 'USD': 38080, 'AED': 139800}, dir: 'debit', time: '3h ago'),
-      MdOp(ref: 'INV-S-2290', type: 'Sale', tone: 'success', desc: 'Najd Builders', amt: {'SAR': 53200, 'USD': 14190, 'AED': 52080}, dir: 'credit', time: 'Yesterday'),
-      MdOp(ref: 'INV-S-2289', type: 'Sale', tone: 'success', desc: 'Coastal Cement', amt: {'SAR': 31750, 'USD': 8470, 'AED': 31080}, dir: 'credit', time: 'Yesterday'),
-      MdOp(ref: 'INV-P-0883', type: 'Purchase', tone: 'info', desc: 'Eastern Timber', amt: {'SAR': 27400, 'USD': 7300, 'AED': 26820}, dir: 'debit', time: '2 days ago'),
+    operations: const [
+      MdOperation(reference: 'INV-S-2291', type: 'Sale', tone: MdTone.success, description: 'Gulf Contracting Ltd', amounts: {'SAR': 96400, 'USD': 25700, 'AED': 94380}, direction: MdDirection.credit, timeLabel: '30m ago'),
+      MdOperation(reference: 'INV-P-0884', type: 'Purchase', tone: MdTone.information, description: 'Saudi Steel Co', amounts: {'SAR': 142800, 'USD': 38080, 'AED': 139800}, direction: MdDirection.debit, timeLabel: '3h ago'),
+      MdOperation(reference: 'INV-S-2290', type: 'Sale', tone: MdTone.success, description: 'Najd Builders', amounts: {'SAR': 53200, 'USD': 14190, 'AED': 52080}, direction: MdDirection.credit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'INV-S-2289', type: 'Sale', tone: MdTone.success, description: 'Coastal Cement', amounts: {'SAR': 31750, 'USD': 8470, 'AED': 31080}, direction: MdDirection.credit, timeLabel: 'Yesterday'),
+      MdOperation(reference: 'INV-P-0883', type: 'Purchase', tone: MdTone.information, description: 'Eastern Timber', amounts: {'SAR': 27400, 'USD': 7300, 'AED': 26820}, direction: MdDirection.debit, timeLabel: '2 days ago'),
     ],
   ),
 ];
@@ -185,18 +135,10 @@ final mdAxis = {
   'month': ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'],
 };
 
-// ── number formatting (en-US grouping) ──
-String mdNum(num v, {int decimals = 0}) {
-  final fixed = v.toStringAsFixed(decimals);
-  final parts = fixed.split('.');
-  final neg = parts[0].startsWith('-');
-  final digits = neg ? parts[0].substring(1) : parts[0];
-  final buf = StringBuffer();
-  for (int i = 0; i < digits.length; i++) {
-    if (i > 0 && (digits.length - i) % 3 == 0) buf.write(',');
-    buf.write(digits[i]);
-  }
-  var out = buf.toString();
-  if (parts.length > 1) out = '$out.${parts[1]}';
-  return neg ? '-$out' : out;
-}
+final mobileDashboardCatalog = MobileDashboardCatalog(
+  tabs: mdTabs,
+  workspaces: mdWorkspaces,
+  attention: mdAttention,
+  currencies: mdCurrencies,
+  axisLabels: mdAxis,
+);

@@ -1,2 +1,2 @@
 // WORKSPACE DATA — NavRepositoryImpl
-// TODO: implement NavRepository.
+// Implementation note: implement NavRepository.

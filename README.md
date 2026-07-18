@@ -1,8 +1,8 @@
-# GeniusLink Mobile — Full App (Flutter · MVC)
+# GeniusLink Mobile — Full App (Flutter · Clean Architecture)
 
 A Flutter port of the entire GeniusLink mobile app (`ui_kits/genius_link/mobile.html`):
 auth, the four bottom tabs, and the 60+ sub-screens reachable from the **More**
-menu. Dark-only (matches the web demo), bilingual EN/AR strings, MVC structure.
+menu. Dark-only (matches the web demo), bilingual EN/AR strings, and feature-first Clean Architecture.
 
 ## Input libraries
 
@@ -19,7 +19,7 @@ flutter run        # device / emulator / -d chrome
 ```
 Sign in on the login screen (any credentials — the button just enters the app).
 
-## MVC layout
+## Project layout
 ```
 lib/
   main.dart                      # MaterialApp (dark) → AppRoot
@@ -92,3 +92,43 @@ FAB and bottom nav. Reachable from **More → Workspace → Mobile Dashboard**
 ## Presentation file structure
 
 Each screen now lives in its own file under `lib/features/**/presentation/pages/`. Reusable feature widgets live under `lib/features/**/presentation/widgets/` and are exported through each feature's `widgets.dart` barrel. Existing `*_screens.dart` imports remain compatible and now act as feature page barrels.
+
+## Reusing screens
+
+All public screens are exported through a single application barrel:
+
+```dart
+import 'package:gl_mobile_app/screens.dart';
+```
+
+Every public `*Screen` widget exposes a public constructor with a named `key`
+parameter. Feature-level imports are also available through
+`features/<feature>/presentation/pages/pages.dart` and
+`features/<feature>/presentation/presentation.dart`.
+
+Contact screens accept the public `ContactKind` configuration so custom customer,
+supplier, or partner variants can be embedded without depending on private types.
+
+## Clean Architecture domain model
+
+Business data used by screens is defined as immutable, framework-free entities
+under `lib/features/<feature>/domain/entities/`. Examples include accounts,
+users and permissions, contacts, currencies, products and stock movements,
+journal entries, stores, settings catalogues, and both dashboard catalogues.
+
+Demo and fixture values live under each feature's `data/datasources/` directory.
+The application router is the composition root and injects the resulting domain
+entities into reusable screen constructors. Presentation code does not import
+feature data sources.
+
+UI-only metadata, such as route identifiers and icon names, remains under
+`presentation/models`; it is deliberately not part of the business domain.
+Flutter form controllers also remain in Presentation and expose pure domain
+entities at their boundary.
+
+See [`docs/clean_architecture.md`](docs/clean_architecture.md) for the dependency
+rules and run the architecture guard with:
+
+```bash
+python tool/check_clean_architecture.py
+```

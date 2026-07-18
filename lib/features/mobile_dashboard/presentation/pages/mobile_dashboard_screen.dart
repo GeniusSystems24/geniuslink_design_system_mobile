@@ -14,10 +14,47 @@ import '../../../../core/bloc/load_status.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
 import '../bloc/mobile_dashboard_cubit.dart';
-import '../../data/datasources/mobile_dashboard_data.dart';
+import '../../domain/domain.dart';
+
+
+Color mdMarker(BuildContext context, MdMarker marker) {
+  final colors = SuperMaterialThemeData.of(context).colorScheme;
+  return switch (marker) {
+    MdMarker.positive => colors.secondary,
+    MdMarker.warning => colors.tertiary,
+    MdMarker.primary => colors.primary,
+  };
+}
+
+Color mdTone(BuildContext context, MdTone tone) {
+  final colors = SuperMaterialThemeData.of(context).colorScheme;
+  return switch (tone) {
+    MdTone.success => colors.secondary,
+    MdTone.information => colors.primary,
+    MdTone.warning => colors.tertiary,
+    MdTone.danger => colors.error,
+    MdTone.neutral => SuperMaterialThemeData.of(context).superTheme.fg3,
+  };
+}
+
+String mdNum(num value, {int decimals = 0}) {
+  final fixed = value.toStringAsFixed(decimals);
+  final parts = fixed.split('.');
+  final negative = parts.first.startsWith('-');
+  final digits = negative ? parts.first.substring(1) : parts.first;
+  final buffer = StringBuffer();
+  for (var i = 0; i < digits.length; i++) {
+    if (i > 0 && (digits.length - i) % 3 == 0) buffer.write(',');
+    buffer.write(digits[i]);
+  }
+  final fraction = parts.length > 1 ? '.${parts.last}' : '';
+  return '${negative ? '-' : ''}$buffer$fraction';
+}
 
 class MobileDashboardScreen extends StatefulWidget {
-  const MobileDashboardScreen({super.key});
+  final MobileDashboardCatalog catalog;
+
+  const MobileDashboardScreen({required this.catalog, super.key});
   @override
   State<MobileDashboardScreen> createState() => _MobileDashboardScreenState();
 }
@@ -46,7 +83,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     _dash = MobileDashboardCubit();
   }
 
-  MdTab get _cfg => mdTabs.firstWhere((t) => t.id == _tab);
+  MdTab get _cfg => widget.catalog.tabs.firstWhere((t) => t.id == _tab);
 
   void _toast(String msg) {
     ScaffoldMessenger.of(context)
@@ -63,11 +100,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   // The displayed workspace is whichever catalog entry maps to the active
   // tenant; falls back to the first. Tenant id is parsed from the "Tenant N"
   // tag so the demo's per-tenant currency factor still applies.
-  MdWorkspace get _ws => mdWorkspaces.firstWhere(
-        (w) => _tenantIdOf(w) == _activeTenantId,
-        orElse: () => mdWorkspaces[0],
+  MdWorkspace get _ws => widget.catalog.workspaces.firstWhere(
+        (workspace) => _tenantIdOf(workspace) == _activeTenantId,
+        orElse: () => widget.catalog.workspaces.first,
       );
-  String _tenantIdOf(MdWorkspace w) => w.tag.split(' ').last;
+  String _tenantIdOf(MdWorkspace w) => w.tenantId;
 
   void _switchWorkspace(MdWorkspace w) {
     // Real, isolated tenant switch: TenantCubit.switchTo changes the
@@ -79,8 +116,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     _refresh();
   }
 
-  double _cardVal(MdCard c) => (c.val[_cur] ?? 0) * _ws.factor;
-  double _opAmt(MdOp o) => (o.amt[_cur] ?? 0) * _ws.factor;
+  double _cardVal(MdCard c) => (c.values[_cur] ?? 0) * _ws.factor;
+  double _opAmt(MdOperation o) => (o.amounts[_cur] ?? 0) * _ws.factor;
 
   @override
   void dispose() {
@@ -161,7 +198,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                   const SizedBox(width: 10),
                   Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
-                    Text(_ws.tag, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                    Text(_ws.subtitle, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                   ])),
                   AnimatedRotation(turns: _wsOpen ? 0.5 : 0, duration: const Duration(milliseconds: 200), child: Icon(MIcons.of('chevD'), size: 15, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                 ]),
@@ -220,8 +257,8 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.surface, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong), borderRadius: BorderRadius.circular(14), boxShadow: const [BoxShadow(color: Color(0x80000000), blurRadius: 28, offset: Offset(0, 12))]),
               child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                Padding(padding: EdgeInsets.fromLTRB(10, 8, 10, 6), child: Text('SWITCH WORKSPACE', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
-                for (final w in mdWorkspaces)
+                Padding(padding: const EdgeInsets.fromLTRB(10, 8, 10, 6), child: Text('SWITCH WORKSPACE', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.8, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+                for (final w in widget.catalog.workspaces)
                   GestureDetector(
                     onTap: () => _switchWorkspace(w),
                     behavior: HitTestBehavior.opaque,
@@ -233,7 +270,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                         const SizedBox(width: 11),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Text(w.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
-                          Text(w.tag, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                          Text(w.subtitle, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                         ])),
                         if (w.id == _ws.id) Icon(MIcons.of('check'), size: 16, color: SuperMaterialThemeData.of(context).colorScheme.primary),
                       ]),
@@ -255,7 +292,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         opacity: _drawerOpen ? 1 : 0,
         duration: const Duration(milliseconds: 200),
         child: Stack(children: [
-          GestureDetector(onTap: () => setState(() => _drawerOpen = false), child: Container(color: Colors.black.withOpacity(0.5))),
+          GestureDetector(onTap: () => setState(() => _drawerOpen = false), child: Container(color: Colors.black.withValues(alpha: 0.5))),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 260),
             curve: Curves.easeOutCubic,
@@ -274,7 +311,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                     const SizedBox(width: 12),
                     Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Text(_ws.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 15, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
-                      Text(_ws.tag, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                      Text(_ws.subtitle, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
                     ])),
                   ]),
                 ),
@@ -283,7 +320,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
                   for (final it in const [('Home', 'home'), ('Accounts', 'inbox'), ('Journal', 'doc'), ('Contacts', 'user'), ('Reports', 'poll'), ('Settings', 'dots')])
                     _drawerItem(it.$1, it.$2),
                   Container(margin: const EdgeInsets.symmetric(vertical: 8), height: 1, color: SuperMaterialThemeData.of(context).superTheme.border),
-                  Padding(padding: EdgeInsets.fromLTRB(12, 2, 12, 6), child: Text('PREFERENCES', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+                  Padding(padding: const EdgeInsets.fromLTRB(12, 2, 12, 6), child: Text('PREFERENCES', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
                   _drawerSeg('Connection', _online ? 0 : 1, const ['Online', 'Offline'], (i) => setState(() => _online = i == 0)),
                 ])),
                 // sign out
@@ -354,7 +391,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _title() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text('GOOD MORNING', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 11, letterSpacing: 1.3, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
-      SizedBox(height: 3),
+      const SizedBox(height: 3),
       Text('Dashboard', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -0.8, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
     ]);
   }
@@ -364,7 +401,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     return Container(
       decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Row(children: [
-        for (final t in mdTabs) Expanded(child: _domainTab(t)),
+        for (final t in widget.catalog.tabs) Expanded(child: _domainTab(t)),
       ]),
     );
   }
@@ -379,7 +416,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         padding: const EdgeInsets.fromLTRB(4, 10, 4, 12),
         child: Stack(alignment: Alignment.bottomCenter, children: [
           Center(child: Text(t.label, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 15, fontWeight: on ? FontWeight.w700 : FontWeight.w500, color: on ? SuperMaterialThemeData.of(context).superTheme.fg1 : SuperMaterialThemeData.of(context).superTheme.fg3))),
-          AnimatedContainer(duration: const Duration(milliseconds: 200), margin: const EdgeInsets.symmetric(horizontal: 6), height: 2.5, decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).colorScheme.primary.withOpacity(on ? 1 : 0), borderRadius: BorderRadius.circular(3))),
+          AnimatedContainer(duration: const Duration(milliseconds: 200), margin: const EdgeInsets.symmetric(horizontal: 6), height: 2.5, decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).colorScheme.primary.withValues(alpha: on ? 1 : 0), borderRadius: BorderRadius.circular(3))),
         ]),
       ),
     );
@@ -419,11 +456,11 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.borderStrong)),
       onSelected: (v) => _dash.setCurrency(v),
       itemBuilder: (_) => [
-        for (final c in mdCurrencies)
-          PopupMenuItem<String>(value: c.$1, child: Row(children: [
-            SizedBox(width: 42, child: Text(c.$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w700, color: c.$1 == _cur ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.fg1))),
-            Expanded(child: Text(c.$2, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg2))),
-            if (c.$1 == _cur) Icon(MIcons.of('check'), size: 16, color: SuperMaterialThemeData.of(context).colorScheme.primary),
+        for (final c in widget.catalog.currencies)
+          PopupMenuItem<String>(value: c.code, child: Row(children: [
+            SizedBox(width: 42, child: Text(c.code, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w700, color: c.code == _cur ? SuperMaterialThemeData.of(context).colorScheme.primary : SuperMaterialThemeData.of(context).superTheme.fg1))),
+            Expanded(child: Text(c.name, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg2))),
+            if (c.code == _cur) Icon(MIcons.of('check'), size: 16, color: SuperMaterialThemeData.of(context).colorScheme.primary),
           ])),
       ],
       child: Container(
@@ -476,7 +513,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   }
 
   Widget _metricCard(MdCard c) {
-    final tr = c.trend[_period];
+    final tr = c.trends[_period];
     final trColor = tr == null ? SuperMaterialThemeData.of(context).superTheme.fg4 : (tr.up ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error);
     return Stack(children: [
       Container(
@@ -512,9 +549,9 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   Widget _chartView() {
     final cards = _cfg.cards;
     final sel = cards.firstWhere((c) => c.id == _chartMetric, orElse: () => cards.first);
-    final tr = sel.trend[_period];
+    final tr = sel.trends[_period];
     final trColor = tr == null ? SuperMaterialThemeData.of(context).superTheme.fg4 : (tr.up ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error);
-    final axis = mdAxis[_period]!;
+    final axis = widget.catalog.axisLabels[_period]!;
     final maxVal = cards.map(_cardVal).fold(0.0, (a, b) => a > b ? a : b);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       // metric chips
@@ -611,16 +648,36 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     );
   }
 
+  String _actionIcon(String id) => switch (id) {
+        'deposit' || 'sale' => 'plus',
+        'withdraw' || 'return' => 'back',
+        'transfer' => 'send',
+        'beneficiaries' || 'customers' => 'user',
+        'reconcile' => 'check',
+        'cards' || 'suppliers' => 'grid',
+        'reports' => 'poll',
+        'accounts' || 'fixed' || 'items' => 'lock',
+        'journal' => 'edit',
+        'receipt' || 'purchase' || 'inventory' => 'inbox',
+        'coa' => 'dots',
+        _ => 'doc',
+      };
+
+  String _attentionIcon(String id) => switch (id) {
+        'approvals' => 'inbox',
+        _ => 'alert',
+      };
+
   // ── quick actions ──
   Widget _quickActions() {
     final actions = _cfg.actions.take(7).toList();
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      _secHead('Quick Actions', 'blue', trailing: _viewAllBtn(() => _openActions())),
+      _secHead('Quick Actions', MdMarker.primary, trailing: _viewAllBtn(() => _openActions())),
       GridView.count(
         crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
         mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
         children: [
-          for (final a in actions) _actionTile(a.icon, a.label, SuperMaterialThemeData.of(context).colorScheme.primary, () => _toast('Opening ${a.label}')),
+          for (final a in actions) _actionTile(_actionIcon(a.id), a.label, SuperMaterialThemeData.of(context).colorScheme.primary, () => _toast('Opening ${a.label}')),
           _actionTile('dots', 'View all', SuperMaterialThemeData.of(context).superTheme.fg3, _openActions, isMore: true),
         ],
       ),
@@ -654,14 +711,14 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         padding: EdgeInsets.fromLTRB(18, 8, 18, MediaQuery.of(ctx).padding.bottom + 24),
         child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 14), decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.borderStrong, borderRadius: BorderRadius.circular(4)))),
-          Padding(padding: EdgeInsets.only(bottom: 12), child: Text('All Actions', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w800, fontSize: 18, color: SuperMaterialThemeData.of(context).superTheme.fg1))),
+          Padding(padding: const EdgeInsets.only(bottom: 12), child: Text('All Actions', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w800, fontSize: 18, color: SuperMaterialThemeData.of(context).superTheme.fg1))),
           for (final group in const [('create', 'Create new'), ('manage', 'Manage')])
             if (_cfg.actions.any((a) => a.group == group.$1)) ...[
               Padding(padding: const EdgeInsets.only(bottom: 10, top: 4), child: Text(group.$2.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
               GridView.count(
                 crossAxisCount: 4, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 0.82,
-                children: [for (final a in _cfg.actions.where((a) => a.group == group.$1)) _actionTile(a.icon, a.label, SuperMaterialThemeData.of(context).colorScheme.primary, () { Navigator.of(ctx).pop(); _toast('Opening ${a.label}'); })],
+                children: [for (final a in _cfg.actions.where((a) => a.group == group.$1)) _actionTile(_actionIcon(a.id), a.label, SuperMaterialThemeData.of(context).colorScheme.primary, () { Navigator.of(ctx).pop(); _toast('Opening ${a.label}'); })],
               ),
               const SizedBox(height: 18),
             ],
@@ -672,9 +729,9 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   // ── recent operations ──
   Widget _recentOps() {
-    final ops = _cfg.ops;
+    final ops = _cfg.operations;
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      _secHead('Recent Operations', 'green', sub: 'Latest 5 in this domain', trailing: _viewAllBtn(() => _toast('Open journal'))),
+      _secHead('Recent Operations', MdMarker.positive, sub: 'Latest 5 in this domain', trailing: _viewAllBtn(() => _toast('Open journal'))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.surface, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(14)),
@@ -686,7 +743,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     ]);
   }
 
-  Widget _opRow(MdOp op, bool last) {
+  Widget _opRow(MdOperation op, bool last) {
     final amtColor = op.isCredit ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error;
     final sign = op.isCredit ? '+' : '−';
     return Container(
@@ -694,17 +751,17 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
       child: Column(children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1))),
+          Expanded(child: Text(op.description, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1))),
           const SizedBox(width: 10),
           Text('$sign$_cur ${mdNum(_opAmt(op), decimals: 2)}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
         ]),
         const SizedBox(height: 7),
         Row(children: [
-          Text(op.ref, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+          Text(op.reference, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           const SizedBox(width: 8),
           _pill(op.type, mdTone(context, op.tone)),
           const Spacer(),
-          Text(op.time, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+          Text(op.timeLabel, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
         ]),
       ]),
     );
@@ -725,12 +782,12 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   // ── needs attention ──
   Widget _attention() {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      _secHead('Needs Attention', 'orange', trailing: Text('All domains', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+      _secHead('Needs Attention', MdMarker.warning, trailing: Text('All domains', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.surface, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(14)),
         child: Column(children: [
-          for (int i = 0; i < mdAttention.length; i++) _attnRow(mdAttention[i], i == mdAttention.length - 1),
+          for (int i = 0; i < widget.catalog.attention.length; i++) _attnRow(widget.catalog.attention[i], i == widget.catalog.attention.length - 1),
         ]),
       ),
     ]);
@@ -744,12 +801,12 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
         child: Row(children: [
-          Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(c, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of(it.icon), size: 18, color: c)),
+          Container(width: 38, height: 38, alignment: Alignment.center, decoration: BoxDecoration(color: superCoreTint(c, 0x29), borderRadius: BorderRadius.circular(10)), child: Icon(MIcons.of(_attentionIcon(it.id)), size: 18, color: c)),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(it.label, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
             const SizedBox(height: 1),
-            Text(it.desc, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+            Text(it.description, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
           ])),
           const SizedBox(width: 8),
           Container(constraints: const BoxConstraints(minWidth: 24), height: 24, alignment: Alignment.center, padding: const EdgeInsets.symmetric(horizontal: 7), decoration: BoxDecoration(color: superCoreTint(c, 0x29), borderRadius: BorderRadius.circular(999)), child: Text('${it.count}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, fontWeight: FontWeight.w700, color: c))),
@@ -761,7 +818,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   }
 
   // ── shared bits ──
-  Widget _secHead(String title, String marker, {String? sub, Widget? trailing}) {
+  Widget _secHead(String title, MdMarker marker, {String? sub, Widget? trailing}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(children: [
@@ -814,7 +871,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
     showModalBottomSheet<void>(
       context: context, backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface, isScrollControlled: true, useSafeArea: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
-      builder: (_) => _SearchSheet(cur: _cur, factor: _ws.factor),
+      builder: (_) => _SearchSheet(cur: _cur, factor: _ws.factor, tabs: widget.catalog.tabs),
     );
   }
 
@@ -930,7 +987,7 @@ class _TrendPainter extends CustomPainter {
     }
     area.lineTo(pts.last.dx, padT + ih);
     area.close();
-    canvas.drawPath(area, Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [color.withOpacity(0.30), color.withOpacity(0.02)]).createShader(Rect.fromLTWH(0, padT, size.width, ih)));
+    canvas.drawPath(area, Paint()..shader = LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [color.withValues(alpha: 0.30), color.withValues(alpha: 0.02)]).createShader(Rect.fromLTWH(0, padT, size.width, ih)));
 
     final line = Path()..moveTo(pts.first.dx, pts.first.dy);
     for (final p in pts.skip(1)) {
@@ -963,7 +1020,8 @@ class _TrendPainter extends CustomPainter {
 class _SearchSheet extends StatefulWidget {
   final String cur;
   final double factor;
-  const _SearchSheet({required this.cur, required this.factor});
+  final List<MdTab> tabs;
+  const _SearchSheet({required this.cur, required this.factor, required this.tabs});
   @override
   State<_SearchSheet> createState() => _SearchSheetState();
 }
@@ -976,9 +1034,9 @@ class _SearchSheetState extends State<_SearchSheet> {
     final borderColor = theme.border;
     final surfaceColor = theme.surface;
     final labelColor = theme.fg3;
-    final all = [for (final t in mdTabs) for (final o in t.ops) (o, t.label)];
+    final all = [for (final t in widget.tabs) for (final o in t.operations) (o, t.label)];
     final ql = _q.trim().toLowerCase();
-    final results = ql.isEmpty ? all : all.where((e) => '${e.$1.ref} ${e.$1.desc} ${e.$1.type}'.toLowerCase().contains(ql)).toList();
+    final results = ql.isEmpty ? all : all.where((e) => '${e.$1.reference} ${e.$1.description} ${e.$1.type}'.toLowerCase().contains(ql)).toList();
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -1005,7 +1063,7 @@ class _SearchSheetState extends State<_SearchSheet> {
           children: [
             Padding(padding: const EdgeInsets.only(bottom: 10), child: Text(_q.trim().isEmpty ? 'SEARCH ACROSS BANKING, ACCOUNTING & COMMERCIAL' : 'RESULTS · ${results.length}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 10, letterSpacing: 0.9, color: labelColor))),
             if (results.isEmpty)
-              Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: Text('No matching operations', style: TextStyle(color: theme.fg2, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))))
+              Padding(padding: const EdgeInsets.symmetric(vertical: 40), child: Center(child: Text('No matching operations', style: TextStyle(color: theme.fg2, fontSize: 14, fontWeight: FontWeight.w600, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))))
             else
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1020,7 +1078,7 @@ class _SearchSheetState extends State<_SearchSheet> {
     );
   }
 
-  Widget _row(MdOp op, String domain, bool last) {
+  Widget _row(MdOperation op, String domain, bool last) {
     final theme = SuperMaterialThemeData.of(context).superTheme;
     final borderColor = theme.border;
     final labelColor = theme.fg3;
@@ -1031,13 +1089,13 @@ class _SearchSheetState extends State<_SearchSheet> {
       decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: borderColor))),
       child: Column(children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(child: Text(op.desc, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: theme.fg1))),
+          Expanded(child: Text(op.description, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w600, color: theme.fg1))),
           const SizedBox(width: 10),
-          Text('$sign${widget.cur} ${mdNum((op.amt[widget.cur] ?? 0) * widget.factor, decimals: 2)}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
+          Text('$sign${widget.cur} ${mdNum((op.amounts[widget.cur] ?? 0) * widget.factor, decimals: 2)}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, fontWeight: FontWeight.w700, color: amtColor)),
         ]),
         const SizedBox(height: 7),
         Row(children: [
-          Text(op.ref, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+          Text(op.reference, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
           const Spacer(),
           Text(domain.toUpperCase(), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: labelColor)),
         ]),

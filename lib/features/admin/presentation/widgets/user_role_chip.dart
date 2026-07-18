@@ -10,7 +10,7 @@ class UserRoleChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
         UserStatusDot(SuperMaterialThemeData.of(context).colorScheme.tertiary),
-        SizedBox(width: 5),
+        const SizedBox(width: 5),
         Text('Accountant', style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
       ]);
 }

@@ -10,21 +10,21 @@ class CreateDepositScreen extends StatelessWidget {
       body: MScroll([
       ISection(icon: 'download', title: 'Deposit Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
         MMoney(label: 'Amount', value: '120,000.00', accent: SuperMaterialThemeData.of(context).colorScheme.secondary, required: true, sign: '+'),
-        MMethod(value: 'cash'),
+        const MMethod(value: 'cash'),
       ]),
-      ISection(icon: 'card', title: 'Destination', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+      ISection(icon: 'card', title: 'Destination', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
         IField(label: 'Deposit To', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Reference', placeholder: 'e.g. Counter slip no.'),
         IField(label: 'Value Date', value: 'Dec 19, 2025', icon: 'calendar'),
       ]),
-      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, defaultOpen: false, children: [
+      ISection(icon: 'ledger', title: 'Journal Preview', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, defaultOpen: false, children: const [
         JournalPreview(rows: [
           ('Bank · NCB Main (1100)', '120,000.00', null),
           ('Cash Box (1001)', null, '120,000.00'),
         ]),
       ]),
-      ITextarea(label: 'Memo', placeholder: 'Optional note for this deposit…'),
-      ActionRow(primary: 'Create Deposit'),
+      const ITextarea(label: 'Memo', placeholder: 'Optional note for this deposit…'),
+      const ActionRow(primary: 'Create Deposit'),
     ]),
     );
   }

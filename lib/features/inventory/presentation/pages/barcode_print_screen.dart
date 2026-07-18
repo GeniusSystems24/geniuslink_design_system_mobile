@@ -80,7 +80,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ],
         ),
       ]),
-      ISection(icon: 'scan', title: 'Print Settings', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
+      ISection(icon: 'scan', title: 'Print Settings', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
         IField(label: 'Symbology', value: 'Code 128', select: true),
         IField(label: 'Paper', value: 'A4 (210 × 297 mm)', select: true),
         IField(label: 'Copies per Item', placeholder: '1', mono: true),

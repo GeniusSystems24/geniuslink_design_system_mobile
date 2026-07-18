@@ -18,9 +18,9 @@ class OpDetailScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'Financial Operation'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Operation Summary', trailing: Pill('Posted'), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Operation Summary', trailing: const Pill('Posted'), children: [
         Text('OP-2024-0883', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
-        Row(children: [
+        const Row(children: [
           Expanded(child: Mini(label: 'Total Debits', value: '6,600.00', sub: 'SAR')),
           SizedBox(width: 12),
           Expanded(child: Mini(label: 'Difference', value: '0.00', sub: 'SAR', hi: true)),

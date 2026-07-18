@@ -18,14 +18,14 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       body: MScroll([
       MCard(children: [
         Row(children: [
-          Avatar('Layla Ahmed', size: 56),
-          SizedBox(width: 16),
+          const Avatar('Layla Ahmed', size: 56),
+          const SizedBox(width: 16),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('Layla Ahmed', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-            SizedBox(height: 3),
+            const SizedBox(height: 3),
             Text('layla.a@geniuslink.sa', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-            SizedBox(height: 6),
-            Row(children: [
+            const SizedBox(height: 6),
+            const Row(children: [
               UserRoleChip(),
               SizedBox(width: 8),
               Pill('Active'),
@@ -33,7 +33,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ])),
         ]),
       ]),
-      ISection(icon: 'user', title: 'Profile', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+      ISection(icon: 'user', title: 'Profile', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
         TInput(label: 'Full Name', defaultValue: 'Layla Ahmed'),
         TInput(label: 'Work Email', defaultValue: 'layla.a@geniuslink.sa', mono: true),
         TInput(label: 'Employee ID', defaultValue: 'EMP-0012', mono: true),

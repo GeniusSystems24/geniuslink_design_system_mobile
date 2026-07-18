@@ -15,7 +15,7 @@ class IssueDetailScreen extends StatelessWidget {
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Issued Value',
           subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
-          trailing: Pill('Posted'),
+          trailing: const Pill('Posted'),
           children: [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -24,7 +24,7 @@ class IssueDetailScreen extends StatelessWidget {
                   Text('USD',
                       style: TextStyle(
                           fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text('5,400.00',
                       style: TextStyle(
                           fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
@@ -34,7 +34,7 @@ class IssueDetailScreen extends StatelessWidget {
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Information', children: const [
         KV('Serial No', 'INV-ISS-2024-0089', mono: true),
         KV('Store', 'Downtown Central'),
         KV('Customer', 'Project A-92'),
@@ -44,7 +44,7 @@ class IssueDetailScreen extends StatelessWidget {
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Accounting Distribution',
           pad: 16,
-          children: [
+          children: const [
             DistRow(
                 account: '1200 — Inventory (WIP)',
                 side: 'Debit',

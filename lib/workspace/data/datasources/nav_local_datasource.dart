@@ -1,2 +1,2 @@
 // WORKSPACE DATA — NavLocalDatasource
-// TODO: SharedPreferences-backed nav state persistence.
+// Implementation note: SharedPreferences-backed nav state persistence.

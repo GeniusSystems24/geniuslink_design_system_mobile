@@ -54,8 +54,8 @@ class AccountDetailFullScreen extends StatelessWidget {
           ]),
         ),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: [
-        const AccountAuditGrid(rows: [('Created By', 'Admin User (ID: 5)'), ('Created At', 'Apr 12, 2024 09:21'), ('Modified By', 'Layla A. (ID: 12)'), ('Modified At', 'Nov 02, 2025 15:48')]),
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: const [
+        AccountAuditGrid(rows: [('Created By', 'Admin User (ID: 5)'), ('Created At', 'Apr 12, 2024 09:21'), ('Modified By', 'Layla A. (ID: 12)'), ('Modified At', 'Nov 02, 2025 15:48')]),
       ]),
       Row(children: [
         const Expanded(child: MBtn('Export', variant: MBtnVariant.secondary, icon: 'download', full: true)),

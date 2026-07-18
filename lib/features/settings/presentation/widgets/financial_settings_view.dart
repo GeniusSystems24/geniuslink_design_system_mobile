@@ -39,11 +39,11 @@ class FinancialSettingsView extends StatelessWidget {
               ]),
             ]),
           ]),
-          ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
+          ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
             TSelect(label: 'Retained Earnings', value: '3100 — Retained Earnings', options: ['3100 — Retained Earnings', '3001 — Owner Capital']),
             TSelect(label: 'Default Tax Account', value: '2200 — VAT Payable', options: ['2200 — VAT Payable', '1350 — VAT Receivable']),
           ]),
-          ISection(icon: 'lock', title: 'Posting Rules', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
+          ISection(icon: 'lock', title: 'Posting Rules', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: const [
             TSwitch(label: 'Lock postings to open periods only', defaultOn: true),
             TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
           ]),

@@ -6,6 +6,16 @@ import 'package:gl_mobile_app/features/inventory/presentation/pages/create_produ
 import 'package:gl_mobile_app/features/inventory/presentation/pages/product_detail_screen.dart';
 import '../../design_system/kit.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
+import '../../features/accounts/data/data.dart';
+import '../../features/admin/data/data.dart';
+import '../../features/contacts/data/data.dart';
+import '../../features/dashboard/data/data.dart';
+import '../../features/mobile_dashboard/data/data.dart';
+import '../../features/config/data/data.dart';
+import '../../features/inventory/data/data.dart';
+import '../../features/ledger/data/data.dart';
+import '../../features/settings/data/data.dart';
+import '../../features/stores/data/data.dart';
 import '../../features/accounts/presentation/pages/accounts_screens.dart';
 import '../../features/stores/presentation/pages/stores_screens.dart';
 import '../../features/more/presentation/pages/more_screen.dart';
@@ -45,7 +55,7 @@ class ScreenMeta {
   const ScreenMeta(this.title, {this.ar, this.back = 'more'});
 }
 
-Map<String, ScreenMeta> subTitles = {
+const Map<String, ScreenMeta> subTitles = {
   'accountDetail': ScreenMeta('Cash Box', ar: 'الصندوق', back: 'accounts'),
   'createAccount': ScreenMeta('Create Account', back: 'accounts'),
   'groupDetail': ScreenMeta('Current Assets', ar: 'الأصول المتداولة', back: 'accounts'),
@@ -134,7 +144,7 @@ Set<String> fullBleedScreens = {'mobileDashboard'};
 Widget buildSubScreen(String id) {
   switch (id) {
     // Full-bleed (own chrome)
-    case 'mobileDashboard': return const MobileDashboardScreen();
+    case 'mobileDashboard': return MobileDashboardScreen(catalog: mobileDashboardCatalog);
     // Accounts
     case 'createAccount': return const CreateAccountScreen();
     case 'accountDetail': return const AccountDetailFullScreen();
@@ -142,15 +152,15 @@ Widget buildSubScreen(String id) {
     case 'groupDetail': return const GroupDetailScreen();
     // Stores
     case 'createStore': return const CreateStoreScreen();
-    case 'storeDetail': return const StoreDetailScreen();
+    case 'storeDetail': return StoreDetailScreen(store: MockStoresDataSource.stores.first);
     case 'issue': return const IssueInventoryScreen();
     // Batch 2 — Ledger
     case 'journal': return const OpeningJournalScreen();
     case 'opDetail': return const OpDetailScreen();
     // Batch 2 — Journal
-    case 'journalList': return const JournalListScreen();
-    case 'createJournalEntry': return const CreateJournalEntryScreen();
-    case 'journalEntryDetail': return const JournalEntryDetailScreen();
+    case 'journalList': return JournalListScreen(entries: MockLedgerDataSource.entries);
+    case 'createJournalEntry': return const CreateJournalEntryScreen(accounts: MockLedgerDataSource.accounts);
+    case 'journalEntryDetail': return JournalEntryDetailScreen(entry: MockLedgerDataSource.entries.first);
     // Batch 2 — Banking · Cash
     case 'createDeposit': return const CreateDepositScreen();
     case 'depositDetail': return const DepositDetailScreen();
@@ -162,8 +172,8 @@ Widget buildSubScreen(String id) {
     case 'createExternalTransfer': return const CreateExternalTransferScreen();
     case 'externalTransferDetail': return const ExternalTransferDetailScreen();
     // Batch 3 — Products & inventory ops
-    case 'productsList': return const ProductsListScreen();
-    case 'productDetail': return const ProductDetailScreen();
+    case 'productsList': return const ProductsListScreen(products: MockInventoryDataSource.products);
+    case 'productDetail': return ProductDetailScreen(detail: MockInventoryDataSource.productDetail);
     case 'createProduct': return const CreateProductScreen();
     case 'issueDetail': return const IssueDetailScreen();
     case 'receiveCreate': return const ReceiveCreateScreen();
@@ -181,20 +191,20 @@ Widget buildSubScreen(String id) {
     case 'warehousesList': return const WarehousesListScreen();
     case 'transferList': return const TransferListScreen();
     // Batch 3 — Accounts parity (full detail overrides simple one + tree)
-    case 'accountTree': return const AccountTreeScreen();
+    case 'accountTree': return const AccountTreeScreen(roots: MockAccountsDataSource.chart);
     // Batch 4 — Currencies
-    case 'currenciesList': return const CurrenciesListScreen();
+    case 'currenciesList': return CurrenciesListScreen(currencies: MockConfigDataSource.currencies);
     case 'createCurrency': return const CreateCurrencyScreen();
-    case 'currencyDetail': return const CurrencyDetailScreen();
+    case 'currencyDetail': return CurrencyDetailScreen(currency: MockConfigDataSource.currencies[1]);
     case 'exchangeRateSetup': return const ExchangeRateSetupScreen();
     case 'fiscalYearSetup': return const FiscalYearSetupScreen();
     // Batch 4 — Contacts
-    case 'customersList': return ContactListScreen.customers();
-    case 'customerDetail': return ContactDetailScreen.customer();
-    case 'createCustomer': return CreateContactScreen.customer();
-    case 'suppliersList': return ContactListScreen.suppliers();
-    case 'supplierDetail': return ContactDetailScreen.supplier();
-    case 'createSupplier': return CreateContactScreen.supplier();
+    case 'customersList': return ContactListScreen(kind: MockContactsDataSource.customer, detailKey: 'customerDetail');
+    case 'customerDetail': return ContactDetailScreen(kind: MockContactsDataSource.customer);
+    case 'createCustomer': return CreateContactScreen(kind: MockContactsDataSource.customer);
+    case 'suppliersList': return ContactListScreen(kind: MockContactsDataSource.supplier, detailKey: 'supplierDetail');
+    case 'supplierDetail': return ContactDetailScreen(kind: MockContactsDataSource.supplier);
+    case 'createSupplier': return CreateContactScreen(kind: MockContactsDataSource.supplier);
     // Batch 4 — Reports
     case 'trialBalance': return const TrialBalanceScreen();
     case 'incomeStatement': return const IncomeStatementScreen();
@@ -202,7 +212,7 @@ Widget buildSubScreen(String id) {
     case 'inventoryValuation': return const InventoryValuationScreen();
     case 'auditLog': return const AuditLogScreen();
     // Batch 4 — Users
-    case 'usersList': return const UsersListScreen();
+    case 'usersList': return const UsersListScreen(users: MockAdminDataSource.users);
     case 'userDetail': return const UserDetailScreen();
     case 'createUser': return const CreateUserScreen();
     case 'rolesPermissions': return const RolesPermissionsScreen();
@@ -216,13 +226,13 @@ Widget buildSubScreen(String id) {
     case 'setBranches': return const BranchesStoresScreen();
     // Batch 5 — Settings · Team & Security
     case 'rolesList': return const RolesListScreen();
-    case 'roleEditor': return const RoleEditorScreen();
+    case 'roleEditor': return const RoleEditorScreen(modules: MockSettingsDataSource.roleModules, initialAccess: MockSettingsDataSource.roleAccess);
     case 'tenants': return const TenantsScreen();
     // Batch 5 — Settings · Platform
-    case 'setIntegrations': return const IntegrationsScreen();
+    case 'setIntegrations': return const IntegrationsScreen(integrations: MockSettingsDataSource.integrations);
     case 'setWebhooks': return const WebhooksScreen();
     case 'setApiKeys': return const ApiKeysScreen();
-    case 'setNotifications': return const NotificationsScreen();
+    case 'setNotifications': return const NotificationsScreen(categories: MockSettingsDataSource.notificationCategories, channels: MockSettingsDataSource.notificationChannels);
     case 'setBilling': return const BillingScreen();
     case 'setBackup': return const BackupScreen();
     default:
@@ -233,12 +243,12 @@ Widget buildSubScreen(String id) {
 /// Build a bottom-tab screen.
 Widget buildTabScreen(String tab) {
   switch (tab) {
-    case 'accounts': return const AccountsScreen();
-    case 'stores': return const StoresScreen();
+    case 'accounts': return const AccountsScreen(accounts: MockAccountsDataSource.list);
+    case 'stores': return const StoresScreen(stores: MockStoresDataSource.stores);
     case 'more': return const MoreScreen();
     case 'dashboard':
     default:
-      return const DashboardScreen();
+      return const DashboardScreen(snapshot: MockDashboardDataSource.snapshot);
   }
 }
 

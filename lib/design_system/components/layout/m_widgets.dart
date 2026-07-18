@@ -6,7 +6,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
-import 'package:super_core/super_core.dart';
 import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 class Eyebrow extends StatelessWidget {
   final String text;

@@ -18,14 +18,14 @@ class CreateExternalTransferScreen extends StatelessWidget {
           ('Fee', '75.00', 'SAR', SuperMaterialThemeData.of(context).colorScheme.tertiary),
         ]),
       ]),
-      ISection(icon: 'building', title: 'Beneficiary', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
+      ISection(icon: 'building', title: 'Beneficiary', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Beneficiary', value: 'Global Steel Imports', select: true, required: true),
         IField(label: 'IBAN / SWIFT', value: 'DE89 3704 0044 0532 0130 00', mono: true),
         IField(label: 'Purpose Code', value: 'GSD — Goods', select: true),
       ]),
       InfoNote('External wires settle in 1–2 business days and require dual approval.', tone: SuperMaterialThemeData.of(context).colorScheme.primary),
-      ActionRow(primary: 'Submit Wire'),
+      const ActionRow(primary: 'Submit Wire'),
     ]),
     );
   }

@@ -107,7 +107,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
               ),
               if (visible.isEmpty)
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 32),
+                    padding: const EdgeInsets.symmetric(vertical: 32),
                     child: Center(
                         child: Text('No log entries match.',
                             style: TextStyle(

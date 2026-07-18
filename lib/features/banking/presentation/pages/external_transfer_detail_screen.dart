@@ -8,7 +8,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: const SuperAppBar(title: 'External Wire Detail'),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'External Wire', trailing: Pill('Pending', tone: PillTone.warning), children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'External Wire', trailing: const Pill('Pending', tone: PillTone.warning), children: [
         Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
       ]),
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Amount & FX', children: [
@@ -22,7 +22,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
           ('Fee', '75.00', 'SAR', SuperMaterialThemeData.of(context).colorScheme.tertiary),
         ]),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Beneficiary', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Beneficiary', children: const [
         BKV('Name', 'Global Steel Imports'),
         BKV('IBAN', 'DE89 3704 0044 0532 0130 00', mono: true),
         BKV('SWIFT', 'COBADEFFXXX', mono: true),

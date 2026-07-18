@@ -19,7 +19,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
           title: 'Received Value',
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
-          trailing: Pill('Posted'),
+          trailing: const Pill('Posted'),
           children: [
             Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -28,7 +28,7 @@ class ReceiveDetailScreen extends StatelessWidget {
                   Text('SAR',
                       style: TextStyle(
                           fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 14, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text('+24,200.00',
                       style: TextStyle(
                           fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
@@ -38,7 +38,7 @@ class ReceiveDetailScreen extends StatelessWidget {
                           letterSpacing: -0.6)),
                 ]),
           ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Receipt Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Receipt Information', children: const [
         KV('Serial No', 'INV-REC-2024-0241', mono: true),
         KV('Receiving Store', 'King Fahd Warehouse'),
         KV('Supplier', 'ABC Trading Co.'),
@@ -58,7 +58,7 @@ class ReceiveDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Audit Information', children: const [
         AuditGridLite(rows: [
           ('Received By', 'Layla A. (ID: 12)', false),
           ('Received At', 'Dec 16, 14:32', true),

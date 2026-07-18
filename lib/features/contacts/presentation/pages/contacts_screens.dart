@@ -7,45 +7,38 @@
 import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
+import '../../domain/domain.dart';
 
 part 'contact_list_screen.dart';
 part 'create_contact_screen.dart';
 part 'contact_detail_screen.dart';
 
-class _ContactKind {
-  final String label, labelPl, balanceLabel, control;
-  final bool supplier;
-  final List<(String, String, String, String, String, int, String)> rows; // code,name,ar,city,balance,orders,status
-  final List<(String, String, String, String)> history; // ref,desc,amount,when
-  const _ContactKind(this.label, this.labelPl, this.balanceLabel, this.supplier, this.control, this.rows, this.history);
 
-  Color tone(BuildContext context) {
-    final colors = SuperMaterialThemeData.of(context).colorScheme;
-    return supplier ? colors.error : colors.secondary;
-  }
+String contactSingularLabel(ContactType type) => type == ContactType.supplier ? 'Supplier' : 'Customer';
+String contactPluralLabel(ContactType type) => type == ContactType.supplier ? 'Suppliers' : 'Customers';
+String contactBalanceLabel(ContactType type) => type == ContactType.supplier ? 'Payable' : 'Receivable';
+String formatContactDate(DateTime value) => '${value.year}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
+
+Color contactTone(BuildContext context, ContactKind kind) {
+  final colors = SuperMaterialThemeData.of(context).colorScheme;
+  return kind.isSupplier ? colors.error : colors.secondary;
 }
 
-final _customer = _ContactKind('Customer', 'Customers', 'Receivable', false, '1300 — Accounts Receivable', [
-  ('CUST-102', 'Riyadh Construction Co.', 'شركة الرياض للإنشاءات', 'Riyadh', '24,500.00', 18, 'active'),
-  ('CUST-118', 'Najd Developers', 'مطوّرو نجد', 'Riyadh', '8,200.00', 6, 'active'),
-  ('CUST-134', 'Coastal Projects LLC', 'مشاريع الساحل', 'Jeddah', '0.00', 2, 'active'),
-  ('CUST-141', 'Eastern Build Group', 'مجموعة البناء الشرقية', 'Dammam', '52,140.00', 31, 'active'),
-  ('CUST-150', 'Madinah Estates', 'عقارات المدينة', 'Madinah', '0.00', 0, 'pending'),
-], [
-  ('INV-2024-0412', 'Sales invoice', '+12,400.00', 'Dec 14'),
-  ('DEP-2024-0182', 'Payment received', '−5,000.00', 'Dec 18'),
-  ('INV-2024-0388', 'Sales invoice', '+17,100.00', 'Dec 02'),
-]);
+PillTone contactStatusTone(ContactStatus status) => switch (status) {
+      ContactStatus.active => PillTone.success,
+      ContactStatus.pending => PillTone.warning,
+      ContactStatus.inactive => PillTone.neutral,
+    };
 
-final _supplier = _ContactKind('Supplier', 'Suppliers', 'Payable', true, '2001 — Accounts Payable', [
-  ('SUP-201', 'Global Steel Imports LLC', 'الاستيراد العالمي للصلب', 'London', '12,000.00', 9, 'active'),
-  ('SUP-210', 'Saudi Cement Company', 'شركة الأسمنت السعودية', 'Riyadh', '34,890.00', 22, 'active'),
-  ('SUP-218', 'Gulf Aggregates', 'حصى الخليج', 'Dammam', '4,200.00', 14, 'active'),
-  ('SUP-225', 'Timber & Ply Trading', 'تجارة الأخشاب', 'Jeddah', '0.00', 5, 'inactive'),
-], [
-  ('PO-2024-0211', 'Purchase order', '+12,000.00', 'Dec 10'),
-  ('EXT-2024-0311', 'Wire payment', '−12,000.00', 'Dec 18'),
-  ('PO-2024-0198', 'Purchase order', '+34,890.00', 'Nov 28'),
-]);
-
-PillTone _kTone(String s) => s == 'active' ? PillTone.success : (s == 'pending' ? PillTone.warning : PillTone.neutral);
+String formatContactAmount(double amount, {bool signed = false}) {
+  final absolute = amount.abs().toStringAsFixed(2);
+  final parts = absolute.split('.');
+  final digits = parts.first;
+  final buffer = StringBuffer();
+  for (var i = 0; i < digits.length; i++) {
+    if (i > 0 && (digits.length - i) % 3 == 0) buffer.write(',');
+    buffer.write(digits[i]);
+  }
+  final sign = signed ? (amount >= 0 ? '+' : '−') : (amount < 0 ? '−' : '');
+  return '$sign${buffer.toString()}.${parts.last}';
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
+import '../../domain/domain.dart';
+import '../controllers/inventory_line_form_controller.dart';
 import 'inventory_shared_widgets.dart';
 
 class _BalancedRow extends StatelessWidget {
@@ -25,17 +27,10 @@ class _BalancedRow extends StatelessWidget {
   }
 }
 
-class _ProductLine {
-  final String sku, name;
-  final SuperNumericFieldController qtyCtl;
-  _ProductLine(this.sku, this.name)
-      : qtyCtl = SuperNumericFieldController(initialValue: 1);
-
-  void dispose() => qtyCtl.dispose();
-}
-
 class ReceiveCreateScreen extends StatefulWidget {
-  const ReceiveCreateScreen({super.key});
+  final Future<void> Function(List<InventoryLine> lines)? onSubmit;
+
+  const ReceiveCreateScreen({this.onSubmit, super.key});
   @override
   State<ReceiveCreateScreen> createState() => _ReceiveCreateScreenState();
 }
@@ -65,7 +60,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     ]),
     allowFreeText: false,
   );
-  final _lines = <_ProductLine>[];
+  final _lines = <InventoryLineFormController>[];
 
   @override
   void dispose() {
@@ -80,11 +75,13 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     final parts = raw.split(' — ');
     final sku = parts.isNotEmpty ? parts[0] : raw;
     final name = parts.length > 1 ? parts[1] : raw;
-    setState(() => _lines.insert(0, _ProductLine(sku, name)));
+    setState(() => _lines.insert(0, InventoryLineFormController(InventoryLine(sku: sku, name: name))));
   }
 
-  void _submit() {
-    // TODO: persist receive
+  Future<void> _submit() async {
+    await widget.onSubmit?.call(
+      _lines.map((line) => line.value).toList(growable: false),
+    );
   }
 
   @override
@@ -132,7 +129,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               return ProductRow(
                 name: l.name,
                 sku: l.sku,
-                qtyController: l.qtyCtl,
+                qtyController: l.quantityController,
                 price: '—',
                 total: '—',
                 currency: '',
@@ -145,7 +142,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           icon: 'swap',
           title: 'Accounting Distribution',
           marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
-          children: [
+          children: const [
             DistRow(
                 account: '1200 — Inventory (WIP)',
                 side: 'Debit',

@@ -4,7 +4,6 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 
 class CreateGroupScreen extends StatefulWidget {
@@ -35,7 +34,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   void _submit() {
     setState(() => _force = true);
     if (_nameEnErr == null && _nameArErr == null) {
-      // TODO: persist group
+      // Implementation note: persist group
     }
   }
 
@@ -70,7 +69,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           required: true,
         ),
       ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Additional Information', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Additional Information', children: const [
         SuperTextFormField(
           label: 'Note',
           placeholder: 'Add any notes about this group…',

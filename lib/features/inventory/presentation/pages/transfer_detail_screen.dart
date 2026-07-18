@@ -83,7 +83,7 @@ class TransferDetailScreen extends StatelessWidget {
           trailing: const Pill('In Transit', tone: PillTone.warning),
           children: [
             Padding(
-                padding: EdgeInsets.only(bottom: 2),
+                padding: const EdgeInsets.only(bottom: 2),
                 child: Text('INV-TRF-2024-0117',
                     style: TextStyle(
                         fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary))),
@@ -137,7 +137,7 @@ class TransferDetailScreen extends StatelessWidget {
               ]),
             ),
           ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Logistics & Tracking', children: [
+      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Logistics & Tracking', children: const [
         KV('Carrier', 'Plate 4892-RKD'),
         KV('Driver', 'Mohammed S.'),
         KV('Expected Arrival', 'Dec 20, 2025', mono: true),
