@@ -14,8 +14,8 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
     final lists = [('retail', 'Retail · Standard', 'SAR', 'List', 412, SuperMaterialThemeData.of(context).colorScheme.primary), ('whole', 'Wholesale · Tier 1', 'SAR', 'Discount 15%', 412, SuperMaterialThemeData.of(context).colorScheme.secondary), ('whole2', 'Wholesale · Tier 2', 'SAR', 'Discount 25%', 412, SuperMaterialThemeData.of(context).colorScheme.secondary), ('export', 'Export · USD', 'USD', 'Markup 8%', 188, SuperMaterialThemeData.of(context).colorScheme.tertiary)];
     const items = [('STL-44021', 'Structural Steel I-Beam', '540.00', '459.00'), ('CMT-90112', 'Portland Cement Type I', '28.00', '23.80'), ('AGG-21044', 'Coarse Aggregate 20mm', '140.00', '119.00'), ('PLY-30022', 'Plywood Sheet 18mm', '105.00', '89.25'), ('PNT-55310', 'Epoxy Floor Coating', '44.00', '37.40')];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Price Lists')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Price Lists'),
       body: MScroll([
       for (final l in lists)
         GestureDetector(

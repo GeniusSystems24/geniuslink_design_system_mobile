@@ -98,7 +98,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       value: _dash,
       child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
         builder: (context, _) => Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).padding.top + 64),
         child: _appBar(),
@@ -812,7 +812,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   void _openSearch() {
     showModalBottomSheet<void>(
-      context: context, backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, isScrollControlled: true, useSafeArea: true,
+      context: context, backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface, isScrollControlled: true, useSafeArea: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(22))),
       builder: (_) => _SearchSheet(cur: _cur, factor: _ws.factor),
     );

@@ -12,8 +12,8 @@ class ReceiveDetailScreen extends StatelessWidget {
       ('Structural Steel I-Beam', '32 PCS × 450.00', '14,400.00')
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Receive Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Receive Detail'),
       body: MScroll([
       MCard(
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,

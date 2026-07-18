@@ -19,8 +19,8 @@ class StoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stores')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Stores'),
       body: MScroll([
       for (final s in _stores)
         GestureDetector(
@@ -79,8 +79,8 @@ class CreateStoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Store')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Store'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Store Details', subtitle: 'Name and location', children: const [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),
@@ -109,8 +109,8 @@ class StoreDetailScreen extends StatelessWidget {
       ('RBR-71203', 'Rebar #6', '0', 'out'),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Store Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Store Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Store Summary', trailing: const Pill('Active'), children: const [
         Row(children: [
@@ -160,8 +160,8 @@ class IssueInventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Issue Inventory')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Issue Inventory'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Details', children: const [
         MField(label: 'Serial No', value: 'INV-ISS-2024-0089', mono: true),

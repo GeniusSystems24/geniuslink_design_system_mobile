@@ -16,8 +16,8 @@ class OpeningJournalScreen extends StatelessWidget {
       ('Capital Account (3001)', '-5,000.00', false, 'Owner investment'),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Opening Journal')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Opening Journal'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Entry Details', children: [
         MField(label: 'Serial No', value: 'JV-2024-0042', mono: true),
@@ -74,8 +74,8 @@ class OpDetailScreen extends StatelessWidget {
       ('Approved & posted', 'Controller · Dec 18, 10:05'),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Financial Operation')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Financial Operation'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Operation Summary', trailing: Pill('Posted'), children: [
         Text('OP-2024-0883', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

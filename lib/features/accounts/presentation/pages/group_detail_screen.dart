@@ -12,8 +12,8 @@ class GroupDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Group Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Group Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Information', trailing: Pill('Active'), children: [
         KV('ID', '1042', mono: true), KV('Name English', 'Current Assets'),

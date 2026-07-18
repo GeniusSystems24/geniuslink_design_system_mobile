@@ -11,8 +11,8 @@ class CreateAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Account')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Account'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Account Details', subtitle: 'Identify and place in the tree', children: [
         const MField(label: 'Account Code', placeholder: 'e.g. 1102', mono: true, required: true),

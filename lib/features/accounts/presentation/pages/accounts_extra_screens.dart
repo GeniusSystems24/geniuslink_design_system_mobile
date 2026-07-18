@@ -71,8 +71,8 @@ class AccountDetailFullScreen extends StatelessWidget {
       ('JV-2024-0071', 'Dec 18, 16:33', 'Petty cash reimbursement', '+650.00', true, '5,100.00'),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Account Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Account Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
@@ -246,8 +246,8 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Account Tree')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Account Tree'),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SuperTree<Account>(

@@ -75,8 +75,8 @@ class _IntegrationsView extends StatelessWidget {
         final groups = _integrationGroups(context);
         void toggle(String k) => form.setField('state', {...st, k: !(st[k] ?? false)});
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Integrations')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Integrations'),
       body: MScroll([
           for (final g in groups)
             MCard(title: g.$1, accentColor: g.$2, pad: 8, children: [
@@ -136,8 +136,8 @@ class _WebhooksView extends StatelessWidget {
         final hooks = [for (final h in (fstate.value<List>('hooks') ?? const [])) List<Object>.from(h as List)];
         void toggle(int i) { final n = [for (final h in hooks) List<Object>.from(h)]; n[i][2] = !(n[i][2] as bool); form.setField('hooks', n); }
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Webhooks')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Webhooks'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: '${hooks.length} Endpoints', subtitle: 'HMAC-signed · retried 5× on failure', pad: 8, children: [
             Padding(
@@ -207,8 +207,8 @@ class _ApiKeysView extends StatelessWidget {
         void toggleReveal(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('keys', n); }
         void revoke(int i) { final n = clone()..removeAt(i); form.setField('keys', n); }
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('API Keys')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'API Keys'),
       body: MScroll([
           InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: SuperMaterialThemeData.of(context).colorScheme.tertiary),
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: '${keys.length} Active Keys', pad: 8, children: [
@@ -269,8 +269,8 @@ class _NotificationsView extends StatelessWidget {
         final prefs = [for (final r in (fstate.value<List>('prefs') ?? const [])) List<bool>.from(r as List)];
         void toggle(int ci, int chi) { final n = [for (final r in prefs) List<bool>.from(r)]; n[ci][chi] = !n[ci][chi]; form.setField('prefs', n); }
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Notifications')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Notifications'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Preferences', subtitle: 'Toggle a channel per category', pad: 8, children: [
             Padding(
@@ -328,8 +328,8 @@ class BillingScreen extends StatelessWidget {
     const usage = [('Users', 6.0, 25.0, ''), ('Transactions · MTD', 4120.0, 100000.0, ''), ('Storage', 2.4, 50.0, ' GB')];
     const plans = [('Starter', '0', 'free', ['1 workspace', '3 users', '500 entries/mo'], false), ('Business', '349', '/mo', ['Unlimited entries', '25 users', 'All integrations'], true), ('Enterprise', 'Custom', '', ['SSO & SAML', 'Dedicated support', 'Audit retention 10y'], false)];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Billing')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Billing'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Plan', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
@@ -438,8 +438,8 @@ class _BackupView extends StatelessWidget {
         final scope = Map<String, bool>.from(fstate.value<Map>('scope') ?? const {});
         void toggleScope(String k) => form.setField('scope', {...scope, k: !(scope[k] ?? false)});
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Backup')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Backup'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Automatic Backups', trailing: const Pill('Healthy'), children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

@@ -22,8 +22,8 @@ class CurrenciesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Currencies')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Currencies'),
       body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < _currencies.length; i++)
@@ -63,8 +63,8 @@ class CreateCurrencyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Add Currency')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Add Currency'),
       body: MScroll([
       ISection(icon: 'swap', title: 'Currency Definition', subtitle: 'ISO code, display names and symbol', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         IField(label: 'ISO Code', placeholder: 'e.g. USD', mono: true, required: true),
@@ -89,8 +89,8 @@ class CurrencyDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const history = [('Dec 18, 2025', '3.750200', 'System · ECB feed'), ('Dec 11, 2025', '3.751400', 'System · ECB feed'), ('Dec 04, 2025', '3.749800', 'Layla A. (manual)'), ('Nov 27, 2025', '3.752100', 'System · ECB feed')];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Currency Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Currency Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Rate', subtitle: 'Per 1 SAR · updated Dec 18, 2025', trailing: Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
@@ -136,8 +136,8 @@ class ExchangeRateSetupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const pairs = [('USD', 'US Dollar', '3.750200', '3.751400', true), ('EUR', 'Euro', '4.082100', '4.079800', true), ('GBP', 'British Pound', '4.761000', '4.758200', true), ('AED', 'UAE Dirham', '1.020800', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', '12.17200', false)];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Exchange Rates')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Exchange Rates'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -193,8 +193,8 @@ class FiscalYearSetupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Fiscal Year')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Fiscal Year'),
       body: MScroll([
       ISection(icon: 'calendar', title: 'Year Definition', subtitle: 'Define the active fiscal year boundaries', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, trailing: Pill('Open'), children: [
         IField(label: 'Fiscal Year', value: '2024', mono: true),

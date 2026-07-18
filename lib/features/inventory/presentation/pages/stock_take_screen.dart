@@ -45,8 +45,8 @@ class StockTakeScreen extends StatelessWidget {
       ('PNT-55310', 'Epoxy Floor Coating', 88, -1), ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stock Take')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Stock Take'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

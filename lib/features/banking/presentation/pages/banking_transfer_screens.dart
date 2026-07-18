@@ -13,8 +13,8 @@ class CreateLocalTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Local Transfer')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Local Transfer'),
       body: MScroll([
       ISection(icon: 'swap', title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         MMoney(label: 'Amount', value: '50,000.00', accent: SuperMaterialThemeData.of(context).colorScheme.primary, required: true),
@@ -42,8 +42,8 @@ class LocalTransferDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Local Transfer Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Local Transfer Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Inter-Account Settlement', trailing: Pill('Posted'), children: [
         Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
@@ -77,8 +77,8 @@ class CreateExternalTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create External Transfer')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create External Transfer'),
       body: MScroll([
       ISection(icon: 'globe', title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: SuperMaterialThemeData.of(context).colorScheme.tertiary, required: true),
@@ -108,8 +108,8 @@ class ExternalTransferDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('External Wire Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'External Wire Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'External Wire', trailing: Pill('Pending', tone: PillTone.warning), children: [
         Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

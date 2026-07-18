@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:super_core/super_core.dart' as super_core;
 import '../../features/auth/presentation/pages/auth_screen.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/accounts/presentation/pages/accounts_screens.dart';
@@ -242,8 +243,10 @@ final GoRouter router = GoRouter(
 
     // ── Shell with four tab branches ─────────────────────
     StatefulShellRoute.indexedStack(
-      builder: (ctx, state, shell) =>
-          Scaffold(body: WorkspaceShell(navigationShell: shell)),
+      builder: (context, state, shell) => Scaffold(
+        backgroundColor: super_core.SuperMaterialThemeData.of(context).colorScheme.surface,
+        body: WorkspaceShell(navigationShell: shell),
+      ),
       branches: [
         StatefulShellBranch(routes: [
           GoRoute(

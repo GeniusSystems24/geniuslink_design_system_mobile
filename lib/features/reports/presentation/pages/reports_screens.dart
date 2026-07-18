@@ -146,11 +146,8 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     final totDr = rows.fold<int>(0, (s, r) => s + r.$3);
     final totCr = rows.fold<int>(0, (s, r) => s + r.$4);
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-          elevation: 0,
-          title: const Text('Trial Balance')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Trial Balance'),
       body: MScroll([
         _ReportMeta(
             period: _period,
@@ -277,11 +274,8 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
       ),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-          elevation: 0,
-          title: const Text('Income Statement')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Income Statement'),
       body: MScroll([
         _ReportMeta(
             period: _period,
@@ -365,11 +359,8 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
       ),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-          elevation: 0,
-          title: const Text('Balance Sheet')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Balance Sheet'),
       body: MScroll([
         _ReportMeta(
             period: _period,
@@ -432,11 +423,8 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
         _store == 'All' ? rows : rows.where((r) => r.$5 == _store).toList();
     final total = visible.fold<double>(0, (s, r) => s + r.$3 * r.$4);
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-          elevation: 0,
-          title: const Text('Inventory Valuation')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Inventory Valuation'),
       body: MScroll([
         MCard(pad: 14, children: [
           Segmented(
@@ -571,9 +559,8 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
     ];
     final visible = logs.where((l) => _act == 'All' || l.$3 == _act).toList();
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-          backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Audit Log')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Audit Log'),
       body: MScroll([
         Segmented(options: const [
           'All',

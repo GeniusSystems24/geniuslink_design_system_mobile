@@ -12,8 +12,8 @@ class CreateDepositScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Deposit')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Deposit'),
       body: MScroll([
       ISection(icon: 'download', title: 'Deposit Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
         MMoney(label: 'Amount', value: '120,000.00', accent: SuperMaterialThemeData.of(context).colorScheme.secondary, required: true, sign: '+'),
@@ -42,8 +42,8 @@ class DepositDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Deposit Receipt')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Deposit Receipt'),
       body: MScroll([
       Container(
         padding: const EdgeInsets.all(18),
@@ -85,8 +85,8 @@ class CreateWithdrawalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Withdrawal')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Withdrawal'),
       body: MScroll([
       ISection(icon: 'card', title: 'Withdrawal Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.error, children: [
         MMoney(label: 'Amount', value: '12,045.00', accent: SuperMaterialThemeData.of(context).colorScheme.error, required: true, sign: '−'),
@@ -110,8 +110,8 @@ class WithdrawalDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Withdrawal Voucher')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Withdrawal Voucher'),
       body: MScroll([
       Container(
         padding: const EdgeInsets.all(18),

@@ -19,8 +19,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ('finish', 'CAT-005', 'Finishing Materials', 128, '184,390', <(String, String, int)>[]),
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Categories')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Categories'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Category Tree', subtitle: '5 top-level groups', pad: 8, children: [
         for (final node in tree) ...[

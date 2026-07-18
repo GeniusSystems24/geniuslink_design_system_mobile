@@ -44,8 +44,8 @@ class _JournalListScreenState extends State<JournalListScreen> {
     }).toList();
 
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Journal Entries')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Journal Entries'),
       body: MScroll([
       SearchInput(placeholder: 'Search entries…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Posted', 'Draft'], value: _filter, onChange: (v) => setState(() => _filter = v)),
@@ -90,8 +90,8 @@ class CreateJournalEntryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Create Journal Entry')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Create Journal Entry'),
       body: MScroll([
       ISection(icon: 'doc', title: 'Entry Header', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         IField(label: 'Serial No', value: 'JV-2024-0227', mono: true, locked: true),
@@ -189,8 +189,8 @@ class JournalEntryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Journal Entry Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Journal Entry Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Journal Entry', trailing: Pill('Posted'), children: [
         Text('JV-2024-0226 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

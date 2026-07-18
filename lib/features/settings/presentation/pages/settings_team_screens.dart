@@ -30,8 +30,8 @@ class RolesListScreen extends StatelessWidget {
       _ => null,
     };
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Roles List')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Roles List'),
       body: MScroll([
       for (final r in roles)
         MCard(children: [
@@ -105,8 +105,8 @@ class _RoleEditorView extends StatelessWidget {
           form.setField('perms', n);
         }
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Role Editor')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Role Editor'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Accountant', subtitle: '2 members assigned', children: [
             TInput(label: 'Role Name', defaultValue: 'Accountant'),
@@ -166,8 +166,8 @@ class TenantsScreen extends StatelessWidget {
       builder: (context, tstate) {
         final activeId = tstate.activeTenantId;
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Workspaces')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Workspaces'),
       body: MScroll([
           for (final t in tenants)
             MCard(children: [

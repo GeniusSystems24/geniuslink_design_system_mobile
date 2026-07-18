@@ -45,8 +45,8 @@ class SettingsHubScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Settings')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Settings'),
       body: MScroll([
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
@@ -96,8 +96,8 @@ class CompanyProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Company Profile')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Company Profile'),
       body: MScroll([
       ISection(icon: 'building', title: 'Identity', sub: 'Names shown on documents', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         Row(children: [
@@ -147,8 +147,8 @@ class _FinancialSettingsView extends StatelessWidget {
       builder: (context, state) {
         final basis = state.value<String>('basis') ?? 'accrual';
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Financial Settings')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Financial Settings'),
       body: MScroll([
           ISection(icon: 'globe', title: 'Currency & Calendar', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
             const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
@@ -218,8 +218,8 @@ class _TaxesSettingsView extends StatelessWidget {
         void toggle(int i) { final n = clone(); n[i][4] = !(n[i][4] as bool); form.setField('rules', n); }
         void add() { final n = clone()..add(['New Rule', '0', 'VAT', '—', false]); form.setField('rules', n); }
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Taxes')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Taxes'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Tax Rules', subtitle: '$active active · applied at line level', pad: 8, children: [
             Padding(
@@ -269,8 +269,8 @@ class CurrenciesSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const pairs = [('USD', 'US Dollar', '3.750200', true), ('EUR', 'Euro', '4.082100', true), ('GBP', 'British Pound', '4.761000', true), ('AED', 'UAE Dirham', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', false)];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Currencies')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Currencies'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -322,8 +322,8 @@ class NumberingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const seqs = [('Sales Invoice', 'INV', '0412'), ('Journal Voucher', 'JV', '0227'), ('Deposit', 'DEP', '0183'), ('Purchase Order', 'PO', '0212'), ('Inventory Transfer', 'INV-TRF', '0118')];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Numbering')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Numbering'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Document Sequences', subtitle: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
         Padding(
@@ -361,8 +361,8 @@ class BranchesStoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const rows = [('ST-001', 'Downtown Central', 'وسط المدينة', 'Riyadh', 'Store', 'active'), ('ST-002', 'King Fahd Warehouse', 'مستودع الملك فهد', 'Riyadh', 'Warehouse', 'active'), ('ST-003', 'Jeddah Showroom', 'صالة عرض جدة', 'Jeddah', 'Store', 'active'), ('BR-010', 'Dammam Branch', 'فرع الدمام', 'Dammam', 'Branch', 'inactive')];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Branches & Stores')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Branches & Stores'),
       body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)

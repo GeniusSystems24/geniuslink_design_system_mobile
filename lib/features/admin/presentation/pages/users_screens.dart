@@ -58,8 +58,8 @@ class _UsersListView extends StatelessWidget {
         final visible = state.results;
         final role = (state.filters['role'] as String?) ?? 'All';
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Users')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Users'),
       body: MScroll([
           SearchInput(placeholder: 'Search name or email…', value: state.query, onChange: cubit.setQuery),
           Segmented(options: roles, value: role, onChange: (v) => cubit.setFilter('role', v)),
@@ -186,8 +186,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     const activity = [('Posted JV-2024-0226', 'Dec 19, 10:14'), ('Created DEP-2024-0182', 'Dec 18, 09:42'), ('Edited account 1200', 'Dec 17, 16:20')];
     const sessions = [('MacBook Pro · Chrome', 'Riyadh · 10.4.22.18 · now', true), ('iPhone 15 · App', 'Riyadh · 10.4.22.51 · 2h ago', false), ('Windows · Edge', 'Jeddah · 94.12.8.140 · Yesterday', false)];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('User Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'User Detail'),
       body: MScroll([
       MCard(children: [
         Row(children: [
@@ -297,8 +297,8 @@ class CreateUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Invite User')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Invite User'),
       body: MScroll([
       ISection(icon: 'user', title: 'Identity', sub: "The new member's name and contact", marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         TInput(label: 'Name English', placeholder: 'e.g. Omar Hassan', required: true),
@@ -374,8 +374,8 @@ class _RolesPermissionsView extends StatelessWidget {
         }
 
         return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Roles & Permissions')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Roles & Permissions'),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Select Role', subtitle: "Tap a module's badge to cycle its access level", children: [
             Segmented(options: _roleNames, value: role, onChange: (v) => form.setField('role', v)),

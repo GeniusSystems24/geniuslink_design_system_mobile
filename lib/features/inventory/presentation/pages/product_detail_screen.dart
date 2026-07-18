@@ -16,8 +16,8 @@ class ProductDetailScreen extends StatelessWidget {
     const byStore = [('ST-001', 'Downtown Central', 88, '39,600.00'), ('ST-002', 'King Fahd Warehouse', 42, '18,900.00'), ('ST-003', 'Jeddah Showroom', 12, '5,400.00')];
     const moves = [('INV-ISS-0089', 'Issue', '−12', 'Dec 18'), ('INV-REC-0241', 'Receive', '+32', 'Dec 16'), ('INV-TRF-0117', 'Transfer', '±18', 'Dec 14')];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Product Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Product Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Stock Summary', subtitle: 'Aggregated across all stores', trailing: const Pill('In Stock'), children: [
         GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2.0, children: const [

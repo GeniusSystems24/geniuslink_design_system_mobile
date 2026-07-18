@@ -74,8 +74,8 @@ class TransferDetailScreen extends StatelessWidget {
       ('Reinforcement Bar #6', '240 PCS × 78.00', '18,720.00')
     ];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Transfer Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Transfer Detail'),
       body: MScroll([
       MCard(
           accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,

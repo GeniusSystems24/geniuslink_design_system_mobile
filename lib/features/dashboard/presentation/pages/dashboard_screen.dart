@@ -50,12 +50,8 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(
-        backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-        elevation: 0,
-        title: const Text('Dashboard'),
-      ),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Dashboard'),
       body: _buildDashboardContent(context),
     );
   }

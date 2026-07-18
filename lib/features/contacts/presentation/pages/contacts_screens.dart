@@ -65,8 +65,8 @@ class _ContactListScreenState extends State<ContactListScreen> {
     final ql = _q.trim().toLowerCase();
     final visible = d.rows.where((c) => (_status == 'All' || c.$7 == _status.toLowerCase()) && (ql.isEmpty || c.$2.toLowerCase().contains(ql) || c.$1.toLowerCase().contains(ql) || c.$3.contains(_q))).toList();
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: Text(d.labelPl)),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: SuperAppBar(title: d.labelPl),
       body: MScroll([
       SearchInput(placeholder: 'Search ${d.labelPl.toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Active', 'Pending', 'Inactive'], value: _status, onChange: (v) => setState(() => _status = v)),
@@ -113,8 +113,8 @@ class CreateContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final d = kind;
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: Text('Add ${d.label}')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: SuperAppBar(title: 'Add ${d.label}'),
       body: MScroll([
       ISection(icon: 'user', title: '${d.label} Identity', subtitle: 'Legal name and contact details', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         TInput(label: 'Name English', placeholder: d.label == 'Customer' ? 'e.g. Riyadh Construction Co.' : 'e.g. Global Steel Imports LLC', required: true),
@@ -153,8 +153,8 @@ class ContactDetailScreen extends StatelessWidget {
     final d = kind;
     final c = d.rows.first;
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: Text('${d.label} Detail')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: SuperAppBar(title: '${d.label} Detail'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Outstanding ${d.balanceLabel}', subtitle: '${c.$6} orders · since Apr 2024', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [

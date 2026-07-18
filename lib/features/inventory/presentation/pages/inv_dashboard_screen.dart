@@ -33,8 +33,8 @@ class InvDashboardScreen extends StatelessWidget {
     final ops = [('INV-REC-0241', 'Receive', '+24,200', SuperMaterialThemeData.of(context).colorScheme.secondary), ('INV-ISS-0089', 'Issue', '-5,400', SuperMaterialThemeData.of(context).colorScheme.error), ('INV-TRF-0117', 'Transfer', '+20,970', SuperMaterialThemeData.of(context).colorScheme.primary), ('INV-ADJ-0058', 'Adjustment', '-307', SuperMaterialThemeData.of(context).colorScheme.tertiary)];
     const low = [('AGG-21044', 'Coarse Aggregate 20mm', 46, 80, 58), ('TMR-19080', 'Timber 2×4 Treated', 24, 60, 40), ('RBR-71203', 'Reinforcement Bar #6', 0, 100, 0)];
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Inventory')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Inventory'),
       body: MScroll([
       GridView.count(
         crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),

@@ -22,8 +22,8 @@ class _TransferListScreenState extends State<TransferListScreen> {
     PillTone tone(String s) => s == 'delivered' ? PillTone.success : (s == 'in-transit' ? PillTone.warning : (s == 'cancelled' ? PillTone.danger : PillTone.neutral));
     String label(String s) => s == 'in-transit' ? 'Transit' : (s[0].toUpperCase() + s.substring(1));
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Stock Transfers')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Stock Transfers'),
       body: MScroll([
       SizedBox(
         height: 32,

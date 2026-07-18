@@ -32,8 +32,8 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
     const tpls = [('sm', 'Small Tag', '38×19'), ('md', 'Medium Label', '50×30'), ('lg', 'Large Shelf', '80×40'), ('sh', 'Shipping', '100×50')];
     final size = tpls.firstWhere((t) => t.$1 == _tpl).$3;
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Barcode Print')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Barcode Print'),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Preview', subtitle: 'Code 128 · $size mm', children: [
         Container(

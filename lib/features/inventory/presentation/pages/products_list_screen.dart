@@ -32,8 +32,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ? _products
         : _products.where((p) => p.$3 == _cat).toList();
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg,
-      appBar: AppBar(backgroundColor: SuperMaterialThemeData.of(context).superTheme.bg, elevation: 0, title: const Text('Products')),
+      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
+      appBar: const SuperAppBar(title: 'Products'),
       body: MScroll([
       Container(
         height: 44,
