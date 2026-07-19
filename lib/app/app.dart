@@ -79,6 +79,7 @@ class GeniusLinkApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: lightTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme)]),
           darkTheme: darkTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme)]),
+          themeMode:ThemeMode.light,
           routerConfig: router,
         ),
       ),
