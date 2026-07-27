@@ -91,11 +91,15 @@ class _TInputState extends State<TInput> {
   @override
   Widget build(BuildContext context) => SuperTextFormField(
         controller: _controller,
-        label: widget.label,
-        placeholder: widget.placeholder,
+        decoration: InputDecoration(
+          labelText: widget.label,
+          hintText: widget.placeholder,
+          prefixIcon: widget.icon == null
+              ? null
+              : Icon(MIcons.of(widget.icon!), size: 18),
+        ),
         required: widget.required,
         arabic: widget.ar,
-        leadingIcon: widget.icon == null ? null : MIcons.of(widget.icon!),
         type: widget.obscure ? SuperTextType.password : SuperTextType.text,
       );
 }
@@ -115,8 +119,10 @@ class TPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperTextFormField(
-        label: label,
-        placeholder: placeholder,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: placeholder,
+        ),
         required: required,
         type: SuperTextType.password,
       );
@@ -139,7 +145,7 @@ class TSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperSelectFormField<String>(
-        label: label,
+        decoration: InputDecoration(labelText: label),
         required: required,
         initialValue: value,
         searchable: options.length > 8,
@@ -159,7 +165,7 @@ class TSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperBoolFormField(
-        title: label,
+        decoration: InputDecoration(labelText: label),
         initialValue: defaultOn,
       );
 }
@@ -177,8 +183,8 @@ class TCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperBoolFormField(
+        decoration: InputDecoration(labelText: label),
         style: SuperBoolStyle.checkbox,
-        title: label,
         initialValue: defaultChecked,
       );
 }
@@ -401,8 +407,10 @@ class _SearchInputState extends State<SearchInput> {
   @override
   Widget build(BuildContext context) => SuperTextFormField(
         controller: _controller,
-        placeholder: widget.placeholder,
-        leadingIcon: Icons.search_rounded,
+        decoration: InputDecoration(
+          hintText: widget.placeholder,
+          prefixIcon: const Icon(Icons.search_rounded, size: 18),
+        ),
         clearable: true,
         onChanged: widget.onChange,
       );

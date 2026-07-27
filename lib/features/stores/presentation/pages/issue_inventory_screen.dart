@@ -1,4 +1,4 @@
-part of 'stores_screens.dart';
+﻿part of 'stores_screens.dart';
 
 class IssueInventoryScreen extends StatelessWidget {
   const IssueInventoryScreen({super.key});
@@ -6,7 +6,7 @@ class IssueInventoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Issue Inventory'),
+      appBar: SuperAppBar(title: const Text('Issue Inventory')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Issue Details', children: const [
         MField(label: 'Serial No', value: 'INV-ISS-2024-0089', mono: true),

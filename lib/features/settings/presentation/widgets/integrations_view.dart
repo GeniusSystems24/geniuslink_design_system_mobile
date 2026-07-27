@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class IntegrationsView extends StatelessWidget {
       void toggle(String id) => form.setField('state', {...values, id: !(values[id] ?? false)});
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-        appBar: const SuperAppBar(title: 'Integrations'),
+        appBar: SuperAppBar(title: const Text('Integrations')),
         body: MScroll([
           for (final category in IntegrationCategory.values)
             if (integrations.any((item) => item.category == category))

@@ -1,4 +1,4 @@
-part of 'settings_org_screens.dart';
+﻿part of 'settings_org_screens.dart';
 
 class CurrenciesSettingsScreen extends StatelessWidget {
   const CurrenciesSettingsScreen({super.key});
@@ -7,7 +7,7 @@ class CurrenciesSettingsScreen extends StatelessWidget {
     const pairs = [('USD', 'US Dollar', '3.750200', true), ('EUR', 'Euro', '4.082100', true), ('GBP', 'British Pound', '4.761000', true), ('AED', 'UAE Dirham', '1.020800', false), ('KWD', 'Kuwaiti Dinar', '12.18000', false)];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Currencies'),
+      appBar: SuperAppBar(title: const Text('Currencies')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Base Currency', children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

@@ -1,4 +1,4 @@
-part of 'contacts_screens.dart';
+﻿part of 'contacts_screens.dart';
 
 class ContactDetailScreen extends StatelessWidget {
   final ContactKind kind;
@@ -15,7 +15,7 @@ class ContactDetailScreen extends StatelessWidget {
     if (d.contacts.isEmpty) {
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-        appBar: SuperAppBar(title: '${contactSingularLabel(d.type)} Detail'),
+        appBar: SuperAppBar(title: Text('${contactSingularLabel(d.type)} Detail')),
         body: Center(
           child: Text(
             'No ${contactSingularLabel(d.type).toLowerCase()} data available.',
@@ -36,7 +36,7 @@ class ContactDetailScreen extends StatelessWidget {
     final c = d.contacts[safeIndex];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: '${contactSingularLabel(d.type)} Detail'),
+      appBar: SuperAppBar(title: Text('${contactSingularLabel(d.type)} Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Outstanding ${contactBalanceLabel(d.type)}', subtitle: '${c.orderCount} orders · since Apr 2024', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [

@@ -1,4 +1,4 @@
-part of 'settings_org_screens.dart';
+﻿part of 'settings_org_screens.dart';
 
 class BranchesStoresScreen extends StatelessWidget {
   const BranchesStoresScreen({super.key});
@@ -7,7 +7,7 @@ class BranchesStoresScreen extends StatelessWidget {
     const rows = [('ST-001', 'Downtown Central', 'وسط المدينة', 'Riyadh', 'Store', 'active'), ('ST-002', 'King Fahd Warehouse', 'مستودع الملك فهد', 'Riyadh', 'Warehouse', 'active'), ('ST-003', 'Jeddah Showroom', 'صالة عرض جدة', 'Jeddah', 'Store', 'active'), ('BR-010', 'Dammam Branch', 'فرع الدمام', 'Dammam', 'Branch', 'inactive')];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Branches & Stores'),
+      appBar: SuperAppBar(title: const Text('Branches & Stores')),
       body: MScroll([
       MCard(pad: 8, children: [
         for (int i = 0; i < rows.length; i++)

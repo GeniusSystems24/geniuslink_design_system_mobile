@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — More menu with reusable navigation configuration.
 // ============================================================
 
@@ -30,7 +30,7 @@ class MoreScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'More'),
+      appBar: SuperAppBar(title: const Text('More')),
       body: MScroll([
         MSuggest(
           items: spotlight,

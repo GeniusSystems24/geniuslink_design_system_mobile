@@ -1,4 +1,4 @@
-part of 'settings_platform_screens.dart';
+﻿part of 'settings_platform_screens.dart';
 
 class BillingScreen extends StatelessWidget {
   const BillingScreen({super.key});
@@ -8,7 +8,7 @@ class BillingScreen extends StatelessWidget {
     const plans = [('Starter', '0', 'free', ['1 workspace', '3 users', '500 entries/mo'], false), ('Business', '349', '/mo', ['Unlimited entries', '25 users', 'All integrations'], true), ('Enterprise', 'Custom', '', ['SSO & SAML', 'Dedicated support', 'Audit retention 10y'], false)];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Billing'),
+      appBar: SuperAppBar(title: const Text('Billing')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Plan', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [

@@ -1,4 +1,4 @@
-part of 'settings_org_screens.dart';
+﻿part of 'settings_org_screens.dart';
 
 class SettingsHubScreen extends StatelessWidget {
   final List<SettingsNavigationSection> sections;
@@ -11,7 +11,7 @@ class SettingsHubScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Settings'),
+      appBar: SuperAppBar(title: const Text('Settings')),
       body: MScroll([
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),

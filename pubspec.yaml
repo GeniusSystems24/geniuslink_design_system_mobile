@@ -13,28 +13,28 @@ dependencies:
   # State management — BLoC (Cubit-first). Migration from ChangeNotifier /
   # setState to flutter_bloc, designed for multi-tenant + database-per-tenant
   # isolation. See bloc-state-management-plan.md.
-  flutter_bloc: ^8.1.6
-  bloc: ^8.1.4
+  flutter_bloc: ^9.1.1
+  bloc: ^9.2.1
   equatable: ^2.0.5
   # Legacy widget kit retained for screens that have not yet moved to a
   # focused Super package.
   geniuslink_design_system: ^2.8.1
 
   # Single source of truth for the complete Material theme and shared tokens.
-  super_core: ^1.3.0
+  super_core: ^3.0.0
 
   # Standard text, numeric, date, select, attachment and boolean fields.
-  super_form_field: ^1.2.0
+  super_form_field: ^1.4.0
 
   # Typeahead / combobox fields. Keep this package for searchable master-data
   # selectors, SKU entry and global spotlight search.
-  super_auto_suggestion_box: ^0.8.0
+  super_auto_suggestion_box: ^0.9.0
 
   # Focused Super widgets used by the remaining non-form interfaces. These
   # versions share the super_core >=1.2.0 <2.0.0 foundation.
-  super_table_field: ^2.3.0
-  super_tree_field: ^0.4.0
-  super_tab_bar: ^2.7.0
+  super_table_field: ^2.4.0
+  super_tree_field: ^0.5.0
+  super_tab_bar: ^2.8.0
 
   go_router: ^17.2.3
 
@@ -43,10 +43,10 @@ dev_dependencies:
   go_router_builder: ^4.3.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
   # BLoC testing — state-machine assertions + mocking for the per-tenant
   # isolation tests (Phase 9).
-  bloc_test: ^9.1.7
+  bloc_test: ^10.0.0
   mocktail: ^1.0.4
 
 flutter:

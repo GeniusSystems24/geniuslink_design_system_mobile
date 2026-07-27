@@ -1,4 +1,4 @@
-
+﻿
 part of 'stores_screens.dart';
 
 class StoresScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class StoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Stores'),
+      appBar: SuperAppBar(title: const Text('Stores')),
       body: MScroll([
         for (final store in stores)
           GestureDetector(

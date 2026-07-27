@@ -20,7 +20,7 @@ class _UomScreenState extends State<UomScreen> {
     final cur = groups[_active]!;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Units of Measure'),
+      appBar: SuperAppBar(title: const Text('Units of Measure')),
       body: MScroll([
       GridView.count(
         crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),

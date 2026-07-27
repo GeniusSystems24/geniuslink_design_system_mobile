@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/material.dart';
 
 import '../../../../app/router/navigation_extensions.dart';
@@ -36,7 +36,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     final rows = _category == 'All' ? widget.products : widget.products.where((product) => product.category == _category).toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Products'),
+      appBar: SuperAppBar(title: const Text('Products')),
       body: MScroll([
         Container(height: 44, padding: const EdgeInsets.symmetric(horizontal: 14), decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.borderStrong), borderRadius: BorderRadius.circular(10)), child: Row(children: [Icon(Icons.search_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3), const SizedBox(width: 10), Text('Search product or SKU…', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 14, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))])),
         SizedBox(height: 32, child: ListView.separated(scrollDirection: Axis.horizontal, itemCount: categories.length, separatorBuilder: (_, __) => const SizedBox(width: 8), itemBuilder: (_, i) {

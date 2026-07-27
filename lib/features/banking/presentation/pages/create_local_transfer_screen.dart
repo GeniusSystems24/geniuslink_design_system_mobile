@@ -1,4 +1,4 @@
-part of 'banking_transfer_screens.dart';
+﻿part of 'banking_transfer_screens.dart';
 
 class CreateLocalTransferScreen extends StatelessWidget {
   const CreateLocalTransferScreen({super.key});
@@ -6,7 +6,7 @@ class CreateLocalTransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Local Transfer'),
+      appBar: SuperAppBar(title: const Text('Create Local Transfer')),
       body: MScroll([
       ISection(icon: 'swap', title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         MMoney(label: 'Amount', value: '50,000.00', accent: SuperMaterialThemeData.of(context).colorScheme.primary, required: true),

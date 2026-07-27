@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
 // list · createAccount · accountDetail · createGroup · groupDetail
 // ============================================================
@@ -42,20 +42,24 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Account Group'),
+      appBar: SuperAppBar(title: const Text('Create Account Group')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Details', subtitle: 'Name and tree association', children: [
         SuperTextFormField(
-          label: 'Name English',
-          placeholder: 'e.g. Current Assets',
+          decoration: const InputDecoration(
+            labelText: 'Name English',
+            hintText: 'e.g. Current Assets',
+          ),
           required: true,
           minLength: 3,
           forceError: _force,
           onValidity: (e) => _nameEnErr = e,
         ),
         SuperTextFormField(
-          label: 'الاسم بالعربية',
-          placeholder: 'مثال: الأصول المتداولة',
+          decoration: const InputDecoration(
+            labelText: 'الاسم بالعربية',
+            hintText: 'مثال: الأصول المتداولة',
+          ),
           required: true,
           minLength: 3,
           arabic: true,
@@ -71,8 +75,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       ]),
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'Additional Information', children: const [
         SuperTextFormField(
-          label: 'Note',
-          placeholder: 'Add any notes about this group…',
+          decoration: InputDecoration(
+            labelText: 'Note',
+            hintText: 'Add any notes about this group…',
+          ),
           multiline: true,
           rows: 3,
         ),

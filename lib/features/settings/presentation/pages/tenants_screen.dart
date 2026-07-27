@@ -1,4 +1,4 @@
-part of 'settings_team_screens.dart';
+﻿part of 'settings_team_screens.dart';
 
 class TenantsScreen extends StatelessWidget {
   const TenantsScreen({super.key});
@@ -11,7 +11,7 @@ class TenantsScreen extends StatelessWidget {
         final activeId = tstate.activeTenantId;
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Workspaces'),
+      appBar: SuperAppBar(title: const Text('Workspaces')),
       body: MScroll([
           for (final t in tenants)
             MCard(children: [

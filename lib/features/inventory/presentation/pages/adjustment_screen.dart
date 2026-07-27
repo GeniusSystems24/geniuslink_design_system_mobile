@@ -77,7 +77,7 @@ class AdjustmentScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Inventory Adjustment'),
+      appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
       body: MScroll([
       ISection(
           icon: 'box',

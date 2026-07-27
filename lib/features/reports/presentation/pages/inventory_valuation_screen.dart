@@ -1,4 +1,4 @@
-part of 'reports_screens.dart';
+﻿part of 'reports_screens.dart';
 
 class InventoryValuationScreen extends StatefulWidget {
   const InventoryValuationScreen({super.key});
@@ -23,7 +23,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
     final total = visible.fold<double>(0, (s, r) => s + r.$3 * r.$4);
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Inventory Valuation'),
+      appBar: SuperAppBar(title: const Text('Inventory Valuation')),
       body: MScroll([
         MCard(pad: 14, children: [
           Segmented(

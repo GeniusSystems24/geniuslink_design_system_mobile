@@ -13,7 +13,7 @@ class ReceiveDetailScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Receive Detail'),
+      appBar: SuperAppBar(title: const Text('Receive Detail')),
       body: MScroll([
       MCard(
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,

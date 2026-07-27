@@ -31,7 +31,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     }).toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: contactPluralLabel(d.type)),
+      appBar: SuperAppBar(title: Text(contactPluralLabel(d.type))),
       body: MScroll([
       SearchInput(placeholder: 'Search ${contactPluralLabel(d.type).toLowerCase()}…', value: _q, onChange: (v) => setState(() => _q = v)),
       Segmented(options: const ['All', 'Active', 'Pending', 'Inactive'], value: _status, onChange: (v) => setState(() => _status = v)),

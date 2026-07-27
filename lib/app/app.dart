@@ -35,8 +35,19 @@ class GeniusLinkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const resolver = FakeTenantConnectionResolver();
-    var lightTheme = SuperMaterialThemeData.light(palette: SuperPalette.bluePalette);
-    var darkTheme = SuperMaterialThemeData.dark(palette: SuperPalette.bluePalette);
+    var palette = SuperPalette.bluePalette;
+    var lightTheme = SuperMaterialThemeData.light(
+      palette: palette,
+      textTheme: SuperTextTheme.fromTokens(
+        palette.applyTo(SuperTokensData.fallback),
+      ),
+    );
+    var darkTheme = SuperMaterialThemeData.dark(
+      palette: palette,
+      textTheme: SuperTextTheme.fromTokens(
+        palette.applyTo(SuperTokensData.fallback),
+      ),
+    );
 
     return MultiBlocProvider(
       providers: [
@@ -51,8 +62,8 @@ class GeniusLinkApp extends StatelessWidget {
           create: (_) => TenantCubit(resolver: resolver),
         ),
         BlocProvider<NavCubit>(
-          create: (_) => NavCubit()
-            ..registryHas = (id) => portedScreens.contains(id),
+          create: (_) =>
+              NavCubit()..registryHas = (id) => portedScreens.contains(id),
         ),
       ],
       child: BlocListener<AuthBloc, AuthState>(
@@ -77,9 +88,17 @@ class GeniusLinkApp extends StatelessWidget {
         child: MaterialApp.router(
           title: 'GeniusLink',
           debugShowCheckedModeBanner: false,
-          theme: lightTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme)]),
-          darkTheme: darkTheme.copyWith(extensions: [AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme)]),
-          themeMode:ThemeMode.light,
+          theme: lightTheme.copyWith(
+            extensions: [
+              AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme),
+            ],
+          ),
+          darkTheme: darkTheme.copyWith(
+            extensions: [
+              AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
+            ],
+          ),
+          themeMode: ThemeMode.light,
           routerConfig: router,
         ),
       ),

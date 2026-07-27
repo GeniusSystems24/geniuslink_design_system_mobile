@@ -79,8 +79,10 @@ class _MobileDashboardSearchSheetState
                 Expanded(
                   child: SuperTextFormField(
                     autofocus: true,
-                    placeholder: 'Search all operations…',
-                    leadingIcon: Icons.search_rounded,
+                    decoration: const InputDecoration(
+                      hintText: 'Search all operations…',
+                      prefixIcon: Icon(Icons.search_rounded, size: 18),
+                    ),
                     clearable: true,
                     density: FieldDensity.compact,
                     onChanged: (value) => setState(() => _query = value),

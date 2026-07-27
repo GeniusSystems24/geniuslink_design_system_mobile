@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class NotificationsView extends StatelessWidget {
       void toggle(String categoryId, int channelIndex) { final next = {for (final entry in prefs.entries) entry.key: [...entry.value]}; next[categoryId]![channelIndex] = !next[categoryId]![channelIndex]; form.setField('prefs', next); }
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-        appBar: const SuperAppBar(title: 'Notifications'),
+        appBar: SuperAppBar(title: const Text('Notifications')),
         body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Preferences', subtitle: 'Toggle a channel per category', pad: 8, children: [
             Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Column(children: [

@@ -1,4 +1,4 @@
-
+﻿
 part of 'currencies_screens.dart';
 
 class CurrenciesListScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class CurrenciesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Currencies'),
+      appBar: SuperAppBar(title: const Text('Currencies')),
       body: MScroll([
         MCard(pad: 8, children: [
           for (int i = 0; i < currencies.length; i++)

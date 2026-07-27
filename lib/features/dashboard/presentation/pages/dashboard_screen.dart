@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Dashboard tab
 // KPI row · cash-flow bars · balances · recent ops · alerts
 // ============================================================
@@ -17,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Dashboard'),
+      appBar: SuperAppBar(title: const Text('Dashboard')),
       body: _buildDashboardContent(context),
     );
   }

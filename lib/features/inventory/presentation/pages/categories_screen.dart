@@ -21,7 +21,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Categories'),
+      appBar: SuperAppBar(title: const Text('Categories')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Category Tree', subtitle: '5 top-level groups', pad: 8, children: [
         for (final node in tree) ...[

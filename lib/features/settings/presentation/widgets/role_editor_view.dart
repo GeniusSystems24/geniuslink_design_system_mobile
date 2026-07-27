@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class RoleEditorView extends StatelessWidget {
       void toggle(String moduleId, int columnIndex) { final next = {for (final entry in permissions.entries) entry.key: [...entry.value]}; next[moduleId]![columnIndex] = !next[moduleId]![columnIndex]; form.setField('perms', next); }
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-        appBar: const SuperAppBar(title: 'Role Editor'),
+        appBar: SuperAppBar(title: const Text('Role Editor')),
         body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Accountant', subtitle: '2 members assigned', children: const [TInput(label: 'Role Name', defaultValue: 'Accountant')]),
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Permission Matrix', subtitle: 'Tap a cell to toggle access', pad: 8, children: [

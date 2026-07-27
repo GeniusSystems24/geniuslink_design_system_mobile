@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class TaxesSettingsView extends StatelessWidget {
         void add() { final n = clone()..add(['New Rule', '0', 'VAT', '—', false]); form.setField('rules', n); }
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Taxes'),
+      appBar: SuperAppBar(title: const Text('Taxes')),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Tax Rules', subtitle: '$active active · applied at line level', pad: 8, children: [
             Padding(

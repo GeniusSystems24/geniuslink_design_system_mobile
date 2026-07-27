@@ -304,8 +304,10 @@ class _MTableState extends State<MTable> {
       padding: const EdgeInsets.only(bottom: 8),
       child: SuperTextFormField(
         controller: _searchCtrl,
-        placeholder: widget.searchHint,
-        leadingIcon: Icons.search_rounded,
+        decoration: InputDecoration(
+          hintText: widget.searchHint,
+          prefixIcon: const Icon(Icons.search_rounded, size: 18),
+        ),
         clearable: true,
         density: FieldDensity.compact,
         onChanged: _controller.setSearch,

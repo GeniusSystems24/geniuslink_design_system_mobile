@@ -1,4 +1,4 @@
-
+﻿
 part of 'accounts_screens.dart';
 
 class AccountsScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class AccountsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Accounts'),
+      appBar: SuperAppBar(title: const Text('Accounts')),
       body: MScroll([
         Container(
           height: 44,

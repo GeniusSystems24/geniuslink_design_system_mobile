@@ -211,9 +211,11 @@ class MField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperTextFormField(
-        label: label,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: placeholder,
+        ),
         initialValue: value ?? '',
-        placeholder: placeholder,
         required: required,
         arabic: ar,
         readOnly: true,

@@ -75,7 +75,7 @@ class TransferDetailScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Transfer Detail'),
+      appBar: SuperAppBar(title: const Text('Transfer Detail')),
       body: MScroll([
       MCard(
           accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
@@ -89,7 +89,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Receive Inventory'),
+      appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
@@ -97,7 +97,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             const SuperTextFormField(
-              label: 'Serial No',
+              decoration: InputDecoration(labelText: 'Serial No'),
               initialValue: 'INV-REC-2024-0241',
               readOnly: true,
             ),
@@ -158,13 +158,15 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ]),
       ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         const SuperTextFormField(
-          label: 'Receipt Notes',
-          placeholder: 'PO number, delivery note, inspection results…',
+          decoration: InputDecoration(
+            labelText: 'Receipt Notes',
+            hintText: 'PO number, delivery note, inspection results…',
+          ),
           multiline: true,
           rows: 3,
         ),
         SuperAttachmentFormField(
-          label: 'Attachments',
+          decoration: const InputDecoration(labelText: 'Attachments'),
           accept: '.pdf,.jpg,.jpeg,.png',
           maxSizeMB: 10,
           maxFiles: 5,

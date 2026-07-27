@@ -1,4 +1,4 @@
-part of 'currencies_screens.dart';
+﻿part of 'currencies_screens.dart';
 
 class FiscalYearSetupScreen extends StatelessWidget {
   const FiscalYearSetupScreen({super.key});
@@ -7,7 +7,7 @@ class FiscalYearSetupScreen extends StatelessWidget {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Fiscal Year'),
+      appBar: SuperAppBar(title: const Text('Fiscal Year')),
       body: MScroll([
       ISection(icon: 'calendar', title: 'Year Definition', subtitle: 'Define the active fiscal year boundaries', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, trailing: const Pill('Open'), children: const [
         IField(label: 'Fiscal Year', value: '2024', mono: true),

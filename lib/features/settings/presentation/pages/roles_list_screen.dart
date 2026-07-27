@@ -1,4 +1,4 @@
-part of 'settings_team_screens.dart';
+﻿part of 'settings_team_screens.dart';
 
 class RolesListScreen extends StatelessWidget {
   const RolesListScreen({super.key});
@@ -20,7 +20,7 @@ class RolesListScreen extends StatelessWidget {
     };
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Roles List'),
+      appBar: SuperAppBar(title: const Text('Roles List')),
       body: MScroll([
       for (final r in roles)
         MCard(children: [

@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Auth screens: Login · SignUp · Forgot Password
 // (ports MLogin, MSignUp, MForgot)
 // ============================================================
@@ -68,8 +68,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(
-        title: 'Sign In',
+      appBar: SuperAppBar(
+        title: const Text('Sign In'),
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
@@ -173,7 +173,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Account'),
+      appBar: SuperAppBar(title: const Text('Create Account')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -272,7 +272,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
     final nav = widget.nav;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Forgot Password'),
+      appBar: SuperAppBar(title: const Text('Forgot Password')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -299,9 +299,11 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 const SizedBox(height: 16),
                 SuperTextFormField(
                   controller: _email,
-                  placeholder: 'you@company.com',
+                  decoration: const InputDecoration(
+                    hintText: 'you@company.com',
+                    prefixIcon: Icon(Icons.email_outlined, size: 18),
+                  ),
                   type: SuperTextType.email,
-                  leadingIcon: Icons.email_outlined,
                   clearable: true,
                 ),
                 const SizedBox(height: 16),

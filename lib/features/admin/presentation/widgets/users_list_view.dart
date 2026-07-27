@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +38,7 @@ class UsersListView extends StatelessWidget {
         final role = (state.filters['role'] as String?) ?? 'All';
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Users'),
+      appBar: SuperAppBar(title: const Text('Users')),
       body: MScroll([
           SearchInput(placeholder: 'Search name or email…', value: state.query, onChange: cubit.setQuery),
           Segmented(options: roles, value: role, onChange: (v) => cubit.setFilter('role', v)),

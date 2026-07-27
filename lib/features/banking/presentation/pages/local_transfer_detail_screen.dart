@@ -1,4 +1,4 @@
-part of 'banking_transfer_screens.dart';
+﻿part of 'banking_transfer_screens.dart';
 
 class LocalTransferDetailScreen extends StatelessWidget {
   const LocalTransferDetailScreen({super.key});
@@ -6,7 +6,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Local Transfer Detail'),
+      appBar: SuperAppBar(title: const Text('Local Transfer Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Inter-Account Settlement', trailing: const Pill('Posted'), children: [
         Text('TR-2024-9042 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

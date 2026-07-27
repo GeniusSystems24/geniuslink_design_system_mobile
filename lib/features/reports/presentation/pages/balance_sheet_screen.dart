@@ -1,4 +1,4 @@
-part of 'reports_screens.dart';
+﻿part of 'reports_screens.dart';
 
 class BalanceSheetScreen extends StatefulWidget {
   const BalanceSheetScreen({super.key});
@@ -32,7 +32,7 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Balance Sheet'),
+      appBar: SuperAppBar(title: const Text('Balance Sheet')),
       body: MScroll([
         ReportMeta(
             period: _period,

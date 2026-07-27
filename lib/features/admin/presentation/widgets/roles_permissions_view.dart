@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,7 @@ class RolesPermissionsView extends StatelessWidget {
 
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Roles & Permissions'),
+      appBar: SuperAppBar(title: const Text('Roles & Permissions')),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Select Role', subtitle: "Tap a module's badge to cycle its access level", children: [
             Segmented(options: matrix.roles, value: role, onChange: (v) => form.setField('role', v)),

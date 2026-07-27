@@ -33,9 +33,9 @@ class ISection extends StatefulWidget {
     this.children = const [],
     Widget? right,
     Widget? trailing,
-  })  : marker = marker ?? accentColor,
-        sub = sub ?? subtitle,
-        right = right ?? trailing;
+  }) : marker = marker ?? accentColor,
+       sub = sub ?? subtitle,
+       right = right ?? trailing;
 
   @override
   State<ISection> createState() => _ISectionState();
@@ -46,12 +46,16 @@ class _ISectionState extends State<ISection> {
 
   @override
   Widget build(BuildContext context) {
-    final marker = widget.marker ?? SuperMaterialThemeData.of(context).colorScheme.primary;
+    final marker =
+        widget.marker ?? SuperMaterialThemeData.of(context).colorScheme.primary;
     return Container(
       decoration: BoxDecoration(
-          color: SuperMaterialThemeData.of(context).superTheme.surface,
-          border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
-          borderRadius: BorderRadius.circular(12)),
+        color: SuperMaterialThemeData.of(context).superTheme.surface,
+        border: Border.all(
+          color: SuperMaterialThemeData.of(context).superTheme.border,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,42 +68,63 @@ class _ISectionState extends State<ISection> {
               child: Row(
                 children: [
                   Container(
-                      width: 4,
-                      height: 36,
-                      decoration: BoxDecoration(
-                          color: marker,
-                          borderRadius: const BorderRadius.horizontal(
-                              right: Radius.circular(12)))),
+                    width: 4,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: marker,
+                      borderRadius: const BorderRadius.horizontal(
+                        right: Radius.circular(12),
+                      ),
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   Container(
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                        color: superCoreTint(marker, 0x1F),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Icon(MIcons.of(widget.icon),
-                        size: 16, color: marker),
+                      color: superCoreTint(marker, 0x1F),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      MIcons.of(widget.icon),
+                      size: 16,
+                      color: marker,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.title.toUpperCase(),
-                            style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12.5,
-                                letterSpacing: 0.7,
-                                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+                        Text(
+                          widget.title.toUpperCase(),
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.5,
+                            letterSpacing: 0.7,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).superTheme.fg1,
+                          ),
+                        ),
                         if (widget.sub != null)
                           Padding(
                             padding: const EdgeInsets.only(top: 3),
-                            child: Text(widget.sub!,
-                                style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 11.5,
-                                    color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                            child: Text(
+                              widget.sub!,
+                              style: TextStyle(
+                                fontFamily: SuperMaterialThemeData.of(
+                                  context,
+                                ).textTheme.bodyMedium?.fontFamily,
+                                fontSize: 11.5,
+                                color: SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.fg3,
+                              ),
+                            ),
                           ),
                       ],
                     ),
@@ -108,8 +133,11 @@ class _ISectionState extends State<ISection> {
                   AnimatedRotation(
                     turns: _open ? 0 : -0.25,
                     duration: const Duration(milliseconds: 150),
-                    child: Icon(Icons.keyboard_arrow_down_rounded,
-                        size: 18, color: SuperMaterialThemeData.of(context).superTheme.fg3),
+                    child: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 18,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    ),
                   ),
                 ],
               ),

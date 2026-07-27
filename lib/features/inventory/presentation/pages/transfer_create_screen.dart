@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
 import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
@@ -66,7 +66,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Transfer Inventory'),
+      appBar: SuperAppBar(title: const Text('Transfer Inventory')),
       body: MScroll([
       ISection(
           icon: 'box',
@@ -74,7 +74,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             const SuperTextFormField(
-              label: 'Serial No',
+              decoration: InputDecoration(labelText: 'Serial No'),
               initialValue: 'INV-TRF-2024-0117',
               readOnly: true,
             ),
@@ -118,13 +118,15 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           ]),
       ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         const SuperTextFormField(
-          label: 'Notes',
-          placeholder: 'Enter transfer notes or internal instructions…',
+          decoration: InputDecoration(
+            labelText: 'Notes',
+            hintText: 'Enter transfer notes or internal instructions…',
+          ),
           multiline: true,
           rows: 3,
         ),
         SuperAttachmentFormField(
-          label: 'Attachments',
+          decoration: const InputDecoration(labelText: 'Attachments'),
           accept: '.pdf,.jpg,.jpeg,.png',
           maxSizeMB: 10,
           maxFiles: 5,

@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class BackupView extends StatelessWidget {
         void toggleScope(String k) => form.setField('scope', {...scope, k: !(scope[k] ?? false)});
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Backup'),
+      appBar: SuperAppBar(title: const Text('Backup')),
       body: MScroll([
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Automatic Backups', trailing: const Pill('Healthy'), children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

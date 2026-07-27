@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
@@ -23,7 +23,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
     String label(String s) => s == 'in-transit' ? 'Transit' : (s[0].toUpperCase() + s.substring(1));
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Stock Transfers'),
+      appBar: SuperAppBar(title: const Text('Stock Transfers')),
       body: MScroll([
       SizedBox(
         height: 32,

@@ -1,4 +1,4 @@
-part of 'ledger_screens.dart';
+﻿part of 'ledger_screens.dart';
 
 class OpDetailScreen extends StatelessWidget {
   const OpDetailScreen({super.key});
@@ -16,7 +16,7 @@ class OpDetailScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Financial Operation'),
+      appBar: SuperAppBar(title: const Text('Financial Operation')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Operation Summary', trailing: const Pill('Posted'), children: [
         Text('OP-2024-0883', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

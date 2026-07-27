@@ -1,4 +1,4 @@
-part of 'currencies_screens.dart';
+﻿part of 'currencies_screens.dart';
 
 class CreateCurrencyScreen extends StatelessWidget {
   const CreateCurrencyScreen({super.key});
@@ -6,7 +6,7 @@ class CreateCurrencyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Add Currency'),
+      appBar: SuperAppBar(title: const Text('Add Currency')),
       body: MScroll([
       ISection(icon: 'swap', title: 'Currency Definition', subtitle: 'ISO code, display names and symbol', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
         IField(label: 'ISO Code', placeholder: 'e.g. USD', mono: true, required: true),

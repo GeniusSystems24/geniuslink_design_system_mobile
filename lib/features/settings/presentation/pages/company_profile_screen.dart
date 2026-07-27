@@ -1,4 +1,4 @@
-part of 'settings_org_screens.dart';
+﻿part of 'settings_org_screens.dart';
 
 class CompanyProfileScreen extends StatelessWidget {
   const CompanyProfileScreen({super.key});
@@ -6,7 +6,7 @@ class CompanyProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Company Profile'),
+      appBar: SuperAppBar(title: const Text('Company Profile')),
       body: MScroll([
       ISection(icon: 'building', title: 'Identity', sub: 'Names shown on documents', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         Row(children: [

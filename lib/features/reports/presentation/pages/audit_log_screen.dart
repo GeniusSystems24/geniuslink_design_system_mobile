@@ -1,4 +1,4 @@
-part of 'reports_screens.dart';
+﻿part of 'reports_screens.dart';
 
 class AuditLogScreen extends StatefulWidget {
   const AuditLogScreen({super.key});
@@ -71,7 +71,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
     final visible = logs.where((l) => _act == 'All' || l.$3 == _act).toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Audit Log'),
+      appBar: SuperAppBar(title: const Text('Audit Log')),
       body: MScroll([
         Segmented(options: const [
           'All',

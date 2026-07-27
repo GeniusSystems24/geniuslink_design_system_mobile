@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/material.dart';
 
 import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
@@ -16,7 +16,7 @@ class ProductDetailScreen extends StatelessWidget {
     final product = detail.product;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Product Detail'),
+      appBar: SuperAppBar(title: const Text('Product Detail')),
       body: MScroll([
         MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Stock Summary', subtitle: 'Aggregated across all stores', trailing: Pill(_stockLabel(product.status), tone: _stockTone(product.status)), children: [
           GridView.count(crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 2, children: [

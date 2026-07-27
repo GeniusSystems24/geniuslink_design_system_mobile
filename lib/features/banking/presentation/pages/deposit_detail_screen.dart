@@ -1,4 +1,4 @@
-part of 'banking_cash_screens.dart';
+﻿part of 'banking_cash_screens.dart';
 
 class DepositDetailScreen extends StatelessWidget {
   const DepositDetailScreen({super.key});
@@ -6,7 +6,7 @@ class DepositDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Deposit Receipt'),
+      appBar: SuperAppBar(title: const Text('Deposit Receipt')),
       body: MScroll([
       Container(
         padding: const EdgeInsets.all(18),

@@ -1,4 +1,4 @@
-
+﻿
 part of 'journal_screens.dart';
 
 class CreateJournalEntryScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class CreateJournalEntryScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Journal Entry'),
+      appBar: SuperAppBar(title: const Text('Create Journal Entry')),
       body: MScroll([
         ISection(icon: 'doc', title: 'Entry Header', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [IField(label: 'Serial No', value: 'JV-2024-0227', mono: true, locked: true), IField(label: 'Date', value: 'Dec 19, 2025', icon: 'calendar'), IField(label: 'Currency', value: 'SAR — Saudi Riyal', select: true), ITextarea(label: 'Description', placeholder: 'Describe this journal entry…')]),
         ISection(icon: 'ledger', title: 'Journal Lines', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, sub: '${lines.length} lines', children: [

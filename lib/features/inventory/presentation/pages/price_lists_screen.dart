@@ -15,7 +15,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
     const items = [('STL-44021', 'Structural Steel I-Beam', '540.00', '459.00'), ('CMT-90112', 'Portland Cement Type I', '28.00', '23.80'), ('AGG-21044', 'Coarse Aggregate 20mm', '140.00', '119.00'), ('PLY-30022', 'Plywood Sheet 18mm', '105.00', '89.25'), ('PNT-55310', 'Epoxy Floor Coating', '44.00', '37.40')];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Price Lists'),
+      appBar: SuperAppBar(title: const Text('Price Lists')),
       body: MScroll([
       for (final l in lists)
         GestureDetector(

@@ -1,4 +1,4 @@
-part of 'settings_org_screens.dart';
+﻿part of 'settings_org_screens.dart';
 
 class NumberingScreen extends StatelessWidget {
   const NumberingScreen({super.key});
@@ -7,7 +7,7 @@ class NumberingScreen extends StatelessWidget {
     const seqs = [('Sales Invoice', 'INV', '0412'), ('Journal Voucher', 'JV', '0227'), ('Deposit', 'DEP', '0183'), ('Purchase Order', 'PO', '0212'), ('Inventory Transfer', 'INV-TRF', '0118')];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Numbering'),
+      appBar: SuperAppBar(title: const Text('Numbering')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Document Sequences', subtitle: 'Format: PREFIX-YEAR-NUMBER', pad: 8, children: [
         Padding(

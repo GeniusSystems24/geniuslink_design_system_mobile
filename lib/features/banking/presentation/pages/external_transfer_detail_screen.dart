@@ -1,4 +1,4 @@
-part of 'banking_transfer_screens.dart';
+﻿part of 'banking_transfer_screens.dart';
 
 class ExternalTransferDetailScreen extends StatelessWidget {
   const ExternalTransferDetailScreen({super.key});
@@ -6,7 +6,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'External Wire Detail'),
+      appBar: SuperAppBar(title: const Text('External Wire Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, title: 'External Wire', trailing: const Pill('Pending', tone: PillTone.warning), children: [
         Text('EXT-2024-0311 · Dec 18, 2025', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

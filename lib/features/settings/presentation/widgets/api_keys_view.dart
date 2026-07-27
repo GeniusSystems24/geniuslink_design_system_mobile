@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,7 @@ class ApiKeysView extends StatelessWidget {
         void revoke(int i) { final n = clone()..removeAt(i); form.setField('keys', n); }
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'API Keys'),
+      appBar: SuperAppBar(title: const Text('API Keys')),
       body: MScroll([
           InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: SuperMaterialThemeData.of(context).colorScheme.tertiary),
           MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: '${keys.length} Active Keys', pad: 8, children: [

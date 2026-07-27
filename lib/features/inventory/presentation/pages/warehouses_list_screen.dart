@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
@@ -47,7 +47,7 @@ class WarehousesListScreen extends StatelessWidget {
     const stores = [('ST-001', 'Downtown Central', 1248, 1800, 'Layla Ahmed', '342.8K'), ('ST-002', 'King Fahd Warehouse', 4892, 6000, 'Mohammed Saleh', '1.82M'), ('ST-003', 'Jeddah Showroom', 412, 600, 'Sara Al-Otaibi', '128.6K'), ('ST-004', 'Dammam Distribution', 2104, 2400, 'Khalid Al-Rashid', '624.2K'), ('ST-005', 'Madinah Outlet', 0, 500, '— Unassigned —', '0.00')];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Warehouses'),
+      appBar: SuperAppBar(title: const Text('Warehouses')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: '5 Warehouses', subtitle: 'Capacity & assigned manager', pad: 8, children: [
         for (int i = 0; i < stores.length; i++) _WarehouseRow(s: stores[i], last: i == stores.length - 1),

@@ -1,4 +1,4 @@
-part of 'users_screens.dart';
+﻿part of 'users_screens.dart';
 
 class UserDetailScreen extends StatefulWidget {
   const UserDetailScreen({super.key});
@@ -14,7 +14,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     const sessions = [('MacBook Pro · Chrome', 'Riyadh · 10.4.22.18 · now', true), ('iPhone 15 · App', 'Riyadh · 10.4.22.51 · 2h ago', false), ('Windows · Edge', 'Jeddah · 94.12.8.140 · Yesterday', false)];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'User Detail'),
+      appBar: SuperAppBar(title: const Text('User Detail')),
       body: MScroll([
       MCard(children: [
         Row(children: [

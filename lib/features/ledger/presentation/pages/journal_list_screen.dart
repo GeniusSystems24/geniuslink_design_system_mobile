@@ -1,4 +1,4 @@
-
+﻿
 part of 'journal_screens.dart';
 
 class JournalListScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _JournalListScreenState extends State<JournalListScreen> {
     final filterLabel = _filter == null ? 'All' : _statusLabel(_filter!);
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Journal Entries'),
+      appBar: SuperAppBar(title: const Text('Journal Entries')),
       body: MScroll([
         SearchInput(placeholder: 'Search entries…', value: _query, onChange: (value) => setState(() => _query = value)),
         Segmented(options: const ['All', 'Posted', 'Draft'], value: filterLabel, onChange: (value) => setState(() => _filter = switch (value) { 'Posted' => JournalEntryStatus.posted, 'Draft' => JournalEntryStatus.draft, _ => null })),

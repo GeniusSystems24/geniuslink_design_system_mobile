@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
 // list · createAccount · accountDetail · createGroup · groupDetail
 // ============================================================
@@ -14,7 +14,7 @@ class AccountDetailScreen extends StatelessWidget {
     const tx = [('JV-2024-0042', '+5,000.00', true), ('TR-9042', '-1,800.00', false), ('JV-2024-0071', '+650.00', true)];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Account Detail'),
+      appBar: SuperAppBar(title: const Text('Account Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [

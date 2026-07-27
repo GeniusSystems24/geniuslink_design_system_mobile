@@ -51,25 +51,29 @@ class IField extends StatelessWidget {
               SuperOption<String>(value: value!, label: value!),
             ];
       return SuperSelectFormField<String>(
-        label: label,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: placeholder,
+          prefixIcon: leadingIcon == null ? null : Icon(leadingIcon, size: 18),
+        ),
         options: options,
         initialValue: value,
-        placeholder: placeholder,
         required: required,
         readOnly: true,
         searchable: options.length > 8,
-        leadingIcon: leadingIcon,
         arabic: ar,
       );
     }
 
     return SuperTextFormField(
-      label: label,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: placeholder,
+        prefixIcon: leadingIcon == null ? null : Icon(leadingIcon, size: 18),
+      ),
       initialValue: value ?? '',
-      placeholder: placeholder,
       required: required,
       readOnly: true,
-      leadingIcon: leadingIcon,
       arabic: ar,
     );
   }
@@ -83,8 +87,10 @@ class ITextarea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperTextFormField(
-        label: label,
-        placeholder: placeholder,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: placeholder,
+        ),
         multiline: true,
         rows: 3,
       );
@@ -95,7 +101,7 @@ class UploadBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperAttachmentFormField(
-        label: 'Attachments',
+        decoration: const InputDecoration(labelText: 'Attachments'),
         accept: '.pdf,.jpg,.jpeg,.png',
         maxSizeMB: 10,
         maxFiles: 5,
@@ -112,7 +118,7 @@ class IToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperBoolFormField(
-        title: label,
+        decoration: InputDecoration(labelText: label),
         initialValue: on,
         readOnly: true,
       );

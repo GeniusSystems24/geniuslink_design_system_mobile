@@ -1,4 +1,4 @@
-part of 'ledger_screens.dart';
+﻿part of 'ledger_screens.dart';
 
 class OpeningJournalScreen extends StatelessWidget {
   const OpeningJournalScreen({super.key});
@@ -10,7 +10,7 @@ class OpeningJournalScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Opening Journal'),
+      appBar: SuperAppBar(title: const Text('Opening Journal')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Entry Details', children: const [
         MField(label: 'Serial No', value: 'JV-2024-0042', mono: true),

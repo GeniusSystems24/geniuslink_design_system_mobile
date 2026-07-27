@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
 // list · createAccount · accountDetail · createGroup · groupDetail
 // ============================================================
@@ -13,7 +13,7 @@ class GroupDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Group Detail'),
+      appBar: SuperAppBar(title: const Text('Group Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Group Information', trailing: const Pill('Active'), children: const [
         KV('ID', '1042', mono: true), KV('Name English', 'Current Assets'),

@@ -1,4 +1,4 @@
-part of 'banking_transfer_screens.dart';
+﻿part of 'banking_transfer_screens.dart';
 
 class CreateExternalTransferScreen extends StatelessWidget {
   const CreateExternalTransferScreen({super.key});
@@ -6,7 +6,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create External Transfer'),
+      appBar: SuperAppBar(title: const Text('Create External Transfer')),
       body: MScroll([
       ISection(icon: 'globe', title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: SuperMaterialThemeData.of(context).colorScheme.tertiary, required: true),

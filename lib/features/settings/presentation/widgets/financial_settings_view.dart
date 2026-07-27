@@ -1,4 +1,4 @@
-// Reusable presentation widget extracted from the former multi-screen file.
+﻿// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ class FinancialSettingsView extends StatelessWidget {
         final basis = state.value<String>('basis') ?? 'accrual';
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Financial Settings'),
+      appBar: SuperAppBar(title: const Text('Financial Settings')),
       body: MScroll([
           ISection(icon: 'globe', title: 'Currency & Calendar', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
             const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),

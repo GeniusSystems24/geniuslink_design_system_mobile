@@ -1,4 +1,4 @@
-part of 'accounts_extra_screens.dart';
+﻿part of 'accounts_extra_screens.dart';
 
 class AccountDetailFullScreen extends StatelessWidget {
   const AccountDetailFullScreen({super.key});
@@ -12,7 +12,7 @@ class AccountDetailFullScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Account Detail'),
+      appBar: SuperAppBar(title: const Text('Account Detail')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Current Balance', subtitle: 'As of Dec 18, 2025 16:33', trailing: const Pill('Active'), children: [
         Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [

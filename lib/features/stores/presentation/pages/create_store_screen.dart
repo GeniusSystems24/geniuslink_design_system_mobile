@@ -1,4 +1,4 @@
-part of 'stores_screens.dart';
+﻿part of 'stores_screens.dart';
 
 class CreateStoreScreen extends StatelessWidget {
   const CreateStoreScreen({super.key});
@@ -6,7 +6,7 @@ class CreateStoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Store'),
+      appBar: SuperAppBar(title: const Text('Create Store')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Store Details', subtitle: 'Name and location', children: const [
         MField(label: 'Name English', placeholder: 'e.g. Downtown Central Store', required: true),

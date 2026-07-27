@@ -9,7 +9,7 @@ class IssueDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Issue Detail'),
+      appBar: SuperAppBar(title: const Text('Issue Detail')),
       body: MScroll([
       MCard(
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,

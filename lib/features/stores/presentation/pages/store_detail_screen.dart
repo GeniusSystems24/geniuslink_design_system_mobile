@@ -1,4 +1,4 @@
-
+﻿
 part of 'stores_screens.dart';
 
 class StoreDetailScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class StoreDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Store Detail'),
+      appBar: SuperAppBar(title: const Text('Store Detail')),
       body: MScroll([
         MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: store.name, trailing: Pill(store.active ? 'Active' : 'Inactive', tone: store.active ? PillTone.success : PillTone.neutral), children: [
           Row(children: [

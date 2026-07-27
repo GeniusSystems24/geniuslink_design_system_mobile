@@ -1,4 +1,4 @@
-part of 'users_screens.dart';
+﻿part of 'users_screens.dart';
 
 class CreateUserScreen extends StatelessWidget {
   const CreateUserScreen({super.key});
@@ -6,7 +6,7 @@ class CreateUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Invite User'),
+      appBar: SuperAppBar(title: const Text('Invite User')),
       body: MScroll([
       ISection(icon: 'user', title: 'Identity', sub: "The new member's name and contact", marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
         TInput(label: 'Name English', placeholder: 'e.g. Omar Hassan', required: true),

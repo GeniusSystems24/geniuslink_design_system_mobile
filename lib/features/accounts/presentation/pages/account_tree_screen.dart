@@ -1,4 +1,4 @@
-part of 'accounts_extra_screens.dart';
+﻿part of 'accounts_extra_screens.dart';
 
 class AccountTreeScreen extends StatefulWidget {
   final List<AccountNode> roots;
@@ -65,7 +65,7 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Account Tree'),
+      appBar: SuperAppBar(title: const Text('Account Tree')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SuperTree<Account>(

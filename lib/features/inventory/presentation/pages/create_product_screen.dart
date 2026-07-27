@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Products & Inventory operations (ports MobileInventory)
 // productsList · productDetail · createProduct · issueDetail
 // receiveCreate · receiveDetail · transferCreate · transferDetail · adjustment
@@ -63,7 +63,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Product'),
+      appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
       ISection(
           icon: 'box',
@@ -72,29 +72,37 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
             SuperTextFormField(
-              label: 'SKU',
-              placeholder: 'e.g. STL-44021',
+              decoration: const InputDecoration(
+                labelText: 'SKU',
+                hintText: 'e.g. STL-44021',
+              ),
               required: true,
               minLength: 3,
               forceError: _force,
               onValidity: (e) => _skuErr = e,
             ),
             const SuperTextFormField(
-              label: 'Barcode',
-              placeholder: 'Scan or type',
-              leadingIcon: Icons.qr_code_scanner_rounded,
+              decoration: InputDecoration(
+                labelText: 'Barcode',
+                hintText: 'Scan or type',
+                prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+              ),
             ),
             SuperTextFormField(
-              label: 'Name English',
-              placeholder: 'e.g. Structural Steel I-Beam',
+              decoration: const InputDecoration(
+                labelText: 'Name English',
+                hintText: 'e.g. Structural Steel I-Beam',
+              ),
               required: true,
               minLength: 2,
               forceError: _force,
               onValidity: (e) => _nameEnErr = e,
             ),
             SuperTextFormField(
-              label: 'الاسم بالعربية',
-              placeholder: 'مثال: كمرة فولاذية',
+              decoration: const InputDecoration(
+                labelText: 'الاسم بالعربية',
+                hintText: 'مثال: كمرة فولاذية',
+              ),
               arabic: true,
               required: true,
               minLength: 2,
@@ -118,14 +126,18 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
             const SuperNumericFormField(
-              label: 'Unit Cost (SAR)',
-              prefix: 'SAR',
+              decoration: InputDecoration(
+                labelText: 'Unit Cost (SAR)',
+                prefixText: 'SAR ',
+              ),
               decimals: 2,
               min: 0,
             ),
             const SuperNumericFormField(
-              label: 'Selling Price (SAR)',
-              prefix: 'SAR',
+              decoration: InputDecoration(
+                labelText: 'Selling Price (SAR)',
+                prefixText: 'SAR ',
+              ),
               decimals: 2,
               min: 0,
             ),
@@ -141,7 +153,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           children: [
             const SuperNumericFormField(
-              label: 'Reorder Level',
+              decoration: InputDecoration(labelText: 'Reorder Level'),
               min: 0,
               step: 1,
               decimals: 0,
@@ -152,13 +164,13 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               hintText: 'Select store…',
             ),
             const SuperNumericFormField(
-              label: 'Opening Stock',
+              decoration: InputDecoration(labelText: 'Opening Stock'),
               min: 0,
               step: 1,
               decimals: 0,
             ),
             SuperAttachmentFormField(
-              label: 'Product Images',
+              decoration: const InputDecoration(labelText: 'Product Images'),
               accept: '.jpg,.jpeg,.png,.pdf',
               maxSizeMB: 10,
               maxFiles: 5,

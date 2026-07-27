@@ -46,7 +46,7 @@ class StockTakeScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Stock Take'),
+      appBar: SuperAppBar(title: const Text('Stock Take')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

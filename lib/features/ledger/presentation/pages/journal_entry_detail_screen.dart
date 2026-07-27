@@ -1,4 +1,4 @@
-
+﻿
 part of 'journal_screens.dart';
 
 class JournalEntryDetailScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Journal Entry Detail'),
+      appBar: SuperAppBar(title: const Text('Journal Entry Detail')),
       body: MScroll([
         MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Journal Entry', trailing: Pill(entry.status == JournalEntryStatus.posted ? 'Posted' : 'Draft', tone: entry.status == JournalEntryStatus.posted ? PillTone.success : PillTone.warning), children: [
           Text('${entry.reference} · ${_dateLabel(entry.occurredAt)}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),

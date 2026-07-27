@@ -1,4 +1,4 @@
-part of 'contacts_screens.dart';
+﻿part of 'contacts_screens.dart';
 
 class CreateContactScreen extends StatelessWidget {
   final ContactKind kind;
@@ -12,7 +12,7 @@ class CreateContactScreen extends StatelessWidget {
     final d = kind;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: 'Add ${contactSingularLabel(d.type)}'),
+      appBar: SuperAppBar(title: Text('Add ${contactSingularLabel(d.type)}')),
       body: MScroll([
       ISection(icon: 'user', title: '${contactSingularLabel(d.type)} Identity', subtitle: 'Legal name and contact details', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         TInput(label: 'Name English', placeholder: contactSingularLabel(d.type) == 'Customer' ? 'e.g. Riyadh Construction Co.' : 'e.g. Global Steel Imports LLC', required: true),

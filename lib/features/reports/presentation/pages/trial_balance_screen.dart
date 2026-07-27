@@ -1,4 +1,4 @@
-part of 'reports_screens.dart';
+﻿part of 'reports_screens.dart';
 
 class TrialBalanceScreen extends StatefulWidget {
   const TrialBalanceScreen({super.key});
@@ -24,7 +24,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     final totCr = rows.fold<int>(0, (s, r) => s + r.$4);
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Trial Balance'),
+      appBar: SuperAppBar(title: const Text('Trial Balance')),
       body: MScroll([
         ReportMeta(
             period: _period,

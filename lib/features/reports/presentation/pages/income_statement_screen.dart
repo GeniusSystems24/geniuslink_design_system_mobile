@@ -1,4 +1,4 @@
-part of 'reports_screens.dart';
+﻿part of 'reports_screens.dart';
 
 class IncomeStatementScreen extends StatefulWidget {
   const IncomeStatementScreen({super.key});
@@ -35,7 +35,7 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Income Statement'),
+      appBar: SuperAppBar(title: const Text('Income Statement')),
       body: MScroll([
         ReportMeta(
             period: _period,

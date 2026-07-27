@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
 // list · createAccount · accountDetail · createGroup · groupDetail
 // ============================================================
@@ -12,7 +12,7 @@ class CreateAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: const SuperAppBar(title: 'Create Account'),
+      appBar: SuperAppBar(title: const Text('Create Account')),
       body: MScroll([
       MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Account Details', subtitle: 'Identify and place in the tree', children: [
         const MField(label: 'Account Code', placeholder: 'e.g. 1102', mono: true, required: true),
