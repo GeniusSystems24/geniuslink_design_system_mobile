@@ -53,7 +53,7 @@ class StockTakeScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'STK-2024-0014' ?? "",
+      title: 'STK-2024-0014',
       subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -82,7 +82,7 @@ class StockTakeScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Count Sheet' ?? "",
+      title: 'Count Sheet',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

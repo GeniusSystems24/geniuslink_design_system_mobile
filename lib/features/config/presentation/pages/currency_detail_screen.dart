@@ -18,7 +18,7 @@ class CurrencyDetailScreen extends StatelessWidget {
       body: MScroll([
         SuperSectionCard2(
       trailing: trailing,
-      title: 'Current Rate' ?? "",
+      title: 'Current Rate',
       subtitle: 'Per 1 base currency',
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -38,7 +38,7 @@ class CurrencyDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Definition' ?? "",
+      title: 'Definition',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -59,7 +59,7 @@ class CurrencyDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Rate History' ?? "",
+      title: 'Rate History',
       subtitle: 'Recent updates',
       initiallyExpanded: true,
       accentColor: accentColor,

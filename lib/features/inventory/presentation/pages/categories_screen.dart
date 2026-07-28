@@ -1,5 +1,4 @@
-﻿import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
+import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -28,7 +27,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Category Tree' ?? "",
+      title: 'Category Tree',
       subtitle: '5 top-level groups',
       initiallyExpanded: true,
       accentColor: accentColor,

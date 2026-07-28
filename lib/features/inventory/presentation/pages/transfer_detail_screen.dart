@@ -83,7 +83,7 @@ class TransferDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'In Transit' ?? "",
+      title: 'In Transit',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -138,7 +138,7 @@ class TransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Items in Transit' ?? "",
+      title: 'Items in Transit',
       subtitle: '2 lines · 258 units',
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -160,7 +160,7 @@ class TransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Logistics & Tracking' ?? "",
+      title: 'Logistics & Tracking',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,

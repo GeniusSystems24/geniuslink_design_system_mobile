@@ -70,7 +70,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Security' ?? "",
+      title: 'Security',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -100,7 +100,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Active Sessions' ?? "",
+      title: 'Active Sessions',
       subtitle: 'Devices currently signed in',
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -138,7 +138,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Activity' ?? "",
+      title: 'Recent Activity',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

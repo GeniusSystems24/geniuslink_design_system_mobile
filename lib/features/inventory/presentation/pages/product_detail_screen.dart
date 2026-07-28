@@ -25,7 +25,7 @@ class ProductDetailScreen extends StatelessWidget {
       body: MScroll([
         SuperSectionCard2(
       trailing: trailing,
-      title: 'Stock Summary' ?? "",
+      title: 'Stock Summary',
       subtitle: 'Aggregated across all stores',
       initiallyExpanded: true,
       accentColor: accentColor4,
@@ -46,7 +46,7 @@ class ProductDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Product Information' ?? "",
+      title: 'Product Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -67,7 +67,7 @@ class ProductDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Stock by Store' ?? "",
+      title: 'Stock by Store',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -92,7 +92,7 @@ class ProductDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Movements' ?? "",
+      title: 'Recent Movements',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

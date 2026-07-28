@@ -1,6 +1,5 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
 import '../../../../design_system/kit.dart';
 
 class _BarcodePainter extends CustomPainter {
@@ -45,7 +44,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Preview' ?? "",
+      title: 'Preview',
       subtitle: 'Code 128 · $size mm',
       initiallyExpanded: true,
       accentColor: accentColor,

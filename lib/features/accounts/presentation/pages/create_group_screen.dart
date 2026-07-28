@@ -48,7 +48,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Group Details' ?? "",
+      title: 'Group Details',
       subtitle: 'Name and tree association',
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -90,7 +90,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Additional Information' ?? "",
+      title: 'Additional Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

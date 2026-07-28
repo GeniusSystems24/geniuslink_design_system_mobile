@@ -18,7 +18,7 @@ class CreateAccountScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Account Details' ?? "",
+      title: 'Account Details',
       subtitle: 'Identify and place in the tree',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -44,7 +44,7 @@ class CreateAccountScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Settings' ?? "",
+      title: 'Settings',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

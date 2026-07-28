@@ -17,7 +17,7 @@ class IssueDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Issued Value' ?? "",
+      title: 'Issued Value',
       subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -48,7 +48,7 @@ class IssueDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Issue Information' ?? "",
+      title: 'Issue Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -67,7 +67,7 @@ class IssueDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Accounting Distribution' ?? "",
+      title: 'Accounting Distribution',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,

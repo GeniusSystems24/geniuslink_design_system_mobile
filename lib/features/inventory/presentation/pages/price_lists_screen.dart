@@ -38,7 +38,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
         ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Item Prices' ?? "",
+      title: 'Item Prices',
       subtitle: '5 items · 15% discount applied',
       initiallyExpanded: true,
       accentColor: accentColor,

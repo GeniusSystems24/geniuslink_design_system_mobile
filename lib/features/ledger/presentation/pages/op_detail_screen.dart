@@ -24,7 +24,7 @@ class OpDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Operation Summary' ?? "",
+      title: 'Operation Summary',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -45,7 +45,7 @@ class OpDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Ledger Lines' ?? "",
+      title: 'Ledger Lines',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -80,7 +80,7 @@ class OpDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Activity' ?? "",
+      title: 'Activity',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

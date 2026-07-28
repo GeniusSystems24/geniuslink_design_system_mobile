@@ -25,7 +25,7 @@ class TaxesSettingsView extends StatelessWidget {
       body: MScroll([
           SuperSectionCard2(
           trailing: (null),
-          title: 'Tax Rules' ?? "",
+          title: 'Tax Rules',
           subtitle: '$active active · applied at line level',
           initiallyExpanded: true,
           accentColor: accentColor,

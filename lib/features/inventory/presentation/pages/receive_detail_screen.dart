@@ -22,7 +22,7 @@ class ReceiveDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Received Value' ?? "",
+      title: 'Received Value',
       subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -53,7 +53,7 @@ class ReceiveDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Receipt Information' ?? "",
+      title: 'Receipt Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor4,
@@ -72,7 +72,7 @@ class ReceiveDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Items' ?? "",
+      title: 'Items',
       subtitle: '2 lines · 432 units',
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -94,7 +94,7 @@ class ReceiveDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Audit Information' ?? "",
+      title: 'Audit Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

@@ -26,7 +26,7 @@ class NotificationsView extends StatelessWidget {
         body: MScroll([
           SuperSectionCard2(
         trailing: (null),
-        title: 'Preferences' ?? "",
+        title: 'Preferences',
         subtitle: 'Toggle a channel per category',
         initiallyExpanded: true,
         accentColor: accentColor,

@@ -25,7 +25,7 @@ class DepositDetailScreen extends StatelessWidget {
       ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Details' ?? "",
+      title: 'Details',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -43,7 +43,7 @@ class DepositDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Posted Journal' ?? "",
+      title: 'Posted Journal',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -62,7 +62,7 @@ class DepositDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Audit' ?? "",
+      title: 'Audit',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

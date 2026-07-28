@@ -25,7 +25,7 @@ class ApiKeysView extends StatelessWidget {
           InfoNote("A key's secret is shown only once at creation. Revoke and re-issue anytime.", tone: SuperMaterialThemeData.of(context).colorScheme.tertiary),
           SuperSectionCard2(
           trailing: (null),
-          title: '${keys.length} Active Keys' ?? "",
+          title: '${keys.length} Active Keys',
           subtitle: (null),
           initiallyExpanded: true,
           accentColor: accentColor,

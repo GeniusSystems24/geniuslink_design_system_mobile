@@ -15,7 +15,7 @@ class BillingScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Current Plan' ?? "",
+      title: 'Current Plan',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -61,7 +61,7 @@ class BillingScreen extends StatelessWidget {
         ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Invoices' ?? "",
+      title: 'Recent Invoices',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

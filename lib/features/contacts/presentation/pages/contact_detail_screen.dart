@@ -44,7 +44,7 @@ class ContactDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Outstanding ${contactBalanceLabel(d.type)}' ?? "",
+      title: 'Outstanding ${contactBalanceLabel(d.type)}',
       subtitle: '${c.orderCount} orders · since Apr 2024',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -64,7 +64,7 @@ class ContactDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: '${contactSingularLabel(d.type)} Information' ?? "",
+      title: '${contactSingularLabel(d.type)} Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -82,7 +82,7 @@ class ContactDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Transaction History' ?? "",
+      title: 'Transaction History',
       subtitle: 'Recent invoices and payments',
       initiallyExpanded: true,
       accentColor: accentColor,

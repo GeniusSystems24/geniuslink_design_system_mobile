@@ -13,7 +13,7 @@ class IssueInventoryScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Issue Details' ?? "",
+      title: 'Issue Details',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -31,7 +31,7 @@ class IssueInventoryScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Items' ?? "",
+      title: 'Items',
       subtitle: '1 line · 12 units',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -61,7 +61,7 @@ class IssueInventoryScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Total' ?? "",
+      title: 'Total',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

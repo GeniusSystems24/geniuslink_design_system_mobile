@@ -27,7 +27,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
       ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Details' ?? "",
+      title: 'Details',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -44,7 +44,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Posted Journal' ?? "",
+      title: 'Posted Journal',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

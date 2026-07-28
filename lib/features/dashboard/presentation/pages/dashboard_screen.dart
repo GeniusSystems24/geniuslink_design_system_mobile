@@ -46,7 +46,7 @@ class DashboardScreen extends StatelessWidget {
       // Cash flow
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Cash Flow' ?? "",
+      title: 'Cash Flow',
       subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -61,7 +61,7 @@ class DashboardScreen extends StatelessWidget {
       // Balances
       SuperSectionCard2(
       trailing: (null),
-      title: 'Cash & Asset Accounts' ?? "",
+      title: 'Cash & Asset Accounts',
       subtitle: 'Top balances',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -78,7 +78,7 @@ class DashboardScreen extends StatelessWidget {
       // Recent ops
       SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Operations' ?? "",
+      title: 'Recent Operations',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor4,
@@ -101,7 +101,7 @@ class DashboardScreen extends StatelessWidget {
       // Alerts
       SuperSectionCard2(
       trailing: (null),
-      title: 'Needs Attention' ?? "",
+      title: 'Needs Attention',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

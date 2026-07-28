@@ -58,7 +58,7 @@ class InvDashboardScreen extends StatelessWidget {
       ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Operations' ?? "",
+      title: 'Recent Operations',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -91,7 +91,7 @@ class InvDashboardScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Reorder Alerts' ?? "",
+      title: 'Reorder Alerts',
       subtitle: '3 products at or below reorder level',
       initiallyExpanded: true,
       accentColor: accentColor,

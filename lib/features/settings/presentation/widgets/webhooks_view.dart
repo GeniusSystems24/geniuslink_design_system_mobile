@@ -23,7 +23,7 @@ class WebhooksView extends StatelessWidget {
       body: MScroll([
           SuperSectionCard2(
           trailing: (null),
-          title: '${hooks.length} Endpoints' ?? "",
+          title: '${hooks.length} Endpoints',
           subtitle: 'HMAC-signed · retried 5× on failure',
           initiallyExpanded: true,
           accentColor: accentColor,

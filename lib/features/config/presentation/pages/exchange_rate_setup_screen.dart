@@ -13,7 +13,7 @@ class ExchangeRateSetupScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Base Currency' ?? "",
+      title: 'Base Currency',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -36,7 +36,7 @@ class ExchangeRateSetupScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Rates per 1 SAR' ?? "",
+      title: 'Rates per 1 SAR',
       subtitle: 'Auto-fed pairs sync daily; manual pairs are editable',
       initiallyExpanded: true,
       accentColor: accentColor2,

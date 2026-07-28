@@ -57,7 +57,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Stock Valuation' ?? "",
+      title: 'Stock Valuation',
       subtitle: 'Quantity × weighted-average unit cost',
       initiallyExpanded: true,
       accentColor: accentColor,

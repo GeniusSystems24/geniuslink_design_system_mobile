@@ -12,7 +12,7 @@ class NumberingScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Document Sequences' ?? "",
+      title: 'Document Sequences',
       subtitle: 'Format: PREFIX-YEAR-NUMBER',
       initiallyExpanded: true,
       accentColor: accentColor,

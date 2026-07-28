@@ -40,7 +40,7 @@ class RolesPermissionsView extends StatelessWidget {
       body: MScroll([
           SuperSectionCard2(
           trailing: (null),
-          title: 'Select Role' ?? "",
+          title: 'Select Role',
           subtitle: "Tap a module's badge to cycle its access level",
           initiallyExpanded: true,
           accentColor: accentColor,

@@ -11,7 +11,7 @@ class CreateStoreScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: 'Store Details' ?? "",
+      title: 'Store Details',
       subtitle: 'Name and location',
       initiallyExpanded: true,
       accentColor: accentColor,

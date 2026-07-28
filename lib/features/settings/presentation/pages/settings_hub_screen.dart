@@ -27,7 +27,7 @@ class SettingsHubScreen extends StatelessWidget {
       for (final section in sections)
         SuperSectionCard2(
       trailing: (null),
-      title: section.title ?? "",
+      title: section.title,
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,

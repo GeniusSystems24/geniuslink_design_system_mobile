@@ -1,5 +1,4 @@
-﻿import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
+import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
 class _AdjLine extends StatelessWidget {
@@ -118,7 +117,7 @@ class AdjustmentScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Variance Summary' ?? "",
+      title: 'Variance Summary',
       subtitle: 'Net financial impact of this reconciliation',
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -140,7 +139,7 @@ class AdjustmentScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Adjustment Lines' ?? "",
+      title: 'Adjustment Lines',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

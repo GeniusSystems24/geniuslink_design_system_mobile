@@ -21,7 +21,7 @@ class GroupDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Group Information' ?? "",
+      title: 'Group Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -38,7 +38,7 @@ class GroupDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Notes' ?? "",
+      title: 'Notes',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -61,7 +61,7 @@ class GroupDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Audit' ?? "",
+      title: 'Audit',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

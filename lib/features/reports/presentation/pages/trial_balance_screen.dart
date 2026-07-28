@@ -37,7 +37,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
             ]),
         SuperSectionCard2(
       trailing: (null),
-      title: 'All Accounts' ?? "",
+      title: 'All Accounts',
       subtitle: 'Debit & credit balances as of period end',
       initiallyExpanded: true,
       accentColor: accentColor,

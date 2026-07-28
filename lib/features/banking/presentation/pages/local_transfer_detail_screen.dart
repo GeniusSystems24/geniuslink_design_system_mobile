@@ -15,7 +15,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Inter-Account Settlement' ?? "",
+      title: 'Inter-Account Settlement',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -31,7 +31,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Flow' ?? "",
+      title: 'Flow',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor4,
@@ -50,7 +50,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Amount' ?? "",
+      title: 'Amount',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -72,7 +72,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Audit' ?? "",
+      title: 'Audit',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,

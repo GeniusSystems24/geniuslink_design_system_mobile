@@ -41,7 +41,7 @@ class MoreScreen extends StatelessWidget {
         for (final group in groups)
           SuperSectionCard2(
       trailing: (null),
-      title: group.title ?? "",
+      title: group.title,
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

@@ -85,7 +85,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
         ], value: _act, onChange: (v) => setState(() => _act = v)),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Immutable Activity Trail' ?? "",
+      title: 'Immutable Activity Trail',
       subtitle: 'Every state-changing action · 7-year retention',
       initiallyExpanded: true,
       accentColor: accentColor,

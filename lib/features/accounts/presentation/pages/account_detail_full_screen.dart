@@ -21,7 +21,7 @@ class AccountDetailFullScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'Current Balance' ?? "",
+      title: 'Current Balance',
       subtitle: 'As of Dec 18, 2025 16:33',
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -45,7 +45,7 @@ class AccountDetailFullScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Account Information' ?? "",
+      title: 'Account Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -64,7 +64,7 @@ class AccountDetailFullScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Recent Transactions' ?? "",
+      title: 'Recent Transactions',
       subtitle: 'Latest entries · running balance',
       initiallyExpanded: true,
       accentColor: accentColor4,
@@ -100,7 +100,7 @@ class AccountDetailFullScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Audit Information' ?? "",
+      title: 'Audit Information',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

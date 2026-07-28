@@ -18,7 +18,7 @@ class StoreDetailScreen extends StatelessWidget {
       body: MScroll([
         SuperSectionCard2(
       trailing: trailing,
-      title: title ?? "",
+      title: title,
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -38,7 +38,7 @@ class StoreDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Stock On Hand' ?? "",
+      title: 'Stock On Hand',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

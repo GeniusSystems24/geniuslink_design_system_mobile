@@ -59,7 +59,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
       ),
       SuperSectionCard2(
       trailing: (null),
-      title: '${visible.length} Transfers' ?? "",
+      title: '${visible.length} Transfers',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

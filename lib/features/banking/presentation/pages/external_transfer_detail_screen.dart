@@ -14,7 +14,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: trailing,
-      title: 'External Wire' ?? "",
+      title: 'External Wire',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,
@@ -30,7 +30,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Amount & FX' ?? "",
+      title: 'Amount & FX',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor3,
@@ -54,7 +54,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
     ),
       SuperSectionCard2(
       trailing: (null),
-      title: 'Beneficiary' ?? "",
+      title: 'Beneficiary',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,

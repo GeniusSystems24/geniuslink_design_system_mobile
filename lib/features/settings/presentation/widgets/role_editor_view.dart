@@ -26,7 +26,7 @@ class RoleEditorView extends StatelessWidget {
         body: MScroll([
           SuperSectionCard2(
         trailing: (null),
-        title: 'Accountant' ?? "",
+        title: 'Accountant',
         subtitle: '2 members assigned',
         initiallyExpanded: true,
         accentColor: accentColor2,
@@ -40,7 +40,7 @@ class RoleEditorView extends StatelessWidget {
       ),
           SuperSectionCard2(
         trailing: (null),
-        title: 'Permission Matrix' ?? "",
+        title: 'Permission Matrix',
         subtitle: 'Tap a cell to toggle access',
         initiallyExpanded: true,
         accentColor: accentColor,

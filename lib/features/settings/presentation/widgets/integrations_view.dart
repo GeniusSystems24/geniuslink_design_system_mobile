@@ -27,7 +27,7 @@ class IntegrationsView extends StatelessWidget {
             if (integrations.any((item) => item.category == category))
               SuperSectionCard2(
         trailing: (null),
-        title: _categoryLabel(category) ?? "",
+        title: _categoryLabel(category),
         subtitle: (null),
         initiallyExpanded: true,
         accentColor: _categoryColor(context, category),

@@ -17,7 +17,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
       body: MScroll([
         SuperSectionCard2(
       trailing: trailing,
-      title: 'Journal Entry' ?? "",
+      title: 'Journal Entry',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor,
@@ -34,7 +34,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
     ),
         SuperSectionCard2(
       trailing: (null),
-      title: 'Lines' ?? "",
+      title: 'Lines',
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: accentColor2,

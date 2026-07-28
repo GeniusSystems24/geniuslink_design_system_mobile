@@ -1,8 +1,7 @@
-﻿// Reusable presentation widget extracted from the former multi-screen file.
+// Reusable presentation widget extracted from the former multi-screen file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../core/bloc/form_cubit.dart';
 

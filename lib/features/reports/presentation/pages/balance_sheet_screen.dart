@@ -41,7 +41,7 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
         for (final b in blocks)
           SuperSectionCard2(
       trailing: (null),
-      title: b.$1 ?? "",
+      title: b.$1,
       subtitle: (null),
       initiallyExpanded: true,
       accentColor: b.$2,

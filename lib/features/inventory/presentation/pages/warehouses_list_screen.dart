@@ -52,7 +52,7 @@ class WarehousesListScreen extends StatelessWidget {
       body: MScroll([
       SuperSectionCard2(
       trailing: (null),
-      title: '5 Warehouses' ?? "",
+      title: '5 Warehouses',
       subtitle: 'Capacity & assigned manager',
       initiallyExpanded: true,
       accentColor: accentColor,

@@ -1,4 +1,3 @@
-import '../../domain/domain.dart';
 import 'banking_dashboard_screen.dart';
 
 @Deprecated(
