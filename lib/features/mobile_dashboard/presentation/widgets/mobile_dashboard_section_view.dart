@@ -41,60 +41,134 @@ class MobileDashboardSectionViewState
   late final MobileDashboardCubit _dashboardCubit;
   final ScrollController _scrollController = ScrollController();
 
-  MobileDashboardState get _dashboardState => _dashboardCubit.state;
-  String get _tabId => _dashboardState.tab;
-  String get _currency => _dashboardState.cur;
-  String get _period => _dashboardState.period;
-  ReportView get _view => _dashboardState.view;
-  String? get _chartMetricId => _dashboardState.chartMetric;
-  bool get _loading => _dashboardState.status.isLoading;
   MobileDashboardCatalog get _catalog => widget.repository.catalog;
   String get _sectionId => widget.repository.sectionId;
   MdWorkspace get _workspace => widget.workspace;
 
-  MdTab get _selectedTab {
-    if (_catalog.tabs.isEmpty) {
-      return const MdTab(
-        id: 'empty',
-        label: 'Dashboard',
-        cards: [],
-        actions: [],
-        operations: [],
-      );
+  _DashboardViewData get _currentDashboard => _DashboardViewData(
+    catalog: _catalog,
+    sectionId: _sectionId,
+    state: _dashboardCubit.state,
+    workspace: _workspace,
+  );
+
+  String _resolveDashboardTab({
+    required List<MdTab> tabs,
+    required String currentTab,
+    required bool preferSectionTab,
+  }) {
+    bool hasTab(String tabId) => tabs.any((tab) => tab.id == tabId);
+
+    if (preferSectionTab && hasTab(_sectionId)) {
+      return _sectionId;
     }
-    return _catalog.tabs.firstWhere(
-      (tab) => tab.id == _tabId,
-      orElse: () => _catalog.tabs.first,
+    if (hasTab(currentTab)) {
+      return currentTab;
+    }
+    return tabs.first.id;
+  }
+
+  void _syncDashboardSelections({required bool preferSectionTab}) {
+    final catalog = _catalog;
+    final tabs = catalog.tabs;
+
+    if (tabs.isNotEmpty) {
+      final currentTab = _dashboardCubit.state.tab;
+      final targetTab = _resolveDashboardTab(
+        tabs: tabs,
+        currentTab: currentTab,
+        preferSectionTab: preferSectionTab,
+      );
+
+      if (currentTab != targetTab) {
+        _dashboardCubit.selectTab(targetTab);
+      }
+    }
+
+    final currencies = catalog.currencies;
+    final currentCurrency = _dashboardCubit.state.cur;
+    final currencyExists = currencies.any(
+      (currency) => currency.code == currentCurrency,
+    );
+    if (currencies.isNotEmpty && !currencyExists) {
+      _dashboardCubit.setCurrency(currencies.first.code);
+    }
+  }
+
+  void _showDashboardToast(String message) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: _DashboardToastContent(message: message),
+          backgroundColor: context.mdColors.inverseSurface,
+          behavior: SnackBarBehavior.floating,
+          duration: _DashboardDurations.toast,
+          shape: const StadiumBorder(),
+          width: _DashboardLayout.toastWidth,
+        ),
+      );
+  }
+
+  Future<void> _refresh() => _dashboardCubit.refresh();
+
+  void _openActions() {
+    final dashboard = _currentDashboard;
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: context.mdTheme.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: _DashboardLayout.sheetBorderRadius,
+      ),
+      builder: (sheetContext) => MobileDashboardActionsSheet(
+        actions: dashboard.selectedTab.actions,
+        onActionTap: (action) {
+          Navigator.of(sheetContext).pop();
+          _showDashboardToast(_DashboardCopy.openingAction(action.label));
+        },
+      ),
     );
   }
 
-  MdDashboardProfile get _profile => _catalog.profiles[_sectionId]!;
+  void _openSearch() {
+    final dashboard = _currentDashboard;
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: context.mdColors.surface,
+      isScrollControlled: true,
+      useSafeArea: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: _DashboardLayout.sheetBorderRadius,
+      ),
+      builder: (sheetContext) => MobileDashboardSearchSheet(
+        currency: dashboard.currency,
+        factor: dashboard.workspace.factor,
+        tabs: dashboard.catalog.tabs,
+        onOperationTap: (operation) {
+          Navigator.of(sheetContext).pop();
+          _showDashboardToast(operation.reference);
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     _dashboardCubit = MobileDashboardCubit(initialTab: _sectionId);
-
-    if (_catalog.tabs.isNotEmpty &&
-        !_catalog.tabs.any((tab) => tab.id == _sectionId)) {
-      _dashboardCubit.selectTab(_catalog.tabs.first.id);
-    }
-    if (_catalog.currencies.isNotEmpty &&
-        !_catalog.currencies.any(
-          (currency) => currency.code == _dashboardCubit.state.cur,
-        )) {
-      _dashboardCubit.setCurrency(_catalog.currencies.first.code);
-    }
-    unawaited(_dashboardCubit.refresh());
+    _syncDashboardSelections(preferSectionTab: false);
+    unawaited(_refresh());
   }
 
   @override
   void didUpdateWidget(covariant MobileDashboardSectionView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.repository.sectionId != _sectionId &&
-        _catalog.tabs.any((tab) => tab.id == _sectionId)) {
-      _dashboardCubit.selectTab(_sectionId);
-    }
+    _syncDashboardSelections(
+      preferSectionTab: oldWidget.repository.sectionId != _sectionId,
+    );
   }
 
   @override
@@ -104,41 +178,6 @@ class MobileDashboardSectionViewState
     super.dispose();
   }
 
-  void _showToast(String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.check_rounded,
-                size: 15,
-                color: context.mdColors.onInverseSurface,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                message,
-                style: TextStyle(
-                  color: context.mdColors.onInverseSurface,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                ),
-              ),
-            ],
-          ),
-          backgroundColor: context.mdColors.inverseSurface,
-          behavior: SnackBarBehavior.floating,
-          duration: const Duration(milliseconds: 1600),
-          shape: const StadiumBorder(),
-          width: 280,
-        ),
-      );
-  }
-
-  Future<void> _refresh() => _dashboardCubit.refresh();
-
   Future<void> refresh() => _refresh();
 
   void scrollToTop() {
@@ -147,242 +186,597 @@ class MobileDashboardSectionViewState
     }
   }
 
-  double _cardValue(MdCard card) {
-    return (card.values[_currency] ?? 0) * _workspace.factor;
-  }
-
-  double _operationAmount(MdOperation operation) {
-    return (operation.amounts[_currency] ?? 0) * _workspace.factor;
-  }
-
-  void _openActions() {
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: context.mdTheme.surface,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-      ),
-      builder: (sheetContext) => MobileDashboardActionsSheet(
-        actions: _selectedTab.actions,
-        onActionTap: (action) {
-          Navigator.of(sheetContext).pop();
-          _showToast('Opening ${action.label}');
-        },
-      ),
-    );
-  }
-
   void openSearch() => _openSearch();
-
-  void _openSearch() {
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: context.mdColors.surface,
-      isScrollControlled: true,
-      useSafeArea: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-      ),
-      builder: (_) => MobileDashboardSearchSheet(
-        currency: _currency,
-        factor: _workspace.factor,
-        tabs: _catalog.tabs,
-        onOperationTap: (operation) {
-          Navigator.of(context).pop();
-          _showToast(operation.reference);
-        },
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MobileDashboardCubit>.value(
       value: _dashboardCubit,
       child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
-        builder: (context, _) {
-          final selectedTab = _selectedTab;
-          final marker = MdMarker.positive;
-
-          return Column(
-            children: [
-              if (!widget.online) const MobileDashboardOfflineBanner(),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: _refresh,
-                  color: context.mdColors.primary,
-                  backgroundColor: context.mdTheme.surface,
-                  child: ListView(
-                    controller: _scrollController,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.fromLTRB(18, 16, 18, 32),
-                    children: [
-                      if (_loading)
-                        const MobileDashboardErpHeroSkeleton()
-                      else
-                        MobileDashboardErpHero(
-                          profile: _profile,
-                          workspace: _workspace,
-                          currency: _currency,
-                          onPrimaryAction: () =>
-                              _showToast(_profile.primaryActionLabel),
-                        ),
-                      const SizedBox(height: 22),
-                      if (_loading)
-                        MobileDashboardStatusStripSkeleton(
-                          itemCount: _profile.statusItems.isEmpty
-                              ? 3
-                              : _profile.statusItems.length,
-                        )
-                      else
-                        MobileDashboardErpStatusStrip(
-                          title: _profile.statusTitle,
-                          items: _profile.statusItems,
-                          onItemTap: (item) => _showToast(item.label),
-                        ),
-                      const SizedBox(height: 24),
-                      SuperSectionCard2(
-                        title: 'Financial overview',
-                        subtitle:
-                            'Consolidated values, movement, and period comparison',
-                        trailing: null,
-                        accentColor: mobileDashboardMarkerColor(
-                          context,
-                          marker,
-                        ),
-
-                        child: Column(
-                          children: [
-                            if (_loading)
-                              const MobileDashboardControlsSkeleton()
-                            else
-                              MobileDashboardControls(
-                                view: _view,
-                                currency: _currency,
-                                period: _period,
-                                currencies: _catalog.currencies,
-                                onToggleView: _dashboardCubit.toggleView,
-                                onCurrencyChanged: _dashboardCubit.setCurrency,
-                                onPeriodChanged: _dashboardCubit.setPeriod,
-                              ),
-                            const SizedBox(height: 12),
-                            if (_loading)
-                              switch (_view) {
-                                ReportView.cards =>
-                                  MobileDashboardMetricGridSkeleton(
-                                    itemCount: selectedTab.cards.isEmpty
-                                        ? 4
-                                        : selectedTab.cards.length,
-                                  ),
-                                ReportView.chart =>
-                                  const MobileDashboardChartSkeleton(),
-                                ReportView.breakdown =>
-                                  const MobileDashboardBreakdownSkeleton(),
-                              }
-                            else
-                              switch (_view) {
-                                ReportView.cards => MobileDashboardMetricGrid(
-                                  cards: selectedTab.cards,
-                                  currency: _currency,
-                                  period: _period,
-                                  valueFor: _cardValue,
-                                ),
-                                ReportView.chart => MobileDashboardChartView(
-                                  cards: selectedTab.cards,
-                                  currency: _currency,
-                                  period: _period,
-                                  selectedMetricId: _chartMetricId,
-                                  axisLabels:
-                                      _catalog.axisLabels[_period] ??
-                                      const <String>[],
-                                  valueFor: _cardValue,
-                                  onMetricSelected:
-                                      _dashboardCubit.setChartMetric,
-                                ),
-                                ReportView.breakdown =>
-                                  MobileDashboardBreakdownView(
-                                    cards: selectedTab.cards,
-                                    tabLabel: selectedTab.label,
-                                    currency: _currency,
-                                    valueFor: _cardValue,
-                                  ),
-                              },
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      if (_loading)
-                        MobileDashboardWorkflowSkeleton(
-                          itemCount: _profile.workflowItems.isEmpty
-                              ? 3
-                              : _profile.workflowItems.length,
-                        )
-                      else
-                        MobileDashboardWorkflowPanel(
-                          title: _profile.workflowTitle,
-                          subtitle: _profile.workflowSubtitle,
-                          items: _profile.workflowItems,
-                          onItemTap: (item) => _showToast(item.title),
-                        ),
-                      const SizedBox(height: 24),
-                      if (_loading)
-                        MobileDashboardQuickActionsSkeleton(
-                          itemCount: selectedTab.actions.isEmpty
-                              ? 8
-                              : selectedTab.actions.length.clamp(4, 8),
-                        )
-                      else
-                        MobileDashboardQuickActions(
-                          title: '${selectedTab.label} workspace',
-                          actions: selectedTab.actions,
-                          onActionTap: (action) =>
-                              _showToast('Opening ${action.label}'),
-                          onViewAll: _openActions,
-                        ),
-                      const SizedBox(height: 24),
-                      if (_loading)
-                        MobileDashboardRecentOperationsSkeleton(
-                          itemCount: selectedTab.operations.isEmpty
-                              ? 5
-                              : selectedTab.operations.length,
-                        )
-                      else
-                        MobileDashboardRecentOperations(
-                          title: _profile.operationsTitle,
-                          subtitle: 'Latest posted and in-process documents',
-                          operations: selectedTab.operations,
-                          currency: _currency,
-                          amountFor: _operationAmount,
-                          onViewAll: () => _showToast('Open register'),
-                        ),
-                      const SizedBox(height: 24),
-                      if (_loading)
-                        MobileDashboardAttentionSkeleton(
-                          itemCount: _profile.attentionItems.isEmpty
-                              ? 3
-                              : _profile.attentionItems.length,
-                        )
-                      else
-                        MobileDashboardAttentionList(
-                          title: _profile.attentionTitle,
-                          subtitle: 'Control issues that require resolution',
-                          items: _profile.attentionItems,
-                          onItemTap: (item) => _showToast(item.label),
-                          trailing: MobileDashboardPill(
-                            label:
-                                '${_profile.attentionItems.fold<int>(0, (sum, item) => sum + item.count)} open',
-                            color: context.mdColors.error,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+        builder: (context, state) {
+          return _MobileDashboardSectionContent(
+            dashboard: _DashboardViewData(
+              catalog: _catalog,
+              sectionId: _sectionId,
+              state: state,
+              workspace: _workspace,
+            ),
+            online: widget.online,
+            scrollController: _scrollController,
+            onRefresh: _refresh,
+            onToast: _showDashboardToast,
+            onOpenActions: _openActions,
+            onToggleView: _dashboardCubit.toggleView,
+            onCurrencyChanged: _dashboardCubit.setCurrency,
+            onPeriodChanged: _dashboardCubit.setPeriod,
+            onMetricSelected: _dashboardCubit.setChartMetric,
           );
         },
       ),
     );
   }
+}
+
+typedef _DashboardToastCallback = void Function(String message);
+
+class _MobileDashboardSectionContent extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final bool online;
+  final ScrollController scrollController;
+  final RefreshCallback onRefresh;
+  final _DashboardToastCallback onToast;
+  final VoidCallback onOpenActions;
+  final VoidCallback onToggleView;
+  final ValueChanged<String> onCurrencyChanged;
+  final ValueChanged<String> onPeriodChanged;
+  final ValueChanged<String> onMetricSelected;
+
+  const _MobileDashboardSectionContent({
+    required this.dashboard,
+    required this.online,
+    required this.scrollController,
+    required this.onRefresh,
+    required this.onToast,
+    required this.onOpenActions,
+    required this.onToggleView,
+    required this.onCurrencyChanged,
+    required this.onPeriodChanged,
+    required this.onMetricSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (!online) const MobileDashboardOfflineBanner(),
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: onRefresh,
+            color: context.mdColors.primary,
+            backgroundColor: context.mdTheme.surface,
+            child: ListView(
+              controller: scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: _DashboardLayout.scrollPadding,
+              children: [
+                _DashboardHeroSection(dashboard: dashboard, onToast: onToast),
+                const SizedBox(height: _DashboardLayout.heroSectionGap),
+                _DashboardStatusSection(dashboard: dashboard, onToast: onToast),
+                const SizedBox(height: _DashboardLayout.sectionGap),
+                _FinancialOverviewSection(
+                  dashboard: dashboard,
+                  onToggleView: onToggleView,
+                  onCurrencyChanged: onCurrencyChanged,
+                  onPeriodChanged: onPeriodChanged,
+                  onMetricSelected: onMetricSelected,
+                ),
+                const SizedBox(height: _DashboardLayout.sectionGap),
+                _DashboardWorkflowSection(
+                  dashboard: dashboard,
+                  onToast: onToast,
+                ),
+                const SizedBox(height: _DashboardLayout.sectionGap),
+                _DashboardQuickActionsSection(
+                  dashboard: dashboard,
+                  onToast: onToast,
+                  onViewAll: onOpenActions,
+                ),
+                const SizedBox(height: _DashboardLayout.sectionGap),
+                _DashboardRecentOperationsSection(
+                  dashboard: dashboard,
+                  onToast: onToast,
+                ),
+                const SizedBox(height: _DashboardLayout.sectionGap),
+                _DashboardAttentionSection(
+                  dashboard: dashboard,
+                  onToast: onToast,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DashboardHeroSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+
+  const _DashboardHeroSection({required this.dashboard, required this.onToast});
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return const MobileDashboardErpHeroSkeleton();
+    }
+
+    return MobileDashboardErpHero(
+      profile: dashboard.profile,
+      workspace: dashboard.workspace,
+      currency: dashboard.currency,
+      onPrimaryAction: () => onToast(dashboard.profile.primaryActionLabel),
+    );
+  }
+}
+
+class _DashboardStatusSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+
+  const _DashboardStatusSection({
+    required this.dashboard,
+    required this.onToast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return MobileDashboardStatusStripSkeleton(
+        itemCount: dashboard.statusSkeletonCount,
+      );
+    }
+
+    return MobileDashboardErpStatusStrip(
+      title: dashboard.profile.statusTitle,
+      items: dashboard.profile.statusItems,
+      onItemTap: (item) => onToast(item.label),
+    );
+  }
+}
+
+class _FinancialOverviewSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final VoidCallback onToggleView;
+  final ValueChanged<String> onCurrencyChanged;
+  final ValueChanged<String> onPeriodChanged;
+  final ValueChanged<String> onMetricSelected;
+
+  const _FinancialOverviewSection({
+    required this.dashboard,
+    required this.onToggleView,
+    required this.onCurrencyChanged,
+    required this.onPeriodChanged,
+    required this.onMetricSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SuperSectionCard2(
+      title: _DashboardCopy.financialOverviewTitle,
+      subtitle: _DashboardCopy.financialOverviewSubtitle,
+      trailing: null,
+      accentColor: mobileDashboardMarkerColor(
+        context,
+        _DashboardDefaults.financialOverviewMarker,
+      ),
+      child: Column(
+        children: [
+          _DashboardControlsSection(
+            dashboard: dashboard,
+            onToggleView: onToggleView,
+            onCurrencyChanged: onCurrencyChanged,
+            onPeriodChanged: onPeriodChanged,
+          ),
+          const SizedBox(height: _DashboardLayout.controlsReportGap),
+          _ReportViewSection(
+            dashboard: dashboard,
+            onMetricSelected: onMetricSelected,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DashboardControlsSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final VoidCallback onToggleView;
+  final ValueChanged<String> onCurrencyChanged;
+  final ValueChanged<String> onPeriodChanged;
+
+  const _DashboardControlsSection({
+    required this.dashboard,
+    required this.onToggleView,
+    required this.onCurrencyChanged,
+    required this.onPeriodChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return const MobileDashboardControlsSkeleton();
+    }
+
+    return MobileDashboardControls(
+      view: dashboard.view,
+      currency: dashboard.currency,
+      period: dashboard.period,
+      currencies: dashboard.catalog.currencies,
+      onToggleView: onToggleView,
+      onCurrencyChanged: onCurrencyChanged,
+      onPeriodChanged: onPeriodChanged,
+    );
+  }
+}
+
+class _ReportViewSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final ValueChanged<String> onMetricSelected;
+
+  const _ReportViewSection({
+    required this.dashboard,
+    required this.onMetricSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return switch (dashboard.view) {
+        ReportView.cards => MobileDashboardMetricGridSkeleton(
+          itemCount: dashboard.metricSkeletonCount,
+        ),
+        ReportView.chart => const MobileDashboardChartSkeleton(),
+        ReportView.breakdown => const MobileDashboardBreakdownSkeleton(),
+      };
+    }
+
+    return switch (dashboard.view) {
+      ReportView.cards => MobileDashboardMetricGrid(
+        cards: dashboard.selectedTab.cards,
+        currency: dashboard.currency,
+        period: dashboard.period,
+        valueFor: dashboard.cardValue,
+      ),
+      ReportView.chart => MobileDashboardChartView(
+        cards: dashboard.selectedTab.cards,
+        currency: dashboard.currency,
+        period: dashboard.period,
+        selectedMetricId: dashboard.chartMetricId,
+        axisLabels: dashboard.axisLabels,
+        valueFor: dashboard.cardValue,
+        onMetricSelected: onMetricSelected,
+      ),
+      ReportView.breakdown => MobileDashboardBreakdownView(
+        cards: dashboard.selectedTab.cards,
+        tabLabel: dashboard.selectedTab.label,
+        currency: dashboard.currency,
+        valueFor: dashboard.cardValue,
+      ),
+    };
+  }
+}
+
+class _DashboardWorkflowSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+
+  const _DashboardWorkflowSection({
+    required this.dashboard,
+    required this.onToast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return MobileDashboardWorkflowSkeleton(
+        itemCount: dashboard.workflowSkeletonCount,
+      );
+    }
+
+    return MobileDashboardWorkflowPanel(
+      title: dashboard.profile.workflowTitle,
+      subtitle: dashboard.profile.workflowSubtitle,
+      items: dashboard.profile.workflowItems,
+      onItemTap: (item) => onToast(item.title),
+    );
+  }
+}
+
+class _DashboardQuickActionsSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+  final VoidCallback onViewAll;
+
+  const _DashboardQuickActionsSection({
+    required this.dashboard,
+    required this.onToast,
+    required this.onViewAll,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return MobileDashboardQuickActionsSkeleton(
+        itemCount: dashboard.quickActionSkeletonCount,
+      );
+    }
+
+    return MobileDashboardQuickActions(
+      title: _DashboardCopy.workspaceTitle(dashboard.selectedTab.label),
+      actions: dashboard.selectedTab.actions,
+      onActionTap: (action) =>
+          onToast(_DashboardCopy.openingAction(action.label)),
+      onViewAll: onViewAll,
+    );
+  }
+}
+
+class _DashboardRecentOperationsSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+
+  const _DashboardRecentOperationsSection({
+    required this.dashboard,
+    required this.onToast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return MobileDashboardRecentOperationsSkeleton(
+        itemCount: dashboard.recentOperationsSkeletonCount,
+      );
+    }
+
+    return MobileDashboardRecentOperations(
+      title: dashboard.profile.operationsTitle,
+      subtitle: _DashboardCopy.recentOperationsSubtitle,
+      operations: dashboard.selectedTab.operations,
+      currency: dashboard.currency,
+      amountFor: dashboard.operationAmount,
+      onViewAll: () => onToast(_DashboardCopy.openRegister),
+    );
+  }
+}
+
+class _DashboardAttentionSection extends StatelessWidget {
+  final _DashboardViewData dashboard;
+  final _DashboardToastCallback onToast;
+
+  const _DashboardAttentionSection({
+    required this.dashboard,
+    required this.onToast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (dashboard.loading) {
+      return MobileDashboardAttentionSkeleton(
+        itemCount: dashboard.attentionSkeletonCount,
+      );
+    }
+
+    return MobileDashboardAttentionList(
+      title: dashboard.profile.attentionTitle,
+      subtitle: _DashboardCopy.attentionSubtitle,
+      items: dashboard.profile.attentionItems,
+      onItemTap: (item) => onToast(item.label),
+      trailing: MobileDashboardPill(
+        label: _DashboardCopy.openItems(dashboard.openAttentionCount),
+        color: context.mdColors.error,
+      ),
+    );
+  }
+}
+
+class _DashboardToastContent extends StatelessWidget {
+  final String message;
+
+  const _DashboardToastContent({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.check_rounded,
+          size: _DashboardLayout.toastIconSize,
+          color: context.mdColors.onInverseSurface,
+        ),
+        const SizedBox(width: _DashboardLayout.toastIconGap),
+        Expanded(
+          child: Text(
+            message,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: context.mdColors.onInverseSurface,
+              fontWeight: FontWeight.w600,
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DashboardViewData {
+  final MobileDashboardCatalog catalog;
+  final String sectionId;
+  final MobileDashboardState state;
+  final MdWorkspace workspace;
+
+  const _DashboardViewData({
+    required this.catalog,
+    required this.sectionId,
+    required this.state,
+    required this.workspace,
+  });
+
+  String get currency => state.cur;
+  String get period => state.period;
+  ReportView get view => state.view;
+  String? get chartMetricId => state.chartMetric;
+  bool get loading => state.status.isLoading;
+
+  MdTab get selectedTab {
+    if (catalog.tabs.isEmpty) {
+      return _DashboardDefaults.emptyTab;
+    }
+
+    return catalog.tabs.firstWhere(
+      (tab) => tab.id == state.tab,
+      orElse: () => catalog.tabs.first,
+    );
+  }
+
+  MdDashboardProfile get profile {
+    final tab = selectedTab;
+    return catalog.profiles[sectionId] ??
+        catalog.profiles[tab.id] ??
+        _DashboardDefaults.emptyProfile(sectionId, tab.label);
+  }
+
+  List<String> get axisLabels => catalog.axisLabels[period] ?? const <String>[];
+
+  int get statusSkeletonCount => _DashboardDefaults.skeletonCount(
+    profile.statusItems.length,
+    _DashboardDefaults.statusSkeletonCount,
+  );
+
+  int get metricSkeletonCount => _DashboardDefaults.skeletonCount(
+    selectedTab.cards.length,
+    _DashboardDefaults.metricSkeletonCount,
+  );
+
+  int get workflowSkeletonCount => _DashboardDefaults.skeletonCount(
+    profile.workflowItems.length,
+    _DashboardDefaults.workflowSkeletonCount,
+  );
+
+  int get quickActionSkeletonCount {
+    final actionsCount = selectedTab.actions.length;
+    if (actionsCount == 0) {
+      return _DashboardDefaults.quickActionSkeletonCount;
+    }
+
+    return actionsCount
+        .clamp(
+          _DashboardDefaults.minQuickActionSkeletonCount,
+          _DashboardDefaults.quickActionSkeletonCount,
+        )
+        .toInt();
+  }
+
+  int get recentOperationsSkeletonCount => _DashboardDefaults.skeletonCount(
+    selectedTab.operations.length,
+    _DashboardDefaults.recentOperationsSkeletonCount,
+  );
+
+  int get attentionSkeletonCount => _DashboardDefaults.skeletonCount(
+    profile.attentionItems.length,
+    _DashboardDefaults.attentionSkeletonCount,
+  );
+
+  int get openAttentionCount =>
+      profile.attentionItems.fold<int>(0, (sum, item) => sum + item.count);
+
+  double cardValue(MdCard card) => _scaledCurrencyValue(card.values[currency]);
+
+  double operationAmount(MdOperation operation) {
+    return _scaledCurrencyValue(operation.amounts[currency]);
+  }
+
+  double _scaledCurrencyValue(double? value) => (value ?? 0) * workspace.factor;
+}
+
+abstract final class _DashboardDefaults {
+  static const financialOverviewMarker = MdMarker.positive;
+  static const statusSkeletonCount = 3;
+  static const metricSkeletonCount = 4;
+  static const workflowSkeletonCount = 3;
+  static const quickActionSkeletonCount = 8;
+  static const minQuickActionSkeletonCount = 4;
+  static const recentOperationsSkeletonCount = 5;
+  static const attentionSkeletonCount = 3;
+  static const emptyTab = MdTab(
+    id: 'empty',
+    label: 'Dashboard',
+    cards: [],
+    actions: [],
+    operations: [],
+  );
+
+  static int skeletonCount(int itemCount, int fallbackCount) {
+    return itemCount == 0 ? fallbackCount : itemCount;
+  }
+
+  static MdDashboardProfile emptyProfile(String sectionId, String title) {
+    return MdDashboardProfile(
+      sectionId: sectionId,
+      eyebrow: _DashboardCopy.dashboardEyebrow,
+      title: title,
+      subtitle: '',
+      primaryActionId: 'create',
+      primaryActionLabel: _DashboardCopy.createAction,
+      statusTitle: _DashboardCopy.statusTitle,
+      workflowTitle: _DashboardCopy.workflowTitle,
+      workflowSubtitle: '',
+      operationsTitle: _DashboardCopy.operationsTitle,
+      attentionTitle: _DashboardCopy.attentionTitle,
+      statusItems: const [],
+      workflowItems: const [],
+      attentionItems: const [],
+    );
+  }
+}
+
+abstract final class _DashboardLayout {
+  static const scrollPadding = EdgeInsets.fromLTRB(18, 16, 18, 32);
+  static const sheetBorderRadius = BorderRadius.vertical(
+    top: Radius.circular(22),
+  );
+  static const heroSectionGap = 22.0;
+  static const sectionGap = 24.0;
+  static const controlsReportGap = 12.0;
+  static const toastIconSize = 15.0;
+  static const toastIconGap = 8.0;
+  static const toastWidth = 280.0;
+}
+
+abstract final class _DashboardDurations {
+  static const toast = Duration(milliseconds: 1600);
+}
+
+abstract final class _DashboardCopy {
+  static const dashboardEyebrow = 'Dashboard';
+  static const createAction = 'Create';
+  static const statusTitle = 'Status';
+  static const workflowTitle = 'Workflow';
+  static const operationsTitle = 'Operations';
+  static const attentionTitle = 'Attention';
+  static const financialOverviewTitle = 'Financial overview';
+  static const financialOverviewSubtitle =
+      'Consolidated values, movement, and period comparison';
+  static const recentOperationsSubtitle =
+      'Latest posted and in-process documents';
+  static const attentionSubtitle = 'Control issues that require resolution';
+  static const openRegister = 'Open register';
+
+  static String openingAction(String label) => 'Opening $label';
+  static String workspaceTitle(String tabLabel) => '$tabLabel workspace';
+  static String openItems(int count) => '$count open';
 }
