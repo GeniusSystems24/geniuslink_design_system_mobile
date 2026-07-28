@@ -14,16 +14,34 @@ class _BalancedRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.borderStrong, width: 2))),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Eyebrow('Balanced · Diff 0.00', color: SuperMaterialThemeData.of(context).colorScheme.secondary, size: 11),
-        Text(value,
+        border: Border(
+          top: BorderSide(
+            color: SuperMaterialThemeData.of(context).superTheme.borderStrong,
+            width: 2,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Eyebrow(
+            'Balanced · Diff 0.00',
+            color: SuperMaterialThemeData.of(context).colorScheme.secondary,
+            size: 11,
+          ),
+          Text(
+            value,
             style: TextStyle(
-                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: SuperMaterialThemeData.of(context).superTheme.fg1)),
-      ]),
+              fontFamily: SuperMaterialThemeData.of(
+                context,
+              ).textTheme.bodyMedium?.fontFamily,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: SuperMaterialThemeData.of(context).superTheme.fg1,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -65,7 +83,9 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
 
   @override
   void dispose() {
-    for (final l in _lines) { l.dispose(); }
+    for (final l in _lines) {
+      l.dispose();
+    }
     _storeController.dispose();
     _supplierController.dispose();
     _currencyController.dispose();
@@ -76,7 +96,12 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     final parts = raw.split(' — ');
     final sku = parts.isNotEmpty ? parts[0] : raw;
     final name = parts.length > 1 ? parts[1] : raw;
-    setState(() => _lines.insert(0, InventoryLineFormController(InventoryLine(sku: sku, name: name))));
+    setState(
+      () => _lines.insert(
+        0,
+        InventoryLineFormController(InventoryLine(sku: sku, name: name)),
+      ),
+    );
   }
 
   Future<void> _submit() async {
@@ -91,8 +116,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
-      ISection(
-          icon: 'box',
+        ISection(
+          icon: MIcons.of('box'),
           title: 'Receive Details',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
@@ -116,11 +141,13 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               label: 'Supplier Account',
               hintText: 'e.g. ABC Trading Co.',
             ),
-          ]),
-      ISection(
-          icon: 'cart',
+          ],
+        ),
+        ISection(
+          icon: MIcons.of('cart'),
           title: 'Inventory Items',
-          sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
+          sub:
+              '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
           marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
             Scanner(onPick: _addLine),
@@ -138,44 +165,53 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               );
             }),
             const AddProductBtn(),
-          ]),
-      ISection(
-          icon: 'swap',
+          ],
+        ),
+        ISection(
+          icon: MIcons.of('swap'),
           title: 'Accounting Distribution',
           marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: const [
             DistRow(
-                account: '1200 — Inventory (WIP)',
-                side: 'Debit',
-                amount: '+24,200.00',
-                last: false),
+              account: '1200 — Inventory (WIP)',
+              side: 'Debit',
+              amount: '+24,200.00',
+              last: false,
+            ),
             DistRow(
-                account: '2001 — Accounts Payable',
-                side: 'Credit',
-                amount: '-24,200.00',
-                last: true),
+              account: '2001 — Accounts Payable',
+              side: 'Credit',
+              amount: '-24,200.00',
+              last: true,
+            ),
             _BalancedRow(value: '24,200.00'),
-          ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
-        const SuperTextFormField(
-          decoration: InputDecoration(
-            labelText: 'Receipt Notes',
-            hintText: 'PO number, delivery note, inspection results…',
-          ),
-          multiline: true,
-          rows: 3,
+          ],
         ),
-        SuperAttachmentFormField(
-          decoration: const InputDecoration(labelText: 'Attachments'),
-          accept: '.pdf,.jpg,.jpeg,.png',
-          maxSizeMB: 10,
-          maxFiles: 5,
-          multiple: true,
-          onBrowse: () async => const <SuperFile>[],
+        ISection(
+          icon: MIcons.of('doc'),
+          title: 'Notes & Docs',
+          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
+          children: [
+            const SuperTextFormField(
+              decoration: InputDecoration(
+                labelText: 'Receipt Notes',
+                hintText: 'PO number, delivery note, inspection results…',
+              ),
+              multiline: true,
+              rows: 3,
+            ),
+            SuperAttachmentFormField(
+              decoration: const InputDecoration(labelText: 'Attachments'),
+              accept: '.pdf,.jpg,.jpeg,.png',
+              maxSizeMB: 10,
+              maxFiles: 5,
+              multiple: true,
+              onBrowse: () async => const <SuperFile>[],
+            ),
+          ],
         ),
+        ActionRow(primary: 'Receive Inventory', onPrimary: _submit),
       ]),
-      ActionRow(primary: 'Receive Inventory', onPrimary: _submit),
-    ]),
     );
   }
 }

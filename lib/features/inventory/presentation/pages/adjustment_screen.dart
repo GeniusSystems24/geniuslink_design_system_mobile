@@ -80,7 +80,7 @@ class AdjustmentScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
       body: MScroll([
       ISection(
-          icon: 'box',
+          icon: MIcons.of('box'),
           title: 'Adjustment Details',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: const [
@@ -125,7 +125,7 @@ class AdjustmentScreen extends StatelessWidget {
         ),
       ]),
       ISection(
-          icon: 'doc',
+          icon: MIcons.of('doc'),
           title: 'Documentation & Approval',
           marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           children: const [

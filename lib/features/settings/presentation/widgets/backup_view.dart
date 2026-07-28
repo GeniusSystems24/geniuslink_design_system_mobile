@@ -32,7 +32,7 @@ class BackupView extends StatelessWidget {
               PlatformToggle(on: auto, onTap: () => form.setField('auto', !auto)),
             ]),
           ]),
-          ISection(icon: 'download', title: 'Manual Export', sub: 'Download a portable copy', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+          ISection(icon: MIcons.of('download'), title: 'Manual Export', sub: 'Download a portable copy', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Padding(padding: EdgeInsets.only(bottom: 7), child: Eyebrow('Data Scope')),
               GridView.count(

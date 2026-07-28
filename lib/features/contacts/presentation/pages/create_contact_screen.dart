@@ -14,7 +14,7 @@ class CreateContactScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: Text('Add ${contactSingularLabel(d.type)}')),
       body: MScroll([
-      ISection(icon: 'user', title: '${contactSingularLabel(d.type)} Identity', subtitle: 'Legal name and contact details', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+      ISection(icon: MIcons.of('user'), title: '${contactSingularLabel(d.type)} Identity', subtitle: 'Legal name and contact details', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         TInput(label: 'Name English', placeholder: contactSingularLabel(d.type) == 'Customer' ? 'e.g. Riyadh Construction Co.' : 'e.g. Global Steel Imports LLC', required: true),
         const TInput(label: 'الاسم بالعربية', placeholder: 'مثال: شركة الرياض للإنشاءات', ar: true),
         const TInput(label: 'Contact Person', placeholder: 'e.g. Ahmed K.'),
@@ -22,13 +22,13 @@ class CreateContactScreen extends StatelessWidget {
         const TInput(label: 'Email', placeholder: 'name@company.com'),
         const TInput(label: 'City', placeholder: 'e.g. Riyadh'),
       ]),
-      ISection(icon: 'swap', title: 'Financial', subtitle: 'Linked control account and terms', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
+      ISection(icon: MIcons.of('swap'), title: 'Financial', subtitle: 'Linked control account and terms', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: [
         TSelect(label: 'Control Account', value: d.controlAccount, options: [d.controlAccount]),
         const TSelect(label: 'Payment Terms', value: 'Net 30', options: ['Net 15', 'Net 30', 'Net 60', 'On Receipt']),
         const TInput(label: 'Tax / VAT Number', placeholder: '3XXXXXXXXXXXXX3', mono: true),
         const TInput(label: 'Credit Limit (SAR)', placeholder: 'e.g. 100,000.00', mono: true),
       ]),
-      ISection(icon: 'doc', title: 'Notes', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
+      ISection(icon: MIcons.of('doc'), title: 'Notes', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         ITextarea(label: 'Notes', placeholder: 'Internal notes about this ${contactSingularLabel(d.type).toLowerCase()}…'),
       ]),
       Row(children: [

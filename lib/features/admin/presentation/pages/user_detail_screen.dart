@@ -33,7 +33,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ])),
         ]),
       ]),
-      ISection(icon: 'user', title: 'Profile', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
+      ISection(icon: MIcons.of('user'), title: 'Profile', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: const [
         TInput(label: 'Full Name', defaultValue: 'Layla Ahmed'),
         TInput(label: 'Work Email', defaultValue: 'layla.a@geniuslink.sa', mono: true),
         TInput(label: 'Employee ID', defaultValue: 'EMP-0012', mono: true),

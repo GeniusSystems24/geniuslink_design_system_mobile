@@ -42,7 +42,7 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
             onPeriod: (v) => setState(() => _period = v),
             badges: const [('Currency', 'SAR'), ('Basis', 'Accrual')]),
         for (final s in sections)
-          ISection(icon: 'ledger', title: s.$1, marker: s.$2, children: [
+          ISection(icon: MIcons.of('ledger'), title: s.$1, marker: s.$2, children: [
             for (int i = 0; i < s.$3.length; i++)
               ReportRow(
                   left: s.$3[i].$2,

@@ -8,17 +8,17 @@ class CreateExternalTransferScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Create External Transfer')),
       body: MScroll([
-      ISection(icon: 'globe', title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
+      ISection(icon: MIcons.of('globe'), title: 'Transfer Amount', accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         MMoney(label: 'Amount', value: '11,000.00', currency: 'USD', accent: SuperMaterialThemeData.of(context).colorScheme.tertiary, required: true),
       ]),
-      ISection(icon: 'percent', title: 'FX Conversion', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+      ISection(icon: MIcons.of('percent'), title: 'FX Conversion', accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         FxTiles(tiles: [
           ('Rate', '3.7500', 'USD → SAR', null),
           ('Converted', '41,250.00', 'SAR', SuperMaterialThemeData.of(context).superTheme.fg1),
           ('Fee', '75.00', 'SAR', SuperMaterialThemeData.of(context).colorScheme.tertiary),
         ]),
       ]),
-      ISection(icon: 'building', title: 'Beneficiary', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
+      ISection(icon: MIcons.of('building'), title: 'Beneficiary', accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
         IField(label: 'From Account', value: 'Bank · NCB Main (1100)', select: true, required: true),
         IField(label: 'Beneficiary', value: 'Global Steel Imports', select: true, required: true),
         IField(label: 'IBAN / SWIFT', value: 'DE89 3704 0044 0532 0130 00', mono: true),

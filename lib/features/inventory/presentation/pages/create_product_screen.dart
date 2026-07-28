@@ -66,7 +66,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
       ISection(
-          icon: 'box',
+          icon: MIcons.of('box'),
           title: 'Product Definition',
           sub: 'SKU, names and classification',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
@@ -121,7 +121,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             ),
           ]),
       ISection(
-          icon: 'swap',
+          icon: MIcons.of('swap'),
           title: 'Costing & Pricing',
           marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
           children: [
@@ -148,7 +148,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             ),
           ]),
       ISection(
-          icon: 'store',
+          icon: MIcons.of('store'),
           title: 'Inventory Settings',
           marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
           children: [

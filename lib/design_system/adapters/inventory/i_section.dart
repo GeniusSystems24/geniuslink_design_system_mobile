@@ -8,13 +8,11 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/components/layout/m_icons.dart';
-import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 import 'package:super_form_field/super_form_field.dart';
 
 /// Collapsible section card: colored marker · icon · title · chevron.
 class ISection extends StatefulWidget {
-  final String icon;
+  final IconData? icon;
   final String title;
   final Color? marker;
   final String? sub;
@@ -78,20 +76,18 @@ class _ISectionState extends State<ISection> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: superCoreTint(marker, 0x1F),
-                      borderRadius: BorderRadius.circular(8),
+                  if (widget.icon != null) ...[
+                    Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: marker.withAlpha(0x1F.clamp(0, 255).toInt()),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(widget.icon, size: 16, color: marker),
                     ),
-                    child: Icon(
-                      MIcons.of(widget.icon),
-                      size: 16,
-                      color: marker,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
+                    const SizedBox(width: 12),
+                  ],
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

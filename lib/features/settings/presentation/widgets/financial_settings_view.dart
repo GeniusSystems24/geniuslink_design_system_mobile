@@ -19,7 +19,7 @@ class FinancialSettingsView extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Financial Settings')),
       body: MScroll([
-          ISection(icon: 'globe', title: 'Currency & Calendar', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+          ISection(icon: MIcons.of('globe'), title: 'Currency & Calendar', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
             const TSelect(label: 'Base Currency', value: 'SAR — Saudi Riyal', options: ['SAR — Saudi Riyal', 'USD — US Dollar', 'AED — UAE Dirham']),
             const TSelect(label: 'Fiscal Year Start', value: 'January', options: ['January', 'April', 'July', 'October']),
             const TSelect(label: 'Rounding Precision', value: '2 decimals', options: ['0 decimals', '2 decimals', '3 decimals']),
@@ -40,11 +40,11 @@ class FinancialSettingsView extends StatelessWidget {
               ]),
             ]),
           ]),
-          ISection(icon: 'ledger', title: 'Default Posting Accounts', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
+          ISection(icon: MIcons.of('ledger'), title: 'Default Posting Accounts', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
             TSelect(label: 'Retained Earnings', value: '3100 — Retained Earnings', options: ['3100 — Retained Earnings', '3001 — Owner Capital']),
             TSelect(label: 'Default Tax Account', value: '2200 — VAT Payable', options: ['2200 — VAT Payable', '1350 — VAT Receivable']),
           ]),
-          ISection(icon: 'lock', title: 'Posting Rules', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: const [
+          ISection(icon: MIcons.of('lock'), title: 'Posting Rules', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: const [
             TSwitch(label: 'Lock postings to open periods only', defaultOn: true),
             TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
           ]),

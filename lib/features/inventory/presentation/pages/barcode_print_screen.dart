@@ -60,7 +60,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
       ]),
-      ISection(icon: 'box', title: 'Label Template', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
+      ISection(icon: MIcons.of('box'), title: 'Label Template', marker: SuperMaterialThemeData.of(context).colorScheme.primary, children: [
         GridView.count(
           crossAxisCount: 2, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 2.6,
@@ -81,12 +81,12 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ],
         ),
       ]),
-      ISection(icon: 'scan', title: 'Print Settings', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
+      ISection(icon: MIcons.of('scan'), title: 'Print Settings', marker: SuperMaterialThemeData.of(context).colorScheme.secondary, children: const [
         IField(label: 'Symbology', value: 'Code 128', select: true),
         IField(label: 'Paper', value: 'A4 (210 × 297 mm)', select: true),
         IField(label: 'Copies per Item', placeholder: '1', mono: true),
       ]),
-      ISection(icon: 'doc', title: 'Queue', sub: '4 products · 12 labels · 1 sheet', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
+      ISection(icon: MIcons.of('doc'), title: 'Queue', sub: '4 products · 12 labels · 1 sheet', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
         for (final q in const [('STL-44021', 'Structural Steel I-Beam', 4), ('CMT-90112', 'Portland Cement Type I', 12), ('AGG-21044', 'Coarse Aggregate 20mm', 2), ('PLY-30022', 'Plywood Sheet 18mm', 6)])
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),

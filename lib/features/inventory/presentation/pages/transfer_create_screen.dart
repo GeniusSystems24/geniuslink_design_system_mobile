@@ -42,7 +42,9 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
 
   @override
   void dispose() {
-    for (final l in _lines) { l.dispose(); }
+    for (final l in _lines) {
+      l.dispose();
+    }
     _fromController.dispose();
     _toController.dispose();
     _currencyController.dispose();
@@ -53,7 +55,12 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     final parts = raw.split(' — ');
     final sku = parts.isNotEmpty ? parts[0] : raw;
     final name = parts.length > 1 ? parts[1] : raw;
-    setState(() => _lines.insert(0, InventoryLineFormController(InventoryLine(sku: sku, name: name))));
+    setState(
+      () => _lines.insert(
+        0,
+        InventoryLineFormController(InventoryLine(sku: sku, name: name)),
+      ),
+    );
   }
 
   Future<void> _submit() async {
@@ -68,8 +75,8 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Transfer Inventory')),
       body: MScroll([
-      ISection(
-          icon: 'box',
+        ISection(
+          icon: MIcons.of('box'),
           title: 'Transfer Details',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
           children: [
@@ -93,9 +100,10 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
               label: 'To Store',
               hintText: 'Search destination…',
             ),
-          ]),
-      ISection(
-          icon: 'cart',
+          ],
+        ),
+        ISection(
+          icon: MIcons.of('cart'),
           title: 'Products',
           sub: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
           marker: SuperMaterialThemeData.of(context).colorScheme.primary,
@@ -115,27 +123,33 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
               );
             }),
             const AddProductBtn(),
-          ]),
-      ISection(icon: 'doc', title: 'Notes & Docs', marker: SuperMaterialThemeData.of(context).colorScheme.tertiary, children: [
-        const SuperTextFormField(
-          decoration: InputDecoration(
-            labelText: 'Notes',
-            hintText: 'Enter transfer notes or internal instructions…',
-          ),
-          multiline: true,
-          rows: 3,
+          ],
         ),
-        SuperAttachmentFormField(
-          decoration: const InputDecoration(labelText: 'Attachments'),
-          accept: '.pdf,.jpg,.jpeg,.png',
-          maxSizeMB: 10,
-          maxFiles: 5,
-          multiple: true,
-          onBrowse: () async => const <SuperFile>[],
+        ISection(
+          icon: MIcons.of('doc'),
+          title: 'Notes & Docs',
+          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
+          children: [
+            const SuperTextFormField(
+              decoration: InputDecoration(
+                labelText: 'Notes',
+                hintText: 'Enter transfer notes or internal instructions…',
+              ),
+              multiline: true,
+              rows: 3,
+            ),
+            SuperAttachmentFormField(
+              decoration: const InputDecoration(labelText: 'Attachments'),
+              accept: '.pdf,.jpg,.jpeg,.png',
+              maxSizeMB: 10,
+              maxFiles: 5,
+              multiple: true,
+              onBrowse: () async => const <SuperFile>[],
+            ),
+          ],
         ),
+        ActionRow(primary: 'Transfer Inventory', onPrimary: _submit),
       ]),
-      ActionRow(primary: 'Transfer Inventory', onPrimary: _submit),
-    ]),
     );
   }
 }
