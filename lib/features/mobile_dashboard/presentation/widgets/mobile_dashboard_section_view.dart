@@ -387,7 +387,7 @@ class _MobileDashboardSectionViewState
                               MobileDashboardQuickActionsSkeleton(
                                 itemCount: selectedTab.actions.isEmpty
                                     ? 8
-                                    : (selectedTab.actions.length.clamp(4, 8) as int),
+                                    : selectedTab.actions.length.clamp(4, 8),
                               )
                             else
                               MobileDashboardQuickActions(

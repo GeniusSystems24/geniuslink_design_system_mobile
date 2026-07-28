@@ -9,30 +9,43 @@ class BranchesStoresScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Branches & Stores')),
       body: MScroll([
-      MCard(pad: 8, children: [
-        for (int i = 0; i < rows.length; i++)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
-            decoration: BoxDecoration(border: i < rows.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
-            child: Row(children: [
-              Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(rows[i].$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                Directionality(textDirection: TextDirection.rtl, child: Text(rows[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
-                const SizedBox(height: 3),
-                Row(children: [
-                  Text(rows[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-                  Text('  ·  ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 10.5)),
-                  Text(rows[i].$4, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+      SuperSectionCard2(
+      trailing: (null),
+      title: "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: (null),
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (int i = 0; i < rows.length; i++)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
+              decoration: BoxDecoration(border: i < rows.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+              child: Row(children: [
+                Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(rows[i].$2, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                  Directionality(textDirection: TextDirection.rtl, child: Text(rows[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+                  const SizedBox(height: 3),
+                  Row(children: [
+                    Text(rows[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                    Text('  ·  ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 10.5)),
+                    Text(rows[i].$4, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                  ]),
+                ])),
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  Pill(rows[i].$5, tone: rows[i].$5 == 'Warehouse' ? PillTone.info : (rows[i].$5 == 'Branch' ? PillTone.warning : PillTone.neutral)),
+                  const SizedBox(height: 5),
+                  Pill(rows[i].$6, tone: rows[i].$6 == 'active' ? PillTone.success : PillTone.neutral),
                 ]),
-              ])),
-              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Pill(rows[i].$5, tone: rows[i].$5 == 'Warehouse' ? PillTone.info : (rows[i].$5 == 'Branch' ? PillTone.warning : PillTone.neutral)),
-                const SizedBox(height: 5),
-                Pill(rows[i].$6, tone: rows[i].$6 == 'active' ? PillTone.success : PillTone.neutral),
               ]),
-            ]),
-          ),
-      ]),
+            ),
+        ],
+      ),
+    ),
       const MBtn('Add Branch', icon: 'plus', full: true),
     ]),
     );

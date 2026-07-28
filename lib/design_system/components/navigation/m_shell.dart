@@ -27,7 +27,7 @@ class MAppBar extends StatelessWidget {
           if (ar != null)
             Directionality(textDirection: TextDirection.rtl, child: Text(ar!, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary.withValues(alpha: 0.85)))),
         ])),
-        if (action != null) action!,
+        ?action,
       ]),
     );
   }

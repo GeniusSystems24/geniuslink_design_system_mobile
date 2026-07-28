@@ -28,6 +28,7 @@ class MoreScreen extends StatelessWidget {
           ),
     ];
 
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('More')),
@@ -38,64 +39,72 @@ class MoreScreen extends StatelessWidget {
           onSelected: context.goTo,
         ),
         for (final group in groups)
-          MCard(
-            title: group.title,
-            accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
-            pad: 8,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < group.items.length; i++)
-                      GestureDetector(
-                        onTap: () => context.goTo(group.items[i].routeId),
-                        behavior: HitTestBehavior.opaque,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 13),
-                          decoration: BoxDecoration(
-                            border: i == group.items.length - 1
-                                ? null
-                                : Border(
-                                    bottom: BorderSide(
-                                      color: SuperMaterialThemeData.of(context)
-                                          .superTheme
-                                          .border,
+          SuperSectionCard2(
+      trailing: (null),
+      title: group.title ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < group.items.length; i++)
+                        GestureDetector(
+                          onTap: () => context.goTo(group.items[i].routeId),
+                          behavior: HitTestBehavior.opaque,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 13),
+                            decoration: BoxDecoration(
+                              border: i == group.items.length - 1
+                                  ? null
+                                  : Border(
+                                      bottom: BorderSide(
+                                        color: SuperMaterialThemeData.of(context)
+                                            .superTheme
+                                            .border,
+                                      ),
                                     ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  group.items[i].label,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: SuperMaterialThemeData.of(context)
+                                        .superTheme
+                                        .fg1,
+                                    fontFamily: SuperMaterialThemeData.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.fontFamily,
                                   ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                group.items[i].label,
-                                style: TextStyle(
-                                  fontSize: 14,
+                                ),
+                                Icon(
+                                  MIcons.of('chevR'),
+                                  size: 16,
                                   color: SuperMaterialThemeData.of(context)
                                       .superTheme
-                                      .fg1,
-                                  fontFamily: SuperMaterialThemeData.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.fontFamily,
+                                      .fg4,
                                 ),
-                              ),
-                              Icon(
-                                MIcons.of('chevR'),
-                                size: 16,
-                                color: SuperMaterialThemeData.of(context)
-                                    .superTheme
-                                    .fg4,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+      ),
+    ),
       ]),
     );
   }

@@ -18,6 +18,7 @@ class _UomScreenState extends State<UomScreen> {
       'volume': ('Volume', 'L', SuperMaterialThemeData.of(context).colorScheme.primary, [('ML', 'Milliliter', '0.001', false), ('L', 'Liter', '1', true), ('M3', 'Cubic Meter', '1000', false)]),
     };
     final cur = groups[_active]!;
+    var accentColor = cur.$3;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Units of Measure')),
@@ -43,24 +44,37 @@ class _UomScreenState extends State<UomScreen> {
             ),
         ],
       ),
-      MCard(accentColor: cur.$3, title: '${cur.$1} Units', subtitle: 'Convert to base ${cur.$2}', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < cur.$4.length; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                decoration: BoxDecoration(border: i < cur.$4.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
-                child: Row(children: [
-                  SizedBox(width: 50, child: Text(cur.$4[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, fontWeight: FontWeight.w700, color: cur.$4[i].$4 ? cur.$3 : SuperMaterialThemeData.of(context).superTheme.fg2))),
-                  Expanded(child: Text(cur.$4[i].$2, style: TextStyle(fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
-                  Text('×${cur.$4[i].$3}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
-                  if (cur.$4[i].$4) const Padding(padding: EdgeInsets.only(left: 10), child: Pill('Base', tone: PillTone.info)),
-                ]),
-              ),
-          ]),
-        ),
-      ]),
+      SuperSectionCard2(
+      trailing: (null),
+      title: '${cur.$1} Units' ?? "",
+      subtitle: 'Convert to base ${cur.$2}',
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(children: [
+              for (int i = 0; i < cur.$4.length; i++)
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                  decoration: BoxDecoration(border: i < cur.$4.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+                  child: Row(children: [
+                    SizedBox(width: 50, child: Text(cur.$4[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, fontWeight: FontWeight.w700, color: cur.$4[i].$4 ? cur.$3 : SuperMaterialThemeData.of(context).superTheme.fg2))),
+                    Expanded(child: Text(cur.$4[i].$2, style: TextStyle(fontSize: 13, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
+                    Text('×${cur.$4[i].$3}', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                    if (cur.$4[i].$4) const Padding(padding: EdgeInsets.only(left: 10), child: Pill('Base', tone: PillTone.info)),
+                  ]),
+                ),
+            ]),
+          ),
+        ],
+      ),
+    ),
     ]),
     );
   }

@@ -4,6 +4,9 @@ class DepositDetailScreen extends StatelessWidget {
   const DepositDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Deposit Receipt')),
@@ -20,23 +23,62 @@ class DepositDetailScreen extends StatelessWidget {
           ]),
         ]),
       ),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Details', children: const [
-        BKV('Method', 'Cash'), BKV('Deposited To', 'Bank · NCB Main (1100)'),
-        BKV('Value Date', 'Dec 19, 2025', mono: true), BKV('Reference', 'CTR-9920', mono: true),
-        BKV('Status', 'Cleared'),
-      ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Posted Journal', pad: 16, children: const [
-        JournalPreview(rows: [
-          ('Bank · NCB Main (1100)', '120,000.00', null),
-          ('Cash Box (1001)', null, '120,000.00'),
-        ]),
-      ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Audit', children: const [
-        AuditGrid(rows: [
-          ('Created By', 'Layla Ahmed', false),
-          ('Created At', 'Dec 19, 09:42', true),
-        ]),
-      ]),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Details' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          BKV('Method', 'Cash'), BKV('Deposited To', 'Bank · NCB Main (1100)'),
+          BKV('Value Date', 'Dec 19, 2025', mono: true), BKV('Reference', 'CTR-9920', mono: true),
+          BKV('Status', 'Cleared'),
+        ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Posted Journal' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor3,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          JournalPreview(rows: [
+            ('Bank · NCB Main (1100)', '120,000.00', null),
+            ('Cash Box (1001)', null, '120,000.00'),
+          ]),
+        ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Audit' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          AuditGrid(rows: [
+            ('Created By', 'Layla Ahmed', false),
+            ('Created At', 'Dec 19, 09:42', true),
+          ]),
+        ],
+      ),
+    ),
       MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),
     ]),
     );

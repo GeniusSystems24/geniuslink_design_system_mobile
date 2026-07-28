@@ -47,7 +47,7 @@ class MAppBar extends StatelessWidget {
       child: Row(children: [
         Expanded(child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
             style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.headlineMedium?.fontFamily, fontWeight: FontWeight.w700, fontSize: 19, letterSpacing: -0.4, color: SuperMaterialThemeData.of(context).superTheme.fg1))),
-        if (action != null) action!,
+        ?action,
       ]),
     );
   }

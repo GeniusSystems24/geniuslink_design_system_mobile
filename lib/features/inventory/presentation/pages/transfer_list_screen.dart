@@ -21,6 +21,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
     final visible = transfers.where((t) => _status == 'all' || t.$6 == _status).toList();
     PillTone tone(String s) => s == 'delivered' ? PillTone.success : (s == 'in-transit' ? PillTone.warning : (s == 'cancelled' ? PillTone.danger : PillTone.neutral));
     String label(String s) => s == 'in-transit' ? 'Transit' : (s[0].toUpperCase() + s.substring(1));
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Stock Transfers')),
@@ -30,7 +31,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: filters.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 8),
+          separatorBuilder: (_, _) => const SizedBox(width: 8),
           itemBuilder: (_, i) {
             final f = filters[i];
             final on = _status == f.$1;
@@ -56,34 +57,47 @@ class _TransferListScreenState extends State<TransferListScreen> {
           Icon(MIcons.of('chevD'), size: 13, color: SuperMaterialThemeData.of(context).superTheme.fg3),
         ]),
       ),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: '${visible.length} Transfers', pad: 8, children: [
-        for (int i = 0; i < visible.length; i++)
-          GestureDetector(
-            onTap: () => context.goTo('transferDetail'),
-            behavior: HitTestBehavior.opaque,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
-              decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
-              child: Row(children: [
-                Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(visible[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
-                  const SizedBox(height: 4),
-                  Row(children: [
-                    Text(visible[i].$2, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
-                    Icon(MIcons.of('chevR'), size: 11, color: SuperMaterialThemeData.of(context).superTheme.fg4),
-                    Text(visible[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
-                    Text('  · ${visible[i].$5}', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 12, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+      SuperSectionCard2(
+      trailing: (null),
+      title: '${visible.length} Transfers' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (int i = 0; i < visible.length; i++)
+            GestureDetector(
+              onTap: () => context.goTo('transferDetail'),
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
+                decoration: BoxDecoration(border: i < visible.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+                child: Row(children: [
+                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(visible[i].$1, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+                    const SizedBox(height: 4),
+                    Row(children: [
+                      Text(visible[i].$2, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                      Icon(MIcons.of('chevR'), size: 11, color: SuperMaterialThemeData.of(context).superTheme.fg4),
+                      Text(visible[i].$3, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                      Text('  · ${visible[i].$5}', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg4, fontSize: 12, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                    ]),
+                  ])),
+                  Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(visible[i].$4, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+                    const SizedBox(height: 4),
+                    Pill(label(visible[i].$6), tone: tone(visible[i].$6)),
                   ]),
-                ])),
-                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  Text(visible[i].$4, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
-                  const SizedBox(height: 4),
-                  Pill(label(visible[i].$6), tone: tone(visible[i].$6)),
                 ]),
-              ]),
+              ),
             ),
-          ),
-      ]),
+        ],
+      ),
+    ),
     ]),
     );
   }

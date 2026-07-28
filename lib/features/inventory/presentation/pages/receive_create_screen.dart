@@ -112,104 +112,138 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var marker = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var icon = MIcons.of('cart');
+    var marker2 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    var icon2 = MIcons.of('doc');
+    var marker3 = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var icon3 = MIcons.of('box');
+    var marker4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var icon4 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
-        ISection(
-          icon: MIcons.of('box'),
-          title: 'Receive Details',
-          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
-          children: [
-            const SuperTextFormField(
-              decoration: InputDecoration(labelText: 'Serial No'),
-              initialValue: 'INV-REC-2024-0241',
-              readOnly: true,
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _currencyController,
-              label: 'Currency',
-              hintText: 'Select currency…',
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _storeController,
-              label: 'Receiving Store',
-              hintText: 'Search store…',
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _supplierController,
-              label: 'Supplier Account',
-              hintText: 'e.g. ABC Trading Co.',
-            ),
-          ],
-        ),
-        ISection(
-          icon: MIcons.of('cart'),
-          title: 'Inventory Items',
-          sub:
-              '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
-          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
-          children: [
-            Scanner(onPick: _addLine),
-            ..._lines.asMap().entries.map((e) {
-              final i = e.key;
-              final l = e.value;
-              return ProductRow(
-                name: l.name,
-                sku: l.sku,
-                qtyController: l.quantityController,
-                price: '—',
-                total: '—',
-                currency: '',
-                last: i == _lines.length - 1,
-              );
-            }),
-            const AddProductBtn(),
-          ],
-        ),
-        ISection(
-          icon: MIcons.of('swap'),
-          title: 'Accounting Distribution',
-          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
-          children: const [
-            DistRow(
-              account: '1200 — Inventory (WIP)',
-              side: 'Debit',
-              amount: '+24,200.00',
-              last: false,
-            ),
-            DistRow(
-              account: '2001 — Accounts Payable',
-              side: 'Credit',
-              amount: '-24,200.00',
-              last: true,
-            ),
-            _BalancedRow(value: '24,200.00'),
-          ],
-        ),
-        ISection(
-          icon: MIcons.of('doc'),
-          title: 'Notes & Docs',
-          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-          children: [
-            const SuperTextFormField(
-              decoration: InputDecoration(
-                labelText: 'Receipt Notes',
-                hintText: 'PO number, delivery note, inspection results…',
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Receive Details',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker3,
+      icon: icon3,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              const SuperTextFormField(
+                decoration: InputDecoration(labelText: 'Serial No'),
+                initialValue: 'INV-REC-2024-0241',
+                readOnly: true,
               ),
-              multiline: true,
-              rows: 3,
-            ),
-            SuperAttachmentFormField(
-              decoration: const InputDecoration(labelText: 'Attachments'),
-              accept: '.pdf,.jpg,.jpeg,.png',
-              maxSizeMB: 10,
-              maxFiles: 5,
-              multiple: true,
-              onBrowse: () async => const <SuperFile>[],
-            ),
-          ],
-        ),
+              AutoSuggestionsBox<String>(
+                controller: _currencyController,
+                label: 'Currency',
+                hintText: 'Select currency…',
+              ),
+              AutoSuggestionsBox<String>(
+                controller: _storeController,
+                label: 'Receiving Store',
+                hintText: 'Search store…',
+              ),
+              AutoSuggestionsBox<String>(
+                controller: _supplierController,
+                label: 'Supplier Account',
+                hintText: 'e.g. ABC Trading Co.',
+              ),
+            ],
+      ),
+    ),
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Inventory Items',
+      subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
+      initiallyExpanded: true,
+      accentColor: marker,
+      icon: icon,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              Scanner(onPick: _addLine),
+              ..._lines.asMap().entries.map((e) {
+                final i = e.key;
+                final l = e.value;
+                return ProductRow(
+                  name: l.name,
+                  sku: l.sku,
+                  qtyController: l.quantityController,
+                  price: '—',
+                  total: '—',
+                  currency: '',
+                  last: i == _lines.length - 1,
+                );
+              }),
+              const AddProductBtn(),
+            ],
+      ),
+    ),
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Accounting Distribution',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker4,
+      icon: icon4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+              DistRow(
+                account: '1200 — Inventory (WIP)',
+                side: 'Debit',
+                amount: '+24,200.00',
+                last: false,
+              ),
+              DistRow(
+                account: '2001 — Accounts Payable',
+                side: 'Credit',
+                amount: '-24,200.00',
+                last: true,
+              ),
+              _BalancedRow(value: '24,200.00'),
+            ],
+      ),
+    ),
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Notes & Docs',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker2,
+      icon: icon2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              const SuperTextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Receipt Notes',
+                  hintText: 'PO number, delivery note, inspection results…',
+                ),
+                multiline: true,
+                rows: 3,
+              ),
+              SuperAttachmentFormField(
+                decoration: const InputDecoration(labelText: 'Attachments'),
+                accept: '.pdf,.jpg,.jpeg,.png',
+                maxSizeMB: 10,
+                maxFiles: 5,
+                multiple: true,
+                onBrowse: () async => const <SuperFile>[],
+              ),
+            ],
+      ),
+    ),
         ActionRow(primary: 'Receive Inventory', onPrimary: _submit),
       ]),
     );

@@ -5,7 +5,6 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/design_system/adapters/inventory/i_section.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';

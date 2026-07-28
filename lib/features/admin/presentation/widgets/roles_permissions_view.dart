@@ -33,38 +33,65 @@ class RolesPermissionsView extends StatelessWidget {
           form.setField('matrix', matrix.cycle(module, ri));
         }
 
+        var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
         return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Roles & Permissions')),
       body: MScroll([
-          MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Select Role', subtitle: "Tap a module's badge to cycle its access level", children: [
-            Segmented(options: matrix.roles, value: role, onChange: (v) => form.setField('role', v)),
-          ]),
-          MCard(pad: 8, children: [
-            for (int i = 0; i < matrix.modules.length; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
-                decoration: BoxDecoration(border: i < matrix.modules.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Text(matrix.modules[i], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                  GestureDetector(
-                    onTap: () => cycle(matrix.modules[i]),
-                    child: () {
-                      final lvl = matrix.levelFor(matrix.modules[i], ri);
-                      final meta = permissionMeta(context)[lvl]!;
-                      final hasColor = lvl != PermissionLevel.none;
-                      return Container(
-                        constraints: const BoxConstraints(minWidth: 72),
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                        decoration: BoxDecoration(color: hasColor ? superCoreTint(meta.$1, 0x26) : Colors.transparent, border: hasColor ? null : Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(999)),
-                        child: Text(meta.$2.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, color: hasColor ? meta.$1 : SuperMaterialThemeData.of(context).superTheme.fg4)),
-                      );
-                    }(),
-                  ),
-                ]),
-              ),
-          ]),
+          SuperSectionCard2(
+          trailing: (null),
+          title: 'Select Role' ?? "",
+          subtitle: "Tap a module's badge to cycle its access level",
+          initiallyExpanded: true,
+          accentColor: accentColor,
+          icon: null,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                  Segmented(options: matrix.roles, value: role, onChange: (v) => form.setField('role', v)),
+                ],
+          ),
+        ),
+          SuperSectionCard2(
+          trailing: (null),
+          title: "",
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: (null),
+          icon: null,
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                  for (int i = 0; i < matrix.modules.length; i++)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 13),
+                      decoration: BoxDecoration(border: i < matrix.modules.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Text(matrix.modules[i], style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                        GestureDetector(
+                          onTap: () => cycle(matrix.modules[i]),
+                          child: () {
+                            final lvl = matrix.levelFor(matrix.modules[i], ri);
+                            final meta = permissionMeta(context)[lvl]!;
+                            final hasColor = lvl != PermissionLevel.none;
+                            return Container(
+                              constraints: const BoxConstraints(minWidth: 72),
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                              decoration: BoxDecoration(color: hasColor ? superCoreTint(meta.$1, 0x26) : Colors.transparent, border: hasColor ? null : Border.all(color: SuperMaterialThemeData.of(context).superTheme.border), borderRadius: BorderRadius.circular(999)),
+                              child: Text(meta.$2.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.4, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, color: hasColor ? meta.$1 : SuperMaterialThemeData.of(context).superTheme.fg4)),
+                            );
+                          }(),
+                        ),
+                      ]),
+                    ),
+                ],
+          ),
+        ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
             child: Wrap(spacing: 18, runSpacing: 8, children: [

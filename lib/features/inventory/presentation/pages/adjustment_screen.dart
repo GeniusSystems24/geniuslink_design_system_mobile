@@ -75,67 +75,111 @@ class AdjustmentScreen extends StatelessWidget {
       ),
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46, 'Spillage · 2 tons'),
     ];
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    var marker = SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    var icon = MIcons.of('doc');
+    var marker2 = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var icon2 = MIcons.of('box');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
       body: MScroll([
-      ISection(
-          icon: MIcons.of('box'),
-          title: 'Adjustment Details',
-          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
-          children: const [
-            IField(
-                label: 'Serial No',
-                value: 'INV-ADJ-2024-0058',
-                mono: true,
-                locked: true),
-            IField(
-                label: 'Reason', value: 'Physical Stock Count', select: true),
-            IField(
-                label: 'Store',
-                placeholder: 'Search store…',
-                icon: 'store',
-                required: true),
-            IField(
-                label: 'Count Date',
-                placeholder: 'mm/dd/yyyy',
-                mono: true,
-                icon: 'calendar'),
-          ]),
-      MCard(
-          accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-          title: 'Variance Summary',
-          subtitle: 'Net financial impact of this reconciliation',
-          children: const [
-            Row(children: [
-              Expanded(child: Mini(label: 'Lines Adjusted', value: '3')),
-              SizedBox(width: 12),
-              Expanded(
-                  child: Mini(
-                      label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Adjustment Details',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker2,
+      icon: icon2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+              IField(
+                  label: 'Serial No',
+                  value: 'INV-ADJ-2024-0058',
+                  mono: true,
+                  locked: true),
+              IField(
+                  label: 'Reason', value: 'Physical Stock Count', select: true),
+              IField(
+                  label: 'Store',
+                  placeholder: 'Search store…',
+                  icon: 'store',
+                  required: true),
+              IField(
+                  label: 'Count Date',
+                  placeholder: 'mm/dd/yyyy',
+                  mono: true,
+                  icon: 'calendar'),
+            ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Variance Summary' ?? "",
+      subtitle: 'Net financial impact of this reconciliation',
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+              Row(children: [
+                Expanded(child: Mini(label: 'Lines Adjusted', value: '3')),
+                SizedBox(width: 12),
+                Expanded(
+                    child: Mini(
+                        label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
+              ]),
+            ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Adjustment Lines' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(children: [
+              for (int i = 0; i < items.length; i++)
+                _AdjLine(item: items[i], last: i == items.length - 1),
             ]),
-          ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Adjustment Lines', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < items.length; i++)
-              _AdjLine(item: items[i], last: i == items.length - 1),
-          ]),
-        ),
-      ]),
-      ISection(
-          icon: MIcons.of('doc'),
-          title: 'Documentation & Approval',
-          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-          children: const [
-            ITextarea(
-                label: 'Adjustment Notes',
-                placeholder: 'Auditor name, witness, count session reference…'),
-            UploadBox(),
-            InfoNote(
-                'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.'),
-          ]),
+          ),
+        ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Documentation & Approval',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker,
+      icon: icon,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+              ITextarea(
+                  label: 'Adjustment Notes',
+                  placeholder: 'Auditor name, witness, count session reference…'),
+              UploadBox(),
+              InfoNote(
+                  'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.'),
+            ],
+      ),
+    ),
       const ActionRow(primary: 'Post Adjustment'),
     ]),
     );

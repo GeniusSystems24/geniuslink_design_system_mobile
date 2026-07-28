@@ -61,123 +61,152 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var marker = SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    var icon = MIcons.of('store');
+    var marker2 = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var icon2 = MIcons.of('box');
+    var marker3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var icon3 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
-      ISection(
-          icon: MIcons.of('box'),
-          title: 'Product Definition',
-          sub: 'SKU, names and classification',
-          marker: SuperMaterialThemeData.of(context).colorScheme.primary,
-          children: [
-            SuperTextFormField(
-              decoration: const InputDecoration(
-                labelText: 'SKU',
-                hintText: 'e.g. STL-44021',
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Product Definition',
+      subtitle: 'SKU, names and classification',
+      initiallyExpanded: true,
+      accentColor: marker2,
+      icon: icon2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              SuperTextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'SKU',
+                  hintText: 'e.g. STL-44021',
+                ),
+                required: true,
+                minLength: 3,
+                forceError: _force,
+                onValidity: (e) => _skuErr = e,
               ),
-              required: true,
-              minLength: 3,
-              forceError: _force,
-              onValidity: (e) => _skuErr = e,
-            ),
-            const SuperTextFormField(
-              decoration: InputDecoration(
-                labelText: 'Barcode',
-                hintText: 'Scan or type',
-                prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+              const SuperTextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Barcode',
+                  hintText: 'Scan or type',
+                  prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+                ),
               ),
-            ),
-            SuperTextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Name English',
-                hintText: 'e.g. Structural Steel I-Beam',
+              SuperTextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Name English',
+                  hintText: 'e.g. Structural Steel I-Beam',
+                ),
+                required: true,
+                minLength: 2,
+                forceError: _force,
+                onValidity: (e) => _nameEnErr = e,
               ),
-              required: true,
-              minLength: 2,
-              forceError: _force,
-              onValidity: (e) => _nameEnErr = e,
-            ),
-            SuperTextFormField(
-              decoration: const InputDecoration(
-                labelText: 'الاسم بالعربية',
-                hintText: 'مثال: كمرة فولاذية',
+              SuperTextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'الاسم بالعربية',
+                  hintText: 'مثال: كمرة فولاذية',
+                ),
+                arabic: true,
+                required: true,
+                minLength: 2,
+                forceError: _force,
+                onValidity: (e) => _nameArErr = e,
               ),
-              arabic: true,
-              required: true,
-              minLength: 2,
-              forceError: _force,
-              onValidity: (e) => _nameArErr = e,
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _categoryController,
-              label: 'Category',
-              hintText: 'Select category…',
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _uomController,
-              label: 'Unit of Measure',
-              hintText: 'Select unit…',
-            ),
-          ]),
-      ISection(
-          icon: MIcons.of('swap'),
-          title: 'Costing & Pricing',
-          marker: SuperMaterialThemeData.of(context).colorScheme.secondary,
-          children: [
-            const SuperNumericFormField(
-              decoration: InputDecoration(
-                labelText: 'Unit Cost (SAR)',
-                prefixText: 'SAR ',
+              AutoSuggestionsBox<String>(
+                controller: _categoryController,
+                label: 'Category',
+                hintText: 'Select category…',
               ),
-              decimals: 2,
-              min: 0,
-            ),
-            const SuperNumericFormField(
-              decoration: InputDecoration(
-                labelText: 'Selling Price (SAR)',
-                prefixText: 'SAR ',
+              AutoSuggestionsBox<String>(
+                controller: _uomController,
+                label: 'Unit of Measure',
+                hintText: 'Select unit…',
               ),
-              decimals: 2,
-              min: 0,
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _vatController,
-              label: 'VAT Rate',
-              hintText: 'Select rate…',
-            ),
-          ]),
-      ISection(
-          icon: MIcons.of('store'),
-          title: 'Inventory Settings',
-          marker: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-          children: [
-            const SuperNumericFormField(
-              decoration: InputDecoration(labelText: 'Reorder Level'),
-              min: 0,
-              step: 1,
-              decimals: 0,
-            ),
-            AutoSuggestionsBox<String>(
-              controller: _storeController,
-              label: 'Default Store',
-              hintText: 'Select store…',
-            ),
-            const SuperNumericFormField(
-              decoration: InputDecoration(labelText: 'Opening Stock'),
-              min: 0,
-              step: 1,
-              decimals: 0,
-            ),
-            SuperAttachmentFormField(
-              decoration: const InputDecoration(labelText: 'Product Images'),
-              accept: '.jpg,.jpeg,.png,.pdf',
-              maxSizeMB: 10,
-              maxFiles: 5,
-              multiple: true,
-              onBrowse: () async => const <SuperFile>[],
-            ),
-          ]),
+            ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Costing & Pricing',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker3,
+      icon: icon3,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              const SuperNumericFormField(
+                decoration: InputDecoration(
+                  labelText: 'Unit Cost (SAR)',
+                  prefixText: 'SAR ',
+                ),
+                decimals: 2,
+                min: 0,
+              ),
+              const SuperNumericFormField(
+                decoration: InputDecoration(
+                  labelText: 'Selling Price (SAR)',
+                  prefixText: 'SAR ',
+                ),
+                decimals: 2,
+                min: 0,
+              ),
+              AutoSuggestionsBox<String>(
+                controller: _vatController,
+                label: 'VAT Rate',
+                hintText: 'Select rate…',
+              ),
+            ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Inventory Settings',
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: marker,
+      icon: icon,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              const SuperNumericFormField(
+                decoration: InputDecoration(labelText: 'Reorder Level'),
+                min: 0,
+                step: 1,
+                decimals: 0,
+              ),
+              AutoSuggestionsBox<String>(
+                controller: _storeController,
+                label: 'Default Store',
+                hintText: 'Select store…',
+              ),
+              const SuperNumericFormField(
+                decoration: InputDecoration(labelText: 'Opening Stock'),
+                min: 0,
+                step: 1,
+                decimals: 0,
+              ),
+              SuperAttachmentFormField(
+                decoration: const InputDecoration(labelText: 'Product Images'),
+                accept: '.jpg,.jpeg,.png,.pdf',
+                maxSizeMB: 10,
+                maxFiles: 5,
+                multiple: true,
+                onBrowse: () async => const <SuperFile>[],
+              ),
+            ],
+      ),
+    ),
       ActionRow(primary: 'Create Product', onPrimary: _submit),
     ]),
     );

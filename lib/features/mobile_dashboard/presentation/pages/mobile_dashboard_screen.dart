@@ -6,7 +6,7 @@ import 'banking_dashboard_screen.dart';
 )
 class MobileDashboardScreen extends BankingDashboardScreen {
   const MobileDashboardScreen({
-    required MobileDashboardCatalog catalog,
+    required super.catalog,
     super.key,
-  }) : super(catalog: catalog);
+  });
 }

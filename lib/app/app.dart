@@ -98,7 +98,7 @@ class GeniusLinkApp extends StatelessWidget {
               AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
             ],
           ),
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.system,
           routerConfig: router,
         ),
       ),

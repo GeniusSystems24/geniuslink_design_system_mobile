@@ -254,7 +254,7 @@ class MobileDashboardChartView extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: cards.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            separatorBuilder: (_, _) => const SizedBox(width: 8),
             itemBuilder: (_, index) {
               final card = cards[index];
               return MobileDashboardMetricSelector(
@@ -610,7 +610,7 @@ class MobileDashboardBreakdownBar extends StatelessWidget {
               tween: Tween<double>(begin: 0, end: ratio),
               duration: const Duration(milliseconds: 520),
               curve: Curves.easeOutCubic,
-              builder: (_, animatedValue, __) => ClipRRect(
+              builder: (_, animatedValue, _) => ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(
                   minHeight: 8,

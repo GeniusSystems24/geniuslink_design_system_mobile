@@ -4,6 +4,8 @@ class WithdrawalDetailScreen extends StatelessWidget {
   const WithdrawalDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Withdrawal Voucher')),
@@ -23,16 +25,42 @@ class WithdrawalDetailScreen extends StatelessWidget {
           ]),
         ]),
       ),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'Details', children: const [
-        BKV('Method', 'Wire Transfer'), BKV('Payee', 'Global Steel Imports'),
-        BKV('From', 'Bank · NCB Main (1100)'), BKV('Value Date', 'Dec 19, 2025', mono: true),
-      ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Posted Journal', pad: 16, children: const [
-        JournalPreview(rows: [
-          ('Cost of Goods Sold (5001)', '12,045.00', null),
-          ('Bank · NCB Main (1100)', null, '12,045.00'),
-        ]),
-      ]),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Details' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          BKV('Method', 'Wire Transfer'), BKV('Payee', 'Global Steel Imports'),
+          BKV('From', 'Bank · NCB Main (1100)'), BKV('Value Date', 'Dec 19, 2025', mono: true),
+        ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Posted Journal' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          JournalPreview(rows: [
+            ('Cost of Goods Sold (5001)', '12,045.00', null),
+            ('Bank · NCB Main (1100)', null, '12,045.00'),
+          ]),
+        ],
+      ),
+    ),
       MBtn('Back', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('more')),
     ]),
     );

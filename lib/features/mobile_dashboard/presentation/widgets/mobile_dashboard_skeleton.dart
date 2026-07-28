@@ -123,7 +123,7 @@ class _MobileDashboardSkeletonState extends State<MobileDashboardSkeleton>
           ? placeholder(highlightAlignment: Alignment.center)
           : AnimatedBuilder(
               animation: _controller,
-              builder: (_, __) => placeholder(
+              builder: (_, _) => placeholder(
                 highlightAlignment: Alignment(-3 + (_controller.value * 6), 0),
               ),
             ),
@@ -200,8 +200,8 @@ class MobileDashboardStatusStripSkeleton extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: itemCount,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
-            itemBuilder: (_, __) => Container(
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
+            itemBuilder: (_, _) => Container(
               width: 198,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(

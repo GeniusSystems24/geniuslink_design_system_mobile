@@ -25,32 +25,45 @@ class SettingsHubScreen extends StatelessWidget {
         ]),
       ),
       for (final section in sections)
-        MCard(title: section.title, accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, pad: 8, children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(children: [
-              for (int i = 0; i < section.items.length; i++)
-                GestureDetector(
-                  onTap: () => context.goTo(section.items[i].routeId),
-                  behavior: HitTestBehavior.opaque,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(border: i < section.items.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
-                    child: Row(children: [
-                      Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of(section.items[i].iconName), size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
-                      const SizedBox(width: 12),
-                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(section.items[i].label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                        const SizedBox(height: 1),
-                        Text(section.items[i].description, style: TextStyle(fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-                      ])),
-                      Icon(MIcons.of('chevR'), size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg4),
-                    ]),
+        SuperSectionCard2(
+      trailing: (null),
+      title: section.title ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < section.items.length; i++)
+                  GestureDetector(
+                    onTap: () => context.goTo(section.items[i].routeId),
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      decoration: BoxDecoration(border: i < section.items.length - 1 ? Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border)) : null),
+                      child: Row(children: [
+                        Container(width: 34, height: 34, alignment: Alignment.center, decoration: BoxDecoration(color: SuperMaterialThemeData.of(context).superTheme.inputBg, borderRadius: BorderRadius.circular(8)), child: Icon(MIcons.of(section.items[i].iconName), size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg2)),
+                        const SizedBox(width: 12),
+                        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(section.items[i].label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                          const SizedBox(height: 1),
+                          Text(section.items[i].description, style: TextStyle(fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                        ])),
+                        Icon(MIcons.of('chevR'), size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg4),
+                      ]),
+                    ),
                   ),
-                ),
-            ]),
-          ),
-        ]),
+              ]),
+            ),
+          ],
+      ),
+    ),
     ]),
     );
   }

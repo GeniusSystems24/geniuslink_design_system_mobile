@@ -23,6 +23,13 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _buildDashboardContent(BuildContext context) {
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
+    var trailing = Row(mainAxisSize: MainAxisSize.min, children: [
+          _Legend(color: SuperMaterialThemeData.of(context).colorScheme.primary, label: 'In'), const SizedBox(width: 12), _Legend(color: SuperMaterialThemeData.of(context).superTheme.fg4, label: 'Out'),
+        ]);
+    var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return MScroll([
       Padding(
         padding: const EdgeInsets.only(top: 0),
@@ -37,47 +44,77 @@ class DashboardScreen extends StatelessWidget {
         children: [for (final kpi in snapshot.kpis) _Kpi(kpi: kpi)],
       ),
       // Cash flow
-      MCard(
-        accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
-        title: 'Cash Flow',
-        subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
-        trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-          _Legend(color: SuperMaterialThemeData.of(context).colorScheme.primary, label: 'In'), const SizedBox(width: 12), _Legend(color: SuperMaterialThemeData.of(context).superTheme.fg4, label: 'Out'),
-        ]),
+      SuperSectionCard2(
+      trailing: trailing,
+      title: 'Cash Flow' ?? "",
+      subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
+      initiallyExpanded: true,
+      accentColor: accentColor3,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [_CashFlowBars(points: snapshot.cashFlow)],
       ),
+    ),
       // Balances
-      MCard(
-        accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
-        title: 'Cash & Asset Accounts',
-        subtitle: 'Top balances',
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Cash & Asset Accounts' ?? "",
+      subtitle: 'Top balances',
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          for (final balance in snapshot.balances) _BalanceRow(balance: balance),
-        ],
+            for (final balance in snapshot.balances) _BalanceRow(balance: balance),
+          ],
       ),
+    ),
       // Recent ops
-      MCard(
-        accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
-        title: 'Recent Operations',
-        pad: 8,
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Recent Operations' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor4,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(children: [
-              for (int i = 0; i < snapshot.recentOperations.length; i++)
-                _RecentRow(operation: snapshot.recentOperations[i], last: i == snapshot.recentOperations.length - 1),
-            ]),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(children: [
+                for (int i = 0; i < snapshot.recentOperations.length; i++)
+                  _RecentRow(operation: snapshot.recentOperations[i], last: i == snapshot.recentOperations.length - 1),
+              ]),
+            ),
+          ],
       ),
+    ),
       // Alerts
-      MCard(
-        accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-        title: 'Needs Attention',
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Needs Attention' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          for (final alert in snapshot.alerts) _AlertRow(alert: alert),
-        ],
+            for (final alert in snapshot.alerts) _AlertRow(alert: alert),
+          ],
       ),
+    ),
     ]);
   }
 }

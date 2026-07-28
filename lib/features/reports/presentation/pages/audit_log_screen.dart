@@ -69,6 +69,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
       ),
     ];
     final visible = logs.where((l) => _act == 'All' || l.$3 == _act).toList();
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Audit Log')),
@@ -82,39 +83,47 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
           'VOID',
           'LOCK'
         ], value: _act, onChange: (v) => setState(() => _act = v)),
-        MCard(
-            accentColor: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-            title: 'Immutable Activity Trail',
-            subtitle: 'Every state-changing action · 7-year retention',
-            pad: 8,
-            children: [
-              MTable(
-                showSearch: true,
-                searchHint: 'Search entity or user…',
-                itemNoun: 'event',
-                itemNounPlural: 'events',
-                columns: const [
-                  MCol('entity', 'Entity', flex: 1),
-                  MCol('action', 'Action', fixed: 100),
-                ],
-                rows: [
-                  for (final l in visible)
-                    {
-                      'entity': '${l.$4}\n${l.$2} · ${l.$5} · ${l.$1}',
-                      'action': l.$3
-                    },
-                ],
-              ),
-              if (visible.isEmpty)
-                Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 32),
-                    child: Center(
-                        child: Text('No log entries match.',
-                            style: TextStyle(
-                                color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                                fontSize: 13,
-                                fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
-            ]),
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Immutable Activity Trail' ?? "",
+      subtitle: 'Every state-changing action · 7-year retention',
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+                MTable(
+                  showSearch: true,
+                  searchHint: 'Search entity or user…',
+                  itemNoun: 'event',
+                  itemNounPlural: 'events',
+                  columns: const [
+                    MCol('entity', 'Entity', flex: 1),
+                    MCol('action', 'Action', fixed: 100),
+                  ],
+                  rows: [
+                    for (final l in visible)
+                      {
+                        'entity': '${l.$4}\n${l.$2} · ${l.$5} · ${l.$1}',
+                        'action': l.$3
+                      },
+                  ],
+                ),
+                if (visible.isEmpty)
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      child: Center(
+                          child: Text('No log entries match.',
+                              style: TextStyle(
+                                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                                  fontSize: 13,
+                                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)))),
+              ],
+      ),
+    ),
       ]),
     );
   }

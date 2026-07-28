@@ -31,21 +31,34 @@ class AccountsScreen extends StatelessWidget {
             Text('Search accounts…', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3, fontSize: 14, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
           ]),
         ),
-        MCard(pad: 8, children: [
-          for (int i = 0; i < accounts.length; i++)
-            AccountRow(
-              account: accounts[i],
-              last: i == accounts.length - 1,
-              onTap: () {
-                final callback = onAccountSelected;
-                if (callback != null) {
-                  callback(accounts[i]);
-                } else {
-                  context.goTo('accountDetail');
-                }
-              },
-            ),
-        ]),
+        SuperSectionCard2(
+      trailing: (null),
+      title: "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: (null),
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            for (int i = 0; i < accounts.length; i++)
+              AccountRow(
+                account: accounts[i],
+                last: i == accounts.length - 1,
+                onTap: () {
+                  final callback = onAccountSelected;
+                  if (callback != null) {
+                    callback(accounts[i]);
+                  } else {
+                    context.goTo('accountDetail');
+                  }
+                },
+              ),
+          ],
+      ),
+    ),
       ]),
     );
   }

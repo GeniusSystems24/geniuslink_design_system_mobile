@@ -8,23 +8,53 @@ class StoreDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var trailing = Pill(store.active ? 'Active' : 'Inactive', tone: store.active ? PillTone.success : PillTone.neutral);
+    var title = store.name;
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Store Detail')),
       body: MScroll([
-        MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: store.name, trailing: Pill(store.active ? 'Active' : 'Inactive', tone: store.active ? PillTone.success : PillTone.neutral), children: [
-          Row(children: [
-            Expanded(child: Mini(label: 'Stock Value', value: SuperFormat.number(store.stockValue, decimals: 0), sub: 'SAR', hi: true)),
-            const SizedBox(width: 12),
-            Expanded(child: Mini(label: 'SKUs', value: SuperFormat.number(store.skuCount, decimals: 0))),
-          ]),
-        ]),
-        MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Stock On Hand', pad: 8, children: [
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Column(children: [
-            for (int i = 0; i < store.stockItems.length; i++) _stockRow(context, store.stockItems[i], i == store.stockItems.length - 1),
-            if (store.stockItems.isEmpty) Padding(padding: const EdgeInsets.all(16), child: Text('No stock items available.', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3))),
-          ])),
-        ]),
+        SuperSectionCard2(
+      trailing: trailing,
+      title: title ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            Row(children: [
+              Expanded(child: Mini(label: 'Stock Value', value: SuperFormat.number(store.stockValue, decimals: 0), sub: 'SAR', hi: true)),
+              const SizedBox(width: 12),
+              Expanded(child: Mini(label: 'SKUs', value: SuperFormat.number(store.skuCount, decimals: 0))),
+            ]),
+          ],
+      ),
+    ),
+        SuperSectionCard2(
+      trailing: (null),
+      title: 'Stock On Hand' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Column(children: [
+              for (int i = 0; i < store.stockItems.length; i++) _stockRow(context, store.stockItems[i], i == store.stockItems.length - 1),
+              if (store.stockItems.isEmpty) Padding(padding: const EdgeInsets.all(16), child: Text('No stock items available.', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3))),
+            ])),
+          ],
+      ),
+    ),
         MBtn('Back to List', variant: MBtnVariant.secondary, icon: 'back', full: true, onTap: () => context.goTo('stores')),
       ]),
     );

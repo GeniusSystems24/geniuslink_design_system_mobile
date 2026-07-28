@@ -44,34 +44,63 @@ class StockTakeScreen extends StatelessWidget {
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46), ('PLY-30022', 'Plywood Sheet 18mm', 312, -1),
       ('PNT-55310', 'Epoxy Floor Coating', 88, -1), ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
+    var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
+    var trailing = const Pill('In Progress', tone: PillTone.warning);
+    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Stock Take')),
       body: MScroll([
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.primary, title: 'STK-2024-0014', subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14', trailing: const Pill('In Progress', tone: PillTone.warning), children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-            const Eyebrow('3 of 6 counted', size: 10),
-            Text('50%', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+      SuperSectionCard2(
+      trailing: trailing,
+      title: 'STK-2024-0014' ?? "",
+      subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14',
+      initiallyExpanded: true,
+      accentColor: accentColor2,
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
+              const Eyebrow('3 of 6 counted', size: 10),
+              Text('50%', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 22, fontWeight: FontWeight.w700, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+            ]),
+            const SizedBox(height: 8),
+            ClipRRect(borderRadius: BorderRadius.circular(999), child: Stack(children: [
+              Container(height: 8, color: SuperMaterialThemeData.of(context).superTheme.inputBg),
+              FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+            ])),
           ]),
-          const SizedBox(height: 8),
-          ClipRRect(borderRadius: BorderRadius.circular(999), child: Stack(children: [
-            Container(height: 8, color: SuperMaterialThemeData.of(context).superTheme.inputBg),
-            FractionallySizedBox(widthFactor: 0.5, child: Container(height: 8, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
-          ])),
-        ]),
-        GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: const [
-          Mini(label: 'Match', value: '1'), Mini(label: 'Short', value: '2'), Mini(label: 'Over', value: '0'),
-        ]),
-      ]),
-      MCard(accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary, title: 'Count Sheet', pad: 8, children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(children: [
-            for (int i = 0; i < items.length; i++) _CountRow(item: items[i], last: i == items.length - 1),
+          GridView.count(crossAxisCount: 3, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 1.4, children: const [
+            Mini(label: 'Match', value: '1'), Mini(label: 'Short', value: '2'), Mini(label: 'Over', value: '0'),
           ]),
-        ),
-      ]),
+        ],
+      ),
+    ),
+      SuperSectionCard2(
+      trailing: (null),
+      title: 'Count Sheet' ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: accentColor,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(children: [
+              for (int i = 0; i < items.length; i++) _CountRow(item: items[i], last: i == items.length - 1),
+            ]),
+          ),
+        ],
+      ),
+    ),
       const ActionRow(primary: 'Post Stock Take'),
     ]),
     );

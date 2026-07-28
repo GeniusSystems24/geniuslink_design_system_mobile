@@ -25,18 +25,31 @@ class IntegrationsView extends StatelessWidget {
         body: MScroll([
           for (final category in IntegrationCategory.values)
             if (integrations.any((item) => item.category == category))
-              MCard(title: _categoryLabel(category), accentColor: _categoryColor(context, category), pad: 8, children: [
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Column(children: [
-                  for (final item in integrations.where((item) => item.category == category))
-                    Container(padding: const EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))), child: Row(children: [
-                      PlatformMonoText(name: item.name, tone: _categoryColor(context, category)),
-                      const SizedBox(width: 12),
-                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item.name, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)), const SizedBox(height: 1), Text(item.description, style: TextStyle(fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))])),
-                      if (values[item.id] == true) const Padding(padding: EdgeInsets.only(right: 8), child: Pill('On')),
-                      PlatformToggle(on: values[item.id] ?? false, onTap: () => toggle(item.id)),
+              SuperSectionCard2(
+        trailing: (null),
+        title: _categoryLabel(category) ?? "",
+        subtitle: (null),
+        initiallyExpanded: true,
+        accentColor: _categoryColor(context, category),
+        icon: null,
+        padding: EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+                    Padding(padding: const EdgeInsets.symmetric(horizontal: 8), child: Column(children: [
+                      for (final item in integrations.where((item) => item.category == category))
+                        Container(padding: const EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))), child: Row(children: [
+                          PlatformMonoText(name: item.name, tone: _categoryColor(context, category)),
+                          const SizedBox(width: 12),
+                          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item.name, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)), const SizedBox(height: 1), Text(item.description, style: TextStyle(fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))])),
+                          if (values[item.id] == true) const Padding(padding: EdgeInsets.only(right: 8), child: Pill('On')),
+                          PlatformToggle(on: values[item.id] ?? false, onTap: () => toggle(item.id)),
+                        ])),
                     ])),
-                ])),
-              ]),
+                  ],
+        ),
+      ),
         ]),
       );
     });

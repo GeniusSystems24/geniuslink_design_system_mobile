@@ -39,35 +39,61 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
             onPeriod: (v) => setState(() => _period = v),
             badges: const [('Currency', 'SAR'), ('Check', 'A = L + E')]),
         for (final b in blocks)
-          MCard(accentColor: b.$2, title: b.$1, pad: 8, children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(children: [
-                for (int i = 0; i < b.$3.length; i++)
-                  ReportRow(
-                      left: b.$3[i].$1,
-                      right: _money(b.$3[i].$2),
-                      last: i == b.$3.length - 1),
-                ReportTotalBar(
-                    label: 'Total ${b.$1}', value: _money(b.$4), tone: b.$2),
+          SuperSectionCard2(
+      trailing: (null),
+      title: b.$1 ?? "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: b.$2,
+      icon: null,
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(children: [
+                  for (int i = 0; i < b.$3.length; i++)
+                    ReportRow(
+                        left: b.$3[i].$1,
+                        right: _money(b.$3[i].$2),
+                        last: i == b.$3.length - 1),
+                  ReportTotalBar(
+                      label: 'Total ${b.$1}', value: _money(b.$4), tone: b.$2),
+                ]),
+              ),
+            ],
+      ),
+    ),
+        SuperSectionCard2(
+      trailing: (null),
+      title: "",
+      subtitle: (null),
+      initiallyExpanded: true,
+      accentColor: (null),
+      icon: null,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Eyebrow('Balance Check', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 12),
+              Row(mainAxisSize: MainAxisSize.min, children: [
+                Icon(MIcons.of('check'), size: 15, color: SuperMaterialThemeData.of(context).colorScheme.secondary),
+                const SizedBox(width: 7),
+                Text('425,790 = 425,790',
+                    style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: SuperMaterialThemeData.of(context).colorScheme.secondary)),
               ]),
-            ),
-          ]),
-        MCard(children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Eyebrow('Balance Check', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 12),
-            Row(mainAxisSize: MainAxisSize.min, children: [
-              Icon(MIcons.of('check'), size: 15, color: SuperMaterialThemeData.of(context).colorScheme.secondary),
-              const SizedBox(width: 7),
-              Text('425,790 = 425,790',
-                  style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: SuperMaterialThemeData.of(context).colorScheme.secondary)),
             ]),
-          ]),
-        ]),
+          ],
+      ),
+    ),
       ]),
     );
   }
