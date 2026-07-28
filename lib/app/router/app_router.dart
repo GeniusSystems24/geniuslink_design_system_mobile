@@ -154,11 +154,11 @@ Widget buildSubScreen(String id) {
     // Full-bleed (own chrome)
     case 'mobileDashboard':
     case 'mobileBankingDashboard':
-      return BankingDashboardScreen(catalog: mobileDashboardCatalog);
+      return const MobileDashboardScreen(repository: BankingRepository());
     case 'mobileAccountingDashboard':
-      return AccountingDashboardScreen(catalog: mobileDashboardCatalog);
+      return const MobileDashboardScreen(repository: AccountingRepository());
     case 'mobileCommercialDashboard':
-      return CommercialDashboardScreen(catalog: mobileDashboardCatalog);
+      return const MobileDashboardScreen(repository: CommercialRepository());
     // Accounts
     case 'createAccount': return const CreateAccountScreen();
     case 'accountDetail': return const AccountDetailFullScreen();

@@ -7,19 +7,19 @@ import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
 
 String mobileDashboardActionIcon(String id) => switch (id) {
-      'deposit' || 'sale' => 'plus',
-      'withdraw' || 'return' => 'back',
-      'transfer' => 'send',
-      'beneficiaries' || 'customers' => 'user',
-      'reconcile' => 'check',
-      'cards' || 'suppliers' => 'grid',
-      'reports' => 'poll',
-      'accounts' || 'fixed' || 'items' => 'lock',
-      'journal' => 'edit',
-      'receipt' || 'purchase' || 'inventory' => 'inbox',
-      'coa' => 'dots',
-      _ => 'doc',
-    };
+  'deposit' || 'sale' => 'plus',
+  'withdraw' || 'return' => 'back',
+  'transfer' => 'send',
+  'beneficiaries' || 'customers' => 'user',
+  'reconcile' => 'check',
+  'cards' || 'suppliers' => 'grid',
+  'reports' => 'poll',
+  'accounts' || 'fixed' || 'items' => 'lock',
+  'journal' => 'edit',
+  'receipt' || 'purchase' || 'inventory' => 'inbox',
+  'coa' => 'dots',
+  _ => 'doc',
+};
 
 class MobileDashboardQuickActions extends StatelessWidget {
   final List<MdAction> actions;
@@ -40,14 +40,19 @@ class MobileDashboardQuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final visibleActions = actions.take(previewLimit).toList(growable: false);
+    var title2 = title;
+    var trailing = MobileDashboardViewAllButton(onTap: onViewAll);
+    var marker = MdMarker.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MobileDashboardSectionHeader(
-          title: title,
-          marker: MdMarker.primary,
-          trailing: MobileDashboardViewAllButton(onTap: onViewAll),
+        SuperSectionTitle1(
+          title: title2,
+          subtitle: null,
+          trailing: trailing,
+          accentColor: mobileDashboardMarkerColor(context, marker),
         ),
+        const SizedBox(height: 12),
         GridView.count(
           crossAxisCount: 4,
           shrinkWrap: true,
@@ -204,8 +209,9 @@ class MobileDashboardActionsSheet extends StatelessWidget {
                 crossAxisSpacing: 10,
                 childAspectRatio: 0.82,
                 children: [
-                  for (final action
-                      in actions.where((item) => item.group == group.$1))
+                  for (final action in actions.where(
+                    (item) => item.group == group.$1,
+                  ))
                     MobileDashboardActionTile(
                       icon: mobileDashboardActionIcon(action.id),
                       label: action.label,

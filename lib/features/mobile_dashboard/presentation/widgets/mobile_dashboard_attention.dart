@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import 'mobile_dashboard_pressable.dart';
-import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
 
 String mobileDashboardAttentionIcon(String id) => switch (id) {
@@ -29,14 +28,9 @@ class MobileDashboardAttentionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        MobileDashboardSectionHeader(
-          title: title,
-          marker: MdMarker.warning,
-          subtitle: subtitle,
-          trailing: trailing ??
+    var title2 = title;
+    var subtitle2 = subtitle;
+    var trailing2 = trailing ??
               Text(
                 'All domains',
                 style: TextStyle(
@@ -44,8 +38,18 @@ class MobileDashboardAttentionList extends StatelessWidget {
                   fontSize: 11,
                   color: context.mdTheme.fg3,
                 ),
-              ),
+              );
+    var marker = MdMarker.warning;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SuperSectionTitle1(
+          title: title2,
+          subtitle: subtitle2,
+          trailing: trailing2,
+          accentColor: mobileDashboardMarkerColor(context, marker),
         ),
+        const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(

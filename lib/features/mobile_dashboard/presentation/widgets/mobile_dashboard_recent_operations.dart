@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:super_core/super_core.dart';
 
 import '../../domain/domain.dart';
 import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
 
-typedef MobileDashboardOperationAmountResolver = double Function(
-  MdOperation operation,
-);
+typedef MobileDashboardOperationAmountResolver =
+    double Function(MdOperation operation);
 
 class MobileDashboardRecentOperations extends StatelessWidget {
   final List<MdOperation> operations;
@@ -28,15 +28,20 @@ class MobileDashboardRecentOperations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var title2 = title;
+    var subtitle2 = subtitle;
+    var trailing = MobileDashboardViewAllButton(onTap: onViewAll);
+    var marker = MdMarker.positive;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MobileDashboardSectionHeader(
-          title: title,
-          marker: MdMarker.positive,
-          subtitle: subtitle,
-          trailing: MobileDashboardViewAllButton(onTap: onViewAll),
+        SuperSectionTitle1(
+          title: title2,
+          subtitle: subtitle2,
+          trailing: trailing,
+          accentColor: mobileDashboardMarkerColor(context, marker),
         ),
+        const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(

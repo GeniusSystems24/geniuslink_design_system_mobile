@@ -85,10 +85,7 @@ class MobileDashboardErpHero extends StatelessWidget {
             runSpacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              _ContextChip(
-                icon: Icons.domain_outlined,
-                label: workspace.name,
-              ),
+              _ContextChip(icon: Icons.domain_outlined, label: workspace.name),
               const _ContextChip(
                 icon: Icons.calendar_month_outlined,
                 label: 'Current period',
@@ -241,14 +238,18 @@ class MobileDashboardErpStatusStrip extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    var title2 = title;
+    var marker = MdMarker.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MobileDashboardSectionHeader(
-          title: title,
-          marker: MdMarker.primary,
+        SuperSectionTitle1(
+          title: title2,
           subtitle: 'Operational health and control indicators',
+          trailing: null,
+          accentColor: mobileDashboardMarkerColor(context, marker),
         ),
+        const SizedBox(height: 12),
         SizedBox(
           height: 126,
           child: ListView.separated(
@@ -371,18 +372,23 @@ class MobileDashboardWorkflowPanel extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    var title2 = title;
+    var subtitle2 = subtitle;
+    var trailing = MobileDashboardPill(
+      label: '${items.length} active',
+      color: context.mdColors.tertiary,
+    );
+    var marker = MdMarker.warning;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MobileDashboardSectionHeader(
-          title: title,
-          marker: MdMarker.warning,
-          subtitle: subtitle,
-          trailing: MobileDashboardPill(
-            label: '${items.length} active',
-            color: context.mdColors.tertiary,
-          ),
+        SuperSectionTitle1(
+          title: title2,
+          subtitle: subtitle2,
+          trailing: trailing,
+          accentColor: mobileDashboardMarkerColor(context, marker),
         ),
+        const SizedBox(height: 12),
         Container(
           decoration: BoxDecoration(
             color: context.mdTheme.surface,
@@ -439,11 +445,7 @@ class _WorkflowRow extends StatelessWidget {
                 color: tone.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(
-                _workflowIcon(item.tone),
-                size: 18,
-                color: tone,
-              ),
+              child: Icon(_workflowIcon(item.tone), size: 18, color: tone),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -481,11 +483,7 @@ class _WorkflowRow extends StatelessWidget {
               children: [
                 MobileDashboardPill(label: item.value, color: tone),
                 const SizedBox(height: 6),
-                Icon(
-                  MIcons.of('chevR'),
-                  size: 14,
-                  color: context.mdTheme.fg4,
-                ),
+                Icon(MIcons.of('chevR'), size: 14, color: context.mdTheme.fg4),
               ],
             ),
           ],
@@ -496,9 +494,9 @@ class _WorkflowRow extends StatelessWidget {
 }
 
 IconData _workflowIcon(MdTone tone) => switch (tone) {
-      MdTone.success => Icons.task_alt_rounded,
-      MdTone.information => Icons.sync_alt_rounded,
-      MdTone.warning => Icons.pending_actions_rounded,
-      MdTone.danger => Icons.error_outline_rounded,
-      MdTone.neutral => Icons.work_outline_rounded,
-    };
+  MdTone.success => Icons.task_alt_rounded,
+  MdTone.information => Icons.sync_alt_rounded,
+  MdTone.warning => Icons.pending_actions_rounded,
+  MdTone.danger => Icons.error_outline_rounded,
+  MdTone.neutral => Icons.work_outline_rounded,
+};

@@ -149,19 +149,19 @@ final GoRouter router = GoRouter(
     // Mobile dashboards
     _sub(
       '/mobile-dashboard',
-      (ctx, state) => BankingDashboardScreen(catalog: mobileDashboardCatalog),
+      (ctx, state) => const MobileDashboardScreen(repository: BankingRepository()),
     ),
     _sub(
       '/mobile-dashboard/banking',
-      (ctx, state) => BankingDashboardScreen(catalog: mobileDashboardCatalog),
+      (ctx, state) => const MobileDashboardScreen(repository: BankingRepository()),
     ),
     _sub(
       '/mobile-dashboard/accounting',
-      (ctx, state) => AccountingDashboardScreen(catalog: mobileDashboardCatalog),
+      (ctx, state) => const MobileDashboardScreen(repository: AccountingRepository()),
     ),
     _sub(
       '/mobile-dashboard/commercial',
-      (ctx, state) => CommercialDashboardScreen(catalog: mobileDashboardCatalog),
+      (ctx, state) => const MobileDashboardScreen(repository: CommercialRepository()),
     ),
 
     // Accounts

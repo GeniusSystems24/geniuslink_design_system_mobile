@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/features/mobile_dashboard/domain/object_values/navigation_destination.dart';
 
 import '../../../../design_system/kit.dart';
 import 'mobile_dashboard_pressable.dart';
@@ -8,55 +9,38 @@ import 'mobile_dashboard_theme.dart';
 
 class MobileDashboardFloatingSearchButton extends StatelessWidget {
   final VoidCallback onTap;
-  final double bottom;
-  final double end;
 
-  const MobileDashboardFloatingSearchButton({
-    required this.onTap,
-    this.bottom = 92,
-    this.end = 18,
-    super.key,
-  });
+  const MobileDashboardFloatingSearchButton({required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PositionedDirectional(
-      end: end,
-      bottom: bottom,
-      child: MobileDashboardPressable(
-        onTap: onTap,
-        semanticLabel: 'Search all operations',
-        child: Container(
-          width: 54,
-          height: 54,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: context.mdColors.primary,
-            borderRadius: BorderRadius.circular(18),
-            boxShadow: [
-              BoxShadow(
-                color: superCoreTint(context.mdColors.primary, 0xB3),
-                blurRadius: 22,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Icon(
-            Icons.search_rounded,
-            size: 24,
-            color: context.mdColors.onPrimary,
-          ),
+    return MobileDashboardPressable(
+      onTap: onTap,
+      semanticLabel: 'Search all operations',
+      child: Container(
+        width: 54,
+        height: 54,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: context.mdColors.primary,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(
+              color: superCoreTint(context.mdColors.primary, 0xB3),
+              blurRadius: 22,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Icon(
+          Icons.search_rounded,
+          size: 24,
+          color: context.mdColors.onPrimary,
         ),
       ),
     );
   }
 }
-
-typedef MobileDashboardNavigationDestination = ({
-  String id,
-  String label,
-  String icon,
-});
 
 class MobileDashboardBottomNavigation extends StatelessWidget {
   final String selectedId;
@@ -77,39 +61,35 @@ class MobileDashboardBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 0,
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-          child: Container(
-            decoration: BoxDecoration(
-              color: (context.mdMaterialTheme.bottomNavigationBarTheme
-                          .backgroundColor ??
-                      context.mdColors.surface)
-                  .withAlpha(0xEB),
-              border: Border(
-                top: BorderSide(color: context.mdTheme.border),
-              ),
-            ),
-            padding: EdgeInsets.only(
-              top: 8,
-              bottom: MediaQuery.paddingOf(context).bottom + 10,
-            ),
-            child: Row(
-              children: [
-                for (final item in items)
-                  Expanded(
-                    child: _BottomNavigationItem(
-                      item: item,
-                      selected: item.id == selectedId,
-                      onTap: () => onSelected(item.id),
-                    ),
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+        child: Container(
+          decoration: BoxDecoration(
+            color:
+                (context
+                            .mdMaterialTheme
+                            .bottomNavigationBarTheme
+                            .backgroundColor ??
+                        context.mdColors.surface)
+                    .withAlpha(0xEB),
+            border: Border(top: BorderSide(color: context.mdTheme.border)),
+          ),
+          padding: EdgeInsets.only(
+            top: 8,
+            bottom: MediaQuery.paddingOf(context).bottom + 10,
+          ),
+          child: Row(
+            children: [
+              for (final item in items)
+                Expanded(
+                  child: _BottomNavigationItem(
+                    item: item,
+                    selected: item.id == selectedId,
+                    onTap: () => onSelected(item.id),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),
@@ -139,9 +119,7 @@ class _BottomNavigationItem extends StatelessWidget {
           Icon(
             MIcons.of(item.icon),
             size: 21,
-            color: selected
-                ? context.mdColors.primary
-                : context.mdTheme.fg3,
+            color: selected ? context.mdColors.primary : context.mdTheme.fg3,
           ),
           const SizedBox(height: 4),
           Text(
@@ -150,9 +128,7 @@ class _BottomNavigationItem extends StatelessWidget {
               fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
               fontSize: 10,
               fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-              color: selected
-                  ? context.mdColors.primary
-                  : context.mdTheme.fg3,
+              color: selected ? context.mdColors.primary : context.mdTheme.fg3,
             ),
           ),
         ],
