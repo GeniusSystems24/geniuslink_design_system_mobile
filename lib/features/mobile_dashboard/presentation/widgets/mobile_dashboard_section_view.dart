@@ -2,6 +2,7 @@ import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gl_mobile_app/features/mobile_dashboard/presentation/widgets/mobile_dashboard_offline_banner.dart';
 import 'package:super_core/super_core.dart';
 
 import '../../../../core/bloc/load_status.dart';
@@ -9,7 +10,6 @@ import '../../domain/domain.dart';
 import '../bloc/mobile_dashboard_cubit.dart';
 import 'mobile_dashboard_attention.dart';
 import 'mobile_dashboard_erp_overview.dart';
-import 'mobile_dashboard_header.dart';
 import 'mobile_dashboard_metrics.dart';
 import 'mobile_dashboard_overview.dart';
 import 'mobile_dashboard_quick_actions.dart';

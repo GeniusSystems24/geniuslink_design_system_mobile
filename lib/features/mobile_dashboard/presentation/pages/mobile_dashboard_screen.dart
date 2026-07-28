@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gl_mobile_app/features/mobile_dashboard/presentation/widgets/mobile_dashboard_workspace_menu.dart';
 
 import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
 import '../../domain/domain.dart';
@@ -22,8 +23,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   String _activeTenantId = '9';
   bool _workspaceMenuOpen = false;
-  bool _drawerOpen = false;
-  bool _online = true;
+  final bool _online = true;
 
   MobileDashboardCatalog get _catalog => widget.repository.catalog;
   List<MobileDashboardNavigationDestination> get _navigationItems =>
@@ -99,7 +99,6 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
           onWorkspaceTap: () =>
               setState(() => _workspaceMenuOpen = !_workspaceMenuOpen),
           onNotificationsTap: () => _showToast('Notifications'),
-          onMenuTap: () => setState(() => _drawerOpen = true),
         ),
       ),
       bottomNavigationBar: MobileDashboardBottomNavigation(
@@ -125,21 +124,6 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
               onSelected: _switchWorkspace,
               onDismiss: () => setState(() => _workspaceMenuOpen = false),
             ),
-          MobileDashboardDrawer(
-            open: _drawerOpen,
-            workspace: _workspace,
-            online: _online,
-            onOnlineChanged: (online) => setState(() => _online = online),
-            onNavigationSelected: (label) {
-              setState(() => _drawerOpen = false);
-              _showToast(label);
-            },
-            onSignOut: () {
-              setState(() => _drawerOpen = false);
-              _showToast('Sign out');
-            },
-            onDismiss: () => setState(() => _drawerOpen = false),
-          ),
         ],
       ),
     );
