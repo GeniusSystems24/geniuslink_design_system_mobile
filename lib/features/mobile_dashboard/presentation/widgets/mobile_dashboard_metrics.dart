@@ -72,8 +72,9 @@ class MobileDashboardMetricCard extends StatelessWidget {
     final trendColor = trend == null
         ? context.mdTheme.fg4
         : trend.up
-            ? context.mdColors.secondary
-            : context.mdColors.error;
+        ? context.mdColors.secondary
+        : context.mdColors.error;
+        final t = SuperMaterialThemeData.of(context);
 
     return Semantics(
       label: '${card.label}, $currency ${mobileDashboardNumber(value)}',
@@ -82,98 +83,96 @@ class MobileDashboardMetricCard extends StatelessWidget {
           Container(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
             decoration: BoxDecoration(
-              color: context.mdTheme.surface,
+              color: t.colorScheme.surfaceContainerLowest,
               border: Border.all(color: context.mdTheme.border),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        card.label.toUpperCase(),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  card.label.toUpperCase(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 10.5,
+                    letterSpacing: 0.5,
+                    color: context.mdTheme.fg2,
+                  ),
+                ),
+                const SizedBox(height: 9),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      currency,
+                      style: TextStyle(
+                        fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: context.mdTheme.fg3,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Flexible(
+                      child: Text(
+                        mobileDashboardNumber(value),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontFamily:
                               context.mdTextTheme.bodyMedium?.fontFamily,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          fontSize: 10.5,
-                          letterSpacing: 0.5,
-                          color: context.mdTheme.fg2,
+                          letterSpacing: -0.8,
+                          color: context.mdTheme.fg1,
                         ),
                       ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            currency,
-                            style: TextStyle(
-                              fontFamily: context
-                                  .mdTextTheme.bodyMedium?.fontFamily,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: context.mdTheme.fg3,
-                            ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 9),
+                SizedBox(
+                  height: 16,
+                  child: trend == null
+                      ? Text(
+                          '—',
+                          style: TextStyle(
+                            fontFamily:
+                                context.mdTextTheme.bodyMedium?.fontFamily,
+                            fontSize: 12,
+                            color: context.mdTheme.fg4,
                           ),
-                          const SizedBox(width: 5),
-                          Flexible(
-                            child: Text(
-                              mobileDashboardNumber(value),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                        )
+                      : Row(
+                          children: [
+                            Text(
+                              trend.up ? '▲' : '▼',
                               style: TextStyle(
-                                fontFamily: context
-                                    .mdTextTheme.bodyMedium?.fontFamily,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.8,
-                                color: context.mdTheme.fg1,
+                                fontSize: 10,
+                                height: 1,
+                                color: trendColor,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      SizedBox(
-                        height: 16,
-                        child: trend == null
-                            ? Text(
-                                '—',
-                                style: TextStyle(
-                                  fontFamily: context
-                                      .mdTextTheme.bodyMedium?.fontFamily,
-                                  fontSize: 12,
-                                  color: context.mdTheme.fg4,
-                                ),
-                              )
-                            : Row(
-                                children: [
-                                  Text(
-                                    trend.up ? '▲' : '▼',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      height: 1,
-                                      color: trendColor,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    '${mobileDashboardNumber(trend.pct, decimals: 1)}%',
-                                    style: TextStyle(
-                                      fontFamily: context
-                                          .mdTextTheme.bodyMedium?.fontFamily,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      color: trendColor,
-                                    ),
-                                  ),
-                                ],
+                            const SizedBox(width: 5),
+                            Text(
+                              '${mobileDashboardNumber(trend.pct, decimals: 1)}%',
+                              style: TextStyle(
+                                fontFamily:
+                                    context.mdTextTheme.bodyMedium?.fontFamily,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                color: trendColor,
                               ),
-                      ),
-                    ],
-                  ),
+                            ),
+                          ],
+                        ),
+                ),
+              ],
+            ),
           ),
           PositionedDirectional(
             start: 0,
@@ -195,7 +194,6 @@ class MobileDashboardMetricCard extends StatelessWidget {
 
 class MobileDashboardChartView extends StatelessWidget {
   final List<MdCard> cards;
-  final String tabLabel;
   final String currency;
   final String period;
   final String? selectedMetricId;
@@ -205,7 +203,6 @@ class MobileDashboardChartView extends StatelessWidget {
 
   const MobileDashboardChartView({
     required this.cards,
-    required this.tabLabel,
     required this.currency,
     required this.period,
     required this.selectedMetricId,
@@ -222,6 +219,7 @@ class MobileDashboardChartView extends StatelessWidget {
         message: 'No metrics are available for this dashboard.',
       );
     }
+    final t = SuperMaterialThemeData.of(context);
 
     final selected = cards.firstWhere(
       (card) => card.id == selectedMetricId,
@@ -231,8 +229,8 @@ class MobileDashboardChartView extends StatelessWidget {
     final trendColor = trend == null
         ? context.mdTheme.fg4
         : trend.up
-            ? context.mdColors.secondary
-            : context.mdColors.error;
+        ? context.mdColors.secondary
+        : context.mdColors.error;
     final rawSeries = selected.series[period] ?? const <double>[];
     final currentValue = valueFor(selected);
     final chartValues = <double>[
@@ -240,11 +238,6 @@ class MobileDashboardChartView extends StatelessWidget {
         if (point.isFinite && (point * currentValue).isFinite)
           point * currentValue,
     ];
-    final cardValues = <double>[
-      for (final card in cards)
-        if (valueFor(card).isFinite && valueFor(card) >= 0) valueFor(card),
-    ];
-    final maxValue = cardValues.isEmpty ? 0.0 : cardValues.reduce(math.max);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -269,8 +262,7 @@ class MobileDashboardChartView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.fromLTRB(14, 16, 14, 12),
           decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
+            color: t.colorScheme.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Column(
@@ -301,8 +293,8 @@ class MobileDashboardChartView extends StatelessWidget {
                             Text(
                               currency,
                               style: TextStyle(
-                                fontFamily: context
-                                    .mdTextTheme.bodyMedium?.fontFamily,
+                                fontFamily:
+                                    context.mdTextTheme.bodyMedium?.fontFamily,
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500,
                                 color: context.mdTheme.fg3,
@@ -316,7 +308,9 @@ class MobileDashboardChartView extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontFamily: context
-                                      .mdTextTheme.bodyMedium?.fontFamily,
+                                      .mdTextTheme
+                                      .bodyMedium
+                                      ?.fontFamily,
                                   fontSize: 22,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: -0.8,
@@ -330,8 +324,10 @@ class MobileDashboardChartView extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: superCoreTint(trendColor, 0x24),
                       border: Border.all(
@@ -344,8 +340,7 @@ class MobileDashboardChartView extends StatelessWidget {
                           ? 'No change'
                           : '${trend.up ? '▲' : '▼'} ${mobileDashboardNumber(trend.pct, decimals: 1)}%',
                       style: TextStyle(
-                        fontFamily:
-                            context.mdTextTheme.bodyMedium?.fontFamily,
+                        fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
                         fontSize: 11.5,
                         fontWeight: FontWeight.w700,
                         color: trendColor,
@@ -363,52 +358,11 @@ class MobileDashboardChartView extends StatelessWidget {
               else
                 MobileDashboardTrendChart(
                   values: chartValues,
-                  color:
-                      mobileDashboardMarkerColor(context, selected.marker),
+                  color: mobileDashboardMarkerColor(context, selected.marker),
                   axisLabels: axisLabels,
                   currency: currency,
                   semanticsLabel:
                       '${selected.label} trend chart. Current value $currency ${mobileDashboardNumber(currentValue)}.',
-                ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 14),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Breakdown',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13.5,
-                  color: context.mdTheme.fg1,
-                ),
-              ),
-              const SizedBox(height: 1),
-              Text(
-                'Relative value across ${tabLabel.toLowerCase()} metrics',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: context.mdTheme.fg3,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final card in cards)
-                MobileDashboardBreakdownBar(
-                  card: card,
-                  value: valueFor(card),
-                  maxValue: maxValue,
-                  currency: currency,
                 ),
             ],
           ),
@@ -422,6 +376,77 @@ class MobileDashboardChartView extends StatelessWidget {
       return value;
     }
     return '${value[0].toUpperCase()}${value.substring(1)}';
+  }
+}
+
+class MobileDashboardBreakdownView extends StatelessWidget {
+  final List<MdCard> cards;
+  final String tabLabel;
+  final String currency;
+  final MobileDashboardCardValueResolver valueFor;
+
+  const MobileDashboardBreakdownView({
+    required this.cards,
+    required this.tabLabel,
+    required this.currency,
+    required this.valueFor,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (cards.isEmpty) {
+      return const MobileDashboardChartEmptyState(
+        message: 'No metrics are available for this dashboard.',
+      );
+    }
+
+final t = SuperMaterialThemeData.of(context);
+    final cardValues = <double>[
+      for (final card in cards)
+        if (valueFor(card).isFinite && valueFor(card) >= 0) valueFor(card),
+    ];
+    final maxValue = cardValues.isEmpty ? 0.0 : cardValues.reduce(math.max);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: t.colorScheme.surfaceContainerLowest,
+        // border: Border.all(color: context.mdTheme.border),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Breakdown',
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontWeight: FontWeight.w700,
+              fontSize: 13.5,
+              color: context.mdTheme.fg1,
+            ),
+          ),
+          const SizedBox(height: 1),
+          Text(
+            'Relative value across ${tabLabel.toLowerCase()} metrics',
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 11,
+              color: context.mdTheme.fg3,
+            ),
+          ),
+          const SizedBox(height: 15),
+          for (final card in cards)
+            MobileDashboardBreakdownBar(
+              card: card,
+              value: valueFor(card),
+              maxValue: maxValue,
+              currency: currency,
+            ),
+        ],
+      ),
+    );
   }
 }
 

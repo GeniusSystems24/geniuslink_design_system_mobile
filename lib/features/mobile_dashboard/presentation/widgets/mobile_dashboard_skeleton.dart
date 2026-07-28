@@ -42,7 +42,8 @@ class _MobileDashboardSkeletonState extends State<MobileDashboardSkeleton>
   void didChangeDependencies() {
     super.didChangeDependencies();
     final media = MediaQuery.maybeOf(context);
-    final disabled = (media?.disableAnimations ?? false) ||
+    final disabled =
+        (media?.disableAnimations ?? false) ||
         (media?.accessibleNavigation ?? false);
     if (disabled == _animationsDisabled && _controller.isAnimating) {
       return;
@@ -77,7 +78,9 @@ class _MobileDashboardSkeletonState extends State<MobileDashboardSkeleton>
     final baseColor = context.mdTheme.inputBg;
     final highlightColor = Color.alphaBlend(
       context.mdColors.onSurface.withValues(
-        alpha: context.mdMaterialTheme.brightness == Brightness.dark ? 0.12 : 0.07,
+        alpha: context.mdMaterialTheme.brightness == Brightness.dark
+            ? 0.12
+            : 0.07,
       ),
       baseColor,
     );
@@ -168,7 +171,10 @@ class MobileDashboardErpHeroSkeleton extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: MobileDashboardSkeleton(width: double.infinity, height: 34),
+                child: MobileDashboardSkeleton(
+                  width: double.infinity,
+                  height: 34,
+                ),
               ),
               SizedBox(width: 8),
               MobileDashboardSkeleton(width: 114, height: 34),
@@ -184,10 +190,7 @@ class MobileDashboardErpHeroSkeleton extends StatelessWidget {
 class MobileDashboardStatusStripSkeleton extends StatelessWidget {
   final int itemCount;
 
-  const MobileDashboardStatusStripSkeleton({
-    this.itemCount = 3,
-    super.key,
-  });
+  const MobileDashboardStatusStripSkeleton({this.itemCount = 3, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -287,10 +290,7 @@ class MobileDashboardMetricCardSkeleton extends StatelessWidget {
 class MobileDashboardMetricGridSkeleton extends StatelessWidget {
   final int itemCount;
 
-  const MobileDashboardMetricGridSkeleton({
-    this.itemCount = 4,
-    super.key,
-  });
+  const MobileDashboardMetricGridSkeleton({this.itemCount = 4, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +309,7 @@ class MobileDashboardMetricGridSkeleton extends StatelessWidget {
   }
 }
 
-/// Loading state for the chart view, including metric chips and breakdown.
+/// Loading state for the chart view, including metric chips.
 class MobileDashboardChartSkeleton extends StatelessWidget {
   const MobileDashboardChartSkeleton({super.key});
 
@@ -360,30 +360,38 @@ class MobileDashboardChartSkeleton extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 14),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MobileDashboardSkeleton(width: 88, height: 13),
-              SizedBox(height: 8),
-              MobileDashboardSkeleton(width: 208, height: 10),
-              SizedBox(height: 18),
-              MobileDashboardSkeleton(width: double.infinity, height: 9),
-              SizedBox(height: 14),
-              MobileDashboardSkeleton(width: double.infinity, height: 9),
-              SizedBox(height: 14),
-              MobileDashboardSkeleton(width: double.infinity, height: 9),
-            ],
-          ),
-        ),
       ],
+    );
+  }
+}
+
+/// Loading state for the metric breakdown view.
+class MobileDashboardBreakdownSkeleton extends StatelessWidget {
+  const MobileDashboardBreakdownSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: context.mdTheme.surface,
+        border: Border.all(color: context.mdTheme.border),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MobileDashboardSkeleton(width: 88, height: 13),
+          SizedBox(height: 8),
+          MobileDashboardSkeleton(width: 208, height: 10),
+          SizedBox(height: 18),
+          MobileDashboardSkeleton(width: double.infinity, height: 9),
+          SizedBox(height: 14),
+          MobileDashboardSkeleton(width: double.infinity, height: 9),
+          SizedBox(height: 14),
+          MobileDashboardSkeleton(width: double.infinity, height: 9),
+        ],
+      ),
     );
   }
 }
@@ -434,7 +442,10 @@ class MobileDashboardListSectionSkeleton extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            MobileDashboardSkeleton(width: double.infinity, height: 12),
+                            MobileDashboardSkeleton(
+                              width: double.infinity,
+                              height: 12,
+                            ),
                             SizedBox(height: 8),
                             MobileDashboardSkeleton(width: 176, height: 10),
                           ],
@@ -461,10 +472,7 @@ class MobileDashboardListSectionSkeleton extends StatelessWidget {
 class MobileDashboardWorkflowSkeleton extends StatelessWidget {
   final int itemCount;
 
-  const MobileDashboardWorkflowSkeleton({
-    this.itemCount = 3,
-    super.key,
-  });
+  const MobileDashboardWorkflowSkeleton({this.itemCount = 3, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -476,10 +484,7 @@ class MobileDashboardWorkflowSkeleton extends StatelessWidget {
 class MobileDashboardAttentionSkeleton extends StatelessWidget {
   final int itemCount;
 
-  const MobileDashboardAttentionSkeleton({
-    this.itemCount = 3,
-    super.key,
-  });
+  const MobileDashboardAttentionSkeleton({this.itemCount = 3, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -527,10 +532,7 @@ class MobileDashboardRecentOperationsSkeleton extends StatelessWidget {
 class MobileDashboardOperationRowSkeleton extends StatelessWidget {
   final bool last;
 
-  const MobileDashboardOperationRowSkeleton({
-    required this.last,
-    super.key,
-  });
+  const MobileDashboardOperationRowSkeleton({required this.last, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -545,9 +547,7 @@ class MobileDashboardOperationRowSkeleton extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: MobileDashboardSkeleton(width: 160, height: 13),
-              ),
+              Expanded(child: MobileDashboardSkeleton(width: 160, height: 13)),
               SizedBox(width: 12),
               MobileDashboardSkeleton(width: 64, height: 13),
             ],
@@ -570,10 +570,7 @@ class MobileDashboardOperationRowSkeleton extends StatelessWidget {
 class MobileDashboardQuickActionsSkeleton extends StatelessWidget {
   final int itemCount;
 
-  const MobileDashboardQuickActionsSkeleton({
-    this.itemCount = 8,
-    super.key,
-  });
+  const MobileDashboardQuickActionsSkeleton({this.itemCount = 8, super.key});
 
   @override
   Widget build(BuildContext context) {

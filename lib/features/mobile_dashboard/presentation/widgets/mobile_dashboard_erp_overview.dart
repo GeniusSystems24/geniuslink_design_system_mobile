@@ -372,41 +372,26 @@ class MobileDashboardWorkflowPanel extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    var title2 = title;
-    var subtitle2 = subtitle;
     var trailing = MobileDashboardPill(
       label: '${items.length} active',
       color: context.mdColors.tertiary,
     );
     var marker = MdMarker.warning;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SuperSectionTitle1(
-          title: title2,
-          subtitle: subtitle2,
-          trailing: trailing,
-          accentColor: mobileDashboardMarkerColor(context, marker),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: Column(
-            children: [
-              for (var index = 0; index < items.length; index++)
-                _WorkflowRow(
-                  item: items[index],
-                  last: index == items.length - 1,
-                  onTap: () => onItemTap(items[index]),
-                ),
-            ],
-          ),
-        ),
-      ],
+    return SuperSectionCard2(
+      title: title,
+      subtitle: subtitle,
+      trailing: trailing,
+      accentColor: mobileDashboardMarkerColor(context, marker),
+      child: Column(
+        children: [
+          for (var index = 0; index < items.length; index++)
+            _WorkflowRow(
+              item: items[index],
+              last: index == items.length - 1,
+              onTap: () => onItemTap(items[index]),
+            ),
+        ],
+      ),
     );
   }
 }

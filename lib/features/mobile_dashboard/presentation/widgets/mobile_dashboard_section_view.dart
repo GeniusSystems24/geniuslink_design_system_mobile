@@ -45,7 +45,7 @@ class MobileDashboardSectionViewState
   String get _tabId => _dashboardState.tab;
   String get _currency => _dashboardState.cur;
   String get _period => _dashboardState.period;
-  String get _view => _dashboardState.view;
+  ReportView get _view => _dashboardState.view;
   String? get _chartMetricId => _dashboardState.chartMetric;
   bool get _loading => _dashboardState.status.isLoading;
   MobileDashboardCatalog get _catalog => widget.repository.catalog;
@@ -242,61 +242,75 @@ class MobileDashboardSectionViewState
                           onItemTap: (item) => _showToast(item.label),
                         ),
                       const SizedBox(height: 24),
-                      if (_loading)
-                        const MobileDashboardSectionTitleSkeleton()
-                      else ...[
-                        SuperSectionTitle1(
-                          title: 'Financial overview',
-                          subtitle:
-                              'Consolidated values, movement, and period comparison',
-                          trailing: null,
-                          accentColor: mobileDashboardMarkerColor(
-                            context,
-                            marker,
-                          ),
+                      SuperSectionCard2(
+                        title: 'Financial overview',
+                        subtitle:
+                            'Consolidated values, movement, and period comparison',
+                        trailing: null,
+                        accentColor: mobileDashboardMarkerColor(
+                          context,
+                          marker,
                         ),
-                        const SizedBox(height: 12),
-                      ],
-                      if (_loading)
-                        const MobileDashboardControlsSkeleton()
-                      else
-                        MobileDashboardControls(
-                          view: _view,
-                          currency: _currency,
-                          period: _period,
-                          currencies: _catalog.currencies,
-                          onToggleView: _dashboardCubit.toggleView,
-                          onCurrencyChanged: _dashboardCubit.setCurrency,
-                          onPeriodChanged: _dashboardCubit.setPeriod,
+
+                        child: Column(
+                          children: [
+                            if (_loading)
+                              const MobileDashboardControlsSkeleton()
+                            else
+                              MobileDashboardControls(
+                                view: _view,
+                                currency: _currency,
+                                period: _period,
+                                currencies: _catalog.currencies,
+                                onToggleView: _dashboardCubit.toggleView,
+                                onCurrencyChanged: _dashboardCubit.setCurrency,
+                                onPeriodChanged: _dashboardCubit.setPeriod,
+                              ),
+                            const SizedBox(height: 12),
+                            if (_loading)
+                              switch (_view) {
+                                ReportView.cards =>
+                                  MobileDashboardMetricGridSkeleton(
+                                    itemCount: selectedTab.cards.isEmpty
+                                        ? 4
+                                        : selectedTab.cards.length,
+                                  ),
+                                ReportView.chart =>
+                                  const MobileDashboardChartSkeleton(),
+                                ReportView.breakdown =>
+                                  const MobileDashboardBreakdownSkeleton(),
+                              }
+                            else
+                              switch (_view) {
+                                ReportView.cards => MobileDashboardMetricGrid(
+                                  cards: selectedTab.cards,
+                                  currency: _currency,
+                                  period: _period,
+                                  valueFor: _cardValue,
+                                ),
+                                ReportView.chart => MobileDashboardChartView(
+                                  cards: selectedTab.cards,
+                                  currency: _currency,
+                                  period: _period,
+                                  selectedMetricId: _chartMetricId,
+                                  axisLabels:
+                                      _catalog.axisLabels[_period] ??
+                                      const <String>[],
+                                  valueFor: _cardValue,
+                                  onMetricSelected:
+                                      _dashboardCubit.setChartMetric,
+                                ),
+                                ReportView.breakdown =>
+                                  MobileDashboardBreakdownView(
+                                    cards: selectedTab.cards,
+                                    tabLabel: selectedTab.label,
+                                    currency: _currency,
+                                    valueFor: _cardValue,
+                                  ),
+                              },
+                          ],
                         ),
-                      const SizedBox(height: 12),
-                      if (_loading)
-                        _view == 'cards'
-                            ? MobileDashboardMetricGridSkeleton(
-                                itemCount: selectedTab.cards.isEmpty
-                                    ? 4
-                                    : selectedTab.cards.length,
-                              )
-                            : const MobileDashboardChartSkeleton()
-                      else if (_view == 'cards')
-                        MobileDashboardMetricGrid(
-                          cards: selectedTab.cards,
-                          currency: _currency,
-                          period: _period,
-                          valueFor: _cardValue,
-                        )
-                      else
-                        MobileDashboardChartView(
-                          cards: selectedTab.cards,
-                          tabLabel: selectedTab.label,
-                          currency: _currency,
-                          period: _period,
-                          selectedMetricId: _chartMetricId,
-                          axisLabels:
-                              _catalog.axisLabels[_period] ?? const <String>[],
-                          valueFor: _cardValue,
-                          onMetricSelected: _dashboardCubit.setChartMetric,
-                        ),
+                      ),
                       const SizedBox(height: 24),
                       if (_loading)
                         MobileDashboardWorkflowSkeleton(

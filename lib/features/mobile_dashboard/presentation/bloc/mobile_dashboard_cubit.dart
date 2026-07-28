@@ -18,14 +18,34 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart' show IconData, Icons;
 
 import '../../../../core/bloc/load_status.dart';
+
+enum ReportView {
+  cards(title: 'Cards', tooltip: 'Show cards', icon: Icons.view_module),
+  chart(title: 'Chart', tooltip: 'Show charts', icon: Icons.show_chart),
+  breakdown(
+    title: 'Breakdown',
+    tooltip: 'Show breakdown',
+    icon: Icons.pie_chart,
+  );
+
+  final String tooltip;
+  final String title;
+  final IconData icon;
+  const ReportView({
+    required this.tooltip,
+    required this.title,
+    required this.icon,
+  });
+}
 
 class MobileDashboardState extends Equatable {
   final String tab;
   final String cur;
   final String period;
-  final String view; // 'cards' | 'chart'
+  final ReportView view; // 'cards' | 'chart' | "breakdown"
   final String? chartMetric;
   final LoadStatus status;
 
@@ -33,7 +53,7 @@ class MobileDashboardState extends Equatable {
     this.tab = 'banking',
     this.cur = 'SAR',
     this.period = 'week',
-    this.view = 'cards',
+    this.view = ReportView.cards,
     this.chartMetric,
     this.status = LoadStatus.ready,
   });
@@ -42,7 +62,7 @@ class MobileDashboardState extends Equatable {
     String? tab,
     String? cur,
     String? period,
-    String? view,
+    ReportView? view,
     String? chartMetric,
     bool clearChartMetric = false,
     LoadStatus? status,
@@ -65,14 +85,18 @@ class MobileDashboardCubit extends Cubit<MobileDashboardState> {
   int _refreshGeneration = 0;
 
   MobileDashboardCubit({String initialTab = 'banking'})
-      : super(MobileDashboardState(tab: initialTab));
+    : super(MobileDashboardState(tab: initialTab));
 
   void selectTab(String tab) =>
       emit(state.copyWith(tab: tab, clearChartMetric: true));
   void setCurrency(String cur) => emit(state.copyWith(cur: cur));
   void setPeriod(String period) => emit(state.copyWith(period: period));
-  void toggleView() =>
-      emit(state.copyWith(view: state.view == 'chart' ? 'cards' : 'chart'));
+  void toggleView() => emit(
+    state.copyWith(
+      view:
+          ReportView.values[(state.view.index + 1) % ReportView.values.length],
+    ),
+  );
   void setChartMetric(String id) => emit(state.copyWith(chartMetric: id));
 
   /// Simulated pull-to-refresh. Replace the delay with a tenant-repo read.

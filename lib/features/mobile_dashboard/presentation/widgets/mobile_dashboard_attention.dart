@@ -6,9 +6,9 @@ import 'mobile_dashboard_pressable.dart';
 import 'mobile_dashboard_theme.dart';
 
 String mobileDashboardAttentionIcon(String id) => switch (id) {
-      'approvals' => 'inbox',
-      _ => 'alert',
-    };
+  'approvals' => 'inbox',
+  _ => 'alert',
+};
 
 class MobileDashboardAttentionList extends StatelessWidget {
   final List<MdAttention> items;
@@ -28,47 +28,31 @@ class MobileDashboardAttentionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var title2 = title;
-    var subtitle2 = subtitle;
-    var trailing2 = trailing ??
-              Text(
-                'All domains',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: context.mdTheme.fg3,
-                ),
-              );
     var marker = MdMarker.warning;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SuperSectionTitle1(
-          title: title2,
-          subtitle: subtitle2,
-          trailing: trailing2,
-          accentColor: mobileDashboardMarkerColor(context, marker),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(14),
+    return SuperSectionCard2(
+      title: title,
+      subtitle: subtitle,
+      trailing:
+          trailing ??
+          Text(
+            'All domains',
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 11,
+              color: context.mdTheme.fg3,
+            ),
           ),
-          child: Column(
-            children: [
-              for (var index = 0; index < items.length; index++)
-                MobileDashboardAttentionRow(
-                  item: items[index],
-                  last: index == items.length - 1,
-                  onTap: () => onItemTap(items[index]),
-                ),
-            ],
-          ),
-        ),
-      ],
+      accentColor: mobileDashboardMarkerColor(context, marker),
+      child: Column(
+        children: [
+          for (var index = 0; index < items.length; index++)
+            MobileDashboardAttentionRow(
+              item: items[index],
+              last: index == items.length - 1,
+              onTap: () => onItemTap(items[index]),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -32,36 +32,22 @@ class MobileDashboardRecentOperations extends StatelessWidget {
     var subtitle2 = subtitle;
     var trailing = MobileDashboardViewAllButton(onTap: onViewAll);
     var marker = MdMarker.positive;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SuperSectionTitle1(
-          title: title2,
-          subtitle: subtitle2,
-          trailing: trailing,
-          accentColor: mobileDashboardMarkerColor(context, marker),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: context.mdTheme.surface,
-            border: Border.all(color: context.mdTheme.border),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: Column(
-            children: [
-              for (var index = 0; index < operations.length; index++)
-                MobileDashboardOperationRow(
-                  operation: operations[index],
-                  currency: currency,
-                  amount: amountFor(operations[index]),
-                  last: index == operations.length - 1,
-                ),
-            ],
-          ),
-        ),
-      ],
+    return SuperSectionCard2(
+      title: title2,
+      subtitle: subtitle2,
+      trailing: trailing,
+      accentColor: mobileDashboardMarkerColor(context, marker),
+      child: Column(
+        children: [
+          for (var index = 0; index < operations.length; index++)
+            MobileDashboardOperationRow(
+              operation: operations[index],
+              currency: currency,
+              amount: amountFor(operations[index]),
+              last: index == operations.length - 1,
+            ),
+        ],
+      ),
     );
   }
 }

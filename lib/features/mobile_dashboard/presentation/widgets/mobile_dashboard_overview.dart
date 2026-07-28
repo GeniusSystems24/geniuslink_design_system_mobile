@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gl_mobile_app/features/mobile_dashboard/presentation/bloc/mobile_dashboard_cubit.dart';
 
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
@@ -46,7 +47,7 @@ class MobileDashboardTitle extends StatelessWidget {
 }
 
 class MobileDashboardControls extends StatelessWidget {
-  final String view;
+  final ReportView view;
   final String currency;
   final String period;
   final List<MdCurrency> currencies;
@@ -67,40 +68,29 @@ class MobileDashboardControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: context.mdTheme.surface,
-        border: Border.all(color: context.mdTheme.border),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          MobileDashboardViewToggle(
-            view: view,
-            onTap: onToggleView,
+    return Row(
+      children: [
+        MobileDashboardViewToggle(view: view, onTap: onToggleView),
+        const SizedBox(width: 8),
+        MobileDashboardCurrencyMenu(
+          currency: currency,
+          currencies: currencies,
+          onChanged: onCurrencyChanged,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: MobileDashboardPeriodSelector(
+            period: period,
+            onChanged: onPeriodChanged,
           ),
-          const SizedBox(width: 8),
-          MobileDashboardCurrencyMenu(
-            currency: currency,
-            currencies: currencies,
-            onChanged: onCurrencyChanged,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: MobileDashboardPeriodSelector(
-              period: period,
-              onChanged: onPeriodChanged,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
 class MobileDashboardViewToggle extends StatelessWidget {
-  final String view;
+  final ReportView view;
   final VoidCallback onTap;
 
   const MobileDashboardViewToggle({
@@ -111,8 +101,7 @@ class MobileDashboardViewToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isChart = view == 'chart';
-    final tooltip = isChart ? 'Show cards' : 'Show charts';
+    final tooltip = view.tooltip;
 
     return Tooltip(
       message: tooltip,
@@ -136,13 +125,11 @@ class MobileDashboardViewToggle extends StatelessWidget {
               ),
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 160),
-                transitionBuilder: (child, animation) => ScaleTransition(
-                  scale: animation,
-                  child: child,
-                ),
+                transitionBuilder: (child, animation) =>
+                    ScaleTransition(scale: animation, child: child),
                 child: Icon(
-                  MIcons.of(isChart ? 'poll' : 'grid'),
-                  key: ValueKey<String>(view),
+                  view.icon,
+                  key: ValueKey<ReportView>(view),
                   size: 18,
                   color: context.mdColors.primary,
                 ),
@@ -238,11 +225,7 @@ class MobileDashboardCurrencyMenu extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 5),
-            Icon(
-              MIcons.of('chevD'),
-              size: 14,
-              color: context.mdTheme.fg3,
-            ),
+            Icon(MIcons.of('chevD'), size: 14, color: context.mdTheme.fg3),
           ],
         ),
       ),
