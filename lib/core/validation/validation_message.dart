@@ -1,1 +1,4 @@
-class ValidationMessage { final String field, message; const ValidationMessage(this.field, this.message); }
+class ValidationMessage {
+  final String field, message;
+  const ValidationMessage(this.field, this.message);
+}

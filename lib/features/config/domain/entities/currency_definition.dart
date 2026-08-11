@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 enum CurrencyStatus { active, inactive }
@@ -8,7 +7,11 @@ class CurrencyRate extends Equatable {
   final double rate;
   final String source;
 
-  const CurrencyRate({required this.effectiveAt, required this.rate, required this.source});
+  const CurrencyRate({
+    required this.effectiveAt,
+    required this.rate,
+    required this.source,
+  });
 
   @override
   List<Object?> get props => [effectiveAt, rate, source];
@@ -40,5 +43,16 @@ class CurrencyDefinition extends Equatable {
   });
 
   @override
-  List<Object?> get props => [code, name, localizedName, symbol, exchangeRate, isBase, status, decimalPlaces, source, rateHistory];
+  List<Object?> get props => [
+    code,
+    name,
+    localizedName,
+    symbol,
+    exchangeRate,
+    isBase,
+    status,
+    decimalPlaces,
+    source,
+    rateHistory,
+  ];
 }

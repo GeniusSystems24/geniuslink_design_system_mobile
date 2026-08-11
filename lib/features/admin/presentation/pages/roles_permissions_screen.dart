@@ -1,6 +1,10 @@
-part of 'users_screens.dart';
+import 'package:flutter/material.dart';
 
-class RolesPermissionsScreen extends StatelessWidget {
+import '../../../../shared/presentation/controllers/form_controller.dart';
+import '../../domain/domain.dart';
+import '../widgets/roles_permissions_view.dart';
+
+class RolesPermissionsScreen extends StatefulWidget {
   final String initialRole;
   final RolePermissionMatrix? initialMatrix;
   final Future<void> Function(RolePermissionMatrix matrix)? onSave;
@@ -13,21 +17,36 @@ class RolesPermissionsScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<FormCubit>(
-      create: (_) => FormCubit(
-        initial: {
-          'role': initialRole,
-          'matrix': initialMatrix ?? RolePermissionMatrix.defaults(),
-        },
-        onSubmit: (values) async {
-          final matrix = values['matrix'];
-          if (matrix is RolePermissionMatrix && onSave != null) {
-            await onSave!(matrix);
-          }
-        },
-      ),
-      child: const RolesPermissionsView(),
+  State<RolesPermissionsScreen> createState() => _RolesPermissionsScreenState();
+}
+
+class _RolesPermissionsScreenState extends State<RolesPermissionsScreen> {
+  late final FormController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = FormController(
+      initial: {
+        'role': widget.initialRole,
+        'matrix': widget.initialMatrix ?? RolePermissionMatrix.defaults(),
+      },
+      onSubmit: (values) async {
+        final matrix = values['matrix'];
+        if (matrix is RolePermissionMatrix && widget.onSave != null) {
+          await widget.onSave!(matrix);
+        }
+      },
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      RolesPermissionsView(controller: _controller);
 }

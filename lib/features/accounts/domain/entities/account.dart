@@ -27,10 +27,7 @@ class AccountNode extends Equatable {
   final Account account;
   final List<AccountNode> children;
 
-  const AccountNode({
-    required this.account,
-    this.children = const [],
-  });
+  const AccountNode({required this.account, this.children = const []});
 
   bool get isLeaf => children.isEmpty;
 

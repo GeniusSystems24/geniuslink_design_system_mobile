@@ -10,11 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # State management — BLoC (Cubit-first). Migration from ChangeNotifier /
-  # setState to flutter_bloc, designed for multi-tenant + database-per-tenant
-  # isolation. See bloc-state-management-plan.md.
-  flutter_bloc: ^9.1.1
-  bloc: ^9.2.1
+  # State management uses presentation-owned ChangeNotifier controllers (MVC).
   equatable: ^2.0.5
   # Legacy widget kit retained for screens that have not yet moved to a
   # focused Super package.
@@ -44,9 +40,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  # BLoC testing — state-machine assertions + mocking for the per-tenant
-  # isolation tests (Phase 9).
-  bloc_test: ^10.0.0
   mocktail: ^1.0.4
 
 flutter:

@@ -1,53 +1,32 @@
-// ============================================================
-// WORKSPACE / WIDGETS — TenantScope (keyed isolation boundary)
-// ------------------------------------------------------------
-// The database-per-tenant isolation boundary. Watches TenantCubit;
-// when a tenant is active it provides that tenant's TenantDatabase
-// (and, in later phases, its repositories + shell blocs) under a
-// ValueKey(tenantId). When the active tenant changes, Flutter
-// destroys this subtree — the host State's dispose() closes the
-// previous connection — and builds a fresh one. No tenant state
-// survives a switch.
-//
-// Phase 1 wires the boundary + connection lifecycle. Tenant repos
-// (Phase 6+) and the shell blocs (WorkspaceCubit/NavCubit, Phase
-// 3/4) are added inside _TenantConnectionHost's provider tree.
-//
-// File placement:  lib/workspace/presentation/widgets/tenant_scope.dart
-// ============================================================
+import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/tenancy/tenant_database.dart';
 import '../../../core/tenancy/tenant_session.dart';
-import '../bloc/tenant_cubit.dart';
-import '../bloc/tenant_state.dart';
+import '../controllers/tenant_controller.dart';
 
+/// Keyed MVC isolation boundary for the active tenant database.
 class TenantScope extends StatelessWidget {
-  /// The authenticated shell to mount once a tenant is active.
+  final TenantController controller;
   final Widget child;
-
-  /// Shown while no tenant is active (auth gate / pre-selection).
   final WidgetBuilder fallbackBuilder;
 
   const TenantScope({
     super.key,
+    required this.controller,
     required this.child,
     required this.fallbackBuilder,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TenantCubit, TenantState>(
-      // Only rebuild the boundary when the ACTIVE tenant identity changes.
-      buildWhen: (a, b) => a.activeTenantId != b.activeTenantId,
-      builder: (context, state) {
-        final session = state.active;
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        final session = controller.state.active;
         if (session == null) return fallbackBuilder(context);
 
-        // ValueKey(tenantId) ⇒ a new tenant gives a new State, so the old
-        // host is disposed (connection closed) before the new one mounts.
         return _TenantConnectionHost(
           key: ValueKey('tenant:${session.tenantId}'),
           session: session,
@@ -58,8 +37,28 @@ class TenantScope extends StatelessWidget {
   }
 }
 
-/// Owns one tenant's TenantDatabase for the lifetime of the keyed subtree,
-/// providing it down the tree and closing it on dispose.
+/// Lightweight inherited database boundary replacing provider coupling.
+class TenantDatabaseScope extends InheritedWidget {
+  final TenantDatabase database;
+
+  const TenantDatabaseScope({
+    super.key,
+    required this.database,
+    required super.child,
+  });
+
+  static TenantDatabase of(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<TenantDatabaseScope>();
+    assert(scope != null, 'TenantDatabaseScope not found in context.');
+    return scope!.database;
+  }
+
+  @override
+  bool updateShouldNotify(TenantDatabaseScope oldWidget) =>
+      !identical(database, oldWidget.database);
+}
+
 class _TenantConnectionHost extends StatefulWidget {
   final TenantSession session;
   final Widget child;
@@ -80,22 +79,18 @@ class _TenantConnectionHostState extends State<_TenantConnectionHost> {
   @override
   void initState() {
     super.initState();
-    _db = TenantDatabase(widget.session)..open();
+    _db = TenantDatabase(widget.session);
+    unawaited(_db.open());
   }
 
   @override
   void dispose() {
-    _db.close();
+    unawaited(_db.close());
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Tenant-scoped repositories + shell blocs nest under this provider in
-    // later phases (RepositoryProvider … → MultiBlocProvider … → shell).
-    return RepositoryProvider<TenantDatabase>.value(
-      value: _db,
-      child: widget.child,
-    );
+    return TenantDatabaseScope(database: _db, child: widget.child);
   }
 }

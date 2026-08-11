@@ -13,11 +13,14 @@ part 'contact_list_screen.dart';
 part 'create_contact_screen.dart';
 part 'contact_detail_screen.dart';
 
-
-String contactSingularLabel(ContactType type) => type == ContactType.supplier ? 'Supplier' : 'Customer';
-String contactPluralLabel(ContactType type) => type == ContactType.supplier ? 'Suppliers' : 'Customers';
-String contactBalanceLabel(ContactType type) => type == ContactType.supplier ? 'Payable' : 'Receivable';
-String formatContactDate(DateTime value) => '${value.year}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
+String contactSingularLabel(ContactType type) =>
+    type == ContactType.supplier ? 'Supplier' : 'Customer';
+String contactPluralLabel(ContactType type) =>
+    type == ContactType.supplier ? 'Suppliers' : 'Customers';
+String contactBalanceLabel(ContactType type) =>
+    type == ContactType.supplier ? 'Payable' : 'Receivable';
+String formatContactDate(DateTime value) =>
+    '${value.year}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
 
 Color contactTone(BuildContext context, ContactKind kind) {
   final colors = SuperMaterialThemeData.of(context).colorScheme;
@@ -25,10 +28,10 @@ Color contactTone(BuildContext context, ContactKind kind) {
 }
 
 PillTone contactStatusTone(ContactStatus status) => switch (status) {
-      ContactStatus.active => PillTone.success,
-      ContactStatus.pending => PillTone.warning,
-      ContactStatus.inactive => PillTone.neutral,
-    };
+  ContactStatus.active => PillTone.success,
+  ContactStatus.pending => PillTone.warning,
+  ContactStatus.inactive => PillTone.neutral,
+};
 
 String formatContactAmount(double amount, {bool signed = false}) {
   final absolute = amount.abs().toStringAsFixed(2);

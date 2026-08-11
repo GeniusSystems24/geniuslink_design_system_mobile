@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 enum ContactType { customer, supplier }
+
 enum ContactStatus { active, pending, inactive }
 
 class ContactSummary extends Equatable {
@@ -23,7 +24,15 @@ class ContactSummary extends Equatable {
   });
 
   @override
-  List<Object?> get props => [code, name, arabicName, city, balance, orderCount, status];
+  List<Object?> get props => [
+    code,
+    name,
+    arabicName,
+    city,
+    balance,
+    orderCount,
+    status,
+  ];
 }
 
 class ContactTransaction extends Equatable {

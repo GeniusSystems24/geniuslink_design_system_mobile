@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
 // list · createAccount · accountDetail · createGroup · groupDetail
 // ============================================================
@@ -46,79 +46,83 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Create Account Group')),
       body: MScroll([
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Group Details',
-      subtitle: 'Name and tree association',
-      initiallyExpanded: true,
-      accentColor: accentColor,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SuperTextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Name English',
-              hintText: 'e.g. Current Assets',
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Group Details',
+          subtitle: 'Name and tree association',
+          initiallyExpanded: true,
+          accentColor: accentColor,
+          icon: null,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SuperTextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Name English',
+                  hintText: 'e.g. Current Assets',
+                ),
+                required: true,
+                minLength: 3,
+                forceError: _force,
+                onValidity: (e) => _nameEnErr = e,
+              ),
+              SuperTextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'الاسم بالعربية',
+                  hintText: 'مثال: الأصول المتداولة',
+                ),
+                required: true,
+                minLength: 3,
+                arabic: true,
+                forceError: _force,
+                onValidity: (e) => _nameArErr = e,
+              ),
+              AutoSuggestionsBox<String>(
+                controller: _treeController,
+                label: 'Account Tree',
+                hintText: 'Select a tree…',
+                required: true,
+              ),
+            ],
+          ),
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Additional Information',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: accentColor2,
+          icon: null,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              SuperTextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Note',
+                  hintText: 'Add any notes about this group…',
+                ),
+                multiline: true,
+                rows: 3,
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            const Expanded(
+              child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true),
             ),
-            required: true,
-            minLength: 3,
-            forceError: _force,
-            onValidity: (e) => _nameEnErr = e,
-          ),
-          SuperTextFormField(
-            decoration: const InputDecoration(
-              labelText: 'الاسم بالعربية',
-              hintText: 'مثال: الأصول المتداولة',
+            const SizedBox(width: 10),
+            Expanded(
+              child: MBtn('Create', icon: 'check', full: true, onTap: _submit),
             ),
-            required: true,
-            minLength: 3,
-            arabic: true,
-            forceError: _force,
-            onValidity: (e) => _nameArErr = e,
-          ),
-          AutoSuggestionsBox<String>(
-            controller: _treeController,
-            label: 'Account Tree',
-            hintText: 'Select a tree…',
-            required: true,
-          ),
-        ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Additional Information',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor2,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          SuperTextFormField(
-            decoration: InputDecoration(
-              labelText: 'Note',
-              hintText: 'Add any notes about this group…',
-            ),
-            multiline: true,
-            rows: 3,
-          ),
-        ],
-      ),
-    ),
-      Row(children: [
-        const Expanded(child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true)),
-        const SizedBox(width: 10),
-        Expanded(
-          child: MBtn('Create', icon: 'check', full: true, onTap: _submit),
+          ],
         ),
       ]),
-    ]),
     );
   }
 }

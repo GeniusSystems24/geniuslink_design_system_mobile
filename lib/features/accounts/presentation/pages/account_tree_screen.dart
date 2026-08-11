@@ -1,14 +1,10 @@
-﻿part of 'accounts_extra_screens.dart';
+part of 'accounts_extra_screens.dart';
 
 class AccountTreeScreen extends StatefulWidget {
   final List<AccountNode> roots;
   final ValueChanged<Account>? onAccountOpen;
 
-  const AccountTreeScreen({
-    required this.roots,
-    this.onAccountOpen,
-    super.key,
-  });
+  const AccountTreeScreen({required this.roots, this.onAccountOpen, super.key});
 
   @override
   State<AccountTreeScreen> createState() => _AccountTreeScreenState();
@@ -49,11 +45,11 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
       )..expandAll();
 
   static TreeNode<Account> _toTreeNode(AccountNode node) => TreeNode<Account>(
-        code: node.account.code,
-        name: node.account.name,
-        value: node.account,
-        children: node.children.map(_toTreeNode).toList(growable: false),
-      );
+    code: node.account.code,
+    name: node.account.name,
+    value: node.account,
+    children: node.children.map(_toTreeNode).toList(growable: false),
+  );
 
   @override
   void dispose() {
@@ -104,10 +100,9 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
     return Text(
       _fmtAmount(_treeTotal(node)),
       style: TextStyle(
-        fontFamily: SuperMaterialThemeData.of(context)
-            .textTheme
-            .bodyMedium
-            ?.fontFamily,
+        fontFamily: SuperMaterialThemeData.of(
+          context,
+        ).textTheme.bodyMedium?.fontFamily,
         fontSize: 12,
         fontWeight: info.depth == 0 ? FontWeight.w700 : FontWeight.w500,
         color: SuperMaterialThemeData.of(context).superTheme.fg1,
@@ -117,7 +112,9 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
 
   static double _treeTotal(TreeNode<Account> node) {
     if (!node.hasChildren) return node.value?.balance ?? 0;
-    return node.children!
-        .fold<double>(0, (sum, child) => sum + _treeTotal(child));
+    return node.children!.fold<double>(
+      0,
+      (sum, child) => sum + _treeTotal(child),
+    );
   }
 }

@@ -74,7 +74,7 @@ class MobileDashboardMetricCard extends StatelessWidget {
         : trend.up
         ? context.mdColors.secondary
         : context.mdColors.error;
-        final t = SuperMaterialThemeData.of(context);
+    final t = SuperMaterialThemeData.of(context);
 
     return Semantics(
       label: '${card.label}, $currency ${mobileDashboardNumber(value)}',
@@ -401,7 +401,7 @@ class MobileDashboardBreakdownView extends StatelessWidget {
       );
     }
 
-final t = SuperMaterialThemeData.of(context);
+    final t = SuperMaterialThemeData.of(context);
     final cardValues = <double>[
       for (final card in cards)
         if (valueFor(card).isFinite && valueFor(card) >= 0) valueFor(card),

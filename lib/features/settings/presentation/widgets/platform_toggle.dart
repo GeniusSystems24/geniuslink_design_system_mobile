@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
-
 class PlatformToggle extends StatelessWidget {
   final bool on;
   final VoidCallback onTap;
@@ -12,13 +11,13 @@ class PlatformToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 64,
-        child: SuperBoolFormField(
-          key: ValueKey(on),
-          initialValue: on,
-          enabledLabel: '',
-          disabledLabel: '',
-          onChanged: (_) => onTap(),
-        ),
-      );
+    width: 64,
+    child: SuperBoolFormField(
+      key: ValueKey(on),
+      initialValue: on,
+      enabledLabel: '',
+      disabledLabel: '',
+      onChanged: (_) => onTap(),
+    ),
+  );
 }

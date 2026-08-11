@@ -137,19 +137,29 @@ Widget mcell(
   Color? color,
   TextAlign align = TextAlign.left,
 }) {
-  return Builder(builder: (context) {
-    final theme = SuperMaterialThemeData.of(context).superTheme;
-    return Text(text,
+  return Builder(
+    builder: (context) {
+      final theme = SuperMaterialThemeData.of(context).superTheme;
+      return Text(
+        text,
         textAlign: align,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontFamily: mono ? SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily : SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
+          fontFamily: mono
+              ? SuperMaterialThemeData.of(
+                  context,
+                ).textTheme.bodyMedium?.fontFamily
+              : SuperMaterialThemeData.of(
+                  context,
+                ).textTheme.bodyMedium?.fontFamily,
           fontSize: 12.5,
           fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
           color: color ?? (muted ? theme.fg3 : theme.fg1),
-        ));
-  });
+        ),
+      );
+    },
+  );
 }
 
 // ── main widget ──────────────────────────────────────────────
@@ -194,9 +204,7 @@ class _MTableState extends State<MTable> {
   void didUpdateWidget(MTable old) {
     super.didUpdateWidget(old);
     if (widget.rows != old.rows) {
-      _controller.updateRows(
-        widget.rows.map((r) => SuperRow.map(r)).toList(),
-      );
+      _controller.updateRows(widget.rows.map((r) => SuperRow.map(r)).toList());
     }
     if (widget.sortable != old.sortable) {
       _controller.updateColumns(_buildColumns());
@@ -213,9 +221,7 @@ class _MTableState extends State<MTable> {
   // ── column construction ──
 
   List<SuperColumn> _buildColumns() {
-    return [
-      for (final col in widget.columns) _buildColumn(col),
-    ];
+    return [for (final col in widget.columns) _buildColumn(col)];
   }
 
   SuperColumn _buildColumn(MCol col) {

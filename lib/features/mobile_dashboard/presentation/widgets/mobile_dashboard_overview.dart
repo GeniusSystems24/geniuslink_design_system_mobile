@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gl_mobile_app/features/mobile_dashboard/presentation/bloc/mobile_dashboard_cubit.dart';
+import 'package:gl_mobile_app/features/mobile_dashboard/presentation/controllers/mobile_dashboard_controller.dart';
 
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';

@@ -1,8 +1,10 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gl_mobile_app/features/mobile_dashboard/presentation/widgets/mobile_dashboard_workspace_menu.dart';
 
-import '../../../../workspace/presentation/bloc/tenant_cubit.dart';
+import '../../../../core/tenancy/tenant_connection.dart';
+import '../../../../workspace/presentation/controllers/tenant_controller.dart';
 import '../../domain/domain.dart';
 import '../widgets/mobile_dashboard_header.dart';
 import '../widgets/mobile_dashboard_navigation.dart';
@@ -11,8 +13,13 @@ import '../widgets/mobile_dashboard_theme.dart';
 
 class MobileDashboardScreen extends StatefulWidget {
   final WorkspaceRepository repository;
+  final TenantController? tenantController;
 
-  const MobileDashboardScreen({required this.repository, super.key});
+  const MobileDashboardScreen({
+    required this.repository,
+    this.tenantController,
+    super.key,
+  });
 
   @override
   State<MobileDashboardScreen> createState() => _MobileDashboardScreenState();
@@ -20,10 +27,14 @@ class MobileDashboardScreen extends StatefulWidget {
 
 class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
   final _sectionKey = GlobalKey<MobileDashboardSectionViewState>();
+  TenantController? _ownedTenantController;
 
   String _activeTenantId = '9';
   bool _workspaceMenuOpen = false;
   final bool _online = true;
+
+  TenantController get _tenantController =>
+      widget.tenantController ?? _ownedTenantController!;
 
   MobileDashboardCatalog get _catalog => widget.repository.catalog;
   List<MobileDashboardNavigationDestination> get _navigationItems =>
@@ -37,6 +48,32 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       (workspace) => workspace.tenantId == _activeTenantId,
       orElse: () => _catalog.workspaces.first,
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.tenantController == null) {
+      _ownedTenantController = TenantController(
+        resolver: const FakeTenantConnectionResolver(),
+      );
+      unawaited(_initializeOwnedTenant());
+    }
+  }
+
+  Future<void> _initializeOwnedTenant() async {
+    final controller = _ownedTenantController;
+    if (controller == null) return;
+    await controller.loadAvailable();
+    if (_ownedTenantController == controller) {
+      await controller.switchTo(_activeTenantId);
+    }
+  }
+
+  @override
+  void dispose() {
+    _ownedTenantController?.dispose();
+    super.dispose();
   }
 
   void _showToast(String message) {
@@ -74,7 +111,7 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   void _switchWorkspace(MdWorkspace workspace) {
     setState(() => _workspaceMenuOpen = false);
-    context.read<TenantCubit>().switchTo(workspace.tenantId);
+    unawaited(_tenantController.switchTo(workspace.tenantId));
     _sectionKey.currentState?.scrollToTop();
     _sectionKey.currentState?.refresh();
   }
@@ -87,45 +124,52 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _activeTenantId =
-        context.watch<TenantCubit>().state.activeTenantId ?? _activeTenantId;
+    return ListenableBuilder(
+      listenable: _tenantController,
+      builder: (context, _) {
+        _activeTenantId =
+            _tenantController.state.activeTenantId ?? _activeTenantId;
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.paddingOf(context).top + 64),
-        child: MobileDashboardAppBar(
-          workspace: _workspace,
-          workspaceMenuOpen: _workspaceMenuOpen,
-          onWorkspaceTap: () =>
-              setState(() => _workspaceMenuOpen = !_workspaceMenuOpen),
-          onNotificationsTap: () => _showToast('Notifications'),
-        ),
-      ),
-      bottomNavigationBar: MobileDashboardBottomNavigation(
-        selectedId: 'home',
-        items: _navigationItems,
-        onSelected: _selectNavigationItem,
-      ),
-      floatingActionButton: MobileDashboardFloatingSearchButton(
-        onTap: () => _sectionKey.currentState?.openSearch(),
-      ),
-      body: Stack(
-        children: [
-          MobileDashboardSectionView(
-            key: _sectionKey,
-            repository: widget.repository,
-            workspace: _workspace,
-            online: _online,
-          ),
-          if (_workspaceMenuOpen)
-            MobileDashboardWorkspaceMenu(
-              workspaces: _catalog.workspaces,
-              selectedWorkspace: _workspace,
-              onSelected: _switchWorkspace,
-              onDismiss: () => setState(() => _workspaceMenuOpen = false),
+        return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(
+              MediaQuery.paddingOf(context).top + 64,
             ),
-        ],
-      ),
+            child: MobileDashboardAppBar(
+              workspace: _workspace,
+              workspaceMenuOpen: _workspaceMenuOpen,
+              onWorkspaceTap: () =>
+                  setState(() => _workspaceMenuOpen = !_workspaceMenuOpen),
+              onNotificationsTap: () => _showToast('Notifications'),
+            ),
+          ),
+          bottomNavigationBar: MobileDashboardBottomNavigation(
+            selectedId: 'home',
+            items: _navigationItems,
+            onSelected: _selectNavigationItem,
+          ),
+          floatingActionButton: MobileDashboardFloatingSearchButton(
+            onTap: () => _sectionKey.currentState?.openSearch(),
+          ),
+          body: Stack(
+            children: [
+              MobileDashboardSectionView(
+                key: _sectionKey,
+                repository: widget.repository,
+                workspace: _workspace,
+                online: _online,
+              ),
+              if (_workspaceMenuOpen)
+                MobileDashboardWorkspaceMenu(
+                  workspaces: _catalog.workspaces,
+                  selectedWorkspace: _workspace,
+                  onSelected: _switchWorkspace,
+                  onDismiss: () => setState(() => _workspaceMenuOpen = false),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -17,8 +17,7 @@ class MobileDashboardPressable extends StatefulWidget {
       _MobileDashboardPressableState();
 }
 
-class _MobileDashboardPressableState
-    extends State<MobileDashboardPressable> {
+class _MobileDashboardPressableState extends State<MobileDashboardPressable> {
   bool _isPressed = false;
 
   @override

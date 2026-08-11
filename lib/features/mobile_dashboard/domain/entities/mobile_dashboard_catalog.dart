@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 enum MdMarker { positive, warning, primary }
+
 enum MdTone { success, information, warning, danger, neutral }
+
 enum MdDirection { credit, debit }
 
 class MdTrend extends Equatable {
@@ -64,7 +66,15 @@ class MdOperation extends Equatable {
   bool get isCredit => direction == MdDirection.credit;
 
   @override
-  List<Object?> get props => [reference, type, tone, description, amounts, direction, timeLabel];
+  List<Object?> get props => [
+    reference,
+    type,
+    tone,
+    description,
+    amounts,
+    direction,
+    timeLabel,
+  ];
 }
 
 class MdAttention extends Equatable {
@@ -73,7 +83,13 @@ class MdAttention extends Equatable {
   final int count;
   final String label;
   final String description;
-  const MdAttention(this.id, this.tone, this.count, this.label, this.description);
+  const MdAttention(
+    this.id,
+    this.tone,
+    this.count,
+    this.label,
+    this.description,
+  );
   @override
   List<Object?> get props => [id, tone, count, label, description];
 }
@@ -84,7 +100,13 @@ class MdTab extends Equatable {
   final List<MdCard> cards;
   final List<MdAction> actions;
   final List<MdOperation> operations;
-  const MdTab({required this.id, required this.label, required this.cards, required this.actions, required this.operations});
+  const MdTab({
+    required this.id,
+    required this.label,
+    required this.cards,
+    required this.actions,
+    required this.operations,
+  });
   @override
   List<Object?> get props => [id, label, cards, actions, operations];
 }
@@ -95,7 +117,13 @@ class MdWorkspace extends Equatable {
   final String name;
   final String subtitle;
   final double factor;
-  const MdWorkspace(this.id, this.tenantId, this.name, this.subtitle, this.factor);
+  const MdWorkspace(
+    this.id,
+    this.tenantId,
+    this.name,
+    this.subtitle,
+    this.factor,
+  );
   @override
   List<Object?> get props => [id, tenantId, name, subtitle, factor];
 }
@@ -107,7 +135,6 @@ class MdCurrency extends Equatable {
   @override
   List<Object?> get props => [code, name];
 }
-
 
 class MdStatusItem extends Equatable {
   final String id;
@@ -182,21 +209,21 @@ class MdDashboardProfile extends Equatable {
 
   @override
   List<Object?> get props => [
-        sectionId,
-        eyebrow,
-        title,
-        subtitle,
-        primaryActionId,
-        primaryActionLabel,
-        statusTitle,
-        workflowTitle,
-        workflowSubtitle,
-        operationsTitle,
-        attentionTitle,
-        statusItems,
-        workflowItems,
-        attentionItems,
-      ];
+    sectionId,
+    eyebrow,
+    title,
+    subtitle,
+    primaryActionId,
+    primaryActionLabel,
+    statusTitle,
+    workflowTitle,
+    workflowSubtitle,
+    operationsTitle,
+    attentionTitle,
+    statusItems,
+    workflowItems,
+    attentionItems,
+  ];
 }
 
 class MobileDashboardCatalog extends Equatable {
@@ -218,11 +245,11 @@ class MobileDashboardCatalog extends Equatable {
 
   @override
   List<Object?> get props => [
-        tabs,
-        workspaces,
-        attention,
-        currencies,
-        axisLabels,
-        profiles,
-      ];
+    tabs,
+    workspaces,
+    attention,
+    currencies,
+    axisLabels,
+    profiles,
+  ];
 }

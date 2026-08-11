@@ -28,25 +28,25 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
   }
 
   SuperTabBarController _createTabs() => SuperTabBarController(
-        tabs: [
-          BrowserTab(
-            id: 1,
-            title: 'Chart of Accounts',
-            pinned: true,
-            behavior: SuperTabBehavior.requiredPinned,
-            leading: const Icon(Icons.account_tree_outlined, size: 15),
-            pageBuilder: (context, tab) =>
-                AccountTreeScreen(roots: widget.accountRoots),
-          ),
-          BrowserTab(
-            id: 2,
-            title: 'Account Detail',
-            leading: const Icon(Icons.description_outlined, size: 15),
-            pageBuilder: (context, tab) => const AccountDetailFullScreen(),
-          ),
-        ],
-        activeId: 1,
-      );
+    tabs: [
+      BrowserTab(
+        id: 1,
+        title: 'Chart of Accounts',
+        pinned: true,
+        behavior: SuperTabBehavior.requiredPinned,
+        leading: const Icon(Icons.account_tree_outlined, size: 15),
+        pageBuilder: (context, tab) =>
+            AccountTreeScreen(roots: widget.accountRoots),
+      ),
+      BrowserTab(
+        id: 2,
+        title: 'Account Detail',
+        leading: const Icon(Icons.description_outlined, size: 15),
+        pageBuilder: (context, tab) => const AccountDetailFullScreen(),
+      ),
+    ],
+    activeId: 1,
+  );
 
   @override
   void dispose() {

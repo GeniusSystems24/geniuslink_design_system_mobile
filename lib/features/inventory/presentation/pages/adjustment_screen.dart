@@ -9,52 +9,139 @@ class _AdjLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final delta = item.$4 - item.$3;
     final pos = delta > 0;
-    final tone = delta == 0 ? SuperMaterialThemeData.of(context).superTheme.fg2 : (pos ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error);
+    final tone = delta == 0
+        ? SuperMaterialThemeData.of(context).superTheme.fg2
+        : (pos
+              ? SuperMaterialThemeData.of(context).colorScheme.secondary
+              : SuperMaterialThemeData.of(context).colorScheme.error);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-          border:
-              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(item.$2,
-                  style: TextStyle(
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w600,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-              const SizedBox(height: 2),
-              Text('${item.$1} · ${item.$5}',
-                  style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-            ]),
-          ),
-          Text('${pos ? '+' : ''}$delta',
-              style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
+        border: last
+            ? null
+            : Border(
+                bottom: BorderSide(
+                  color: SuperMaterialThemeData.of(context).superTheme.border,
+                ),
+              ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.$2,
+                      style: TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w600,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${item.$1} · ${item.$5}',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 11,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '${pos ? '+' : ''}$delta',
+                style: TextStyle(
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: tone)),
-        ]),
-        const SizedBox(height: 8),
-        Row(children: [
-          Text.rich(TextSpan(children: [
-            TextSpan(text: 'System ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-            TextSpan(text: '${item.$3}', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg2))
-          ], style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11))),
-          const SizedBox(width: 16),
-          Text.rich(TextSpan(children: [
-            TextSpan(text: 'Counted ', style: TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-            TextSpan(
-                text: '${item.$4}',
-                style:
-                    TextStyle(color: SuperMaterialThemeData.of(context).superTheme.fg1, fontWeight: FontWeight.w600))
-          ], style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11))),
-        ]),
-      ]),
+                  color: tone,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'System ',
+                      style: TextStyle(
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${item.$3}',
+                      style: TextStyle(
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg2,
+                      ),
+                    ),
+                  ],
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 11,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Counted ',
+                      style: TextStyle(
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '${item.$4}',
+                      style: TextStyle(
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 11,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -70,7 +157,7 @@ class AdjustmentScreen extends StatelessWidget {
         'Portland Cement Type I',
         1820,
         1834,
-        'Receiving miscount · +14'
+        'Receiving miscount · +14',
       ),
       ('AGG-21044', 'Coarse Aggregate 20mm', 48, 46, 'Spillage · 2 tons'),
     ];
@@ -84,103 +171,121 @@ class AdjustmentScreen extends StatelessWidget {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
       body: MScroll([
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Adjustment Details',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker2,
-      icon: icon2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Adjustment Details',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker2,
+          icon: icon2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
               IField(
-                  label: 'Serial No',
-                  value: 'INV-ADJ-2024-0058',
-                  mono: true,
-                  locked: true),
+                label: 'Serial No',
+                value: 'INV-ADJ-2024-0058',
+                mono: true,
+                locked: true,
+              ),
               IField(
-                  label: 'Reason', value: 'Physical Stock Count', select: true),
+                label: 'Reason',
+                value: 'Physical Stock Count',
+                select: true,
+              ),
               IField(
-                  label: 'Store',
-                  placeholder: 'Search store…',
-                  icon: 'store',
-                  required: true),
+                label: 'Store',
+                placeholder: 'Search store…',
+                icon: 'store',
+                required: true,
+              ),
               IField(
-                  label: 'Count Date',
-                  placeholder: 'mm/dd/yyyy',
-                  mono: true,
-                  icon: 'calendar'),
+                label: 'Count Date',
+                placeholder: 'mm/dd/yyyy',
+                mono: true,
+                icon: 'calendar',
+              ),
             ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Variance Summary',
-      subtitle: 'Net financial impact of this reconciliation',
-      initiallyExpanded: true,
-      accentColor: accentColor2,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-              Row(children: [
-                Expanded(child: Mini(label: 'Lines Adjusted', value: '3')),
-                SizedBox(width: 12),
-                Expanded(
-                    child: Mini(
-                        label: 'Net Adjustment', value: '-307.00', sub: 'SAR')),
-              ]),
-            ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Adjustment Lines',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor,
-      icon: null,
-      padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(children: [
-              for (int i = 0; i < items.length; i++)
-                _AdjLine(item: items[i], last: i == items.length - 1),
-            ]),
           ),
-        ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Documentation & Approval',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker,
-      icon: icon,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Variance Summary',
+          subtitle: 'Net financial impact of this reconciliation',
+          initiallyExpanded: true,
+          accentColor: accentColor2,
+          icon: null,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Row(
+                children: [
+                  Expanded(
+                    child: Mini(label: 'Lines Adjusted', value: '3'),
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Mini(
+                      label: 'Net Adjustment',
+                      value: '-307.00',
+                      sub: 'SAR',
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Adjustment Lines',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: accentColor,
+          icon: null,
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < items.length; i++)
+                      _AdjLine(item: items[i], last: i == items.length - 1),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Documentation & Approval',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker,
+          icon: icon,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
               ITextarea(
-                  label: 'Adjustment Notes',
-                  placeholder: 'Auditor name, witness, count session reference…'),
+                label: 'Adjustment Notes',
+                placeholder: 'Auditor name, witness, count session reference…',
+              ),
               UploadBox(),
               InfoNote(
-                  'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.'),
+                'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.',
+              ),
             ],
-      ),
-    ),
-      const ActionRow(primary: 'Post Adjustment'),
-    ]),
+          ),
+        ),
+        const ActionRow(primary: 'Post Adjustment'),
+      ]),
     );
   }
 }

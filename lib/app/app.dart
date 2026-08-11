@@ -1,106 +1,78 @@
-// ============================================================
-// GeniusLink Mobile — App root
-// ------------------------------------------------------------
-// Control-plane provider root: AuthBloc + TenantCubit live above
-// the MaterialApp. Mobile boots to the login gate, so AuthBloc
-// seeds unauthenticated and no tenant is active until sign-in. A
-// root BlocListener links auth → tenancy: on authentication it
-// loads the available tenants and activates the first; on logout
-// it clears the active tenant (closing the tenant scope).
-//
-// ThemeCubit joins this root in Phase 2; Phase 4 adds NavCubit and
-// wraps the authed shell in TenantScope (and fixed the WorkspacePage/
-// AppRoot naming conflict). On logout the AuthBloc listener clears the
-// tenant AND resets NavCubit back to the gate.
-//
-// File placement:  lib/app/app.dart
-// ============================================================
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
 
-import 'bloc/theme_cubit.dart';
 import '../core/tenancy/tenant_connection.dart';
-import '../features/auth/presentation/bloc/auth_bloc.dart';
-import '../features/auth/presentation/bloc/auth_state.dart';
-import '../workspace/presentation/bloc/tenant_cubit.dart';
-import '../workspace/presentation/bloc/nav_cubit.dart';
-import 'router/app_router.dart';
-import 'router/router.dart' show router, authNotifier;
+import 'controllers/app_controller.dart';
+import 'router/router.dart';
+import 'router/screen_route_registry.dart';
 
-class GeniusLinkApp extends StatelessWidget {
+class GeniusLinkApp extends StatefulWidget {
   const GeniusLinkApp({super.key});
 
   @override
+  State<GeniusLinkApp> createState() => _GeniusLinkAppState();
+}
+
+class _GeniusLinkAppState extends State<GeniusLinkApp> {
+  static const _resolver = FakeTenantConnectionResolver();
+
+  late final AppController _appController;
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    super.initState();
+    _appController = AppController(
+      resolver: _resolver,
+      registryHas: ScreenRouteRegistry.hasRoute,
+    );
+    _router = createRouter(
+      authController: _appController.authController,
+      tenantController: _appController.tenantController,
+    );
+  }
+
+  @override
+  void dispose() {
+    _router.dispose();
+    _appController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const resolver = FakeTenantConnectionResolver();
-    var palette = SuperPalette.bluePalette;
-    var lightTheme = SuperMaterialThemeData.light(
+    final palette = SuperPalette.bluePalette;
+    final lightTheme = SuperMaterialThemeData.light(
       palette: palette,
       textTheme: SuperTextTheme.fromTokens(
         palette.applyTo(SuperTokensData.fallback),
       ),
     );
-    var darkTheme = SuperMaterialThemeData.dark(
+    final darkTheme = SuperMaterialThemeData.dark(
       palette: palette,
       textTheme: SuperTextTheme.fromTokens(
         palette.applyTo(SuperTokensData.fallback),
       ),
     );
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
-        BlocProvider<AuthBloc>(
-          create: (_) => AuthBloc(
-            resolver: resolver,
-            initial: const AuthState.unauthenticated(),
-          ),
+    return ListenableBuilder(
+      listenable: _appController.themeController,
+      builder: (context, _) => MaterialApp.router(
+        title: 'GeniusLink',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme.copyWith(
+          extensions: [
+            AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme),
+          ],
         ),
-        BlocProvider<TenantCubit>(
-          create: (_) => TenantCubit(resolver: resolver),
+        darkTheme: darkTheme.copyWith(
+          extensions: [
+            AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
+          ],
         ),
-        BlocProvider<NavCubit>(
-          create: (_) =>
-              NavCubit()..registryHas = (id) => portedScreens.contains(id),
-        ),
-      ],
-      child: BlocListener<AuthBloc, AuthState>(
-        listenWhen: (a, b) =>
-            a.status != b.status || a.availableTenants != b.availableTenants,
-        listener: (context, state) {
-          final tenant = context.read<TenantCubit>();
-          if (state.isAuthenticated) {
-            authNotifier.setAuthed(true);
-            tenant.setAvailable(state.availableTenants);
-            if (tenant.state.activeTenantId == null &&
-                state.availableTenants.isNotEmpty) {
-              tenant.switchTo(state.availableTenants.first.id);
-            }
-            context.read<NavCubit>().login();
-          } else if (state.status == AuthStatus.unauthenticated) {
-            authNotifier.setAuthed(false);
-            tenant.clear();
-            context.read<NavCubit>().logout();
-          }
-        },
-        child: MaterialApp.router(
-          title: 'GeniusLink',
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme.copyWith(
-            extensions: [
-              AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme),
-            ],
-          ),
-          darkTheme: darkTheme.copyWith(
-            extensions: [
-              AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
-            ],
-          ),
-          themeMode: ThemeMode.system,
-          routerConfig: router,
-        ),
+        themeMode: _appController.themeController.mode,
+        routerConfig: _router,
       ),
     );
   }

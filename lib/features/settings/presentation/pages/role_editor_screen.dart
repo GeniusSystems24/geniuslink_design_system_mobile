@@ -1,17 +1,48 @@
+import 'package:flutter/material.dart';
 
-part of 'settings_team_screens.dart';
+import '../../../../shared/presentation/controllers/form_controller.dart';
+import '../../domain/domain.dart';
+import '../widgets/role_editor_view.dart';
 
-class RoleEditorScreen extends StatelessWidget {
+class RoleEditorScreen extends StatefulWidget {
   final List<RoleModuleDefinition> modules;
   final Map<String, RoleAccess> initialAccess;
 
-  const RoleEditorScreen({required this.modules, this.initialAccess = const {}, super.key});
+  const RoleEditorScreen({
+    required this.modules,
+    this.initialAccess = const {},
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<FormCubit>(
-      create: (_) => FormCubit(initial: {'perms': {for (final module in modules) module.id: (initialAccess[module.id] ?? const RoleAccess()).toList()}}, onSubmit: (_) async {}),
-      child: RoleEditorView(modules: modules),
+  State<RoleEditorScreen> createState() => _RoleEditorScreenState();
+}
+
+class _RoleEditorScreenState extends State<RoleEditorScreen> {
+  late final FormController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = FormController(
+      initial: {
+        'perms': {
+          for (final module in widget.modules)
+            module.id: (widget.initialAccess[module.id] ?? const RoleAccess())
+                .toList(),
+        },
+      },
+      onSubmit: (_) async {},
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      RoleEditorView(modules: widget.modules, controller: _controller);
 }

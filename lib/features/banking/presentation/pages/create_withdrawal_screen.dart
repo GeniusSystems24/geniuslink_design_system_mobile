@@ -1,4 +1,4 @@
-﻿part of 'banking_cash_screens.dart';
+part of 'banking_cash_screens.dart';
 
 class CreateWithdrawalScreen extends StatelessWidget {
   const CreateWithdrawalScreen({super.key});
@@ -13,16 +13,16 @@ class CreateWithdrawalScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Withdrawal')),
       body: MScroll([
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Withdrawal Amount',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor,
-      icon: icon,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Withdrawal Amount',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: accentColor,
+          icon: icon,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               MMoney(
                 label: 'Amount',
                 value: '12,045.00',
@@ -32,19 +32,19 @@ class CreateWithdrawalScreen extends StatelessWidget {
               ),
               const MMethod(value: 'wire'),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Source & Purpose',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor2,
-      icon: icon2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
+          trailing: (null),
+          title: 'Source & Purpose',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: accentColor2,
+          icon: icon2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
               IField(
                 label: 'Withdraw From',
                 value: 'Bank · NCB Main (1100)',
@@ -67,8 +67,8 @@ class CreateWithdrawalScreen extends StatelessWidget {
                 icon: 'calendar',
               ),
             ],
-      ),
-    ),
+          ),
+        ),
         InfoNote(
           'Withdrawals above 10,000 SAR require a second approval before posting.',
           tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,

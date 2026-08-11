@@ -38,18 +38,16 @@ class _MobileDashboardSearchSheetState
     final results = normalizedQuery.isEmpty
         ? allOperations
         : allOperations
-            .where(
-              (entry) =>
-                  '${entry.$1.reference} ${entry.$1.description} ${entry.$1.type}'
-                      .toLowerCase()
-                      .contains(normalizedQuery),
-            )
-            .toList(growable: false);
+              .where(
+                (entry) =>
+                    '${entry.$1.reference} ${entry.$1.description} ${entry.$1.type}'
+                        .toLowerCase()
+                        .contains(normalizedQuery),
+              )
+              .toList(growable: false);
 
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -68,11 +66,7 @@ class _MobileDashboardSearchSheetState
                       border: Border.all(color: theme.border),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      MIcons.of('back'),
-                      size: 18,
-                      color: theme.fg1,
-                    ),
+                    child: Icon(MIcons.of('back'), size: 18, color: theme.fg1),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -138,9 +132,7 @@ class _MobileDashboardSearchSheetState
                     ),
                     child: Column(
                       children: [
-                        for (var index = 0;
-                            index < results.length;
-                            index++)
+                        for (var index = 0; index < results.length; index++)
                           MobileDashboardSearchResultRow(
                             operation: results[index].$1,
                             domain: results[index].$2,
@@ -149,9 +141,8 @@ class _MobileDashboardSearchSheetState
                             last: index == results.length - 1,
                             onTap: widget.onOperationTap == null
                                 ? null
-                                : () => widget.onOperationTap!(
-                                      results[index].$1,
-                                    ),
+                                : () =>
+                                      widget.onOperationTap!(results[index].$1),
                           ),
                       ],
                     ),
@@ -194,9 +185,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
     final content = Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-        border: last
-            ? null
-            : Border(bottom: BorderSide(color: theme.border)),
+        border: last ? null : Border(bottom: BorderSide(color: theme.border)),
       ),
       child: Column(
         children: [

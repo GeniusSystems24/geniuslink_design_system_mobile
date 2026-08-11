@@ -20,14 +20,16 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
   final _categoryController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
-      'Steel', 'Concrete', 'Lumber', 'Fasteners', 'Tools',
+      'Steel',
+      'Concrete',
+      'Lumber',
+      'Fasteners',
+      'Tools',
     ]),
     allowFreeText: false,
   );
   final _uomController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
-      'PCS', 'KG', 'TON', 'M', 'M²', 'LTR',
-    ]),
+    source: SuggestionSources.strings(['PCS', 'KG', 'TON', 'M', 'M²', 'LTR']),
     allowFreeText: false,
   );
   final _vatController = AutoSuggestionsBoxController<String>(
@@ -37,7 +39,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   );
   final _storeController = AutoSuggestionsBoxController<String>(
     source: SuggestionSources.strings([
-      'Downtown Central', 'North Warehouse', 'East Distribution',
+      'Downtown Central',
+      'North Warehouse',
+      'East Distribution',
     ]),
     allowFreeText: false,
   );
@@ -70,17 +74,17 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Product Definition',
-      subtitle: 'SKU, names and classification',
-      initiallyExpanded: true,
-      accentColor: marker2,
-      icon: icon2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Product Definition',
+          subtitle: 'SKU, names and classification',
+          initiallyExpanded: true,
+          accentColor: marker2,
+          icon: icon2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               SuperTextFormField(
                 decoration: const InputDecoration(
                   labelText: 'SKU',
@@ -130,19 +134,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 hintText: 'Select unit…',
               ),
             ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Costing & Pricing',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker3,
-      icon: icon3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          ),
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Costing & Pricing',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker3,
+          icon: icon3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperNumericFormField(
                 decoration: InputDecoration(
                   labelText: 'Unit Cost (SAR)',
@@ -165,19 +169,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 hintText: 'Select rate…',
               ),
             ],
-      ),
-    ),
-      SuperSectionCard2(
-      trailing: (null),
-      title: 'Inventory Settings',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker,
-      icon: icon,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          ),
+        ),
+        SuperSectionCard2(
+          trailing: (null),
+          title: 'Inventory Settings',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker,
+          icon: icon,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperNumericFormField(
                 decoration: InputDecoration(labelText: 'Reorder Level'),
                 min: 0,
@@ -204,10 +208,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 onBrowse: () async => const <SuperFile>[],
               ),
             ],
-      ),
-    ),
-      ActionRow(primary: 'Create Product', onPrimary: _submit),
-    ]),
+          ),
+        ),
+        ActionRow(primary: 'Create Product', onPrimary: _submit),
+      ]),
     );
   }
 }

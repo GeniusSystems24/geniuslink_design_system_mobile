@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 enum NotificationChannel { email, inApp, sms }
@@ -10,7 +9,11 @@ class NotificationCategory extends Equatable {
   final String title;
   final String description;
 
-  const NotificationCategory({required this.id, required this.title, required this.description});
+  const NotificationCategory({
+    required this.id,
+    required this.title,
+    required this.description,
+  });
 
   @override
   List<Object?> get props => [id, title, description];
@@ -23,7 +26,13 @@ class IntegrationDefinition extends Equatable {
   final IntegrationCategory category;
   final bool connected;
 
-  const IntegrationDefinition({required this.id, required this.name, required this.description, required this.category, this.connected = false});
+  const IntegrationDefinition({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.category,
+    this.connected = false,
+  });
 
   @override
   List<Object?> get props => [id, name, description, category, connected];
@@ -44,7 +53,11 @@ class RoleAccess extends Equatable {
   final bool canEdit;
   final bool canDelete;
 
-  const RoleAccess({this.canView = false, this.canEdit = false, this.canDelete = false});
+  const RoleAccess({
+    this.canView = false,
+    this.canEdit = false,
+    this.canDelete = false,
+  });
 
   List<bool> toList() => [canView, canEdit, canDelete];
 

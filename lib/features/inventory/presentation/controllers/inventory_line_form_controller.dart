@@ -9,16 +9,18 @@ class InventoryLineFormController {
   final SuperNumericFieldController quantityController;
 
   InventoryLineFormController(InventoryLine line)
-      : initialValue = line,
-        quantityController = SuperNumericFieldController(initialValue: line.quantity);
+    : initialValue = line,
+      quantityController = SuperNumericFieldController(
+        initialValue: line.quantity,
+      );
 
   String get sku => initialValue.sku;
 
   String get name => initialValue.name;
 
   InventoryLine get value => initialValue.copyWith(
-        quantity: quantityController.value?.toDouble() ?? initialValue.quantity,
-      );
+    quantity: quantityController.value?.toDouble() ?? initialValue.quantity,
+  );
 
   void dispose() => quantityController.dispose();
 }

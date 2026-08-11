@@ -4,7 +4,7 @@
 // Immutable identity layer for the database-per-tenant model.
 //
 //   TenantRef             — lightweight catalog entry (id · name · plan).
-//                           What AuthBloc loads + TenantCubit lists.
+//                           What AuthController loads + TenantController lists.
 //   ConnectionDescriptor  — how to reach ONE tenant's own database
 //                           (baseUrl / dbName / schema / token). No
 //                           shared data store — every tenant routes to

@@ -1,1 +1,3 @@
-abstract class UuidGenerator { String generate(); }
+abstract class UuidGenerator {
+  String generate();
+}

@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 /// Authenticated control-plane user. Framework-free and reusable across UI,

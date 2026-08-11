@@ -81,16 +81,16 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
       appBar: SuperAppBar(title: const Text('Transfer Inventory')),
       body: MScroll([
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Transfer Details',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker3,
-      icon: icon3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Transfer Details',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker3,
+          icon: icon3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperTextFormField(
                 decoration: InputDecoration(labelText: 'Serial No'),
                 initialValue: 'INV-TRF-2024-0117',
@@ -112,19 +112,19 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                 hintText: 'Search destination…',
               ),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Products',
-      subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
-      initiallyExpanded: true,
-      accentColor: marker2,
-      icon: icon2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Products',
+          subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
+          initiallyExpanded: true,
+          accentColor: marker2,
+          icon: icon2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               Scanner(onPick: _addLine),
               ..._lines.asMap().entries.map((e) {
                 final i = e.key;
@@ -141,19 +141,19 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
               }),
               const AddProductBtn(),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Notes & Docs',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker,
-      icon: icon,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Notes & Docs',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker,
+          icon: icon,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Notes',
@@ -171,8 +171,8 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                 onBrowse: () async => const <SuperFile>[],
               ),
             ],
-      ),
-    ),
+          ),
+        ),
         ActionRow(primary: 'Transfer Inventory', onPrimary: _submit),
       ]),
     );

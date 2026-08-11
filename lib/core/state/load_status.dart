@@ -1,12 +1,7 @@
 // ============================================================
-// CORE — LoadStatus
+// CORE / STATE — LoadStatus
 // ------------------------------------------------------------
-// Shared async-operation status used by Cubit/Bloc states across
-// the app. Under the database-per-tenant model every tenant data
-// read is async, so list / form / settings states carry one of
-// these instead of bare booleans.
-//
-// File placement:  lib/core/bloc/load_status.dart
+// Framework-neutral lifecycle status shared by presentation controllers.
 // ============================================================
 
 enum LoadStatus { initial, loading, ready, failure }

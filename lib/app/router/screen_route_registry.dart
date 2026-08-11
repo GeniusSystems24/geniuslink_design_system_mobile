@@ -1,4 +1,4 @@
-/// Maps legacy screen IDs (from [subTitles] and [NavCubit]) to GoRouter
+/// Maps legacy screen IDs (from the legacy screen registry) to GoRouter
 /// route paths.  This adapter lets us migrate `nav.go('screenId')` →
 /// `context.go(routePath)` one screen at a time.
 ///

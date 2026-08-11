@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // VIEW — More menu with reusable navigation configuration.
 // ============================================================
 
@@ -11,10 +11,7 @@ import '../models/models.dart';
 class MoreScreen extends StatelessWidget {
   final List<NavigationGroup> groups;
 
-  const MoreScreen({
-    this.groups = defaultMoreNavigationGroups,
-    super.key,
-  });
+  const MoreScreen({this.groups = defaultMoreNavigationGroups, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +37,17 @@ class MoreScreen extends StatelessWidget {
         ),
         for (final group in groups)
           SuperSectionCard2(
-      trailing: (null),
-      title: group.title,
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor,
-      icon: null,
-      padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+            trailing: (null),
+            title: group.title,
+            subtitle: (null),
+            initiallyExpanded: true,
+            accentColor: accentColor,
+            icon: null,
+            padding: EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
@@ -66,9 +63,9 @@ class MoreScreen extends StatelessWidget {
                                   ? null
                                   : Border(
                                       bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(context)
-                                            .superTheme
-                                            .border,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.border,
                                       ),
                                     ),
                             ),
@@ -79,21 +76,20 @@ class MoreScreen extends StatelessWidget {
                                   group.items[i].label,
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: SuperMaterialThemeData.of(context)
-                                        .superTheme
-                                        .fg1,
-                                    fontFamily: SuperMaterialThemeData.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.fontFamily,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg1,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
                                   ),
                                 ),
                                 Icon(
                                   MIcons.of('chevR'),
                                   size: 16,
-                                  color: SuperMaterialThemeData.of(context)
-                                      .superTheme
-                                      .fg4,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg4,
                                 ),
                               ],
                             ),
@@ -103,8 +99,8 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ),
               ],
-      ),
-    ),
+            ),
+          ),
       ]),
     );
   }

@@ -8,7 +8,8 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart' as suggest;
+import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart'
+    as suggest;
 import 'package:super_form_field/super_form_field.dart';
 import '../../components/layout/m_icons.dart';
 import '../../components/layout/m_widgets.dart';
@@ -87,13 +88,10 @@ class ITextarea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperTextFormField(
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: placeholder,
-        ),
-        multiline: true,
-        rows: 3,
-      );
+    decoration: InputDecoration(labelText: label, hintText: placeholder),
+    multiline: true,
+    rows: 3,
+  );
 }
 
 class UploadBox extends StatelessWidget {
@@ -101,13 +99,13 @@ class UploadBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperAttachmentFormField(
-        decoration: const InputDecoration(labelText: 'Attachments'),
-        accept: '.pdf,.jpg,.jpeg,.png',
-        maxSizeMB: 10,
-        maxFiles: 5,
-        multiple: true,
-        onBrowse: () async => const <SuperFile>[],
-      );
+    decoration: const InputDecoration(labelText: 'Attachments'),
+    accept: '.pdf,.jpg,.jpeg,.png',
+    maxSizeMB: 10,
+    maxFiles: 5,
+    multiple: true,
+    onBrowse: () async => const <SuperFile>[],
+  );
 }
 
 class IToggle extends StatelessWidget {
@@ -118,10 +116,10 @@ class IToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SuperBoolFormField(
-        decoration: InputDecoration(labelText: label),
-        initialValue: on,
-        readOnly: true,
-      );
+    decoration: InputDecoration(labelText: label),
+    initialValue: on,
+    readOnly: true,
+  );
 }
 
 class InfoNote extends StatelessWidget {
@@ -130,25 +128,33 @@ class InfoNote extends StatelessWidget {
   const InfoNote(this.text, {super.key, this.tone});
   @override
   Widget build(BuildContext context) {
-    final resolvedTone = tone ?? SuperMaterialThemeData.of(context).colorScheme.tertiary;
+    final resolvedTone =
+        tone ?? SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-          color: superCoreTint(resolvedTone, 0x14),
-          border: Border.all(color: superCoreTint(resolvedTone, 0x40)),
-          borderRadius: BorderRadius.circular(8)),
+        color: superCoreTint(resolvedTone, 0x14),
+        border: Border.all(color: superCoreTint(resolvedTone, 0x40)),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.info_outline_rounded, size: 14, color: resolvedTone),
           const SizedBox(width: 10),
           Expanded(
-              child: Text(text,
-                  style: TextStyle(
-                      fontSize: 11.5,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg2,
-                      height: 1.5,
-                      fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily))),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 11.5,
+                color: SuperMaterialThemeData.of(context).superTheme.fg2,
+                height: 1.5,
+                fontFamily: SuperMaterialThemeData.of(
+                  context,
+                ).textTheme.bodyMedium?.fontFamily,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -161,22 +167,32 @@ class ActionRow extends StatelessWidget {
   final String icon;
   final VoidCallback? onSecondary;
   final VoidCallback? onPrimary;
-  const ActionRow(
-      {super.key,
-      this.secondary = 'Cancel',
-      required this.primary,
-      this.icon = 'check',
-      this.onSecondary,
-      this.onPrimary});
+  const ActionRow({
+    super.key,
+    this.secondary = 'Cancel',
+    required this.primary,
+    this.icon = 'check',
+    this.onSecondary,
+    this.onPrimary,
+  });
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Expanded(
-          child: MBtn(secondary,
-              variant: MBtnVariant.secondary, full: true, onTap: onSecondary)),
-      const SizedBox(width: 10),
-      Expanded(child: MBtn(primary, icon: icon, full: true, onTap: onPrimary)),
-    ]);
+    return Row(
+      children: [
+        Expanded(
+          child: MBtn(
+            secondary,
+            variant: MBtnVariant.secondary,
+            full: true,
+            onTap: onSecondary,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: MBtn(primary, icon: icon, full: true, onTap: onPrimary),
+        ),
+      ],
+    );
   }
 }
 
@@ -186,22 +202,29 @@ class ProductRow extends StatelessWidget {
   final SuperNumericFieldController qtyController;
   final String price, total, currency;
   final bool last;
-  const ProductRow(
-      {super.key,
-      required this.name,
-      required this.sku,
-      required this.qtyController,
-      required this.price,
-      required this.total,
-      this.currency = '\$',
-      this.last = false});
+  const ProductRow({
+    super.key,
+    required this.name,
+    required this.sku,
+    required this.qtyController,
+    required this.price,
+    required this.total,
+    this.currency = '\$',
+    this.last = false,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
-          border:
-              last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
+        border: last
+            ? null
+            : Border(
+                bottom: BorderSide(
+                  color: SuperMaterialThemeData.of(context).superTheme.border,
+                ),
+              ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -212,55 +235,93 @@ class ProductRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name,
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                      ),
+                    ),
                     const SizedBox(height: 2),
-                    Text('SKU: $sku',
-                        style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                    Text(
+                      'SKU: $sku',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 11,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Icon(Icons.delete_outline_rounded, size: 16, color: SuperMaterialThemeData.of(context).superTheme.fg3),
+              Icon(
+                Icons.delete_outline_rounded,
+                size: 16,
+                color: SuperMaterialThemeData.of(context).superTheme.fg3,
+              ),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(children: [
-                Eyebrow('Qty', color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
-                const SizedBox(width: 10),
-                SizedBox(
-                  width: 140,
-                  child: SuperNumericFormField(
-                    controller: qtyController,
-                    decimals: 0,
-                    step: 1,
-                    min: 1,
-                    allowNegative: false,
-                    stepper: true,
-                    density: FieldDensity.compact,
+              Row(
+                children: [
+                  Eyebrow(
+                    'Qty',
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    size: 9.5,
                   ),
-                ),
-              ]),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 140,
+                    child: SuperNumericFormField(
+                      controller: qtyController,
+                      decimals: 0,
+                      step: 1,
+                      min: 1,
+                      allowNegative: false,
+                      stepper: true,
+                      density: FieldDensity.compact,
+                    ),
+                  ),
+                ],
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('$currency$price / unit',
-                      style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                  Text(
+                    '$currency$price / unit',
+                    style: TextStyle(
+                      fontFamily: SuperMaterialThemeData.of(
+                        context,
+                      ).textTheme.bodyMedium?.fontFamily,
+                      fontSize: 11,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    ),
+                  ),
                   const SizedBox(height: 2),
-                  Text('$currency$total',
-                      style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+                  Text(
+                    '$currency$total',
+                    style: TextStyle(
+                      fontFamily: SuperMaterialThemeData.of(
+                        context,
+                      ).textTheme.bodyMedium?.fontFamily,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -325,17 +386,32 @@ class _ScannerState extends State<Scanner> {
         Container(
           height: 168,
           decoration: BoxDecoration(
-              color: SuperPalette.bluePalette.darkSurface2, borderRadius: BorderRadius.circular(12)),
+            color: SuperPalette.bluePalette.darkSurface2,
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: CustomPaint(
-            painter: _ScanBrackets(SuperMaterialThemeData.of(context).colorScheme.primary),
+            painter: _ScanBrackets(
+              SuperMaterialThemeData.of(context).colorScheme.primary,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.qr_code_2_rounded, size: 42, color: SuperMaterialThemeData.of(context).superTheme.fg4),
+                Icon(
+                  Icons.qr_code_2_rounded,
+                  size: 42,
+                  color: SuperMaterialThemeData.of(context).superTheme.fg4,
+                ),
                 const SizedBox(height: 12),
-                Text('Point your camera at a barcode to scan',
-                    style: TextStyle(
-                        fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                Text(
+                  'Point your camera at a barcode to scan',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                  ),
+                ),
               ],
             ),
           ),
@@ -366,15 +442,22 @@ class _DashedButton extends StatelessWidget {
       height: 46,
       width: double.infinity,
       child: CustomPaint(
-        painter: _DashRect(SuperMaterialThemeData.of(context).superTheme.borderStrong),
+        painter: _DashRect(
+          SuperMaterialThemeData.of(context).superTheme.borderStrong,
+        ),
         child: Center(
-          child: Text(label.toUpperCase(),
-              style: TextStyle(
-                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 12,
-                  letterSpacing: 0.7,
-                  fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+          child: Text(
+            label.toUpperCase(),
+            style: TextStyle(
+              color: SuperMaterialThemeData.of(context).colorScheme.primary,
+              fontWeight: FontWeight.w700,
+              fontSize: 12,
+              letterSpacing: 0.7,
+              fontFamily: SuperMaterialThemeData.of(
+                context,
+              ).textTheme.bodyMedium?.fontFamily,
+            ),
+          ),
         ),
       ),
     );
@@ -400,8 +483,9 @@ class _DashRect extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     final path = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-          Offset.zero & size, const Radius.circular(10)));
+      ..addRRect(
+        RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(10)),
+      );
     const dash = 6.0, gap = 4.0;
     for (final m in path.computeMetrics()) {
       double d = 0;
@@ -440,5 +524,6 @@ class _ScanBrackets extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _ScanBrackets old) => old.accentColor != accentColor;
+  bool shouldRepaint(covariant _ScanBrackets old) =>
+      old.accentColor != accentColor;
 }

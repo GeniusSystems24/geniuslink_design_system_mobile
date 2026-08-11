@@ -38,8 +38,9 @@ class MobileDashboardTrendChart extends StatelessWidget {
               color: color,
               axis: axisLabels,
               currency: currency,
-              gridColor:
-                  context.mdColors.outlineVariant.withValues(alpha: 0.58),
+              gridColor: context.mdColors.outlineVariant.withValues(
+                alpha: 0.58,
+              ),
               surfaceColor: context.mdTheme.surface,
               labelColor: context.mdColors.onSurfaceVariant,
               valueLabelColor: context.mdTheme.fg2,
@@ -105,11 +106,11 @@ class _MobileDashboardTrendPainter extends CustomPainter {
     final low = rawMin - span * 0.14;
     final high = rawMax + span * 0.18;
 
-    double xAt(int index) => padLeft +
+    double xAt(int index) =>
+        padLeft +
         (count == 1 ? plotWidth / 2 : index / (count - 1) * plotWidth);
-    double yAt(double value) => padTop +
-        plotHeight -
-        ((value - low) / (high - low)) * plotHeight;
+    double yAt(double value) =>
+        padTop + plotHeight - ((value - low) / (high - low)) * plotHeight;
 
     final gridPaint = Paint()
       ..color = gridColor
@@ -137,7 +138,10 @@ class _MobileDashboardTrendPainter extends CustomPainter {
         textDirection: textDirection,
         maxLines: 1,
       )..layout(maxWidth: padLeft - 8);
-      label.paint(canvas, Offset(padLeft - label.width - 7, y - label.height / 2));
+      label.paint(
+        canvas,
+        Offset(padLeft - label.width - 7, y - label.height / 2),
+      );
     }
 
     final points = [
@@ -187,7 +191,11 @@ class _MobileDashboardTrendPainter extends CustomPainter {
     }
 
     final last = points.last;
-    canvas.drawCircle(last, 6.5, Paint()..color = color.withValues(alpha: 0.16));
+    canvas.drawCircle(
+      last,
+      6.5,
+      Paint()..color = color.withValues(alpha: 0.16),
+    );
     canvas.drawCircle(last, 4.2, Paint()..color = surfaceColor);
     canvas.drawCircle(
       last,

@@ -2,7 +2,7 @@
 // CORE / TENANCY — TenantDatabase
 // ------------------------------------------------------------
 // The open/close lifecycle for ONE tenant's connection. Created
-// inside the keyed TenantScope (RepositoryProvider) and disposed
+// inside the keyed TenantScope (TenantDatabaseScope) and disposed
 // when the scope is torn down (tenant switch / logout) — Flutter
 // rebuilds the subtree on ValueKey(tenantId) change, calling
 // dispose() here, which closes the underlying connection.
@@ -34,8 +34,10 @@ class TenantDatabase {
     if (_open) return;
     _open = true;
     if (kDebugMode) {
-      debugPrint('[TenantDB] open  ${session.tenantId} '
-          '→ ${session.connection.dbName}');
+      debugPrint(
+        '[TenantDB] open  ${session.tenantId} '
+        '→ ${session.connection.dbName}',
+      );
     }
   }
 
@@ -50,9 +52,8 @@ class TenantDatabase {
     }
   }
 
-  /// Closes the connection. Called from RepositoryProvider.dispose when the
-  /// keyed scope is destroyed — observable in the AppBlocObserver flow as
-  /// the surrounding cubits close alongside it.
+  /// Closes the connection. Called when the keyed TenantScope host is disposed when the
+  /// keyed scope is destroyed — observable through the database open/close debug logs.
   Future<void> close() async {
     if (!_open) return;
     _open = false;

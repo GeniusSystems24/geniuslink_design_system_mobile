@@ -6,4 +6,3 @@
 // IToggle · InfoNote · ActionRow. Reused by Journal, Inventory,
 // Currencies and Users screens.
 // ============================================================
-

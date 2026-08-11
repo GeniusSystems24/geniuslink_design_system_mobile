@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // VIEW — Dashboard tab
 // KPI row · cash-flow bars · balances · recent ops · alerts
 // ============================================================
@@ -25,96 +25,124 @@ class DashboardScreen extends StatelessWidget {
   Widget _buildDashboardContent(BuildContext context) {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
-    var trailing = Row(mainAxisSize: MainAxisSize.min, children: [
-          _Legend(color: SuperMaterialThemeData.of(context).colorScheme.primary, label: 'In'), const SizedBox(width: 12), _Legend(color: SuperMaterialThemeData.of(context).superTheme.fg4, label: 'Out'),
-        ]);
+    var trailing = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _Legend(
+          color: SuperMaterialThemeData.of(context).colorScheme.primary,
+          label: 'In',
+        ),
+        const SizedBox(width: 12),
+        _Legend(
+          color: SuperMaterialThemeData.of(context).superTheme.fg4,
+          label: 'Out',
+        ),
+      ],
+    );
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return MScroll([
       Padding(
         padding: const EdgeInsets.only(top: 0),
-        child: Text(snapshot.periodLabel, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+        child: Text(
+          snapshot.periodLabel,
+          style: TextStyle(
+            fontFamily: SuperMaterialThemeData.of(
+              context,
+            ).textTheme.bodyMedium?.fontFamily,
+            fontSize: 11.5,
+            color: SuperMaterialThemeData.of(context).superTheme.fg3,
+          ),
+        ),
       ),
       // KPI grid
       GridView.count(
         crossAxisCount: 2,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.55,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 1.55,
         children: [for (final kpi in snapshot.kpis) _Kpi(kpi: kpi)],
       ),
       // Cash flow
       SuperSectionCard2(
-      trailing: trailing,
-      title: 'Cash Flow',
-      subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
-      initiallyExpanded: true,
-      accentColor: accentColor3,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [_CashFlowBars(points: snapshot.cashFlow)],
+        trailing: trailing,
+        title: 'Cash Flow',
+        subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
+        initiallyExpanded: true,
+        accentColor: accentColor3,
+        icon: null,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [_CashFlowBars(points: snapshot.cashFlow)],
+        ),
       ),
-    ),
       // Balances
       SuperSectionCard2(
-      trailing: (null),
-      title: 'Cash & Asset Accounts',
-      subtitle: 'Top balances',
-      initiallyExpanded: true,
-      accentColor: accentColor2,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-            for (final balance in snapshot.balances) _BalanceRow(balance: balance),
+        trailing: (null),
+        title: 'Cash & Asset Accounts',
+        subtitle: 'Top balances',
+        initiallyExpanded: true,
+        accentColor: accentColor2,
+        icon: null,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final balance in snapshot.balances)
+              _BalanceRow(balance: balance),
           ],
+        ),
       ),
-    ),
       // Recent ops
       SuperSectionCard2(
-      trailing: (null),
-      title: 'Recent Operations',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor4,
-      icon: null,
-      padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+        trailing: (null),
+        title: 'Recent Operations',
+        subtitle: (null),
+        initiallyExpanded: true,
+        accentColor: accentColor4,
+        icon: null,
+        padding: EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(children: [
-                for (int i = 0; i < snapshot.recentOperations.length; i++)
-                  _RecentRow(operation: snapshot.recentOperations[i], last: i == snapshot.recentOperations.length - 1),
-              ]),
+              child: Column(
+                children: [
+                  for (int i = 0; i < snapshot.recentOperations.length; i++)
+                    _RecentRow(
+                      operation: snapshot.recentOperations[i],
+                      last: i == snapshot.recentOperations.length - 1,
+                    ),
+                ],
+              ),
             ),
           ],
+        ),
       ),
-    ),
       // Alerts
       SuperSectionCard2(
-      trailing: (null),
-      title: 'Needs Attention',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: accentColor,
-      icon: null,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+        trailing: (null),
+        title: 'Needs Attention',
+        subtitle: (null),
+        initiallyExpanded: true,
+        accentColor: accentColor,
+        icon: null,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
             for (final alert in snapshot.alerts) _AlertRow(alert: alert),
           ],
+        ),
       ),
-    ),
     ]);
   }
 }
@@ -129,27 +157,69 @@ class _Kpi extends StatelessWidget {
     final accent = kpi.emphasis == DashboardKpiEmphasis.positive
         ? SuperMaterialThemeData.of(context).colorScheme.secondary
         : SuperMaterialThemeData.of(context).superTheme.fg1;
-    final delta = '${kpi.isPositive ? '+' : '−'}${kpi.deltaPercent.abs().toStringAsFixed(1)}%';
+    final delta =
+        '${kpi.isPositive ? '+' : '−'}${kpi.deltaPercent.abs().toStringAsFixed(1)}%';
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: SuperMaterialThemeData.of(context).superTheme.surface,
-        border: Border.all(color: SuperMaterialThemeData.of(context).superTheme.border),
+        border: Border.all(
+          color: SuperMaterialThemeData.of(context).superTheme.border,
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Eyebrow(kpi.label, color: SuperMaterialThemeData.of(context).superTheme.fg3, size: 9.5),
+          Eyebrow(
+            kpi.label,
+            color: SuperMaterialThemeData.of(context).superTheme.fg3,
+            size: 9.5,
+          ),
           const SizedBox(height: 8),
-          Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-            Text(_formatDashboardAmount(kpi.amount), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: -0.4, color: accent)),
-            const SizedBox(width: 5),
-            Text('SAR', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-          ]),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                _formatDashboardAmount(kpi.amount),
+                style: TextStyle(
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.4,
+                  color: accent,
+                ),
+              ),
+              const SizedBox(width: 5),
+              Text(
+                'SAR',
+                style: TextStyle(
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
+                  fontSize: 10,
+                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 4),
-          Text('${kpi.isPositive ? '▲' : '▼'} $delta', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 11, color: kpi.isPositive ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
+          Text(
+            '${kpi.isPositive ? '▲' : '▼'} $delta',
+            style: TextStyle(
+              fontFamily: SuperMaterialThemeData.of(
+                context,
+              ).textTheme.bodyMedium?.fontFamily,
+              fontSize: 11,
+              color: kpi.isPositive
+                  ? SuperMaterialThemeData.of(context).colorScheme.secondary
+                  : SuperMaterialThemeData.of(context).colorScheme.error,
+            ),
+          ),
         ],
       ),
     );
@@ -172,11 +242,31 @@ class _Legend extends StatelessWidget {
   final String label;
   const _Legend({required this.color, required this.label});
   @override
-  Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
-        Container(width: 9, height: 9, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(2))),
-        const SizedBox(width: 5),
-        Text(label, style: TextStyle(fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontWeight: FontWeight.w600, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
-      ]);
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        width: 9,
+        height: 9,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(2),
+        ),
+      ),
+      const SizedBox(width: 5),
+      Text(
+        label,
+        style: TextStyle(
+          fontSize: 10.5,
+          color: SuperMaterialThemeData.of(context).superTheme.fg3,
+          fontWeight: FontWeight.w600,
+          fontFamily: SuperMaterialThemeData.of(
+            context,
+          ).textTheme.bodyMedium?.fontFamily,
+        ),
+      ),
+    ],
+  );
 }
 
 class _CashFlowBars extends StatelessWidget {
@@ -184,7 +274,11 @@ class _CashFlowBars extends StatelessWidget {
   const _CashFlowBars({required this.points});
   @override
   Widget build(BuildContext context) {
-    final maxV = points.isEmpty ? 1.0 : points.expand((point) => [point.inflow, point.outflow]).reduce((a, b) => a > b ? a : b);
+    final maxV = points.isEmpty
+        ? 1.0
+        : points
+              .expand((point) => [point.inflow, point.outflow])
+              .reduce((a, b) => a > b ? a : b);
     return SizedBox(
       height: 150,
       child: Row(
@@ -202,14 +296,33 @@ class _CashFlowBars extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _bar(point.inflow / maxV, SuperMaterialThemeData.of(context).colorScheme.primary),
+                          _bar(
+                            point.inflow / maxV,
+                            SuperMaterialThemeData.of(
+                              context,
+                            ).colorScheme.primary,
+                          ),
                           const SizedBox(width: 2),
-                          _bar(point.outflow / maxV, SuperMaterialThemeData.of(context).superTheme.fg4),
+                          _bar(
+                            point.outflow / maxV,
+                            SuperMaterialThemeData.of(context).superTheme.fg4,
+                          ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(point.period, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 8.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+                    Text(
+                      point.period,
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 8.5,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -220,12 +333,17 @@ class _CashFlowBars extends StatelessWidget {
   }
 
   Widget _bar(double frac, Color c) => Expanded(
-        child: FractionallySizedBox(
-          heightFactor: frac.clamp(0.0, 1.0),
-          alignment: Alignment.bottomCenter,
-          child: Container(decoration: BoxDecoration(color: c, borderRadius: const BorderRadius.vertical(top: Radius.circular(2)))),
+    child: FractionallySizedBox(
+      heightFactor: frac.clamp(0.0, 1.0),
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        decoration: BoxDecoration(
+          color: c,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(2)),
         ),
-      );
+      ),
+    ),
+  );
 }
 
 class _BalanceRow extends StatelessWidget {
@@ -242,25 +360,65 @@ class _BalanceRow extends StatelessWidget {
           children: [
             Expanded(
               child: Text.rich(
-                TextSpan(children: [
-                  TextSpan(text: '${balance.code}  ', style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
-                  TextSpan(text: balance.name),
-                ]),
-                maxLines: 1, overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 12.5, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily),
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${balance.code}  ',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
+                    ),
+                    TextSpan(text: balance.name),
+                  ],
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 12.5,
+                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
+                ),
               ),
             ),
             const SizedBox(width: 10),
-            Text(_formatDashboardAmount(balance.amount), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12.5, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1)),
+            Text(
+              _formatDashboardAmount(balance.amount),
+              style: TextStyle(
+                fontFamily: SuperMaterialThemeData.of(
+                  context,
+                ).textTheme.bodyMedium?.fontFamily,
+                fontSize: 12.5,
+                fontWeight: FontWeight.w600,
+                color: SuperMaterialThemeData.of(context).superTheme.fg1,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(999),
-          child: Stack(children: [
-            Container(height: 6, color: SuperMaterialThemeData.of(context).superTheme.inputBg),
-            FractionallySizedBox(widthFactor: balance.sharePercent / 100, child: Container(height: 6, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
-          ]),
+          child: Stack(
+            children: [
+              Container(
+                height: 6,
+                color: SuperMaterialThemeData.of(context).superTheme.inputBg,
+              ),
+              FractionallySizedBox(
+                widthFactor: balance.sharePercent / 100,
+                child: Container(
+                  height: 6,
+                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -275,25 +433,74 @@ class _RecentRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: SuperMaterialThemeData.of(context).superTheme.border))),
+      decoration: BoxDecoration(
+        border: last
+            ? null
+            : Border(
+                bottom: BorderSide(
+                  color: SuperMaterialThemeData.of(context).superTheme.border,
+                ),
+              ),
+      ),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(operation.reference, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 12, color: SuperMaterialThemeData.of(context).colorScheme.primary)),
+                Text(
+                  operation.reference,
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.primary,
+                  ),
+                ),
                 const SizedBox(height: 2),
-                Text(operation.description, style: TextStyle(fontSize: 12, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                Text(
+                  operation.description,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                  ),
+                ),
               ],
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(_formatDashboardAmount(operation.amount, signed: true), style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 13, fontWeight: FontWeight.w600, color: operation.isCredit ? SuperMaterialThemeData.of(context).colorScheme.secondary : SuperMaterialThemeData.of(context).colorScheme.error)),
+              Text(
+                _formatDashboardAmount(operation.amount, signed: true),
+                style: TextStyle(
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: operation.isCredit
+                      ? SuperMaterialThemeData.of(context).colorScheme.secondary
+                      : SuperMaterialThemeData.of(context).colorScheme.error,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(operation.timeLabel, style: TextStyle(fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily, fontSize: 10.5, color: SuperMaterialThemeData.of(context).superTheme.fg3)),
+              Text(
+                operation.timeLabel,
+                style: TextStyle(
+                  fontFamily: SuperMaterialThemeData.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
+                  fontSize: 10.5,
+                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                ),
+              ),
             ],
           ),
         ],
@@ -331,9 +538,28 @@ class _AlertRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(alert.title, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: SuperMaterialThemeData.of(context).superTheme.fg1, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                Text(
+                  alert.title,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                  ),
+                ),
                 const SizedBox(height: 2),
-                Text(alert.description, style: TextStyle(fontSize: 11, color: SuperMaterialThemeData.of(context).superTheme.fg3, fontFamily: SuperMaterialThemeData.of(context).textTheme.bodyMedium?.fontFamily)),
+                Text(
+                  alert.description,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                  ),
+                ),
               ],
             ),
           ),

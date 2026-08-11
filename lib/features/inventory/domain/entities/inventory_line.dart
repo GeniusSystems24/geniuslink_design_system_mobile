@@ -5,9 +5,14 @@ class InventoryLine extends Equatable {
   final String name;
   final double quantity;
 
-  const InventoryLine({required this.sku, required this.name, this.quantity = 1});
+  const InventoryLine({
+    required this.sku,
+    required this.name,
+    this.quantity = 1,
+  });
 
-  InventoryLine copyWith({String? sku, String? name, double? quantity}) => InventoryLine(
+  InventoryLine copyWith({String? sku, String? name, double? quantity}) =>
+      InventoryLine(
         sku: sku ?? this.sku,
         name: name ?? this.name,
         quantity: quantity ?? this.quantity,

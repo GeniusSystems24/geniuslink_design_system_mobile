@@ -15,6 +15,4 @@ part 'create_store_screen.dart';
 part 'store_detail_screen.dart';
 part 'issue_inventory_screen.dart';
 
-
-
 /// A dashed-border container (CustomPaint) for "add" affordances.

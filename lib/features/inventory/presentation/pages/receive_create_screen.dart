@@ -124,16 +124,16 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
       appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Receive Details',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker3,
-      icon: icon3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Receive Details',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker3,
+          icon: icon3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperTextFormField(
                 decoration: InputDecoration(labelText: 'Serial No'),
                 initialValue: 'INV-REC-2024-0241',
@@ -155,19 +155,20 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 hintText: 'e.g. ABC Trading Co.',
               ),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Inventory Items',
-      subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
-      initiallyExpanded: true,
-      accentColor: marker,
-      icon: icon,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Inventory Items',
+          subtitle:
+              '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
+          initiallyExpanded: true,
+          accentColor: marker,
+          icon: icon,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               Scanner(onPick: _addLine),
               ..._lines.asMap().entries.map((e) {
                 final i = e.key;
@@ -184,19 +185,19 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               }),
               const AddProductBtn(),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Accounting Distribution',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker4,
-      icon: icon4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: const [
+          trailing: (null),
+          title: 'Accounting Distribution',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker4,
+          icon: icon4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
               DistRow(
                 account: '1200 — Inventory (WIP)',
                 side: 'Debit',
@@ -211,19 +212,19 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
               ),
               _BalancedRow(value: '24,200.00'),
             ],
-      ),
-    ),
+          ),
+        ),
         SuperSectionCard2(
-      trailing: (null),
-      title: 'Notes & Docs',
-      subtitle: (null),
-      initiallyExpanded: true,
-      accentColor: marker2,
-      icon: icon2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+          trailing: (null),
+          title: 'Notes & Docs',
+          subtitle: (null),
+          initiallyExpanded: true,
+          accentColor: marker2,
+          icon: icon2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
               const SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Receipt Notes',
@@ -241,8 +242,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 onBrowse: () async => const <SuperFile>[],
               ),
             ],
-      ),
-    ),
+          ),
+        ),
         ActionRow(primary: 'Receive Inventory', onPrimary: _submit),
       ]),
     );

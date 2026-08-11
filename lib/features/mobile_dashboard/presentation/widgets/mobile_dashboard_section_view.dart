@@ -1,13 +1,12 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gl_mobile_app/features/mobile_dashboard/presentation/widgets/mobile_dashboard_offline_banner.dart';
 import 'package:super_core/super_core.dart';
 
-import '../../../../core/bloc/load_status.dart';
+import '../../../../core/state/load_status.dart';
 import '../../domain/domain.dart';
-import '../bloc/mobile_dashboard_cubit.dart';
+import '../controllers/mobile_dashboard_controller.dart';
 import 'mobile_dashboard_attention.dart';
 import 'mobile_dashboard_erp_overview.dart';
 import 'mobile_dashboard_metrics.dart';
@@ -38,7 +37,7 @@ class MobileDashboardSectionView extends StatefulWidget {
 
 class MobileDashboardSectionViewState
     extends State<MobileDashboardSectionView> {
-  late final MobileDashboardCubit _dashboardCubit;
+  late final MobileDashboardController _dashboardController;
   final ScrollController _scrollController = ScrollController();
 
   MobileDashboardCatalog get _catalog => widget.repository.catalog;
@@ -48,7 +47,7 @@ class MobileDashboardSectionViewState
   _DashboardViewData get _currentDashboard => _DashboardViewData(
     catalog: _catalog,
     sectionId: _sectionId,
-    state: _dashboardCubit.state,
+    state: _dashboardController.state,
     workspace: _workspace,
   );
 
@@ -73,7 +72,7 @@ class MobileDashboardSectionViewState
     final tabs = catalog.tabs;
 
     if (tabs.isNotEmpty) {
-      final currentTab = _dashboardCubit.state.tab;
+      final currentTab = _dashboardController.state.tab;
       final targetTab = _resolveDashboardTab(
         tabs: tabs,
         currentTab: currentTab,
@@ -81,17 +80,17 @@ class MobileDashboardSectionViewState
       );
 
       if (currentTab != targetTab) {
-        _dashboardCubit.selectTab(targetTab);
+        _dashboardController.selectTab(targetTab);
       }
     }
 
     final currencies = catalog.currencies;
-    final currentCurrency = _dashboardCubit.state.cur;
+    final currentCurrency = _dashboardController.state.cur;
     final currencyExists = currencies.any(
       (currency) => currency.code == currentCurrency,
     );
     if (currencies.isNotEmpty && !currencyExists) {
-      _dashboardCubit.setCurrency(currencies.first.code);
+      _dashboardController.setCurrency(currencies.first.code);
     }
   }
 
@@ -110,7 +109,7 @@ class MobileDashboardSectionViewState
       );
   }
 
-  Future<void> _refresh() => _dashboardCubit.refresh();
+  Future<void> _refresh() => _dashboardController.refresh();
 
   void _openActions() {
     final dashboard = _currentDashboard;
@@ -158,7 +157,7 @@ class MobileDashboardSectionViewState
   @override
   void initState() {
     super.initState();
-    _dashboardCubit = MobileDashboardCubit(initialTab: _sectionId);
+    _dashboardController = MobileDashboardController(initialTab: _sectionId);
     _syncDashboardSelections(preferSectionTab: false);
     unawaited(_refresh());
   }
@@ -173,7 +172,7 @@ class MobileDashboardSectionViewState
 
   @override
   void dispose() {
-    _dashboardCubit.close();
+    _dashboardController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -190,29 +189,28 @@ class MobileDashboardSectionViewState
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MobileDashboardCubit>.value(
-      value: _dashboardCubit,
-      child: BlocBuilder<MobileDashboardCubit, MobileDashboardState>(
-        builder: (context, state) {
-          return _MobileDashboardSectionContent(
-            dashboard: _DashboardViewData(
-              catalog: _catalog,
-              sectionId: _sectionId,
-              state: state,
-              workspace: _workspace,
-            ),
-            online: widget.online,
-            scrollController: _scrollController,
-            onRefresh: _refresh,
-            onToast: _showDashboardToast,
-            onOpenActions: _openActions,
-            onToggleView: _dashboardCubit.toggleView,
-            onCurrencyChanged: _dashboardCubit.setCurrency,
-            onPeriodChanged: _dashboardCubit.setPeriod,
-            onMetricSelected: _dashboardCubit.setChartMetric,
-          );
-        },
-      ),
+    return ListenableBuilder(
+      listenable: _dashboardController,
+      builder: (context, _) {
+        final state = _dashboardController.state;
+        return _MobileDashboardSectionContent(
+          dashboard: _DashboardViewData(
+            catalog: _catalog,
+            sectionId: _sectionId,
+            state: state,
+            workspace: _workspace,
+          ),
+          online: widget.online,
+          scrollController: _scrollController,
+          onRefresh: _refresh,
+          onToast: _showDashboardToast,
+          onOpenActions: _openActions,
+          onToggleView: _dashboardController.toggleView,
+          onCurrencyChanged: _dashboardController.setCurrency,
+          onPeriodChanged: _dashboardController.setPeriod,
+          onMetricSelected: _dashboardController.setChartMetric,
+        );
+      },
     );
   }
 }
