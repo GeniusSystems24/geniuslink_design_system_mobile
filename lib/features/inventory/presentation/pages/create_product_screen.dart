@@ -95,7 +95,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 forceError: _force,
                 onValidity: (e) => _skuErr = e,
               ),
-              const SuperTextFormField(
+              SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Barcode',
                   hintText: 'Scan or type',

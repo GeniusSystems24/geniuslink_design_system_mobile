@@ -91,7 +91,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperTextFormField(
+              SuperTextFormField(
                 decoration: InputDecoration(labelText: 'Serial No'),
                 initialValue: 'INV-TRF-2024-0117',
                 readOnly: true,
@@ -154,7 +154,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperTextFormField(
+              SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Notes',
                   hintText: 'Enter transfer notes or internal instructions…',

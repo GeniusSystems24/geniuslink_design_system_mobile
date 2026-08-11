@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:super_form_field/super_form_field.dart';
+import 'package:super_table_field/super_table_field.dart';
 
 import '../core/tenancy/tenant_connection.dart';
 import 'controllers/app_controller.dart';
@@ -43,17 +47,18 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
   @override
   Widget build(BuildContext context) {
     final palette = SuperPalette.bluePalette;
+    var superTextTheme = SuperTextTheme(
+      bodyFont: GoogleFonts.robotoTextTheme().bodyMedium!,
+    );
     final lightTheme = SuperMaterialThemeData.light(
       palette: palette,
-      textTheme: SuperTextTheme.fromTokens(
-        palette.applyTo(SuperTokensData.fallback),
-      ),
+      textTheme: superTextTheme,
+      primaryTextTheme: superTextTheme,
     );
     final darkTheme = SuperMaterialThemeData.dark(
       palette: palette,
-      textTheme: SuperTextTheme.fromTokens(
-        palette.applyTo(SuperTokensData.fallback),
-      ),
+      textTheme: superTextTheme,
+      primaryTextTheme: superTextTheme,
     );
 
     return ListenableBuilder(
@@ -71,6 +76,15 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
             AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
           ],
         ),
+        supportedLocales: [const Locale('en'), const Locale('ar')],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          // super packages
+          SuperTableTranslation.delegate,
+          SuperFormTranslation.delegate,
+        ],
         themeMode: _appController.themeController.mode,
         routerConfig: _router,
       ),

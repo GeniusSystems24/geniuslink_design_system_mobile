@@ -99,7 +99,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Note',

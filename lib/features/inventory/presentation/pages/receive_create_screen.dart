@@ -134,7 +134,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperTextFormField(
+              SuperTextFormField(
                 decoration: InputDecoration(labelText: 'Serial No'),
                 initialValue: 'INV-REC-2024-0241',
                 readOnly: true,
@@ -225,7 +225,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperTextFormField(
+              SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: 'Receipt Notes',
                   hintText: 'PO number, delivery note, inspection results…',
