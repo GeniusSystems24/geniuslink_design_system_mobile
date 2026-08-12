@@ -117,15 +117,12 @@ class DepositDetailScreen extends StatelessWidget {
           accentColor: accentColor2,
           icon: null,
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              AuditGrid(
-                rows: [
-                  ('Created By', 'Layla Ahmed', false),
-                  ('Created At', 'Dec 19, 09:42', true),
-                ],
+          child: AuditColumn(
+            items: [
+              AuditItem(
+                title: 'Created',
+                doAt: DateTime(2025, 12, 19, 9, 42),
+                doBy: 'Layla Ahmed',
               ),
             ],
           ),

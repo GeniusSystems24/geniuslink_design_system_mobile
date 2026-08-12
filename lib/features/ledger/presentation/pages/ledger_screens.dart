@@ -7,5 +7,6 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 
+import '../../../accounts/presentation/widgets/audit_column.dart';
 part 'opening_journal_screen.dart';
 part 'op_detail_screen.dart';

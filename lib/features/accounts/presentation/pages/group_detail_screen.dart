@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 
+import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
 class GroupDetailScreen extends StatelessWidget {
   const GroupDetailScreen({super.key});
   @override
@@ -91,12 +92,14 @@ class GroupDetailScreen extends StatelessWidget {
           accentColor: accentColor,
           icon: null,
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Created By', 'Admin User (ID: 5)'),
-              KV('Created At', 'Dec 04, 2025 11:58 PM'),
+          child: AuditColumn(
+            connectIndictors: true,
+            items: [
+              AuditItem(
+                title: 'Created',
+                doAt: DateTime(2025, 12, 4, 23, 58),
+                doBy: 'Admin User (ID: 5)',
+              ),
             ],
           ),
         ),

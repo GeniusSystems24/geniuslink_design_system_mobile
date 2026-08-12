@@ -246,13 +246,21 @@ class AccountDetailFullScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              AccountAuditGrid(
-                rows: [
-                  ('Created By', 'Admin User (ID: 5)'),
-                  ('Created At', 'Apr 12, 2024 09:21'),
-                  ('Modified By', 'Layla A. (ID: 12)'),
-                  ('Modified At', 'Nov 02, 2025 15:48'),
+            children: [
+              AuditColumn(
+                connectIndictors: true,
+                items: [
+                  AuditItem(
+                    title: 'Created',
+                    doAt: DateTime(2024, 4, 12, 9, 21),
+                    doBy: 'Admin User (ID: 5)',
+                    cancelled: true,
+                  ),
+                  AuditItem(
+                    title: 'Modified',
+                    doAt: DateTime(2025, 11, 2, 15, 48),
+                    doBy: 'Layla A. (ID: 12)',
+                  ),
                 ],
               ),
             ],

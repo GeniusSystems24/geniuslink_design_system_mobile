@@ -3,6 +3,7 @@ import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
 
+import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
 class ReceiveDetailScreen extends StatelessWidget {
   const ReceiveDetailScreen({super.key});
   @override
@@ -117,17 +118,14 @@ class ReceiveDetailScreen extends StatelessWidget {
           accentColor: accentColor,
           icon: null,
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              AuditGridLite(
-                rows: [
-                  ('Received By', 'Layla A. (ID: 12)', false),
-                  ('Received At', 'Dec 16, 14:32', true),
-                  ('Linked Journal', 'JV-2024-0241', true),
-                  ('Audit Hash', 'b3e1…a072', true),
-                ],
+          child: AuditColumn(
+            connectIndictors: true,
+            items: [
+              AuditItem(
+                title: 'Received',
+                doAt: DateTime(2025, 12, 16, 14, 32),
+                doBy: 'Layla A. (ID: 12)',
+                description: 'Linked Journal: JV-2024-0241\nAudit Hash: b3e1…a072',
               ),
             ],
           ),
@@ -144,47 +142,3 @@ class ReceiveDetailScreen extends StatelessWidget {
   }
 }
 
-class AuditGridLite extends StatelessWidget {
-  final List<(String, String, bool)> rows;
-  const AuditGridLite({super.key, required this.rows});
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      childAspectRatio: 4.2,
-      children: [
-        for (final r in rows)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Eyebrow(
-                r.$1,
-                color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                size: 9.5,
-              ),
-              const SizedBox(height: 5),
-              Text(
-                r.$2,
-                style: TextStyle(
-                  fontSize: 12.5,
-                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                  fontFamily: r.$3
-                      ? SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily
-                      : SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily,
-                ),
-              ),
-            ],
-          ),
-      ],
-    );
-  }
-}

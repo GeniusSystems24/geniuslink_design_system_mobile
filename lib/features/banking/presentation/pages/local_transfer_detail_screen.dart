@@ -136,15 +136,12 @@ class LocalTransferDetailScreen extends StatelessWidget {
           accentColor: accentColor3,
           icon: null,
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              AuditGrid(
-                rows: [
-                  ('Created By', 'Layla Ahmed', false),
-                  ('Created At', 'Dec 18, 14:02', true),
-                ],
+          child: AuditColumn(
+            items: [
+              AuditItem(
+                title: 'Created',
+                doAt: DateTime(2025, 12, 18, 14, 2),
+                doBy: 'Layla Ahmed',
               ),
             ],
           ),

@@ -9,11 +9,6 @@ class OpDetailScreen extends StatelessWidget {
       ('5001 — Cost of Goods Sold', '+1,200.00', true, 'Debit'),
       ('1100 — Bank · NCB Main', '−6,600.00', false, 'Credit'),
     ];
-    const timeline = [
-      ('Operation created', 'Layla A. · Dec 18, 09:21'),
-      ('Submitted for review', 'Layla A. · Dec 18, 09:24'),
-      ('Approved & posted', 'Controller · Dec 18, 10:05'),
-    ];
     var trailing = const Pill('Posted');
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
@@ -155,96 +150,32 @@ class OpDetailScreen extends StatelessWidget {
         ),
         SuperSectionCard2(
           trailing: (null),
-          title: 'Activity',
+          title: 'Audit',
           subtitle: (null),
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: null,
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Column(
-                children: [
-                  for (int i = 0; i < timeline.length; i++)
-                    IntrinsicHeight(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                width: 12,
-                                height: 12,
-                                decoration: BoxDecoration(
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).colorScheme.secondary,
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                              if (i < timeline.length - 1)
-                                Expanded(
-                                  child: Container(
-                                    width: 2,
-                                    constraints: const BoxConstraints(
-                                      minHeight: 22,
-                                    ),
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.borderStrong,
-                                  ),
-                                ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 14),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    timeline[i].$1,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg1,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    timeline[i].$2,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 11,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg3,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
+          padding: const EdgeInsets.all(16),
+          child: AuditColumn(
+            connectIndictors: true,
+            items: [
+              AuditItem(
+                title: 'Operation created',
+                doAt: DateTime(2025, 12, 18, 9, 21),
+                doBy: 'Layla A.',
+                indicatorColor: accentColor2,
+              ),
+              AuditItem(
+                title: 'Submitted for review',
+                doAt: DateTime(2025, 12, 18, 9, 24),
+                doBy: 'Layla A.',
+                indicatorColor: accentColor2,
+              ),
+              AuditItem(
+                title: 'Approved & posted',
+                doAt: DateTime(2025, 12, 18, 10, 5),
+                doBy: 'Controller',
+                indicatorColor: accentColor2,
               ),
             ],
           ),
