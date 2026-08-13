@@ -18,12 +18,12 @@ class CurrenciesSettingsScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Currencies')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Base Currency',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,12 +101,12 @@ class CurrenciesSettingsScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Rates per 1 SAR',
           subtitle: 'Auto pairs sync daily; manual editable',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

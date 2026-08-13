@@ -30,12 +30,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       appBar: SuperAppBar(title: const Text('User Detail')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: "",
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: (null),
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,9 +92,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Profile',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
@@ -117,12 +117,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Security',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -211,12 +211,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Active Sessions',
           subtitle: 'Devices currently signed in',
           initiallyExpanded: true,
           accentColor: accentColor3,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -316,12 +316,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Recent Activity',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

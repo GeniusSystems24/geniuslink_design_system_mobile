@@ -18,7 +18,7 @@ class CreateContactScreen extends StatelessWidget {
       appBar: SuperAppBar(title: Text('Add ${contactSingularLabel(d.type)}')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: '${contactSingularLabel(d.type)} Identity',
           subtitle: 'Legal name and contact details',
           initiallyExpanded: true,
@@ -55,7 +55,7 @@ class CreateContactScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Financial',
           subtitle: 'Linked control account and terms',
           initiallyExpanded: true,
@@ -89,9 +89,9 @@ class CreateContactScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Notes',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,

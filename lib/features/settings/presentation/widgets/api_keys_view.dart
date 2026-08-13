@@ -47,12 +47,12 @@ class ApiKeysView extends StatelessWidget {
               tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
             ),
             SuperSectionCard2(
-              trailing: (null),
+              
               title: '${keys.length} Active Keys',
-              subtitle: (null),
+              
               initiallyExpanded: true,
               accentColor: accentColor,
-              icon: null,
+              
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

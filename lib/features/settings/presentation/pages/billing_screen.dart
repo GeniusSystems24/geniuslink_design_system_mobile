@@ -42,10 +42,10 @@ class BillingScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: 'Current Plan',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -265,12 +265,12 @@ class BillingScreen extends StatelessWidget {
             ),
           ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Recent Invoices',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

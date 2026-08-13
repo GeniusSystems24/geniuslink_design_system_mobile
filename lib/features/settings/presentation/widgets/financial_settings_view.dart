@@ -29,9 +29,9 @@ class FinancialSettingsView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Financial Settings')),
           body: MScroll([
             SuperSectionCard2(
-              trailing: (null),
+              
               title: 'Currency & Calendar',
-              subtitle: (null),
+              
               initiallyExpanded: true,
               accentColor: marker,
               icon: icon,
@@ -130,9 +130,9 @@ class FinancialSettingsView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              trailing: (null),
+              
               title: 'Default Posting Accounts',
-              subtitle: (null),
+              
               initiallyExpanded: true,
               accentColor: marker3,
               icon: icon3,
@@ -157,9 +157,9 @@ class FinancialSettingsView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              trailing: (null),
+              
               title: 'Posting Rules',
-              subtitle: (null),
+              
               initiallyExpanded: true,
               accentColor: marker2,
               icon: icon2,

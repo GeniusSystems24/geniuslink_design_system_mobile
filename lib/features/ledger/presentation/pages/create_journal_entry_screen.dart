@@ -35,9 +35,9 @@ class CreateJournalEntryScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Journal Entry')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Entry Header',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
@@ -65,7 +65,7 @@ class CreateJournalEntryScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Journal Lines',
           subtitle: '${lines.length} lines',
           initiallyExpanded: true,

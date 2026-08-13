@@ -124,9 +124,9 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
       appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Receive Details',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -158,7 +158,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Inventory Items',
           subtitle:
               '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
@@ -188,9 +188,9 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Accounting Distribution',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker4,
           icon: icon4,
@@ -215,9 +215,9 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Notes & Docs',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,

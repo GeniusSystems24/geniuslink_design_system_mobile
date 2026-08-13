@@ -23,10 +23,10 @@ class GroupDetailScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: 'Group Information',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor3,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,12 +40,12 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Notes',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,12 +85,12 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Audit',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: AuditColumn(
             connectIndictors: true,

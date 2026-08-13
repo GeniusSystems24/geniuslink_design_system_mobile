@@ -215,12 +215,12 @@ class WarehousesListScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Warehouses')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: '5 Warehouses',
           subtitle: 'Capacity & assigned manager',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

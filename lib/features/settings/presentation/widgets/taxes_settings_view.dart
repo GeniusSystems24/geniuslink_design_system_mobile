@@ -44,12 +44,12 @@ class TaxesSettingsView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Taxes')),
           body: MScroll([
             SuperSectionCard2(
-              trailing: (null),
+              
               title: 'Tax Rules',
               subtitle: '$active active · applied at line level',
               initiallyExpanded: true,
               accentColor: accentColor,
-              icon: null,
+              
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

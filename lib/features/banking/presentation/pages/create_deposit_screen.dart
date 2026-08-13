@@ -15,9 +15,7 @@ class CreateDepositScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Deposit')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
           title: 'Deposit Amount',
-          subtitle: (null),
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -39,9 +37,9 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Destination',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
@@ -65,9 +63,9 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Journal Preview',
-          subtitle: (null),
+          
           initiallyExpanded: false,
           accentColor: accentColor2,
           icon: icon2,

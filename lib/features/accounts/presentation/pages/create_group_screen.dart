@@ -47,12 +47,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       appBar: SuperAppBar(title: const Text('Create Account Group')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Group Details',
           subtitle: 'Name and tree association',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -89,12 +89,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Additional Information',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

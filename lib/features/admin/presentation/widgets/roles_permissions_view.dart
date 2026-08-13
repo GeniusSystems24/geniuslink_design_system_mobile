@@ -53,12 +53,12 @@ class RolesPermissionsView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Roles & Permissions')),
           body: MScroll([
             SuperSectionCard2(
-              trailing: (null),
+              
               title: 'Select Role',
               subtitle: "Tap a module's badge to cycle its access level",
               initiallyExpanded: true,
               accentColor: accentColor,
-              icon: null,
+              
               padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,12 +73,12 @@ class RolesPermissionsView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              trailing: (null),
+              
               title: "",
-              subtitle: (null),
+              
               initiallyExpanded: true,
               accentColor: (null),
-              icon: null,
+              
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

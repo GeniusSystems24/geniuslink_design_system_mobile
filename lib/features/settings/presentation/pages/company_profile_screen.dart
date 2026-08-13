@@ -15,7 +15,7 @@ class CompanyProfileScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Company Profile')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Identity',
           subtitle: 'Names shown on documents',
           initiallyExpanded: true,
@@ -77,9 +77,9 @@ class CompanyProfileScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Registered Address',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
@@ -107,9 +107,9 @@ class CompanyProfileScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Tax Registration',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,

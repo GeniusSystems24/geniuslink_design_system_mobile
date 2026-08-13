@@ -127,12 +127,12 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: "",
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: (null),
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

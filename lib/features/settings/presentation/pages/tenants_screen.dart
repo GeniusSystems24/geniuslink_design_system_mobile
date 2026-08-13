@@ -89,7 +89,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                 subtitle: null,
                 initiallyExpanded: true,
                 accentColor: null,
-                icon: null,
+                
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

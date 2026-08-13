@@ -81,9 +81,9 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
       appBar: SuperAppBar(title: const Text('Transfer Inventory')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Transfer Details',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -115,7 +115,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Products',
           subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
           initiallyExpanded: true,
@@ -144,9 +144,9 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Notes & Docs',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,

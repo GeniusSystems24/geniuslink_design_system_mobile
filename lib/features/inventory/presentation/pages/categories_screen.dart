@@ -68,12 +68,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       appBar: SuperAppBar(title: const Text('Categories')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Category Tree',
           subtitle: '5 top-level groups',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -239,7 +239,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'New Category',
           subtitle: 'Quick inline form',
           initiallyExpanded: false,

@@ -37,12 +37,12 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
           ],
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'All Accounts',
           subtitle: 'Debit & credit balances as of period end',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

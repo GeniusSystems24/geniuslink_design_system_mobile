@@ -27,7 +27,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,12 +68,12 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Receipt Information',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor4,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,12 +87,12 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Items',
           subtitle: '2 lines · 432 units',
           initiallyExpanded: true,
           accentColor: accentColor3,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -111,12 +111,12 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Audit Information',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: AuditColumn(
             connectIndictors: true,

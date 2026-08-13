@@ -17,12 +17,12 @@ class NumberingScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Numbering')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Document Sequences',
           subtitle: 'Format: PREFIX-YEAR-NUMBER',
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

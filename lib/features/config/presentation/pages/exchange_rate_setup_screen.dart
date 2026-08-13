@@ -18,12 +18,12 @@ class ExchangeRateSetupScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Exchange Rates')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Base Currency',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,12 +101,12 @@ class ExchangeRateSetupScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Rates per 1 SAR',
           subtitle: 'Auto-fed pairs sync daily; manual pairs are editable',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

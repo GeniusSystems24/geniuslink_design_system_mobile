@@ -75,7 +75,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Product Definition',
           subtitle: 'SKU, names and classification',
           initiallyExpanded: true,
@@ -137,9 +137,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Costing & Pricing',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -172,9 +172,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Inventory Settings',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,

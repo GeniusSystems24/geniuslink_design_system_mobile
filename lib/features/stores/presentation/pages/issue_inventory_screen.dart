@@ -12,12 +12,12 @@ class IssueInventoryScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Issue Inventory')),
       body: MScroll([
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Issue Details',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor3,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,12 +38,12 @@ class IssueInventoryScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Items',
           subtitle: '1 line · 12 units',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,12 +115,12 @@ class IssueInventoryScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: 'Total',
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: accentColor,
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

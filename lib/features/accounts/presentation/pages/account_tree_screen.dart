@@ -72,7 +72,6 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
           subtitle: 'Roll-up balances · bilingual',
           nameColumnLabel: 'Account',
           trailingColumnLabel: 'Balance (SAR)',
-          enableEditing: false,
         ),
       ),
     );

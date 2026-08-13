@@ -41,12 +41,12 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
         ),
         for (final b in blocks)
           SuperSectionCard2(
-            trailing: (null),
+            
             title: b.$1,
-            subtitle: (null),
+            
             initiallyExpanded: true,
             accentColor: b.$2,
-            icon: null,
+            
             padding: EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -74,12 +74,12 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
             ),
           ),
         SuperSectionCard2(
-          trailing: (null),
+          
           title: "",
-          subtitle: (null),
+          
           initiallyExpanded: true,
           accentColor: (null),
-          icon: null,
+          
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

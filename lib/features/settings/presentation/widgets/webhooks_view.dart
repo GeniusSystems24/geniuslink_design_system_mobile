@@ -37,12 +37,12 @@ class WebhooksView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Webhooks')),
           body: MScroll([
             SuperSectionCard2(
-              trailing: (null),
+              
               title: '${hooks.length} Endpoints',
               subtitle: 'HMAC-signed · retried 5× on failure',
               initiallyExpanded: true,
               accentColor: accentColor,
-              icon: null,
+              
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

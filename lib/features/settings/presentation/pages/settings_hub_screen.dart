@@ -66,12 +66,12 @@ class SettingsHubScreen extends StatelessWidget {
         ),
         for (final section in sections)
           SuperSectionCard2(
-            trailing: (null),
+            
             title: section.title,
-            subtitle: (null),
+            
             initiallyExpanded: true,
             accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
-            icon: null,
+            
             padding: EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:super_tab_bar/super_tab_bar.dart';
-import 'package:super_tree_field/super_tree.dart' hide AccountType;
+import 'package:super_tree_field/super_tree.dart' ;
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';

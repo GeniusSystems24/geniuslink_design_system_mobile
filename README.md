@@ -65,13 +65,11 @@ FAB and bottom nav. Reachable from **More → Workspace → Mobile Dashboard**
 (screen id `mobileDashboard`).
 
 ## Notes
-- The app consumes the sibling **`geniuslink_design_system`** package (a `path:`
-  dependency) for its three data components — synced to library **v2.8.1**, with
-  the Tree / ReadableTable / AutoSuggestionsBox theme extensions registered on
-  the dark theme in `main.dart` so all three blend with the MCard chrome:
-  - **`Tree`** — the **Account Tree** screen (`accountTree`) is a typed
-    `Tree<Account>` (search · expand/collapse · indent guides · roll-up balances;
-    builders read `row.node.value`).
+- The app keeps **`geniuslink_design_system` v2.8.1** for legacy widgets while
+  focused Super packages own the newer data-entry and data-view components.
+  - **`super_tree_field` v1.0.0** — the **Account Tree** screen (`accountTree`)
+    uses a typed `SuperTree<Account>` with `SuperTreeController<Account>` for
+    search, expand/collapse, indent guides, leaf opening, and roll-up balances.
   - **`ReadableTable`** — wrapped as **`MTable`** (`m_widgets.dart`) for the
     genuinely tabular reports: **Trial Balance**, **Inventory Valuation** and the
     **Audit Log** now render in the DS grid with click-to-sort headers + TSV copy
