@@ -28,12 +28,11 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
       appBar: SuperAppBar(title: const Text('Inventory Valuation')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: (null),
-          
+
           padding: EdgeInsets.all(14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,12 +68,11 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Stock Valuation',
           subtitle: 'Quantity × weighted-average unit cost',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

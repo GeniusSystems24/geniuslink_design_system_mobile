@@ -31,7 +31,7 @@ class ProductDetailScreen extends StatelessWidget {
           subtitle: 'Aggregated across all stores',
           initiallyExpanded: true,
           accentColor: accentColor4,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,12 +75,11 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Product Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,12 +98,11 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Stock by Store',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -199,12 +197,11 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Recent Movements',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

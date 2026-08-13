@@ -21,10 +21,10 @@ class StoreDetailScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: title,
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,12 +53,11 @@ class StoreDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Stock On Hand',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -138,12 +138,11 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
             ),
           ),
         SuperSectionCard2(
-          
           title: 'Item Prices',
           subtitle: '5 items · 15% discount applied',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

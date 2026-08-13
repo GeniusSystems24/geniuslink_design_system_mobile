@@ -140,7 +140,7 @@ class StockTakeScreen extends StatelessWidget {
           subtitle: 'King Fahd Warehouse · Started Dec 18, 09:14',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -211,12 +211,11 @@ class StockTakeScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Count Sheet',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

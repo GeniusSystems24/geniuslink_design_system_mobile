@@ -69,12 +69,11 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Details',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -89,12 +88,11 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Posted Journal',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -110,12 +108,11 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Audit',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: AuditColumn(
             items: [

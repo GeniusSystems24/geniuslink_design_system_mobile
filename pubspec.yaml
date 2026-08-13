@@ -26,11 +26,11 @@ dependencies:
 
   # Typeahead / combobox fields. Keep this package for searchable master-data
   # selectors, SKU entry and global spotlight search.
-  super_auto_suggestion_box: ^0.14.1
+  super_auto_suggestion_box: ^1.0.0
 
   # Focused Super widgets used by the remaining non-form interfaces.
   # Keep these versions aligned with the current super_core foundation.
-  super_table_field: ^2.5.3
+  super_table_field: ^2.7.0
   super_tree_field: ^1.0.0
   super_tab_bar: ^2.8.2
 

@@ -45,12 +45,11 @@ class _ContactListScreenState extends State<ContactListScreen> {
           onChange: (v) => setState(() => _status = v),
         ),
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: (null),
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

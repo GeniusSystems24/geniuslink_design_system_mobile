@@ -45,9 +45,7 @@ class AuditColumn extends StatelessWidget {
           Opacity(
             opacity: items[i].cancelled ? 0.50 : 1.0,
             child: Padding(
-              padding: EdgeInsets.only(
-                bottom: i != items.length - 1 ? 14 : 0,
-              ),
+              padding: EdgeInsets.only(bottom: i != items.length - 1 ? 14 : 0),
               child: _AuditColumnItem(
                 item: items[i],
                 fontFamily: fontFamily,

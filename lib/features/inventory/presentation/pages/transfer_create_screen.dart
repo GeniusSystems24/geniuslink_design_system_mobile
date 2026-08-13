@@ -81,9 +81,8 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
       appBar: SuperAppBar(title: const Text('Transfer Inventory')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Transfer Details',
-          
+
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -97,16 +96,22 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                 readOnly: true,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) =>
+                    AutoSuggestion<String>(value: item, label: item),
                 controller: _currencyController,
                 label: 'Currency',
                 hintText: 'Select currency…',
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) =>
+                    AutoSuggestion<String>(value: item, label: item),
                 controller: _fromController,
                 label: 'From Store',
                 hintText: 'Search origin warehouse…',
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) =>
+                    AutoSuggestion<String>(value: item, label: item),
                 controller: _toController,
                 label: 'To Store',
                 hintText: 'Search destination…',
@@ -115,7 +120,6 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Products',
           subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
           initiallyExpanded: true,
@@ -144,9 +148,8 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Notes & Docs',
-          
+
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,

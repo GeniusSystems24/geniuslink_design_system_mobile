@@ -50,12 +50,11 @@ class NotificationsView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Notifications')),
           body: MScroll([
             SuperSectionCard2(
-              
               title: 'Preferences',
               subtitle: 'Toggle a channel per category',
               initiallyExpanded: true,
               accentColor: accentColor,
-              
+
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

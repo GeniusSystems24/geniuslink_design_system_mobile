@@ -44,12 +44,11 @@ class FiscalYearSetupScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Accounting Periods',
           subtitle: '12 monthly periods · lock to prevent back-dated postings',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

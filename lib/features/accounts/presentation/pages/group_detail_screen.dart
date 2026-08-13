@@ -8,6 +8,7 @@ import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 
 import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
+
 class GroupDetailScreen extends StatelessWidget {
   const GroupDetailScreen({super.key});
   @override
@@ -23,10 +24,10 @@ class GroupDetailScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: 'Group Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,12 +41,11 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Notes',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,12 +85,11 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Audit',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: AuditColumn(
             connectIndictors: true,

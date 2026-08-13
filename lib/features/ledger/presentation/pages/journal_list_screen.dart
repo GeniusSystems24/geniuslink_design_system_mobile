@@ -51,12 +51,11 @@ class _JournalListScreenState extends State<JournalListScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: (null),
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

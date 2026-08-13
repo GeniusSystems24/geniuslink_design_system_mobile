@@ -13,7 +13,6 @@ class CreateUserScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Invite User')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Identity',
           subtitle: "The new member's name and contact",
           initiallyExpanded: true,
@@ -43,7 +42,6 @@ class CreateUserScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Access',
           subtitle: 'Role determines default permissions',
           initiallyExpanded: true,

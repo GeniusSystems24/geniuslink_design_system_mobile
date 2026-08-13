@@ -27,10 +27,10 @@ class AccountDetailScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: 'Current Balance',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,12 +71,11 @@ class AccountDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,12 +89,11 @@ class AccountDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Recent Transactions',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

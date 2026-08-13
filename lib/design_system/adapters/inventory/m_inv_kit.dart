@@ -418,13 +418,17 @@ class _ScannerState extends State<Scanner> {
         ),
         const SizedBox(height: 12),
         suggest.AutoSuggestionsBox<String>(
+          suggestionBuilder: (items, index, item) => suggest.AutoSuggestion<String>(
+            value: item,
+            label: item,
+          ),
           controller: _skuController,
           focusNode: _focusNode,
           hintText: 'Search or type SKU manually…',
           bare: true,
           fieldHeight: 46,
           leading: const Icon(Icons.qr_code_scanner_rounded, size: 18),
-          onSelected: (item) => _commit(item.label),
+          onSelected: (item) => _commit(item),
           onSubmitted: _commit,
         ),
       ],

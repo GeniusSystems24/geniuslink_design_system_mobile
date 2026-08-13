@@ -59,12 +59,11 @@ class RolesListScreen extends StatelessWidget {
       body: MScroll([
         for (final r in roles)
           SuperSectionCard2(
-            
             title: "",
-            
+
             initiallyExpanded: true,
             accentColor: (null),
-            
+
             padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

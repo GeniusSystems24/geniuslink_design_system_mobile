@@ -72,7 +72,7 @@ class DashboardScreen extends StatelessWidget {
         subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
         initiallyExpanded: true,
         accentColor: accentColor3,
-        
+
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -82,12 +82,11 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Balances
       SuperSectionCard2(
-        
         title: 'Cash & Asset Accounts',
         subtitle: 'Top balances',
         initiallyExpanded: true,
         accentColor: accentColor2,
-        
+
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -100,12 +99,11 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Recent ops
       SuperSectionCard2(
-        
         title: 'Recent Operations',
-        
+
         initiallyExpanded: true,
         accentColor: accentColor4,
-        
+
         padding: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -128,12 +126,11 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Alerts
       SuperSectionCard2(
-        
         title: 'Needs Attention',
-        
+
         initiallyExpanded: true,
         accentColor: accentColor,
-        
+
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

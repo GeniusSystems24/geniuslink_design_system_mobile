@@ -1,0 +1,36 @@
+GeniusLink super package upgrade report
+=======================================
+Project: F:\genius_systems_development\genius_link_system\genius_link_app_old\geniuslink_design_system_mobile
+Generated: 2026-08-13T06:24:32
+
+Targets:
+- super_table_field: 2.7.0
+- super_auto_suggestion_box: 1.0.0
+
+pubspec.yaml diff:
+(no changes; target versions were already present)
+
+Dart usage audit:
+- super_table_field: 2 file(s)
+  - lib/app/app.dart -> SuperTableTranslation
+  - lib/design_system/adapters/table/m_table.dart -> SuperColumn, SuperMenuEntry, SuperNumberColumn, SuperRow, SuperRowMenuContext, SuperSelectionMode, SuperTable, SuperTableController, SuperTableMode, SuperTextColumn
+- super_auto_suggestion_box: 9 file(s)
+  - lib/app/app.dart -> AutoSuggestionsBoxThemeData
+  - lib/design_system/adapters/form/m_inputs.dart -> AutoSuggestion, AutoSuggestionMatch, AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/design_system/adapters/inventory/m_inv_kit.dart -> AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/features/accounts/presentation/pages/create_group_screen.dart -> AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/features/inventory/presentation/pages/create_product_screen.dart -> AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/features/inventory/presentation/pages/receive_create_screen.dart -> AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/features/inventory/presentation/pages/transfer_create_screen.dart -> AutoSuggestionsBox, AutoSuggestionsBoxController, SuggestionSources
+  - lib/features/ledger/presentation/widgets/journal_line_editor.dart -> AutoSuggestion
+  - lib/features/more/presentation/pages/more_screen.dart -> AutoSuggestion
+
+Validation commands:
+- flutter pub get: exit 127
+- dart format: exit 0
+- flutter analyze: exit 127
+
+Notes:
+- Generated files such as .flutter-plugins-dependencies are not edited manually.
+- flutter pub get is responsible for dependency resolution and generated package metadata.
+- flutter analyze is the final API-compatibility gate for all project components.

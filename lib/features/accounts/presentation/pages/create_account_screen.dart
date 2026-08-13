@@ -17,12 +17,11 @@ class CreateAccountScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Account')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Account Details',
           subtitle: 'Identify and place in the tree',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,12 +61,11 @@ class CreateAccountScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Settings',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

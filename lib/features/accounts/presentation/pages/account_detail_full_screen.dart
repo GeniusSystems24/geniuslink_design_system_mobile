@@ -53,7 +53,7 @@ class AccountDetailFullScreen extends StatelessWidget {
           subtitle: 'As of Dec 18, 2025 16:33',
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -106,12 +106,11 @@ class AccountDetailFullScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Account Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -129,12 +128,11 @@ class AccountDetailFullScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Recent Transactions',
           subtitle: 'Latest entries · running balance',
           initiallyExpanded: true,
           accentColor: accentColor4,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -236,12 +234,11 @@ class AccountDetailFullScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Audit Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -13,9 +13,8 @@ class CreateWithdrawalScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Withdrawal')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Withdrawal Amount',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -35,9 +34,8 @@ class CreateWithdrawalScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Source & Purpose',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,

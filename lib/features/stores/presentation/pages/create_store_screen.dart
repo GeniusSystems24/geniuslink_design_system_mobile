@@ -10,12 +10,11 @@ class CreateStoreScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Store')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Store Details',
           subtitle: 'Name and location',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

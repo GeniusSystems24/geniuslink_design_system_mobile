@@ -124,9 +124,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
       appBar: SuperAppBar(title: const Text('Receive Inventory')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Receive Details',
-          
+
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -140,16 +139,28 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 readOnly: true,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _currencyController,
                 label: 'Currency',
                 hintText: 'Select currency…',
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _storeController,
                 label: 'Receiving Store',
                 hintText: 'Search store…',
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _supplierController,
                 label: 'Supplier Account',
                 hintText: 'e.g. ABC Trading Co.',
@@ -158,7 +169,6 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Inventory Items',
           subtitle:
               '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
@@ -188,9 +198,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Accounting Distribution',
-          
+
           initiallyExpanded: true,
           accentColor: marker4,
           icon: icon4,
@@ -215,9 +224,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Notes & Docs',
-          
+
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,

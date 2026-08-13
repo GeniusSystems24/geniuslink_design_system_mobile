@@ -37,12 +37,11 @@ class MoreScreen extends StatelessWidget {
         ),
         for (final group in groups)
           SuperSectionCard2(
-            
             title: group.title,
-            
+
             initiallyExpanded: true,
             accentColor: accentColor,
-            
+
             padding: EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -75,7 +75,6 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       appBar: SuperAppBar(title: const Text('Create Product')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Product Definition',
           subtitle: 'SKU, names and classification',
           initiallyExpanded: true,
@@ -124,11 +123,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 onValidity: (e) => _nameArErr = e,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _categoryController,
                 label: 'Category',
                 hintText: 'Select category…',
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _uomController,
                 label: 'Unit of Measure',
                 hintText: 'Select unit…',
@@ -137,9 +144,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Costing & Pricing',
-          
+
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -164,6 +170,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 min: 0,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _vatController,
                 label: 'VAT Rate',
                 hintText: 'Select rate…',
@@ -172,9 +182,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Inventory Settings',
-          
+
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
@@ -189,6 +198,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 decimals: 0,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _storeController,
                 label: 'Default Store',
                 hintText: 'Select store…',

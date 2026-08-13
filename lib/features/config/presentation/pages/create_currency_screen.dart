@@ -13,7 +13,6 @@ class CreateCurrencyScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Add Currency')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Currency Definition',
           subtitle: 'ISO code, display names and symbol',
           initiallyExpanded: true,
@@ -45,7 +44,6 @@ class CreateCurrencyScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Precision & Rate',
           subtitle: 'Decimal places and exchange rate against base',
           initiallyExpanded: true,

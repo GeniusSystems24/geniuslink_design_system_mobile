@@ -172,9 +172,8 @@ class AdjustmentScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Adjustment Details',
-          
+
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
@@ -209,12 +208,11 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Variance Summary',
           subtitle: 'Net financial impact of this reconciliation',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -239,12 +237,11 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Adjustment Lines',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -263,9 +260,8 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Documentation & Approval',
-          
+
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,

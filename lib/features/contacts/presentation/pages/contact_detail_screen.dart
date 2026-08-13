@@ -53,7 +53,7 @@ class ContactDetailScreen extends StatelessWidget {
           subtitle: '${c.orderCount} orders · since Apr 2024',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,12 +92,11 @@ class ContactDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: '${contactSingularLabel(d.type)} Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -113,12 +112,11 @@ class ContactDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Transaction History',
           subtitle: 'Recent invoices and payments',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

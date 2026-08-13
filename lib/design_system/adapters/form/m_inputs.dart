@@ -231,8 +231,10 @@ class _MSuggestState extends State<MSuggest> {
   suggest.AutoSuggestionsBoxController<String> _buildController() {
     final initial = _itemForValue(widget.value);
     return suggest.AutoSuggestionsBoxController<String>(
-      source: suggest.SuggestionSources.list<String>(widget.items),
-      initialValue: initial,
+      source: suggest.SuggestionSources.list<String>(
+        widget.items.map((item) => item.value).toList(growable: false),
+      ),
+      initialValue: initial?.value,
       initialText: initial == null ? widget.value : null,
       allowFreeText: widget.allowFreeText,
     );
@@ -258,7 +260,9 @@ class _MSuggestState extends State<MSuggest> {
   void didUpdateWidget(MSuggest oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!_sameItems(oldWidget.items, widget.items)) {
-      _controller.source = suggest.SuggestionSources.list<String>(widget.items);
+      _controller.source = suggest.SuggestionSources.list<String>(
+        widget.items.map((item) => item.value).toList(growable: false),
+      );
     }
     if (oldWidget.allowFreeText != widget.allowFreeText) {
       _controller.allowFreeText = widget.allowFreeText;
@@ -266,7 +270,7 @@ class _MSuggestState extends State<MSuggest> {
     if (oldWidget.value != widget.value) {
       final item = _itemForValue(widget.value);
       if (item != null) {
-        _controller.select(item);
+        _controller.select(item.value);
       } else if (widget.value == null || widget.value!.isEmpty) {
         _controller.clear();
       } else {
@@ -284,6 +288,12 @@ class _MSuggestState extends State<MSuggest> {
 
   @override
   Widget build(BuildContext context) => suggest.AutoSuggestionsBox<String>(
+    suggestionBuilder: (items, index, item) =>
+        _itemForValue(items[index]) ??
+        suggest.AutoSuggestion<String>(
+          value: item,
+          label: item,
+        ),
     controller: _controller,
     label: widget.label,
     hintText: widget.placeholder,
@@ -295,7 +305,7 @@ class _MSuggestState extends State<MSuggest> {
       color: Theme.of(context).colorScheme.onSurfaceVariant,
     ),
     highlightMatch: suggest.AutoSuggestionMatch.contains,
-    onSelected: (item) => widget.onSelected?.call(item.value),
+    onSelected: (item) => widget.onSelected?.call(item),
   );
 }
 

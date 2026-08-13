@@ -15,9 +15,8 @@ class CreateLocalTransferScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create Local Transfer')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Transfer Amount',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -35,9 +34,8 @@ class CreateLocalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Accounts',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
@@ -70,9 +68,8 @@ class CreateLocalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Journal Preview',
-          
+
           initiallyExpanded: false,
           accentColor: accentColor2,
           icon: icon2,

@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 
@@ -215,12 +215,11 @@ class WarehousesListScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Warehouses')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: '5 Warehouses',
           subtitle: 'Capacity & assigned manager',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

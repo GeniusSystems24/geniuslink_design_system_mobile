@@ -36,12 +36,11 @@ class BranchesStoresScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Branches & Stores')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: (null),
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -15,12 +15,11 @@ class OpeningJournalScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Opening Journal')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Entry Details',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,12 +32,11 @@ class OpeningJournalScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Transfer Lines',
           subtitle: '2 lines · balanced',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

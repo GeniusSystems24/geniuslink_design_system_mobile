@@ -47,12 +47,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       appBar: SuperAppBar(title: const Text('Create Account Group')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Group Details',
           subtitle: 'Name and tree association',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,6 +79,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 onValidity: (e) => _nameArErr = e,
               ),
               AutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+                  value: item,
+                  label: item,
+                ),
                 controller: _treeController,
                 label: 'Account Tree',
                 hintText: 'Select a tree…',
@@ -89,12 +92,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Additional Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

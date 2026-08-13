@@ -44,9 +44,8 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
         ),
         for (final s in sections)
           SuperSectionCard2(
-            
             title: s.$1,
-            
+
             initiallyExpanded: true,
             accentColor: s.$2,
             icon: MIcons.of('ledger'),
@@ -75,12 +74,11 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
             ),
           ),
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

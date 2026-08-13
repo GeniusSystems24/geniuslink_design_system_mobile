@@ -51,12 +51,11 @@ class RoleEditorView extends StatelessWidget {
           appBar: SuperAppBar(title: const Text('Role Editor')),
           body: MScroll([
             SuperSectionCard2(
-              
               title: 'Accountant',
               subtitle: '2 members assigned',
               initiallyExpanded: true,
               accentColor: accentColor2,
-              
+
               padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,12 +66,11 @@ class RoleEditorView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              
               title: 'Permission Matrix',
               subtitle: 'Tap a cell to toggle access',
               initiallyExpanded: true,
               accentColor: accentColor,
-              
+
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

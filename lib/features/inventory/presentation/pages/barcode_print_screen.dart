@@ -50,12 +50,11 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
       appBar: SuperAppBar(title: const Text('Barcode Print')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Preview',
           subtitle: 'Code 128 · $size mm',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,9 +137,8 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Label Template',
-          
+
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
@@ -223,9 +221,8 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Print Settings',
-          
+
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -240,7 +237,6 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Queue',
           subtitle: '4 products · 12 labels · 1 sheet',
           initiallyExpanded: true,

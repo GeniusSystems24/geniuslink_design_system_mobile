@@ -30,12 +30,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       appBar: SuperAppBar(title: const Text('User Detail')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: "",
-          
+
           initiallyExpanded: true,
           accentColor: (null),
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,9 +91,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Profile',
-          
+
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
@@ -117,12 +115,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Security',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -211,12 +208,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Active Sessions',
           subtitle: 'Devices currently signed in',
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -316,12 +312,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Recent Activity',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

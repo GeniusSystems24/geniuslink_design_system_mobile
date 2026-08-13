@@ -206,12 +206,11 @@ class InvDashboardScreen extends StatelessWidget {
           ],
         ),
         SuperSectionCard2(
-          
           title: 'Recent Operations',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -290,12 +289,11 @@ class InvDashboardScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Reorder Alerts',
           subtitle: '3 products at or below reorder level',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

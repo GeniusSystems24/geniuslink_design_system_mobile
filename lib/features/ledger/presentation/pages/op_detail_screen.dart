@@ -20,10 +20,10 @@ class OpDetailScreen extends StatelessWidget {
         SuperSectionCard2(
           trailing: trailing,
           title: 'Operation Summary',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,12 +63,11 @@ class OpDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Ledger Lines',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -149,12 +148,11 @@ class OpDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Audit',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: const EdgeInsets.all(16),
           child: AuditColumn(
             connectIndictors: true,

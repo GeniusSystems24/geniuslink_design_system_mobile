@@ -63,12 +63,11 @@ class UsersListView extends StatelessWidget {
               onChange: (v) => list.setFilter('role', v),
             ),
             SuperSectionCard2(
-              
               title: "",
-              
+
               initiallyExpanded: true,
               accentColor: (null),
-              
+
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

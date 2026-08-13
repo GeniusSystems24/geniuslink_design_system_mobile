@@ -37,9 +37,8 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Destination',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
@@ -63,9 +62,8 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Journal Preview',
-          
+
           initiallyExpanded: false,
           accentColor: accentColor2,
           icon: icon2,

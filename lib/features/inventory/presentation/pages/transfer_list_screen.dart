@@ -172,12 +172,11 @@ class _TransferListScreenState extends State<TransferListScreen> {
           ),
         ),
         SuperSectionCard2(
-          
           title: '${visible.length} Transfers',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

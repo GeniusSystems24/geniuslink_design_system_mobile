@@ -41,10 +41,10 @@ class BackupView extends StatelessWidget {
             SuperSectionCard2(
               trailing: trailing,
               title: 'Automatic Backups',
-              
+
               initiallyExpanded: true,
               accentColor: accentColor,
-              
+
               padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,7 +96,6 @@ class BackupView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              
               title: 'Manual Export',
               subtitle: 'Download a portable copy',
               initiallyExpanded: true,
@@ -213,12 +212,11 @@ class BackupView extends StatelessWidget {
               ),
             ),
             SuperSectionCard2(
-              
               title: 'Export History',
-              
+
               initiallyExpanded: true,
               accentColor: accentColor2,
-              
+
               padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

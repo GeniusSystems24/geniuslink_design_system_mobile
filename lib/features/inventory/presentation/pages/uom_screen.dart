@@ -131,12 +131,11 @@ class _UomScreenState extends State<UomScreen> {
           ],
         ),
         SuperSectionCard2(
-          
           title: '${cur.$1} Units',
           subtitle: 'Convert to base ${cur.$2}',
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

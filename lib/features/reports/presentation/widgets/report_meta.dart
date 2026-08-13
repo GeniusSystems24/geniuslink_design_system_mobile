@@ -16,12 +16,11 @@ class ReportMeta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SuperSectionCard2(
-      
       title: "",
-      
+
       initiallyExpanded: true,
       accentColor: (null),
-      
+
       padding: EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

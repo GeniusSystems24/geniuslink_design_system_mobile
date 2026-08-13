@@ -4,6 +4,7 @@ import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
 
 import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
+
 class ReceiveDetailScreen extends StatelessWidget {
   const ReceiveDetailScreen({super.key});
   @override
@@ -27,7 +28,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
           initiallyExpanded: true,
           accentColor: accentColor2,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,12 +69,11 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Receipt Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor4,
-          
+
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,12 +87,11 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Items',
           subtitle: '2 lines · 432 units',
           initiallyExpanded: true,
           accentColor: accentColor3,
-          
+
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -111,12 +110,11 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Audit Information',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
-          
+
           padding: EdgeInsets.all(16),
           child: AuditColumn(
             connectIndictors: true,
@@ -125,7 +123,8 @@ class ReceiveDetailScreen extends StatelessWidget {
                 title: 'Received',
                 doAt: DateTime(2025, 12, 16, 14, 32),
                 doBy: 'Layla A. (ID: 12)',
-                description: 'Linked Journal: JV-2024-0241\nAudit Hash: b3e1…a072',
+                description:
+                    'Linked Journal: JV-2024-0241\nAudit Hash: b3e1…a072',
               ),
             ],
           ),
@@ -141,4 +140,3 @@ class ReceiveDetailScreen extends StatelessWidget {
     );
   }
 }
-

@@ -15,9 +15,8 @@ class CreateExternalTransferScreen extends StatelessWidget {
       appBar: SuperAppBar(title: const Text('Create External Transfer')),
       body: MScroll([
         SuperSectionCard2(
-          
           title: 'Transfer Amount',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -36,9 +35,8 @@ class CreateExternalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'FX Conversion',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
@@ -67,9 +65,8 @@ class CreateExternalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          
           title: 'Beneficiary',
-          
+
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
