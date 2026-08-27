@@ -18,31 +18,31 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   bool _force = false;
   String? _skuErr, _nameEnErr, _nameArErr;
 
-  final _categoryController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _categorySource = SuperAutoSuggestionSources.strings([
       'Steel',
       'Concrete',
       'Lumber',
       'Fasteners',
       'Tools',
-    ]),
+    ]);
+  final _categoryController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _uomController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings(['PCS', 'KG', 'TON', 'M', 'M²', 'LTR']),
+  final _uomSource = SuperAutoSuggestionSources.strings(['PCS', 'KG', 'TON', 'M', 'M²', 'LTR']);
+  final _uomController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _vatController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings(['0%', '5%', '15%']),
+  final _vatSource = SuperAutoSuggestionSources.strings(['0%', '5%', '15%']);
+  final _vatController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
-    initialText: '15%',
+    initialValue: '15%',
   );
-  final _storeController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _storeSource = SuperAutoSuggestionSources.strings([
       'Downtown Central',
       'North Warehouse',
       'East Distribution',
-    ]),
+    ]);
+  final _storeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
 
@@ -122,22 +122,24 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 forceError: _force,
                 onValidity: (e) => _nameArErr = e,
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _categorySource,
                 controller: _categoryController,
-                label: 'Category',
+                decoration: InputDecoration(labelText: 'Category'),
                 hintText: 'Select category…',
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _uomSource,
                 controller: _uomController,
-                label: 'Unit of Measure',
+                decoration: InputDecoration(labelText: 'Unit of Measure'),
                 hintText: 'Select unit…',
               ),
             ],
@@ -169,13 +171,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 decimals: 2,
                 min: 0,
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _vatSource,
                 controller: _vatController,
-                label: 'VAT Rate',
+                decoration: InputDecoration(labelText: 'VAT Rate'),
                 hintText: 'Select rate…',
               ),
             ],
@@ -197,13 +200,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 step: 1,
                 decimals: 0,
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _storeSource,
                 controller: _storeController,
-                label: 'Default Store',
+                decoration: InputDecoration(labelText: 'Default Store'),
                 hintText: 'Select store…',
               ),
               const SuperNumericFormField(

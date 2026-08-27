@@ -1,7 +1,7 @@
 // Reusable vertical audit/activity list.
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/kit.dart';
+import 'package:super_core/super_core.dart';
 
 class AuditItem {
   final String title;
@@ -53,7 +53,7 @@ class AuditColumn extends StatelessWidget {
                 descriptionColor: superTheme.fg2,
                 metadataColor: superTheme.fg3,
                 defaultIndicatorColor: superTheme.fg3,
-                connectorColor: superTheme.fg3.withOpacity(0.40),
+                connectorColor: superTheme.fg3.withValues(alpha: 0.40),
                 connectIndictors: connectIndictors,
                 isFirst: i == 0,
                 isLast: i == items.length - 1,

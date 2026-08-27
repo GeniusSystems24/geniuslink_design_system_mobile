@@ -37,10 +37,10 @@ class JournalLineEditor extends StatelessWidget {
                   icon: 'ledger',
                   items: [
                     for (final account in accounts)
-                      AutoSuggestion<String>(
+                      SuperAutoSuggestionsItem<String>(
                         value: '${account.name} (${account.code})',
-                        label: account.name,
-                        description: '${account.code} · ${account.category}',
+                        titleText: account.name,
+                        descriptionText: '${account.code} · ${account.category}',
                       ),
                   ],
                 ),

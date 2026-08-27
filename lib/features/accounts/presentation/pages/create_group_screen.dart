@@ -16,12 +16,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   bool _force = false;
   String? _nameEnErr, _nameArErr;
 
-  final _treeController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _treeSource = SuperAutoSuggestionSources.strings([
       'Assets Tree (1)',
       'Liabilities Tree (2)',
       'Equity Tree (3)',
-    ]),
+    ]);
+  final _treeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
 
@@ -78,13 +78,14 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 forceError: _force,
                 onValidity: (e) => _nameArErr = e,
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _treeSource,
                 controller: _treeController,
-                label: 'Account Tree',
+                decoration: InputDecoration(labelText: 'Account Tree'),
                 hintText: 'Select a tree…',
                 required: true,
               ),

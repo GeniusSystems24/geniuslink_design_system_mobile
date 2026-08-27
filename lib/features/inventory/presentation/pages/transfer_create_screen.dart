@@ -13,28 +13,28 @@ class TransferCreateScreen extends StatefulWidget {
 }
 
 class _TransferCreateScreenState extends State<TransferCreateScreen> {
-  final _fromController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _fromSource = SuperAutoSuggestionSources.strings([
       'Downtown Central',
       'North Warehouse',
       'East Distribution',
-    ]),
+    ]);
+  final _fromController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _toController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _toSource = SuperAutoSuggestionSources.strings([
       'North Warehouse',
       'Downtown Central',
       'East Distribution',
-    ]),
+    ]);
+  final _toController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _currencyController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _currencySource = SuperAutoSuggestionSources.strings([
       'SAR — Saudi Riyal',
       'USD — US Dollar',
       'EUR — Euro',
-    ]),
+    ]);
+  final _currencyController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
   final _lines = <InventoryLineFormController>[];
@@ -95,25 +95,28 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                 initialValue: 'INV-TRF-2024-0117',
                 readOnly: true,
               ),
-              AutoSuggestionsBox<String>(
+              SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) =>
-                    AutoSuggestion<String>(value: item, label: item),
+                    SuperAutoSuggestionsItem<String>(value: item, titleText: item),
+                source: _currencySource,
                 controller: _currencyController,
-                label: 'Currency',
+                decoration: InputDecoration(labelText: 'Currency'),
                 hintText: 'Select currency…',
               ),
-              AutoSuggestionsBox<String>(
+              SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) =>
-                    AutoSuggestion<String>(value: item, label: item),
+                    SuperAutoSuggestionsItem<String>(value: item, titleText: item),
+                source: _fromSource,
                 controller: _fromController,
-                label: 'From Store',
+                decoration: InputDecoration(labelText: 'From Store'),
                 hintText: 'Search origin warehouse…',
               ),
-              AutoSuggestionsBox<String>(
+              SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) =>
-                    AutoSuggestion<String>(value: item, label: item),
+                    SuperAutoSuggestionsItem<String>(value: item, titleText: item),
+                source: _toSource,
                 controller: _toController,
-                label: 'To Store',
+                decoration: InputDecoration(labelText: 'To Store'),
                 hintText: 'Search destination…',
               ),
             ],

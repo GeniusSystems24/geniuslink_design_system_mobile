@@ -15,12 +15,12 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spotlight = <AutoSuggestion<String>>[
+    final spotlight = <SuperAutoSuggestionsItem<String>>[
       for (final group in groups)
         for (final item in group.items)
-          AutoSuggestion<String>(
+          SuperAutoSuggestionsItem<String>(
             value: item.routeId,
-            label: item.label,
+            titleText: item.label,
             group: group.title,
           ),
     ];

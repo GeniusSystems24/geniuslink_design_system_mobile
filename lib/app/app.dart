@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:super_form_field/super_form_field.dart';
 import 'package:super_table_field/super_table_field.dart';
 
+import 'package:super_core/super_core.dart';
 import '../core/tenancy/tenant_connection.dart';
 import 'controllers/app_controller.dart';
 import 'router/router.dart';
@@ -68,12 +69,12 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
         debugShowCheckedModeBanner: false,
         theme: lightTheme.copyWith(
           extensions: [
-            AutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme),
+            SuperAutoSuggestionsBoxThemeData.fromMaterialTheme(lightTheme),
           ],
         ),
         darkTheme: darkTheme.copyWith(
           extensions: [
-            AutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
+            SuperAutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
           ],
         ),
         supportedLocales: [const Locale('en'), const Locale('ar')],
@@ -83,6 +84,7 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
           GlobalCupertinoLocalizations.delegate,
           // super packages
           SuperTableTranslation.delegate,
+          SuperAutoSuggestionsTranslation.delegate,
           SuperFormTranslation.delegate,
         ],
         themeMode: _appController.themeController.mode,

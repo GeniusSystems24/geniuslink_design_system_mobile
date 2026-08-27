@@ -5,9 +5,9 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:super_table_field/super_table_field.dart'
-    hide FieldDensity, PillTone, SuperThemeData;
-import 'package:super_form_field/super_form_field.dart' hide PillTone;
+import 'package:super_table_field/super_table_field.dart';
+import 'package:super_form_field/super_form_field.dart';
+import 'package:super_core/super_core.dart';
 import '../../components/feedback/m_feedback.dart';
 
 // ============================================================
@@ -42,8 +42,7 @@ export 'package:super_table_field/super_table_field.dart'
         SuperAgg,
         SuperPill,
         SuperTableSkin,
-        SuperDensity,
-        SuperThemeData;
+        SuperDensity;
 
 // ============================================================
 // MTable — mobile wrapper over the design-system SuperTable

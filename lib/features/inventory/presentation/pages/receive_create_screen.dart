@@ -54,28 +54,28 @@ class ReceiveCreateScreen extends StatefulWidget {
 }
 
 class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
-  final _storeController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _storeSource = SuperAutoSuggestionSources.strings([
       'Downtown Central',
       'North Warehouse',
       'East Distribution',
-    ]),
+    ]);
+  final _storeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _supplierController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _supplierSource = SuperAutoSuggestionSources.strings([
       'ABC Trading Co.',
       'SteelMart LLC',
       'ConcretePro Ltd.',
-    ]),
+    ]);
+  final _supplierController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _currencyController = AutoSuggestionsBoxController<String>(
-    source: SuggestionSources.strings([
+  final _currencySource = SuperAutoSuggestionSources.strings([
       'SAR — Saudi Riyal',
       'USD — US Dollar',
       'EUR — Euro',
-    ]),
+    ]);
+  final _currencyController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
   final _lines = <InventoryLineFormController>[];
@@ -138,31 +138,34 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 initialValue: 'INV-REC-2024-0241',
                 readOnly: true,
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _currencySource,
                 controller: _currencyController,
-                label: 'Currency',
+                decoration: InputDecoration(labelText: 'Currency'),
                 hintText: 'Select currency…',
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _storeSource,
                 controller: _storeController,
-                label: 'Receiving Store',
+                decoration: InputDecoration(labelText: 'Receiving Store'),
                 hintText: 'Search store…',
               ),
-              AutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => AutoSuggestion<String>(
+              SuperAutoSuggestionsBox<String>(
+                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
                   value: item,
-                  label: item,
+                  titleText: item,
                 ),
+                source: _supplierSource,
                 controller: _supplierController,
-                label: 'Supplier Account',
+                decoration: InputDecoration(labelText: 'Supplier Account'),
                 hintText: 'e.g. ABC Trading Co.',
               ),
             ],

@@ -14,15 +14,16 @@ import '../../components/layout/m_icons.dart';
 
 export 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart'
     show
-        AutoSuggestion,
-        AutoSuggestionsBox,
-        AutoSuggestionsBoxController,
-        SuggestionSources,
+        SuperAutoSuggestionsItem,
+        SuperAutoSuggestionsBox,
+        SuperAutoSuggestionsController,
+        SuperAutoSuggestionsSource,
+        SuperAutoSuggestionSources,
+        SuperAutoSuggestionsMode,
         AutoSuggestionMatch;
 
 export 'package:super_form_field/super_form_field.dart'
     show
-        FieldDensity,
         SuperBoolFieldController,
         SuperBoolFormField,
         SuperBoolStyle,
@@ -37,6 +38,9 @@ export 'package:super_form_field/super_form_field.dart'
         SuperNumericFormField,
         SuperOption,
         SuperSelectFieldController,
+        SuperSelectSource,
+        SuperSelectListSource,
+        SuperSelectRemoteSource,
         SuperSelectFormField,
         SuperTextFieldController,
         SuperTextFormField,
@@ -147,10 +151,9 @@ class TSelect extends StatelessWidget {
     required: required,
     initialValue: value,
     searchable: options.length > 8,
-    options: [
-      for (final option in options)
+    sources: [SuperSelectListSource<String>(items: options)],
+    optionBuilder: (items, index, option) =>
         SuperOption<String>(value: option, label: option),
-    ],
   );
 }
 
@@ -192,7 +195,7 @@ class TCheckbox extends StatelessWidget {
 /// dropdowns continue to use [TSelect]/`SuperSelectFormField`.
 class MSuggest extends StatefulWidget {
   final String? label;
-  final List<suggest.AutoSuggestion<String>> items;
+  final List<suggest.SuperAutoSuggestionsItem<String>> items;
   final String? value;
   final String? placeholder;
   final bool required;
@@ -217,10 +220,36 @@ class MSuggest extends StatefulWidget {
 }
 
 class _MSuggestState extends State<MSuggest> {
-  late final suggest.AutoSuggestionsBoxController<String> _controller =
-      _buildController();
+  late final TextEditingController? _initialTextController;
+  late final suggest.SuperAutoSuggestionsController<String> _controller;
+  late suggest.SuperAutoSuggestionsSource<String> _source;
 
-  suggest.AutoSuggestion<String>? _itemForValue(String? value) {
+  @override
+  void initState() {
+    super.initState();
+    final initial = _itemForValue(widget.value);
+    _source = _buildSource();
+    _initialTextController = initial == null && (widget.value?.isNotEmpty ?? false)
+        ? TextEditingController(text: widget.value)
+        : null;
+    _controller = suggest.SuperAutoSuggestionsController<String>(
+      textController: _initialTextController,
+      initialValue: initial?.value,
+      allowFreeText: widget.allowFreeText,
+    );
+    if (initial == null &&
+        widget.allowFreeText &&
+        (widget.value?.isNotEmpty ?? false)) {
+      _controller.acceptFreeText();
+    }
+  }
+
+  suggest.SuperAutoSuggestionsSource<String> _buildSource() =>
+      suggest.SuperAutoSuggestionSources.list<String>(
+        widget.items.map((item) => item.value).toList(growable: false),
+      );
+
+  suggest.SuperAutoSuggestionsItem<String>? _itemForValue(String? value) {
     if (value == null) return null;
     for (final item in widget.items) {
       if (item.value == value) return item;
@@ -228,27 +257,16 @@ class _MSuggestState extends State<MSuggest> {
     return null;
   }
 
-  suggest.AutoSuggestionsBoxController<String> _buildController() {
-    final initial = _itemForValue(widget.value);
-    return suggest.AutoSuggestionsBoxController<String>(
-      source: suggest.SuggestionSources.list<String>(
-        widget.items.map((item) => item.value).toList(growable: false),
-      ),
-      initialValue: initial?.value,
-      initialText: initial == null ? widget.value : null,
-      allowFreeText: widget.allowFreeText,
-    );
-  }
-
   bool _sameItems(
-    List<suggest.AutoSuggestion<String>> a,
-    List<suggest.AutoSuggestion<String>> b,
+    List<suggest.SuperAutoSuggestionsItem<String>> a,
+    List<suggest.SuperAutoSuggestionsItem<String>> b,
   ) {
     if (identical(a, b)) return true;
     if (a.length != b.length) return false;
     for (var i = 0; i < a.length; i++) {
       if (a[i].value != b[i].value ||
-          a[i].label != b[i].label ||
+          a[i].titleText != b[i].titleText ||
+          a[i].descriptionText != b[i].descriptionText ||
           a[i].group != b[i].group) {
         return false;
       }
@@ -260,9 +278,7 @@ class _MSuggestState extends State<MSuggest> {
   void didUpdateWidget(MSuggest oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!_sameItems(oldWidget.items, widget.items)) {
-      _controller.source = suggest.SuggestionSources.list<String>(
-        widget.items.map((item) => item.value).toList(growable: false),
-      );
+      _source = _buildSource();
     }
     if (oldWidget.allowFreeText != widget.allowFreeText) {
       _controller.allowFreeText = widget.allowFreeText;
@@ -283,39 +299,47 @@ class _MSuggestState extends State<MSuggest> {
   @override
   void dispose() {
     _controller.dispose();
+    _initialTextController?.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => suggest.AutoSuggestionsBox<String>(
-    suggestionBuilder: (items, index, item) =>
-        _itemForValue(items[index]) ??
-        suggest.AutoSuggestion<String>(
-          value: item,
-          label: item,
+  Widget build(BuildContext context) =>
+      suggest.SuperAutoSuggestionsBox<String>(
+        source: _source,
+        suggestionBuilder: (items, index, item) =>
+            _itemForValue(item) ??
+            suggest.SuperAutoSuggestionsItem<String>(
+              value: item,
+              titleText: item,
+            ),
+        controller: _controller,
+        decoration: InputDecoration(
+          labelText: widget.label,
+          prefixIcon: Icon(
+            MIcons.of(widget.icon),
+            size: 16,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
-    controller: _controller,
-    label: widget.label,
-    hintText: widget.placeholder,
-    required: widget.required,
-    fieldHeight: 46,
-    leading: Icon(
-      MIcons.of(widget.icon),
-      size: 16,
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
-    ),
-    highlightMatch: suggest.AutoSuggestionMatch.contains,
-    onSelected: (item) => widget.onSelected?.call(item),
-  );
+        hintText: widget.placeholder,
+        required: widget.required,
+        fieldHeight: 46,
+        mode: suggest.SuperAutoSuggestionsMode.textBox,
+        highlightMatch: suggest.AutoSuggestionMatch.contains,
+        onSelectionChanged: (items) {
+          if (items.isNotEmpty) widget.onSelected?.call(items.last);
+        },
+      );
 }
 
 /// Convenience mapping from strings to autocomplete rows.
-List<suggest.AutoSuggestion<String>> mSuggestions(
+List<suggest.SuperAutoSuggestionsItem<String>> mSuggestions(
   List<String> options, {
   String? group,
 }) => [
   for (final option in options)
-    suggest.AutoSuggestion<String>(value: option, label: option, group: group),
+    suggest.SuperAutoSuggestionsItem<String>(value: option, titleText: option, group: group),
 ];
 
 /// Compact fixed-set filter backed by `SuperChoiceFormField`.

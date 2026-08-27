@@ -29,7 +29,7 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 
   SuperTabBarController _createTabs() => SuperTabBarController(
     tabs: [
-      BrowserTab(
+      SuperTab(
         id: 1,
         title: 'Chart of Accounts',
         pinned: true,
@@ -38,7 +38,7 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
         pageBuilder: (context, tab) =>
             AccountTreeScreen(roots: widget.accountRoots),
       ),
-      BrowserTab(
+      SuperTab(
         id: 2,
         title: 'Account Detail',
         leading: const Icon(Icons.description_outlined, size: 15),

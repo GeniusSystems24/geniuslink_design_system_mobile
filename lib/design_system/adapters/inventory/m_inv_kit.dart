@@ -17,6 +17,7 @@ import '../../components/buttons/m_buttons.dart';
 
 import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart';
 
+import 'package:super_core/super_core.dart';
 /// Read-only flexible field (plain / locked / select / leading-icon / arabic).
 class IField extends StatelessWidget {
   final String label;
@@ -47,17 +48,17 @@ class IField extends StatelessWidget {
     final leadingIcon = icon == null ? null : MIcons.of(icon!);
     if (select) {
       final options = value == null || value!.isEmpty
-          ? const <SuperOption<String>>[]
-          : <SuperOption<String>>[
-              SuperOption<String>(value: value!, label: value!),
-            ];
+          ? const <String>[]
+          : <String>[value!];
       return SuperSelectFormField<String>(
         decoration: InputDecoration(
           labelText: label,
           hintText: placeholder,
           prefixIcon: leadingIcon == null ? null : Icon(leadingIcon, size: 18),
         ),
-        options: options,
+        sources: [SuperSelectListSource<String>(items: options)],
+        optionBuilder: (items, index, option) =>
+            SuperOption<String>(value: option, label: option),
         initialValue: value,
         required: required,
         readOnly: true,
@@ -351,14 +352,14 @@ class Scanner extends StatefulWidget {
 }
 
 class _ScannerState extends State<Scanner> {
-  final _skuController = suggest.AutoSuggestionsBoxController<String>(
-    source: suggest.SuggestionSources.strings([
+  final _skuSource = suggest.SuperAutoSuggestionSources.strings([
       'CMT-90112 — Portland Cement Type I',
       'STL-44021 — Structural Steel I-Beam',
       'RBR-33210 — Rebar 16mm',
       'PLY-55109 — Plywood 18mm',
       'CBL-66112 — PVC Conduit 25mm',
-    ]),
+    ]);
+  final _skuController = suggest.SuperAutoSuggestionsController<String>(
     allowFreeText: true,
   );
   final _focusNode = FocusNode();
@@ -417,19 +418,27 @@ class _ScannerState extends State<Scanner> {
           ),
         ),
         const SizedBox(height: 12),
-        suggest.AutoSuggestionsBox<String>(
-          suggestionBuilder: (items, index, item) => suggest.AutoSuggestion<String>(
+        suggest.SuperAutoSuggestionsBox<String>(
+          suggestionBuilder: (items, index, item) => suggest.SuperAutoSuggestionsItem<String>(
             value: item,
-            label: item,
+            titleText: item,
           ),
+          source: _skuSource,
           controller: _skuController,
           focusNode: _focusNode,
           hintText: 'Search or type SKU manually…',
           bare: true,
           fieldHeight: 46,
-          leading: const Icon(Icons.qr_code_scanner_rounded, size: 18),
-          onSelected: (item) => _commit(item),
-          onSubmitted: _commit,
+          mode: suggest.SuperAutoSuggestionsMode.textBox,
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+          ),
+          onSelectionChanged: (items) {
+            if (items.isNotEmpty) _commit(items.last);
+          },
+          // 1.2 removed onSubmitted. Treat unmatched manual SKU text as an
+          // inline-created raw String so pressing Enter still commits it.
+          onCreate: (query) => query,
         ),
       ],
     );
