@@ -64,14 +64,51 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
       appBar: SuperAppBar(title: const Text('Account Tree')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SuperTree<Account>(
-          controller: _controller,
-          leadingBuilder: _leading,
-          trailingBuilder: _trailing,
-          title: 'Chart of Accounts',
-          subtitle: 'Roll-up balances · bilingual',
-          nameColumnLabel: 'Account',
-          trailingColumnLabel: 'Balance (SAR)',
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // SuperSectionCard2 renders its body inside an internal Column.
+            // Give the tree an explicit bounded height so its scrollable
+            // viewport remains valid.
+            final availableHeight = constraints.hasBoundedHeight
+                ? constraints.maxHeight
+                : 520.0;
+            final contentHeight = availableHeight > 104
+                ? availableHeight - 104
+                : availableHeight;
+
+            return SuperSectionCard2(
+              title: 'Chart of Accounts',
+              subtitle: 'Roll-up balances · bilingual',
+              icon: Icons.account_tree_outlined,
+              accentColor:
+                  SuperMaterialThemeData.of(context).colorScheme.primary,
+              collapsible: false,
+              dividerAfterHeader: true,
+              margin: EdgeInsets.zero,
+              child: SizedBox(
+                height: contentHeight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Row(
+                      children: [
+                        Expanded(child: Text('Account')),
+                        Text('Balance (SAR)'),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: SuperTree<Account>(
+                        controller: _controller,
+                        leadingBuilder: _leading,
+                        trailingBuilder: _trailing,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

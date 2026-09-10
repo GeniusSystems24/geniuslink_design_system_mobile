@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:super_form_field/super_form_field.dart';
+import 'package:super_navigation_sidebar/super_navigation_sidebar.dart';
 import 'package:super_table_field/super_table_field.dart';
+import 'package:super_tree_field/super_tree.dart';
 
 import 'package:super_core/super_core.dart';
 import '../core/tenancy/tenant_connection.dart';
@@ -83,9 +85,11 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           // super packages
-          SuperTableTranslation.delegate,
+          SuperTableLocalization.delegate,
           SuperAutoSuggestionsTranslation.delegate,
           SuperFormTranslation.delegate,
+          SuperTreeLocalization.delegate,
+          SuperNavigationLocalization.delegate,
         ],
         themeMode: _appController.themeController.mode,
         routerConfig: _router,
