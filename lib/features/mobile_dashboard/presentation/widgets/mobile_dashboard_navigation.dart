@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -110,28 +111,26 @@ class _BottomNavigationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MobileDashboardPressable(
+    final color = selected ? context.mdColors.primary : context.mdTheme.fg3;
+    return LabeledActionTile(
       onTap: onTap,
       semanticLabel: item.label,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            MIcons.of(item.icon),
-            size: 21,
-            color: selected ? context.mdColors.primary : context.mdTheme.fg3,
+      theme: (context.mdComponentTheme.actionTileTheme ??
+              const LabeledActionTileThemeData())
+          .copyWith(
+            gap: 4,
+            minHeight: 48,
+            alignment: Alignment.center,
           ),
-          const SizedBox(height: 4),
-          Text(
-            item.label,
-            style: TextStyle(
-              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-              fontSize: 10,
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-              color: selected ? context.mdColors.primary : context.mdTheme.fg3,
-            ),
-          ),
-        ],
+      top: Icon(MIcons.of(item.icon), size: 21, color: color),
+      bottom: Text(
+        item.label,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 10,
+          fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+          color: color,
+        ),
       ),
     );
   }

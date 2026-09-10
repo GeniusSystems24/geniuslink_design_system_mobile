@@ -1,12 +1,22 @@
 part of 'accounts_extra_screens.dart';
 
 class AccountDetailFullScreen extends StatelessWidget {
-  const AccountDetailFullScreen({super.key});
+  const AccountDetailFullScreen({
+    super.key,
+    this.theme = const AccountDetailFullScreenTheme(),
+  });
+
+  final AccountDetailFullScreenTheme theme;
+
   @override
   Widget build(BuildContext context) {
     final l10n = GeniusLinkLocalization.of(context);
+    final materialTheme = SuperMaterialThemeData.of(context);
+    final colors = materialTheme.colorScheme;
+    final superTheme = materialTheme.superTheme;
+    final fontFamily = materialTheme.textTheme.bodyMedium?.fontFamily;
 
-    const tx = [
+    const transactions = [
       (
         'JV-2024-0042',
         'Dec 15, 14:22',
@@ -40,80 +50,84 @@ class AccountDetailFullScreen extends StatelessWidget {
         '5,100.00',
       ),
     ];
-    var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
-    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
-    var trailing = Pill(l10n.active);
-    var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
+
+    final currentBalanceTopStartStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 14,
+      color: superTheme.fg3,
+    ).merge(theme.currentBalanceContent.topStartStyle);
+
+    final currentBalanceTopEndStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 32,
+      fontWeight: FontWeight.w700,
+      color: colors.secondary,
+      letterSpacing: -0.6,
+    ).merge(theme.currentBalanceContent.topEndStyle);
+
+    TextStyle transactionTopStartStyle() => TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 12,
+          color: colors.primary,
+        ).merge(theme.transactionContent.topStartStyle);
+
+    TextStyle transactionTopEndStyle(bool positive) => TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: positive ? colors.secondary : colors.error,
+        ).merge(
+          positive
+              ? theme.transactionContent.topEndPositiveStyle
+              : theme.transactionContent.topEndNegativeStyle,
+        );
+
+    TextStyle transactionBottomStartStyle() => TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 12,
+          color: superTheme.fg3,
+        ).merge(theme.transactionContent.bottomStartStyle);
+
+    TextStyle transactionBottomEndStyle() => TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 11.5,
+          color: superTheme.fg2,
+        ).merge(theme.transactionContent.bottomEndStyle);
+
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(l10n.accountDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      backgroundColor: theme.backgroundColor ?? colors.surface,
+      appBar: SuperAppBar(
+        title: Text(l10n.accountDetail),
+        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
+      ),
       body: MScroll([
-        SuperSectionCard2(
-          trailing: trailing,
+        AccountDetailCurrentBalanceSection(
           title: l10n.currentBalance,
           subtitle: '${l10n.asOf} Dec 18, 2025 16:33',
-          initiallyExpanded: true,
-          accentColor: accentColor3,
-
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    'SAR',
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 14,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '42,500.00',
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: SuperMaterialThemeData.of(
-                        context,
-                      ).colorScheme.secondary,
-                      letterSpacing: -0.6,
-                    ),
-                  ),
-                ],
-              ),
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 1.7,
-                children: [
-                  Mini(label: l10n.totalDebits, value: '148,920', sub: 'SAR'),
-                  Mini(label: l10n.totalCredits, value: '106,420', sub: 'SAR'),
-                ],
-              ),
-            ],
+          trailing: Pill(l10n.active),
+          accentColor: theme.currentBalanceAccentColor ?? colors.secondary,
+          theme: theme.currentBalanceSection,
+          topStart: Text('SAR', style: currentBalanceTopStartStyle),
+          topEnd: Text('42,500.00', style: currentBalanceTopEndStyle),
+          bottomStart: Mini(
+            label: l10n.totalDebits,
+            value: '148,920',
+            sub: 'SAR',
+          ),
+          bottomEnd: Mini(
+            label: l10n.totalCredits,
+            value: '106,420',
+            sub: 'SAR',
           ),
         ),
         SuperSectionCard2(
           title: l10n.accountInformation,
-
           initiallyExpanded: true,
-          accentColor: accentColor2,
-
-          padding: EdgeInsets.all(16),
+          accentColor: theme.informationAccentColor ?? colors.primary,
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
@@ -129,163 +143,72 @@ class AccountDetailFullScreen extends StatelessWidget {
             ],
           ),
         ),
-        SuperSectionCard2(
+        AccountDetailRecentTransactionsSection(
           title: l10n.recentTransactions,
           subtitle: l10n.latestEntriesRunningBalance,
-          initiallyExpanded: true,
-          accentColor: accentColor4,
-
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < tx.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < tx.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  tx[i].$1,
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 12,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                                ),
-                                Text(
-                                  tx[i].$4,
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                    color: tx[i].$5
-                                        ? SuperMaterialThemeData.of(
-                                            context,
-                                          ).colorScheme.secondary
-                                        : SuperMaterialThemeData.of(
-                                            context,
-                                          ).colorScheme.error,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    '${tx[i].$3} · ${tx[i].$2}',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg3,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  '${l10n.balanceShort} ${tx[i].$6}',
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 11.5,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.fg2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
+          accentColor:
+              theme.recentTransactionsAccentColor ?? colors.secondary,
+          theme: theme.recentTransactionsSection,
+          children: [
+            for (final transaction in transactions)
+              TwoRowTile(
+                theme: theme.transactionTile,
+                topStart: Text(
+                  transaction.$1,
+                  style: transactionTopStartStyle(),
+                ),
+                topEnd: Text(
+                  transaction.$4,
+                  style: transactionTopEndStyle(transaction.$5),
+                ),
+                bottomStart: Text(
+                  '${transaction.$3} · ${transaction.$2}',
+                  style: transactionBottomStartStyle(),
+                ),
+                bottomEnd: Text(
+                  '${l10n.balanceShort} ${transaction.$6}',
+                  style: transactionBottomEndStyle(),
                 ),
               ),
-            ],
-          ),
+          ],
         ),
         SuperSectionCard2(
           title: l10n.auditInformation,
-
           initiallyExpanded: true,
-          accentColor: accentColor,
-
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AuditColumn(
-                connectIndictors: true,
-                items: [
-                  AuditItem(
-                    title: l10n.created,
-                    doAt: DateTime(2024, 4, 12, 9, 21),
-                    doBy: 'Admin User (ID: 5)',
-                    cancelled: true,
-                  ),
-                  AuditItem(
-                    title: l10n.modified,
-                    doAt: DateTime(2025, 11, 2, 15, 48),
-                    doBy: 'Layla A. (ID: 12)',
-                  ),
-                ],
+          accentColor: theme.auditAccentColor ?? colors.tertiary,
+          padding: const EdgeInsets.all(16),
+          child: AuditColumn(
+            connectIndictors: true,
+            items: [
+              AuditItem(
+                title: l10n.created,
+                doAt: DateTime(2024, 4, 12, 9, 21),
+                doBy: 'Admin User (ID: 5)',
+                cancelled: true,
+              ),
+              AuditItem(
+                title: l10n.modified,
+                doAt: DateTime(2025, 11, 2, 15, 48),
+                doBy: 'Layla A. (ID: 12)',
               ),
             ],
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: MBtn(
-                l10n.export,
-                variant: MBtnVariant.secondary,
-                icon: 'download',
-                full: true,
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: MBtn(
-                l10n.back,
-                variant: MBtnVariant.secondary,
-                icon: 'back',
-                full: true,
-                onTap: () => context.goTo('accounts'),
-              ),
-            ),
-          ],
+        AccountDetailActions(
+          theme: theme.actions,
+          start: MBtn(
+            l10n.export,
+            variant: MBtnVariant.secondary,
+            icon: 'download',
+            full: true,
+          ),
+          end: MBtn(
+            l10n.back,
+            variant: MBtnVariant.secondary,
+            icon: 'back',
+            full: true,
+            onTap: () => context.goTo('accounts'),
+          ),
         ),
       ]),
     );

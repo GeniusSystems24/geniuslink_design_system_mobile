@@ -17,6 +17,16 @@ bool userPredicate(
       user.email.toLowerCase().contains(normalized);
 }
 
+/// Page boundary that owns the user-list controller lifecycle.
+///
+/// The screen owns page-level lifecycle/state and delegates visual composition
+/// to presentation widgets under `presentation/widgets`.
+///
+/// Example:
+///
+/// ```dart
+/// UsersListScreen(users: users)
+/// ```
 class UsersListScreen extends StatefulWidget {
   final List<UserSummary> users;
 

@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 import 'package:super_core/super_core.dart';
 
@@ -164,6 +165,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
   final double factor;
   final bool last;
   final VoidCallback? onTap;
+  final TwoRowTileThemeData? theme;
 
   const MobileDashboardSearchResultRow({
     required this.operation,
@@ -172,84 +174,68 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
     required this.factor,
     required this.last,
     this.onTap,
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.mdTheme;
     final amountColor = operation.isCredit
         ? context.mdColors.secondary
         : context.mdColors.error;
     final sign = operation.isCredit ? '+' : '−';
     final amount = (operation.amounts[currency] ?? 0) * factor;
-    final content = Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-        border: last ? null : Border(bottom: BorderSide(color: theme.border)),
+
+    return TwoRowTile(
+      onTap: onTap,
+      semanticLabel: '${operation.description}, $domain',
+      showBottomDivider: !last,
+      theme: theme ??
+          context.mdComponentTheme.twoRowTheme ??
+          TwoRowTileThemeData(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            rowGap: 7,
+            columnGap: 10,
+            dividerColor: context.mdTheme.border,
+          ),
+      topStart: Text(
+        operation.description,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: context.mdTheme.fg1,
+        ),
       ),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  operation.description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: theme.fg1,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: amountColor,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 7),
-          Row(
-            children: [
-              Text(
-                operation.reference,
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: context.mdColors.primary,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                domain.toUpperCase(),
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 10.5,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: theme.fg3,
-                ),
-              ),
-            ],
-          ),
-        ],
+      topEnd: Text(
+        '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: amountColor,
+        ),
+      ),
+      bottomStart: Text(
+        operation.reference,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 11,
+          color: context.mdColors.primary,
+        ),
+      ),
+      bottomEnd: Text(
+        domain.toUpperCase(),
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 10.5,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.4,
+          color: context.mdTheme.fg3,
+        ),
       ),
     );
-
-    if (onTap == null) {
-      return content;
-    }
-
-    return InkWell(onTap: onTap, child: content);
   }
 }

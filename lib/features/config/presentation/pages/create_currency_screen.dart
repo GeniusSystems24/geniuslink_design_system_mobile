@@ -1,70 +1,16 @@
+// componentized-by: dismantle_config_contacts_dashboard_inventory_ledger_pages.py
 part of 'currencies_screens.dart';
 
-class CreateCurrencyScreen extends StatelessWidget {
+/// Public page boundary for [CreateCurrencyView].
+///
+/// The page keeps the original screen API stable while delegating the
+/// existing rendering and presentation state to the view component.
+///
+/// Example:
+///
+/// ```dart
+/// const CreateCurrencyScreen()
+/// ```
+class CreateCurrencyScreen extends CreateCurrencyView {
   const CreateCurrencyScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var icon = MIcons.of('ledger');
-    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
-    var icon2 = MIcons.of('swap');
-    return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).addCurrency), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
-      body: MScroll([
-        SuperSectionCard2(
-          title: GeniusLinkLocalization.of(context).currencyDefinition,
-          subtitle: GeniusLinkLocalization.of(context).isoCodeDisplayNamesAndSymbol,
-          initiallyExpanded: true,
-          accentColor: accentColor2,
-          icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).isoCode,
-                placeholder: GeniusLinkLocalization.of(context).eGUsd,
-                mono: true,
-                required: true,
-              ),
-              IField(label: GeniusLinkLocalization.of(context).symbol, placeholder: 'e.g. \$', required: true),
-              IField(
-                label: GeniusLinkLocalization.of(context).nameEnglish,
-                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
-                required: true,
-              ),
-              IField(
-                label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
-                ar: true,
-                required: true,
-              ),
-            ],
-          ),
-        ),
-        SuperSectionCard2(
-          title: GeniusLinkLocalization.of(context).precisionRate,
-          subtitle: GeniusLinkLocalization.of(context).decimalPlacesAndExchangeRateAgainstBase,
-          initiallyExpanded: true,
-          accentColor: accentColor,
-          icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IField(label: GeniusLinkLocalization.of(context).decimalPlaces, value: '2', select: true),
-              IField(
-                label: GeniusLinkLocalization.of(context).exchangeRatePer1Sar,
-                placeholder: GeniusLinkLocalization.of(context).eG3750200,
-                mono: true,
-              ),
-              IToggle(label: GeniusLinkLocalization.of(context).setAsBaseCurrency, on: false),
-            ],
-          ),
-        ),
-        const ActionRow(primary: 'Add Currency'),
-      ]),
-    );
-  }
 }

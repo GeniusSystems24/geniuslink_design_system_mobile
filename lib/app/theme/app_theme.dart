@@ -6,7 +6,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gl_mobile_app/design_system/kit.dart';
 import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
 
 // APP_READABILITY_THEME_V2

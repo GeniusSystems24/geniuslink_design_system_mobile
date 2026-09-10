@@ -4,3 +4,5 @@ export 'user_role_chip.dart';
 export 'user_session_banner.dart';
 export 'user_status_dot.dart';
 export 'users_list_view.dart';
+export 'create_user_view.dart';
+export 'user_detail_view.dart';

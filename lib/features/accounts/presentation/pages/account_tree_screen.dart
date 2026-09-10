@@ -3,8 +3,14 @@ part of 'accounts_extra_screens.dart';
 class AccountTreeScreen extends StatefulWidget {
   final List<AccountNode> roots;
   final ValueChanged<Account>? onAccountOpen;
+  final AccountTreeScreenThemeData theme;
 
-  const AccountTreeScreen({required this.roots, this.onAccountOpen, super.key});
+  const AccountTreeScreen({
+    required this.roots,
+    this.onAccountOpen,
+    this.theme = const AccountTreeScreenThemeData(),
+    super.key,
+  });
 
   @override
   State<AccountTreeScreen> createState() => _AccountTreeScreenState();
@@ -45,11 +51,11 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
       )..expandAll();
 
   static TreeNode<Account> _toTreeNode(AccountNode node) => TreeNode<Account>(
-    code: node.account.code,
-    name: node.account.name,
-    value: node.account,
-    children: node.children.map(_toTreeNode).toList(growable: false),
-  );
+        code: node.account.code,
+        name: node.account.name,
+        value: node.account,
+        children: node.children.map(_toTreeNode).toList(growable: false),
+      );
 
   @override
   void dispose() {
@@ -60,63 +66,47 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = GeniusLinkLocalization.of(context);
+    final materialTheme = SuperMaterialThemeData.of(context);
+    final fontFamily = materialTheme.textTheme.bodyMedium?.fontFamily;
+
+    final headerStartStyle = TextStyle(
+      fontFamily: fontFamily,
+      color: materialTheme.superTheme.fg2,
+    ).merge(widget.theme.headerStartStyle);
+    final headerEndStyle = TextStyle(
+      fontFamily: fontFamily,
+      color: materialTheme.superTheme.fg2,
+    ).merge(widget.theme.headerEndStyle);
 
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(l10n.accountTree), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            // SuperSectionCard2 renders its body inside an internal Column.
-            // Give the tree an explicit bounded height so its scrollable
-            // viewport remains valid.
-            final availableHeight = constraints.hasBoundedHeight
-                ? constraints.maxHeight
-                : 520.0;
-            final contentHeight = availableHeight > 104
-                ? availableHeight - 104
-                : availableHeight;
-
-            return SuperSectionCard2(
-              title: l10n.chartOfAccounts,
-              subtitle: l10n.rollUpBalancesBilingual,
-              icon: Icons.account_tree_outlined,
-              accentColor:
-                  SuperMaterialThemeData.of(context).colorScheme.primary,
-              collapsible: false,
-              dividerAfterHeader: true,
-              margin: EdgeInsets.zero,
-              child: SizedBox(
-                height: contentHeight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(child: Text(l10n.account)),
-                        Text(l10n.balanceSar),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Expanded(
-                      child: SuperTree<Account>(
-                        controller: _controller,
-                        leadingBuilder: _leading,
-                        trailingBuilder: _trailing,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
+      backgroundColor:
+          widget.theme.backgroundColor ?? materialTheme.colorScheme.surface,
+      appBar: SuperAppBar(
+        title: Text(l10n.accountTree),
+        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
+      ),
+      body: AccountTreeSection(
+        title: l10n.chartOfAccounts,
+        subtitle: l10n.rollUpBalancesBilingual,
+        icon: Icons.account_tree_outlined,
+        accentColor:
+            widget.theme.accentColor ?? materialTheme.colorScheme.primary,
+        theme: widget.theme.section,
+        headerStart: Text(l10n.account, style: headerStartStyle),
+        headerEnd: Text(l10n.balanceSar, style: headerEndStyle),
+        content: SuperTree<Account>(
+          controller: _controller,
+          leadingBuilder: _leading,
+          trailingBuilder: _trailing,
         ),
       ),
     );
   }
 
-  static Widget _leading(
+  Widget _leading(
     BuildContext context,
     TreeNode<Account> node,
     TreeRowInfo info,
@@ -124,26 +114,31 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
     final color = _typeDot(context)[node.value?.type];
     if (color == null) return const SizedBox.shrink();
     return Container(
-      width: 7,
-      height: 7,
+      width: widget.theme.typeDotSize,
+      height: widget.theme.typeDotSize,
       decoration: BoxDecoration(color: color, shape: BoxShape.circle),
     );
   }
 
-  static Widget? _trailing(
+  Widget? _trailing(
     BuildContext context,
     TreeNode<Account> node,
     TreeRowInfo info,
   ) {
+    final materialTheme = SuperMaterialThemeData.of(context);
+    final baseStyle = TextStyle(
+      fontFamily: materialTheme.textTheme.bodyMedium?.fontFamily,
+      fontSize: 12,
+      fontWeight: info.depth == 0 ? FontWeight.w700 : FontWeight.w500,
+      color: materialTheme.superTheme.fg1,
+    );
+
     return Text(
       _fmtAmount(_treeTotal(node)),
-      style: TextStyle(
-        fontFamily: SuperMaterialThemeData.of(
-          context,
-        ).textTheme.bodyMedium?.fontFamily,
-        fontSize: 12,
-        fontWeight: info.depth == 0 ? FontWeight.w700 : FontWeight.w500,
-        color: SuperMaterialThemeData.of(context).superTheme.fg1,
+      style: baseStyle.merge(
+        info.depth == 0
+            ? widget.theme.rootAmountStyle ?? widget.theme.amountStyle
+            : widget.theme.amountStyle,
       ),
     );
   }

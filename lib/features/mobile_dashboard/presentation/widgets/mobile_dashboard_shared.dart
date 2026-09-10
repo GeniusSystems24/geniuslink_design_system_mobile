@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 
 import '../../../../design_system/kit.dart';
@@ -40,21 +41,24 @@ class MobileDashboardViewAllButton extends StatelessWidget {
 class MobileDashboardPill extends StatelessWidget {
   final String label;
   final Color color;
+  final StatusBadgeThemeData? theme;
 
   const MobileDashboardPill({
     required this.label,
     required this.color,
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: superCoreTint(color, 0x24),
-        borderRadius: BorderRadius.circular(999),
-      ),
+    return StatusBadge(
+      theme: theme ??
+          context.mdComponentTheme.badgeTheme ??
+          StatusBadgeThemeData(
+            backgroundColor: superCoreTint(color, 0x24),
+            foregroundColor: color,
+          ),
       child: Text(
         label.toUpperCase(),
         style: TextStyle(
@@ -62,7 +66,6 @@ class MobileDashboardPill extends StatelessWidget {
           fontSize: 9,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.4,
-          color: color,
         ),
       ),
     );

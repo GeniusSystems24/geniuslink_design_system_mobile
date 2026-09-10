@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 import 'package:gl_mobile_app/features/mobile_dashboard/domain/domain.dart';
@@ -85,86 +86,74 @@ class WorkspaceMenuItem extends StatelessWidget {
   final MdWorkspace workspace;
   final bool selected;
   final VoidCallback onTap;
+  final DirectionalSlotTileThemeData? theme;
 
   const WorkspaceMenuItem({
     super.key,
     required this.workspace,
     required this.selected,
     required this.onTap,
+    this.theme,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return DirectionalSlotTile(
       onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        constraints: const BoxConstraints(minHeight: 48),
-        decoration: BoxDecoration(
-          color: selected ? context.mdTheme.hover : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
+      semanticLabel: workspace.name,
+      theme: theme ??
+          DirectionalSlotTileThemeData(
+            minHeight: 48,
+            padding: const EdgeInsets.all(10),
+            backgroundColor: selected ? context.mdTheme.hover : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            pressableTheme: const PressableSurfaceThemeData(pressedScale: 1),
+          ),
+      start: IconSurface(
+        theme: IconSurfaceThemeData(
+          size: 34,
+          backgroundColor: selected
+              ? context.mdColors.primary
+              : context.mdTheme.inputBg,
+          borderRadius: BorderRadius.circular(9),
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 34,
-              height: 34,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: selected
-                    ? context.mdColors.primary
-                    : context.mdTheme.inputBg,
-                borderRadius: BorderRadius.circular(9),
-              ),
-              child: Text(
-                workspace.name.isEmpty ? '?' : workspace.name[0],
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.headlineMedium?.fontFamily,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: selected
-                      ? context.mdColors.onPrimary
-                      : context.mdTheme.fg3,
-                ),
-              ),
-            ),
-            const SizedBox(width: 11),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    workspace.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w600,
-                      color: context.mdTheme.fg1,
-                    ),
-                  ),
-                  Text(
-                    workspace.subtitle,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                      fontSize: 10.5,
-                      color: context.mdTheme.fg3,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (selected)
-              Icon(
-                MIcons.of('check'),
-                size: 16,
-                color: context.mdColors.primary,
-              ),
-          ],
+        child: Text(
+          workspace.name.isEmpty ? '?' : workspace.name[0],
+          style: TextStyle(
+            fontFamily: context.mdTextTheme.headlineMedium?.fontFamily,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            color: selected ? context.mdColors.onPrimary : context.mdTheme.fg3,
+          ),
         ),
       ),
+      center: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            workspace.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 13.5,
+              fontWeight: FontWeight.w600,
+              color: context.mdTheme.fg1,
+            ),
+          ),
+          Text(
+            workspace.subtitle,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 10.5,
+              color: context.mdTheme.fg3,
+            ),
+          ),
+        ],
+      ),
+      end: selected
+          ? Icon(MIcons.of('check'), size: 16, color: context.mdColors.primary)
+          : null,
     );
   }
 }

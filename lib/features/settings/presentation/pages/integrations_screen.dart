@@ -4,6 +4,18 @@ import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../domain/domain.dart';
 import '../widgets/integrations_view.dart';
 
+/// Route/page boundary for the Integrations feature view.
+///
+/// The screen preserves the existing public navigation API and delegates UI
+/// composition to its corresponding `*View` widget.
+///
+/// Example:
+///
+/// ```dart
+/// IntegrationsScreen(
+///   integrations: integrations,
+/// )
+/// ```
 class IntegrationsScreen extends StatefulWidget {
   final List<IntegrationDefinition> integrations;
 

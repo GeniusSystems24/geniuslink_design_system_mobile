@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/features/mobile_dashboard/presentation/controllers/mobile_dashboard_controller.dart';
 
@@ -237,102 +238,59 @@ class MobileDashboardPeriodSelector extends StatelessWidget {
   final String period;
   final ValueChanged<String> onChanged;
   final List<String> periods;
+  final SegmentedSlotSelectorThemeData? theme;
 
   const MobileDashboardPeriodSelector({
     required this.period,
     required this.onChanged,
     this.periods = const ['week', 'month'],
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (periods.isEmpty) return const SizedBox.shrink();
     final activePeriod = periods.contains(period) ? period : periods.first;
-
-    return Container(
-      height: 38,
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        color: context.mdTheme.inputBg,
-        border: Border.all(color: context.mdTheme.border),
-        borderRadius: BorderRadius.circular(9),
-      ),
-      child: Row(
-        children: [
-          for (final item in periods)
-            Expanded(
-              child: _PeriodOption(
-                period: item,
-                selected: item == activePeriod,
-                onTap: () => onChanged(item),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PeriodOption extends StatelessWidget {
-  final String period;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _PeriodOption({
-    required this.period,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final label = switch (period) {
+    final selectedIndex = periods.indexOf(activePeriod);
+    String labelFor(String value) => switch (value) {
       'week' => 'Week',
       'month' => 'Month',
-      _ => period,
+      _ => value,
     };
 
-    return Semantics(
-      button: true,
-      selected: selected,
-      label: '$label comparison period',
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(7),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 160),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: selected ? context.mdColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: selected
-                  ? [
-                      BoxShadow(
-                        color: context.mdColors.primary.withValues(alpha: 0.18),
-                        blurRadius: 6,
-                        offset: const Offset(0, 2),
-                      ),
-                    ]
-                  : null,
-            ),
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                fontSize: 12,
-                fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-                color: selected
-                    ? context.mdColors.onPrimary
-                    : context.mdTheme.fg3,
-              ),
+    return SegmentedSlotSelector(
+      selectedIndex: selectedIndex,
+      onChanged: (index) => onChanged(periods[index]),
+      semanticLabels: [
+        for (final item in periods) '${labelFor(item)} comparison period',
+      ],
+      theme: theme ??
+          context.mdComponentTheme.segmentedSelectorTheme ??
+          SegmentedSlotSelectorThemeData(
+            minHeight: 38,
+            backgroundColor: context.mdTheme.inputBg,
+            borderColor: context.mdTheme.border,
+            borderRadius: BorderRadius.circular(9),
+            optionBorderRadius: BorderRadius.circular(7),
+            selectedBackgroundColor: context.mdColors.primary,
+            selectedForegroundColor: context.mdColors.onPrimary,
+            unselectedForegroundColor: context.mdTheme.fg3,
+          ),
+      options: [
+        for (var index = 0; index < periods.length; index++)
+          Text(
+            labelFor(periods[index]),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 12,
+              fontWeight:
+                  index == selectedIndex ? FontWeight.w700 : FontWeight.w600,
             ),
           ),
-        ),
-      ),
+      ],
     );
   }
 }

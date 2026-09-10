@@ -1,8 +1,8 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
-import 'mobile_dashboard_pressable.dart';
 import 'mobile_dashboard_theme.dart';
 
 String mobileDashboardAttentionIcon(String id) => switch (id) {
@@ -61,93 +61,90 @@ class MobileDashboardAttentionRow extends StatelessWidget {
   final MdAttention item;
   final bool last;
   final VoidCallback onTap;
+  final DirectionalSlotTileThemeData? theme;
 
   const MobileDashboardAttentionRow({
     required this.item,
     required this.last,
     required this.onTap,
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final color = mobileDashboardToneColor(context, item.tone);
-    return MobileDashboardPressable(
+    final rowTheme = theme ??
+        context.mdComponentTheme.rowTheme ??
+        DirectionalSlotTileThemeData(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          dividerColor: context.mdTheme.border,
+        );
+
+    return DirectionalSlotTile(
       onTap: onTap,
       semanticLabel: '${item.label}, ${item.count}',
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          border: last
-              ? null
-              : Border(bottom: BorderSide(color: context.mdTheme.border)),
+      showBottomDivider: !last,
+      theme: rowTheme,
+      start: IconSurface(
+        theme: context.mdComponentTheme.iconSurfaceTheme ??
+            IconSurfaceThemeData(
+              size: 38,
+              backgroundColor: superCoreTint(color, 0x29),
+              borderRadius: BorderRadius.circular(10),
+            ),
+        child: Icon(
+          MIcons.of(mobileDashboardAttentionIcon(item.id)),
+          size: 18,
+          color: color,
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 38,
-              height: 38,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: superCoreTint(color, 0x29),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                MIcons.of(mobileDashboardAttentionIcon(item.id)),
-                size: 18,
-                color: color,
-              ),
+      ),
+      center: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.label,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 13.5,
+              fontWeight: FontWeight.w600,
+              color: context.mdTheme.fg1,
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.label,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w600,
-                      color: context.mdTheme.fg1,
-                    ),
-                  ),
-                  const SizedBox(height: 1),
-                  Text(
-                    item.description,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                      fontSize: 11.5,
-                      color: context.mdTheme.fg3,
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          const SizedBox(height: 1),
+          Text(
+            item.description,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 11.5,
+              color: context.mdTheme.fg3,
             ),
-            const SizedBox(width: 8),
-            Container(
-              constraints: const BoxConstraints(minWidth: 24),
-              height: 24,
-              alignment: Alignment.center,
+          ),
+        ],
+      ),
+      end: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          StatusBadge(
+            theme: StatusBadgeThemeData(
+              minWidth: 24,
+              minHeight: 24,
               padding: const EdgeInsets.symmetric(horizontal: 7),
-              decoration: BoxDecoration(
-                color: superCoreTint(color, 0x29),
-                borderRadius: BorderRadius.circular(999),
-              ),
-              child: Text(
-                '${item.count}',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                ),
+              backgroundColor: superCoreTint(color, 0x29),
+              foregroundColor: color,
+            ),
+            child: Text(
+              '${item.count}',
+              style: TextStyle(
+                fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(width: 6),
-            Icon(MIcons.of('chevR'), size: 16, color: context.mdTheme.fg4),
-          ],
-        ),
+          ),
+          const SizedBox(width: 6),
+          Icon(MIcons.of('chevR'), size: 16, color: context.mdTheme.fg4),
+        ],
       ),
     );
   }

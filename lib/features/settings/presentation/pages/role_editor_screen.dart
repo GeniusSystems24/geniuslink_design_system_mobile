@@ -4,6 +4,19 @@ import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../domain/domain.dart';
 import '../widgets/role_editor_view.dart';
 
+/// Route/page boundary for the RoleEditor feature view.
+///
+/// The screen preserves the existing public navigation API and delegates UI
+/// composition to its corresponding `*View` widget.
+///
+/// Example:
+///
+/// ```dart
+/// RoleEditorScreen(
+///   modules: modules,
+///   initialAccess: initialAccess,
+/// )
+/// ```
 class RoleEditorScreen extends StatefulWidget {
   final List<RoleModuleDefinition> modules;
   final Map<String, RoleAccess> initialAccess;

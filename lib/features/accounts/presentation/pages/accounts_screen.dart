@@ -3,78 +3,54 @@ part of 'accounts_screens.dart';
 class AccountsScreen extends StatelessWidget {
   final List<Account> accounts;
   final ValueChanged<Account>? onAccountSelected;
+  final AccountsScreenThemeData theme;
 
   const AccountsScreen({
     required this.accounts,
     this.onAccountSelected,
+    this.theme = const AccountsScreenThemeData(),
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = GeniusLinkLocalization.of(context);
+    final materialTheme = SuperMaterialThemeData.of(context);
 
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(l10n.accounts), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      backgroundColor:
+          theme.backgroundColor ?? materialTheme.colorScheme.surface,
+      appBar: SuperAppBar(
+        title: Text(l10n.accounts),
+        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
+      ),
       body: MScroll([
-        Container(
-          height: 44,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            color: SuperMaterialThemeData.of(context).superTheme.inputBg,
-            border: Border.all(
-              color: SuperMaterialThemeData.of(context).superTheme.borderStrong,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.search_rounded,
-                size: 16,
-                color: SuperMaterialThemeData.of(context).superTheme.fg3,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                l10n.searchAccounts,
-                style: TextStyle(
-                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                  fontSize: 14,
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                ),
-              ),
-            ],
-          ),
+        AccountsSearchPrompt(
+          theme: theme.searchPrompt,
+          start: const Icon(Icons.search_rounded, size: 16),
+          center: Text(l10n.searchAccounts),
         ),
-        SuperSectionCard2(
-          title: "",
-
-          initiallyExpanded: true,
-          accentColor: (null),
-
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (int i = 0; i < accounts.length; i++)
-                AccountRow(
-                  account: accounts[i],
-                  last: i == accounts.length - 1,
-                  onTap: () {
-                    final callback = onAccountSelected;
-                    if (callback != null) {
-                      callback(accounts[i]);
-                    } else {
-                      context.goTo('accountDetail');
-                    }
-                  },
-                ),
-            ],
-          ),
+        AccountsListSection(
+          theme: theme.listSection,
+          children: [
+            for (int index = 0; index < accounts.length; index++)
+              AccountRow(
+                account: accounts[index],
+                last: index == accounts.length - 1,
+                theme: theme.accountRow,
+                onTap: () {
+                  final callback = onAccountSelected;
+                  if (callback != null) {
+                    callback(accounts[index]);
+                  } else {
+                    context.goTo('accountDetail');
+                  }
+                },
+              ),
+          ],
         ),
       ]),
     );

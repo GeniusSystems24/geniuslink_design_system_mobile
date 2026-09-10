@@ -4,6 +4,16 @@ import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../domain/domain.dart';
 import '../widgets/roles_permissions_view.dart';
 
+/// Page boundary that owns role-permission form-controller lifecycle.
+///
+/// The screen owns page-level lifecycle/state and delegates visual composition
+/// to presentation widgets under `presentation/widgets`.
+///
+/// Example:
+///
+/// ```dart
+/// const RolesPermissionsScreen()
+/// ```
 class RolesPermissionsScreen extends StatefulWidget {
   final String initialRole;
   final RolePermissionMatrix? initialMatrix;

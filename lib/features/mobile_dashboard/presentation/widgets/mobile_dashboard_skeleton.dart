@@ -1,6 +1,8 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 
 import 'mobile_dashboard_theme.dart';
+import '../../../../design_system/kit.dart';
 
 /// Animated ERP loading placeholder whose colors are derived from the active
 /// `super_core` theme.
@@ -8,7 +10,7 @@ import 'mobile_dashboard_theme.dart';
 /// Each placeholder owns a short-lived animation only while it is mounted. The
 /// dashboard mounts these widgets exclusively for loading states, so normal
 /// content does not retain animation controllers or repaint work.
-class MobileDashboardSkeleton extends StatefulWidget {
+class MobileDashboardSkeleton extends StatelessWidget {
   final double width;
   final double height;
   final BorderRadiusGeometry borderRadius;
@@ -23,116 +25,28 @@ class MobileDashboardSkeleton extends StatefulWidget {
   });
 
   @override
-  State<MobileDashboardSkeleton> createState() =>
-      _MobileDashboardSkeletonState();
-}
-
-class _MobileDashboardSkeletonState extends State<MobileDashboardSkeleton>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  bool _animationsDisabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.duration);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final media = MediaQuery.maybeOf(context);
-    final disabled =
-        (media?.disableAnimations ?? false) ||
-        (media?.accessibleNavigation ?? false);
-    if (disabled == _animationsDisabled && _controller.isAnimating) {
-      return;
-    }
-    _animationsDisabled = disabled;
-    if (_animationsDisabled) {
-      _controller.stop();
-    } else {
-      _controller.repeat();
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant MobileDashboardSkeleton oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.duration != widget.duration) {
-      _controller.duration = widget.duration;
-      if (!_animationsDisabled) {
-        _controller.repeat();
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final baseColor = context.mdTheme.inputBg;
     final highlightColor = Color.alphaBlend(
       context.mdColors.onSurface.withValues(
-        alpha: context.mdMaterialTheme.brightness == Brightness.dark
-            ? 0.12
-            : 0.07,
+        alpha: context.mdMaterialTheme.brightness == Brightness.dark ? 0.12 : 0.07,
       ),
       baseColor,
     );
-    final transparentColor = baseColor.withValues(alpha: 0);
 
-    Widget placeholder({required AlignmentGeometry highlightAlignment}) {
-      return RepaintBoundary(
-        child: SizedBox(
-          width: widget.width,
-          height: widget.height,
-          child: ClipRRect(
-            borderRadius: widget.borderRadius,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                ColoredBox(color: baseColor),
-                if (!_animationsDisabled)
-                  FractionallySizedBox(
-                    widthFactor: 0.55,
-                    alignment: highlightAlignment,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            transparentColor,
-                            highlightColor,
-                            transparentColor,
-                          ],
-                          stops: const [0, 0.5, 1],
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    return ExcludeSemantics(
-      child: _animationsDisabled
-          ? placeholder(highlightAlignment: Alignment.center)
-          : AnimatedBuilder(
-              animation: _controller,
-              builder: (_, _) => placeholder(
-                highlightAlignment: Alignment(-3 + (_controller.value * 6), 0),
-              ),
-            ),
+    return AnimatedSkeletonBox(
+      width: width,
+      height: height,
+      borderRadius: borderRadius,
+      theme: AnimatedSkeletonBoxThemeData(
+        baseColor: baseColor,
+        highlightColor: highlightColor,
+        duration: duration,
+      ),
     );
   }
 }
+
 
 /// Loading state for the ERP hero at the top of every dashboard.
 class MobileDashboardErpHeroSkeleton extends StatelessWidget {
@@ -294,12 +208,11 @@ class MobileDashboardMetricGridSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
+    return AdaptiveSlotGrid(
+      minItemWidth: 145,
+      maxColumns: 2,
+      runSpacing: 12,
+      spacing: 12,
       childAspectRatio: 1.45,
       children: [
         for (var index = 0; index < itemCount; index++)
@@ -578,12 +491,11 @@ class MobileDashboardQuickActionsSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const MobileDashboardSectionTitleSkeleton(showTrailing: true),
-        GridView.count(
-          crossAxisCount: 4,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+        AdaptiveSlotGrid(
+          minItemWidth: 68,
+          maxColumns: 4,
+          runSpacing: 10,
+          spacing: 10,
           childAspectRatio: 0.82,
           children: [
             for (var index = 0; index < itemCount; index++)

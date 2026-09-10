@@ -4,6 +4,20 @@ import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../domain/domain.dart';
 import '../widgets/notifications_view.dart';
 
+/// Route/page boundary for the Notifications feature view.
+///
+/// The screen preserves the existing public navigation API and delegates UI
+/// composition to its corresponding `*View` widget.
+///
+/// Example:
+///
+/// ```dart
+/// NotificationsScreen(
+///   categories: categories,
+///   channels: channels,
+///   initialPreferences: initialPreferences,
+/// )
+/// ```
 class NotificationsScreen extends StatefulWidget {
   final List<NotificationCategory> categories;
   final List<NotificationChannel> channels;

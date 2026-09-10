@@ -7,6 +7,17 @@ import 'platform_mono_text.dart';
 import 'platform_toggle.dart';
 import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
+/// Reusable presentation view for `IntegrationsScreen`.
+///
+/// The owning screen manages route/lifecycle concerns while this widget
+/// renders the feature UI from the values/controllers supplied by its caller.
+///
+/// Example:
+///
+/// ```dart
+/// // Supply the constructor arguments required by the view.
+/// IntegrationsView(/* ... */)
+/// ```
 class IntegrationsView extends StatelessWidget {
   final List<IntegrationDefinition> integrations;
   final FormController controller;

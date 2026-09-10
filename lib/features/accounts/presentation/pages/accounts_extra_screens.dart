@@ -18,23 +18,7 @@ part 'accounts_extra_tabs.dart';
 part 'account_detail_full_screen.dart';
 part 'account_tree_screen.dart';
 
-// ── Tab wrapper ──────────────────────────────────────────────
-
-// ════════════════════════════════════════════════════════════════
-// Account detail (full)
-// ════════════════════════════════════════════════════════════════
-
-// ════════════════════════════════════════════════════════════
-// Account tree — built on `SuperTree` from `super_tree_field`
-// ------------------------------------------------------------
-// The chart of accounts is modelled as a typed `TreeNode<Account>` forest and
-// rendered by SuperTree (search · expand/collapse · keyboard · indent guides).
-// Group balances roll up from the leaves; a colour-coded type dot + roll-up
-// amount ride the trailing edge of every row. Single-tap opens a posting
-// account (→ accountDetail). Read-only: structural editing is disabled.
-// ════════════════════════════════════════════════════════════
-
-/// Account-type colour key (matches the rest of the mobile app).
+/// Account-type colour key used by the account-tree feature adapter.
 Map<AccountType, Color> _typeDot(BuildContext context) {
   final colors = SuperMaterialThemeData.of(context).colorScheme;
   return {

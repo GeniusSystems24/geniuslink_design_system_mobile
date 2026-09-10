@@ -1,28 +1,37 @@
 // ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
-// list · createAccount · accountDetail · createGroup · groupDetail
+// create group
 // ============================================================
 
 import 'package:flutter/material.dart';
-import '../../../../design_system/kit.dart';
-import 'package:gl_mobile_app/localization/generated/l10n.dart';
 import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
+import 'package:gl_mobile_app/design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+
+import '../widgets/widgets.dart';
 
 class CreateGroupScreen extends StatefulWidget {
-  const CreateGroupScreen({super.key});
+  const CreateGroupScreen({
+    super.key,
+    this.theme = const CreateGroupScreenThemeData(),
+  });
+
+  final CreateGroupScreenThemeData theme;
+
   @override
   State<CreateGroupScreen> createState() => _CreateGroupScreenState();
 }
 
 class _CreateGroupScreenState extends State<CreateGroupScreen> {
   bool _force = false;
-  String? _nameEnErr, _nameArErr;
+  String? _nameEnErr;
+  String? _nameArErr;
 
   final _treeSource = SuperAutoSuggestionSources.strings([
-      'Assets Tree (1)',
-      'Liabilities Tree (2)',
-      'Equity Tree (3)',
-    ]);
+    'Assets Tree (1)',
+    'Liabilities Tree (2)',
+    'Equity Tree (3)',
+  ]);
   final _treeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
@@ -43,24 +52,24 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = GeniusLinkLocalization.of(context);
+    final colors = SuperMaterialThemeData.of(context).colorScheme;
 
-    var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
-    var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Scaffold(
-      backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(l10n.createAccountGroup), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      backgroundColor: widget.theme.backgroundColor ?? colors.surface,
+      appBar: SuperAppBar(
+        title: Text(l10n.createAccountGroup),
+        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
+      ),
       body: MScroll([
-        SuperSectionCard2(
+        AccountsFieldSection(
           title: l10n.groupDetails,
           subtitle: l10n.nameAndTreeAssociation,
-          initiallyExpanded: true,
-          accentColor: accentColor,
-
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
+          accentColor: widget.theme.detailsAccentColor ?? colors.primary,
+          theme: widget.theme.section,
+          children: [
               SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: l10n.nameEnglish,
@@ -69,7 +78,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 required: true,
                 minLength: 3,
                 forceError: _force,
-                onValidity: (e) => _nameEnErr = e,
+                onValidity: (error) => _nameEnErr = error,
               ),
               SuperTextFormField(
                 decoration: InputDecoration(
@@ -80,10 +89,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 minLength: 3,
                 arabic: true,
                 forceError: _force,
-                onValidity: (e) => _nameArErr = e,
+                onValidity: (error) => _nameArErr = error,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
+                suggestionBuilder: (items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
                   value: item,
                   titleText: item,
                 ),
@@ -94,40 +104,34 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 required: true,
               ),
             ],
-          ),
         ),
-        SuperSectionCard2(
+        AccountsSection(
           title: l10n.additionalInformation,
-
-          initiallyExpanded: true,
-          accentColor: accentColor2,
-
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: l10n.note,
-                  hintText: l10n.addNotesAboutGroup,
-                ),
-                multiline: true,
-                rows: 3,
-              ),
-            ],
+          accentColor:
+              widget.theme.additionalInformationAccentColor ?? colors.tertiary,
+          theme: widget.theme.section,
+          child: SuperTextFormField(
+            decoration: InputDecoration(
+              labelText: l10n.note,
+              hintText: l10n.addNotesAboutGroup,
+            ),
+            multiline: true,
+            rows: 3,
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: MBtn(l10n.cancel, variant: MBtnVariant.secondary, full: true),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: MBtn(l10n.create, icon: 'check', full: true, onTap: _submit),
-            ),
-          ],
+        AccountsPageActions(
+          theme: widget.theme.actions,
+          start: MBtn(
+            l10n.cancel,
+            variant: MBtnVariant.secondary,
+            full: true,
+          ),
+          end: MBtn(
+            l10n.create,
+            icon: 'check',
+            full: true,
+            onTap: _submit,
+          ),
         ),
       ]),
     );

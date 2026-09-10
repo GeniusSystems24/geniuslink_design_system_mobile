@@ -1,8 +1,8 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
-import 'mobile_dashboard_pressable.dart';
 import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
 
@@ -53,12 +53,11 @@ class MobileDashboardQuickActions extends StatelessWidget {
           accentColor: mobileDashboardMarkerColor(context, marker),
         ),
         const SizedBox(height: 12),
-        GridView.count(
-          crossAxisCount: 4,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+        AdaptiveSlotGrid(
+          minItemWidth: 68,
+          maxColumns: 4,
+          runSpacing: 10,
+          spacing: 10,
           childAspectRatio: 0.82,
           children: [
             for (final action in visibleActions)
@@ -88,6 +87,7 @@ class MobileDashboardActionTile extends StatelessWidget {
   final Color color;
   final VoidCallback onTap;
   final bool outlined;
+  final LabeledActionTileThemeData? theme;
 
   const MobileDashboardActionTile({
     required this.icon,
@@ -95,44 +95,40 @@ class MobileDashboardActionTile extends StatelessWidget {
     required this.color,
     required this.onTap,
     this.outlined = false,
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return MobileDashboardPressable(
+    return LabeledActionTile(
       onTap: onTap,
       semanticLabel: label,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 46,
-            height: 46,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: outlined ? Colors.transparent : superCoreTint(color, 0x21),
-              border: outlined
-                  ? Border.all(color: context.mdTheme.borderStrong, width: 1.5)
-                  : null,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(MIcons.of(icon), size: 20, color: color),
-          ),
-          const SizedBox(height: 7),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: context.mdTheme.fg2,
-            ),
-          ),
-        ],
+      theme: theme ??
+          context.mdComponentTheme.actionTileTheme ??
+          const LabeledActionTileThemeData(gap: 7),
+      top: IconSurface(
+        theme: IconSurfaceThemeData(
+          size: 46,
+          backgroundColor:
+              outlined ? Colors.transparent : superCoreTint(color, 0x21),
+          borderColor: outlined ? context.mdTheme.borderStrong : null,
+          borderWidth: outlined ? 1.5 : 1,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Icon(MIcons.of(icon), size: 20, color: color),
+      ),
+      bottom: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: context.mdTheme.fg2,
+        ),
       ),
     );
   }
@@ -201,12 +197,11 @@ class MobileDashboardActionsSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              GridView.count(
-                crossAxisCount: 4,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
+              AdaptiveSlotGrid(
+                minItemWidth: 68,
+                maxColumns: 4,
+                runSpacing: 10,
+                spacing: 10,
                 childAspectRatio: 0.82,
                 children: [
                   for (final action in actions.where(

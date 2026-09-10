@@ -1,54 +1,31 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
+import '../../../../design_system/kit.dart';
+import 'mobile_dashboard_theme.dart';
 
-class MobileDashboardPressable extends StatefulWidget {
+class MobileDashboardPressable extends StatelessWidget {
   final Widget child;
   final VoidCallback? onTap;
   final String? semanticLabel;
+  final PressableSurfaceThemeData? theme;
 
   const MobileDashboardPressable({
     required this.child,
     this.onTap,
     this.semanticLabel,
+    this.theme,
     super.key,
   });
 
   @override
-  State<MobileDashboardPressable> createState() =>
-      _MobileDashboardPressableState();
-}
-
-class _MobileDashboardPressableState extends State<MobileDashboardPressable> {
-  bool _isPressed = false;
-
-  @override
   Widget build(BuildContext context) {
-    final content = GestureDetector(
-      onTap: widget.onTap,
-      onTapDown: widget.onTap == null
-          ? null
-          : (_) => setState(() => _isPressed = true),
-      onTapUp: widget.onTap == null
-          ? null
-          : (_) => setState(() => _isPressed = false),
-      onTapCancel: widget.onTap == null
-          ? null
-          : () => setState(() => _isPressed = false),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedScale(
-        scale: _isPressed ? 0.96 : 1,
-        duration: const Duration(milliseconds: 90),
-        child: widget.child,
-      ),
-    );
-
-    if (widget.semanticLabel == null) {
-      return content;
-    }
-
-    return Semantics(
-      button: widget.onTap != null,
-      label: widget.semanticLabel,
-      child: content,
+    return PressableSurface(
+      onTap: onTap,
+      semanticLabel: semanticLabel,
+      theme: theme ??
+          context.mdComponentTheme.pressableTheme ??
+          const PressableSurfaceThemeData(),
+      child: child,
     );
   }
 }

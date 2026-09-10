@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -129,17 +130,33 @@ class MobileDashboardSegmentedPreference extends StatelessWidget {
   final int value;
   final List<String> options;
   final ValueChanged<int> onChanged;
+  final SegmentedSlotSelectorThemeData? theme;
 
   const MobileDashboardSegmentedPreference({
     required this.label,
     required this.value,
     required this.options,
     required this.onChanged,
+    this.theme,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final resolvedTheme = theme ??
+        context.mdComponentTheme.segmentedSelectorTheme ??
+        SegmentedSlotSelectorThemeData(
+          minHeight: 38,
+          backgroundColor: context.mdTheme.inputBg,
+          borderColor: context.mdTheme.border,
+          borderRadius: BorderRadius.circular(8),
+          optionBorderRadius: BorderRadius.circular(6),
+          selectedBackgroundColor: context.mdColors.primary,
+          selectedForegroundColor: context.mdColors.onPrimary,
+          unselectedForegroundColor: context.mdTheme.fg3,
+          duration: const Duration(milliseconds: 150),
+        );
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       child: Column(
@@ -155,48 +172,23 @@ class MobileDashboardSegmentedPreference extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              color: context.mdTheme.inputBg,
-              border: Border.all(color: context.mdTheme.border),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                for (var index = 0; index < options.length; index++)
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => onChanged(index),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 150),
-                        constraints: const BoxConstraints(minHeight: 32),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: index == value
-                              ? context.mdColors.primary
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          options[index],
-                          style: TextStyle(
-                            fontFamily:
-                                context.mdTextTheme.bodyMedium?.fontFamily,
-                            fontSize: 12.5,
-                            fontWeight: index == value
-                                ? FontWeight.w700
-                                : FontWeight.w500,
-                            color: index == value
-                                ? context.mdColors.onPrimary
-                                : context.mdTheme.fg3,
-                          ),
-                        ),
-                      ),
-                    ),
+          SegmentedSlotSelector(
+            selectedIndex: value,
+            onChanged: onChanged,
+            semanticLabels: options,
+            theme: resolvedTheme,
+            options: [
+              for (var index = 0; index < options.length; index++)
+                Text(
+                  options[index],
+                  style: TextStyle(
+                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                    fontSize: 12.5,
+                    fontWeight:
+                        index == value ? FontWeight.w700 : FontWeight.w500,
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ],
       ),

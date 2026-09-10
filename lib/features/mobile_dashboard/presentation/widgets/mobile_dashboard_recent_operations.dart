@@ -1,9 +1,10 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
-import 'package:super_core/super_core.dart';
 
 import '../../domain/domain.dart';
 import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
+import '../../../../design_system/kit.dart';
 
 typedef MobileDashboardOperationAmountResolver =
     double Function(MdOperation operation);
@@ -57,12 +58,14 @@ class MobileDashboardOperationRow extends StatelessWidget {
   final String currency;
   final double amount;
   final bool last;
+  final TwoRowTileThemeData? theme;
 
   const MobileDashboardOperationRow({
     required this.operation,
     required this.currency,
     required this.amount,
     required this.last,
+    this.theme,
     super.key,
   });
 
@@ -73,71 +76,63 @@ class MobileDashboardOperationRow extends StatelessWidget {
         : context.mdColors.error;
     final sign = operation.isCredit ? '+' : '−';
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-        border: last
-            ? null
-            : Border(bottom: BorderSide(color: context.mdTheme.border)),
-      ),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  operation.description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: context.mdTheme.fg1,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: amountColor,
-                ),
-              ),
-            ],
+    return TwoRowTile(
+      semanticLabel:
+          '${operation.description}, $sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
+      showBottomDivider: !last,
+      theme: theme ??
+          context.mdComponentTheme.twoRowTheme ??
+          TwoRowTileThemeData(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            rowGap: 7,
+            columnGap: 10,
+            dividerColor: context.mdTheme.border,
           ),
-          const SizedBox(height: 7),
-          Row(
-            children: [
-              Text(
-                operation.reference,
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: context.mdColors.primary,
-                ),
-              ),
-              const SizedBox(width: 8),
-              MobileDashboardPill(
-                label: operation.type,
-                color: mobileDashboardToneColor(context, operation.tone),
-              ),
-              const Spacer(),
-              Text(
-                operation.timeLabel,
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: context.mdTheme.fg3,
-                ),
-              ),
-            ],
+      topStart: Text(
+        operation.description,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: context.mdTheme.fg1,
+        ),
+      ),
+      topEnd: Text(
+        '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: amountColor,
+        ),
+      ),
+      bottomStart: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            operation.reference,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 11,
+              color: context.mdColors.primary,
+            ),
+          ),
+          const SizedBox(width: 8),
+          MobileDashboardPill(
+            label: operation.type,
+            color: mobileDashboardToneColor(context, operation.tone),
           ),
         ],
+      ),
+      bottomEnd: Text(
+        operation.timeLabel,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 11,
+          color: context.mdTheme.fg3,
+        ),
       ),
     );
   }

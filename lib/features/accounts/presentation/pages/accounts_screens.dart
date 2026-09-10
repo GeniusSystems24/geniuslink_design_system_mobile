@@ -1,6 +1,6 @@
 // ============================================================
 // VIEW — Accounts feature (ports MobileAccounts)
-// list · createAccount · accountDetail · createGroup · groupDetail
+// list
 // ============================================================
 
 import 'package:flutter/material.dart';

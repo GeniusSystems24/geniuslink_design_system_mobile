@@ -3,3 +3,4 @@
 export 'controllers/mobile_dashboard_controller.dart';
 export 'pages/pages.dart';
 export 'widgets/widgets.dart';
+export 'mobile_dashboard_localization.dart';

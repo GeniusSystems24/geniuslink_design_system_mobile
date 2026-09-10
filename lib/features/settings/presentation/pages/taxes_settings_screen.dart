@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../widgets/taxes_settings_view.dart';
 
+/// Route/page boundary for the TaxesSettings feature view.
+///
+/// The screen preserves the existing public navigation API and delegates UI
+/// composition to its corresponding `*View` widget.
+///
+/// Example:
+///
+/// ```dart
+/// const TaxesSettingsScreen()
+/// ```
 class TaxesSettingsScreen extends StatefulWidget {
   const TaxesSettingsScreen({super.key});
 

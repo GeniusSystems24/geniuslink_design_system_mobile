@@ -15,3 +15,7 @@ export '../widgets/widgets.dart';
 part 'journal_list_screen.dart';
 part 'create_journal_entry_screen.dart';
 part 'journal_entry_detail_screen.dart';
+
+part '../widgets/page_views/create_journal_entry_screen_view.dart';
+part '../widgets/page_views/journal_entry_detail_screen_view.dart';
+part '../widgets/page_views/journal_list_screen_view.dart';

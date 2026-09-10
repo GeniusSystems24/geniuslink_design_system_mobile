@@ -13,3 +13,5 @@ export 'mobile_dashboard_skeleton.dart';
 export 'mobile_dashboard_theme.dart';
 export 'mobile_dashboard_trend_chart.dart';
 export 'mobile_dashboard_section_view.dart';
+export 'mobile_dashboard_sections.dart';
+export 'mobile_dashboard_view_data.dart';

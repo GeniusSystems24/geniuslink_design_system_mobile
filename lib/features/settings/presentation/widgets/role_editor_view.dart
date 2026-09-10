@@ -4,6 +4,17 @@ import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
+/// Reusable presentation view for `RoleEditorScreen`.
+///
+/// The owning screen manages route/lifecycle concerns while this widget
+/// renders the feature UI from the values/controllers supplied by its caller.
+///
+/// Example:
+///
+/// ```dart
+/// // Supply the constructor arguments required by the view.
+/// RoleEditorView(/* ... */)
+/// ```
 class RoleEditorView extends StatelessWidget {
   final List<RoleModuleDefinition> modules;
   final FormController controller;

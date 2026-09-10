@@ -5,6 +5,17 @@ import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
+/// Reusable presentation view for `FinancialSettingsScreen`.
+///
+/// The owning screen manages route/lifecycle concerns while this widget
+/// renders the feature UI from the values/controllers supplied by its caller.
+///
+/// Example:
+///
+/// ```dart
+/// // Supply the constructor arguments required by the view.
+/// FinancialSettingsView(/* ... */)
+/// ```
 class FinancialSettingsView extends StatelessWidget {
   final FormController controller;
 

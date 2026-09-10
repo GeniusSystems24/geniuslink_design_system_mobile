@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -32,12 +33,11 @@ class MobileDashboardMetricGrid extends StatelessWidget {
       );
     }
 
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
+    return AdaptiveSlotGrid(
+      minItemWidth: 145,
+      maxColumns: 2,
+      runSpacing: 12,
+      spacing: 12,
       childAspectRatio: 1.45,
       children: [
         for (final card in cards)
@@ -57,12 +57,14 @@ class MobileDashboardMetricCard extends StatelessWidget {
   final String currency;
   final String period;
   final double value;
+  final MetricSlotCardThemeData? theme;
 
   const MobileDashboardMetricCard({
     required this.card,
     required this.currency,
     required this.period,
     required this.value,
+    this.theme,
     super.key,
   });
 
@@ -72,121 +74,104 @@ class MobileDashboardMetricCard extends StatelessWidget {
     final trendColor = trend == null
         ? context.mdTheme.fg4
         : trend.up
-        ? context.mdColors.secondary
-        : context.mdColors.error;
+            ? context.mdColors.secondary
+            : context.mdColors.error;
     final t = SuperMaterialThemeData.of(context);
 
-    return Semantics(
-      label: '${card.label}, $currency ${mobileDashboardNumber(value)}',
-      child: Stack(
-        children: [
-          Container(
+    return MetricSlotCard(
+      semanticLabel: '${card.label}, $currency ${mobileDashboardNumber(value)}',
+      theme: theme ??
+          context.mdComponentTheme.metricCardTheme ??
+          MetricSlotCardThemeData(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
-            decoration: BoxDecoration(
-              color: t.colorScheme.surfaceContainerLowest,
-              border: Border.all(color: context.mdTheme.border),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  card.label.toUpperCase(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 10.5,
-                    letterSpacing: 0.5,
-                    color: context.mdTheme.fg2,
-                  ),
-                ),
-                const SizedBox(height: 9),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      currency,
-                      style: TextStyle(
-                        fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: context.mdTheme.fg3,
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    Flexible(
-                      child: Text(
-                        mobileDashboardNumber(value),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily:
-                              context.mdTextTheme.bodyMedium?.fontFamily,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.8,
-                          color: context.mdTheme.fg1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 9),
-                SizedBox(
-                  height: 16,
-                  child: trend == null
-                      ? Text(
-                          '—',
-                          style: TextStyle(
-                            fontFamily:
-                                context.mdTextTheme.bodyMedium?.fontFamily,
-                            fontSize: 12,
-                            color: context.mdTheme.fg4,
-                          ),
-                        )
-                      : Row(
-                          children: [
-                            Text(
-                              trend.up ? '▲' : '▼',
-                              style: TextStyle(
-                                fontSize: 10,
-                                height: 1,
-                                color: trendColor,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              '${mobileDashboardNumber(trend.pct, decimals: 1)}%',
-                              style: TextStyle(
-                                fontFamily:
-                                    context.mdTextTheme.bodyMedium?.fontFamily,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: trendColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                ),
-              ],
+            rowGap: 9,
+            backgroundColor: t.colorScheme.surfaceContainerLowest,
+            borderColor: context.mdTheme.border,
+            borderRadius: BorderRadius.circular(14),
+          ),
+      startOverlay: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        child: Container(
+          width: 3,
+          decoration: BoxDecoration(
+            color: mobileDashboardMarkerColor(context, card.marker),
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+      ),
+      topStart: Text(
+        card.label.toUpperCase(),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontWeight: FontWeight.w700,
+          fontSize: 10.5,
+          letterSpacing: 0.5,
+          color: context.mdTheme.fg2,
+        ),
+      ),
+      centerStart: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Text(
+            currency,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              color: context.mdTheme.fg3,
             ),
           ),
-          PositionedDirectional(
-            start: 0,
-            top: 14,
-            bottom: 14,
-            child: Container(
-              width: 3,
-              decoration: BoxDecoration(
-                color: mobileDashboardMarkerColor(context, card.marker),
-                borderRadius: BorderRadius.circular(3),
+          const SizedBox(width: 5),
+          Flexible(
+            child: Text(
+              mobileDashboardNumber(value),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.8,
+                color: context.mdTheme.fg1,
               ),
             ),
           ),
         ],
+      ),
+      bottomStart: SizedBox(
+        height: 16,
+        child: trend == null
+            ? Text(
+                '—',
+                style: TextStyle(
+                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                  fontSize: 12,
+                  color: context.mdTheme.fg4,
+                ),
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    trend.up ? '▲' : '▼',
+                    style: TextStyle(fontSize: 10, height: 1, color: trendColor),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${mobileDashboardNumber(trend.pct, decimals: 1)}%',
+                    style: TextStyle(
+                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: trendColor,
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }

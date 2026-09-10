@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 
 import '../../../../design_system/kit.dart';
@@ -279,75 +280,68 @@ class _StatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tone = mobileDashboardToneColor(context, item.tone);
-    final child = Container(
+    return SizedBox(
       width: 198,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: context.mdTheme.surface,
-        border: Border.all(color: context.mdTheme.border),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 9,
-                height: 9,
-                decoration: BoxDecoration(color: tone, shape: BoxShape.circle),
-              ),
-              const SizedBox(width: 7),
-              Expanded(
-                child: Text(
-                  item.label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: context.mdTextTheme.labelMedium?.fontFamily,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    color: context.mdTheme.fg3,
-                  ),
+      height: 126,
+      child: MetricSlotCard(
+        onTap: onTap,
+        semanticLabel: '${item.label}: ${item.value}',
+        theme: context.mdComponentTheme.metricCardTheme ??
+            MetricSlotCardThemeData(
+              padding: const EdgeInsets.all(14),
+              rowGap: 3,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              backgroundColor: context.mdTheme.surface,
+              borderColor: context.mdTheme.border,
+              borderRadius: BorderRadius.circular(14),
+            ),
+        topStart: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 9,
+              height: 9,
+              decoration: BoxDecoration(color: tone, shape: BoxShape.circle),
+            ),
+            const SizedBox(width: 7),
+            Flexible(
+              child: Text(
+                item.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontFamily: context.mdTextTheme.labelMedium?.fontFamily,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: context.mdTheme.fg3,
                 ),
               ),
-            ],
-          ),
-          const Spacer(),
-          Text(
-            item.value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: context.mdTextTheme.titleLarge?.fontFamily,
-              fontSize: item.value.length > 8 ? 18 : 23,
-              fontWeight: FontWeight.w800,
-              letterSpacing: -0.45,
-              color: context.mdTheme.fg1,
             ),
+          ],
+        ),
+        centerStart: Text(
+          item.value,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontFamily: context.mdTextTheme.titleLarge?.fontFamily,
+            fontSize: item.value.length > 8 ? 18 : 23,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.45,
+            color: context.mdTheme.fg1,
           ),
-          const SizedBox(height: 3),
-          Text(
-            item.description,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: context.mdTextTheme.bodySmall?.fontFamily,
-              fontSize: 10.5,
-              color: context.mdTheme.fg3,
-            ),
+        ),
+        bottomStart: Text(
+          item.description,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontFamily: context.mdTextTheme.bodySmall?.fontFamily,
+            fontSize: 10.5,
+            color: context.mdTheme.fg3,
           ),
-        ],
+        ),
       ),
-    );
-
-    if (onTap == null) {
-      return child;
-    }
-    return MobileDashboardPressable(
-      onTap: onTap!,
-      semanticLabel: '${item.label}: ${item.value}',
-      child: child,
     );
   }
 }
@@ -410,69 +404,57 @@ class _WorkflowRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tone = mobileDashboardToneColor(context, item.tone);
-    return MobileDashboardPressable(
+    return DirectionalSlotTile(
       onTap: onTap,
       semanticLabel: '${item.title}, ${item.value}',
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-        decoration: BoxDecoration(
-          border: last
-              ? null
-              : Border(bottom: BorderSide(color: context.mdTheme.border)),
+      showBottomDivider: !last,
+      theme: context.mdComponentTheme.rowTheme ??
+          DirectionalSlotTileThemeData(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+            dividerColor: context.mdTheme.border,
+          ),
+      start: IconSurface(
+        theme: IconSurfaceThemeData(
+          size: 38,
+          backgroundColor: tone.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 38,
-              height: 38,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: tone.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(_workflowIcon(item.tone), size: 18, color: tone),
+        child: Icon(_workflowIcon(item.tone), size: 18, color: tone),
+      ),
+      center: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              fontSize: 13.5,
+              fontWeight: FontWeight.w700,
+              color: context.mdTheme.fg1,
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w700,
-                      color: context.mdTheme.fg1,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    item.description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: context.mdTextTheme.bodySmall?.fontFamily,
-                      fontSize: 11,
-                      color: context.mdTheme.fg3,
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            item.description,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: context.mdTextTheme.bodySmall?.fontFamily,
+              fontSize: 11,
+              color: context.mdTheme.fg3,
             ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                MobileDashboardPill(label: item.value, color: tone),
-                const SizedBox(height: 6),
-                Icon(MIcons.of('chevR'), size: 14, color: context.mdTheme.fg4),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
+      ),
+      end: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          MobileDashboardPill(label: item.value, color: tone),
+          const SizedBox(height: 6),
+          Icon(MIcons.of('chevR'), size: 14, color: context.mdTheme.fg4),
+        ],
       ),
     );
   }

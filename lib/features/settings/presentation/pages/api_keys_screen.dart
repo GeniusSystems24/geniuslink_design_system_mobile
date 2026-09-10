@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../widgets/api_keys_view.dart';
 
+/// Route/page boundary for the ApiKeys feature view.
+///
+/// The screen preserves the existing public navigation API and delegates UI
+/// composition to its corresponding `*View` widget.
+///
+/// Example:
+///
+/// ```dart
+/// const ApiKeysScreen()
+/// ```
 class ApiKeysScreen extends StatefulWidget {
   const ApiKeysScreen({super.key});
 

@@ -1,3 +1,4 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 import 'package:gl_mobile_app/features/mobile_dashboard/domain/domain.dart';
@@ -224,40 +225,38 @@ class DrawerItem extends StatelessWidget {
   final String label;
   final String icon;
   final VoidCallback onTap;
+  final DirectionalSlotTileThemeData? theme;
 
   const DrawerItem({
     super.key,
     required this.label,
     required this.icon,
     required this.onTap,
+    this.theme,
   });
 
   @override
   Widget build(BuildContext context) {
-    return MobileDashboardPressable(
+    return DirectionalSlotTile(
       onTap: onTap,
-      child: Container(
-        constraints: const BoxConstraints(minHeight: 48),
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            Icon(MIcons.of(icon), size: 19, color: context.mdTheme.fg2),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-                  fontSize: 14.5,
-                  fontWeight: FontWeight.w600,
-                  color: context.mdTheme.fg1,
-                ),
-              ),
-            ),
-            Icon(MIcons.of('chevR'), size: 16, color: context.mdTheme.fg4),
-          ],
+      semanticLabel: label,
+      theme: theme ??
+          context.mdComponentTheme.rowTheme ??
+          const DirectionalSlotTileThemeData(
+            minHeight: 48,
+            padding: EdgeInsets.all(12),
+          ),
+      start: Icon(MIcons.of(icon), size: 19, color: context.mdTheme.fg2),
+      center: Text(
+        label,
+        style: TextStyle(
+          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+          fontSize: 14.5,
+          fontWeight: FontWeight.w600,
+          color: context.mdTheme.fg1,
         ),
       ),
+      end: Icon(MIcons.of('chevR'), size: 16, color: context.mdTheme.fg4),
     );
   }
 }

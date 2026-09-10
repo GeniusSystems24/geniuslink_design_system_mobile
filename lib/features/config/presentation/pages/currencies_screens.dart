@@ -18,3 +18,9 @@ part 'create_currency_screen.dart';
 part 'currency_detail_screen.dart';
 part 'exchange_rate_setup_screen.dart';
 part 'fiscal_year_setup_screen.dart';
+
+part '../widgets/page_views/create_currency_screen_view.dart';
+part '../widgets/page_views/currencies_list_screen_view.dart';
+part '../widgets/page_views/currency_detail_screen_view.dart';
+part '../widgets/page_views/exchange_rate_setup_screen_view.dart';
+part '../widgets/page_views/fiscal_year_setup_screen_view.dart';

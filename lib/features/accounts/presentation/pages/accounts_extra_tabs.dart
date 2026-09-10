@@ -2,8 +2,13 @@ part of 'accounts_extra_screens.dart';
 
 class AccountsExtraTabs extends StatefulWidget {
   final List<AccountNode> accountRoots;
+  final AccountsExtraTabsThemeData theme;
 
-  const AccountsExtraTabs({required this.accountRoots, super.key});
+  const AccountsExtraTabs({
+    required this.accountRoots,
+    this.theme = const AccountsExtraTabsThemeData(),
+    super.key,
+  });
 
   @override
   State<AccountsExtraTabs> createState() => _AccountsExtraTabsState();
@@ -30,7 +35,8 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
   @override
   void didUpdateWidget(covariant AccountsExtraTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.accountRoots != widget.accountRoots) {
+    if (oldWidget.accountRoots != widget.accountRoots ||
+        oldWidget.theme != widget.theme) {
       _tabs?.dispose();
       _tabs = _createTabs(GeniusLinkLocalization.of(context));
     }
@@ -38,25 +44,29 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 
   SuperTabBarController _createTabs(GeniusLinkLocalization l10n) =>
       SuperTabBarController(
-    tabs: [
-      SuperTab(
-        id: 1,
-        title: l10n.chartOfAccounts,
-        pinned: true,
-        behavior: SuperTabBehavior.requiredPinned,
-        leading: const Icon(Icons.account_tree_outlined, size: 15),
-        pageBuilder: (context, tab) =>
-            AccountTreeScreen(roots: widget.accountRoots),
-      ),
-      SuperTab(
-        id: 2,
-        title: l10n.accountDetail,
-        leading: const Icon(Icons.description_outlined, size: 15),
-        pageBuilder: (context, tab) => const AccountDetailFullScreen(),
-      ),
-    ],
-    activeId: 1,
-  );
+        tabs: [
+          SuperTab(
+            id: 1,
+            title: l10n.chartOfAccounts,
+            pinned: true,
+            behavior: SuperTabBehavior.requiredPinned,
+            leading: const Icon(Icons.account_tree_outlined, size: 15),
+            pageBuilder: (context, tab) => AccountTreeScreen(
+              roots: widget.accountRoots,
+              theme: widget.theme.tree,
+            ),
+          ),
+          SuperTab(
+            id: 2,
+            title: l10n.accountDetail,
+            leading: const Icon(Icons.description_outlined, size: 15),
+            pageBuilder: (context, tab) => AccountDetailFullScreen(
+              theme: widget.theme.detail,
+            ),
+          ),
+        ],
+        activeId: 1,
+      );
 
   @override
   void dispose() {
@@ -66,12 +76,9 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 
   @override
   Widget build(BuildContext context) {
-    return SuperTabBar(
+    return AccountsTabsView(
       controller: _tabs!,
-      fillContent: true,
-      scrollContent: false,
-      contentPadding: EdgeInsets.zero,
-      allowAutoCompact: true,
+      theme: widget.theme.tabs,
     );
   }
 }

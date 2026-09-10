@@ -1,9 +1,41 @@
+// MOBILE_DASHBOARD_COMPONENTIZATION_V3
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/material.dart';
 
 import 'mobile_dashboard_theme.dart';
+
+/// Configures the visual presentation of [MobileDashboardTrendChart].
+///
+/// Use this theme for chart-specific drawing and layout values while keeping the
+/// chart's data separate from its visual configuration.
+///
+/// Example:
+///
+/// ```dart
+/// const chartTheme = MobileDashboardTrendChartThemeData();
+/// ```
+@immutable
+class MobileDashboardTrendChartThemeData {
+  const MobileDashboardTrendChartThemeData({
+    this.gridColor,
+    this.surfaceColor,
+    this.labelColor,
+    this.valueLabelColor,
+    this.tooltipBackground,
+    this.tooltipForeground,
+    this.fontFamily,
+  });
+
+  final Color? gridColor;
+  final Color? surfaceColor;
+  final Color? labelColor;
+  final Color? valueLabelColor;
+  final Color? tooltipBackground;
+  final Color? tooltipForeground;
+  final String? fontFamily;
+}
 
 class MobileDashboardTrendChart extends StatelessWidget {
   final List<double> values;
@@ -12,6 +44,7 @@ class MobileDashboardTrendChart extends StatelessWidget {
   final String currency;
   final double height;
   final String semanticsLabel;
+  final MobileDashboardTrendChartThemeData theme;
 
   const MobileDashboardTrendChart({
     required this.values,
@@ -20,6 +53,7 @@ class MobileDashboardTrendChart extends StatelessWidget {
     required this.currency,
     required this.semanticsLabel,
     this.height = 176,
+    this.theme = const MobileDashboardTrendChartThemeData(),
     super.key,
   });
 
@@ -38,15 +72,17 @@ class MobileDashboardTrendChart extends StatelessWidget {
               color: color,
               axis: axisLabels,
               currency: currency,
-              gridColor: context.mdColors.outlineVariant.withValues(
-                alpha: 0.58,
-              ),
-              surfaceColor: context.mdTheme.surface,
-              labelColor: context.mdColors.onSurfaceVariant,
-              valueLabelColor: context.mdTheme.fg2,
-              tooltipBackground: context.mdColors.inverseSurface,
-              tooltipForeground: context.mdColors.onInverseSurface,
-              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
+              gridColor: theme.gridColor ??
+                  context.mdColors.outlineVariant.withValues(alpha: 0.58),
+              surfaceColor: theme.surfaceColor ?? context.mdTheme.surface,
+              labelColor: theme.labelColor ?? context.mdColors.onSurfaceVariant,
+              valueLabelColor: theme.valueLabelColor ?? context.mdTheme.fg2,
+              tooltipBackground:
+                  theme.tooltipBackground ?? context.mdColors.inverseSurface,
+              tooltipForeground:
+                  theme.tooltipForeground ?? context.mdColors.onInverseSurface,
+              fontFamily:
+                  theme.fontFamily ?? context.mdTextTheme.bodyMedium?.fontFamily,
               textDirection: Directionality.of(context),
             ),
           ),
