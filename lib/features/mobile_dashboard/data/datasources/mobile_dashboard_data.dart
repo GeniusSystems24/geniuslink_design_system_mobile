@@ -1,8 +1,8 @@
 // ============================================================
 // DATA — Mobile Dashboard v2 (ports mobile-dashboard/data.jsx)
 // The three domain tabs, attention items, workspaces, currencies
-// and the deterministic chart series. English strings only (the
-// geniuslink_design_system_mobile app is dark + EN, matching the .html default).
+// and the deterministic chart series. Display copy is localized at the
+// presentation boundary through the adapter below.
 // ============================================================
 
 import 'dart:math' as math;
@@ -665,6 +665,219 @@ const Map<String, MdDashboardProfile> mdProfiles = {
     ],
   ),
 };
+
+// MOBILE_DASHBOARD_LOCALIZATION_ADAPTER_V2
+
+/// Canonical navigation copy used by repositories.
+///
+/// Locale-specific labels are resolved by the presentation layer through
+/// [localizeMobileDashboardNavigationItems].
+abstract final class MobileDashboardNavigationCopy {
+  static const String overview = 'Overview';
+  static const String sales = 'Sales';
+  static const String inventory = 'Inventory';
+  static const String more = 'More';
+  static const String accounts = 'Accounts';
+  static const String transfers = 'Transfers';
+  static const String ledger = 'Ledger';
+  static const String reports = 'Reports';
+}
+
+typedef MobileDashboardTextResolver = String Function(String sourceText);
+
+MdAttention _localizedAttention(
+  MdAttention item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdAttention(
+    item.id,
+    item.tone,
+    item.count,
+    resolve(item.label),
+    resolve(item.description),
+  );
+}
+
+MdOperation _localizedOperation(
+  MdOperation item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdOperation(
+    reference: item.reference,
+    type: resolve(item.type),
+    tone: item.tone,
+    description: resolve(item.description),
+    amounts: item.amounts,
+    direction: item.direction,
+    timeLabel: resolve(item.timeLabel),
+  );
+}
+
+MdCard _localizedCard(
+  MdCard item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdCard(
+    id: item.id,
+    label: resolve(item.label),
+    marker: item.marker,
+    values: item.values,
+    trends: item.trends,
+    series: item.series,
+  );
+}
+
+MdAction _localizedAction(
+  MdAction item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdAction(item.id, resolve(item.label), item.group);
+}
+
+MdTab _localizedTab(
+  MdTab item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdTab(
+    id: item.id,
+    label: resolve(item.label),
+    cards: item.cards
+        .map((card) => _localizedCard(card, resolve))
+        .toList(growable: false),
+    actions: item.actions
+        .map((action) => _localizedAction(action, resolve))
+        .toList(growable: false),
+    operations: item.operations
+        .map((operation) => _localizedOperation(operation, resolve))
+        .toList(growable: false),
+  );
+}
+
+MdWorkspace _localizedWorkspace(
+  MdWorkspace item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdWorkspace(
+    item.id,
+    item.tenantId,
+    resolve(item.name),
+    resolve(item.subtitle),
+    item.factor,
+  );
+}
+
+MdCurrency _localizedCurrency(
+  MdCurrency item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdCurrency(item.code, resolve(item.name));
+}
+
+MdStatusItem _localizedStatusItem(
+  MdStatusItem item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdStatusItem(
+    id: item.id,
+    label: resolve(item.label),
+    value: resolve(item.value),
+    description: resolve(item.description),
+    tone: item.tone,
+  );
+}
+
+MdWorkflowItem _localizedWorkflowItem(
+  MdWorkflowItem item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdWorkflowItem(
+    id: item.id,
+    title: resolve(item.title),
+    description: resolve(item.description),
+    value: resolve(item.value),
+    tone: item.tone,
+  );
+}
+
+MdDashboardProfile _localizedProfile(
+  MdDashboardProfile item,
+  MobileDashboardTextResolver resolve,
+) {
+  return MdDashboardProfile(
+    sectionId: item.sectionId,
+    eyebrow: resolve(item.eyebrow),
+    title: resolve(item.title),
+    subtitle: resolve(item.subtitle),
+    primaryActionId: item.primaryActionId,
+    primaryActionLabel: resolve(item.primaryActionLabel),
+    statusTitle: resolve(item.statusTitle),
+    workflowTitle: resolve(item.workflowTitle),
+    workflowSubtitle: resolve(item.workflowSubtitle),
+    operationsTitle: resolve(item.operationsTitle),
+    attentionTitle: resolve(item.attentionTitle),
+    statusItems: item.statusItems
+        .map((entry) => _localizedStatusItem(entry, resolve))
+        .toList(growable: false),
+    workflowItems: item.workflowItems
+        .map((entry) => _localizedWorkflowItem(entry, resolve))
+        .toList(growable: false),
+    attentionItems: item.attentionItems
+        .map((entry) => _localizedAttention(entry, resolve))
+        .toList(growable: false),
+  );
+}
+
+/// Creates a localized copy of the complete dashboard catalog.
+///
+/// Every human-readable field is passed through [resolve], including chart-axis
+/// labels and sample workspace/company names. Unknown values are preserved, so
+/// machine IDs, references, currency codes, amount keys, and pure numeric values
+/// remain domain data.
+MobileDashboardCatalog localizeMobileDashboardCatalog(
+  MobileDashboardCatalog source,
+  MobileDashboardTextResolver resolve,
+) {
+  return MobileDashboardCatalog(
+    tabs: source.tabs
+        .map((tab) => _localizedTab(tab, resolve))
+        .toList(growable: false),
+    workspaces: source.workspaces
+        .map((workspace) => _localizedWorkspace(workspace, resolve))
+        .toList(growable: false),
+    attention: source.attention
+        .map((entry) => _localizedAttention(entry, resolve))
+        .toList(growable: false),
+    currencies: source.currencies
+        .map((currency) => _localizedCurrency(currency, resolve))
+        .toList(growable: false),
+    axisLabels: source.axisLabels.map(
+      (period, labels) => MapEntry(
+        period,
+        labels.map(resolve).toList(growable: false),
+      ),
+    ),
+    profiles: source.profiles.map(
+      (key, profile) => MapEntry(key, _localizedProfile(profile, resolve)),
+    ),
+  );
+}
+
+/// Creates localized navigation items while preserving IDs and icon IDs.
+List<MobileDashboardNavigationDestination>
+localizeMobileDashboardNavigationItems(
+  List<MobileDashboardNavigationDestination> source,
+  MobileDashboardTextResolver resolve,
+) {
+  return source
+      .map(
+        (item) => (
+          id: item.id,
+          label: resolve(item.label),
+          icon: item.icon,
+        ),
+      )
+      .toList(growable: false);
+}
 
 final mobileDashboardCatalog = MobileDashboardCatalog(
   tabs: mdTabs,

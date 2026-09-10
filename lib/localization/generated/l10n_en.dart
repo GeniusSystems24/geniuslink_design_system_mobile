@@ -1326,4 +1326,678 @@ class GeniusLinkLocalizationEn extends GeniusLinkLocalization {
 
   @override
   String get stores => 'Stores';
+
+  @override
+  String get mobileDashboardWorkspace => 'Workspace';
+
+  @override
+  String get mobileDashboardNotifications => 'Notifications';
+
+  @override
+  String get mobileDashboardOverview => 'Overview';
+
+  @override
+  String get mobileDashboardSales => 'Sales';
+
+  @override
+  String get mobileDashboardTransfers => 'Transfers';
+
+  @override
+  String get mobileDashboardLedger => 'Ledger';
+
+  @override
+  String get mobileDashboardReports => 'Reports';
+
+  @override
+  String get mobileDashboardSaudiRiyal => 'Saudi Riyal';
+
+  @override
+  String get mobileDashboardUsDollar => 'US Dollar';
+
+  @override
+  String get mobileDashboardUaeDirham => 'UAE Dirham';
+
+  @override
+  String get mobileDashboardTenant9 => 'Tenant 9';
+
+  @override
+  String get mobileDashboardTenant14 => 'Tenant 14';
+
+  @override
+  String get mobileDashboardTenant22 => 'Tenant 22';
+
+  @override
+  String get mobileDashboardOutOfBalanceEntries => 'Out-of-balance entries';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDonTMatch =>
+      'Debits and credits don\'t match';
+
+  @override
+  String get mobileDashboardPendingApprovals => 'Pending approvals';
+
+  @override
+  String get mobileDashboardVouchersAwaitingYourSignOff =>
+      'Vouchers awaiting your sign-off';
+
+  @override
+  String get mobileDashboardSyncConflict => 'Sync conflict';
+
+  @override
+  String get mobileDashboardADraftEditedOnTwoDevices =>
+      'A draft edited on two devices';
+
+  @override
+  String get mobileDashboardBanking => 'Banking';
+
+  @override
+  String get mobileDashboardTotalBalance => 'Total Balance';
+
+  @override
+  String get mobileDashboardAvailableCash => 'Available Cash';
+
+  @override
+  String get mobileDashboardInflow => 'Inflow';
+
+  @override
+  String get mobileDashboardOutflow => 'Outflow';
+
+  @override
+  String get mobileDashboardDeposit => 'Deposit';
+
+  @override
+  String get mobileDashboardWithdrawal => 'Withdrawal';
+
+  @override
+  String get mobileDashboardTransfer => 'Transfer';
+
+  @override
+  String get mobileDashboardStatement => 'Statement';
+
+  @override
+  String get mobileDashboardBeneficiaries => 'Beneficiaries';
+
+  @override
+  String get mobileDashboardReconcile => 'Reconcile';
+
+  @override
+  String get mobileDashboardCards => 'Cards';
+
+  @override
+  String get mobileDashboardCheques => 'Cheques';
+
+  @override
+  String get mobileDashboardBankAccounts => 'Bank Accounts';
+
+  @override
+  String get mobileDashboardCashDepositMain => 'Cash deposit — Main';
+
+  @override
+  String get mobileDashboardText1hAgo => '1h ago';
+
+  @override
+  String get mobileDashboardPayrollRelease => 'Payroll release';
+
+  @override
+  String get mobileDashboardText4hAgo => '4h ago';
+
+  @override
+  String get mobileDashboardRiyadBankMain => 'Riyad Bank → Main';
+
+  @override
+  String get mobileDashboardYesterday => 'Yesterday';
+
+  @override
+  String get mobileDashboardSupplierWire => 'Supplier wire';
+
+  @override
+  String get mobileDashboardCustomerSettlement => 'Customer settlement';
+
+  @override
+  String get mobileDashboardText2DaysAgo => '2 days ago';
+
+  @override
+  String get mobileDashboardAccounting => 'Accounting';
+
+  @override
+  String get mobileDashboardTotalAssets => 'Total Assets';
+
+  @override
+  String get mobileDashboardCash => 'Cash';
+
+  @override
+  String get mobileDashboardRevenueMtd => 'Revenue MTD';
+
+  @override
+  String get mobileDashboardVoucher => 'Voucher';
+
+  @override
+  String get mobileDashboardReceipt => 'Receipt';
+
+  @override
+  String get mobileDashboardInvoice => 'Invoice';
+
+  @override
+  String get mobileDashboardCustomers => 'Customers';
+
+  @override
+  String get mobileDashboardSuppliers => 'Suppliers';
+
+  @override
+  String get mobileDashboardFixedAssets => 'Fixed Assets';
+
+  @override
+  String get mobileDashboardJournal => 'Journal';
+
+  @override
+  String get mobileDashboardDepreciationQ4 => 'Depreciation — Q4';
+
+  @override
+  String get mobileDashboardText2hAgo => '2h ago';
+
+  @override
+  String get mobileDashboardOfficeRentPayment => 'Office rent payment';
+
+  @override
+  String get mobileDashboardText5hAgo => '5h ago';
+
+  @override
+  String get mobileDashboardRevenueAccrual => 'Revenue accrual';
+
+  @override
+  String get mobileDashboardUtilitiesNov => 'Utilities — Nov';
+
+  @override
+  String get mobileDashboardFxRevaluation => 'FX revaluation';
+
+  @override
+  String get mobileDashboardCommercial => 'Commercial';
+
+  @override
+  String get mobileDashboardSalesMtd => 'Sales MTD';
+
+  @override
+  String get mobileDashboardPurchasesMtd => 'Purchases MTD';
+
+  @override
+  String get mobileDashboardReceivables => 'Receivables';
+
+  @override
+  String get mobileDashboardPayables => 'Payables';
+
+  @override
+  String get mobileDashboardSale => 'Sale';
+
+  @override
+  String get mobileDashboardPurchase => 'Purchase';
+
+  @override
+  String get mobileDashboardQuotation => 'Quotation';
+
+  @override
+  String get mobileDashboardReturnText => 'Return';
+
+  @override
+  String get mobileDashboardText30mAgo => '30m ago';
+
+  @override
+  String get mobileDashboardText3hAgo => '3h ago';
+
+  @override
+  String get mobileDashboardTreasuryCashManagement =>
+      'TREASURY & CASH MANAGEMENT';
+
+  @override
+  String get mobileDashboardBankingControlCenter => 'Banking control center';
+
+  @override
+  String
+  get mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity =>
+      'Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.';
+
+  @override
+  String get mobileDashboardNewTransfer => 'New transfer';
+
+  @override
+  String get mobileDashboardTreasuryStatus => 'Treasury status';
+
+  @override
+  String get mobileDashboardTreasuryWorkflow => 'Treasury workflow';
+
+  @override
+  String get mobileDashboardItemsThatRequireActionBeforeTheNextCutOff =>
+      'Items that require action before the next cut-off.';
+
+  @override
+  String get mobileDashboardLatestBankMovements => 'Latest bank movements';
+
+  @override
+  String get mobileDashboardTreasuryExceptions => 'Treasury exceptions';
+
+  @override
+  String get mobileDashboardConnectedAccounts => 'Connected accounts';
+
+  @override
+  String get mobileDashboardAcross3Banks => 'Across 3 banks';
+
+  @override
+  String get mobileDashboardReconciliation => 'Reconciliation';
+
+  @override
+  String get mobileDashboardText3StatementsPending => '3 statements pending';
+
+  @override
+  String get mobileDashboardPaymentApprovals => 'Payment approvals';
+
+  @override
+  String get mobileDashboardSar284kAwaitingRelease =>
+      'SAR 284K awaiting release';
+
+  @override
+  String get mobileDashboardApprovePaymentBatch => 'Approve payment batch';
+
+  @override
+  String get mobileDashboardPayrollAndSupplierWires =>
+      'Payroll and supplier wires';
+
+  @override
+  String get mobileDashboardText5Items => '5 items';
+
+  @override
+  String get mobileDashboardReconcileBankStatements =>
+      'Reconcile bank statements';
+
+  @override
+  String get mobileDashboardRiyadBankAndSnb => 'Riyad Bank and SNB';
+
+  @override
+  String get mobileDashboardText3Open => '3 open';
+
+  @override
+  String get mobileDashboardReview13WeekCashForecast =>
+      'Review 13-week cash forecast';
+
+  @override
+  String get mobileDashboardUpdatedWithCurrentCommitments =>
+      'Updated with current commitments';
+
+  @override
+  String get mobileDashboardToday => 'Today';
+
+  @override
+  String get mobileDashboardUnreconciledStatements => 'Unreconciled statements';
+
+  @override
+  String get mobileDashboardBankStatementLinesRemainUnmatched =>
+      'Bank statement lines remain unmatched';
+
+  @override
+  String get mobileDashboardPaymentsAwaitingApproval =>
+      'Payments awaiting approval';
+
+  @override
+  String get mobileDashboardTransfersAreApproachingTheBankCutOff =>
+      'Transfers are approaching the bank cut-off';
+
+  @override
+  String get mobileDashboardBankFeedDelayed => 'Bank feed delayed';
+
+  @override
+  String get mobileDashboardOneAccountHasNotSynchronizedToday =>
+      'One account has not synchronized today';
+
+  @override
+  String get mobileDashboardGeneralLedgerFinancialControl =>
+      'GENERAL LEDGER & FINANCIAL CONTROL';
+
+  @override
+  String get mobileDashboardAccountingCommandCenter =>
+      'Accounting command center';
+
+  @override
+  String
+  get mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace =>
+      'Track close readiness, posting health, balances, and control exceptions from one operational workspace.';
+
+  @override
+  String get mobileDashboardPostJournal => 'Post journal';
+
+  @override
+  String get mobileDashboardCloseReadiness => 'Close readiness';
+
+  @override
+  String get mobileDashboardPeriodCloseWorkflow => 'Period-close workflow';
+
+  @override
+  String get mobileDashboardPriorityTasksForAnAccurateAndControlledClose =>
+      'Priority tasks for an accurate and controlled close.';
+
+  @override
+  String get mobileDashboardRecentPostings => 'Recent postings';
+
+  @override
+  String get mobileDashboardAccountingExceptions => 'Accounting exceptions';
+
+  @override
+  String get mobileDashboardOpenPeriod => 'Open period';
+
+  @override
+  String get mobileDashboardDec2024 => 'DEC 2024';
+
+  @override
+  String get mobileDashboardClosesIn4Days => 'Closes in 4 days';
+
+  @override
+  String get mobileDashboardTrialBalance => 'Trial balance';
+
+  @override
+  String get mobileDashboardBalanced => 'Balanced';
+
+  @override
+  String get mobileDashboardNoVarianceDetected => 'No variance detected';
+
+  @override
+  String get mobileDashboardUnpostedJournals => 'Unposted journals';
+
+  @override
+  String get mobileDashboardText2RequireApproval => '2 require approval';
+
+  @override
+  String get mobileDashboardPostRecurringJournals => 'Post recurring journals';
+
+  @override
+  String get mobileDashboardRentPayrollAndDepreciation =>
+      'Rent, payroll, and depreciation';
+
+  @override
+  String get mobileDashboardText4Batches => '4 batches';
+
+  @override
+  String get mobileDashboardReviewControlAccounts => 'Review control accounts';
+
+  @override
+  String get mobileDashboardArApInventoryAndTax => 'AR, AP, inventory, and tax';
+
+  @override
+  String get mobileDashboardText2Variances => '2 variances';
+
+  @override
+  String get mobileDashboardLockOperationalSubledgers =>
+      'Lock operational subledgers';
+
+  @override
+  String get mobileDashboardAfterFinalPostingReview =>
+      'After final posting review';
+
+  @override
+  String get mobileDashboardPending => 'Pending';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDoNotMatch =>
+      'Debits and credits do not match';
+
+  @override
+  String get mobileDashboardDraftAndApprovalQueuesRemainOpen =>
+      'Draft and approval queues remain open';
+
+  @override
+  String get mobileDashboardControlAccountVariances =>
+      'Control account variances';
+
+  @override
+  String get mobileDashboardArAndInventoryRequireInvestigation =>
+      'AR and inventory require investigation';
+
+  @override
+  String get mobileDashboardSalesPurchasingOrderFulfilment =>
+      'SALES, PURCHASING & ORDER FULFILMENT';
+
+  @override
+  String get mobileDashboardCommercialOperationsCenter =>
+      'Commercial operations center';
+
+  @override
+  String
+  get mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness =>
+      'Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.';
+
+  @override
+  String get mobileDashboardCreateSalesOrder => 'Create sales order';
+
+  @override
+  String get mobileDashboardCommercialPulse => 'Commercial pulse';
+
+  @override
+  String get mobileDashboardOrderToCashWorkflow => 'Order-to-cash workflow';
+
+  @override
+  String
+  get mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService =>
+      'Operational work that can affect revenue and customer service.';
+
+  @override
+  String get mobileDashboardLatestCommercialDocuments =>
+      'Latest commercial documents';
+
+  @override
+  String get mobileDashboardCommercialExceptions => 'Commercial exceptions';
+
+  @override
+  String get mobileDashboardOpenSalesOrders => 'Open sales orders';
+
+  @override
+  String get mobileDashboardSar114mPipeline => 'SAR 1.14M pipeline';
+
+  @override
+  String get mobileDashboardOnTimeFulfilment => 'On-time fulfilment';
+
+  @override
+  String get mobileDashboardText4OrdersAtRisk => '4 orders at risk';
+
+  @override
+  String get mobileDashboardOverdueReceivables => 'Overdue receivables';
+
+  @override
+  String get mobileDashboardSar176kOverdue => 'SAR 176K overdue';
+
+  @override
+  String get mobileDashboardReleaseBlockedSalesOrders =>
+      'Release blocked sales orders';
+
+  @override
+  String get mobileDashboardCreditAndMarginChecks => 'Credit and margin checks';
+
+  @override
+  String get mobileDashboardText4Orders => '4 orders';
+
+  @override
+  String get mobileDashboardConfirmPurchaseCommitments =>
+      'Confirm purchase commitments';
+
+  @override
+  String get mobileDashboardLeadTimeChangesFromSuppliers =>
+      'Lead-time changes from suppliers';
+
+  @override
+  String get mobileDashboardText6Lines => '6 lines';
+
+  @override
+  String get mobileDashboardFollowUpOverdueInvoices =>
+      'Follow up overdue invoices';
+
+  @override
+  String get mobileDashboardTopCustomerBalances => 'Top customer balances';
+
+  @override
+  String get mobileDashboardText8Accounts => '8 accounts';
+
+  @override
+  String get mobileDashboardOrdersOnCreditHold => 'Orders on credit hold';
+
+  @override
+  String get mobileDashboardCustomerLimitsOrOverdueBalancesExceeded =>
+      'Customer limits or overdue balances exceeded';
+
+  @override
+  String get mobileDashboardFulfilmentShortages => 'Fulfilment shortages';
+
+  @override
+  String get mobileDashboardCommittedQuantitiesExceedAvailableStock =>
+      'Committed quantities exceed available stock';
+
+  @override
+  String get mobileDashboardSupplierDeliveryChanges =>
+      'Supplier delivery changes';
+
+  @override
+  String get mobileDashboardExpectedDatesWereUpdatedByVendors =>
+      'Expected dates were updated by vendors';
+
+  @override
+  String get accountingDashboard => 'Accounting Dashboard';
+
+  @override
+  String get addCustomer => 'Add Customer';
+
+  @override
+  String get addSupplier => 'Add Supplier';
+
+  @override
+  String get administration => 'Administration';
+
+  @override
+  String get bankingDashboard => 'Banking Dashboard';
+
+  @override
+  String get bankingCash => 'Banking · Cash';
+
+  @override
+  String get bankingTransfers => 'Banking · Transfers';
+
+  @override
+  String get commercialDashboard => 'Commercial Dashboard';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get externalWireDetails => 'External Wire Details';
+
+  @override
+  String get inventoryDashboard => 'Inventory Dashboard';
+
+  @override
+  String get issueDetailsMore => 'Issue — Details';
+
+  @override
+  String get journalEntryDetails => 'Journal Entry Details';
+
+  @override
+  String get localTransferDetails => 'Local Transfer Details';
+
+  @override
+  String get openingJournalEntry => 'Opening Journal Entry';
+
+  @override
+  String get procurementSuppliers => 'Procurement · Suppliers';
+
+  @override
+  String get productsList => 'Products List';
+
+  @override
+  String get receiveDetailsMore => 'Receive — Details';
+
+  @override
+  String get rolesPermissions => 'Roles & Permissions';
+
+  @override
+  String get salesCustomers => 'Sales · Customers';
+
+  @override
+  String get transferDetailsMore => 'Transfer — Details';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDonTMatch2 =>
+      'Debits and credits don\'t match';
+
+  @override
+  String get mobileDashboardText9a => '9a';
+
+  @override
+  String get mobileDashboardText12p => '12p';
+
+  @override
+  String get mobileDashboardText3p => '3p';
+
+  @override
+  String get mobileDashboardText6p => '6p';
+
+  @override
+  String get mobileDashboardNow => 'now';
+
+  @override
+  String get mobileDashboardM => 'M';
+
+  @override
+  String get mobileDashboardT => 'T';
+
+  @override
+  String get mobileDashboardW => 'W';
+
+  @override
+  String get mobileDashboardF => 'F';
+
+  @override
+  String get mobileDashboardS => 'S';
+
+  @override
+  String get mobileDashboardW1 => 'W1';
+
+  @override
+  String get mobileDashboardW2 => 'W2';
+
+  @override
+  String get mobileDashboardW3 => 'W3';
+
+  @override
+  String get mobileDashboardW4 => 'W4';
+
+  @override
+  String get mobileDashboardW5 => 'W5';
+
+  @override
+  String get mobileDashboardW6 => 'W6';
+
+  @override
+  String get mobileDashboardW7 => 'W7';
+
+  @override
+  String get mobileDashboardW8 => 'W8';
+
+  @override
+  String get mobileDashboardAlRashidTradingCo => 'Al-Rashid Trading Co.';
+
+  @override
+  String get mobileDashboardNajdHoldings => 'Najd Holdings';
+
+  @override
+  String get mobileDashboardCoastalLogistics => 'Coastal Logistics';
+
+  @override
+  String get mobileDashboardGulfContractingLtd => 'Gulf Contracting Ltd';
+
+  @override
+  String get mobileDashboardSaudiSteelCo => 'Saudi Steel Co';
+
+  @override
+  String get mobileDashboardNajdBuilders => 'Najd Builders';
+
+  @override
+  String get mobileDashboardCoastalCement => 'Coastal Cement';
+
+  @override
+  String get mobileDashboardEasternTimber => 'Eastern Timber';
 }

@@ -1323,4 +1323,678 @@ class GeniusLinkLocalizationAr extends GeniusLinkLocalization {
 
   @override
   String get stores => 'المتاجر';
+
+  @override
+  String get mobileDashboardWorkspace => 'مساحة العمل';
+
+  @override
+  String get mobileDashboardNotifications => 'الإشعارات';
+
+  @override
+  String get mobileDashboardOverview => 'نظرة عامة';
+
+  @override
+  String get mobileDashboardSales => 'المبيعات';
+
+  @override
+  String get mobileDashboardTransfers => 'التحويلات';
+
+  @override
+  String get mobileDashboardLedger => 'دفتر الأستاذ';
+
+  @override
+  String get mobileDashboardReports => 'التقارير';
+
+  @override
+  String get mobileDashboardSaudiRiyal => 'الريال السعودي';
+
+  @override
+  String get mobileDashboardUsDollar => 'الدولار الأمريكي';
+
+  @override
+  String get mobileDashboardUaeDirham => 'الدرهم الإماراتي';
+
+  @override
+  String get mobileDashboardTenant9 => 'المستأجر 9';
+
+  @override
+  String get mobileDashboardTenant14 => 'المستأجر 14';
+
+  @override
+  String get mobileDashboardTenant22 => 'المستأجر 22';
+
+  @override
+  String get mobileDashboardOutOfBalanceEntries => 'قيود غير متوازنة';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDonTMatch =>
+      'إجمالي المدين والدائن غير متطابق';
+
+  @override
+  String get mobileDashboardPendingApprovals => 'موافقات معلّقة';
+
+  @override
+  String get mobileDashboardVouchersAwaitingYourSignOff =>
+      'سندات تنتظر اعتمادك';
+
+  @override
+  String get mobileDashboardSyncConflict => 'تعارض في المزامنة';
+
+  @override
+  String get mobileDashboardADraftEditedOnTwoDevices =>
+      'تم تعديل مسودة على جهازين';
+
+  @override
+  String get mobileDashboardBanking => 'الخدمات المصرفية';
+
+  @override
+  String get mobileDashboardTotalBalance => 'إجمالي الرصيد';
+
+  @override
+  String get mobileDashboardAvailableCash => 'النقد المتاح';
+
+  @override
+  String get mobileDashboardInflow => 'التدفقات الداخلة';
+
+  @override
+  String get mobileDashboardOutflow => 'التدفقات الخارجة';
+
+  @override
+  String get mobileDashboardDeposit => 'إيداع';
+
+  @override
+  String get mobileDashboardWithdrawal => 'سحب';
+
+  @override
+  String get mobileDashboardTransfer => 'تحويل';
+
+  @override
+  String get mobileDashboardStatement => 'كشف حساب';
+
+  @override
+  String get mobileDashboardBeneficiaries => 'المستفيدون';
+
+  @override
+  String get mobileDashboardReconcile => 'مطابقة';
+
+  @override
+  String get mobileDashboardCards => 'البطاقات';
+
+  @override
+  String get mobileDashboardCheques => 'الشيكات';
+
+  @override
+  String get mobileDashboardBankAccounts => 'الحسابات البنكية';
+
+  @override
+  String get mobileDashboardCashDepositMain => 'إيداع نقدي — الرئيسي';
+
+  @override
+  String get mobileDashboardText1hAgo => 'قبل ساعة';
+
+  @override
+  String get mobileDashboardPayrollRelease => 'صرف الرواتب';
+
+  @override
+  String get mobileDashboardText4hAgo => 'قبل 4 ساعات';
+
+  @override
+  String get mobileDashboardRiyadBankMain => 'بنك الرياض ← الرئيسي';
+
+  @override
+  String get mobileDashboardYesterday => 'أمس';
+
+  @override
+  String get mobileDashboardSupplierWire => 'تحويل بنكي للمورّد';
+
+  @override
+  String get mobileDashboardCustomerSettlement => 'تسوية عميل';
+
+  @override
+  String get mobileDashboardText2DaysAgo => 'قبل يومين';
+
+  @override
+  String get mobileDashboardAccounting => 'المحاسبة';
+
+  @override
+  String get mobileDashboardTotalAssets => 'إجمالي الأصول';
+
+  @override
+  String get mobileDashboardCash => 'النقد';
+
+  @override
+  String get mobileDashboardRevenueMtd => 'الإيرادات منذ بداية الشهر';
+
+  @override
+  String get mobileDashboardVoucher => 'سند';
+
+  @override
+  String get mobileDashboardReceipt => 'سند قبض';
+
+  @override
+  String get mobileDashboardInvoice => 'فاتورة';
+
+  @override
+  String get mobileDashboardCustomers => 'العملاء';
+
+  @override
+  String get mobileDashboardSuppliers => 'الموردون';
+
+  @override
+  String get mobileDashboardFixedAssets => 'الأصول الثابتة';
+
+  @override
+  String get mobileDashboardJournal => 'يومية';
+
+  @override
+  String get mobileDashboardDepreciationQ4 => 'الإهلاك — الربع الرابع';
+
+  @override
+  String get mobileDashboardText2hAgo => 'قبل ساعتين';
+
+  @override
+  String get mobileDashboardOfficeRentPayment => 'دفع إيجار المكتب';
+
+  @override
+  String get mobileDashboardText5hAgo => 'قبل 5 ساعات';
+
+  @override
+  String get mobileDashboardRevenueAccrual => 'استحقاق الإيرادات';
+
+  @override
+  String get mobileDashboardUtilitiesNov => 'المرافق — نوفمبر';
+
+  @override
+  String get mobileDashboardFxRevaluation => 'إعادة تقييم العملات الأجنبية';
+
+  @override
+  String get mobileDashboardCommercial => 'التجاري';
+
+  @override
+  String get mobileDashboardSalesMtd => 'المبيعات منذ بداية الشهر';
+
+  @override
+  String get mobileDashboardPurchasesMtd => 'المشتريات منذ بداية الشهر';
+
+  @override
+  String get mobileDashboardReceivables => 'الذمم المدينة';
+
+  @override
+  String get mobileDashboardPayables => 'الذمم الدائنة';
+
+  @override
+  String get mobileDashboardSale => 'بيع';
+
+  @override
+  String get mobileDashboardPurchase => 'شراء';
+
+  @override
+  String get mobileDashboardQuotation => 'عرض سعر';
+
+  @override
+  String get mobileDashboardReturnText => 'مرتجع';
+
+  @override
+  String get mobileDashboardText30mAgo => 'قبل 30 دقيقة';
+
+  @override
+  String get mobileDashboardText3hAgo => 'قبل 3 ساعات';
+
+  @override
+  String get mobileDashboardTreasuryCashManagement => 'الخزينة وإدارة النقد';
+
+  @override
+  String get mobileDashboardBankingControlCenter => 'مركز التحكم المصرفي';
+
+  @override
+  String
+  get mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity =>
+      'راقب السيولة والمراكز البنكية والتحويلات وعمليات المطابقة عبر جميع الكيانات القانونية.';
+
+  @override
+  String get mobileDashboardNewTransfer => 'تحويل جديد';
+
+  @override
+  String get mobileDashboardTreasuryStatus => 'حالة الخزينة';
+
+  @override
+  String get mobileDashboardTreasuryWorkflow => 'سير عمل الخزينة';
+
+  @override
+  String get mobileDashboardItemsThatRequireActionBeforeTheNextCutOff =>
+      'عناصر تتطلب إجراءً قبل موعد الإقفال التالي.';
+
+  @override
+  String get mobileDashboardLatestBankMovements => 'أحدث الحركات البنكية';
+
+  @override
+  String get mobileDashboardTreasuryExceptions => 'استثناءات الخزينة';
+
+  @override
+  String get mobileDashboardConnectedAccounts => 'الحسابات المتصلة';
+
+  @override
+  String get mobileDashboardAcross3Banks => 'عبر 3 بنوك';
+
+  @override
+  String get mobileDashboardReconciliation => 'المطابقة';
+
+  @override
+  String get mobileDashboardText3StatementsPending => '3 كشوف حساب معلّقة';
+
+  @override
+  String get mobileDashboardPaymentApprovals => 'موافقات الدفع';
+
+  @override
+  String get mobileDashboardSar284kAwaitingRelease =>
+      '284 ألف ر.س بانتظار الصرف';
+
+  @override
+  String get mobileDashboardApprovePaymentBatch => 'اعتماد دفعة المدفوعات';
+
+  @override
+  String get mobileDashboardPayrollAndSupplierWires =>
+      'الرواتب وتحويلات الموردين';
+
+  @override
+  String get mobileDashboardText5Items => '5 عناصر';
+
+  @override
+  String get mobileDashboardReconcileBankStatements =>
+      'مطابقة كشوف الحساب البنكية';
+
+  @override
+  String get mobileDashboardRiyadBankAndSnb =>
+      'بنك الرياض والبنك الأهلي السعودي';
+
+  @override
+  String get mobileDashboardText3Open => '3 مفتوحة';
+
+  @override
+  String get mobileDashboardReview13WeekCashForecast =>
+      'مراجعة توقعات النقد لـ 13 أسبوعاً';
+
+  @override
+  String get mobileDashboardUpdatedWithCurrentCommitments =>
+      'محدّثة بالالتزامات الحالية';
+
+  @override
+  String get mobileDashboardToday => 'اليوم';
+
+  @override
+  String get mobileDashboardUnreconciledStatements => 'كشوف غير مطابقة';
+
+  @override
+  String get mobileDashboardBankStatementLinesRemainUnmatched =>
+      'لا تزال بعض بنود كشف الحساب غير مطابقة';
+
+  @override
+  String get mobileDashboardPaymentsAwaitingApproval =>
+      'مدفوعات بانتظار الموافقة';
+
+  @override
+  String get mobileDashboardTransfersAreApproachingTheBankCutOff =>
+      'التحويلات تقترب من موعد إقفال البنك';
+
+  @override
+  String get mobileDashboardBankFeedDelayed => 'تأخر تغذية البنك';
+
+  @override
+  String get mobileDashboardOneAccountHasNotSynchronizedToday =>
+      'هناك حساب لم تتم مزامنته اليوم';
+
+  @override
+  String get mobileDashboardGeneralLedgerFinancialControl =>
+      'دفتر الأستاذ العام والرقابة المالية';
+
+  @override
+  String get mobileDashboardAccountingCommandCenter => 'مركز قيادة المحاسبة';
+
+  @override
+  String
+  get mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace =>
+      'تابع جاهزية الإقفال وسلامة الترحيل والأرصدة واستثناءات الرقابة من مساحة عمل تشغيلية واحدة.';
+
+  @override
+  String get mobileDashboardPostJournal => 'ترحيل قيد يومية';
+
+  @override
+  String get mobileDashboardCloseReadiness => 'جاهزية الإقفال';
+
+  @override
+  String get mobileDashboardPeriodCloseWorkflow => 'سير عمل إقفال الفترة';
+
+  @override
+  String get mobileDashboardPriorityTasksForAnAccurateAndControlledClose =>
+      'مهام ذات أولوية لإقفال دقيق ومنضبط.';
+
+  @override
+  String get mobileDashboardRecentPostings => 'أحدث الترحيلات';
+
+  @override
+  String get mobileDashboardAccountingExceptions => 'استثناءات المحاسبة';
+
+  @override
+  String get mobileDashboardOpenPeriod => 'الفترة المفتوحة';
+
+  @override
+  String get mobileDashboardDec2024 => 'ديسمبر 2024';
+
+  @override
+  String get mobileDashboardClosesIn4Days => 'تُغلق خلال 4 أيام';
+
+  @override
+  String get mobileDashboardTrialBalance => 'ميزان المراجعة';
+
+  @override
+  String get mobileDashboardBalanced => 'متوازن';
+
+  @override
+  String get mobileDashboardNoVarianceDetected => 'لم يتم اكتشاف أي فروقات';
+
+  @override
+  String get mobileDashboardUnpostedJournals => 'قيود يومية غير مرحلة';
+
+  @override
+  String get mobileDashboardText2RequireApproval => '2 تتطلب الموافقة';
+
+  @override
+  String get mobileDashboardPostRecurringJournals => 'ترحيل القيود الدورية';
+
+  @override
+  String get mobileDashboardRentPayrollAndDepreciation =>
+      'الإيجار والرواتب والإهلاك';
+
+  @override
+  String get mobileDashboardText4Batches => '4 دفعات';
+
+  @override
+  String get mobileDashboardReviewControlAccounts => 'مراجعة حسابات الرقابة';
+
+  @override
+  String get mobileDashboardArApInventoryAndTax =>
+      'الذمم المدينة والدائنة والمخزون والضرائب';
+
+  @override
+  String get mobileDashboardText2Variances => 'فروقان';
+
+  @override
+  String get mobileDashboardLockOperationalSubledgers =>
+      'إقفال دفاتر الأستاذ الفرعية التشغيلية';
+
+  @override
+  String get mobileDashboardAfterFinalPostingReview =>
+      'بعد المراجعة النهائية للترحيل';
+
+  @override
+  String get mobileDashboardPending => 'معلّق';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDoNotMatch =>
+      'إجمالي المدين والدائن غير متطابق';
+
+  @override
+  String get mobileDashboardDraftAndApprovalQueuesRemainOpen =>
+      'لا تزال قوائم المسودات والموافقات مفتوحة';
+
+  @override
+  String get mobileDashboardControlAccountVariances => 'فروقات حسابات الرقابة';
+
+  @override
+  String get mobileDashboardArAndInventoryRequireInvestigation =>
+      'تتطلب الذمم المدينة والمخزون المراجعة';
+
+  @override
+  String get mobileDashboardSalesPurchasingOrderFulfilment =>
+      'المبيعات والمشتريات وتنفيذ الطلبات';
+
+  @override
+  String get mobileDashboardCommercialOperationsCenter =>
+      'مركز العمليات التجارية';
+
+  @override
+  String
+  get mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness =>
+      'أدر تنفيذ الإيرادات والتزامات المشتريات والذمم المدينة ومخاطر تنفيذ الطلبات على مستوى المنشأة.';
+
+  @override
+  String get mobileDashboardCreateSalesOrder => 'إنشاء أمر بيع';
+
+  @override
+  String get mobileDashboardCommercialPulse => 'المؤشرات التجارية';
+
+  @override
+  String get mobileDashboardOrderToCashWorkflow =>
+      'سير العمل من الطلب إلى التحصيل';
+
+  @override
+  String
+  get mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService =>
+      'أعمال تشغيلية قد تؤثر في الإيرادات وخدمة العملاء.';
+
+  @override
+  String get mobileDashboardLatestCommercialDocuments =>
+      'أحدث المستندات التجارية';
+
+  @override
+  String get mobileDashboardCommercialExceptions => 'الاستثناءات التجارية';
+
+  @override
+  String get mobileDashboardOpenSalesOrders => 'أوامر البيع المفتوحة';
+
+  @override
+  String get mobileDashboardSar114mPipeline => '1.14 مليون ر.س في خط المبيعات';
+
+  @override
+  String get mobileDashboardOnTimeFulfilment => 'التنفيذ في الموعد';
+
+  @override
+  String get mobileDashboardText4OrdersAtRisk => '4 طلبات معرضة للخطر';
+
+  @override
+  String get mobileDashboardOverdueReceivables => 'ذمم مدينة متأخرة';
+
+  @override
+  String get mobileDashboardSar176kOverdue => '176 ألف ر.س متأخرة';
+
+  @override
+  String get mobileDashboardReleaseBlockedSalesOrders =>
+      'إتاحة أوامر البيع المحجوبة';
+
+  @override
+  String get mobileDashboardCreditAndMarginChecks => 'فحوصات الائتمان والهامش';
+
+  @override
+  String get mobileDashboardText4Orders => '4 طلبات';
+
+  @override
+  String get mobileDashboardConfirmPurchaseCommitments =>
+      'تأكيد التزامات الشراء';
+
+  @override
+  String get mobileDashboardLeadTimeChangesFromSuppliers =>
+      'تغييرات مهل التوريد من الموردين';
+
+  @override
+  String get mobileDashboardText6Lines => '6 بنود';
+
+  @override
+  String get mobileDashboardFollowUpOverdueInvoices =>
+      'متابعة الفواتير المتأخرة';
+
+  @override
+  String get mobileDashboardTopCustomerBalances => 'أعلى أرصدة العملاء';
+
+  @override
+  String get mobileDashboardText8Accounts => '8 حسابات';
+
+  @override
+  String get mobileDashboardOrdersOnCreditHold => 'طلبات موقوفة ائتمانياً';
+
+  @override
+  String get mobileDashboardCustomerLimitsOrOverdueBalancesExceeded =>
+      'تم تجاوز حدود العملاء أو الأرصدة المتأخرة';
+
+  @override
+  String get mobileDashboardFulfilmentShortages => 'نقص في تنفيذ الطلبات';
+
+  @override
+  String get mobileDashboardCommittedQuantitiesExceedAvailableStock =>
+      'الكميات الملتزم بها تتجاوز المخزون المتاح';
+
+  @override
+  String get mobileDashboardSupplierDeliveryChanges =>
+      'تغييرات في تسليم الموردين';
+
+  @override
+  String get mobileDashboardExpectedDatesWereUpdatedByVendors =>
+      'تم تحديث التواريخ المتوقعة من قبل الموردين';
+
+  @override
+  String get accountingDashboard => 'لوحة التحكم المحاسبية';
+
+  @override
+  String get addCustomer => 'إضافة عميل';
+
+  @override
+  String get addSupplier => 'إضافة مورد';
+
+  @override
+  String get administration => 'الإدارة';
+
+  @override
+  String get bankingDashboard => 'لوحة التحكم المصرفية';
+
+  @override
+  String get bankingCash => 'المصرفية · النقدية';
+
+  @override
+  String get bankingTransfers => 'المصرفية · التحويلات';
+
+  @override
+  String get commercialDashboard => 'لوحة التحكم التجارية';
+
+  @override
+  String get configuration => 'التهيئة';
+
+  @override
+  String get externalWireDetails => 'تفاصيل الحوالة الخارجية';
+
+  @override
+  String get inventoryDashboard => 'لوحة تحكم المخزون';
+
+  @override
+  String get issueDetailsMore => 'تفاصيل الصرف';
+
+  @override
+  String get journalEntryDetails => 'تفاصيل قيد اليومية';
+
+  @override
+  String get localTransferDetails => 'تفاصيل التحويل المحلي';
+
+  @override
+  String get openingJournalEntry => 'قيد اليومية الافتتاحي';
+
+  @override
+  String get procurementSuppliers => 'المشتريات · الموردون';
+
+  @override
+  String get productsList => 'قائمة المنتجات';
+
+  @override
+  String get receiveDetailsMore => 'تفاصيل الاستلام';
+
+  @override
+  String get rolesPermissions => 'الأدوار والصلاحيات';
+
+  @override
+  String get salesCustomers => 'المبيعات · العملاء';
+
+  @override
+  String get transferDetailsMore => 'تفاصيل التحويل';
+
+  @override
+  String get users => 'المستخدمون';
+
+  @override
+  String get mobileDashboardDebitsAndCreditsDonTMatch2 =>
+      'إجمالي المدين والدائن غير متطابق';
+
+  @override
+  String get mobileDashboardText9a => '٩ ص';
+
+  @override
+  String get mobileDashboardText12p => '١٢ م';
+
+  @override
+  String get mobileDashboardText3p => '٣ م';
+
+  @override
+  String get mobileDashboardText6p => '٦ م';
+
+  @override
+  String get mobileDashboardNow => 'الآن';
+
+  @override
+  String get mobileDashboardM => 'ن';
+
+  @override
+  String get mobileDashboardT => 'ث';
+
+  @override
+  String get mobileDashboardW => 'ر';
+
+  @override
+  String get mobileDashboardF => 'ج';
+
+  @override
+  String get mobileDashboardS => 'س';
+
+  @override
+  String get mobileDashboardW1 => 'أ1';
+
+  @override
+  String get mobileDashboardW2 => 'أ2';
+
+  @override
+  String get mobileDashboardW3 => 'أ3';
+
+  @override
+  String get mobileDashboardW4 => 'أ4';
+
+  @override
+  String get mobileDashboardW5 => 'أ5';
+
+  @override
+  String get mobileDashboardW6 => 'أ6';
+
+  @override
+  String get mobileDashboardW7 => 'أ7';
+
+  @override
+  String get mobileDashboardW8 => 'أ8';
+
+  @override
+  String get mobileDashboardAlRashidTradingCo => 'شركة الرشيد للتجارة';
+
+  @override
+  String get mobileDashboardNajdHoldings => 'شركة نجد القابضة';
+
+  @override
+  String get mobileDashboardCoastalLogistics => 'الخدمات اللوجستية الساحلية';
+
+  @override
+  String get mobileDashboardGulfContractingLtd => 'شركة الخليج للمقاولات';
+
+  @override
+  String get mobileDashboardSaudiSteelCo => 'شركة الصلب السعودية';
+
+  @override
+  String get mobileDashboardNajdBuilders => 'بناة نجد';
+
+  @override
+  String get mobileDashboardCoastalCement => 'أسمنت الساحل';
+
+  @override
+  String get mobileDashboardEasternTimber => 'الأخشاب الشرقية';
 }

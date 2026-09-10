@@ -1,6 +1,8 @@
 import '../../domain/domain.dart';
 import '../datasources/mobile_dashboard_data.dart';
 
+// Navigation labels are localized by MobileDashboardScreen.
+
 class BankingRepository implements WorkspaceRepository {
   final MobileDashboardCatalog? _source;
 
@@ -15,9 +17,9 @@ class BankingRepository implements WorkspaceRepository {
 
   @override
   List<MobileDashboardNavigationDestination> get navigationItems => const [
-    (id: 'home', label: 'Overview', icon: 'home'),
-    (id: 'accounts', label: 'Accounts', icon: 'inbox'),
-    (id: 'transfers', label: 'Transfers', icon: 'send'),
-    (id: 'more', label: 'More', icon: 'dots'),
+    (id: 'home', label: MobileDashboardNavigationCopy.overview, icon: 'home'),
+    (id: 'accounts', label: MobileDashboardNavigationCopy.accounts, icon: 'inbox'),
+    (id: 'transfers', label: MobileDashboardNavigationCopy.transfers, icon: 'send'),
+    (id: 'more', label: MobileDashboardNavigationCopy.more, icon: 'dots'),
   ];
 }

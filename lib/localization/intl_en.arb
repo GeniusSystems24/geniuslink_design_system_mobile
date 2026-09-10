@@ -1719,5 +1719,845 @@
   "stores": "Stores",
   "@stores": {
     "description": "Localized user-interface text."
+  },
+  "mobileDashboardWorkspace": "Workspace",
+  "@mobileDashboardWorkspace": {
+    "description": "Mobile Dashboard user-facing text: Workspace"
+  },
+  "mobileDashboardNotifications": "Notifications",
+  "@mobileDashboardNotifications": {
+    "description": "Mobile Dashboard user-facing text: Notifications"
+  },
+  "mobileDashboardOverview": "Overview",
+  "@mobileDashboardOverview": {
+    "description": "Mobile Dashboard user-facing text: Overview"
+  },
+  "mobileDashboardSales": "Sales",
+  "@mobileDashboardSales": {
+    "description": "Mobile Dashboard user-facing text: Sales"
+  },
+  "mobileDashboardTransfers": "Transfers",
+  "@mobileDashboardTransfers": {
+    "description": "Mobile Dashboard user-facing text: Transfers"
+  },
+  "mobileDashboardLedger": "Ledger",
+  "@mobileDashboardLedger": {
+    "description": "Mobile Dashboard user-facing text: Ledger"
+  },
+  "mobileDashboardReports": "Reports",
+  "@mobileDashboardReports": {
+    "description": "Mobile Dashboard user-facing text: Reports"
+  },
+  "mobileDashboardSaudiRiyal": "Saudi Riyal",
+  "@mobileDashboardSaudiRiyal": {
+    "description": "Mobile Dashboard user-facing text: Saudi Riyal"
+  },
+  "mobileDashboardUsDollar": "US Dollar",
+  "@mobileDashboardUsDollar": {
+    "description": "Mobile Dashboard user-facing text: US Dollar"
+  },
+  "mobileDashboardUaeDirham": "UAE Dirham",
+  "@mobileDashboardUaeDirham": {
+    "description": "Mobile Dashboard user-facing text: UAE Dirham"
+  },
+  "mobileDashboardTenant9": "Tenant 9",
+  "@mobileDashboardTenant9": {
+    "description": "Mobile Dashboard user-facing text: Tenant 9"
+  },
+  "mobileDashboardTenant14": "Tenant 14",
+  "@mobileDashboardTenant14": {
+    "description": "Mobile Dashboard user-facing text: Tenant 14"
+  },
+  "mobileDashboardTenant22": "Tenant 22",
+  "@mobileDashboardTenant22": {
+    "description": "Mobile Dashboard user-facing text: Tenant 22"
+  },
+  "mobileDashboardOutOfBalanceEntries": "Out-of-balance entries",
+  "@mobileDashboardOutOfBalanceEntries": {
+    "description": "Mobile Dashboard user-facing text: Out-of-balance entries"
+  },
+  "mobileDashboardDebitsAndCreditsDonTMatch": "Debits and credits don''t match",
+  "@mobileDashboardDebitsAndCreditsDonTMatch": {
+    "description": "Mobile Dashboard user-facing text: Debits and credits don''t match"
+  },
+  "mobileDashboardPendingApprovals": "Pending approvals",
+  "@mobileDashboardPendingApprovals": {
+    "description": "Mobile Dashboard user-facing text: Pending approvals"
+  },
+  "mobileDashboardVouchersAwaitingYourSignOff": "Vouchers awaiting your sign-off",
+  "@mobileDashboardVouchersAwaitingYourSignOff": {
+    "description": "Mobile Dashboard user-facing text: Vouchers awaiting your sign-off"
+  },
+  "mobileDashboardSyncConflict": "Sync conflict",
+  "@mobileDashboardSyncConflict": {
+    "description": "Mobile Dashboard user-facing text: Sync conflict"
+  },
+  "mobileDashboardADraftEditedOnTwoDevices": "A draft edited on two devices",
+  "@mobileDashboardADraftEditedOnTwoDevices": {
+    "description": "Mobile Dashboard user-facing text: A draft edited on two devices"
+  },
+  "mobileDashboardBanking": "Banking",
+  "@mobileDashboardBanking": {
+    "description": "Mobile Dashboard user-facing text: Banking"
+  },
+  "mobileDashboardTotalBalance": "Total Balance",
+  "@mobileDashboardTotalBalance": {
+    "description": "Mobile Dashboard user-facing text: Total Balance"
+  },
+  "mobileDashboardAvailableCash": "Available Cash",
+  "@mobileDashboardAvailableCash": {
+    "description": "Mobile Dashboard user-facing text: Available Cash"
+  },
+  "mobileDashboardInflow": "Inflow",
+  "@mobileDashboardInflow": {
+    "description": "Mobile Dashboard user-facing text: Inflow"
+  },
+  "mobileDashboardOutflow": "Outflow",
+  "@mobileDashboardOutflow": {
+    "description": "Mobile Dashboard user-facing text: Outflow"
+  },
+  "mobileDashboardDeposit": "Deposit",
+  "@mobileDashboardDeposit": {
+    "description": "Mobile Dashboard user-facing text: Deposit"
+  },
+  "mobileDashboardWithdrawal": "Withdrawal",
+  "@mobileDashboardWithdrawal": {
+    "description": "Mobile Dashboard user-facing text: Withdrawal"
+  },
+  "mobileDashboardTransfer": "Transfer",
+  "@mobileDashboardTransfer": {
+    "description": "Mobile Dashboard user-facing text: Transfer"
+  },
+  "mobileDashboardStatement": "Statement",
+  "@mobileDashboardStatement": {
+    "description": "Mobile Dashboard user-facing text: Statement"
+  },
+  "mobileDashboardBeneficiaries": "Beneficiaries",
+  "@mobileDashboardBeneficiaries": {
+    "description": "Mobile Dashboard user-facing text: Beneficiaries"
+  },
+  "mobileDashboardReconcile": "Reconcile",
+  "@mobileDashboardReconcile": {
+    "description": "Mobile Dashboard user-facing text: Reconcile"
+  },
+  "mobileDashboardCards": "Cards",
+  "@mobileDashboardCards": {
+    "description": "Mobile Dashboard user-facing text: Cards"
+  },
+  "mobileDashboardCheques": "Cheques",
+  "@mobileDashboardCheques": {
+    "description": "Mobile Dashboard user-facing text: Cheques"
+  },
+  "mobileDashboardBankAccounts": "Bank Accounts",
+  "@mobileDashboardBankAccounts": {
+    "description": "Mobile Dashboard user-facing text: Bank Accounts"
+  },
+  "mobileDashboardCashDepositMain": "Cash deposit — Main",
+  "@mobileDashboardCashDepositMain": {
+    "description": "Mobile Dashboard user-facing text: Cash deposit — Main"
+  },
+  "mobileDashboardText1hAgo": "1h ago",
+  "@mobileDashboardText1hAgo": {
+    "description": "Mobile Dashboard user-facing text: 1h ago"
+  },
+  "mobileDashboardPayrollRelease": "Payroll release",
+  "@mobileDashboardPayrollRelease": {
+    "description": "Mobile Dashboard user-facing text: Payroll release"
+  },
+  "mobileDashboardText4hAgo": "4h ago",
+  "@mobileDashboardText4hAgo": {
+    "description": "Mobile Dashboard user-facing text: 4h ago"
+  },
+  "mobileDashboardRiyadBankMain": "Riyad Bank → Main",
+  "@mobileDashboardRiyadBankMain": {
+    "description": "Mobile Dashboard user-facing text: Riyad Bank → Main"
+  },
+  "mobileDashboardYesterday": "Yesterday",
+  "@mobileDashboardYesterday": {
+    "description": "Mobile Dashboard user-facing text: Yesterday"
+  },
+  "mobileDashboardSupplierWire": "Supplier wire",
+  "@mobileDashboardSupplierWire": {
+    "description": "Mobile Dashboard user-facing text: Supplier wire"
+  },
+  "mobileDashboardCustomerSettlement": "Customer settlement",
+  "@mobileDashboardCustomerSettlement": {
+    "description": "Mobile Dashboard user-facing text: Customer settlement"
+  },
+  "mobileDashboardText2DaysAgo": "2 days ago",
+  "@mobileDashboardText2DaysAgo": {
+    "description": "Mobile Dashboard user-facing text: 2 days ago"
+  },
+  "mobileDashboardAccounting": "Accounting",
+  "@mobileDashboardAccounting": {
+    "description": "Mobile Dashboard user-facing text: Accounting"
+  },
+  "mobileDashboardTotalAssets": "Total Assets",
+  "@mobileDashboardTotalAssets": {
+    "description": "Mobile Dashboard user-facing text: Total Assets"
+  },
+  "mobileDashboardCash": "Cash",
+  "@mobileDashboardCash": {
+    "description": "Mobile Dashboard user-facing text: Cash"
+  },
+  "mobileDashboardRevenueMtd": "Revenue MTD",
+  "@mobileDashboardRevenueMtd": {
+    "description": "Mobile Dashboard user-facing text: Revenue MTD"
+  },
+  "mobileDashboardVoucher": "Voucher",
+  "@mobileDashboardVoucher": {
+    "description": "Mobile Dashboard user-facing text: Voucher"
+  },
+  "mobileDashboardReceipt": "Receipt",
+  "@mobileDashboardReceipt": {
+    "description": "Mobile Dashboard user-facing text: Receipt"
+  },
+  "mobileDashboardInvoice": "Invoice",
+  "@mobileDashboardInvoice": {
+    "description": "Mobile Dashboard user-facing text: Invoice"
+  },
+  "mobileDashboardCustomers": "Customers",
+  "@mobileDashboardCustomers": {
+    "description": "Mobile Dashboard user-facing text: Customers"
+  },
+  "mobileDashboardSuppliers": "Suppliers",
+  "@mobileDashboardSuppliers": {
+    "description": "Mobile Dashboard user-facing text: Suppliers"
+  },
+  "mobileDashboardFixedAssets": "Fixed Assets",
+  "@mobileDashboardFixedAssets": {
+    "description": "Mobile Dashboard user-facing text: Fixed Assets"
+  },
+  "mobileDashboardJournal": "Journal",
+  "@mobileDashboardJournal": {
+    "description": "Mobile Dashboard user-facing text: Journal"
+  },
+  "mobileDashboardDepreciationQ4": "Depreciation — Q4",
+  "@mobileDashboardDepreciationQ4": {
+    "description": "Mobile Dashboard user-facing text: Depreciation — Q4"
+  },
+  "mobileDashboardText2hAgo": "2h ago",
+  "@mobileDashboardText2hAgo": {
+    "description": "Mobile Dashboard user-facing text: 2h ago"
+  },
+  "mobileDashboardOfficeRentPayment": "Office rent payment",
+  "@mobileDashboardOfficeRentPayment": {
+    "description": "Mobile Dashboard user-facing text: Office rent payment"
+  },
+  "mobileDashboardText5hAgo": "5h ago",
+  "@mobileDashboardText5hAgo": {
+    "description": "Mobile Dashboard user-facing text: 5h ago"
+  },
+  "mobileDashboardRevenueAccrual": "Revenue accrual",
+  "@mobileDashboardRevenueAccrual": {
+    "description": "Mobile Dashboard user-facing text: Revenue accrual"
+  },
+  "mobileDashboardUtilitiesNov": "Utilities — Nov",
+  "@mobileDashboardUtilitiesNov": {
+    "description": "Mobile Dashboard user-facing text: Utilities — Nov"
+  },
+  "mobileDashboardFxRevaluation": "FX revaluation",
+  "@mobileDashboardFxRevaluation": {
+    "description": "Mobile Dashboard user-facing text: FX revaluation"
+  },
+  "mobileDashboardCommercial": "Commercial",
+  "@mobileDashboardCommercial": {
+    "description": "Mobile Dashboard user-facing text: Commercial"
+  },
+  "mobileDashboardSalesMtd": "Sales MTD",
+  "@mobileDashboardSalesMtd": {
+    "description": "Mobile Dashboard user-facing text: Sales MTD"
+  },
+  "mobileDashboardPurchasesMtd": "Purchases MTD",
+  "@mobileDashboardPurchasesMtd": {
+    "description": "Mobile Dashboard user-facing text: Purchases MTD"
+  },
+  "mobileDashboardReceivables": "Receivables",
+  "@mobileDashboardReceivables": {
+    "description": "Mobile Dashboard user-facing text: Receivables"
+  },
+  "mobileDashboardPayables": "Payables",
+  "@mobileDashboardPayables": {
+    "description": "Mobile Dashboard user-facing text: Payables"
+  },
+  "mobileDashboardSale": "Sale",
+  "@mobileDashboardSale": {
+    "description": "Mobile Dashboard user-facing text: Sale"
+  },
+  "mobileDashboardPurchase": "Purchase",
+  "@mobileDashboardPurchase": {
+    "description": "Mobile Dashboard user-facing text: Purchase"
+  },
+  "mobileDashboardQuotation": "Quotation",
+  "@mobileDashboardQuotation": {
+    "description": "Mobile Dashboard user-facing text: Quotation"
+  },
+  "mobileDashboardReturnText": "Return",
+  "@mobileDashboardReturnText": {
+    "description": "Mobile Dashboard user-facing text: Return"
+  },
+  "mobileDashboardText30mAgo": "30m ago",
+  "@mobileDashboardText30mAgo": {
+    "description": "Mobile Dashboard user-facing text: 30m ago"
+  },
+  "mobileDashboardText3hAgo": "3h ago",
+  "@mobileDashboardText3hAgo": {
+    "description": "Mobile Dashboard user-facing text: 3h ago"
+  },
+  "mobileDashboardTreasuryCashManagement": "TREASURY & CASH MANAGEMENT",
+  "@mobileDashboardTreasuryCashManagement": {
+    "description": "Mobile Dashboard user-facing text: TREASURY & CASH MANAGEMENT"
+  },
+  "mobileDashboardBankingControlCenter": "Banking control center",
+  "@mobileDashboardBankingControlCenter": {
+    "description": "Mobile Dashboard user-facing text: Banking control center"
+  },
+  "mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity": "Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.",
+  "@mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity": {
+    "description": "Mobile Dashboard user-facing text: Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity."
+  },
+  "mobileDashboardNewTransfer": "New transfer",
+  "@mobileDashboardNewTransfer": {
+    "description": "Mobile Dashboard user-facing text: New transfer"
+  },
+  "mobileDashboardTreasuryStatus": "Treasury status",
+  "@mobileDashboardTreasuryStatus": {
+    "description": "Mobile Dashboard user-facing text: Treasury status"
+  },
+  "mobileDashboardTreasuryWorkflow": "Treasury workflow",
+  "@mobileDashboardTreasuryWorkflow": {
+    "description": "Mobile Dashboard user-facing text: Treasury workflow"
+  },
+  "mobileDashboardItemsThatRequireActionBeforeTheNextCutOff": "Items that require action before the next cut-off.",
+  "@mobileDashboardItemsThatRequireActionBeforeTheNextCutOff": {
+    "description": "Mobile Dashboard user-facing text: Items that require action before the next cut-off."
+  },
+  "mobileDashboardLatestBankMovements": "Latest bank movements",
+  "@mobileDashboardLatestBankMovements": {
+    "description": "Mobile Dashboard user-facing text: Latest bank movements"
+  },
+  "mobileDashboardTreasuryExceptions": "Treasury exceptions",
+  "@mobileDashboardTreasuryExceptions": {
+    "description": "Mobile Dashboard user-facing text: Treasury exceptions"
+  },
+  "mobileDashboardConnectedAccounts": "Connected accounts",
+  "@mobileDashboardConnectedAccounts": {
+    "description": "Mobile Dashboard user-facing text: Connected accounts"
+  },
+  "mobileDashboardAcross3Banks": "Across 3 banks",
+  "@mobileDashboardAcross3Banks": {
+    "description": "Mobile Dashboard user-facing text: Across 3 banks"
+  },
+  "mobileDashboardReconciliation": "Reconciliation",
+  "@mobileDashboardReconciliation": {
+    "description": "Mobile Dashboard user-facing text: Reconciliation"
+  },
+  "mobileDashboardText3StatementsPending": "3 statements pending",
+  "@mobileDashboardText3StatementsPending": {
+    "description": "Mobile Dashboard user-facing text: 3 statements pending"
+  },
+  "mobileDashboardPaymentApprovals": "Payment approvals",
+  "@mobileDashboardPaymentApprovals": {
+    "description": "Mobile Dashboard user-facing text: Payment approvals"
+  },
+  "mobileDashboardSar284kAwaitingRelease": "SAR 284K awaiting release",
+  "@mobileDashboardSar284kAwaitingRelease": {
+    "description": "Mobile Dashboard user-facing text: SAR 284K awaiting release"
+  },
+  "mobileDashboardApprovePaymentBatch": "Approve payment batch",
+  "@mobileDashboardApprovePaymentBatch": {
+    "description": "Mobile Dashboard user-facing text: Approve payment batch"
+  },
+  "mobileDashboardPayrollAndSupplierWires": "Payroll and supplier wires",
+  "@mobileDashboardPayrollAndSupplierWires": {
+    "description": "Mobile Dashboard user-facing text: Payroll and supplier wires"
+  },
+  "mobileDashboardText5Items": "5 items",
+  "@mobileDashboardText5Items": {
+    "description": "Mobile Dashboard user-facing text: 5 items"
+  },
+  "mobileDashboardReconcileBankStatements": "Reconcile bank statements",
+  "@mobileDashboardReconcileBankStatements": {
+    "description": "Mobile Dashboard user-facing text: Reconcile bank statements"
+  },
+  "mobileDashboardRiyadBankAndSnb": "Riyad Bank and SNB",
+  "@mobileDashboardRiyadBankAndSnb": {
+    "description": "Mobile Dashboard user-facing text: Riyad Bank and SNB"
+  },
+  "mobileDashboardText3Open": "3 open",
+  "@mobileDashboardText3Open": {
+    "description": "Mobile Dashboard user-facing text: 3 open"
+  },
+  "mobileDashboardReview13WeekCashForecast": "Review 13-week cash forecast",
+  "@mobileDashboardReview13WeekCashForecast": {
+    "description": "Mobile Dashboard user-facing text: Review 13-week cash forecast"
+  },
+  "mobileDashboardUpdatedWithCurrentCommitments": "Updated with current commitments",
+  "@mobileDashboardUpdatedWithCurrentCommitments": {
+    "description": "Mobile Dashboard user-facing text: Updated with current commitments"
+  },
+  "mobileDashboardToday": "Today",
+  "@mobileDashboardToday": {
+    "description": "Mobile Dashboard user-facing text: Today"
+  },
+  "mobileDashboardUnreconciledStatements": "Unreconciled statements",
+  "@mobileDashboardUnreconciledStatements": {
+    "description": "Mobile Dashboard user-facing text: Unreconciled statements"
+  },
+  "mobileDashboardBankStatementLinesRemainUnmatched": "Bank statement lines remain unmatched",
+  "@mobileDashboardBankStatementLinesRemainUnmatched": {
+    "description": "Mobile Dashboard user-facing text: Bank statement lines remain unmatched"
+  },
+  "mobileDashboardPaymentsAwaitingApproval": "Payments awaiting approval",
+  "@mobileDashboardPaymentsAwaitingApproval": {
+    "description": "Mobile Dashboard user-facing text: Payments awaiting approval"
+  },
+  "mobileDashboardTransfersAreApproachingTheBankCutOff": "Transfers are approaching the bank cut-off",
+  "@mobileDashboardTransfersAreApproachingTheBankCutOff": {
+    "description": "Mobile Dashboard user-facing text: Transfers are approaching the bank cut-off"
+  },
+  "mobileDashboardBankFeedDelayed": "Bank feed delayed",
+  "@mobileDashboardBankFeedDelayed": {
+    "description": "Mobile Dashboard user-facing text: Bank feed delayed"
+  },
+  "mobileDashboardOneAccountHasNotSynchronizedToday": "One account has not synchronized today",
+  "@mobileDashboardOneAccountHasNotSynchronizedToday": {
+    "description": "Mobile Dashboard user-facing text: One account has not synchronized today"
+  },
+  "mobileDashboardGeneralLedgerFinancialControl": "GENERAL LEDGER & FINANCIAL CONTROL",
+  "@mobileDashboardGeneralLedgerFinancialControl": {
+    "description": "Mobile Dashboard user-facing text: GENERAL LEDGER & FINANCIAL CONTROL"
+  },
+  "mobileDashboardAccountingCommandCenter": "Accounting command center",
+  "@mobileDashboardAccountingCommandCenter": {
+    "description": "Mobile Dashboard user-facing text: Accounting command center"
+  },
+  "mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace": "Track close readiness, posting health, balances, and control exceptions from one operational workspace.",
+  "@mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace": {
+    "description": "Mobile Dashboard user-facing text: Track close readiness, posting health, balances, and control exceptions from one operational workspace."
+  },
+  "mobileDashboardPostJournal": "Post journal",
+  "@mobileDashboardPostJournal": {
+    "description": "Mobile Dashboard user-facing text: Post journal"
+  },
+  "mobileDashboardCloseReadiness": "Close readiness",
+  "@mobileDashboardCloseReadiness": {
+    "description": "Mobile Dashboard user-facing text: Close readiness"
+  },
+  "mobileDashboardPeriodCloseWorkflow": "Period-close workflow",
+  "@mobileDashboardPeriodCloseWorkflow": {
+    "description": "Mobile Dashboard user-facing text: Period-close workflow"
+  },
+  "mobileDashboardPriorityTasksForAnAccurateAndControlledClose": "Priority tasks for an accurate and controlled close.",
+  "@mobileDashboardPriorityTasksForAnAccurateAndControlledClose": {
+    "description": "Mobile Dashboard user-facing text: Priority tasks for an accurate and controlled close."
+  },
+  "mobileDashboardRecentPostings": "Recent postings",
+  "@mobileDashboardRecentPostings": {
+    "description": "Mobile Dashboard user-facing text: Recent postings"
+  },
+  "mobileDashboardAccountingExceptions": "Accounting exceptions",
+  "@mobileDashboardAccountingExceptions": {
+    "description": "Mobile Dashboard user-facing text: Accounting exceptions"
+  },
+  "mobileDashboardOpenPeriod": "Open period",
+  "@mobileDashboardOpenPeriod": {
+    "description": "Mobile Dashboard user-facing text: Open period"
+  },
+  "mobileDashboardDec2024": "DEC 2024",
+  "@mobileDashboardDec2024": {
+    "description": "Mobile Dashboard user-facing text: DEC 2024"
+  },
+  "mobileDashboardClosesIn4Days": "Closes in 4 days",
+  "@mobileDashboardClosesIn4Days": {
+    "description": "Mobile Dashboard user-facing text: Closes in 4 days"
+  },
+  "mobileDashboardTrialBalance": "Trial balance",
+  "@mobileDashboardTrialBalance": {
+    "description": "Mobile Dashboard user-facing text: Trial balance"
+  },
+  "mobileDashboardBalanced": "Balanced",
+  "@mobileDashboardBalanced": {
+    "description": "Mobile Dashboard user-facing text: Balanced"
+  },
+  "mobileDashboardNoVarianceDetected": "No variance detected",
+  "@mobileDashboardNoVarianceDetected": {
+    "description": "Mobile Dashboard user-facing text: No variance detected"
+  },
+  "mobileDashboardUnpostedJournals": "Unposted journals",
+  "@mobileDashboardUnpostedJournals": {
+    "description": "Mobile Dashboard user-facing text: Unposted journals"
+  },
+  "mobileDashboardText2RequireApproval": "2 require approval",
+  "@mobileDashboardText2RequireApproval": {
+    "description": "Mobile Dashboard user-facing text: 2 require approval"
+  },
+  "mobileDashboardPostRecurringJournals": "Post recurring journals",
+  "@mobileDashboardPostRecurringJournals": {
+    "description": "Mobile Dashboard user-facing text: Post recurring journals"
+  },
+  "mobileDashboardRentPayrollAndDepreciation": "Rent, payroll, and depreciation",
+  "@mobileDashboardRentPayrollAndDepreciation": {
+    "description": "Mobile Dashboard user-facing text: Rent, payroll, and depreciation"
+  },
+  "mobileDashboardText4Batches": "4 batches",
+  "@mobileDashboardText4Batches": {
+    "description": "Mobile Dashboard user-facing text: 4 batches"
+  },
+  "mobileDashboardReviewControlAccounts": "Review control accounts",
+  "@mobileDashboardReviewControlAccounts": {
+    "description": "Mobile Dashboard user-facing text: Review control accounts"
+  },
+  "mobileDashboardArApInventoryAndTax": "AR, AP, inventory, and tax",
+  "@mobileDashboardArApInventoryAndTax": {
+    "description": "Mobile Dashboard user-facing text: AR, AP, inventory, and tax"
+  },
+  "mobileDashboardText2Variances": "2 variances",
+  "@mobileDashboardText2Variances": {
+    "description": "Mobile Dashboard user-facing text: 2 variances"
+  },
+  "mobileDashboardLockOperationalSubledgers": "Lock operational subledgers",
+  "@mobileDashboardLockOperationalSubledgers": {
+    "description": "Mobile Dashboard user-facing text: Lock operational subledgers"
+  },
+  "mobileDashboardAfterFinalPostingReview": "After final posting review",
+  "@mobileDashboardAfterFinalPostingReview": {
+    "description": "Mobile Dashboard user-facing text: After final posting review"
+  },
+  "mobileDashboardPending": "Pending",
+  "@mobileDashboardPending": {
+    "description": "Mobile Dashboard user-facing text: Pending"
+  },
+  "mobileDashboardDebitsAndCreditsDoNotMatch": "Debits and credits do not match",
+  "@mobileDashboardDebitsAndCreditsDoNotMatch": {
+    "description": "Mobile Dashboard user-facing text: Debits and credits do not match"
+  },
+  "mobileDashboardDraftAndApprovalQueuesRemainOpen": "Draft and approval queues remain open",
+  "@mobileDashboardDraftAndApprovalQueuesRemainOpen": {
+    "description": "Mobile Dashboard user-facing text: Draft and approval queues remain open"
+  },
+  "mobileDashboardControlAccountVariances": "Control account variances",
+  "@mobileDashboardControlAccountVariances": {
+    "description": "Mobile Dashboard user-facing text: Control account variances"
+  },
+  "mobileDashboardArAndInventoryRequireInvestigation": "AR and inventory require investigation",
+  "@mobileDashboardArAndInventoryRequireInvestigation": {
+    "description": "Mobile Dashboard user-facing text: AR and inventory require investigation"
+  },
+  "mobileDashboardSalesPurchasingOrderFulfilment": "SALES, PURCHASING & ORDER FULFILMENT",
+  "@mobileDashboardSalesPurchasingOrderFulfilment": {
+    "description": "Mobile Dashboard user-facing text: SALES, PURCHASING & ORDER FULFILMENT"
+  },
+  "mobileDashboardCommercialOperationsCenter": "Commercial operations center",
+  "@mobileDashboardCommercialOperationsCenter": {
+    "description": "Mobile Dashboard user-facing text: Commercial operations center"
+  },
+  "mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness": "Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.",
+  "@mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness": {
+    "description": "Mobile Dashboard user-facing text: Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business."
+  },
+  "mobileDashboardCreateSalesOrder": "Create sales order",
+  "@mobileDashboardCreateSalesOrder": {
+    "description": "Mobile Dashboard user-facing text: Create sales order"
+  },
+  "mobileDashboardCommercialPulse": "Commercial pulse",
+  "@mobileDashboardCommercialPulse": {
+    "description": "Mobile Dashboard user-facing text: Commercial pulse"
+  },
+  "mobileDashboardOrderToCashWorkflow": "Order-to-cash workflow",
+  "@mobileDashboardOrderToCashWorkflow": {
+    "description": "Mobile Dashboard user-facing text: Order-to-cash workflow"
+  },
+  "mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService": "Operational work that can affect revenue and customer service.",
+  "@mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService": {
+    "description": "Mobile Dashboard user-facing text: Operational work that can affect revenue and customer service."
+  },
+  "mobileDashboardLatestCommercialDocuments": "Latest commercial documents",
+  "@mobileDashboardLatestCommercialDocuments": {
+    "description": "Mobile Dashboard user-facing text: Latest commercial documents"
+  },
+  "mobileDashboardCommercialExceptions": "Commercial exceptions",
+  "@mobileDashboardCommercialExceptions": {
+    "description": "Mobile Dashboard user-facing text: Commercial exceptions"
+  },
+  "mobileDashboardOpenSalesOrders": "Open sales orders",
+  "@mobileDashboardOpenSalesOrders": {
+    "description": "Mobile Dashboard user-facing text: Open sales orders"
+  },
+  "mobileDashboardSar114mPipeline": "SAR 1.14M pipeline",
+  "@mobileDashboardSar114mPipeline": {
+    "description": "Mobile Dashboard user-facing text: SAR 1.14M pipeline"
+  },
+  "mobileDashboardOnTimeFulfilment": "On-time fulfilment",
+  "@mobileDashboardOnTimeFulfilment": {
+    "description": "Mobile Dashboard user-facing text: On-time fulfilment"
+  },
+  "mobileDashboardText4OrdersAtRisk": "4 orders at risk",
+  "@mobileDashboardText4OrdersAtRisk": {
+    "description": "Mobile Dashboard user-facing text: 4 orders at risk"
+  },
+  "mobileDashboardOverdueReceivables": "Overdue receivables",
+  "@mobileDashboardOverdueReceivables": {
+    "description": "Mobile Dashboard user-facing text: Overdue receivables"
+  },
+  "mobileDashboardSar176kOverdue": "SAR 176K overdue",
+  "@mobileDashboardSar176kOverdue": {
+    "description": "Mobile Dashboard user-facing text: SAR 176K overdue"
+  },
+  "mobileDashboardReleaseBlockedSalesOrders": "Release blocked sales orders",
+  "@mobileDashboardReleaseBlockedSalesOrders": {
+    "description": "Mobile Dashboard user-facing text: Release blocked sales orders"
+  },
+  "mobileDashboardCreditAndMarginChecks": "Credit and margin checks",
+  "@mobileDashboardCreditAndMarginChecks": {
+    "description": "Mobile Dashboard user-facing text: Credit and margin checks"
+  },
+  "mobileDashboardText4Orders": "4 orders",
+  "@mobileDashboardText4Orders": {
+    "description": "Mobile Dashboard user-facing text: 4 orders"
+  },
+  "mobileDashboardConfirmPurchaseCommitments": "Confirm purchase commitments",
+  "@mobileDashboardConfirmPurchaseCommitments": {
+    "description": "Mobile Dashboard user-facing text: Confirm purchase commitments"
+  },
+  "mobileDashboardLeadTimeChangesFromSuppliers": "Lead-time changes from suppliers",
+  "@mobileDashboardLeadTimeChangesFromSuppliers": {
+    "description": "Mobile Dashboard user-facing text: Lead-time changes from suppliers"
+  },
+  "mobileDashboardText6Lines": "6 lines",
+  "@mobileDashboardText6Lines": {
+    "description": "Mobile Dashboard user-facing text: 6 lines"
+  },
+  "mobileDashboardFollowUpOverdueInvoices": "Follow up overdue invoices",
+  "@mobileDashboardFollowUpOverdueInvoices": {
+    "description": "Mobile Dashboard user-facing text: Follow up overdue invoices"
+  },
+  "mobileDashboardTopCustomerBalances": "Top customer balances",
+  "@mobileDashboardTopCustomerBalances": {
+    "description": "Mobile Dashboard user-facing text: Top customer balances"
+  },
+  "mobileDashboardText8Accounts": "8 accounts",
+  "@mobileDashboardText8Accounts": {
+    "description": "Mobile Dashboard user-facing text: 8 accounts"
+  },
+  "mobileDashboardOrdersOnCreditHold": "Orders on credit hold",
+  "@mobileDashboardOrdersOnCreditHold": {
+    "description": "Mobile Dashboard user-facing text: Orders on credit hold"
+  },
+  "mobileDashboardCustomerLimitsOrOverdueBalancesExceeded": "Customer limits or overdue balances exceeded",
+  "@mobileDashboardCustomerLimitsOrOverdueBalancesExceeded": {
+    "description": "Mobile Dashboard user-facing text: Customer limits or overdue balances exceeded"
+  },
+  "mobileDashboardFulfilmentShortages": "Fulfilment shortages",
+  "@mobileDashboardFulfilmentShortages": {
+    "description": "Mobile Dashboard user-facing text: Fulfilment shortages"
+  },
+  "mobileDashboardCommittedQuantitiesExceedAvailableStock": "Committed quantities exceed available stock",
+  "@mobileDashboardCommittedQuantitiesExceedAvailableStock": {
+    "description": "Mobile Dashboard user-facing text: Committed quantities exceed available stock"
+  },
+  "mobileDashboardSupplierDeliveryChanges": "Supplier delivery changes",
+  "@mobileDashboardSupplierDeliveryChanges": {
+    "description": "Mobile Dashboard user-facing text: Supplier delivery changes"
+  },
+  "mobileDashboardExpectedDatesWereUpdatedByVendors": "Expected dates were updated by vendors",
+  "@mobileDashboardExpectedDatesWereUpdatedByVendors": {
+    "description": "Mobile Dashboard user-facing text: Expected dates were updated by vendors"
+  },
+  "accountingDashboard": "Accounting Dashboard",
+  "@accountingDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "addCustomer": "Add Customer",
+  "@addCustomer": {
+    "description": "Navigation label used in the More screen."
+  },
+  "addSupplier": "Add Supplier",
+  "@addSupplier": {
+    "description": "Navigation label used in the More screen."
+  },
+  "administration": "Administration",
+  "@administration": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingDashboard": "Banking Dashboard",
+  "@bankingDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingCash": "Banking · Cash",
+  "@bankingCash": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingTransfers": "Banking · Transfers",
+  "@bankingTransfers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "commercialDashboard": "Commercial Dashboard",
+  "@commercialDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "configuration": "Configuration",
+  "@configuration": {
+    "description": "Navigation label used in the More screen."
+  },
+  "externalWireDetails": "External Wire Details",
+  "@externalWireDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "inventoryDashboard": "Inventory Dashboard",
+  "@inventoryDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "issueDetailsMore": "Issue — Details",
+  "@issueDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "journalEntryDetails": "Journal Entry Details",
+  "@journalEntryDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "localTransferDetails": "Local Transfer Details",
+  "@localTransferDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "openingJournalEntry": "Opening Journal Entry",
+  "@openingJournalEntry": {
+    "description": "Navigation label used in the More screen."
+  },
+  "procurementSuppliers": "Procurement · Suppliers",
+  "@procurementSuppliers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "productsList": "Products List",
+  "@productsList": {
+    "description": "Navigation label used in the More screen."
+  },
+  "receiveDetailsMore": "Receive — Details",
+  "@receiveDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "rolesPermissions": "Roles & Permissions",
+  "@rolesPermissions": {
+    "description": "Navigation label used in the More screen."
+  },
+  "salesCustomers": "Sales · Customers",
+  "@salesCustomers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "transferDetailsMore": "Transfer — Details",
+  "@transferDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "users": "Users",
+  "@users": {
+    "description": "Navigation label used in the More screen."
+  },
+  "mobileDashboardDebitsAndCreditsDonTMatch2": "Debits and credits don''t match",
+  "@mobileDashboardDebitsAndCreditsDonTMatch2": {
+    "description": "Mobile Dashboard user-facing text: Debits and credits don''t match"
+  },
+  "mobileDashboardText9a": "9a",
+  "@mobileDashboardText9a": {
+    "description": "Mobile Dashboard user-facing text: 9a"
+  },
+  "mobileDashboardText12p": "12p",
+  "@mobileDashboardText12p": {
+    "description": "Mobile Dashboard user-facing text: 12p"
+  },
+  "mobileDashboardText3p": "3p",
+  "@mobileDashboardText3p": {
+    "description": "Mobile Dashboard user-facing text: 3p"
+  },
+  "mobileDashboardText6p": "6p",
+  "@mobileDashboardText6p": {
+    "description": "Mobile Dashboard user-facing text: 6p"
+  },
+  "mobileDashboardNow": "now",
+  "@mobileDashboardNow": {
+    "description": "Mobile Dashboard user-facing text: now"
+  },
+  "mobileDashboardM": "M",
+  "@mobileDashboardM": {
+    "description": "Mobile Dashboard user-facing text: M"
+  },
+  "mobileDashboardT": "T",
+  "@mobileDashboardT": {
+    "description": "Mobile Dashboard user-facing text: T"
+  },
+  "mobileDashboardW": "W",
+  "@mobileDashboardW": {
+    "description": "Mobile Dashboard user-facing text: W"
+  },
+  "mobileDashboardF": "F",
+  "@mobileDashboardF": {
+    "description": "Mobile Dashboard user-facing text: F"
+  },
+  "mobileDashboardS": "S",
+  "@mobileDashboardS": {
+    "description": "Mobile Dashboard user-facing text: S"
+  },
+  "mobileDashboardW1": "W1",
+  "@mobileDashboardW1": {
+    "description": "Mobile Dashboard user-facing text: W1"
+  },
+  "mobileDashboardW2": "W2",
+  "@mobileDashboardW2": {
+    "description": "Mobile Dashboard user-facing text: W2"
+  },
+  "mobileDashboardW3": "W3",
+  "@mobileDashboardW3": {
+    "description": "Mobile Dashboard user-facing text: W3"
+  },
+  "mobileDashboardW4": "W4",
+  "@mobileDashboardW4": {
+    "description": "Mobile Dashboard user-facing text: W4"
+  },
+  "mobileDashboardW5": "W5",
+  "@mobileDashboardW5": {
+    "description": "Mobile Dashboard user-facing text: W5"
+  },
+  "mobileDashboardW6": "W6",
+  "@mobileDashboardW6": {
+    "description": "Mobile Dashboard user-facing text: W6"
+  },
+  "mobileDashboardW7": "W7",
+  "@mobileDashboardW7": {
+    "description": "Mobile Dashboard user-facing text: W7"
+  },
+  "mobileDashboardW8": "W8",
+  "@mobileDashboardW8": {
+    "description": "Mobile Dashboard user-facing text: W8"
+  },
+  "mobileDashboardAlRashidTradingCo": "Al-Rashid Trading Co.",
+  "@mobileDashboardAlRashidTradingCo": {
+    "description": "Mobile Dashboard user-facing text: Al-Rashid Trading Co."
+  },
+  "mobileDashboardNajdHoldings": "Najd Holdings",
+  "@mobileDashboardNajdHoldings": {
+    "description": "Mobile Dashboard user-facing text: Najd Holdings"
+  },
+  "mobileDashboardCoastalLogistics": "Coastal Logistics",
+  "@mobileDashboardCoastalLogistics": {
+    "description": "Mobile Dashboard user-facing text: Coastal Logistics"
+  },
+  "mobileDashboardGulfContractingLtd": "Gulf Contracting Ltd",
+  "@mobileDashboardGulfContractingLtd": {
+    "description": "Mobile Dashboard user-facing text: Gulf Contracting Ltd"
+  },
+  "mobileDashboardSaudiSteelCo": "Saudi Steel Co",
+  "@mobileDashboardSaudiSteelCo": {
+    "description": "Mobile Dashboard user-facing text: Saudi Steel Co"
+  },
+  "mobileDashboardNajdBuilders": "Najd Builders",
+  "@mobileDashboardNajdBuilders": {
+    "description": "Mobile Dashboard user-facing text: Najd Builders"
+  },
+  "mobileDashboardCoastalCement": "Coastal Cement",
+  "@mobileDashboardCoastalCement": {
+    "description": "Mobile Dashboard user-facing text: Coastal Cement"
+  },
+  "mobileDashboardEasternTimber": "Eastern Timber",
+  "@mobileDashboardEasternTimber": {
+    "description": "Mobile Dashboard user-facing text: Eastern Timber"
   }
 }

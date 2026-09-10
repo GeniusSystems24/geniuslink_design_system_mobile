@@ -2683,6 +2683,1270 @@ abstract class GeniusLinkLocalization {
   /// In en, this message translates to:
   /// **'Stores'**
   String get stores;
+
+  /// Mobile Dashboard user-facing text: Workspace
+  ///
+  /// In en, this message translates to:
+  /// **'Workspace'**
+  String get mobileDashboardWorkspace;
+
+  /// Mobile Dashboard user-facing text: Notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get mobileDashboardNotifications;
+
+  /// Mobile Dashboard user-facing text: Overview
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get mobileDashboardOverview;
+
+  /// Mobile Dashboard user-facing text: Sales
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get mobileDashboardSales;
+
+  /// Mobile Dashboard user-facing text: Transfers
+  ///
+  /// In en, this message translates to:
+  /// **'Transfers'**
+  String get mobileDashboardTransfers;
+
+  /// Mobile Dashboard user-facing text: Ledger
+  ///
+  /// In en, this message translates to:
+  /// **'Ledger'**
+  String get mobileDashboardLedger;
+
+  /// Mobile Dashboard user-facing text: Reports
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get mobileDashboardReports;
+
+  /// Mobile Dashboard user-facing text: Saudi Riyal
+  ///
+  /// In en, this message translates to:
+  /// **'Saudi Riyal'**
+  String get mobileDashboardSaudiRiyal;
+
+  /// Mobile Dashboard user-facing text: US Dollar
+  ///
+  /// In en, this message translates to:
+  /// **'US Dollar'**
+  String get mobileDashboardUsDollar;
+
+  /// Mobile Dashboard user-facing text: UAE Dirham
+  ///
+  /// In en, this message translates to:
+  /// **'UAE Dirham'**
+  String get mobileDashboardUaeDirham;
+
+  /// Mobile Dashboard user-facing text: Tenant 9
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant 9'**
+  String get mobileDashboardTenant9;
+
+  /// Mobile Dashboard user-facing text: Tenant 14
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant 14'**
+  String get mobileDashboardTenant14;
+
+  /// Mobile Dashboard user-facing text: Tenant 22
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant 22'**
+  String get mobileDashboardTenant22;
+
+  /// Mobile Dashboard user-facing text: Out-of-balance entries
+  ///
+  /// In en, this message translates to:
+  /// **'Out-of-balance entries'**
+  String get mobileDashboardOutOfBalanceEntries;
+
+  /// Mobile Dashboard user-facing text: Debits and credits don''t match
+  ///
+  /// In en, this message translates to:
+  /// **'Debits and credits don\'\'t match'**
+  String get mobileDashboardDebitsAndCreditsDonTMatch;
+
+  /// Mobile Dashboard user-facing text: Pending approvals
+  ///
+  /// In en, this message translates to:
+  /// **'Pending approvals'**
+  String get mobileDashboardPendingApprovals;
+
+  /// Mobile Dashboard user-facing text: Vouchers awaiting your sign-off
+  ///
+  /// In en, this message translates to:
+  /// **'Vouchers awaiting your sign-off'**
+  String get mobileDashboardVouchersAwaitingYourSignOff;
+
+  /// Mobile Dashboard user-facing text: Sync conflict
+  ///
+  /// In en, this message translates to:
+  /// **'Sync conflict'**
+  String get mobileDashboardSyncConflict;
+
+  /// Mobile Dashboard user-facing text: A draft edited on two devices
+  ///
+  /// In en, this message translates to:
+  /// **'A draft edited on two devices'**
+  String get mobileDashboardADraftEditedOnTwoDevices;
+
+  /// Mobile Dashboard user-facing text: Banking
+  ///
+  /// In en, this message translates to:
+  /// **'Banking'**
+  String get mobileDashboardBanking;
+
+  /// Mobile Dashboard user-facing text: Total Balance
+  ///
+  /// In en, this message translates to:
+  /// **'Total Balance'**
+  String get mobileDashboardTotalBalance;
+
+  /// Mobile Dashboard user-facing text: Available Cash
+  ///
+  /// In en, this message translates to:
+  /// **'Available Cash'**
+  String get mobileDashboardAvailableCash;
+
+  /// Mobile Dashboard user-facing text: Inflow
+  ///
+  /// In en, this message translates to:
+  /// **'Inflow'**
+  String get mobileDashboardInflow;
+
+  /// Mobile Dashboard user-facing text: Outflow
+  ///
+  /// In en, this message translates to:
+  /// **'Outflow'**
+  String get mobileDashboardOutflow;
+
+  /// Mobile Dashboard user-facing text: Deposit
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit'**
+  String get mobileDashboardDeposit;
+
+  /// Mobile Dashboard user-facing text: Withdrawal
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawal'**
+  String get mobileDashboardWithdrawal;
+
+  /// Mobile Dashboard user-facing text: Transfer
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer'**
+  String get mobileDashboardTransfer;
+
+  /// Mobile Dashboard user-facing text: Statement
+  ///
+  /// In en, this message translates to:
+  /// **'Statement'**
+  String get mobileDashboardStatement;
+
+  /// Mobile Dashboard user-facing text: Beneficiaries
+  ///
+  /// In en, this message translates to:
+  /// **'Beneficiaries'**
+  String get mobileDashboardBeneficiaries;
+
+  /// Mobile Dashboard user-facing text: Reconcile
+  ///
+  /// In en, this message translates to:
+  /// **'Reconcile'**
+  String get mobileDashboardReconcile;
+
+  /// Mobile Dashboard user-facing text: Cards
+  ///
+  /// In en, this message translates to:
+  /// **'Cards'**
+  String get mobileDashboardCards;
+
+  /// Mobile Dashboard user-facing text: Cheques
+  ///
+  /// In en, this message translates to:
+  /// **'Cheques'**
+  String get mobileDashboardCheques;
+
+  /// Mobile Dashboard user-facing text: Bank Accounts
+  ///
+  /// In en, this message translates to:
+  /// **'Bank Accounts'**
+  String get mobileDashboardBankAccounts;
+
+  /// Mobile Dashboard user-facing text: Cash deposit — Main
+  ///
+  /// In en, this message translates to:
+  /// **'Cash deposit — Main'**
+  String get mobileDashboardCashDepositMain;
+
+  /// Mobile Dashboard user-facing text: 1h ago
+  ///
+  /// In en, this message translates to:
+  /// **'1h ago'**
+  String get mobileDashboardText1hAgo;
+
+  /// Mobile Dashboard user-facing text: Payroll release
+  ///
+  /// In en, this message translates to:
+  /// **'Payroll release'**
+  String get mobileDashboardPayrollRelease;
+
+  /// Mobile Dashboard user-facing text: 4h ago
+  ///
+  /// In en, this message translates to:
+  /// **'4h ago'**
+  String get mobileDashboardText4hAgo;
+
+  /// Mobile Dashboard user-facing text: Riyad Bank → Main
+  ///
+  /// In en, this message translates to:
+  /// **'Riyad Bank → Main'**
+  String get mobileDashboardRiyadBankMain;
+
+  /// Mobile Dashboard user-facing text: Yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get mobileDashboardYesterday;
+
+  /// Mobile Dashboard user-facing text: Supplier wire
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier wire'**
+  String get mobileDashboardSupplierWire;
+
+  /// Mobile Dashboard user-facing text: Customer settlement
+  ///
+  /// In en, this message translates to:
+  /// **'Customer settlement'**
+  String get mobileDashboardCustomerSettlement;
+
+  /// Mobile Dashboard user-facing text: 2 days ago
+  ///
+  /// In en, this message translates to:
+  /// **'2 days ago'**
+  String get mobileDashboardText2DaysAgo;
+
+  /// Mobile Dashboard user-facing text: Accounting
+  ///
+  /// In en, this message translates to:
+  /// **'Accounting'**
+  String get mobileDashboardAccounting;
+
+  /// Mobile Dashboard user-facing text: Total Assets
+  ///
+  /// In en, this message translates to:
+  /// **'Total Assets'**
+  String get mobileDashboardTotalAssets;
+
+  /// Mobile Dashboard user-facing text: Cash
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get mobileDashboardCash;
+
+  /// Mobile Dashboard user-facing text: Revenue MTD
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue MTD'**
+  String get mobileDashboardRevenueMtd;
+
+  /// Mobile Dashboard user-facing text: Voucher
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher'**
+  String get mobileDashboardVoucher;
+
+  /// Mobile Dashboard user-facing text: Receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get mobileDashboardReceipt;
+
+  /// Mobile Dashboard user-facing text: Invoice
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice'**
+  String get mobileDashboardInvoice;
+
+  /// Mobile Dashboard user-facing text: Customers
+  ///
+  /// In en, this message translates to:
+  /// **'Customers'**
+  String get mobileDashboardCustomers;
+
+  /// Mobile Dashboard user-facing text: Suppliers
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get mobileDashboardSuppliers;
+
+  /// Mobile Dashboard user-facing text: Fixed Assets
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed Assets'**
+  String get mobileDashboardFixedAssets;
+
+  /// Mobile Dashboard user-facing text: Journal
+  ///
+  /// In en, this message translates to:
+  /// **'Journal'**
+  String get mobileDashboardJournal;
+
+  /// Mobile Dashboard user-facing text: Depreciation — Q4
+  ///
+  /// In en, this message translates to:
+  /// **'Depreciation — Q4'**
+  String get mobileDashboardDepreciationQ4;
+
+  /// Mobile Dashboard user-facing text: 2h ago
+  ///
+  /// In en, this message translates to:
+  /// **'2h ago'**
+  String get mobileDashboardText2hAgo;
+
+  /// Mobile Dashboard user-facing text: Office rent payment
+  ///
+  /// In en, this message translates to:
+  /// **'Office rent payment'**
+  String get mobileDashboardOfficeRentPayment;
+
+  /// Mobile Dashboard user-facing text: 5h ago
+  ///
+  /// In en, this message translates to:
+  /// **'5h ago'**
+  String get mobileDashboardText5hAgo;
+
+  /// Mobile Dashboard user-facing text: Revenue accrual
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue accrual'**
+  String get mobileDashboardRevenueAccrual;
+
+  /// Mobile Dashboard user-facing text: Utilities — Nov
+  ///
+  /// In en, this message translates to:
+  /// **'Utilities — Nov'**
+  String get mobileDashboardUtilitiesNov;
+
+  /// Mobile Dashboard user-facing text: FX revaluation
+  ///
+  /// In en, this message translates to:
+  /// **'FX revaluation'**
+  String get mobileDashboardFxRevaluation;
+
+  /// Mobile Dashboard user-facing text: Commercial
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial'**
+  String get mobileDashboardCommercial;
+
+  /// Mobile Dashboard user-facing text: Sales MTD
+  ///
+  /// In en, this message translates to:
+  /// **'Sales MTD'**
+  String get mobileDashboardSalesMtd;
+
+  /// Mobile Dashboard user-facing text: Purchases MTD
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases MTD'**
+  String get mobileDashboardPurchasesMtd;
+
+  /// Mobile Dashboard user-facing text: Receivables
+  ///
+  /// In en, this message translates to:
+  /// **'Receivables'**
+  String get mobileDashboardReceivables;
+
+  /// Mobile Dashboard user-facing text: Payables
+  ///
+  /// In en, this message translates to:
+  /// **'Payables'**
+  String get mobileDashboardPayables;
+
+  /// Mobile Dashboard user-facing text: Sale
+  ///
+  /// In en, this message translates to:
+  /// **'Sale'**
+  String get mobileDashboardSale;
+
+  /// Mobile Dashboard user-facing text: Purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase'**
+  String get mobileDashboardPurchase;
+
+  /// Mobile Dashboard user-facing text: Quotation
+  ///
+  /// In en, this message translates to:
+  /// **'Quotation'**
+  String get mobileDashboardQuotation;
+
+  /// Mobile Dashboard user-facing text: Return
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get mobileDashboardReturnText;
+
+  /// Mobile Dashboard user-facing text: 30m ago
+  ///
+  /// In en, this message translates to:
+  /// **'30m ago'**
+  String get mobileDashboardText30mAgo;
+
+  /// Mobile Dashboard user-facing text: 3h ago
+  ///
+  /// In en, this message translates to:
+  /// **'3h ago'**
+  String get mobileDashboardText3hAgo;
+
+  /// Mobile Dashboard user-facing text: TREASURY & CASH MANAGEMENT
+  ///
+  /// In en, this message translates to:
+  /// **'TREASURY & CASH MANAGEMENT'**
+  String get mobileDashboardTreasuryCashManagement;
+
+  /// Mobile Dashboard user-facing text: Banking control center
+  ///
+  /// In en, this message translates to:
+  /// **'Banking control center'**
+  String get mobileDashboardBankingControlCenter;
+
+  /// Mobile Dashboard user-facing text: Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.'**
+  String
+  get mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity;
+
+  /// Mobile Dashboard user-facing text: New transfer
+  ///
+  /// In en, this message translates to:
+  /// **'New transfer'**
+  String get mobileDashboardNewTransfer;
+
+  /// Mobile Dashboard user-facing text: Treasury status
+  ///
+  /// In en, this message translates to:
+  /// **'Treasury status'**
+  String get mobileDashboardTreasuryStatus;
+
+  /// Mobile Dashboard user-facing text: Treasury workflow
+  ///
+  /// In en, this message translates to:
+  /// **'Treasury workflow'**
+  String get mobileDashboardTreasuryWorkflow;
+
+  /// Mobile Dashboard user-facing text: Items that require action before the next cut-off.
+  ///
+  /// In en, this message translates to:
+  /// **'Items that require action before the next cut-off.'**
+  String get mobileDashboardItemsThatRequireActionBeforeTheNextCutOff;
+
+  /// Mobile Dashboard user-facing text: Latest bank movements
+  ///
+  /// In en, this message translates to:
+  /// **'Latest bank movements'**
+  String get mobileDashboardLatestBankMovements;
+
+  /// Mobile Dashboard user-facing text: Treasury exceptions
+  ///
+  /// In en, this message translates to:
+  /// **'Treasury exceptions'**
+  String get mobileDashboardTreasuryExceptions;
+
+  /// Mobile Dashboard user-facing text: Connected accounts
+  ///
+  /// In en, this message translates to:
+  /// **'Connected accounts'**
+  String get mobileDashboardConnectedAccounts;
+
+  /// Mobile Dashboard user-facing text: Across 3 banks
+  ///
+  /// In en, this message translates to:
+  /// **'Across 3 banks'**
+  String get mobileDashboardAcross3Banks;
+
+  /// Mobile Dashboard user-facing text: Reconciliation
+  ///
+  /// In en, this message translates to:
+  /// **'Reconciliation'**
+  String get mobileDashboardReconciliation;
+
+  /// Mobile Dashboard user-facing text: 3 statements pending
+  ///
+  /// In en, this message translates to:
+  /// **'3 statements pending'**
+  String get mobileDashboardText3StatementsPending;
+
+  /// Mobile Dashboard user-facing text: Payment approvals
+  ///
+  /// In en, this message translates to:
+  /// **'Payment approvals'**
+  String get mobileDashboardPaymentApprovals;
+
+  /// Mobile Dashboard user-facing text: SAR 284K awaiting release
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 284K awaiting release'**
+  String get mobileDashboardSar284kAwaitingRelease;
+
+  /// Mobile Dashboard user-facing text: Approve payment batch
+  ///
+  /// In en, this message translates to:
+  /// **'Approve payment batch'**
+  String get mobileDashboardApprovePaymentBatch;
+
+  /// Mobile Dashboard user-facing text: Payroll and supplier wires
+  ///
+  /// In en, this message translates to:
+  /// **'Payroll and supplier wires'**
+  String get mobileDashboardPayrollAndSupplierWires;
+
+  /// Mobile Dashboard user-facing text: 5 items
+  ///
+  /// In en, this message translates to:
+  /// **'5 items'**
+  String get mobileDashboardText5Items;
+
+  /// Mobile Dashboard user-facing text: Reconcile bank statements
+  ///
+  /// In en, this message translates to:
+  /// **'Reconcile bank statements'**
+  String get mobileDashboardReconcileBankStatements;
+
+  /// Mobile Dashboard user-facing text: Riyad Bank and SNB
+  ///
+  /// In en, this message translates to:
+  /// **'Riyad Bank and SNB'**
+  String get mobileDashboardRiyadBankAndSnb;
+
+  /// Mobile Dashboard user-facing text: 3 open
+  ///
+  /// In en, this message translates to:
+  /// **'3 open'**
+  String get mobileDashboardText3Open;
+
+  /// Mobile Dashboard user-facing text: Review 13-week cash forecast
+  ///
+  /// In en, this message translates to:
+  /// **'Review 13-week cash forecast'**
+  String get mobileDashboardReview13WeekCashForecast;
+
+  /// Mobile Dashboard user-facing text: Updated with current commitments
+  ///
+  /// In en, this message translates to:
+  /// **'Updated with current commitments'**
+  String get mobileDashboardUpdatedWithCurrentCommitments;
+
+  /// Mobile Dashboard user-facing text: Today
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get mobileDashboardToday;
+
+  /// Mobile Dashboard user-facing text: Unreconciled statements
+  ///
+  /// In en, this message translates to:
+  /// **'Unreconciled statements'**
+  String get mobileDashboardUnreconciledStatements;
+
+  /// Mobile Dashboard user-facing text: Bank statement lines remain unmatched
+  ///
+  /// In en, this message translates to:
+  /// **'Bank statement lines remain unmatched'**
+  String get mobileDashboardBankStatementLinesRemainUnmatched;
+
+  /// Mobile Dashboard user-facing text: Payments awaiting approval
+  ///
+  /// In en, this message translates to:
+  /// **'Payments awaiting approval'**
+  String get mobileDashboardPaymentsAwaitingApproval;
+
+  /// Mobile Dashboard user-facing text: Transfers are approaching the bank cut-off
+  ///
+  /// In en, this message translates to:
+  /// **'Transfers are approaching the bank cut-off'**
+  String get mobileDashboardTransfersAreApproachingTheBankCutOff;
+
+  /// Mobile Dashboard user-facing text: Bank feed delayed
+  ///
+  /// In en, this message translates to:
+  /// **'Bank feed delayed'**
+  String get mobileDashboardBankFeedDelayed;
+
+  /// Mobile Dashboard user-facing text: One account has not synchronized today
+  ///
+  /// In en, this message translates to:
+  /// **'One account has not synchronized today'**
+  String get mobileDashboardOneAccountHasNotSynchronizedToday;
+
+  /// Mobile Dashboard user-facing text: GENERAL LEDGER & FINANCIAL CONTROL
+  ///
+  /// In en, this message translates to:
+  /// **'GENERAL LEDGER & FINANCIAL CONTROL'**
+  String get mobileDashboardGeneralLedgerFinancialControl;
+
+  /// Mobile Dashboard user-facing text: Accounting command center
+  ///
+  /// In en, this message translates to:
+  /// **'Accounting command center'**
+  String get mobileDashboardAccountingCommandCenter;
+
+  /// Mobile Dashboard user-facing text: Track close readiness, posting health, balances, and control exceptions from one operational workspace.
+  ///
+  /// In en, this message translates to:
+  /// **'Track close readiness, posting health, balances, and control exceptions from one operational workspace.'**
+  String
+  get mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace;
+
+  /// Mobile Dashboard user-facing text: Post journal
+  ///
+  /// In en, this message translates to:
+  /// **'Post journal'**
+  String get mobileDashboardPostJournal;
+
+  /// Mobile Dashboard user-facing text: Close readiness
+  ///
+  /// In en, this message translates to:
+  /// **'Close readiness'**
+  String get mobileDashboardCloseReadiness;
+
+  /// Mobile Dashboard user-facing text: Period-close workflow
+  ///
+  /// In en, this message translates to:
+  /// **'Period-close workflow'**
+  String get mobileDashboardPeriodCloseWorkflow;
+
+  /// Mobile Dashboard user-facing text: Priority tasks for an accurate and controlled close.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority tasks for an accurate and controlled close.'**
+  String get mobileDashboardPriorityTasksForAnAccurateAndControlledClose;
+
+  /// Mobile Dashboard user-facing text: Recent postings
+  ///
+  /// In en, this message translates to:
+  /// **'Recent postings'**
+  String get mobileDashboardRecentPostings;
+
+  /// Mobile Dashboard user-facing text: Accounting exceptions
+  ///
+  /// In en, this message translates to:
+  /// **'Accounting exceptions'**
+  String get mobileDashboardAccountingExceptions;
+
+  /// Mobile Dashboard user-facing text: Open period
+  ///
+  /// In en, this message translates to:
+  /// **'Open period'**
+  String get mobileDashboardOpenPeriod;
+
+  /// Mobile Dashboard user-facing text: DEC 2024
+  ///
+  /// In en, this message translates to:
+  /// **'DEC 2024'**
+  String get mobileDashboardDec2024;
+
+  /// Mobile Dashboard user-facing text: Closes in 4 days
+  ///
+  /// In en, this message translates to:
+  /// **'Closes in 4 days'**
+  String get mobileDashboardClosesIn4Days;
+
+  /// Mobile Dashboard user-facing text: Trial balance
+  ///
+  /// In en, this message translates to:
+  /// **'Trial balance'**
+  String get mobileDashboardTrialBalance;
+
+  /// Mobile Dashboard user-facing text: Balanced
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get mobileDashboardBalanced;
+
+  /// Mobile Dashboard user-facing text: No variance detected
+  ///
+  /// In en, this message translates to:
+  /// **'No variance detected'**
+  String get mobileDashboardNoVarianceDetected;
+
+  /// Mobile Dashboard user-facing text: Unposted journals
+  ///
+  /// In en, this message translates to:
+  /// **'Unposted journals'**
+  String get mobileDashboardUnpostedJournals;
+
+  /// Mobile Dashboard user-facing text: 2 require approval
+  ///
+  /// In en, this message translates to:
+  /// **'2 require approval'**
+  String get mobileDashboardText2RequireApproval;
+
+  /// Mobile Dashboard user-facing text: Post recurring journals
+  ///
+  /// In en, this message translates to:
+  /// **'Post recurring journals'**
+  String get mobileDashboardPostRecurringJournals;
+
+  /// Mobile Dashboard user-facing text: Rent, payroll, and depreciation
+  ///
+  /// In en, this message translates to:
+  /// **'Rent, payroll, and depreciation'**
+  String get mobileDashboardRentPayrollAndDepreciation;
+
+  /// Mobile Dashboard user-facing text: 4 batches
+  ///
+  /// In en, this message translates to:
+  /// **'4 batches'**
+  String get mobileDashboardText4Batches;
+
+  /// Mobile Dashboard user-facing text: Review control accounts
+  ///
+  /// In en, this message translates to:
+  /// **'Review control accounts'**
+  String get mobileDashboardReviewControlAccounts;
+
+  /// Mobile Dashboard user-facing text: AR, AP, inventory, and tax
+  ///
+  /// In en, this message translates to:
+  /// **'AR, AP, inventory, and tax'**
+  String get mobileDashboardArApInventoryAndTax;
+
+  /// Mobile Dashboard user-facing text: 2 variances
+  ///
+  /// In en, this message translates to:
+  /// **'2 variances'**
+  String get mobileDashboardText2Variances;
+
+  /// Mobile Dashboard user-facing text: Lock operational subledgers
+  ///
+  /// In en, this message translates to:
+  /// **'Lock operational subledgers'**
+  String get mobileDashboardLockOperationalSubledgers;
+
+  /// Mobile Dashboard user-facing text: After final posting review
+  ///
+  /// In en, this message translates to:
+  /// **'After final posting review'**
+  String get mobileDashboardAfterFinalPostingReview;
+
+  /// Mobile Dashboard user-facing text: Pending
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get mobileDashboardPending;
+
+  /// Mobile Dashboard user-facing text: Debits and credits do not match
+  ///
+  /// In en, this message translates to:
+  /// **'Debits and credits do not match'**
+  String get mobileDashboardDebitsAndCreditsDoNotMatch;
+
+  /// Mobile Dashboard user-facing text: Draft and approval queues remain open
+  ///
+  /// In en, this message translates to:
+  /// **'Draft and approval queues remain open'**
+  String get mobileDashboardDraftAndApprovalQueuesRemainOpen;
+
+  /// Mobile Dashboard user-facing text: Control account variances
+  ///
+  /// In en, this message translates to:
+  /// **'Control account variances'**
+  String get mobileDashboardControlAccountVariances;
+
+  /// Mobile Dashboard user-facing text: AR and inventory require investigation
+  ///
+  /// In en, this message translates to:
+  /// **'AR and inventory require investigation'**
+  String get mobileDashboardArAndInventoryRequireInvestigation;
+
+  /// Mobile Dashboard user-facing text: SALES, PURCHASING & ORDER FULFILMENT
+  ///
+  /// In en, this message translates to:
+  /// **'SALES, PURCHASING & ORDER FULFILMENT'**
+  String get mobileDashboardSalesPurchasingOrderFulfilment;
+
+  /// Mobile Dashboard user-facing text: Commercial operations center
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial operations center'**
+  String get mobileDashboardCommercialOperationsCenter;
+
+  /// Mobile Dashboard user-facing text: Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.'**
+  String
+  get mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness;
+
+  /// Mobile Dashboard user-facing text: Create sales order
+  ///
+  /// In en, this message translates to:
+  /// **'Create sales order'**
+  String get mobileDashboardCreateSalesOrder;
+
+  /// Mobile Dashboard user-facing text: Commercial pulse
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial pulse'**
+  String get mobileDashboardCommercialPulse;
+
+  /// Mobile Dashboard user-facing text: Order-to-cash workflow
+  ///
+  /// In en, this message translates to:
+  /// **'Order-to-cash workflow'**
+  String get mobileDashboardOrderToCashWorkflow;
+
+  /// Mobile Dashboard user-facing text: Operational work that can affect revenue and customer service.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational work that can affect revenue and customer service.'**
+  String
+  get mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService;
+
+  /// Mobile Dashboard user-facing text: Latest commercial documents
+  ///
+  /// In en, this message translates to:
+  /// **'Latest commercial documents'**
+  String get mobileDashboardLatestCommercialDocuments;
+
+  /// Mobile Dashboard user-facing text: Commercial exceptions
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial exceptions'**
+  String get mobileDashboardCommercialExceptions;
+
+  /// Mobile Dashboard user-facing text: Open sales orders
+  ///
+  /// In en, this message translates to:
+  /// **'Open sales orders'**
+  String get mobileDashboardOpenSalesOrders;
+
+  /// Mobile Dashboard user-facing text: SAR 1.14M pipeline
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 1.14M pipeline'**
+  String get mobileDashboardSar114mPipeline;
+
+  /// Mobile Dashboard user-facing text: On-time fulfilment
+  ///
+  /// In en, this message translates to:
+  /// **'On-time fulfilment'**
+  String get mobileDashboardOnTimeFulfilment;
+
+  /// Mobile Dashboard user-facing text: 4 orders at risk
+  ///
+  /// In en, this message translates to:
+  /// **'4 orders at risk'**
+  String get mobileDashboardText4OrdersAtRisk;
+
+  /// Mobile Dashboard user-facing text: Overdue receivables
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue receivables'**
+  String get mobileDashboardOverdueReceivables;
+
+  /// Mobile Dashboard user-facing text: SAR 176K overdue
+  ///
+  /// In en, this message translates to:
+  /// **'SAR 176K overdue'**
+  String get mobileDashboardSar176kOverdue;
+
+  /// Mobile Dashboard user-facing text: Release blocked sales orders
+  ///
+  /// In en, this message translates to:
+  /// **'Release blocked sales orders'**
+  String get mobileDashboardReleaseBlockedSalesOrders;
+
+  /// Mobile Dashboard user-facing text: Credit and margin checks
+  ///
+  /// In en, this message translates to:
+  /// **'Credit and margin checks'**
+  String get mobileDashboardCreditAndMarginChecks;
+
+  /// Mobile Dashboard user-facing text: 4 orders
+  ///
+  /// In en, this message translates to:
+  /// **'4 orders'**
+  String get mobileDashboardText4Orders;
+
+  /// Mobile Dashboard user-facing text: Confirm purchase commitments
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm purchase commitments'**
+  String get mobileDashboardConfirmPurchaseCommitments;
+
+  /// Mobile Dashboard user-facing text: Lead-time changes from suppliers
+  ///
+  /// In en, this message translates to:
+  /// **'Lead-time changes from suppliers'**
+  String get mobileDashboardLeadTimeChangesFromSuppliers;
+
+  /// Mobile Dashboard user-facing text: 6 lines
+  ///
+  /// In en, this message translates to:
+  /// **'6 lines'**
+  String get mobileDashboardText6Lines;
+
+  /// Mobile Dashboard user-facing text: Follow up overdue invoices
+  ///
+  /// In en, this message translates to:
+  /// **'Follow up overdue invoices'**
+  String get mobileDashboardFollowUpOverdueInvoices;
+
+  /// Mobile Dashboard user-facing text: Top customer balances
+  ///
+  /// In en, this message translates to:
+  /// **'Top customer balances'**
+  String get mobileDashboardTopCustomerBalances;
+
+  /// Mobile Dashboard user-facing text: 8 accounts
+  ///
+  /// In en, this message translates to:
+  /// **'8 accounts'**
+  String get mobileDashboardText8Accounts;
+
+  /// Mobile Dashboard user-facing text: Orders on credit hold
+  ///
+  /// In en, this message translates to:
+  /// **'Orders on credit hold'**
+  String get mobileDashboardOrdersOnCreditHold;
+
+  /// Mobile Dashboard user-facing text: Customer limits or overdue balances exceeded
+  ///
+  /// In en, this message translates to:
+  /// **'Customer limits or overdue balances exceeded'**
+  String get mobileDashboardCustomerLimitsOrOverdueBalancesExceeded;
+
+  /// Mobile Dashboard user-facing text: Fulfilment shortages
+  ///
+  /// In en, this message translates to:
+  /// **'Fulfilment shortages'**
+  String get mobileDashboardFulfilmentShortages;
+
+  /// Mobile Dashboard user-facing text: Committed quantities exceed available stock
+  ///
+  /// In en, this message translates to:
+  /// **'Committed quantities exceed available stock'**
+  String get mobileDashboardCommittedQuantitiesExceedAvailableStock;
+
+  /// Mobile Dashboard user-facing text: Supplier delivery changes
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier delivery changes'**
+  String get mobileDashboardSupplierDeliveryChanges;
+
+  /// Mobile Dashboard user-facing text: Expected dates were updated by vendors
+  ///
+  /// In en, this message translates to:
+  /// **'Expected dates were updated by vendors'**
+  String get mobileDashboardExpectedDatesWereUpdatedByVendors;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounting Dashboard'**
+  String get accountingDashboard;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Customer'**
+  String get addCustomer;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Supplier'**
+  String get addSupplier;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Administration'**
+  String get administration;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Banking Dashboard'**
+  String get bankingDashboard;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Banking · Cash'**
+  String get bankingCash;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Banking · Transfers'**
+  String get bankingTransfers;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial Dashboard'**
+  String get commercialDashboard;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration'**
+  String get configuration;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'External Wire Details'**
+  String get externalWireDetails;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Inventory Dashboard'**
+  String get inventoryDashboard;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue — Details'**
+  String get issueDetailsMore;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Journal Entry Details'**
+  String get journalEntryDetails;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Transfer Details'**
+  String get localTransferDetails;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening Journal Entry'**
+  String get openingJournalEntry;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Procurement · Suppliers'**
+  String get procurementSuppliers;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Products List'**
+  String get productsList;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive — Details'**
+  String get receiveDetailsMore;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Roles & Permissions'**
+  String get rolesPermissions;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales · Customers'**
+  String get salesCustomers;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer — Details'**
+  String get transferDetailsMore;
+
+  /// Navigation label used in the More screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
+  /// Mobile Dashboard user-facing text: Debits and credits don''t match
+  ///
+  /// In en, this message translates to:
+  /// **'Debits and credits don\'\'t match'**
+  String get mobileDashboardDebitsAndCreditsDonTMatch2;
+
+  /// Mobile Dashboard user-facing text: 9a
+  ///
+  /// In en, this message translates to:
+  /// **'9a'**
+  String get mobileDashboardText9a;
+
+  /// Mobile Dashboard user-facing text: 12p
+  ///
+  /// In en, this message translates to:
+  /// **'12p'**
+  String get mobileDashboardText12p;
+
+  /// Mobile Dashboard user-facing text: 3p
+  ///
+  /// In en, this message translates to:
+  /// **'3p'**
+  String get mobileDashboardText3p;
+
+  /// Mobile Dashboard user-facing text: 6p
+  ///
+  /// In en, this message translates to:
+  /// **'6p'**
+  String get mobileDashboardText6p;
+
+  /// Mobile Dashboard user-facing text: now
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get mobileDashboardNow;
+
+  /// Mobile Dashboard user-facing text: M
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get mobileDashboardM;
+
+  /// Mobile Dashboard user-facing text: T
+  ///
+  /// In en, this message translates to:
+  /// **'T'**
+  String get mobileDashboardT;
+
+  /// Mobile Dashboard user-facing text: W
+  ///
+  /// In en, this message translates to:
+  /// **'W'**
+  String get mobileDashboardW;
+
+  /// Mobile Dashboard user-facing text: F
+  ///
+  /// In en, this message translates to:
+  /// **'F'**
+  String get mobileDashboardF;
+
+  /// Mobile Dashboard user-facing text: S
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get mobileDashboardS;
+
+  /// Mobile Dashboard user-facing text: W1
+  ///
+  /// In en, this message translates to:
+  /// **'W1'**
+  String get mobileDashboardW1;
+
+  /// Mobile Dashboard user-facing text: W2
+  ///
+  /// In en, this message translates to:
+  /// **'W2'**
+  String get mobileDashboardW2;
+
+  /// Mobile Dashboard user-facing text: W3
+  ///
+  /// In en, this message translates to:
+  /// **'W3'**
+  String get mobileDashboardW3;
+
+  /// Mobile Dashboard user-facing text: W4
+  ///
+  /// In en, this message translates to:
+  /// **'W4'**
+  String get mobileDashboardW4;
+
+  /// Mobile Dashboard user-facing text: W5
+  ///
+  /// In en, this message translates to:
+  /// **'W5'**
+  String get mobileDashboardW5;
+
+  /// Mobile Dashboard user-facing text: W6
+  ///
+  /// In en, this message translates to:
+  /// **'W6'**
+  String get mobileDashboardW6;
+
+  /// Mobile Dashboard user-facing text: W7
+  ///
+  /// In en, this message translates to:
+  /// **'W7'**
+  String get mobileDashboardW7;
+
+  /// Mobile Dashboard user-facing text: W8
+  ///
+  /// In en, this message translates to:
+  /// **'W8'**
+  String get mobileDashboardW8;
+
+  /// Mobile Dashboard user-facing text: Al-Rashid Trading Co.
+  ///
+  /// In en, this message translates to:
+  /// **'Al-Rashid Trading Co.'**
+  String get mobileDashboardAlRashidTradingCo;
+
+  /// Mobile Dashboard user-facing text: Najd Holdings
+  ///
+  /// In en, this message translates to:
+  /// **'Najd Holdings'**
+  String get mobileDashboardNajdHoldings;
+
+  /// Mobile Dashboard user-facing text: Coastal Logistics
+  ///
+  /// In en, this message translates to:
+  /// **'Coastal Logistics'**
+  String get mobileDashboardCoastalLogistics;
+
+  /// Mobile Dashboard user-facing text: Gulf Contracting Ltd
+  ///
+  /// In en, this message translates to:
+  /// **'Gulf Contracting Ltd'**
+  String get mobileDashboardGulfContractingLtd;
+
+  /// Mobile Dashboard user-facing text: Saudi Steel Co
+  ///
+  /// In en, this message translates to:
+  /// **'Saudi Steel Co'**
+  String get mobileDashboardSaudiSteelCo;
+
+  /// Mobile Dashboard user-facing text: Najd Builders
+  ///
+  /// In en, this message translates to:
+  /// **'Najd Builders'**
+  String get mobileDashboardNajdBuilders;
+
+  /// Mobile Dashboard user-facing text: Coastal Cement
+  ///
+  /// In en, this message translates to:
+  /// **'Coastal Cement'**
+  String get mobileDashboardCoastalCement;
+
+  /// Mobile Dashboard user-facing text: Eastern Timber
+  ///
+  /// In en, this message translates to:
+  /// **'Eastern Timber'**
+  String get mobileDashboardEasternTimber;
 }
 
 class _GeniusLinkLocalizationDelegate

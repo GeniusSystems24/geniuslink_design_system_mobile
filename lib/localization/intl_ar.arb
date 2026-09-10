@@ -1719,5 +1719,296 @@
   "stores": "المتاجر",
   "@stores": {
     "description": "Localized user-interface text."
-  }
+  },
+  "mobileDashboardWorkspace": "مساحة العمل",
+  "mobileDashboardNotifications": "الإشعارات",
+  "mobileDashboardOverview": "نظرة عامة",
+  "mobileDashboardSales": "المبيعات",
+  "mobileDashboardTransfers": "التحويلات",
+  "mobileDashboardLedger": "دفتر الأستاذ",
+  "mobileDashboardReports": "التقارير",
+  "mobileDashboardSaudiRiyal": "الريال السعودي",
+  "mobileDashboardUsDollar": "الدولار الأمريكي",
+  "mobileDashboardUaeDirham": "الدرهم الإماراتي",
+  "mobileDashboardTenant9": "المستأجر 9",
+  "mobileDashboardTenant14": "المستأجر 14",
+  "mobileDashboardTenant22": "المستأجر 22",
+  "mobileDashboardOutOfBalanceEntries": "قيود غير متوازنة",
+  "mobileDashboardDebitsAndCreditsDonTMatch": "إجمالي المدين والدائن غير متطابق",
+  "mobileDashboardPendingApprovals": "موافقات معلّقة",
+  "mobileDashboardVouchersAwaitingYourSignOff": "سندات تنتظر اعتمادك",
+  "mobileDashboardSyncConflict": "تعارض في المزامنة",
+  "mobileDashboardADraftEditedOnTwoDevices": "تم تعديل مسودة على جهازين",
+  "mobileDashboardBanking": "الخدمات المصرفية",
+  "mobileDashboardTotalBalance": "إجمالي الرصيد",
+  "mobileDashboardAvailableCash": "النقد المتاح",
+  "mobileDashboardInflow": "التدفقات الداخلة",
+  "mobileDashboardOutflow": "التدفقات الخارجة",
+  "mobileDashboardDeposit": "إيداع",
+  "mobileDashboardWithdrawal": "سحب",
+  "mobileDashboardTransfer": "تحويل",
+  "mobileDashboardStatement": "كشف حساب",
+  "mobileDashboardBeneficiaries": "المستفيدون",
+  "mobileDashboardReconcile": "مطابقة",
+  "mobileDashboardCards": "البطاقات",
+  "mobileDashboardCheques": "الشيكات",
+  "mobileDashboardBankAccounts": "الحسابات البنكية",
+  "mobileDashboardCashDepositMain": "إيداع نقدي — الرئيسي",
+  "mobileDashboardText1hAgo": "قبل ساعة",
+  "mobileDashboardPayrollRelease": "صرف الرواتب",
+  "mobileDashboardText4hAgo": "قبل 4 ساعات",
+  "mobileDashboardRiyadBankMain": "بنك الرياض ← الرئيسي",
+  "mobileDashboardYesterday": "أمس",
+  "mobileDashboardSupplierWire": "تحويل بنكي للمورّد",
+  "mobileDashboardCustomerSettlement": "تسوية عميل",
+  "mobileDashboardText2DaysAgo": "قبل يومين",
+  "mobileDashboardAccounting": "المحاسبة",
+  "mobileDashboardTotalAssets": "إجمالي الأصول",
+  "mobileDashboardCash": "النقد",
+  "mobileDashboardRevenueMtd": "الإيرادات منذ بداية الشهر",
+  "mobileDashboardVoucher": "سند",
+  "mobileDashboardReceipt": "سند قبض",
+  "mobileDashboardInvoice": "فاتورة",
+  "mobileDashboardCustomers": "العملاء",
+  "mobileDashboardSuppliers": "الموردون",
+  "mobileDashboardFixedAssets": "الأصول الثابتة",
+  "mobileDashboardJournal": "يومية",
+  "mobileDashboardDepreciationQ4": "الإهلاك — الربع الرابع",
+  "mobileDashboardText2hAgo": "قبل ساعتين",
+  "mobileDashboardOfficeRentPayment": "دفع إيجار المكتب",
+  "mobileDashboardText5hAgo": "قبل 5 ساعات",
+  "mobileDashboardRevenueAccrual": "استحقاق الإيرادات",
+  "mobileDashboardUtilitiesNov": "المرافق — نوفمبر",
+  "mobileDashboardFxRevaluation": "إعادة تقييم العملات الأجنبية",
+  "mobileDashboardCommercial": "التجاري",
+  "mobileDashboardSalesMtd": "المبيعات منذ بداية الشهر",
+  "mobileDashboardPurchasesMtd": "المشتريات منذ بداية الشهر",
+  "mobileDashboardReceivables": "الذمم المدينة",
+  "mobileDashboardPayables": "الذمم الدائنة",
+  "mobileDashboardSale": "بيع",
+  "mobileDashboardPurchase": "شراء",
+  "mobileDashboardQuotation": "عرض سعر",
+  "mobileDashboardReturnText": "مرتجع",
+  "mobileDashboardText30mAgo": "قبل 30 دقيقة",
+  "mobileDashboardText3hAgo": "قبل 3 ساعات",
+  "mobileDashboardTreasuryCashManagement": "الخزينة وإدارة النقد",
+  "mobileDashboardBankingControlCenter": "مركز التحكم المصرفي",
+  "mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity": "راقب السيولة والمراكز البنكية والتحويلات وعمليات المطابقة عبر جميع الكيانات القانونية.",
+  "mobileDashboardNewTransfer": "تحويل جديد",
+  "mobileDashboardTreasuryStatus": "حالة الخزينة",
+  "mobileDashboardTreasuryWorkflow": "سير عمل الخزينة",
+  "mobileDashboardItemsThatRequireActionBeforeTheNextCutOff": "عناصر تتطلب إجراءً قبل موعد الإقفال التالي.",
+  "mobileDashboardLatestBankMovements": "أحدث الحركات البنكية",
+  "mobileDashboardTreasuryExceptions": "استثناءات الخزينة",
+  "mobileDashboardConnectedAccounts": "الحسابات المتصلة",
+  "mobileDashboardAcross3Banks": "عبر 3 بنوك",
+  "mobileDashboardReconciliation": "المطابقة",
+  "mobileDashboardText3StatementsPending": "3 كشوف حساب معلّقة",
+  "mobileDashboardPaymentApprovals": "موافقات الدفع",
+  "mobileDashboardSar284kAwaitingRelease": "284 ألف ر.س بانتظار الصرف",
+  "mobileDashboardApprovePaymentBatch": "اعتماد دفعة المدفوعات",
+  "mobileDashboardPayrollAndSupplierWires": "الرواتب وتحويلات الموردين",
+  "mobileDashboardText5Items": "5 عناصر",
+  "mobileDashboardReconcileBankStatements": "مطابقة كشوف الحساب البنكية",
+  "mobileDashboardRiyadBankAndSnb": "بنك الرياض والبنك الأهلي السعودي",
+  "mobileDashboardText3Open": "3 مفتوحة",
+  "mobileDashboardReview13WeekCashForecast": "مراجعة توقعات النقد لـ 13 أسبوعاً",
+  "mobileDashboardUpdatedWithCurrentCommitments": "محدّثة بالالتزامات الحالية",
+  "mobileDashboardToday": "اليوم",
+  "mobileDashboardUnreconciledStatements": "كشوف غير مطابقة",
+  "mobileDashboardBankStatementLinesRemainUnmatched": "لا تزال بعض بنود كشف الحساب غير مطابقة",
+  "mobileDashboardPaymentsAwaitingApproval": "مدفوعات بانتظار الموافقة",
+  "mobileDashboardTransfersAreApproachingTheBankCutOff": "التحويلات تقترب من موعد إقفال البنك",
+  "mobileDashboardBankFeedDelayed": "تأخر تغذية البنك",
+  "mobileDashboardOneAccountHasNotSynchronizedToday": "هناك حساب لم تتم مزامنته اليوم",
+  "mobileDashboardGeneralLedgerFinancialControl": "دفتر الأستاذ العام والرقابة المالية",
+  "mobileDashboardAccountingCommandCenter": "مركز قيادة المحاسبة",
+  "mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace": "تابع جاهزية الإقفال وسلامة الترحيل والأرصدة واستثناءات الرقابة من مساحة عمل تشغيلية واحدة.",
+  "mobileDashboardPostJournal": "ترحيل قيد يومية",
+  "mobileDashboardCloseReadiness": "جاهزية الإقفال",
+  "mobileDashboardPeriodCloseWorkflow": "سير عمل إقفال الفترة",
+  "mobileDashboardPriorityTasksForAnAccurateAndControlledClose": "مهام ذات أولوية لإقفال دقيق ومنضبط.",
+  "mobileDashboardRecentPostings": "أحدث الترحيلات",
+  "mobileDashboardAccountingExceptions": "استثناءات المحاسبة",
+  "mobileDashboardOpenPeriod": "الفترة المفتوحة",
+  "mobileDashboardDec2024": "ديسمبر 2024",
+  "mobileDashboardClosesIn4Days": "تُغلق خلال 4 أيام",
+  "mobileDashboardTrialBalance": "ميزان المراجعة",
+  "mobileDashboardBalanced": "متوازن",
+  "mobileDashboardNoVarianceDetected": "لم يتم اكتشاف أي فروقات",
+  "mobileDashboardUnpostedJournals": "قيود يومية غير مرحلة",
+  "mobileDashboardText2RequireApproval": "2 تتطلب الموافقة",
+  "mobileDashboardPostRecurringJournals": "ترحيل القيود الدورية",
+  "mobileDashboardRentPayrollAndDepreciation": "الإيجار والرواتب والإهلاك",
+  "mobileDashboardText4Batches": "4 دفعات",
+  "mobileDashboardReviewControlAccounts": "مراجعة حسابات الرقابة",
+  "mobileDashboardArApInventoryAndTax": "الذمم المدينة والدائنة والمخزون والضرائب",
+  "mobileDashboardText2Variances": "فروقان",
+  "mobileDashboardLockOperationalSubledgers": "إقفال دفاتر الأستاذ الفرعية التشغيلية",
+  "mobileDashboardAfterFinalPostingReview": "بعد المراجعة النهائية للترحيل",
+  "mobileDashboardPending": "معلّق",
+  "mobileDashboardDebitsAndCreditsDoNotMatch": "إجمالي المدين والدائن غير متطابق",
+  "mobileDashboardDraftAndApprovalQueuesRemainOpen": "لا تزال قوائم المسودات والموافقات مفتوحة",
+  "mobileDashboardControlAccountVariances": "فروقات حسابات الرقابة",
+  "mobileDashboardArAndInventoryRequireInvestigation": "تتطلب الذمم المدينة والمخزون المراجعة",
+  "mobileDashboardSalesPurchasingOrderFulfilment": "المبيعات والمشتريات وتنفيذ الطلبات",
+  "mobileDashboardCommercialOperationsCenter": "مركز العمليات التجارية",
+  "mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness": "أدر تنفيذ الإيرادات والتزامات المشتريات والذمم المدينة ومخاطر تنفيذ الطلبات على مستوى المنشأة.",
+  "mobileDashboardCreateSalesOrder": "إنشاء أمر بيع",
+  "mobileDashboardCommercialPulse": "المؤشرات التجارية",
+  "mobileDashboardOrderToCashWorkflow": "سير العمل من الطلب إلى التحصيل",
+  "mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService": "أعمال تشغيلية قد تؤثر في الإيرادات وخدمة العملاء.",
+  "mobileDashboardLatestCommercialDocuments": "أحدث المستندات التجارية",
+  "mobileDashboardCommercialExceptions": "الاستثناءات التجارية",
+  "mobileDashboardOpenSalesOrders": "أوامر البيع المفتوحة",
+  "mobileDashboardSar114mPipeline": "1.14 مليون ر.س في خط المبيعات",
+  "mobileDashboardOnTimeFulfilment": "التنفيذ في الموعد",
+  "mobileDashboardText4OrdersAtRisk": "4 طلبات معرضة للخطر",
+  "mobileDashboardOverdueReceivables": "ذمم مدينة متأخرة",
+  "mobileDashboardSar176kOverdue": "176 ألف ر.س متأخرة",
+  "mobileDashboardReleaseBlockedSalesOrders": "إتاحة أوامر البيع المحجوبة",
+  "mobileDashboardCreditAndMarginChecks": "فحوصات الائتمان والهامش",
+  "mobileDashboardText4Orders": "4 طلبات",
+  "mobileDashboardConfirmPurchaseCommitments": "تأكيد التزامات الشراء",
+  "mobileDashboardLeadTimeChangesFromSuppliers": "تغييرات مهل التوريد من الموردين",
+  "mobileDashboardText6Lines": "6 بنود",
+  "mobileDashboardFollowUpOverdueInvoices": "متابعة الفواتير المتأخرة",
+  "mobileDashboardTopCustomerBalances": "أعلى أرصدة العملاء",
+  "mobileDashboardText8Accounts": "8 حسابات",
+  "mobileDashboardOrdersOnCreditHold": "طلبات موقوفة ائتمانياً",
+  "mobileDashboardCustomerLimitsOrOverdueBalancesExceeded": "تم تجاوز حدود العملاء أو الأرصدة المتأخرة",
+  "mobileDashboardFulfilmentShortages": "نقص في تنفيذ الطلبات",
+  "mobileDashboardCommittedQuantitiesExceedAvailableStock": "الكميات الملتزم بها تتجاوز المخزون المتاح",
+  "mobileDashboardSupplierDeliveryChanges": "تغييرات في تسليم الموردين",
+  "mobileDashboardExpectedDatesWereUpdatedByVendors": "تم تحديث التواريخ المتوقعة من قبل الموردين",
+  "accountingDashboard": "لوحة التحكم المحاسبية",
+  "@accountingDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "addCustomer": "إضافة عميل",
+  "@addCustomer": {
+    "description": "Navigation label used in the More screen."
+  },
+  "addSupplier": "إضافة مورد",
+  "@addSupplier": {
+    "description": "Navigation label used in the More screen."
+  },
+  "administration": "الإدارة",
+  "@administration": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingDashboard": "لوحة التحكم المصرفية",
+  "@bankingDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingCash": "المصرفية · النقدية",
+  "@bankingCash": {
+    "description": "Navigation label used in the More screen."
+  },
+  "bankingTransfers": "المصرفية · التحويلات",
+  "@bankingTransfers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "commercialDashboard": "لوحة التحكم التجارية",
+  "@commercialDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "configuration": "التهيئة",
+  "@configuration": {
+    "description": "Navigation label used in the More screen."
+  },
+  "@mobileDashboardCustomers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "externalWireDetails": "تفاصيل الحوالة الخارجية",
+  "@externalWireDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "inventoryDashboard": "لوحة تحكم المخزون",
+  "@inventoryDashboard": {
+    "description": "Navigation label used in the More screen."
+  },
+  "issueDetailsMore": "تفاصيل الصرف",
+  "@issueDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "journalEntryDetails": "تفاصيل قيد اليومية",
+  "@journalEntryDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "@mobileDashboardLedger": {
+    "description": "Navigation label used in the More screen."
+  },
+  "localTransferDetails": "تفاصيل التحويل المحلي",
+  "@localTransferDetails": {
+    "description": "Navigation label used in the More screen."
+  },
+  "openingJournalEntry": "قيد اليومية الافتتاحي",
+  "@openingJournalEntry": {
+    "description": "Navigation label used in the More screen."
+  },
+  "procurementSuppliers": "المشتريات · الموردون",
+  "@procurementSuppliers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "productsList": "قائمة المنتجات",
+  "@productsList": {
+    "description": "Navigation label used in the More screen."
+  },
+  "receiveDetailsMore": "تفاصيل الاستلام",
+  "@receiveDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "@mobileDashboardReports": {
+    "description": "Navigation label used in the More screen."
+  },
+  "rolesPermissions": "الأدوار والصلاحيات",
+  "@rolesPermissions": {
+    "description": "Navigation label used in the More screen."
+  },
+  "salesCustomers": "المبيعات · العملاء",
+  "@salesCustomers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "@mobileDashboardSuppliers": {
+    "description": "Navigation label used in the More screen."
+  },
+  "transferDetailsMore": "تفاصيل التحويل",
+  "@transferDetailsMore": {
+    "description": "Navigation label used in the More screen."
+  },
+  "users": "المستخدمون",
+  "@users": {
+    "description": "Navigation label used in the More screen."
+  },
+  "@mobileDashboardWorkspace": {
+    "description": "Navigation label used in the More screen."
+  },
+  "mobileDashboardDebitsAndCreditsDonTMatch2": "إجمالي المدين والدائن غير متطابق",
+  "mobileDashboardText9a": "٩ ص",
+  "mobileDashboardText12p": "١٢ م",
+  "mobileDashboardText3p": "٣ م",
+  "mobileDashboardText6p": "٦ م",
+  "mobileDashboardNow": "الآن",
+  "mobileDashboardM": "ن",
+  "mobileDashboardT": "ث",
+  "mobileDashboardW": "ر",
+  "mobileDashboardF": "ج",
+  "mobileDashboardS": "س",
+  "mobileDashboardW1": "أ1",
+  "mobileDashboardW2": "أ2",
+  "mobileDashboardW3": "أ3",
+  "mobileDashboardW4": "أ4",
+  "mobileDashboardW5": "أ5",
+  "mobileDashboardW6": "أ6",
+  "mobileDashboardW7": "أ7",
+  "mobileDashboardW8": "أ8",
+  "mobileDashboardAlRashidTradingCo": "شركة الرشيد للتجارة",
+  "mobileDashboardNajdHoldings": "شركة نجد القابضة",
+  "mobileDashboardCoastalLogistics": "الخدمات اللوجستية الساحلية",
+  "mobileDashboardGulfContractingLtd": "شركة الخليج للمقاولات",
+  "mobileDashboardSaudiSteelCo": "شركة الصلب السعودية",
+  "mobileDashboardNajdBuilders": "بناة نجد",
+  "mobileDashboardCoastalCement": "أسمنت الساحل",
+  "mobileDashboardEasternTimber": "الأخشاب الشرقية"
 }

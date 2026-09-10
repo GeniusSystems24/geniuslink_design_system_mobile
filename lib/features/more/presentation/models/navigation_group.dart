@@ -1,3 +1,5 @@
+import '../../../../localization/generated/l10n.dart';
+
 class NavigationItem {
   final String label;
   final String routeId;
@@ -10,146 +12,148 @@ class NavigationGroup {
   const NavigationGroup({required this.title, required this.items});
 }
 
-const defaultMoreNavigationGroups = <NavigationGroup>[
+List<NavigationGroup> buildDefaultMoreNavigationGroups(
+  GeniusLinkLocalization l10n,
+) => <NavigationGroup>[
   NavigationGroup(
-    title: 'Workspace',
+    title: l10n.mobileDashboardWorkspace,
     items: [
       NavigationItem(
-        label: 'Banking Dashboard',
+        label: l10n.bankingDashboard,
         routeId: 'mobileBankingDashboard',
       ),
       NavigationItem(
-        label: 'Accounting Dashboard',
+        label: l10n.accountingDashboard,
         routeId: 'mobileAccountingDashboard',
       ),
       NavigationItem(
-        label: 'Commercial Dashboard',
+        label: l10n.commercialDashboard,
         routeId: 'mobileCommercialDashboard',
       ),
-      NavigationItem(label: 'Settings', routeId: 'settingsHub'),
+      NavigationItem(label: l10n.settings, routeId: 'settingsHub'),
     ],
   ),
   NavigationGroup(
-    title: 'Accounts',
+    title: l10n.accounts,
     items: [
-      NavigationItem(label: 'Account Tree', routeId: 'accountTree'),
-      NavigationItem(label: 'Create Account Group', routeId: 'createGroup'),
+      NavigationItem(label: l10n.accountTree, routeId: 'accountTree'),
+      NavigationItem(label: l10n.createAccountGroup, routeId: 'createGroup'),
     ],
   ),
   NavigationGroup(
-    title: 'Products',
+    title: l10n.products,
     items: [
-      NavigationItem(label: 'Products List', routeId: 'productsList'),
-      NavigationItem(label: 'Create Product', routeId: 'createProduct'),
+      NavigationItem(label: l10n.productsList, routeId: 'productsList'),
+      NavigationItem(label: l10n.createProduct, routeId: 'createProduct'),
     ],
   ),
   NavigationGroup(
-    title: 'Inventory',
+    title: l10n.inventory,
     items: [
-      NavigationItem(label: 'Inventory Dashboard', routeId: 'invDashboard'),
-      NavigationItem(label: 'Warehouses', routeId: 'warehousesList'),
-      NavigationItem(label: 'Stock Transfers', routeId: 'transferList'),
-      NavigationItem(label: 'Issue — Details', routeId: 'issueDetail'),
-      NavigationItem(label: 'Receive Inventory', routeId: 'receiveCreate'),
-      NavigationItem(label: 'Receive — Details', routeId: 'receiveDetail'),
-      NavigationItem(label: 'Transfer Inventory', routeId: 'transferCreate'),
-      NavigationItem(label: 'Transfer — Details', routeId: 'transferDetail'),
-      NavigationItem(label: 'Inventory Adjustment', routeId: 'adjustment'),
-      NavigationItem(label: 'Stock Take', routeId: 'stockTake'),
-      NavigationItem(label: 'Categories', routeId: 'categories'),
-      NavigationItem(label: 'Units of Measure', routeId: 'uom'),
-      NavigationItem(label: 'Price Lists', routeId: 'priceLists'),
-      NavigationItem(label: 'Barcode Print', routeId: 'barcodePrint'),
+      NavigationItem(label: l10n.inventoryDashboard, routeId: 'invDashboard'),
+      NavigationItem(label: l10n.warehouses, routeId: 'warehousesList'),
+      NavigationItem(label: l10n.stockTransfers, routeId: 'transferList'),
+      NavigationItem(label: l10n.issueDetailsMore, routeId: 'issueDetail'),
+      NavigationItem(label: l10n.receiveInventory, routeId: 'receiveCreate'),
+      NavigationItem(label: l10n.receiveDetailsMore, routeId: 'receiveDetail'),
+      NavigationItem(label: l10n.transferInventory, routeId: 'transferCreate'),
+      NavigationItem(label: l10n.transferDetailsMore, routeId: 'transferDetail'),
+      NavigationItem(label: l10n.inventoryAdjustment, routeId: 'adjustment'),
+      NavigationItem(label: l10n.stockTake, routeId: 'stockTake'),
+      NavigationItem(label: l10n.categories, routeId: 'categories'),
+      NavigationItem(label: l10n.unitsOfMeasure, routeId: 'uom'),
+      NavigationItem(label: l10n.priceLists, routeId: 'priceLists'),
+      NavigationItem(label: l10n.barcodePrint, routeId: 'barcodePrint'),
     ],
   ),
   NavigationGroup(
-    title: 'Ledger',
+    title: l10n.mobileDashboardLedger,
     items: [
-      NavigationItem(label: 'Journal Entries', routeId: 'journalList'),
+      NavigationItem(label: l10n.journalEntries, routeId: 'journalList'),
       NavigationItem(
-        label: 'Create Journal Entry',
+        label: l10n.createJournalEntry,
         routeId: 'createJournalEntry',
       ),
       NavigationItem(
-        label: 'Journal Entry Details',
+        label: l10n.journalEntryDetails,
         routeId: 'journalEntryDetail',
       ),
-      NavigationItem(label: 'Opening Journal Entry', routeId: 'journal'),
-      NavigationItem(label: 'Financial Operation', routeId: 'opDetail'),
+      NavigationItem(label: l10n.openingJournalEntry, routeId: 'journal'),
+      NavigationItem(label: l10n.financialOperation, routeId: 'opDetail'),
     ],
   ),
   NavigationGroup(
-    title: 'Sales · Customers',
+    title: l10n.salesCustomers,
     items: [
-      NavigationItem(label: 'Customers', routeId: 'customersList'),
-      NavigationItem(label: 'Add Customer', routeId: 'createCustomer'),
+      NavigationItem(label: l10n.mobileDashboardCustomers, routeId: 'customersList'),
+      NavigationItem(label: l10n.addCustomer, routeId: 'createCustomer'),
     ],
   ),
   NavigationGroup(
-    title: 'Procurement · Suppliers',
+    title: l10n.procurementSuppliers,
     items: [
-      NavigationItem(label: 'Suppliers', routeId: 'suppliersList'),
-      NavigationItem(label: 'Add Supplier', routeId: 'createSupplier'),
+      NavigationItem(label: l10n.mobileDashboardSuppliers, routeId: 'suppliersList'),
+      NavigationItem(label: l10n.addSupplier, routeId: 'createSupplier'),
     ],
   ),
   NavigationGroup(
-    title: 'Configuration',
+    title: l10n.configuration,
     items: [
-      NavigationItem(label: 'Currencies', routeId: 'currenciesList'),
-      NavigationItem(label: 'Add Currency', routeId: 'createCurrency'),
-      NavigationItem(label: 'Exchange Rates', routeId: 'exchangeRateSetup'),
-      NavigationItem(label: 'Fiscal Year', routeId: 'fiscalYearSetup'),
+      NavigationItem(label: l10n.currencies, routeId: 'currenciesList'),
+      NavigationItem(label: l10n.addCurrency, routeId: 'createCurrency'),
+      NavigationItem(label: l10n.exchangeRates, routeId: 'exchangeRateSetup'),
+      NavigationItem(label: l10n.fiscalYear, routeId: 'fiscalYearSetup'),
     ],
   ),
   NavigationGroup(
-    title: 'Banking · Cash',
+    title: l10n.bankingCash,
     items: [
-      NavigationItem(label: 'Create Deposit', routeId: 'createDeposit'),
-      NavigationItem(label: 'Deposit Receipt', routeId: 'depositDetail'),
-      NavigationItem(label: 'Create Withdrawal', routeId: 'createWithdrawal'),
-      NavigationItem(label: 'Withdrawal Voucher', routeId: 'withdrawalDetail'),
+      NavigationItem(label: l10n.createDeposit, routeId: 'createDeposit'),
+      NavigationItem(label: l10n.depositReceipt, routeId: 'depositDetail'),
+      NavigationItem(label: l10n.createWithdrawal, routeId: 'createWithdrawal'),
+      NavigationItem(label: l10n.withdrawalVoucher, routeId: 'withdrawalDetail'),
     ],
   ),
   NavigationGroup(
-    title: 'Banking · Transfers',
+    title: l10n.bankingTransfers,
     items: [
       NavigationItem(
-        label: 'Create Local Transfer',
+        label: l10n.createLocalTransfer,
         routeId: 'createLocalTransfer',
       ),
       NavigationItem(
-        label: 'Local Transfer Details',
+        label: l10n.localTransferDetails,
         routeId: 'localTransferDetail',
       ),
       NavigationItem(
-        label: 'Create External Transfer',
+        label: l10n.createExternalTransfer,
         routeId: 'createExternalTransfer',
       ),
       NavigationItem(
-        label: 'External Wire Details',
+        label: l10n.externalWireDetails,
         routeId: 'externalTransferDetail',
       ),
     ],
   ),
   NavigationGroup(
-    title: 'Reports',
+    title: l10n.mobileDashboardReports,
     items: [
-      NavigationItem(label: 'Trial Balance', routeId: 'trialBalance'),
-      NavigationItem(label: 'Income Statement', routeId: 'incomeStatement'),
-      NavigationItem(label: 'Balance Sheet', routeId: 'balanceSheet'),
+      NavigationItem(label: l10n.trialBalance, routeId: 'trialBalance'),
+      NavigationItem(label: l10n.incomeStatement, routeId: 'incomeStatement'),
+      NavigationItem(label: l10n.balanceSheet, routeId: 'balanceSheet'),
       NavigationItem(
-        label: 'Inventory Valuation',
+        label: l10n.inventoryValuation,
         routeId: 'inventoryValuation',
       ),
-      NavigationItem(label: 'Audit Log', routeId: 'auditLog'),
+      NavigationItem(label: l10n.auditLog, routeId: 'auditLog'),
     ],
   ),
   NavigationGroup(
-    title: 'Administration',
+    title: l10n.administration,
     items: [
-      NavigationItem(label: 'Users', routeId: 'usersList'),
-      NavigationItem(label: 'Invite User', routeId: 'createUser'),
-      NavigationItem(label: 'Roles & Permissions', routeId: 'rolesPermissions'),
+      NavigationItem(label: l10n.users, routeId: 'usersList'),
+      NavigationItem(label: l10n.inviteUser, routeId: 'createUser'),
+      NavigationItem(label: l10n.rolesPermissions, routeId: 'rolesPermissions'),
     ],
   ),
 ];
