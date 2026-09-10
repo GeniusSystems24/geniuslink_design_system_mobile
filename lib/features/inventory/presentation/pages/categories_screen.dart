@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -65,11 +67,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     var icon = MIcons.of('briefcase');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Categories')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).categories), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Category Tree',
-          subtitle: '5 top-level groups',
+          title: GeniusLinkLocalization.of(context).categoryTree,
+          subtitle: GeniusLinkLocalization.of(context).text5TopLevelGroups,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -238,30 +240,30 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'New Category',
-          subtitle: 'Quick inline form',
+          title: GeniusLinkLocalization.of(context).newCategory,
+          subtitle: GeniusLinkLocalization.of(context).quickInlineForm,
           initiallyExpanded: false,
           accentColor: marker,
           icon: icon,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'Code',
-                placeholder: 'e.g. CAT-006',
+                label: GeniusLinkLocalization.of(context).code,
+                placeholder: GeniusLinkLocalization.of(context).eGCat006,
                 mono: true,
                 required: true,
               ),
-              IField(label: 'Parent', value: '— Top Level —', select: true),
+              IField(label: GeniusLinkLocalization.of(context).parent, value: '— Top Level —', select: true),
               IField(
                 label: 'Name (English)',
-                placeholder: 'e.g. Adhesives & Sealants',
+                placeholder: GeniusLinkLocalization.of(context).eGAdhesivesSealants,
                 required: true,
               ),
               IField(
-                label: 'الاسم بالعربية',
-                placeholder: 'مثال: لاصقات',
+                label: GeniusLinkLocalization.of(context).nameArabic,
+                placeholder: GeniusLinkLocalization.of(context).eGAdhesives,
                 ar: true,
                 required: true,
               ),

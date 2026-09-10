@@ -59,9 +59,11 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Account Tree')),
+      appBar: SuperAppBar(title: Text(l10n.accountTree), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: LayoutBuilder(
@@ -77,8 +79,8 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
                 : availableHeight;
 
             return SuperSectionCard2(
-              title: 'Chart of Accounts',
-              subtitle: 'Roll-up balances · bilingual',
+              title: l10n.chartOfAccounts,
+              subtitle: l10n.rollUpBalancesBilingual,
               icon: Icons.account_tree_outlined,
               accentColor:
                   SuperMaterialThemeData.of(context).colorScheme.primary,
@@ -90,10 +92,10 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Row(
+                    Row(
                       children: [
-                        Expanded(child: Text('Account')),
-                        Text('Balance (SAR)'),
+                        Expanded(child: Text(l10n.account)),
+                        Text(l10n.balanceSar),
                       ],
                     ),
                     const SizedBox(height: 8),

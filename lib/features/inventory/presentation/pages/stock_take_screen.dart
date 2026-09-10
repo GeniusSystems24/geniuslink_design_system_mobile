@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _CountRow extends StatelessWidget {
   final (String, String, int, int) item;
@@ -69,7 +71,7 @@ class _CountRow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
-                'COUNT',
+                GeniusLinkLocalization.of(context).count,
                 style: TextStyle(
                   fontFamily: SuperMaterialThemeData.of(
                     context,
@@ -128,11 +130,11 @@ class StockTakeScreen extends StatelessWidget {
       ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var trailing = const Pill('In Progress', tone: PillTone.warning);
+    var trailing = Pill(GeniusLinkLocalization.of(context).inProgress, tone: PillTone.warning);
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Stock Take')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).stockTake), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -153,7 +155,7 @@ class StockTakeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Eyebrow('3 of 6 counted', size: 10),
+                      Eyebrow(GeniusLinkLocalization.of(context).text3Of6Counted, size: 10),
                       Text(
                         '50%',
                         style: TextStyle(
@@ -201,17 +203,17 @@ class StockTakeScreen extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 childAspectRatio: 1.4,
-                children: const [
-                  Mini(label: 'Match', value: '1'),
-                  Mini(label: 'Short', value: '2'),
-                  Mini(label: 'Over', value: '0'),
+                children: [
+                  Mini(label: GeniusLinkLocalization.of(context).match, value: '1'),
+                  Mini(label: GeniusLinkLocalization.of(context).short, value: '2'),
+                  Mini(label: GeniusLinkLocalization.of(context).over, value: '0'),
                 ],
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Count Sheet',
+          title: GeniusLinkLocalization.of(context).countSheet,
 
           initiallyExpanded: true,
           accentColor: accentColor,

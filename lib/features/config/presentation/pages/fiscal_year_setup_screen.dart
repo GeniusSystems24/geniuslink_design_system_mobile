@@ -19,33 +19,33 @@ class FiscalYearSetupScreen extends StatelessWidget {
       'Dec',
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var trailing = const Pill('Open');
+    var trailing = Pill(GeniusLinkLocalization.of(context).open);
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var icon = MIcons.of('calendar');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Fiscal Year')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).fiscalYear), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
           title: 'Year Definition',
-          subtitle: 'Define the active fiscal year boundaries',
+          subtitle: GeniusLinkLocalization.of(context).defineTheActiveFiscalYearBoundaries,
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              IField(label: 'Fiscal Year', value: '2024', mono: true),
-              IField(label: 'Start Date', value: '01/01/2024', mono: true),
-              IField(label: 'End Date', value: '12/31/2024', mono: true),
+            children: [
+              IField(label: GeniusLinkLocalization.of(context).fiscalYear, value: '2024', mono: true),
+              IField(label: GeniusLinkLocalization.of(context).startDate, value: '01/01/2024', mono: true),
+              IField(label: GeniusLinkLocalization.of(context).endDate, value: '12/31/2024', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Accounting Periods',
-          subtitle: '12 monthly periods · lock to prevent back-dated postings',
+          title: GeniusLinkLocalization.of(context).accountingPeriods,
+          subtitle: GeniusLinkLocalization.of(context).text12MonthlyPeriodsLockToPreventBackDatedPostings,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -72,8 +72,8 @@ class FiscalYearSetupScreen extends StatelessWidget {
             ],
           ),
         ),
-        const InfoNote(
-          'Closing a period locks all postings dated within it. A locked period can only be reopened by a controller with audit justification.',
+        InfoNote(
+          GeniusLinkLocalization.of(context).closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti,
         ),
         const ActionRow(primary: 'Save Configuration'),
       ]),

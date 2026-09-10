@@ -6,11 +6,15 @@
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class AccountDetailScreen extends StatelessWidget {
   const AccountDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     const tx = [
       ('JV-2024-0042', '+5,000.00', true),
       ('TR-9042', '-1,800.00', false),
@@ -18,15 +22,15 @@ class AccountDetailScreen extends StatelessWidget {
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var trailing = const Pill('Active');
+    var trailing = Pill(l10n.active);
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Account Detail')),
+      appBar: SuperAppBar(title: Text(l10n.accountDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Current Balance',
+          title: l10n.currentBalance,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -71,7 +75,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Information',
+          title: l10n.information,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -80,16 +84,16 @@ class AccountDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Code', '1001', mono: true),
-              KV('Type', 'Asset · Cash'),
-              KV('Tree', 'Assets Tree (1)'),
-              KV('Currency', 'SAR'),
+            children: [
+              KV(l10n.code, '1001', mono: true),
+              KV(l10n.accountType, l10n.assetCash),
+              KV(l10n.tree, l10n.assetsTreeOne),
+              KV(l10n.currency, 'SAR'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Recent Transactions',
+          title: l10n.recentTransactions,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -159,7 +163,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to List',
+          l10n.backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

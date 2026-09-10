@@ -16,7 +16,10 @@ class ContactDetailScreen extends StatelessWidget {
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
         appBar: SuperAppBar(
-          title: Text('${contactSingularLabel(d.type)} Detail'),
+          title: Text('${contactSingularLabel(d.type)} Detail'),          actions: const [
+            AppLanguageToggleButton(),
+            AppThemeToggleButton(),
+          ],
         ),
         body: Center(
           child: Text(
@@ -38,13 +41,16 @@ class ContactDetailScreen extends StatelessWidget {
               : contactIndex);
     final c = d.contacts[safeIndex];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
-    var trailing = const Pill('Active');
+    var trailing = Pill(GeniusLinkLocalization.of(context).active);
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(
-        title: Text('${contactSingularLabel(d.type)} Detail'),
+        title: Text('${contactSingularLabel(d.type)} Detail'),        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
       ),
       body: MScroll([
         SuperSectionCard2(
@@ -102,18 +108,18 @@ class ContactDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KV('Code', c.code, mono: true),
-              KV('City', c.city),
-              const KV('Contact Person', 'Ahmed K.'),
-              const KV('Phone', '+966 55 124 9020', mono: true),
-              KV('Control Account', d.controlAccount),
-              const KV('Payment Terms', 'Net 30'),
+              KV(GeniusLinkLocalization.of(context).code, c.code, mono: true),
+              KV(GeniusLinkLocalization.of(context).city, c.city),
+              KV(GeniusLinkLocalization.of(context).contactPerson, 'Ahmed K.'),
+              KV(GeniusLinkLocalization.of(context).phone, '+966 55 124 9020', mono: true),
+              KV(GeniusLinkLocalization.of(context).controlAccount, d.controlAccount),
+              KV(GeniusLinkLocalization.of(context).paymentTerms, 'Net 30'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Transaction History',
-          subtitle: 'Recent invoices and payments',
+          title: GeniusLinkLocalization.of(context).transactionHistory,
+          subtitle: GeniusLinkLocalization.of(context).recentInvoicesAndPayments,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -203,11 +209,11 @@ class ContactDetailScreen extends StatelessWidget {
             ],
           ),
         ),
-        const Row(
+        Row(
           children: [
             Expanded(
               child: MBtn(
-                'Edit',
+                GeniusLinkLocalization.of(context).edit,
                 variant: MBtnVariant.secondary,
                 icon: 'edit',
                 full: true,
@@ -216,7 +222,7 @@ class ContactDetailScreen extends StatelessWidget {
             SizedBox(width: 10),
             Expanded(
               child: MBtn(
-                'Archive',
+                GeniusLinkLocalization.of(context).archive,
                 variant: MBtnVariant.danger,
                 icon: 'trash',
                 full: true,

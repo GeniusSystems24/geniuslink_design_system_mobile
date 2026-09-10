@@ -5,6 +5,7 @@ import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 
 import 'platform_toggle.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class BackupView extends StatelessWidget {
   final FormController controller;
@@ -36,7 +37,7 @@ class BackupView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Backup')),
+          appBar: SuperAppBar(title: const Text('Backup'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SuperSectionCard2(
               trailing: trailing,

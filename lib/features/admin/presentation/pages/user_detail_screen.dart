@@ -27,7 +27,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     var icon = MIcons.of('user');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('User Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).userDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           title: "",
@@ -75,11 +75,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        const Row(
+                        Row(
                           children: [
                             UserRoleChip(),
                             SizedBox(width: 8),
-                            Pill('Active'),
+                            Pill(GeniusLinkLocalization.of(context).active),
                           ],
                         ),
                       ],
@@ -91,7 +91,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Profile',
+          title: GeniusLinkLocalization.of(context).profile,
 
           initiallyExpanded: true,
           accentColor: marker,
@@ -99,15 +99,15 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              TInput(label: 'Full Name', defaultValue: 'Layla Ahmed'),
+            children: [
+              TInput(label: GeniusLinkLocalization.of(context).fullName, defaultValue: 'Layla Ahmed'),
               TInput(
-                label: 'Work Email',
+                label: GeniusLinkLocalization.of(context).workEmail,
                 defaultValue: 'layla.a@geniuslink.sa',
                 mono: true,
               ),
               TInput(
-                label: 'Employee ID',
+                label: GeniusLinkLocalization.of(context).employeeId,
                 defaultValue: 'EMP-0012',
                 mono: true,
               ),
@@ -115,7 +115,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Security',
+          title: GeniusLinkLocalization.of(context).security,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -133,7 +133,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Two-Factor Authentication',
+                          GeniusLinkLocalization.of(context).twoFactorAuthentication,
                           style: TextStyle(
                             fontSize: 13.5,
                             fontWeight: FontWeight.w600,
@@ -208,8 +208,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Active Sessions',
-          subtitle: 'Devices currently signed in',
+          title: GeniusLinkLocalization.of(context).activeSessions,
+          subtitle: GeniusLinkLocalization.of(context).devicesCurrentlySignedIn,
           initiallyExpanded: true,
           accentColor: accentColor3,
 
@@ -290,7 +290,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                             ),
                             if (!sessions[i].$3)
                               Text(
-                                'Revoke',
+                                GeniusLinkLocalization.of(context).revoke,
                                 style: TextStyle(
                                   color: SuperMaterialThemeData.of(
                                     context,
@@ -312,7 +312,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Recent Activity',
+          title: GeniusLinkLocalization.of(context).recentActivity,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -376,8 +376,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             ],
           ),
         ),
-        const MBtn(
-          'Deactivate User',
+        MBtn(
+          GeniusLinkLocalization.of(context).deactivateUser,
           variant: MBtnVariant.danger,
           icon: 'trash',
           full: true,

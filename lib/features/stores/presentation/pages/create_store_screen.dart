@@ -7,11 +7,11 @@ class CreateStoreScreen extends StatelessWidget {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Store')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createStore), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Store Details',
-          subtitle: 'Name and location',
+          title: GeniusLinkLocalization.of(context).storeDetails,
+          subtitle: GeniusLinkLocalization.of(context).nameAndLocation,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -19,31 +19,31 @@ class CreateStoreScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               MField(
-                label: 'Name English',
-                placeholder: 'e.g. Downtown Central Store',
+                label: GeniusLinkLocalization.of(context).nameEnglish,
+                placeholder: GeniusLinkLocalization.of(context).eGDowntownCentralStore,
                 required: true,
               ),
               MField(
-                label: 'الاسم بالعربية',
-                placeholder: 'مثال: متجر وسط المدينة',
+                label: GeniusLinkLocalization.of(context).nameArabic,
+                placeholder: GeniusLinkLocalization.of(context).eGDowntownCentralStore,
                 ar: true,
                 required: true,
               ),
-              MField(label: 'Location Code', value: 'ST-001', mono: true),
-              MField(label: 'Store Category', value: 'Retail'),
-              MField(label: 'Note', placeholder: 'Add internal notes…'),
+              MField(label: GeniusLinkLocalization.of(context).locationCode, value: 'ST-001', mono: true),
+              MField(label: GeniusLinkLocalization.of(context).storeCategory, value: 'Retail'),
+              MField(label: GeniusLinkLocalization.of(context).note, placeholder: GeniusLinkLocalization.of(context).addInternalNotes),
             ],
           ),
         ),
-        const Row(
+        Row(
           children: [
             Expanded(
-              child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true),
+              child: MBtn(GeniusLinkLocalization.of(context).cancel, variant: MBtnVariant.secondary, full: true),
             ),
             SizedBox(width: 10),
-            Expanded(child: MBtn('Create', icon: 'check', full: true)),
+            Expanded(child: MBtn(GeniusLinkLocalization.of(context).create, icon: 'check', full: true)),
           ],
         ),
       ]),

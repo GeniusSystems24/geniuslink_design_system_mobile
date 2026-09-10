@@ -32,10 +32,10 @@ class _JournalListScreenState extends State<JournalListScreen> {
     final filterLabel = _filter == null ? 'All' : _statusLabel(_filter!);
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Journal Entries')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).journalEntries), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SearchInput(
-          placeholder: 'Search entries…',
+          placeholder: GeniusLinkLocalization.of(context).searchEntries,
           value: _query,
           onChange: (value) => setState(() => _query = value),
         ),
@@ -178,7 +178,7 @@ class _JournalListScreenState extends State<JournalListScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 28),
                   child: Center(
                     child: Text(
-                      'No entries match.',
+                      GeniusLinkLocalization.of(context).noEntriesMatch,
                       style: TextStyle(
                         color: SuperMaterialThemeData.of(
                           context,

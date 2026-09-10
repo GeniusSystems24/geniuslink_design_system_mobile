@@ -22,9 +22,21 @@ class ThemeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Retained for API symmetry with the previous mobile theme control.
-  /// Mobile theme toggling remains deliberately disabled.
-  void toggle() {}
+  /// Toggle between the effective light and dark themes.
+  ///
+  /// When the current mode is [ThemeMode.system], [currentBrightness] is used
+  /// so the first toggle always moves to the opposite visible theme.
+  void toggle({Brightness? currentBrightness}) {
+    if (_disposed) return;
+
+    final currentlyDark = switch (_mode) {
+      ThemeMode.dark => true,
+      ThemeMode.light => false,
+      ThemeMode.system => currentBrightness == Brightness.dark,
+    };
+
+    setMode(currentlyDark ? ThemeMode.light : ThemeMode.dark);
+  }
 
   @override
   void dispose() {

@@ -17,11 +17,11 @@ class JournalEntryDetailScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Journal Entry Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).journalEntryDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Journal Entry',
+          title: GeniusLinkLocalization.of(context).journalEntry,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -55,7 +55,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Lines',
+          title: GeniusLinkLocalization.of(context).lines,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -84,7 +84,7 @@ class JournalEntryDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to Entries',
+          GeniusLinkLocalization.of(context).backToEntries,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

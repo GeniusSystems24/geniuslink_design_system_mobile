@@ -5,6 +5,7 @@ import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import 'platform_mono_text.dart';
 import 'platform_toggle.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class IntegrationsView extends StatelessWidget {
   final List<IntegrationDefinition> integrations;
@@ -32,7 +33,7 @@ class IntegrationsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Integrations')),
+          appBar: SuperAppBar(title: const Text('Integrations'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             for (final category in IntegrationCategory.values)
               if (integrations.any((item) => item.category == category))

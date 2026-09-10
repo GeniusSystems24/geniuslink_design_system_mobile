@@ -33,15 +33,15 @@ class BillingScreen extends StatelessWidget {
       ),
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
-    var trailing = const Pill('Active');
+    var trailing = Pill(GeniusLinkLocalization.of(context).active);
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Billing')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).billing), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Current Plan',
+          title: GeniusLinkLocalization.of(context).currentPlan,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -56,7 +56,7 @@ class BillingScreen extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    'Business',
+                    GeniusLinkLocalization.of(context).business,
                     style: TextStyle(
                       fontFamily: SuperMaterialThemeData.of(
                         context,
@@ -246,7 +246,7 @@ class BillingScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        'CURRENT',
+                        GeniusLinkLocalization.of(context).current,
                         style: TextStyle(
                           fontSize: 8,
                           fontWeight: FontWeight.w700,
@@ -265,7 +265,7 @@ class BillingScreen extends StatelessWidget {
             ),
           ),
         SuperSectionCard2(
-          title: 'Recent Invoices',
+          title: GeniusLinkLocalization.of(context).recentInvoices,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -338,7 +338,7 @@ class BillingScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            const Pill('Paid'),
+                            Pill(GeniusLinkLocalization.of(context).paid),
                           ],
                         ),
                       ),

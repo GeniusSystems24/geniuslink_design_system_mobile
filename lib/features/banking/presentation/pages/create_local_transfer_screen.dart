@@ -12,10 +12,10 @@ class CreateLocalTransferScreen extends StatelessWidget {
     var icon3 = MIcons.of('building');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Local Transfer')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createLocalTransfer), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Transfer Amount',
+          title: GeniusLinkLocalization.of(context).transferAmount,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -25,7 +25,7 @@ class CreateLocalTransferScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               MMoney(
-                label: 'Amount',
+                label: GeniusLinkLocalization.of(context).amount,
                 value: '50,000.00',
                 accent: SuperMaterialThemeData.of(context).colorScheme.primary,
                 required: true,
@@ -34,7 +34,7 @@ class CreateLocalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Accounts',
+          title: GeniusLinkLocalization.of(context).accounts,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -42,7 +42,7 @@ class CreateLocalTransferScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
                 label: 'From Account',
                 value: 'Bank · NCB Main (1100)',
@@ -50,25 +50,25 @@ class CreateLocalTransferScreen extends StatelessWidget {
                 required: true,
               ),
               IField(
-                label: 'To Account',
+                label: GeniusLinkLocalization.of(context).toAccount,
                 value: 'Bank · Al Rajhi (1101)',
                 select: true,
                 required: true,
               ),
               IField(
-                label: 'Value Date',
+                label: GeniusLinkLocalization.of(context).valueDate,
                 value: 'Dec 19, 2025',
                 icon: 'calendar',
               ),
               IField(
-                label: 'Reference',
-                placeholder: 'Internal note / slip no.',
+                label: GeniusLinkLocalization.of(context).reference,
+                placeholder: GeniusLinkLocalization.of(context).internalNoteSlipNo,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Journal Preview',
+          title: GeniusLinkLocalization.of(context).journalPreview,
 
           initiallyExpanded: false,
           accentColor: accentColor2,

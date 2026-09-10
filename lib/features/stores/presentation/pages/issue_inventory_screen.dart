@@ -9,10 +9,10 @@ class IssueInventoryScreen extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Issue Inventory')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).issueInventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Issue Details',
+          title: GeniusLinkLocalization.of(context).issueDetails,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -21,24 +21,24 @@ class IssueInventoryScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               MField(
-                label: 'Serial No',
+                label: GeniusLinkLocalization.of(context).serialNo,
                 value: 'INV-ISS-2024-0089',
                 mono: true,
               ),
               MField(
-                label: 'Store',
-                placeholder: 'Search store…',
+                label: GeniusLinkLocalization.of(context).store,
+                placeholder: GeniusLinkLocalization.of(context).searchStore,
                 required: true,
               ),
-              MField(label: 'Currency', value: 'USD — US Dollar'),
+              MField(label: GeniusLinkLocalization.of(context).currency, value: 'USD — US Dollar'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Items',
-          subtitle: '1 line · 12 units',
+          title: GeniusLinkLocalization.of(context).items,
+          subtitle: GeniusLinkLocalization.of(context).text1Line12Units,
           initiallyExpanded: true,
           accentColor: accentColor2,
 
@@ -113,7 +113,7 @@ class IssueInventoryScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Total',
+          title: GeniusLinkLocalization.of(context).total,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -129,7 +129,7 @@ class IssueInventoryScreen extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Eyebrow(
-                    'Total Value',
+                    GeniusLinkLocalization.of(context).totalValue,
                     color: SuperMaterialThemeData.of(context).superTheme.fg3,
                     size: 12,
                   ),
@@ -169,7 +169,7 @@ class IssueInventoryScreen extends StatelessWidget {
             ],
           ),
         ),
-        const MBtn('Issue Inventory', icon: 'check', full: true),
+        MBtn(GeniusLinkLocalization.of(context).issueInventory, icon: 'check', full: true),
       ]),
     );
   }

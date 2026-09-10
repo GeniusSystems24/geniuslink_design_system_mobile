@@ -12,10 +12,10 @@ class OpeningJournalScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Opening Journal')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).openingJournal), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Entry Details',
+          title: GeniusLinkLocalization.of(context).entryDetails,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -24,15 +24,15 @@ class OpeningJournalScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              MField(label: 'Serial No', value: 'JV-2024-0042', mono: true),
-              MField(label: 'Currency', value: 'SAR — Saudi Riyal'),
-              MField(label: 'Fiscal Year', value: '2024', mono: true),
+            children: [
+              MField(label: GeniusLinkLocalization.of(context).serialNo, value: 'JV-2024-0042', mono: true),
+              MField(label: GeniusLinkLocalization.of(context).currency, value: 'SAR — Saudi Riyal'),
+              MField(label: GeniusLinkLocalization.of(context).fiscalYear, value: '2024', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Transfer Lines',
+          title: GeniusLinkLocalization.of(context).transferLines,
           subtitle: '2 lines · balanced',
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -159,7 +159,7 @@ class OpeningJournalScreen extends StatelessWidget {
             ],
           ),
         ),
-        const MBtn('Create Entry', icon: 'check', full: true),
+        MBtn(GeniusLinkLocalization.of(context).createEntry, icon: 'check', full: true),
       ]),
     );
   }

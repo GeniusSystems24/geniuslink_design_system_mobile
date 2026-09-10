@@ -6,24 +6,28 @@
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
 
 import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class GroupDetailScreen extends StatelessWidget {
   const GroupDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
-    var trailing = const Pill('Active');
+    var trailing = Pill(l10n.active);
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Group Detail')),
+      appBar: SuperAppBar(title: Text(l10n.groupDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Group Information',
+          title: l10n.groupInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -32,16 +36,16 @@ class GroupDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('ID', '1042', mono: true),
-              KV('Name English', 'Current Assets'),
-              KV('Name Arabic', 'الأصول المتداولة', ar: true),
-              KV('Account Tree', 'Assets Tree (1)'),
+            children: [
+              KV(l10n.id, '1042', mono: true),
+              KV(l10n.nameEnglish, 'Current Assets'),
+              KV(l10n.nameArabic, 'الأصول المتداولة', ar: true),
+              KV(l10n.accountTree, 'Assets Tree (1)'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Notes',
+          title: l10n.notes,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -85,7 +89,7 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit',
+          title: l10n.audit,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -95,7 +99,7 @@ class GroupDetailScreen extends StatelessWidget {
             connectIndictors: true,
             items: [
               AuditItem(
-                title: 'Created',
+                title: l10n.created,
                 doAt: DateTime(2025, 12, 4, 23, 58),
                 doBy: 'Admin User (ID: 5)',
               ),
@@ -103,7 +107,7 @@ class GroupDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to List',
+          l10n.backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

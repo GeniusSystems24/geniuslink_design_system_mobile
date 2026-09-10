@@ -32,7 +32,7 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Balance Sheet')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).balanceSheet), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         ReportMeta(
           period: _period,
@@ -87,7 +87,7 @@ class _BalanceSheetScreenState extends State<BalanceSheetScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Eyebrow(
-                    'Balance Check',
+                    GeniusLinkLocalization.of(context).balanceCheck,
                     color: SuperMaterialThemeData.of(context).superTheme.fg3,
                     size: 12,
                   ),

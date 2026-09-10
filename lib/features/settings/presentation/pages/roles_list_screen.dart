@@ -55,7 +55,7 @@ class RolesListScreen extends StatelessWidget {
     };
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Roles List')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).rolesList), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         for (final r in roles)
           SuperSectionCard2(
@@ -190,7 +190,7 @@ class RolesListScreen extends StatelessWidget {
                   ),
                 ),
                 MBtn(
-                  'Edit Role',
+                  GeniusLinkLocalization.of(context).editRole,
                   variant: MBtnVariant.secondary,
                   icon: 'edit',
                   full: true,
@@ -200,7 +200,7 @@ class RolesListScreen extends StatelessWidget {
             ),
           ),
         MBtn(
-          'New Role',
+          GeniusLinkLocalization.of(context).newRole,
           icon: 'plus',
           full: true,
           onTap: () => context.goTo('roleEditor'),

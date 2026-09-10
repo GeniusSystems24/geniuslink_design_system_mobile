@@ -4,6 +4,8 @@ import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import '../controllers/inventory_line_form_controller.dart';
 import 'inventory_shared_widgets.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _BalancedRow extends StatelessWidget {
   final String value;
@@ -121,10 +123,10 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
     var icon4 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Receive Inventory')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).receiveInventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Receive Details',
+          title: GeniusLinkLocalization.of(context).receiveDetails,
 
           initiallyExpanded: true,
           accentColor: marker3,
@@ -134,7 +136,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SuperTextFormField(
-                decoration: InputDecoration(labelText: 'Serial No'),
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).serialNo),
                 initialValue: 'INV-REC-2024-0241',
                 readOnly: true,
               ),
@@ -145,8 +147,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 ),
                 source: _currencySource,
                 controller: _currencyController,
-                decoration: InputDecoration(labelText: 'Currency'),
-                hintText: 'Select currency…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).currency),
+                hintText: GeniusLinkLocalization.of(context).selectCurrency,
               ),
               SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
@@ -155,8 +157,8 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 ),
                 source: _storeSource,
                 controller: _storeController,
-                decoration: InputDecoration(labelText: 'Receiving Store'),
-                hintText: 'Search store…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).receivingStore),
+                hintText: GeniusLinkLocalization.of(context).searchStore,
               ),
               SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
@@ -165,14 +167,14 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
                 ),
                 source: _supplierSource,
                 controller: _supplierController,
-                decoration: InputDecoration(labelText: 'Supplier Account'),
-                hintText: 'e.g. ABC Trading Co.',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).supplierAccount),
+                hintText: GeniusLinkLocalization.of(context).eGAbcTradingCo,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Inventory Items',
+          title: GeniusLinkLocalization.of(context).inventoryItems,
           subtitle:
               '${_lines.length} line${_lines.length == 1 ? '' : 's'} · received into stock',
           initiallyExpanded: true,
@@ -201,7 +203,7 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Accounting Distribution',
+          title: GeniusLinkLocalization.of(context).accountingDistribution,
 
           initiallyExpanded: true,
           accentColor: marker4,
@@ -238,14 +240,14 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateScreen> {
             children: [
               SuperTextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Receipt Notes',
-                  hintText: 'PO number, delivery note, inspection results…',
+                  labelText: GeniusLinkLocalization.of(context).receiptNotes,
+                  hintText: GeniusLinkLocalization.of(context).poNumberDeliveryNoteInspectionResults,
                 ),
                 multiline: true,
                 rows: 3,
               ),
               SuperAttachmentFormField(
-                decoration: const InputDecoration(labelText: 'Attachments'),
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).attachments),
                 accept: '.pdf,.jpg,.jpeg,.png',
                 maxSizeMB: 10,
                 maxFiles: 5,

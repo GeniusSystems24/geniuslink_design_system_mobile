@@ -72,7 +72,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Audit Log')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).auditLog), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Segmented(
           options: const [
@@ -88,8 +88,8 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
           onChange: (v) => setState(() => _act = v),
         ),
         SuperSectionCard2(
-          title: 'Immutable Activity Trail',
-          subtitle: 'Every state-changing action · 7-year retention',
+          title: GeniusLinkLocalization.of(context).immutableActivityTrail,
+          subtitle: GeniusLinkLocalization.of(context).everyStateChangingAction7YearRetention,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -100,7 +100,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
             children: [
               MTable(
                 showSearch: true,
-                searchHint: 'Search entity or user…',
+                searchHint: GeniusLinkLocalization.of(context).searchEntityOrUser,
                 itemNoun: 'event',
                 itemNounPlural: 'events',
                 columns: const [
@@ -120,7 +120,7 @@ class _AuditLogScreenState extends State<AuditLogScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Center(
                     child: Text(
-                      'No log entries match.',
+                      GeniusLinkLocalization.of(context).noLogEntriesMatch,
                       style: TextStyle(
                         color: SuperMaterialThemeData.of(
                           context,

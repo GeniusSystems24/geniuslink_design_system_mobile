@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class TransferListScreen extends StatefulWidget {
   const TransferListScreen({super.key});
@@ -87,7 +89,7 @@ class _TransferListScreenState extends State<TransferListScreen> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Stock Transfers')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).stockTransfers), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SizedBox(
           height: 32,

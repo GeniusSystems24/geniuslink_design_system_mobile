@@ -6,6 +6,8 @@ import '../../../../core/tenancy/tenant_connection.dart';
 import '../../../../core/tenancy/tenant_session.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../workspace/presentation/controllers/tenant_controller.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class TenantsScreen extends StatefulWidget {
   final TenantController? controller;
@@ -80,7 +82,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Workspaces')),
+          appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).workspaces), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             for (final t in tenants)
               SuperSectionCard2(
@@ -134,9 +136,9 @@ class _TenantsScreenState extends State<TenantsScreen> {
                                     ),
                                   ),
                                   if (t.$1.toString() == activeId)
-                                    const Padding(
+                                    Padding(
                                       padding: EdgeInsets.only(left: 8),
-                                      child: Pill('Current'),
+                                      child: Pill(GeniusLinkLocalization.of(context).current2),
                                     ),
                                 ],
                               ),
@@ -167,15 +169,15 @@ class _TenantsScreenState extends State<TenantsScreen> {
                       ],
                     ),
                     if (t.$1.toString() == activeId)
-                      const MBtn(
-                        'Manage Workspace',
+                      MBtn(
+                        GeniusLinkLocalization.of(context).manageWorkspace,
                         variant: MBtnVariant.secondary,
                         icon: 'settings',
                         full: true,
                       )
                     else
                       MBtn(
-                        'Switch to this Workspace',
+                        GeniusLinkLocalization.of(context).switchToThisWorkspace,
                         icon: 'switch2',
                         full: true,
                         onTap: () =>
@@ -184,7 +186,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                   ],
                 ),
               ),
-            const MBtn('New Workspace', icon: 'plus', full: true),
+            MBtn(GeniusLinkLocalization.of(context).newWorkspace, icon: 'plus', full: true),
           ]),
         );
       },

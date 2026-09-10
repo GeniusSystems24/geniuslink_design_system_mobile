@@ -4,18 +4,18 @@ class LocalTransferDetailScreen extends StatelessWidget {
   const LocalTransferDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var trailing = const Pill('Posted');
+    var trailing = Pill(GeniusLinkLocalization.of(context).posted);
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Local Transfer Detail')),
+      appBar: SuperAppBar(title: const Text('Local Transfer Detail'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Inter-Account Settlement',
+          title: GeniusLinkLocalization.of(context).interAccountSettlement,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -57,7 +57,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
                   meta: 'Balance after  ·  136,420.00',
                 ),
                 to: FlowCardData(
-                  label: 'To',
+                  label: GeniusLinkLocalization.of(context).to,
                   title: 'Bank · Al Rajhi',
                   subtitle: '1101',
                   meta: 'Balance after  ·  56,240.00',
@@ -70,7 +70,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Amount',
+          title: GeniusLinkLocalization.of(context).amount,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -86,7 +86,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Eyebrow(
-                    'Transferred',
+                    GeniusLinkLocalization.of(context).transferred,
                     color: SuperMaterialThemeData.of(context).superTheme.fg3,
                     size: 11,
                   ),
@@ -127,7 +127,7 @@ class LocalTransferDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit',
+          title: GeniusLinkLocalization.of(context).audit,
 
           initiallyExpanded: true,
           accentColor: accentColor3,

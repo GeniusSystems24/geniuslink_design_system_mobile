@@ -7,6 +7,7 @@ import '../../../../shared/presentation/controllers/list_controller.dart';
 import '../../domain/domain.dart';
 
 import 'user_session_banner.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 PillTone userTone(UserAccountStatus status) => switch (status) {
   UserAccountStatus.active => PillTone.success,
@@ -50,7 +51,7 @@ class UsersListView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Users')),
+          appBar: SuperAppBar(title: const Text('Users'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SearchInput(
               placeholder: 'Search name or email…',

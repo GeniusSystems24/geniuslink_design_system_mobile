@@ -4,6 +4,8 @@ import 'package:gl_mobile_app/app/router/navigation_extensions.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 
 import '../../domain/domain.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ProductDetail detail;
@@ -23,12 +25,12 @@ class ProductDetailScreen extends StatelessWidget {
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Product Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).productDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Stock Summary',
-          subtitle: 'Aggregated across all stores',
+          title: GeniusLinkLocalization.of(context).stockSummary,
+          subtitle: GeniusLinkLocalization.of(context).aggregatedAcrossAllStores,
           initiallyExpanded: true,
           accentColor: accentColor4,
 
@@ -46,18 +48,18 @@ class ProductDetailScreen extends StatelessWidget {
                 childAspectRatio: 2,
                 children: [
                   Mini(
-                    label: 'Total On Hand',
+                    label: GeniusLinkLocalization.of(context).totalOnHand,
                     value: '${detail.totalOnHand}',
                     sub: product.unit,
                     hi: true,
                   ),
                   Mini(
-                    label: 'Stock Value',
+                    label: GeniusLinkLocalization.of(context).stockValue,
                     value: SuperFormat.number(detail.stockValue, decimals: 0),
                     sub: 'SAR',
                   ),
                   Mini(
-                    label: 'Avg Unit Cost',
+                    label: GeniusLinkLocalization.of(context).avgUnitCost,
                     value: SuperFormat.number(
                       detail.averageUnitCost,
                       decimals: 2,
@@ -65,7 +67,7 @@ class ProductDetailScreen extends StatelessWidget {
                     sub: 'SAR',
                   ),
                   Mini(
-                    label: 'Reorder Level',
+                    label: GeniusLinkLocalization.of(context).reorderLevel,
                     value: '${detail.reorderLevel}',
                     sub: product.unit,
                   ),
@@ -75,7 +77,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Product Information',
+          title: GeniusLinkLocalization.of(context).productInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -86,19 +88,19 @@ class ProductDetailScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               KV('SKU', product.sku, mono: true),
-              KV('Barcode', detail.barcode, mono: true),
-              KV('Category', product.category),
-              KV('Unit', product.unit),
+              KV(GeniusLinkLocalization.of(context).barcode, detail.barcode, mono: true),
+              KV(GeniusLinkLocalization.of(context).category, product.category),
+              KV(GeniusLinkLocalization.of(context).unit, product.unit),
               KV(
-                'Selling Price',
+                GeniusLinkLocalization.of(context).sellingPrice,
                 '${SuperFormat.number(detail.sellingPrice, decimals: 2)} SAR',
               ),
-              KV('VAT Rate', '${(detail.vatRate * 100).toStringAsFixed(0)}%'),
+              KV(GeniusLinkLocalization.of(context).vatRate, '${(detail.vatRate * 100).toStringAsFixed(0)}%'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Stock by Store',
+          title: GeniusLinkLocalization.of(context).stockByStore,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -197,7 +199,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Recent Movements',
+          title: GeniusLinkLocalization.of(context).recentMovements,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -313,7 +315,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to Products',
+          GeniusLinkLocalization.of(context).backToProducts,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

@@ -10,6 +10,8 @@ import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 
 import '../widgets/widgets.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 export '../widgets/widgets.dart';
 part 'currencies_list_screen.dart';
 part 'create_currency_screen.dart';

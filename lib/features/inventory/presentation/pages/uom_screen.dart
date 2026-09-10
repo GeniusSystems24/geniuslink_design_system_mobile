@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class UomScreen extends StatefulWidget {
   const UomScreen({super.key});
@@ -60,7 +62,7 @@ class _UomScreenState extends State<UomScreen> {
     var accentColor = cur.$3;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Units of Measure')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).unitsOfMeasure), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         GridView.count(
           crossAxisCount: 2,
@@ -207,9 +209,9 @@ class _UomScreenState extends State<UomScreen> {
                               ),
                             ),
                             if (cur.$4[i].$4)
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.only(left: 10),
-                                child: Pill('Base', tone: PillTone.info),
+                                child: Pill(GeniusLinkLocalization.of(context).base, tone: PillTone.info),
                               ),
                           ],
                         ),

@@ -9,7 +9,7 @@ class DepositDetailScreen extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Deposit Receipt')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).depositReceipt), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Container(
           padding: const EdgeInsets.all(18),
@@ -69,7 +69,7 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Details',
+          title: GeniusLinkLocalization.of(context).details,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -88,7 +88,7 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Posted Journal',
+          title: GeniusLinkLocalization.of(context).postedJournal,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -108,7 +108,7 @@ class DepositDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit',
+          title: GeniusLinkLocalization.of(context).audit,
 
           initiallyExpanded: true,
           accentColor: accentColor2,

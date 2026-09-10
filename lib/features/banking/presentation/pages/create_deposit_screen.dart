@@ -12,10 +12,10 @@ class CreateDepositScreen extends StatelessWidget {
     var icon3 = MIcons.of('card');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Deposit')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createDeposit), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Deposit Amount',
+          title: GeniusLinkLocalization.of(context).depositAmount,
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -24,7 +24,7 @@ class CreateDepositScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               MMoney(
-                label: 'Amount',
+                label: GeniusLinkLocalization.of(context).amount,
                 value: '120,000.00',
                 accent: SuperMaterialThemeData.of(
                   context,
@@ -37,7 +37,7 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Destination',
+          title: GeniusLinkLocalization.of(context).destination,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -45,16 +45,16 @@ class CreateDepositScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'Deposit To',
+                label: GeniusLinkLocalization.of(context).depositTo,
                 value: 'Bank · NCB Main (1100)',
                 select: true,
                 required: true,
               ),
-              IField(label: 'Reference', placeholder: 'e.g. Counter slip no.'),
+              IField(label: GeniusLinkLocalization.of(context).reference, placeholder: GeniusLinkLocalization.of(context).eGCounterSlipNo),
               IField(
-                label: 'Value Date',
+                label: GeniusLinkLocalization.of(context).valueDate,
                 value: 'Dec 19, 2025',
                 icon: 'calendar',
               ),
@@ -62,7 +62,7 @@ class CreateDepositScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Journal Preview',
+          title: GeniusLinkLocalization.of(context).journalPreview,
 
           initiallyExpanded: false,
           accentColor: accentColor2,
@@ -80,9 +80,9 @@ class CreateDepositScreen extends StatelessWidget {
             ],
           ),
         ),
-        const ITextarea(
+        ITextarea(
           label: 'Memo',
-          placeholder: 'Optional note for this deposit…',
+          placeholder: GeniusLinkLocalization.of(context).optionalNoteForThisDeposit,
         ),
         const ActionRow(primary: 'Create Deposit'),
       ]),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class FinancialSettingsView extends StatelessWidget {
   final FormController controller;
@@ -26,7 +27,7 @@ class FinancialSettingsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Financial Settings')),
+          appBar: SuperAppBar(title: const Text('Financial Settings'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SuperSectionCard2(
               title: 'Currency & Calendar',

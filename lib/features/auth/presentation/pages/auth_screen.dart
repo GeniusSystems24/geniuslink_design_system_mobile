@@ -10,6 +10,8 @@ import 'dart:async' show unawaited;
 import 'package:flutter/gestures.dart';
 import '../../../../design_system/kit.dart';
 import '../controllers/auth_controller.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _Brand extends StatelessWidget {
   const _Brand();
@@ -75,8 +77,11 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(
-        title: const Text('Sign In'),
-        automaticallyImplyLeading: false,
+        title: Text(GeniusLinkLocalization.of(context).signIn),
+        automaticallyImplyLeading: false,        actions: const [
+          AppLanguageToggleButton(),
+          AppThemeToggleButton(),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -89,7 +94,7 @@ class LoginScreen extends StatelessWidget {
               _authEyebrow(context, 'Sign In'),
               const SizedBox(height: 14),
               Text(
-                'Access your workspace',
+                GeniusLinkLocalization.of(context).accessYourWorkspace,
                 style: TextStyle(
                   fontFamily: SuperMaterialThemeData.of(
                     context,
@@ -102,20 +107,20 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 28),
-              const TInput(
-                label: 'Email',
+              TInput(
+                label: GeniusLinkLocalization.of(context).email,
                 placeholder: 'you@company.com',
                 defaultValue: 'layla.a@geniuslink.sa',
               ),
               const SizedBox(height: 16),
-              const TPassword(label: 'Password', placeholder: '••••••••••'),
+              TPassword(label: GeniusLinkLocalization.of(context).password, placeholder: '••••••••••'),
               const SizedBox(height: 16),
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () => context.go('/forgot'),
                   child: Text(
-                    'Forgot password?',
+                    GeniusLinkLocalization.of(context).forgotPassword,
                     style: TextStyle(
                       fontSize: 12.5,
                       color: SuperMaterialThemeData.of(
@@ -128,7 +133,7 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               MBtn(
-                'Sign In to GeniusLink',
+                GeniusLinkLocalization.of(context).signInToGeniusLink,
                 full: true,
                 onTap: () =>
                     unawaited(controller.login('layla.a@geniuslink.sa', '')),
@@ -191,7 +196,7 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(width: 9),
                     Expanded(
                       child: Text(
-                        'Sessions are recorded in the audit log with timestamp and device.',
+                        GeniusLinkLocalization.of(context).sessionsAreRecordedInTheAuditLogWithTimestampAndDevice,
                         style: TextStyle(
                           fontFamily: SuperMaterialThemeData.of(
                             context,
@@ -223,7 +228,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Account')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createAccount), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -235,7 +240,7 @@ class SignUpScreen extends StatelessWidget {
               _authEyebrow(context, 'Create Account'),
               const SizedBox(height: 12),
               Text(
-                'Provision a workspace',
+                GeniusLinkLocalization.of(context).provisionAWorkspace,
                 style: TextStyle(
                   fontFamily: SuperMaterialThemeData.of(
                     context,
@@ -249,7 +254,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                "You'll be the workspace administrator.",
+                GeniusLinkLocalization.of(context).youLlBeTheWorkspaceAdministrator,
                 style: TextStyle(
                   fontFamily: SuperMaterialThemeData.of(
                     context,
@@ -259,34 +264,34 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              const TInput(
-                label: 'Full Name',
-                placeholder: 'e.g. Khalid Al-Rashid',
+              TInput(
+                label: GeniusLinkLocalization.of(context).fullName,
+                placeholder: GeniusLinkLocalization.of(context).eGKhalidAlRashid,
                 required: true,
               ),
               const SizedBox(height: 16),
-              const TInput(
-                label: 'Work Email',
+              TInput(
+                label: GeniusLinkLocalization.of(context).workEmail,
                 placeholder: 'you@company.com',
                 required: true,
               ),
               const SizedBox(height: 16),
-              const TInput(
-                label: 'Organization',
-                placeholder: 'e.g. Al-Rashid Trading Co.',
+              TInput(
+                label: GeniusLinkLocalization.of(context).organization,
+                placeholder: GeniusLinkLocalization.of(context).eGAlRashidTradingCo,
                 required: true,
               ),
               const SizedBox(height: 16),
-              const TPassword(label: 'Password', required: true),
+              TPassword(label: GeniusLinkLocalization.of(context).password, required: true),
               const SizedBox(height: 16),
-              const TCheckbox(
+              TCheckbox(
                 label:
-                    'I agree to the Terms of Service and Data Processing Agreement.',
+                    GeniusLinkLocalization.of(context).iAgreeToTheTermsOfServiceAndDataProcessingAgreement,
                 defaultChecked: true,
               ),
               const SizedBox(height: 16),
               MBtn(
-                'Create Workspace',
+                GeniusLinkLocalization.of(context).createWorkspace,
                 full: true,
                 onTap: () => unawaited(
                   controller.signUp('owner@new-co.example', 'New Workspace'),
@@ -365,7 +370,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
       listenable: _controller,
       builder: (context, _) => Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-        appBar: SuperAppBar(title: const Text('Forgot Password')),
+        appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).forgotPassword2), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(28, 44, 28, 40),
@@ -378,7 +383,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   _authEyebrow(context, 'Password Reset'),
                   const SizedBox(height: 12),
                   Text(
-                    'Forgot password?',
+                    GeniusLinkLocalization.of(context).forgotPassword,
                     style: TextStyle(
                       fontFamily: SuperMaterialThemeData.of(
                         context,
@@ -392,7 +397,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Enter the email tied to your account.',
+                    GeniusLinkLocalization.of(context).enterTheEmailTiedToYourAccount,
                     style: TextStyle(
                       fontFamily: SuperMaterialThemeData.of(
                         context,
@@ -413,7 +418,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   ),
                   const SizedBox(height: 16),
                   MBtn(
-                    'Send Reset Link',
+                    GeniusLinkLocalization.of(context).sendResetLink,
                     full: true,
                     onTap: _controller.sendResetLink,
                   ),
@@ -422,7 +427,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                     child: GestureDetector(
                       onTap: () => context.go('/login'),
                       child: Text(
-                        'Back to sign in',
+                        GeniusLinkLocalization.of(context).backToSignIn,
                         style: TextStyle(
                           fontSize: 13,
                           color: SuperMaterialThemeData.of(
@@ -467,7 +472,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Check your inbox',
+                          GeniusLinkLocalization.of(context).checkYourInbox,
                           style: TextStyle(
                             fontFamily: SuperMaterialThemeData.of(
                               context,
@@ -518,7 +523,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         ),
                         const SizedBox(height: 28),
                         MBtn(
-                          'Use a different email',
+                          GeniusLinkLocalization.of(context).useADifferentEmail,
                           variant: MBtnVariant.secondary,
                           full: true,
                           onTap: _controller.useDifferentEmail,
@@ -527,7 +532,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                         GestureDetector(
                           onTap: () => context.go('/login'),
                           child: Text(
-                            'Back to sign in',
+                            GeniusLinkLocalization.of(context).backToSignIn,
                             style: TextStyle(
                               fontSize: 13,
                               color: SuperMaterialThemeData.of(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 PillTone _statusTone(InventoryStockStatus status) => switch (status) {
   InventoryStockStatus.inStock => PillTone.success,
@@ -46,7 +48,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               .toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Products')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).products), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Container(
           height: 44,
@@ -67,7 +69,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               ),
               const SizedBox(width: 10),
               Text(
-                'Search product or SKU…',
+                GeniusLinkLocalization.of(context).searchProductOrSku,
                 style: TextStyle(
                   color: SuperMaterialThemeData.of(context).superTheme.fg3,
                   fontSize: 14,

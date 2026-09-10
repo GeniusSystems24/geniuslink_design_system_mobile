@@ -7,6 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:super_form_field/super_form_field.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class CreateProductScreen extends StatefulWidget {
   const CreateProductScreen({super.key});
@@ -72,11 +74,11 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
     var icon3 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Product')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createProduct), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Product Definition',
-          subtitle: 'SKU, names and classification',
+          title: GeniusLinkLocalization.of(context).productDefinition,
+          subtitle: GeniusLinkLocalization.of(context).skuNamesAndClassification,
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
@@ -85,9 +87,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SuperTextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'SKU',
-                  hintText: 'e.g. STL-44021',
+                  hintText: GeniusLinkLocalization.of(context).eGStl44021,
                 ),
                 required: true,
                 minLength: 3,
@@ -96,15 +98,15 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               ),
               SuperTextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Barcode',
-                  hintText: 'Scan or type',
+                  labelText: GeniusLinkLocalization.of(context).barcode,
+                  hintText: GeniusLinkLocalization.of(context).scanOrType,
                   prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
                 ),
               ),
               SuperTextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Name English',
-                  hintText: 'e.g. Structural Steel I-Beam',
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).nameEnglish,
+                  hintText: GeniusLinkLocalization.of(context).eGStructuralSteelIBeam,
                 ),
                 required: true,
                 minLength: 2,
@@ -112,9 +114,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 onValidity: (e) => _nameEnErr = e,
               ),
               SuperTextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'الاسم بالعربية',
-                  hintText: 'مثال: كمرة فولاذية',
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).nameArabic,
+                  hintText: GeniusLinkLocalization.of(context).eGStructuralSteelIBeam,
                 ),
                 arabic: true,
                 required: true,
@@ -129,8 +131,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
                 source: _categorySource,
                 controller: _categoryController,
-                decoration: InputDecoration(labelText: 'Category'),
-                hintText: 'Select category…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).category),
+                hintText: GeniusLinkLocalization.of(context).selectCategory,
               ),
               SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
@@ -139,14 +141,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
                 source: _uomSource,
                 controller: _uomController,
-                decoration: InputDecoration(labelText: 'Unit of Measure'),
-                hintText: 'Select unit…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).unitOfMeasure),
+                hintText: GeniusLinkLocalization.of(context).selectUnit,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Costing & Pricing',
+          title: GeniusLinkLocalization.of(context).costingPricing,
 
           initiallyExpanded: true,
           accentColor: marker3,
@@ -155,17 +157,17 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperNumericFormField(
+              SuperNumericFormField(
                 decoration: InputDecoration(
-                  labelText: 'Unit Cost (SAR)',
+                  labelText: GeniusLinkLocalization.of(context).unitCostSar,
                   prefixText: 'SAR ',
                 ),
                 decimals: 2,
                 min: 0,
               ),
-              const SuperNumericFormField(
+              SuperNumericFormField(
                 decoration: InputDecoration(
-                  labelText: 'Selling Price (SAR)',
+                  labelText: GeniusLinkLocalization.of(context).sellingPriceSar,
                   prefixText: 'SAR ',
                 ),
                 decimals: 2,
@@ -178,14 +180,14 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
                 source: _vatSource,
                 controller: _vatController,
-                decoration: InputDecoration(labelText: 'VAT Rate'),
-                hintText: 'Select rate…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).vatRate),
+                hintText: GeniusLinkLocalization.of(context).selectRate,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Inventory Settings',
+          title: GeniusLinkLocalization.of(context).inventorySettings,
 
           initiallyExpanded: true,
           accentColor: marker,
@@ -194,8 +196,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SuperNumericFormField(
-                decoration: InputDecoration(labelText: 'Reorder Level'),
+              SuperNumericFormField(
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).reorderLevel),
                 min: 0,
                 step: 1,
                 decimals: 0,
@@ -207,17 +209,17 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
                 source: _storeSource,
                 controller: _storeController,
-                decoration: InputDecoration(labelText: 'Default Store'),
-                hintText: 'Select store…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).defaultStore),
+                hintText: GeniusLinkLocalization.of(context).selectStore,
               ),
-              const SuperNumericFormField(
-                decoration: InputDecoration(labelText: 'Opening Stock'),
+              SuperNumericFormField(
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).openingStock),
                 min: 0,
                 step: 1,
                 decimals: 0,
               ),
               SuperAttachmentFormField(
-                decoration: const InputDecoration(labelText: 'Product Images'),
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).productImages),
                 accept: '.jpg,.jpeg,.png,.pdf',
                 maxSizeMB: 10,
                 maxFiles: 5,

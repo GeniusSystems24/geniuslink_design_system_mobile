@@ -8,7 +8,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Withdrawal Voucher')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).withdrawalVoucher), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Container(
           padding: const EdgeInsets.all(18),
@@ -36,7 +36,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
                     color: SuperMaterialThemeData.of(context).colorScheme.error,
                     size: 10,
                   ),
-                  const Pill('Approved'),
+                  Pill(GeniusLinkLocalization.of(context).approved),
                 ],
               ),
               const SizedBox(height: 10),
@@ -74,7 +74,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Details',
+          title: GeniusLinkLocalization.of(context).details,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -92,7 +92,7 @@ class WithdrawalDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Posted Journal',
+          title: GeniusLinkLocalization.of(context).postedJournal,
 
           initiallyExpanded: true,
           accentColor: accentColor2,

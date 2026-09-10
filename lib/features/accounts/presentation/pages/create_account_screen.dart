@@ -5,20 +5,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Account')),
+      appBar: SuperAppBar(title: Text(l10n.createAccount), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Account Details',
-          subtitle: 'Identify and place in the tree',
+          title: l10n.accountDetails,
+          subtitle: l10n.identifyAndPlaceInTree,
           initiallyExpanded: true,
           accentColor: accentColor2,
 
@@ -27,28 +31,28 @@ class CreateAccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const MField(
-                label: 'Account Code',
-                placeholder: 'e.g. 1102',
+              MField(
+                label: l10n.accountCode,
+                placeholder: l10n.example1102,
                 mono: true,
                 required: true,
               ),
-              const MField(label: 'Account Type', value: 'Asset'),
-              const MField(
-                label: 'Name English',
-                placeholder: 'e.g. Bank · Al Rajhi',
+              MField(label: l10n.accountType, value: l10n.asset),
+              MField(
+                label: l10n.nameEnglish,
+                placeholder: l10n.exampleEnglishAccountName,
                 required: true,
               ),
-              const MField(
-                label: 'الاسم بالعربية',
-                placeholder: 'مثال: بنك الراجحي',
+              MField(
+                label: l10n.nameArabic,
+                placeholder: l10n.exampleArabicAccountName,
                 ar: true,
                 required: true,
               ),
               MSuggest(
-                label: 'Parent Group',
+                label: l10n.parentGroup,
                 value: 'Current Assets (1000)',
-                placeholder: 'Search a parent group…',
+                placeholder: l10n.searchParentGroup,
                 icon: 'briefcase',
                 items: mSuggestions(const [
                   'Current Assets (1000)',
@@ -61,7 +65,7 @@ class CreateAccountScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Settings',
+          title: l10n.settings,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -72,9 +76,9 @@ class CreateAccountScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               MSuggest(
-                label: 'Currency',
+                label: l10n.currency,
                 value: 'SAR — Saudi Riyal',
-                placeholder: 'Search currency…',
+                placeholder: l10n.searchCurrency,
                 icon: 'globe',
                 items: mSuggestions(const [
                   'SAR — Saudi Riyal',
@@ -82,21 +86,21 @@ class CreateAccountScreen extends StatelessWidget {
                   'EUR — Euro',
                 ]),
               ),
-              const MField(
-                label: 'Opening Balance',
+              MField(
+                label: l10n.openingBalance,
                 placeholder: '0.00',
                 mono: true,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Eyebrow('Normal Balance'),
+                  Eyebrow(l10n.normalBalance),
                   const SizedBox(height: 7),
                   Row(
                     children: [
-                      Expanded(child: _toggleBox(context, 'Debit', true)),
+                      Expanded(child: _toggleBox(context, l10n.debit, true)),
                       const SizedBox(width: 8),
-                      Expanded(child: _toggleBox(context, 'Credit', false)),
+                      Expanded(child: _toggleBox(context, l10n.credit, false)),
                     ],
                   ),
                 ],
@@ -104,13 +108,13 @@ class CreateAccountScreen extends StatelessWidget {
             ],
           ),
         ),
-        const Row(
+        Row(
           children: [
             Expanded(
-              child: MBtn('Cancel', variant: MBtnVariant.secondary, full: true),
+              child: MBtn(l10n.cancel, variant: MBtnVariant.secondary, full: true),
             ),
             SizedBox(width: 10),
-            Expanded(child: MBtn('Create', icon: 'check', full: true)),
+            Expanded(child: MBtn(l10n.create, icon: 'check', full: true)),
           ],
         ),
       ]),

@@ -12,10 +12,10 @@ class CreateExternalTransferScreen extends StatelessWidget {
     var icon3 = MIcons.of('building');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create External Transfer')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createExternalTransfer), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Transfer Amount',
+          title: GeniusLinkLocalization.of(context).transferAmount,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -25,7 +25,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               MMoney(
-                label: 'Amount',
+                label: GeniusLinkLocalization.of(context).amount,
                 value: '11,000.00',
                 currency: 'USD',
                 accent: SuperMaterialThemeData.of(context).colorScheme.tertiary,
@@ -35,7 +35,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'FX Conversion',
+          title: GeniusLinkLocalization.of(context).fxConversion,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -65,7 +65,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Beneficiary',
+          title: GeniusLinkLocalization.of(context).beneficiary,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -73,7 +73,7 @@ class CreateExternalTransferScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
                 label: 'From Account',
                 value: 'Bank · NCB Main (1100)',
@@ -81,22 +81,22 @@ class CreateExternalTransferScreen extends StatelessWidget {
                 required: true,
               ),
               IField(
-                label: 'Beneficiary',
+                label: GeniusLinkLocalization.of(context).beneficiary,
                 value: 'Global Steel Imports',
                 select: true,
                 required: true,
               ),
               IField(
-                label: 'IBAN / SWIFT',
+                label: GeniusLinkLocalization.of(context).ibanSwift,
                 value: 'DE89 3704 0044 0532 0130 00',
                 mono: true,
               ),
-              IField(label: 'Purpose Code', value: 'GSD — Goods', select: true),
+              IField(label: GeniusLinkLocalization.of(context).purposeCode, value: 'GSD — Goods', select: true),
             ],
           ),
         ),
         InfoNote(
-          'External wires settle in 1–2 business days and require dual approval.',
+          GeniusLinkLocalization.of(context).externalWiresSettleIn12BusinessDaysAndRequireDualApproval,
           tone: SuperMaterialThemeData.of(context).colorScheme.primary,
         ),
         const ActionRow(primary: 'Submit Wire'),

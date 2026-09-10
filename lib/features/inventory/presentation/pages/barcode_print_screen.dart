@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _BarcodePainter extends CustomPainter {
   @override
@@ -47,10 +49,10 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
     var icon3 = MIcons.of('scan');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Barcode Print')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).barcodePrint), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Preview',
+          title: GeniusLinkLocalization.of(context).preview,
           subtitle: 'Code 128 · $size mm',
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -137,7 +139,7 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Label Template',
+          title: GeniusLinkLocalization.of(context).labelTemplate,
 
           initiallyExpanded: true,
           accentColor: marker,
@@ -229,15 +231,15 @@ class _BarcodePrintScreenState extends State<BarcodePrintScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              IField(label: 'Symbology', value: 'Code 128', select: true),
-              IField(label: 'Paper', value: 'A4 (210 × 297 mm)', select: true),
-              IField(label: 'Copies per Item', placeholder: '1', mono: true),
+            children: [
+              IField(label: GeniusLinkLocalization.of(context).symbology, value: 'Code 128', select: true),
+              IField(label: GeniusLinkLocalization.of(context).paper, value: 'A4 (210 × 297 mm)', select: true),
+              IField(label: GeniusLinkLocalization.of(context).copiesPerItem, placeholder: '1', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Queue',
+          title: GeniusLinkLocalization.of(context).queue,
           subtitle: '4 products · 12 labels · 1 sheet',
           initiallyExpanded: true,
           accentColor: marker2,

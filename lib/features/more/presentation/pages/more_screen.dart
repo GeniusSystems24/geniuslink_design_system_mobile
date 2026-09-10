@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import '../models/models.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class MoreScreen extends StatelessWidget {
   final List<NavigationGroup> groups;
@@ -28,11 +30,11 @@ class MoreScreen extends StatelessWidget {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('More')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).more), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         MSuggest(
           items: spotlight,
-          placeholder: 'Search every screen…',
+          placeholder: GeniusLinkLocalization.of(context).searchEveryScreen,
           onSelected: context.goTo,
         ),
         for (final group in groups)

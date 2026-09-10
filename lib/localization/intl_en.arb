@@ -1,3 +1,1723 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+  "accountDetail": "Account Detail",
+  "@accountDetail": {
+    "description": "Title of the account detail screen."
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Label indicating that an account is active."
+  },
+  "currentBalance": "Current Balance",
+  "@currentBalance": {
+    "description": "Section title for the account current balance."
+  },
+  "information": "Information",
+  "@information": {
+    "description": "Section title for account information."
+  },
+  "code": "Code",
+  "@code": {
+    "description": "Label for an account code."
+  },
+  "accountType": "Type",
+  "@accountType": {
+    "description": "Label for the account type."
+  },
+  "assetCash": "Asset · Cash",
+  "@assetCash": {
+    "description": "Display value for an asset cash account type."
+  },
+  "tree": "Tree",
+  "@tree": {
+    "description": "Label for the account hierarchy/tree."
+  },
+  "assetsTreeOne": "Assets Tree (1)",
+  "@assetsTreeOne": {
+    "description": "Display name of the sample assets tree."
+  },
+  "currency": "Currency",
+  "@currency": {
+    "description": "Label for currency."
+  },
+  "recentTransactions": "Recent Transactions",
+  "@recentTransactions": {
+    "description": "Section title for recent account transactions."
+  },
+  "backToList": "Back to List",
+  "@backToList": {
+    "description": "Button label that returns to the accounts list."
+  },
+  "asOf": "As of",
+  "@asOf": {
+    "description": "Prefix shown before the balance as-of date and time."
+  },
+  "totalDebits": "Total Debits",
+  "@totalDebits": {
+    "description": "Label for total debit amount."
+  },
+  "totalCredits": "Total Credits",
+  "@totalCredits": {
+    "description": "Label for total credit amount."
+  },
+  "accountInformation": "Account Information",
+  "@accountInformation": {
+    "description": "Section title for account information."
+  },
+  "assetCashEquivalents": "Asset · Cash Equivalents",
+  "@assetCashEquivalents": {
+    "description": "Display label for the cash equivalents account type."
+  },
+  "nameEnglish": "Name English",
+  "@nameEnglish": {
+    "description": "Label for an English name field."
+  },
+  "nameArabic": "Name Arabic",
+  "@nameArabic": {
+    "description": "Label for an Arabic name field."
+  },
+  "accountTree": "Account Tree",
+  "@accountTree": {
+    "description": "Label or title for the account tree."
+  },
+  "parentGroup": "Parent Group",
+  "@parentGroup": {
+    "description": "Label for the parent account group."
+  },
+  "tenantId": "Tenant ID",
+  "@tenantId": {
+    "description": "Label for a tenant identifier."
+  },
+  "latestEntriesRunningBalance": "Latest entries · running balance",
+  "@latestEntriesRunningBalance": {
+    "description": "Subtitle for the recent transactions section."
+  },
+  "balanceShort": "Bal",
+  "@balanceShort": {
+    "description": "Short balance label shown beside a running transaction balance."
+  },
+  "auditInformation": "Audit Information",
+  "@auditInformation": {
+    "description": "Section title for audit information."
+  },
+  "created": "Created",
+  "@created": {
+    "description": "Audit action label for creation."
+  },
+  "modified": "Modified",
+  "@modified": {
+    "description": "Audit action label for modification."
+  },
+  "export": "Export",
+  "@export": {
+    "description": "Button label for export."
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Generic back button label."
+  },
+  "chartOfAccounts": "Chart of Accounts",
+  "@chartOfAccounts": {
+    "description": "Title for the chart of accounts."
+  },
+  "rollUpBalancesBilingual": "Roll-up balances · bilingual",
+  "@rollUpBalancesBilingual": {
+    "description": "Subtitle describing the account tree."
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account column label."
+  },
+  "balanceSar": "Balance (SAR)",
+  "@balanceSar": {
+    "description": "Balance column label using SAR."
+  },
+  "accounts": "Accounts",
+  "@accounts": {
+    "description": "Accounts screen title."
+  },
+  "searchAccounts": "Search accounts…",
+  "@searchAccounts": {
+    "description": "Placeholder shown for account search."
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account screen title."
+  },
+  "accountDetails": "Account Details",
+  "@accountDetails": {
+    "description": "Section title for account creation details."
+  },
+  "identifyAndPlaceInTree": "Identify and place in the tree",
+  "@identifyAndPlaceInTree": {
+    "description": "Subtitle for account creation details."
+  },
+  "accountCode": "Account Code",
+  "@accountCode": {
+    "description": "Label for the account code input."
+  },
+  "example1102": "e.g. 1102",
+  "@example1102": {
+    "description": "Example placeholder for an account code."
+  },
+  "asset": "Asset",
+  "@asset": {
+    "description": "Display label for an asset account type."
+  },
+  "exampleEnglishAccountName": "e.g. Bank · Al Rajhi",
+  "@exampleEnglishAccountName": {
+    "description": "Example placeholder for an English account name."
+  },
+  "exampleArabicAccountName": "e.g. Al Rajhi Bank",
+  "@exampleArabicAccountName": {
+    "description": "Example placeholder for an Arabic account name."
+  },
+  "searchParentGroup": "Search a parent group…",
+  "@searchParentGroup": {
+    "description": "Placeholder for searching parent account groups."
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings section title."
+  },
+  "searchCurrency": "Search currency…",
+  "@searchCurrency": {
+    "description": "Placeholder for currency search."
+  },
+  "openingBalance": "Opening Balance",
+  "@openingBalance": {
+    "description": "Label for opening balance."
+  },
+  "normalBalance": "Normal Balance",
+  "@normalBalance": {
+    "description": "Label for normal debit or credit balance."
+  },
+  "debit": "Debit",
+  "@debit": {
+    "description": "Debit option label."
+  },
+  "credit": "Credit",
+  "@credit": {
+    "description": "Credit option label."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label."
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Create button label."
+  },
+  "createAccountGroup": "Create Account Group",
+  "@createAccountGroup": {
+    "description": "Create account group screen title."
+  },
+  "groupDetails": "Group Details",
+  "@groupDetails": {
+    "description": "Section title for group creation details."
+  },
+  "nameAndTreeAssociation": "Name and tree association",
+  "@nameAndTreeAssociation": {
+    "description": "Subtitle for group name and tree association."
+  },
+  "exampleCurrentAssets": "e.g. Current Assets",
+  "@exampleCurrentAssets": {
+    "description": "Example placeholder for an account group name."
+  },
+  "selectTree": "Select a tree…",
+  "@selectTree": {
+    "description": "Placeholder for selecting an account tree."
+  },
+  "additionalInformation": "Additional Information",
+  "@additionalInformation": {
+    "description": "Additional information section title."
+  },
+  "note": "Note",
+  "@note": {
+    "description": "Label for a note field."
+  },
+  "addNotesAboutGroup": "Add any notes about this group…",
+  "@addNotesAboutGroup": {
+    "description": "Placeholder for group notes."
+  },
+  "groupDetail": "Group Detail",
+  "@groupDetail": {
+    "description": "Group detail screen title."
+  },
+  "groupInformation": "Group Information",
+  "@groupInformation": {
+    "description": "Section title for group information."
+  },
+  "id": "ID",
+  "@id": {
+    "description": "Generic identifier label."
+  },
+  "notes": "Notes",
+  "@notes": {
+    "description": "Notes section title."
+  },
+  "audit": "Audit",
+  "@audit": {
+    "description": "Audit section title."
+  },
+  "inviteUser": "Invite User",
+  "@inviteUser": {
+    "description": "Localized user-interface text."
+  },
+  "identity": "Identity",
+  "@identity": {
+    "description": "Localized user-interface text."
+  },
+  "theNewMemberSNameAndContact": "The new member''s name and contact",
+  "@theNewMemberSNameAndContact": {
+    "description": "Localized user-interface text."
+  },
+  "eGOmarHassan": "e.g. Omar Hassan",
+  "@eGOmarHassan": {
+    "description": "Localized user-interface text."
+  },
+  "workEmail": "Work Email",
+  "@workEmail": {
+    "description": "Localized user-interface text."
+  },
+  "employeeId": "Employee ID",
+  "@employeeId": {
+    "description": "Localized user-interface text."
+  },
+  "optional": "Optional",
+  "@optional": {
+    "description": "Localized user-interface text."
+  },
+  "access": "Access",
+  "@access": {
+    "description": "Localized user-interface text."
+  },
+  "roleDeterminesDefaultPermissions": "Role determines default permissions",
+  "@roleDeterminesDefaultPermissions": {
+    "description": "Localized user-interface text."
+  },
+  "role": "Role",
+  "@role": {
+    "description": "Localized user-interface text."
+  },
+  "defaultStore": "Default Store",
+  "@defaultStore": {
+    "description": "Localized user-interface text."
+  },
+  "anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword": "An invitation email with a single-use setup link will be sent. The account stays Pending until the user sets a password.",
+  "@anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword": {
+    "description": "Localized user-interface text."
+  },
+  "sendInvitation": "Send Invitation",
+  "@sendInvitation": {
+    "description": "Localized user-interface text."
+  },
+  "userDetail": "User Detail",
+  "@userDetail": {
+    "description": "Localized user-interface text."
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Localized user-interface text."
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Localized user-interface text."
+  },
+  "security": "Security",
+  "@security": {
+    "description": "Localized user-interface text."
+  },
+  "twoFactorAuthentication": "Two-Factor Authentication",
+  "@twoFactorAuthentication": {
+    "description": "Localized user-interface text."
+  },
+  "activeSessions": "Active Sessions",
+  "@activeSessions": {
+    "description": "Localized user-interface text."
+  },
+  "devicesCurrentlySignedIn": "Devices currently signed in",
+  "@devicesCurrentlySignedIn": {
+    "description": "Localized user-interface text."
+  },
+  "revoke": "Revoke",
+  "@revoke": {
+    "description": "Localized user-interface text."
+  },
+  "recentActivity": "Recent Activity",
+  "@recentActivity": {
+    "description": "Localized user-interface text."
+  },
+  "deactivateUser": "Deactivate User",
+  "@deactivateUser": {
+    "description": "Localized user-interface text."
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Localized user-interface text."
+  },
+  "accessYourWorkspace": "Access your workspace",
+  "@accessYourWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Localized user-interface text."
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Localized user-interface text."
+  },
+  "forgotPassword": "Forgot password?",
+  "@forgotPassword": {
+    "description": "Localized user-interface text."
+  },
+  "signInToGeniusLink": "Sign In to GeniusLink",
+  "@signInToGeniusLink": {
+    "description": "Localized user-interface text."
+  },
+  "sessionsAreRecordedInTheAuditLogWithTimestampAndDevice": "Sessions are recorded in the audit log with timestamp and device.",
+  "@sessionsAreRecordedInTheAuditLogWithTimestampAndDevice": {
+    "description": "Localized user-interface text."
+  },
+  "provisionAWorkspace": "Provision a workspace",
+  "@provisionAWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "youLlBeTheWorkspaceAdministrator": "You''ll be the workspace administrator.",
+  "@youLlBeTheWorkspaceAdministrator": {
+    "description": "Localized user-interface text."
+  },
+  "eGKhalidAlRashid": "e.g. Khalid Al-Rashid",
+  "@eGKhalidAlRashid": {
+    "description": "Localized user-interface text."
+  },
+  "organization": "Organization",
+  "@organization": {
+    "description": "Localized user-interface text."
+  },
+  "eGAlRashidTradingCo": "e.g. Al-Rashid Trading Co.",
+  "@eGAlRashidTradingCo": {
+    "description": "Localized user-interface text."
+  },
+  "iAgreeToTheTermsOfServiceAndDataProcessingAgreement": "I agree to the Terms of Service and Data Processing Agreement.",
+  "@iAgreeToTheTermsOfServiceAndDataProcessingAgreement": {
+    "description": "Localized user-interface text."
+  },
+  "createWorkspace": "Create Workspace",
+  "@createWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "forgotPassword2": "Forgot Password",
+  "@forgotPassword2": {
+    "description": "Localized user-interface text."
+  },
+  "enterTheEmailTiedToYourAccount": "Enter the email tied to your account.",
+  "@enterTheEmailTiedToYourAccount": {
+    "description": "Localized user-interface text."
+  },
+  "sendResetLink": "Send Reset Link",
+  "@sendResetLink": {
+    "description": "Localized user-interface text."
+  },
+  "backToSignIn": "Back to sign in",
+  "@backToSignIn": {
+    "description": "Localized user-interface text."
+  },
+  "checkYourInbox": "Check your inbox",
+  "@checkYourInbox": {
+    "description": "Localized user-interface text."
+  },
+  "useADifferentEmail": "Use a different email",
+  "@useADifferentEmail": {
+    "description": "Localized user-interface text."
+  },
+  "createDeposit": "Create Deposit",
+  "@createDeposit": {
+    "description": "Localized user-interface text."
+  },
+  "depositAmount": "Deposit Amount",
+  "@depositAmount": {
+    "description": "Localized user-interface text."
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Localized user-interface text."
+  },
+  "destination": "Destination",
+  "@destination": {
+    "description": "Localized user-interface text."
+  },
+  "depositTo": "Deposit To",
+  "@depositTo": {
+    "description": "Localized user-interface text."
+  },
+  "reference": "Reference",
+  "@reference": {
+    "description": "Localized user-interface text."
+  },
+  "eGCounterSlipNo": "e.g. Counter slip no.",
+  "@eGCounterSlipNo": {
+    "description": "Localized user-interface text."
+  },
+  "valueDate": "Value Date",
+  "@valueDate": {
+    "description": "Localized user-interface text."
+  },
+  "journalPreview": "Journal Preview",
+  "@journalPreview": {
+    "description": "Localized user-interface text."
+  },
+  "optionalNoteForThisDeposit": "Optional note for this deposit…",
+  "@optionalNoteForThisDeposit": {
+    "description": "Localized user-interface text."
+  },
+  "createExternalTransfer": "Create External Transfer",
+  "@createExternalTransfer": {
+    "description": "Localized user-interface text."
+  },
+  "transferAmount": "Transfer Amount",
+  "@transferAmount": {
+    "description": "Localized user-interface text."
+  },
+  "fxConversion": "FX Conversion",
+  "@fxConversion": {
+    "description": "Localized user-interface text."
+  },
+  "beneficiary": "Beneficiary",
+  "@beneficiary": {
+    "description": "Localized user-interface text."
+  },
+  "ibanSwift": "IBAN / SWIFT",
+  "@ibanSwift": {
+    "description": "Localized user-interface text."
+  },
+  "purposeCode": "Purpose Code",
+  "@purposeCode": {
+    "description": "Localized user-interface text."
+  },
+  "externalWiresSettleIn12BusinessDaysAndRequireDualApproval": "External wires settle in 1–2 business days and require dual approval.",
+  "@externalWiresSettleIn12BusinessDaysAndRequireDualApproval": {
+    "description": "Localized user-interface text."
+  },
+  "createLocalTransfer": "Create Local Transfer",
+  "@createLocalTransfer": {
+    "description": "Localized user-interface text."
+  },
+  "toAccount": "To Account",
+  "@toAccount": {
+    "description": "Localized user-interface text."
+  },
+  "internalNoteSlipNo": "Internal note / slip no.",
+  "@internalNoteSlipNo": {
+    "description": "Localized user-interface text."
+  },
+  "createWithdrawal": "Create Withdrawal",
+  "@createWithdrawal": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalAmount": "Withdrawal Amount",
+  "@withdrawalAmount": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawFrom": "Withdraw From",
+  "@withdrawFrom": {
+    "description": "Localized user-interface text."
+  },
+  "payee": "Payee",
+  "@payee": {
+    "description": "Localized user-interface text."
+  },
+  "eGGlobalSteelImports": "e.g. Global Steel Imports",
+  "@eGGlobalSteelImports": {
+    "description": "Localized user-interface text."
+  },
+  "expenseAccount": "Expense Account",
+  "@expenseAccount": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalsAbove10000SarRequireASecondApprovalBeforePosting": "Withdrawals above 10,000 SAR require a second approval before posting.",
+  "@withdrawalsAbove10000SarRequireASecondApprovalBeforePosting": {
+    "description": "Localized user-interface text."
+  },
+  "depositReceipt": "Deposit Receipt",
+  "@depositReceipt": {
+    "description": "Localized user-interface text."
+  },
+  "details": "Details",
+  "@details": {
+    "description": "Localized user-interface text."
+  },
+  "postedJournal": "Posted Journal",
+  "@postedJournal": {
+    "description": "Localized user-interface text."
+  },
+  "externalWireDetail": "External Wire Detail",
+  "@externalWireDetail": {
+    "description": "Localized user-interface text."
+  },
+  "externalWire": "External Wire",
+  "@externalWire": {
+    "description": "Localized user-interface text."
+  },
+  "posted": "Posted",
+  "@posted": {
+    "description": "Localized user-interface text."
+  },
+  "interAccountSettlement": "Inter-Account Settlement",
+  "@interAccountSettlement": {
+    "description": "Localized user-interface text."
+  },
+  "to": "To",
+  "@to": {
+    "description": "Localized user-interface text."
+  },
+  "transferred": "Transferred",
+  "@transferred": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalVoucher": "Withdrawal Voucher",
+  "@withdrawalVoucher": {
+    "description": "Localized user-interface text."
+  },
+  "approved": "Approved",
+  "@approved": {
+    "description": "Localized user-interface text."
+  },
+  "addCurrency": "Add Currency",
+  "@addCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "currencyDefinition": "Currency Definition",
+  "@currencyDefinition": {
+    "description": "Localized user-interface text."
+  },
+  "isoCodeDisplayNamesAndSymbol": "ISO code, display names and symbol",
+  "@isoCodeDisplayNamesAndSymbol": {
+    "description": "Localized user-interface text."
+  },
+  "isoCode": "ISO Code",
+  "@isoCode": {
+    "description": "Localized user-interface text."
+  },
+  "eGUsd": "e.g. USD",
+  "@eGUsd": {
+    "description": "Localized user-interface text."
+  },
+  "symbol": "Symbol",
+  "@symbol": {
+    "description": "Localized user-interface text."
+  },
+  "eGUsDollar": "e.g. US Dollar",
+  "@eGUsDollar": {
+    "description": "Localized user-interface text."
+  },
+  "precisionRate": "Precision & Rate",
+  "@precisionRate": {
+    "description": "Localized user-interface text."
+  },
+  "decimalPlacesAndExchangeRateAgainstBase": "Decimal places and exchange rate against base",
+  "@decimalPlacesAndExchangeRateAgainstBase": {
+    "description": "Localized user-interface text."
+  },
+  "decimalPlaces": "Decimal Places",
+  "@decimalPlaces": {
+    "description": "Localized user-interface text."
+  },
+  "exchangeRatePer1Sar": "Exchange Rate (per 1 SAR)",
+  "@exchangeRatePer1Sar": {
+    "description": "Localized user-interface text."
+  },
+  "eG3750200": "e.g. 3.750200",
+  "@eG3750200": {
+    "description": "Localized user-interface text."
+  },
+  "setAsBaseCurrency": "Set as base currency",
+  "@setAsBaseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "currencies": "Currencies",
+  "@currencies": {
+    "description": "Localized user-interface text."
+  },
+  "currencyDetail": "Currency Detail",
+  "@currencyDetail": {
+    "description": "Localized user-interface text."
+  },
+  "currentRate": "Current Rate",
+  "@currentRate": {
+    "description": "Localized user-interface text."
+  },
+  "per1BaseCurrency": "Per 1 base currency",
+  "@per1BaseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "definition": "Definition",
+  "@definition": {
+    "description": "Localized user-interface text."
+  },
+  "localizedName": "Localized Name",
+  "@localizedName": {
+    "description": "Localized user-interface text."
+  },
+  "source": "Source",
+  "@source": {
+    "description": "Localized user-interface text."
+  },
+  "rateHistory": "Rate History",
+  "@rateHistory": {
+    "description": "Localized user-interface text."
+  },
+  "recentUpdates": "Recent updates",
+  "@recentUpdates": {
+    "description": "Localized user-interface text."
+  },
+  "noRateHistoryAvailable": "No rate history available.",
+  "@noRateHistoryAvailable": {
+    "description": "Localized user-interface text."
+  },
+  "exchangeRates": "Exchange Rates",
+  "@exchangeRates": {
+    "description": "Localized user-interface text."
+  },
+  "baseCurrency": "Base Currency",
+  "@baseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "pullEcbFeed": "Pull ECB Feed",
+  "@pullEcbFeed": {
+    "description": "Localized user-interface text."
+  },
+  "ratesPer1Sar": "Rates per 1 SAR",
+  "@ratesPer1Sar": {
+    "description": "Localized user-interface text."
+  },
+  "autoFedPairsSyncDailyManualPairsAreEditable": "Auto-fed pairs sync daily; manual pairs are editable",
+  "@autoFedPairsSyncDailyManualPairsAreEditable": {
+    "description": "Localized user-interface text."
+  },
+  "open": "Open",
+  "@open": {
+    "description": "Localized user-interface text."
+  },
+  "fiscalYear": "Fiscal Year",
+  "@fiscalYear": {
+    "description": "Localized user-interface text."
+  },
+  "defineTheActiveFiscalYearBoundaries": "Define the active fiscal year boundaries",
+  "@defineTheActiveFiscalYearBoundaries": {
+    "description": "Localized user-interface text."
+  },
+  "startDate": "Start Date",
+  "@startDate": {
+    "description": "Localized user-interface text."
+  },
+  "endDate": "End Date",
+  "@endDate": {
+    "description": "Localized user-interface text."
+  },
+  "accountingPeriods": "Accounting Periods",
+  "@accountingPeriods": {
+    "description": "Localized user-interface text."
+  },
+  "text12MonthlyPeriodsLockToPreventBackDatedPostings": "12 monthly periods · lock to prevent back-dated postings",
+  "@text12MonthlyPeriodsLockToPreventBackDatedPostings": {
+    "description": "Localized user-interface text."
+  },
+  "closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti": "Closing a period locks all postings dated within it. A locked period can only be reopened by a controller with audit justification.",
+  "@closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti": {
+    "description": "Localized user-interface text."
+  },
+  "city": "City",
+  "@city": {
+    "description": "Localized user-interface text."
+  },
+  "contactPerson": "Contact Person",
+  "@contactPerson": {
+    "description": "Localized user-interface text."
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Localized user-interface text."
+  },
+  "controlAccount": "Control Account",
+  "@controlAccount": {
+    "description": "Localized user-interface text."
+  },
+  "paymentTerms": "Payment Terms",
+  "@paymentTerms": {
+    "description": "Localized user-interface text."
+  },
+  "transactionHistory": "Transaction History",
+  "@transactionHistory": {
+    "description": "Localized user-interface text."
+  },
+  "recentInvoicesAndPayments": "Recent invoices and payments",
+  "@recentInvoicesAndPayments": {
+    "description": "Localized user-interface text."
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Localized user-interface text."
+  },
+  "archive": "Archive",
+  "@archive": {
+    "description": "Localized user-interface text."
+  },
+  "legalNameAndContactDetails": "Legal name and contact details",
+  "@legalNameAndContactDetails": {
+    "description": "Localized user-interface text."
+  },
+  "eGRiyadhConstructionCo": "e.g. Riyadh Construction Co.",
+  "@eGRiyadhConstructionCo": {
+    "description": "Localized user-interface text."
+  },
+  "eGAhmedK": "e.g. Ahmed K.",
+  "@eGAhmedK": {
+    "description": "Localized user-interface text."
+  },
+  "eGRiyadh": "e.g. Riyadh",
+  "@eGRiyadh": {
+    "description": "Localized user-interface text."
+  },
+  "linkedControlAccountAndTerms": "Linked control account and terms",
+  "@linkedControlAccountAndTerms": {
+    "description": "Localized user-interface text."
+  },
+  "taxVatNumber": "Tax / VAT Number",
+  "@taxVatNumber": {
+    "description": "Localized user-interface text."
+  },
+  "creditLimitSar": "Credit Limit (SAR)",
+  "@creditLimitSar": {
+    "description": "Localized user-interface text."
+  },
+  "eG10000000": "e.g. 100,000.00",
+  "@eG10000000": {
+    "description": "Localized user-interface text."
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Localized user-interface text."
+  },
+  "inflowShort": "In",
+  "@inflowShort": {
+    "description": "Localized user-interface text."
+  },
+  "outflowShort": "Out",
+  "@outflowShort": {
+    "description": "Localized user-interface text."
+  },
+  "cashFlow": "Cash Flow",
+  "@cashFlow": {
+    "description": "Localized user-interface text."
+  },
+  "inflowVsOutflowSarThousands12Months": "Inflow vs outflow · SAR thousands · 12 months",
+  "@inflowVsOutflowSarThousands12Months": {
+    "description": "Localized user-interface text."
+  },
+  "cashAssetAccounts": "Cash & Asset Accounts",
+  "@cashAssetAccounts": {
+    "description": "Localized user-interface text."
+  },
+  "topBalances": "Top balances",
+  "@topBalances": {
+    "description": "Localized user-interface text."
+  },
+  "recentOperations": "Recent Operations",
+  "@recentOperations": {
+    "description": "Localized user-interface text."
+  },
+  "needsAttention": "Needs Attention",
+  "@needsAttention": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryAdjustment": "Inventory Adjustment",
+  "@inventoryAdjustment": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentDetails": "Adjustment Details",
+  "@adjustmentDetails": {
+    "description": "Localized user-interface text."
+  },
+  "serialNo": "Serial No",
+  "@serialNo": {
+    "description": "Localized user-interface text."
+  },
+  "reason": "Reason",
+  "@reason": {
+    "description": "Localized user-interface text."
+  },
+  "store": "Store",
+  "@store": {
+    "description": "Localized user-interface text."
+  },
+  "searchStore": "Search store…",
+  "@searchStore": {
+    "description": "Localized user-interface text."
+  },
+  "countDate": "Count Date",
+  "@countDate": {
+    "description": "Localized user-interface text."
+  },
+  "varianceSummary": "Variance Summary",
+  "@varianceSummary": {
+    "description": "Localized user-interface text."
+  },
+  "netFinancialImpactOfThisReconciliation": "Net financial impact of this reconciliation",
+  "@netFinancialImpactOfThisReconciliation": {
+    "description": "Localized user-interface text."
+  },
+  "netAdjustment": "Net Adjustment",
+  "@netAdjustment": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentLines": "Adjustment Lines",
+  "@adjustmentLines": {
+    "description": "Localized user-interface text."
+  },
+  "documentationApproval": "Documentation & Approval",
+  "@documentationApproval": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentNotes": "Adjustment Notes",
+  "@adjustmentNotes": {
+    "description": "Localized user-interface text."
+  },
+  "auditorNameWitnessCountSessionReference": "Auditor name, witness, count session reference…",
+  "@auditorNameWitnessCountSessionReference": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro": "Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.",
+  "@adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro": {
+    "description": "Localized user-interface text."
+  },
+  "barcodePrint": "Barcode Print",
+  "@barcodePrint": {
+    "description": "Localized user-interface text."
+  },
+  "preview": "Preview",
+  "@preview": {
+    "description": "Localized user-interface text."
+  },
+  "labelTemplate": "Label Template",
+  "@labelTemplate": {
+    "description": "Localized user-interface text."
+  },
+  "symbology": "Symbology",
+  "@symbology": {
+    "description": "Localized user-interface text."
+  },
+  "paper": "Paper",
+  "@paper": {
+    "description": "Localized user-interface text."
+  },
+  "copiesPerItem": "Copies per Item",
+  "@copiesPerItem": {
+    "description": "Localized user-interface text."
+  },
+  "queue": "Queue",
+  "@queue": {
+    "description": "Localized user-interface text."
+  },
+  "categories": "Categories",
+  "@categories": {
+    "description": "Localized user-interface text."
+  },
+  "categoryTree": "Category Tree",
+  "@categoryTree": {
+    "description": "Localized user-interface text."
+  },
+  "text5TopLevelGroups": "5 top-level groups",
+  "@text5TopLevelGroups": {
+    "description": "Localized user-interface text."
+  },
+  "newCategory": "New Category",
+  "@newCategory": {
+    "description": "Localized user-interface text."
+  },
+  "quickInlineForm": "Quick inline form",
+  "@quickInlineForm": {
+    "description": "Localized user-interface text."
+  },
+  "eGCat006": "e.g. CAT-006",
+  "@eGCat006": {
+    "description": "Localized user-interface text."
+  },
+  "parent": "Parent",
+  "@parent": {
+    "description": "Localized user-interface text."
+  },
+  "eGAdhesivesSealants": "e.g. Adhesives & Sealants",
+  "@eGAdhesivesSealants": {
+    "description": "Localized user-interface text."
+  },
+  "eGAdhesives": "e.g. Adhesives",
+  "@eGAdhesives": {
+    "description": "Localized user-interface text."
+  },
+  "createProduct": "Create Product",
+  "@createProduct": {
+    "description": "Localized user-interface text."
+  },
+  "productDefinition": "Product Definition",
+  "@productDefinition": {
+    "description": "Localized user-interface text."
+  },
+  "skuNamesAndClassification": "SKU, names and classification",
+  "@skuNamesAndClassification": {
+    "description": "Localized user-interface text."
+  },
+  "eGStl44021": "e.g. STL-44021",
+  "@eGStl44021": {
+    "description": "Localized user-interface text."
+  },
+  "barcode": "Barcode",
+  "@barcode": {
+    "description": "Localized user-interface text."
+  },
+  "scanOrType": "Scan or type",
+  "@scanOrType": {
+    "description": "Localized user-interface text."
+  },
+  "eGStructuralSteelIBeam": "e.g. Structural Steel I-Beam",
+  "@eGStructuralSteelIBeam": {
+    "description": "Localized user-interface text."
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Localized user-interface text."
+  },
+  "selectCategory": "Select category…",
+  "@selectCategory": {
+    "description": "Localized user-interface text."
+  },
+  "unitOfMeasure": "Unit of Measure",
+  "@unitOfMeasure": {
+    "description": "Localized user-interface text."
+  },
+  "selectUnit": "Select unit…",
+  "@selectUnit": {
+    "description": "Localized user-interface text."
+  },
+  "costingPricing": "Costing & Pricing",
+  "@costingPricing": {
+    "description": "Localized user-interface text."
+  },
+  "unitCostSar": "Unit Cost (SAR)",
+  "@unitCostSar": {
+    "description": "Localized user-interface text."
+  },
+  "sellingPriceSar": "Selling Price (SAR)",
+  "@sellingPriceSar": {
+    "description": "Localized user-interface text."
+  },
+  "vatRate": "VAT Rate",
+  "@vatRate": {
+    "description": "Localized user-interface text."
+  },
+  "selectRate": "Select rate…",
+  "@selectRate": {
+    "description": "Localized user-interface text."
+  },
+  "inventorySettings": "Inventory Settings",
+  "@inventorySettings": {
+    "description": "Localized user-interface text."
+  },
+  "reorderLevel": "Reorder Level",
+  "@reorderLevel": {
+    "description": "Localized user-interface text."
+  },
+  "selectStore": "Select store…",
+  "@selectStore": {
+    "description": "Localized user-interface text."
+  },
+  "openingStock": "Opening Stock",
+  "@openingStock": {
+    "description": "Localized user-interface text."
+  },
+  "productImages": "Product Images",
+  "@productImages": {
+    "description": "Localized user-interface text."
+  },
+  "inventory": "Inventory",
+  "@inventory": {
+    "description": "Localized user-interface text."
+  },
+  "reorderAlerts": "Reorder Alerts",
+  "@reorderAlerts": {
+    "description": "Localized user-interface text."
+  },
+  "text3ProductsAtOrBelowReorderLevel": "3 products at or below reorder level",
+  "@text3ProductsAtOrBelowReorderLevel": {
+    "description": "Localized user-interface text."
+  },
+  "generatePurchaseOrder": "Generate Purchase Order",
+  "@generatePurchaseOrder": {
+    "description": "Localized user-interface text."
+  },
+  "issueDetail": "Issue Detail",
+  "@issueDetail": {
+    "description": "Localized user-interface text."
+  },
+  "issuedValue": "Issued Value",
+  "@issuedValue": {
+    "description": "Localized user-interface text."
+  },
+  "issueInformation": "Issue Information",
+  "@issueInformation": {
+    "description": "Localized user-interface text."
+  },
+  "customer": "Customer",
+  "@customer": {
+    "description": "Localized user-interface text."
+  },
+  "accountingDistribution": "Accounting Distribution",
+  "@accountingDistribution": {
+    "description": "Localized user-interface text."
+  },
+  "backToOperations": "Back to Operations",
+  "@backToOperations": {
+    "description": "Localized user-interface text."
+  },
+  "priceLists": "Price Lists",
+  "@priceLists": {
+    "description": "Localized user-interface text."
+  },
+  "itemPrices": "Item Prices",
+  "@itemPrices": {
+    "description": "Localized user-interface text."
+  },
+  "productDetail": "Product Detail",
+  "@productDetail": {
+    "description": "Localized user-interface text."
+  },
+  "stockSummary": "Stock Summary",
+  "@stockSummary": {
+    "description": "Localized user-interface text."
+  },
+  "aggregatedAcrossAllStores": "Aggregated across all stores",
+  "@aggregatedAcrossAllStores": {
+    "description": "Localized user-interface text."
+  },
+  "totalOnHand": "Total On Hand",
+  "@totalOnHand": {
+    "description": "Localized user-interface text."
+  },
+  "stockValue": "Stock Value",
+  "@stockValue": {
+    "description": "Localized user-interface text."
+  },
+  "avgUnitCost": "Avg Unit Cost",
+  "@avgUnitCost": {
+    "description": "Localized user-interface text."
+  },
+  "productInformation": "Product Information",
+  "@productInformation": {
+    "description": "Localized user-interface text."
+  },
+  "unit": "Unit",
+  "@unit": {
+    "description": "Localized user-interface text."
+  },
+  "sellingPrice": "Selling Price",
+  "@sellingPrice": {
+    "description": "Localized user-interface text."
+  },
+  "stockByStore": "Stock by Store",
+  "@stockByStore": {
+    "description": "Localized user-interface text."
+  },
+  "recentMovements": "Recent Movements",
+  "@recentMovements": {
+    "description": "Localized user-interface text."
+  },
+  "backToProducts": "Back to Products",
+  "@backToProducts": {
+    "description": "Localized user-interface text."
+  },
+  "products": "Products",
+  "@products": {
+    "description": "Localized user-interface text."
+  },
+  "searchProductOrSku": "Search product or SKU…",
+  "@searchProductOrSku": {
+    "description": "Localized user-interface text."
+  },
+  "receiveInventory": "Receive Inventory",
+  "@receiveInventory": {
+    "description": "Localized user-interface text."
+  },
+  "receiveDetails": "Receive Details",
+  "@receiveDetails": {
+    "description": "Localized user-interface text."
+  },
+  "selectCurrency": "Select currency…",
+  "@selectCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "receivingStore": "Receiving Store",
+  "@receivingStore": {
+    "description": "Localized user-interface text."
+  },
+  "supplierAccount": "Supplier Account",
+  "@supplierAccount": {
+    "description": "Localized user-interface text."
+  },
+  "eGAbcTradingCo": "e.g. ABC Trading Co.",
+  "@eGAbcTradingCo": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryItems": "Inventory Items",
+  "@inventoryItems": {
+    "description": "Localized user-interface text."
+  },
+  "receiptNotes": "Receipt Notes",
+  "@receiptNotes": {
+    "description": "Localized user-interface text."
+  },
+  "poNumberDeliveryNoteInspectionResults": "PO number, delivery note, inspection results…",
+  "@poNumberDeliveryNoteInspectionResults": {
+    "description": "Localized user-interface text."
+  },
+  "attachments": "Attachments",
+  "@attachments": {
+    "description": "Localized user-interface text."
+  },
+  "receiveDetail": "Receive Detail",
+  "@receiveDetail": {
+    "description": "Localized user-interface text."
+  },
+  "receivedValue": "Received Value",
+  "@receivedValue": {
+    "description": "Localized user-interface text."
+  },
+  "receiptInformation": "Receipt Information",
+  "@receiptInformation": {
+    "description": "Localized user-interface text."
+  },
+  "supplier": "Supplier",
+  "@supplier": {
+    "description": "Localized user-interface text."
+  },
+  "poReference": "PO Reference",
+  "@poReference": {
+    "description": "Localized user-interface text."
+  },
+  "items": "Items",
+  "@items": {
+    "description": "Localized user-interface text."
+  },
+  "text2Lines432Units": "2 lines · 432 units",
+  "@text2Lines432Units": {
+    "description": "Localized user-interface text."
+  },
+  "received": "Received",
+  "@received": {
+    "description": "Localized user-interface text."
+  },
+  "count": "COUNT",
+  "@count": {
+    "description": "Localized user-interface text."
+  },
+  "inProgress": "In Progress",
+  "@inProgress": {
+    "description": "Localized user-interface text."
+  },
+  "stockTake": "Stock Take",
+  "@stockTake": {
+    "description": "Localized user-interface text."
+  },
+  "text3Of6Counted": "3 of 6 counted",
+  "@text3Of6Counted": {
+    "description": "Localized user-interface text."
+  },
+  "match": "Match",
+  "@match": {
+    "description": "Localized user-interface text."
+  },
+  "short": "Short",
+  "@short": {
+    "description": "Localized user-interface text."
+  },
+  "over": "Over",
+  "@over": {
+    "description": "Localized user-interface text."
+  },
+  "countSheet": "Count Sheet",
+  "@countSheet": {
+    "description": "Localized user-interface text."
+  },
+  "transferInventory": "Transfer Inventory",
+  "@transferInventory": {
+    "description": "Localized user-interface text."
+  },
+  "transferDetails": "Transfer Details",
+  "@transferDetails": {
+    "description": "Localized user-interface text."
+  },
+  "searchOriginWarehouse": "Search origin warehouse…",
+  "@searchOriginWarehouse": {
+    "description": "Localized user-interface text."
+  },
+  "toStore": "To Store",
+  "@toStore": {
+    "description": "Localized user-interface text."
+  },
+  "searchDestination": "Search destination…",
+  "@searchDestination": {
+    "description": "Localized user-interface text."
+  },
+  "enterTransferNotesOrInternalInstructions": "Enter transfer notes or internal instructions…",
+  "@enterTransferNotesOrInternalInstructions": {
+    "description": "Localized user-interface text."
+  },
+  "transferDetail": "Transfer Detail",
+  "@transferDetail": {
+    "description": "Localized user-interface text."
+  },
+  "itemsInTransit": "Items in Transit",
+  "@itemsInTransit": {
+    "description": "Localized user-interface text."
+  },
+  "text2Lines258Units": "2 lines · 258 units",
+  "@text2Lines258Units": {
+    "description": "Localized user-interface text."
+  },
+  "logisticsTracking": "Logistics & Tracking",
+  "@logisticsTracking": {
+    "description": "Localized user-interface text."
+  },
+  "carrier": "Carrier",
+  "@carrier": {
+    "description": "Localized user-interface text."
+  },
+  "driver": "Driver",
+  "@driver": {
+    "description": "Localized user-interface text."
+  },
+  "expectedArrival": "Expected Arrival",
+  "@expectedArrival": {
+    "description": "Localized user-interface text."
+  },
+  "stockTransfers": "Stock Transfers",
+  "@stockTransfers": {
+    "description": "Localized user-interface text."
+  },
+  "unitsOfMeasure": "Units of Measure",
+  "@unitsOfMeasure": {
+    "description": "Localized user-interface text."
+  },
+  "base": "Base",
+  "@base": {
+    "description": "Localized user-interface text."
+  },
+  "warehouses": "Warehouses",
+  "@warehouses": {
+    "description": "Localized user-interface text."
+  },
+  "text5Warehouses": "5 Warehouses",
+  "@text5Warehouses": {
+    "description": "Localized user-interface text."
+  },
+  "capacityAssignedManager": "Capacity & assigned manager",
+  "@capacityAssignedManager": {
+    "description": "Localized user-interface text."
+  },
+  "createJournalEntry": "Create Journal Entry",
+  "@createJournalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "entryHeader": "Entry Header",
+  "@entryHeader": {
+    "description": "Localized user-interface text."
+  },
+  "date": "Date",
+  "@date": {
+    "description": "Localized user-interface text."
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Localized user-interface text."
+  },
+  "describeThisJournalEntry": "Describe this journal entry…",
+  "@describeThisJournalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "journalLines": "Journal Lines",
+  "@journalLines": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntryDetail": "Journal Entry Detail",
+  "@journalEntryDetail": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntry": "Journal Entry",
+  "@journalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "lines": "Lines",
+  "@lines": {
+    "description": "Localized user-interface text."
+  },
+  "backToEntries": "Back to Entries",
+  "@backToEntries": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntries": "Journal Entries",
+  "@journalEntries": {
+    "description": "Localized user-interface text."
+  },
+  "searchEntries": "Search entries…",
+  "@searchEntries": {
+    "description": "Localized user-interface text."
+  },
+  "noEntriesMatch": "No entries match.",
+  "@noEntriesMatch": {
+    "description": "Localized user-interface text."
+  },
+  "financialOperation": "Financial Operation",
+  "@financialOperation": {
+    "description": "Localized user-interface text."
+  },
+  "operationSummary": "Operation Summary",
+  "@operationSummary": {
+    "description": "Localized user-interface text."
+  },
+  "difference": "Difference",
+  "@difference": {
+    "description": "Localized user-interface text."
+  },
+  "ledgerLines": "Ledger Lines",
+  "@ledgerLines": {
+    "description": "Localized user-interface text."
+  },
+  "operationCreated": "Operation created",
+  "@operationCreated": {
+    "description": "Localized user-interface text."
+  },
+  "submittedForReview": "Submitted for review",
+  "@submittedForReview": {
+    "description": "Localized user-interface text."
+  },
+  "approvedPosted": "Approved & posted",
+  "@approvedPosted": {
+    "description": "Localized user-interface text."
+  },
+  "openingJournal": "Opening Journal",
+  "@openingJournal": {
+    "description": "Localized user-interface text."
+  },
+  "entryDetails": "Entry Details",
+  "@entryDetails": {
+    "description": "Localized user-interface text."
+  },
+  "transferLines": "Transfer Lines",
+  "@transferLines": {
+    "description": "Localized user-interface text."
+  },
+  "createEntry": "Create Entry",
+  "@createEntry": {
+    "description": "Localized user-interface text."
+  },
+  "more": "More",
+  "@more": {
+    "description": "Localized user-interface text."
+  },
+  "searchEveryScreen": "Search every screen…",
+  "@searchEveryScreen": {
+    "description": "Localized user-interface text."
+  },
+  "auditLog": "Audit Log",
+  "@auditLog": {
+    "description": "Localized user-interface text."
+  },
+  "immutableActivityTrail": "Immutable Activity Trail",
+  "@immutableActivityTrail": {
+    "description": "Localized user-interface text."
+  },
+  "everyStateChangingAction7YearRetention": "Every state-changing action · 7-year retention",
+  "@everyStateChangingAction7YearRetention": {
+    "description": "Localized user-interface text."
+  },
+  "searchEntityOrUser": "Search entity or user…",
+  "@searchEntityOrUser": {
+    "description": "Localized user-interface text."
+  },
+  "noLogEntriesMatch": "No log entries match.",
+  "@noLogEntriesMatch": {
+    "description": "Localized user-interface text."
+  },
+  "balanceSheet": "Balance Sheet",
+  "@balanceSheet": {
+    "description": "Localized user-interface text."
+  },
+  "balanceCheck": "Balance Check",
+  "@balanceCheck": {
+    "description": "Localized user-interface text."
+  },
+  "incomeStatement": "Income Statement",
+  "@incomeStatement": {
+    "description": "Localized user-interface text."
+  },
+  "netIncome": "Net Income",
+  "@netIncome": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryValuation": "Inventory Valuation",
+  "@inventoryValuation": {
+    "description": "Localized user-interface text."
+  },
+  "method": "Method",
+  "@method": {
+    "description": "Localized user-interface text."
+  },
+  "weightedAvg": "Weighted Avg",
+  "@weightedAvg": {
+    "description": "Localized user-interface text."
+  },
+  "stockValuation": "Stock Valuation",
+  "@stockValuation": {
+    "description": "Localized user-interface text."
+  },
+  "quantityWeightedAverageUnitCost": "Quantity × weighted-average unit cost",
+  "@quantityWeightedAverageUnitCost": {
+    "description": "Localized user-interface text."
+  },
+  "searchSkuProductOrStore": "Search SKU, product or store…",
+  "@searchSkuProductOrStore": {
+    "description": "Localized user-interface text."
+  },
+  "totalInventoryValue": "Total Inventory Value",
+  "@totalInventoryValue": {
+    "description": "Localized user-interface text."
+  },
+  "trialBalance": "Trial Balance",
+  "@trialBalance": {
+    "description": "Localized user-interface text."
+  },
+  "allAccounts": "All Accounts",
+  "@allAccounts": {
+    "description": "Localized user-interface text."
+  },
+  "debitCreditBalancesAsOfPeriodEnd": "Debit & credit balances as of period end",
+  "@debitCreditBalancesAsOfPeriodEnd": {
+    "description": "Localized user-interface text."
+  },
+  "totalsBalanced": "Totals · balanced",
+  "@totalsBalanced": {
+    "description": "Localized user-interface text."
+  },
+  "exportPdf": "Export PDF",
+  "@exportPdf": {
+    "description": "Localized user-interface text."
+  },
+  "billing": "Billing",
+  "@billing": {
+    "description": "Localized user-interface text."
+  },
+  "currentPlan": "Current Plan",
+  "@currentPlan": {
+    "description": "Localized user-interface text."
+  },
+  "business": "Business",
+  "@business": {
+    "description": "Localized user-interface text."
+  },
+  "current": "CURRENT",
+  "@current": {
+    "description": "Localized user-interface text."
+  },
+  "recentInvoices": "Recent Invoices",
+  "@recentInvoices": {
+    "description": "Localized user-interface text."
+  },
+  "paid": "Paid",
+  "@paid": {
+    "description": "Localized user-interface text."
+  },
+  "branchesStores": "Branches & Stores",
+  "@branchesStores": {
+    "description": "Localized user-interface text."
+  },
+  "addBranch": "Add Branch",
+  "@addBranch": {
+    "description": "Localized user-interface text."
+  },
+  "companyProfile": "Company Profile",
+  "@companyProfile": {
+    "description": "Localized user-interface text."
+  },
+  "namesShownOnDocuments": "Names shown on documents",
+  "@namesShownOnDocuments": {
+    "description": "Localized user-interface text."
+  },
+  "uploadLogo": "Upload Logo",
+  "@uploadLogo": {
+    "description": "Localized user-interface text."
+  },
+  "legalNameEnglish": "Legal Name (English)",
+  "@legalNameEnglish": {
+    "description": "Localized user-interface text."
+  },
+  "legalName": "Legal Name",
+  "@legalName": {
+    "description": "Localized user-interface text."
+  },
+  "tradeName": "Trade Name",
+  "@tradeName": {
+    "description": "Localized user-interface text."
+  },
+  "commercialRegistration": "Commercial Registration",
+  "@commercialRegistration": {
+    "description": "Localized user-interface text."
+  },
+  "registeredAddress": "Registered Address",
+  "@registeredAddress": {
+    "description": "Localized user-interface text."
+  },
+  "streetAddress": "Street Address",
+  "@streetAddress": {
+    "description": "Localized user-interface text."
+  },
+  "postalCode": "Postal Code",
+  "@postalCode": {
+    "description": "Localized user-interface text."
+  },
+  "taxRegistration": "Tax Registration",
+  "@taxRegistration": {
+    "description": "Localized user-interface text."
+  },
+  "vatNumber": "VAT Number",
+  "@vatNumber": {
+    "description": "Localized user-interface text."
+  },
+  "taxIdentificationNo": "Tax Identification No.",
+  "@taxIdentificationNo": {
+    "description": "Localized user-interface text."
+  },
+  "taxAuthority": "Tax Authority",
+  "@taxAuthority": {
+    "description": "Localized user-interface text."
+  },
+  "saveChanges": "Save Changes",
+  "@saveChanges": {
+    "description": "Localized user-interface text."
+  },
+  "autoPairsSyncDailyManualEditable": "Auto pairs sync daily; manual editable",
+  "@autoPairsSyncDailyManualEditable": {
+    "description": "Localized user-interface text."
+  },
+  "saveRates": "Save Rates",
+  "@saveRates": {
+    "description": "Localized user-interface text."
+  },
+  "numbering": "Numbering",
+  "@numbering": {
+    "description": "Localized user-interface text."
+  },
+  "documentSequences": "Document Sequences",
+  "@documentSequences": {
+    "description": "Localized user-interface text."
+  },
+  "formatPrefixYearNumber": "Format: PREFIX-YEAR-NUMBER",
+  "@formatPrefixYearNumber": {
+    "description": "Localized user-interface text."
+  },
+  "rolesList": "Roles List",
+  "@rolesList": {
+    "description": "Localized user-interface text."
+  },
+  "editRole": "Edit Role",
+  "@editRole": {
+    "description": "Localized user-interface text."
+  },
+  "newRole": "New Role",
+  "@newRole": {
+    "description": "Localized user-interface text."
+  },
+  "workspaces": "Workspaces",
+  "@workspaces": {
+    "description": "Localized user-interface text."
+  },
+  "current2": "Current",
+  "@current2": {
+    "description": "Localized user-interface text."
+  },
+  "manageWorkspace": "Manage Workspace",
+  "@manageWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "switchToThisWorkspace": "Switch to this Workspace",
+  "@switchToThisWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "newWorkspace": "New Workspace",
+  "@newWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "createStore": "Create Store",
+  "@createStore": {
+    "description": "Localized user-interface text."
+  },
+  "storeDetails": "Store Details",
+  "@storeDetails": {
+    "description": "Localized user-interface text."
+  },
+  "nameAndLocation": "Name and location",
+  "@nameAndLocation": {
+    "description": "Localized user-interface text."
+  },
+  "eGDowntownCentralStore": "e.g. Downtown Central Store",
+  "@eGDowntownCentralStore": {
+    "description": "Localized user-interface text."
+  },
+  "locationCode": "Location Code",
+  "@locationCode": {
+    "description": "Localized user-interface text."
+  },
+  "storeCategory": "Store Category",
+  "@storeCategory": {
+    "description": "Localized user-interface text."
+  },
+  "addInternalNotes": "Add internal notes…",
+  "@addInternalNotes": {
+    "description": "Localized user-interface text."
+  },
+  "issueInventory": "Issue Inventory",
+  "@issueInventory": {
+    "description": "Localized user-interface text."
+  },
+  "issueDetails": "Issue Details",
+  "@issueDetails": {
+    "description": "Localized user-interface text."
+  },
+  "text1Line12Units": "1 line · 12 units",
+  "@text1Line12Units": {
+    "description": "Localized user-interface text."
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Localized user-interface text."
+  },
+  "totalValue": "Total Value",
+  "@totalValue": {
+    "description": "Localized user-interface text."
+  },
+  "storeDetail": "Store Detail",
+  "@storeDetail": {
+    "description": "Localized user-interface text."
+  },
+  "stockOnHand": "Stock On Hand",
+  "@stockOnHand": {
+    "description": "Localized user-interface text."
+  },
+  "noStockItemsAvailable": "No stock items available.",
+  "@noStockItemsAvailable": {
+    "description": "Localized user-interface text."
+  },
+  "stores": "Stores",
+  "@stores": {
+    "description": "Localized user-interface text."
+  }
 }

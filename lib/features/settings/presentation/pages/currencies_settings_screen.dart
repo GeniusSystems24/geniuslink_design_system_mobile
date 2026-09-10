@@ -15,10 +15,10 @@ class CurrenciesSettingsScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Currencies')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).currencies), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Base Currency',
+          title: GeniusLinkLocalization.of(context).baseCurrency,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -90,8 +90,8 @@ class CurrenciesSettingsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const MBtn(
-                'Pull ECB Feed',
+              MBtn(
+                GeniusLinkLocalization.of(context).pullEcbFeed,
                 variant: MBtnVariant.secondary,
                 icon: 'refresh',
                 full: true,
@@ -100,8 +100,8 @@ class CurrenciesSettingsScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Rates per 1 SAR',
-          subtitle: 'Auto pairs sync daily; manual editable',
+          title: GeniusLinkLocalization.of(context).ratesPer1Sar,
+          subtitle: GeniusLinkLocalization.of(context).autoPairsSyncDailyManualEditable,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -217,7 +217,7 @@ class CurrenciesSettingsScreen extends StatelessWidget {
             ],
           ),
         ),
-        const MBtn('Save Rates', icon: 'check', full: true),
+        MBtn(GeniusLinkLocalization.of(context).saveRates, icon: 'check', full: true),
       ]),
     );
   }

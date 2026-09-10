@@ -6,6 +6,8 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 // ── DashboardScreen ─────────────────────────────────────────
 class DashboardScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Dashboard')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).dashboard), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: _buildDashboardContent(context),
     );
   }
@@ -30,12 +32,12 @@ class DashboardScreen extends StatelessWidget {
       children: [
         _Legend(
           color: SuperMaterialThemeData.of(context).colorScheme.primary,
-          label: 'In',
+          label: GeniusLinkLocalization.of(context).inflowShort,
         ),
         const SizedBox(width: 12),
         _Legend(
           color: SuperMaterialThemeData.of(context).superTheme.fg4,
-          label: 'Out',
+          label: GeniusLinkLocalization.of(context).outflowShort,
         ),
       ],
     );
@@ -68,8 +70,8 @@ class DashboardScreen extends StatelessWidget {
       // Cash flow
       SuperSectionCard2(
         trailing: trailing,
-        title: 'Cash Flow',
-        subtitle: 'Inflow vs outflow · SAR thousands · 12 months',
+        title: GeniusLinkLocalization.of(context).cashFlow,
+        subtitle: GeniusLinkLocalization.of(context).inflowVsOutflowSarThousands12Months,
         initiallyExpanded: true,
         accentColor: accentColor3,
 
@@ -82,8 +84,8 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Balances
       SuperSectionCard2(
-        title: 'Cash & Asset Accounts',
-        subtitle: 'Top balances',
+        title: GeniusLinkLocalization.of(context).cashAssetAccounts,
+        subtitle: GeniusLinkLocalization.of(context).topBalances,
         initiallyExpanded: true,
         accentColor: accentColor2,
 
@@ -99,7 +101,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Recent ops
       SuperSectionCard2(
-        title: 'Recent Operations',
+        title: GeniusLinkLocalization.of(context).recentOperations,
 
         initiallyExpanded: true,
         accentColor: accentColor4,
@@ -126,7 +128,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       // Alerts
       SuperSectionCard2(
-        title: 'Needs Attention',
+        title: GeniusLinkLocalization.of(context).needsAttention,
 
         initiallyExpanded: true,
         accentColor: accentColor,

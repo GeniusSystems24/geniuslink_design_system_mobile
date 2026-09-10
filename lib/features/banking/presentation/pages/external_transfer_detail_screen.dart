@@ -10,11 +10,11 @@ class ExternalTransferDetailScreen extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('External Wire Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).externalWireDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'External Wire',
+          title: GeniusLinkLocalization.of(context).externalWire,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -98,7 +98,7 @@ class ExternalTransferDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Beneficiary',
+          title: GeniusLinkLocalization.of(context).beneficiary,
 
           initiallyExpanded: true,
           accentColor: accentColor,

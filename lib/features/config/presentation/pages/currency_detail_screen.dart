@@ -18,12 +18,12 @@ class CurrencyDetailScreen extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Currency Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).currencyDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Current Rate',
-          subtitle: 'Per 1 base currency',
+          title: GeniusLinkLocalization.of(context).currentRate,
+          subtitle: GeniusLinkLocalization.of(context).per1BaseCurrency,
           initiallyExpanded: true,
           accentColor: accentColor3,
 
@@ -65,7 +65,7 @@ class CurrencyDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Definition',
+          title: GeniusLinkLocalization.of(context).definition,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -75,19 +75,19 @@ class CurrencyDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KV('ISO Code', currency.code, mono: true),
-              KV('Symbol', currency.symbol),
-              KV('Name English', currency.name),
+              KV(GeniusLinkLocalization.of(context).isoCode, currency.code, mono: true),
+              KV(GeniusLinkLocalization.of(context).symbol, currency.symbol),
+              KV(GeniusLinkLocalization.of(context).nameEnglish, currency.name),
               if (currency.localizedName case final localizedName?)
-                KV('Localized Name', localizedName, ar: true),
-              KV('Decimal Places', '${currency.decimalPlaces}', mono: true),
-              KV('Source', currency.source),
+                KV(GeniusLinkLocalization.of(context).localizedName, localizedName, ar: true),
+              KV(GeniusLinkLocalization.of(context).decimalPlaces, '${currency.decimalPlaces}', mono: true),
+              KV(GeniusLinkLocalization.of(context).source, currency.source),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Rate History',
-          subtitle: 'Recent updates',
+          title: GeniusLinkLocalization.of(context).rateHistory,
+          subtitle: GeniusLinkLocalization.of(context).recentUpdates,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -173,7 +173,7 @@ class CurrencyDetailScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          'No rate history available.',
+                          GeniusLinkLocalization.of(context).noRateHistoryAvailable,
                           style: TextStyle(
                             color: SuperMaterialThemeData.of(
                               context,
@@ -188,7 +188,7 @@ class CurrencyDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to List',
+          GeniusLinkLocalization.of(context).backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

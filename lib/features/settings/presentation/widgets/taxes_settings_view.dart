@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class TaxesSettingsView extends StatelessWidget {
   final FormController controller;
@@ -41,7 +42,7 @@ class TaxesSettingsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Taxes')),
+          appBar: SuperAppBar(title: const Text('Taxes'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SuperSectionCard2(
               title: 'Tax Rules',

@@ -9,10 +9,12 @@ import 'package:super_table_field/super_table_field.dart';
 import 'package:super_tree_field/super_tree.dart';
 
 import 'package:super_core/super_core.dart';
+import '../localization/generated/l10n.dart';
 import '../core/tenancy/tenant_connection.dart';
 import 'controllers/app_controller.dart';
 import 'router/router.dart';
 import 'router/screen_route_registry.dart';
+import 'widgets/app_settings_scope.dart';
 
 class GeniusLinkApp extends StatefulWidget {
   const GeniusLinkApp({super.key});
@@ -65,8 +67,15 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
     );
 
     return ListenableBuilder(
-      listenable: _appController.themeController,
+      listenable: Listenable.merge([
+        _appController.themeController,
+        _appController.localeController,
+      ]),
       builder: (context, _) => MaterialApp.router(
+        builder: (context, child) => AppSettingsScope(
+          controller: _appController,
+          child: child ?? const SizedBox.shrink(),
+        ),
         title: 'GeniusLink',
         debugShowCheckedModeBanner: false,
         theme: lightTheme.copyWith(
@@ -79,8 +88,10 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
             SuperAutoSuggestionsBoxThemeData.fromMaterialTheme(darkTheme),
           ],
         ),
+        locale: _appController.localeController.locale,
         supportedLocales: [const Locale('en'), const Locale('ar')],
         localizationsDelegates: const [
+          GeniusLinkLocalization.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class NotificationsView extends StatelessWidget {
   final List<NotificationCategory> categories;
@@ -47,7 +48,7 @@ class NotificationsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Notifications')),
+          appBar: SuperAppBar(title: const Text('Notifications'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SuperSectionCard2(
               title: 'Preferences',

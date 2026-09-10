@@ -10,10 +10,10 @@ class CreateWithdrawalScreen extends StatelessWidget {
     var icon2 = MIcons.of('building');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Withdrawal')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createWithdrawal), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Withdrawal Amount',
+          title: GeniusLinkLocalization.of(context).withdrawalAmount,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -23,7 +23,7 @@ class CreateWithdrawalScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               MMoney(
-                label: 'Amount',
+                label: GeniusLinkLocalization.of(context).amount,
                 value: '12,045.00',
                 accent: SuperMaterialThemeData.of(context).colorScheme.error,
                 required: true,
@@ -42,25 +42,25 @@ class CreateWithdrawalScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'Withdraw From',
+                label: GeniusLinkLocalization.of(context).withdrawFrom,
                 value: 'Bank · NCB Main (1100)',
                 select: true,
                 required: true,
               ),
               IField(
-                label: 'Payee',
-                placeholder: 'e.g. Global Steel Imports',
+                label: GeniusLinkLocalization.of(context).payee,
+                placeholder: GeniusLinkLocalization.of(context).eGGlobalSteelImports,
                 required: true,
               ),
               IField(
-                label: 'Expense Account',
+                label: GeniusLinkLocalization.of(context).expenseAccount,
                 value: 'Cost of Goods Sold (5001)',
                 select: true,
               ),
               IField(
-                label: 'Value Date',
+                label: GeniusLinkLocalization.of(context).valueDate,
                 value: 'Dec 19, 2025',
                 icon: 'calendar',
               ),
@@ -68,7 +68,7 @@ class CreateWithdrawalScreen extends StatelessWidget {
           ),
         ),
         InfoNote(
-          'Withdrawals above 10,000 SAR require a second approval before posting.',
+          GeniusLinkLocalization.of(context).withdrawalsAbove10000SarRequireASecondApprovalBeforePosting,
           tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
         ),
         const ActionRow(primary: 'Submit for Approval'),

@@ -14,11 +14,11 @@ class NumberingScreen extends StatelessWidget {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Numbering')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).numbering), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Document Sequences',
-          subtitle: 'Format: PREFIX-YEAR-NUMBER',
+          title: GeniusLinkLocalization.of(context).documentSequences,
+          subtitle: GeniusLinkLocalization.of(context).formatPrefixYearNumber,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -127,7 +127,7 @@ class NumberingScreen extends StatelessWidget {
             ],
           ),
         ),
-        const MBtn('Save Changes', icon: 'check', full: true),
+        MBtn(GeniusLinkLocalization.of(context).saveChanges, icon: 'check', full: true),
       ]),
     );
   }

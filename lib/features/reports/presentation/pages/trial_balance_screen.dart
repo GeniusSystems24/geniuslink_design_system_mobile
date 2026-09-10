@@ -25,7 +25,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Trial Balance')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).trialBalance), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         ReportMeta(
           period: _period,
@@ -37,8 +37,8 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
           ],
         ),
         SuperSectionCard2(
-          title: 'All Accounts',
-          subtitle: 'Debit & credit balances as of period end',
+          title: GeniusLinkLocalization.of(context).allAccounts,
+          subtitle: GeniusLinkLocalization.of(context).debitCreditBalancesAsOfPeriodEnd,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -114,7 +114,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                   children: [
                     Expanded(
                       child: Eyebrow(
-                        'Totals · balanced',
+                        GeniusLinkLocalization.of(context).totalsBalanced,
                         color: SuperMaterialThemeData.of(
                           context,
                         ).colorScheme.secondary,
@@ -161,8 +161,8 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
             ],
           ),
         ),
-        const MBtn(
-          'Export PDF',
+        MBtn(
+          GeniusLinkLocalization.of(context).exportPdf,
           variant: MBtnVariant.secondary,
           icon: 'download',
           full: true,

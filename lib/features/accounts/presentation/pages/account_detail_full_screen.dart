@@ -4,6 +4,8 @@ class AccountDetailFullScreen extends StatelessWidget {
   const AccountDetailFullScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     const tx = [
       (
         'JV-2024-0042',
@@ -40,17 +42,17 @@ class AccountDetailFullScreen extends StatelessWidget {
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
-    var trailing = const Pill('Active');
+    var trailing = Pill(l10n.active);
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Account Detail')),
+      appBar: SuperAppBar(title: Text(l10n.accountDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Current Balance',
-          subtitle: 'As of Dec 18, 2025 16:33',
+          title: l10n.currentBalance,
+          subtitle: '${l10n.asOf} Dec 18, 2025 16:33',
           initiallyExpanded: true,
           accentColor: accentColor3,
 
@@ -96,17 +98,17 @@ class AccountDetailFullScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: 2.4,
-                children: const [
-                  Mini(label: 'Total Debits', value: '148,920', sub: 'SAR'),
-                  Mini(label: 'Total Credits', value: '106,420', sub: 'SAR'),
+                childAspectRatio: 1.7,
+                children: [
+                  Mini(label: l10n.totalDebits, value: '148,920', sub: 'SAR'),
+                  Mini(label: l10n.totalCredits, value: '106,420', sub: 'SAR'),
                 ],
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Account Information',
+          title: l10n.accountInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -115,21 +117,21 @@ class AccountDetailFullScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Code', '1001', mono: true),
-              KV('Type', 'Asset · Cash Equivalents'),
-              KV('Name English', 'Cash Box'),
-              KV('Name Arabic', 'الصندوق', ar: true),
-              KV('Account Tree', 'Assets Tree (1)'),
-              KV('Currency', 'SAR — Saudi Riyal'),
-              KV('Parent Group', 'Current Assets (1000)'),
-              KV('Tenant ID', '9', mono: true),
+            children: [
+              KV(l10n.code, '1001', mono: true),
+              KV(l10n.accountType, l10n.assetCashEquivalents),
+              KV(l10n.nameEnglish, 'Cash Box'),
+              KV(l10n.nameArabic, 'الصندوق', ar: true),
+              KV(l10n.accountTree, 'Assets Tree (1)'),
+              KV(l10n.currency, 'SAR — Saudi Riyal'),
+              KV(l10n.parentGroup, 'Current Assets (1000)'),
+              KV(l10n.tenantId, '9', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Recent Transactions',
-          subtitle: 'Latest entries · running balance',
+          title: l10n.recentTransactions,
+          subtitle: l10n.latestEntriesRunningBalance,
           initiallyExpanded: true,
           accentColor: accentColor4,
 
@@ -211,7 +213,7 @@ class AccountDetailFullScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'Bal ${tx[i].$6}',
+                                  '${l10n.balanceShort} ${tx[i].$6}',
                                   style: TextStyle(
                                     fontFamily: SuperMaterialThemeData.of(
                                       context,
@@ -234,7 +236,7 @@ class AccountDetailFullScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit Information',
+          title: l10n.auditInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -248,13 +250,13 @@ class AccountDetailFullScreen extends StatelessWidget {
                 connectIndictors: true,
                 items: [
                   AuditItem(
-                    title: 'Created',
+                    title: l10n.created,
                     doAt: DateTime(2024, 4, 12, 9, 21),
                     doBy: 'Admin User (ID: 5)',
                     cancelled: true,
                   ),
                   AuditItem(
-                    title: 'Modified',
+                    title: l10n.modified,
                     doAt: DateTime(2025, 11, 2, 15, 48),
                     doBy: 'Layla A. (ID: 12)',
                   ),
@@ -265,9 +267,9 @@ class AccountDetailFullScreen extends StatelessWidget {
         ),
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: MBtn(
-                'Export',
+                l10n.export,
                 variant: MBtnVariant.secondary,
                 icon: 'download',
                 full: true,
@@ -276,7 +278,7 @@ class AccountDetailFullScreen extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: MBtn(
-                'Back',
+                l10n.back,
                 variant: MBtnVariant.secondary,
                 icon: 'back',
                 full: true,

@@ -10,33 +10,33 @@ class CreateCurrencyScreen extends StatelessWidget {
     var icon2 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Add Currency')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).addCurrency), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Currency Definition',
-          subtitle: 'ISO code, display names and symbol',
+          title: GeniusLinkLocalization.of(context).currencyDefinition,
+          subtitle: GeniusLinkLocalization.of(context).isoCodeDisplayNamesAndSymbol,
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'ISO Code',
-                placeholder: 'e.g. USD',
+                label: GeniusLinkLocalization.of(context).isoCode,
+                placeholder: GeniusLinkLocalization.of(context).eGUsd,
                 mono: true,
                 required: true,
               ),
-              IField(label: 'Symbol', placeholder: 'e.g. \$', required: true),
+              IField(label: GeniusLinkLocalization.of(context).symbol, placeholder: 'e.g. \$', required: true),
               IField(
-                label: 'Name English',
-                placeholder: 'e.g. US Dollar',
+                label: GeniusLinkLocalization.of(context).nameEnglish,
+                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
                 required: true,
               ),
               IField(
-                label: 'الاسم بالعربية',
-                placeholder: 'مثال: دولار أمريكي',
+                label: GeniusLinkLocalization.of(context).nameArabic,
+                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
                 ar: true,
                 required: true,
               ),
@@ -44,22 +44,22 @@ class CreateCurrencyScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Precision & Rate',
-          subtitle: 'Decimal places and exchange rate against base',
+          title: GeniusLinkLocalization.of(context).precisionRate,
+          subtitle: GeniusLinkLocalization.of(context).decimalPlacesAndExchangeRateAgainstBase,
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              IField(label: 'Decimal Places', value: '2', select: true),
+            children: [
+              IField(label: GeniusLinkLocalization.of(context).decimalPlaces, value: '2', select: true),
               IField(
-                label: 'Exchange Rate (per 1 SAR)',
-                placeholder: 'e.g. 3.750200',
+                label: GeniusLinkLocalization.of(context).exchangeRatePer1Sar,
+                placeholder: GeniusLinkLocalization.of(context).eG3750200,
                 mono: true,
               ),
-              IToggle(label: 'Set as base currency', on: false),
+              IToggle(label: GeniusLinkLocalization.of(context).setAsBaseCurrency, on: false),
             ],
           ),
         ),

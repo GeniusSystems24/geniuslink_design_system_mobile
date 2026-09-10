@@ -10,7 +10,7 @@ class StoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Stores')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).stores), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         for (final store in stores)
           GestureDetector(

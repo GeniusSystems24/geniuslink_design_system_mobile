@@ -35,7 +35,7 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Income Statement')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).incomeStatement), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         ReportMeta(
           period: _period,
@@ -90,7 +90,7 @@ class _IncomeStatementScreenState extends State<IncomeStatementScreen> {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    'Net Income',
+                    GeniusLinkLocalization.of(context).netIncome,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 13,

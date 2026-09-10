@@ -3,6 +3,8 @@ import 'package:super_form_field/super_form_field.dart';
 import '../../../../design_system/kit.dart';
 import '../../domain/domain.dart';
 import '../controllers/inventory_line_form_controller.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class TransferCreateScreen extends StatefulWidget {
   final Future<void> Function(List<InventoryLine> lines)? onSubmit;
@@ -78,10 +80,10 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
     var icon3 = MIcons.of('box');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Transfer Inventory')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).transferInventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Transfer Details',
+          title: GeniusLinkLocalization.of(context).transferDetails,
 
           initiallyExpanded: true,
           accentColor: marker3,
@@ -91,7 +93,7 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SuperTextFormField(
-                decoration: InputDecoration(labelText: 'Serial No'),
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).serialNo),
                 initialValue: 'INV-TRF-2024-0117',
                 readOnly: true,
               ),
@@ -100,8 +102,8 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                     SuperAutoSuggestionsItem<String>(value: item, titleText: item),
                 source: _currencySource,
                 controller: _currencyController,
-                decoration: InputDecoration(labelText: 'Currency'),
-                hintText: 'Select currency…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).currency),
+                hintText: GeniusLinkLocalization.of(context).selectCurrency,
               ),
               SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) =>
@@ -109,21 +111,21 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
                 source: _fromSource,
                 controller: _fromController,
                 decoration: InputDecoration(labelText: 'From Store'),
-                hintText: 'Search origin warehouse…',
+                hintText: GeniusLinkLocalization.of(context).searchOriginWarehouse,
               ),
               SuperAutoSuggestionsBox<String>(
                 suggestionBuilder: (items, index, item) =>
                     SuperAutoSuggestionsItem<String>(value: item, titleText: item),
                 source: _toSource,
                 controller: _toController,
-                decoration: InputDecoration(labelText: 'To Store'),
-                hintText: 'Search destination…',
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).toStore),
+                hintText: GeniusLinkLocalization.of(context).searchDestination,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Products',
+          title: GeniusLinkLocalization.of(context).products,
           subtitle: '${_lines.length} line${_lines.length == 1 ? '' : 's'}',
           initiallyExpanded: true,
           accentColor: marker2,
@@ -162,14 +164,14 @@ class _TransferCreateScreenState extends State<TransferCreateScreen> {
             children: [
               SuperTextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Notes',
-                  hintText: 'Enter transfer notes or internal instructions…',
+                  labelText: GeniusLinkLocalization.of(context).notes,
+                  hintText: GeniusLinkLocalization.of(context).enterTransferNotesOrInternalInstructions,
                 ),
                 multiline: true,
                 rows: 3,
               ),
               SuperAttachmentFormField(
-                decoration: const InputDecoration(labelText: 'Attachments'),
+                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).attachments),
                 accept: '.pdf,.jpg,.jpeg,.png',
                 maxSizeMB: 10,
                 maxFiles: 5,

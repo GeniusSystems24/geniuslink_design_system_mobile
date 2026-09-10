@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _TransferFlowCard extends StatelessWidget {
   final Color tone, deltaColor;
@@ -114,7 +116,7 @@ class TransferDetailScreen extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Transfer Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).transferDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -189,7 +191,7 @@ class TransferDetailScreen extends StatelessWidget {
                   tone: SuperMaterialThemeData.of(
                     context,
                   ).colorScheme.secondary,
-                  label: 'To Store',
+                  label: GeniusLinkLocalization.of(context).toStore,
                   store: 'ST-002 · King Fahd Warehouse',
                   ar: 'مستودع الملك فهد',
                   delta: '+54,892 SAR',
@@ -202,8 +204,8 @@ class TransferDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Items in Transit',
-          subtitle: '2 lines · 258 units',
+          title: GeniusLinkLocalization.of(context).itemsInTransit,
+          subtitle: GeniusLinkLocalization.of(context).text2Lines258Units,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -225,7 +227,7 @@ class TransferDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Logistics & Tracking',
+          title: GeniusLinkLocalization.of(context).logisticsTracking,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -234,15 +236,15 @@ class TransferDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Carrier', 'Plate 4892-RKD'),
-              KV('Driver', 'Mohammed S.'),
-              KV('Expected Arrival', 'Dec 20, 2025', mono: true),
+            children: [
+              KV(GeniusLinkLocalization.of(context).carrier, 'Plate 4892-RKD'),
+              KV(GeniusLinkLocalization.of(context).driver, 'Mohammed S.'),
+              KV(GeniusLinkLocalization.of(context).expectedArrival, 'Dec 20, 2025', mono: true),
             ],
           ),
         ),
         MBtn(
-          'Back to List',
+          GeniusLinkLocalization.of(context).backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

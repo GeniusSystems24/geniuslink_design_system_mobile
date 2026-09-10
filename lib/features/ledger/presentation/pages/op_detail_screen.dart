@@ -9,17 +9,17 @@ class OpDetailScreen extends StatelessWidget {
       ('5001 — Cost of Goods Sold', '+1,200.00', true, 'Debit'),
       ('1100 — Bank · NCB Main', '−6,600.00', false, 'Credit'),
     ];
-    var trailing = const Pill('Posted');
+    var trailing = Pill(GeniusLinkLocalization.of(context).posted);
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Financial Operation')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).financialOperation), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Operation Summary',
+          title: GeniusLinkLocalization.of(context).operationSummary,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -39,11 +39,11 @@ class OpDetailScreen extends StatelessWidget {
                   color: SuperMaterialThemeData.of(context).colorScheme.primary,
                 ),
               ),
-              const Row(
+              Row(
                 children: [
                   Expanded(
                     child: Mini(
-                      label: 'Total Debits',
+                      label: GeniusLinkLocalization.of(context).totalDebits,
                       value: '6,600.00',
                       sub: 'SAR',
                     ),
@@ -51,7 +51,7 @@ class OpDetailScreen extends StatelessWidget {
                   SizedBox(width: 12),
                   Expanded(
                     child: Mini(
-                      label: 'Difference',
+                      label: GeniusLinkLocalization.of(context).difference,
                       value: '0.00',
                       sub: 'SAR',
                       hi: true,
@@ -63,7 +63,7 @@ class OpDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Ledger Lines',
+          title: GeniusLinkLocalization.of(context).ledgerLines,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -148,7 +148,7 @@ class OpDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit',
+          title: GeniusLinkLocalization.of(context).audit,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -158,19 +158,19 @@ class OpDetailScreen extends StatelessWidget {
             connectIndictors: true,
             items: [
               AuditItem(
-                title: 'Operation created',
+                title: GeniusLinkLocalization.of(context).operationCreated,
                 doAt: DateTime(2025, 12, 18, 9, 21),
                 doBy: 'Layla A.',
                 indicatorColor: accentColor2,
               ),
               AuditItem(
-                title: 'Submitted for review',
+                title: GeniusLinkLocalization.of(context).submittedForReview,
                 doAt: DateTime(2025, 12, 18, 9, 24),
                 doBy: 'Layla A.',
                 indicatorColor: accentColor2,
               ),
               AuditItem(
-                title: 'Approved & posted',
+                title: GeniusLinkLocalization.of(context).approvedPosted,
                 doAt: DateTime(2025, 12, 18, 10, 5),
                 doBy: 'Controller',
                 indicatorColor: accentColor2,
@@ -179,7 +179,7 @@ class OpDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to Operations',
+          GeniusLinkLocalization.of(context).backToOperations,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

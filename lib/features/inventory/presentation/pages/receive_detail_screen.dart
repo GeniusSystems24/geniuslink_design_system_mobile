@@ -4,6 +4,8 @@ import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
 
 import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class ReceiveDetailScreen extends StatelessWidget {
   const ReceiveDetailScreen({super.key});
@@ -14,17 +16,17 @@ class ReceiveDetailScreen extends StatelessWidget {
       ('Structural Steel I-Beam', '32 PCS × 450.00', '14,400.00'),
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.tertiary;
-    var trailing = const Pill('Posted');
+    var trailing = Pill(GeniusLinkLocalization.of(context).posted);
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Receive Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).receiveDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Received Value',
+          title: GeniusLinkLocalization.of(context).receivedValue,
           subtitle: 'INV-REC-2024-0241 · Dec 16, 2025',
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -69,7 +71,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Receipt Information',
+          title: GeniusLinkLocalization.of(context).receiptInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor4,
@@ -78,17 +80,17 @@ class ReceiveDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Serial No', 'INV-REC-2024-0241', mono: true),
-              KV('Receiving Store', 'King Fahd Warehouse'),
-              KV('Supplier', 'ABC Trading Co.'),
-              KV('PO Reference', 'PO-2024-1182', mono: true),
+            children: [
+              KV(GeniusLinkLocalization.of(context).serialNo, 'INV-REC-2024-0241', mono: true),
+              KV(GeniusLinkLocalization.of(context).receivingStore, 'King Fahd Warehouse'),
+              KV(GeniusLinkLocalization.of(context).supplier, 'ABC Trading Co.'),
+              KV(GeniusLinkLocalization.of(context).poReference, 'PO-2024-1182', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Items',
-          subtitle: '2 lines · 432 units',
+          title: GeniusLinkLocalization.of(context).items,
+          subtitle: GeniusLinkLocalization.of(context).text2Lines432Units,
           initiallyExpanded: true,
           accentColor: accentColor3,
 
@@ -110,7 +112,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Audit Information',
+          title: GeniusLinkLocalization.of(context).auditInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -120,7 +122,7 @@ class ReceiveDetailScreen extends StatelessWidget {
             connectIndictors: true,
             items: [
               AuditItem(
-                title: 'Received',
+                title: GeniusLinkLocalization.of(context).received,
                 doAt: DateTime(2025, 12, 16, 14, 32),
                 doBy: 'Layla A. (ID: 12)',
                 description:
@@ -130,7 +132,7 @@ class ReceiveDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to List',
+          GeniusLinkLocalization.of(context).backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

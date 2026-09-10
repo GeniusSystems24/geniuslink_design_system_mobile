@@ -1,3 +1,1723 @@
 {
-  "@@locale": "ar"
+  "@@locale": "ar",
+  "accountDetail": "تفاصيل الحساب",
+  "@accountDetail": {
+    "description": "Title of the account detail screen."
+  },
+  "active": "نشط",
+  "@active": {
+    "description": "Label indicating that an account is active."
+  },
+  "currentBalance": "الرصيد الحالي",
+  "@currentBalance": {
+    "description": "Section title for the account current balance."
+  },
+  "information": "المعلومات",
+  "@information": {
+    "description": "Section title for account information."
+  },
+  "code": "الرمز",
+  "@code": {
+    "description": "Label for an account code."
+  },
+  "accountType": "النوع",
+  "@accountType": {
+    "description": "Label for the account type."
+  },
+  "assetCash": "أصل · نقد",
+  "@assetCash": {
+    "description": "Display value for an asset cash account type."
+  },
+  "tree": "الشجرة",
+  "@tree": {
+    "description": "Label for the account hierarchy/tree."
+  },
+  "assetsTreeOne": "شجرة الأصول (1)",
+  "@assetsTreeOne": {
+    "description": "Display name of the sample assets tree."
+  },
+  "currency": "العملة",
+  "@currency": {
+    "description": "Label for currency."
+  },
+  "recentTransactions": "أحدث الحركات",
+  "@recentTransactions": {
+    "description": "Section title for recent account transactions."
+  },
+  "backToList": "العودة إلى القائمة",
+  "@backToList": {
+    "description": "Button label that returns to the accounts list."
+  },
+  "asOf": "كما في",
+  "@asOf": {
+    "description": "Prefix shown before the balance as-of date and time."
+  },
+  "totalDebits": "إجمالي المدين",
+  "@totalDebits": {
+    "description": "Label for total debit amount."
+  },
+  "totalCredits": "إجمالي الدائن",
+  "@totalCredits": {
+    "description": "Label for total credit amount."
+  },
+  "accountInformation": "معلومات الحساب",
+  "@accountInformation": {
+    "description": "Section title for account information."
+  },
+  "assetCashEquivalents": "أصل · النقد وما في حكمه",
+  "@assetCashEquivalents": {
+    "description": "Display label for the cash equivalents account type."
+  },
+  "nameEnglish": "الاسم بالإنجليزية",
+  "@nameEnglish": {
+    "description": "Label for an English name field."
+  },
+  "nameArabic": "الاسم بالعربية",
+  "@nameArabic": {
+    "description": "Label for an Arabic name field."
+  },
+  "accountTree": "شجرة الحسابات",
+  "@accountTree": {
+    "description": "Label or title for the account tree."
+  },
+  "parentGroup": "المجموعة الأم",
+  "@parentGroup": {
+    "description": "Label for the parent account group."
+  },
+  "tenantId": "معرف المستأجر",
+  "@tenantId": {
+    "description": "Label for a tenant identifier."
+  },
+  "latestEntriesRunningBalance": "أحدث القيود · الرصيد الجاري",
+  "@latestEntriesRunningBalance": {
+    "description": "Subtitle for the recent transactions section."
+  },
+  "balanceShort": "الرصيد",
+  "@balanceShort": {
+    "description": "Short balance label shown beside a running transaction balance."
+  },
+  "auditInformation": "معلومات التدقيق",
+  "@auditInformation": {
+    "description": "Section title for audit information."
+  },
+  "created": "تم الإنشاء",
+  "@created": {
+    "description": "Audit action label for creation."
+  },
+  "modified": "تم التعديل",
+  "@modified": {
+    "description": "Audit action label for modification."
+  },
+  "export": "تصدير",
+  "@export": {
+    "description": "Button label for export."
+  },
+  "back": "رجوع",
+  "@back": {
+    "description": "Generic back button label."
+  },
+  "chartOfAccounts": "دليل الحسابات",
+  "@chartOfAccounts": {
+    "description": "Title for the chart of accounts."
+  },
+  "rollUpBalancesBilingual": "أرصدة مجمعة · ثنائي اللغة",
+  "@rollUpBalancesBilingual": {
+    "description": "Subtitle describing the account tree."
+  },
+  "account": "الحساب",
+  "@account": {
+    "description": "Account column label."
+  },
+  "balanceSar": "الرصيد (SAR)",
+  "@balanceSar": {
+    "description": "Balance column label using SAR."
+  },
+  "accounts": "الحسابات",
+  "@accounts": {
+    "description": "Accounts screen title."
+  },
+  "searchAccounts": "البحث في الحسابات…",
+  "@searchAccounts": {
+    "description": "Placeholder shown for account search."
+  },
+  "createAccount": "إنشاء حساب",
+  "@createAccount": {
+    "description": "Create account screen title."
+  },
+  "accountDetails": "تفاصيل الحساب",
+  "@accountDetails": {
+    "description": "Section title for account creation details."
+  },
+  "identifyAndPlaceInTree": "تحديد الحساب وموقعه في الشجرة",
+  "@identifyAndPlaceInTree": {
+    "description": "Subtitle for account creation details."
+  },
+  "accountCode": "رمز الحساب",
+  "@accountCode": {
+    "description": "Label for the account code input."
+  },
+  "example1102": "مثال: 1102",
+  "@example1102": {
+    "description": "Example placeholder for an account code."
+  },
+  "asset": "أصل",
+  "@asset": {
+    "description": "Display label for an asset account type."
+  },
+  "exampleEnglishAccountName": "مثال: بنك · الراجحي",
+  "@exampleEnglishAccountName": {
+    "description": "Example placeholder for an English account name."
+  },
+  "exampleArabicAccountName": "مثال: بنك الراجحي",
+  "@exampleArabicAccountName": {
+    "description": "Example placeholder for an Arabic account name."
+  },
+  "searchParentGroup": "البحث عن مجموعة أم…",
+  "@searchParentGroup": {
+    "description": "Placeholder for searching parent account groups."
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Settings section title."
+  },
+  "searchCurrency": "البحث عن عملة…",
+  "@searchCurrency": {
+    "description": "Placeholder for currency search."
+  },
+  "openingBalance": "الرصيد الافتتاحي",
+  "@openingBalance": {
+    "description": "Label for opening balance."
+  },
+  "normalBalance": "طبيعة الرصيد",
+  "@normalBalance": {
+    "description": "Label for normal debit or credit balance."
+  },
+  "debit": "مدين",
+  "@debit": {
+    "description": "Debit option label."
+  },
+  "credit": "دائن",
+  "@credit": {
+    "description": "Credit option label."
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Cancel button label."
+  },
+  "create": "إنشاء",
+  "@create": {
+    "description": "Create button label."
+  },
+  "createAccountGroup": "إنشاء مجموعة حسابات",
+  "@createAccountGroup": {
+    "description": "Create account group screen title."
+  },
+  "groupDetails": "تفاصيل المجموعة",
+  "@groupDetails": {
+    "description": "Section title for group creation details."
+  },
+  "nameAndTreeAssociation": "الاسم والارتباط بالشجرة",
+  "@nameAndTreeAssociation": {
+    "description": "Subtitle for group name and tree association."
+  },
+  "exampleCurrentAssets": "مثال: الأصول المتداولة",
+  "@exampleCurrentAssets": {
+    "description": "Example placeholder for an account group name."
+  },
+  "selectTree": "اختر شجرة…",
+  "@selectTree": {
+    "description": "Placeholder for selecting an account tree."
+  },
+  "additionalInformation": "معلومات إضافية",
+  "@additionalInformation": {
+    "description": "Additional information section title."
+  },
+  "note": "ملاحظة",
+  "@note": {
+    "description": "Label for a note field."
+  },
+  "addNotesAboutGroup": "أضف أي ملاحظات حول هذه المجموعة…",
+  "@addNotesAboutGroup": {
+    "description": "Placeholder for group notes."
+  },
+  "groupDetail": "تفاصيل المجموعة",
+  "@groupDetail": {
+    "description": "Group detail screen title."
+  },
+  "groupInformation": "معلومات المجموعة",
+  "@groupInformation": {
+    "description": "Section title for group information."
+  },
+  "id": "المعرّف",
+  "@id": {
+    "description": "Generic identifier label."
+  },
+  "notes": "ملاحظات",
+  "@notes": {
+    "description": "Notes section title."
+  },
+  "audit": "التدقيق",
+  "@audit": {
+    "description": "Audit section title."
+  },
+  "inviteUser": "دعوة مستخدم",
+  "@inviteUser": {
+    "description": "Localized user-interface text."
+  },
+  "identity": "الهوية",
+  "@identity": {
+    "description": "Localized user-interface text."
+  },
+  "theNewMemberSNameAndContact": "اسم العضو الجديد وبيانات التواصل",
+  "@theNewMemberSNameAndContact": {
+    "description": "Localized user-interface text."
+  },
+  "eGOmarHassan": "مثال: Omar Hassan",
+  "@eGOmarHassan": {
+    "description": "Localized user-interface text."
+  },
+  "workEmail": "البريد الإلكتروني للعمل",
+  "@workEmail": {
+    "description": "Localized user-interface text."
+  },
+  "employeeId": "معرف الموظف",
+  "@employeeId": {
+    "description": "Localized user-interface text."
+  },
+  "optional": "اختياري",
+  "@optional": {
+    "description": "Localized user-interface text."
+  },
+  "access": "الصلاحيات",
+  "@access": {
+    "description": "Localized user-interface text."
+  },
+  "roleDeterminesDefaultPermissions": "يحدد الدور الصلاحيات الافتراضية",
+  "@roleDeterminesDefaultPermissions": {
+    "description": "Localized user-interface text."
+  },
+  "role": "الدور",
+  "@role": {
+    "description": "Localized user-interface text."
+  },
+  "defaultStore": "المتجر الافتراضي",
+  "@defaultStore": {
+    "description": "Localized user-interface text."
+  },
+  "anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword": "سيتم إرسال رسالة دعوة تحتوي على رابط إعداد صالح للاستخدام مرة واحدة. سيظل الحساب قيد الانتظار حتى يعيّن المستخدم كلمة مرور.",
+  "@anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword": {
+    "description": "Localized user-interface text."
+  },
+  "sendInvitation": "إرسال الدعوة",
+  "@sendInvitation": {
+    "description": "Localized user-interface text."
+  },
+  "userDetail": "تفاصيل المستخدم",
+  "@userDetail": {
+    "description": "Localized user-interface text."
+  },
+  "profile": "الملف التعريفي",
+  "@profile": {
+    "description": "Localized user-interface text."
+  },
+  "fullName": "الاسم الكامل",
+  "@fullName": {
+    "description": "Localized user-interface text."
+  },
+  "security": "الأمان",
+  "@security": {
+    "description": "Localized user-interface text."
+  },
+  "twoFactorAuthentication": "المصادقة الثنائية",
+  "@twoFactorAuthentication": {
+    "description": "Localized user-interface text."
+  },
+  "activeSessions": "الجلسات النشطة",
+  "@activeSessions": {
+    "description": "Localized user-interface text."
+  },
+  "devicesCurrentlySignedIn": "الأجهزة المسجل دخولها حالياً",
+  "@devicesCurrentlySignedIn": {
+    "description": "Localized user-interface text."
+  },
+  "revoke": "إلغاء",
+  "@revoke": {
+    "description": "Localized user-interface text."
+  },
+  "recentActivity": "النشاط الأخير",
+  "@recentActivity": {
+    "description": "Localized user-interface text."
+  },
+  "deactivateUser": "إلغاء تنشيط المستخدم",
+  "@deactivateUser": {
+    "description": "Localized user-interface text."
+  },
+  "signIn": "تسجيل الدخول",
+  "@signIn": {
+    "description": "Localized user-interface text."
+  },
+  "accessYourWorkspace": "الوصول إلى مساحة العمل",
+  "@accessYourWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "email": "البريد الإلكتروني",
+  "@email": {
+    "description": "Localized user-interface text."
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "Localized user-interface text."
+  },
+  "forgotPassword": "هل نسيت كلمة المرور؟",
+  "@forgotPassword": {
+    "description": "Localized user-interface text."
+  },
+  "signInToGeniusLink": "تسجيل الدخول إلى GeniusLink",
+  "@signInToGeniusLink": {
+    "description": "Localized user-interface text."
+  },
+  "sessionsAreRecordedInTheAuditLogWithTimestampAndDevice": "يتم تسجيل الجلسات في سجل التدقيق مع الوقت والجهاز.",
+  "@sessionsAreRecordedInTheAuditLogWithTimestampAndDevice": {
+    "description": "Localized user-interface text."
+  },
+  "provisionAWorkspace": "إعداد مساحة عمل",
+  "@provisionAWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "youLlBeTheWorkspaceAdministrator": "ستكون مسؤول مساحة العمل.",
+  "@youLlBeTheWorkspaceAdministrator": {
+    "description": "Localized user-interface text."
+  },
+  "eGKhalidAlRashid": "مثال: Khalid Al-Rashid",
+  "@eGKhalidAlRashid": {
+    "description": "Localized user-interface text."
+  },
+  "organization": "المؤسسة",
+  "@organization": {
+    "description": "Localized user-interface text."
+  },
+  "eGAlRashidTradingCo": "مثال: Al-Rashid Trading Co.",
+  "@eGAlRashidTradingCo": {
+    "description": "Localized user-interface text."
+  },
+  "iAgreeToTheTermsOfServiceAndDataProcessingAgreement": "أوافق على شروط الخدمة واتفاقية معالجة البيانات.",
+  "@iAgreeToTheTermsOfServiceAndDataProcessingAgreement": {
+    "description": "Localized user-interface text."
+  },
+  "createWorkspace": "إنشاء مساحة العمل",
+  "@createWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "forgotPassword2": "نسيت كلمة المرور",
+  "@forgotPassword2": {
+    "description": "Localized user-interface text."
+  },
+  "enterTheEmailTiedToYourAccount": "أدخل البريد الإلكتروني المرتبط بحسابك.",
+  "@enterTheEmailTiedToYourAccount": {
+    "description": "Localized user-interface text."
+  },
+  "sendResetLink": "إرسال رابط إعادة التعيين",
+  "@sendResetLink": {
+    "description": "Localized user-interface text."
+  },
+  "backToSignIn": "العودة إلى تسجيل الدخول",
+  "@backToSignIn": {
+    "description": "Localized user-interface text."
+  },
+  "checkYourInbox": "تحقق من صندوق الوارد",
+  "@checkYourInbox": {
+    "description": "Localized user-interface text."
+  },
+  "useADifferentEmail": "استخدام بريد إلكتروني مختلف",
+  "@useADifferentEmail": {
+    "description": "Localized user-interface text."
+  },
+  "createDeposit": "إنشاء إيداع",
+  "@createDeposit": {
+    "description": "Localized user-interface text."
+  },
+  "depositAmount": "مبلغ الإيداع",
+  "@depositAmount": {
+    "description": "Localized user-interface text."
+  },
+  "amount": "المبلغ",
+  "@amount": {
+    "description": "Localized user-interface text."
+  },
+  "destination": "الوجهة",
+  "@destination": {
+    "description": "Localized user-interface text."
+  },
+  "depositTo": "الإيداع إلى",
+  "@depositTo": {
+    "description": "Localized user-interface text."
+  },
+  "reference": "المرجع",
+  "@reference": {
+    "description": "Localized user-interface text."
+  },
+  "eGCounterSlipNo": "مثال: Counter slip no.",
+  "@eGCounterSlipNo": {
+    "description": "Localized user-interface text."
+  },
+  "valueDate": "تاريخ القيمة",
+  "@valueDate": {
+    "description": "Localized user-interface text."
+  },
+  "journalPreview": "معاينة القيد",
+  "@journalPreview": {
+    "description": "Localized user-interface text."
+  },
+  "optionalNoteForThisDeposit": "ملاحظة اختيارية لهذا الإيداع…",
+  "@optionalNoteForThisDeposit": {
+    "description": "Localized user-interface text."
+  },
+  "createExternalTransfer": "إنشاء تحويل خارجي",
+  "@createExternalTransfer": {
+    "description": "Localized user-interface text."
+  },
+  "transferAmount": "مبلغ التحويل",
+  "@transferAmount": {
+    "description": "Localized user-interface text."
+  },
+  "fxConversion": "تحويل العملات",
+  "@fxConversion": {
+    "description": "Localized user-interface text."
+  },
+  "beneficiary": "المستفيد",
+  "@beneficiary": {
+    "description": "Localized user-interface text."
+  },
+  "ibanSwift": "IBAN / SWIFT",
+  "@ibanSwift": {
+    "description": "Localized user-interface text."
+  },
+  "purposeCode": "رمز الغرض",
+  "@purposeCode": {
+    "description": "Localized user-interface text."
+  },
+  "externalWiresSettleIn12BusinessDaysAndRequireDualApproval": "تتم تسوية التحويلات الخارجية خلال 1–2 يوم عمل وتتطلب اعتماداً مزدوجاً.",
+  "@externalWiresSettleIn12BusinessDaysAndRequireDualApproval": {
+    "description": "Localized user-interface text."
+  },
+  "createLocalTransfer": "إنشاء تحويل محلي",
+  "@createLocalTransfer": {
+    "description": "Localized user-interface text."
+  },
+  "toAccount": "حساب إلى",
+  "@toAccount": {
+    "description": "Localized user-interface text."
+  },
+  "internalNoteSlipNo": "ملاحظة داخلية / رقم الإيصال",
+  "@internalNoteSlipNo": {
+    "description": "Localized user-interface text."
+  },
+  "createWithdrawal": "إنشاء سحب",
+  "@createWithdrawal": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalAmount": "مبلغ السحب",
+  "@withdrawalAmount": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawFrom": "السحب من",
+  "@withdrawFrom": {
+    "description": "Localized user-interface text."
+  },
+  "payee": "المستفيد من الدفع",
+  "@payee": {
+    "description": "Localized user-interface text."
+  },
+  "eGGlobalSteelImports": "مثال: Global Steel Imports",
+  "@eGGlobalSteelImports": {
+    "description": "Localized user-interface text."
+  },
+  "expenseAccount": "حساب المصروف",
+  "@expenseAccount": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalsAbove10000SarRequireASecondApprovalBeforePosting": "السحوبات التي تتجاوز 10,000 SAR تتطلب اعتماداً ثانياً قبل الترحيل.",
+  "@withdrawalsAbove10000SarRequireASecondApprovalBeforePosting": {
+    "description": "Localized user-interface text."
+  },
+  "depositReceipt": "إيصال إيداع",
+  "@depositReceipt": {
+    "description": "Localized user-interface text."
+  },
+  "details": "التفاصيل",
+  "@details": {
+    "description": "Localized user-interface text."
+  },
+  "postedJournal": "القيد المرحّل",
+  "@postedJournal": {
+    "description": "Localized user-interface text."
+  },
+  "externalWireDetail": "تفاصيل التحويل البنكي الخارجي",
+  "@externalWireDetail": {
+    "description": "Localized user-interface text."
+  },
+  "externalWire": "تحويل بنكي خارجي",
+  "@externalWire": {
+    "description": "Localized user-interface text."
+  },
+  "posted": "مرحّل",
+  "@posted": {
+    "description": "Localized user-interface text."
+  },
+  "interAccountSettlement": "تسوية بين الحسابات",
+  "@interAccountSettlement": {
+    "description": "Localized user-interface text."
+  },
+  "to": "إلى",
+  "@to": {
+    "description": "Localized user-interface text."
+  },
+  "transferred": "تم التحويل",
+  "@transferred": {
+    "description": "Localized user-interface text."
+  },
+  "withdrawalVoucher": "سند سحب",
+  "@withdrawalVoucher": {
+    "description": "Localized user-interface text."
+  },
+  "approved": "معتمد",
+  "@approved": {
+    "description": "Localized user-interface text."
+  },
+  "addCurrency": "إضافة العملة",
+  "@addCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "currencyDefinition": "تعريف العملة",
+  "@currencyDefinition": {
+    "description": "Localized user-interface text."
+  },
+  "isoCodeDisplayNamesAndSymbol": "رمز ISO وأسماء العرض والرمز",
+  "@isoCodeDisplayNamesAndSymbol": {
+    "description": "Localized user-interface text."
+  },
+  "isoCode": "رمز ISO",
+  "@isoCode": {
+    "description": "Localized user-interface text."
+  },
+  "eGUsd": "مثال: USD",
+  "@eGUsd": {
+    "description": "Localized user-interface text."
+  },
+  "symbol": "الرمز",
+  "@symbol": {
+    "description": "Localized user-interface text."
+  },
+  "eGUsDollar": "مثال: US Dollar",
+  "@eGUsDollar": {
+    "description": "Localized user-interface text."
+  },
+  "precisionRate": "الدقة وسعر الصرف",
+  "@precisionRate": {
+    "description": "Localized user-interface text."
+  },
+  "decimalPlacesAndExchangeRateAgainstBase": "المنازل العشرية وسعر الصرف مقابل العملة الأساسية",
+  "@decimalPlacesAndExchangeRateAgainstBase": {
+    "description": "Localized user-interface text."
+  },
+  "decimalPlaces": "المنازل العشرية",
+  "@decimalPlaces": {
+    "description": "Localized user-interface text."
+  },
+  "exchangeRatePer1Sar": "سعر الصرف (لكل 1 SAR)",
+  "@exchangeRatePer1Sar": {
+    "description": "Localized user-interface text."
+  },
+  "eG3750200": "مثال: 3.750200",
+  "@eG3750200": {
+    "description": "Localized user-interface text."
+  },
+  "setAsBaseCurrency": "تعيين كعملة أساسية",
+  "@setAsBaseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "currencies": "العملات",
+  "@currencies": {
+    "description": "Localized user-interface text."
+  },
+  "currencyDetail": "تفاصيل العملة",
+  "@currencyDetail": {
+    "description": "Localized user-interface text."
+  },
+  "currentRate": "السعر الحالي",
+  "@currentRate": {
+    "description": "Localized user-interface text."
+  },
+  "per1BaseCurrency": "لكل وحدة من العملة الأساسية",
+  "@per1BaseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "definition": "التعريف",
+  "@definition": {
+    "description": "Localized user-interface text."
+  },
+  "localizedName": "الاسم المحلي",
+  "@localizedName": {
+    "description": "Localized user-interface text."
+  },
+  "source": "المصدر",
+  "@source": {
+    "description": "Localized user-interface text."
+  },
+  "rateHistory": "سجل السعر",
+  "@rateHistory": {
+    "description": "Localized user-interface text."
+  },
+  "recentUpdates": "التحديثات الأخيرة",
+  "@recentUpdates": {
+    "description": "Localized user-interface text."
+  },
+  "noRateHistoryAvailable": "لا يتوفر سجل لأسعار الصرف.",
+  "@noRateHistoryAvailable": {
+    "description": "Localized user-interface text."
+  },
+  "exchangeRates": "أسعار الصرف",
+  "@exchangeRates": {
+    "description": "Localized user-interface text."
+  },
+  "baseCurrency": "العملة الأساسية",
+  "@baseCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "pullEcbFeed": "جلب بيانات ECB",
+  "@pullEcbFeed": {
+    "description": "Localized user-interface text."
+  },
+  "ratesPer1Sar": "الأسعار لكل 1 SAR",
+  "@ratesPer1Sar": {
+    "description": "Localized user-interface text."
+  },
+  "autoFedPairsSyncDailyManualPairsAreEditable": "تتم مزامنة الأزواج التلقائية يومياً؛ والأزواج اليدوية قابلة للتعديل",
+  "@autoFedPairsSyncDailyManualPairsAreEditable": {
+    "description": "Localized user-interface text."
+  },
+  "open": "مفتوح",
+  "@open": {
+    "description": "Localized user-interface text."
+  },
+  "fiscalYear": "السنة المالية",
+  "@fiscalYear": {
+    "description": "Localized user-interface text."
+  },
+  "defineTheActiveFiscalYearBoundaries": "تحديد حدود السنة المالية النشطة",
+  "@defineTheActiveFiscalYearBoundaries": {
+    "description": "Localized user-interface text."
+  },
+  "startDate": "تاريخ البدء",
+  "@startDate": {
+    "description": "Localized user-interface text."
+  },
+  "endDate": "تاريخ الانتهاء",
+  "@endDate": {
+    "description": "Localized user-interface text."
+  },
+  "accountingPeriods": "الفترات المحاسبية",
+  "@accountingPeriods": {
+    "description": "Localized user-interface text."
+  },
+  "text12MonthlyPeriodsLockToPreventBackDatedPostings": "12 فترة شهرية · قفل لمنع الترحيل بتاريخ سابق",
+  "@text12MonthlyPeriodsLockToPreventBackDatedPostings": {
+    "description": "Localized user-interface text."
+  },
+  "closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti": "إغلاق الفترة يقفل جميع الترحيلات المؤرخة ضمنها. ولا يمكن إعادة فتح فترة مقفلة إلا بواسطة مسؤول مخوّل مع تبرير تدقيقي.",
+  "@closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti": {
+    "description": "Localized user-interface text."
+  },
+  "city": "المدينة",
+  "@city": {
+    "description": "Localized user-interface text."
+  },
+  "contactPerson": "جهة الاتصال",
+  "@contactPerson": {
+    "description": "Localized user-interface text."
+  },
+  "phone": "الهاتف",
+  "@phone": {
+    "description": "Localized user-interface text."
+  },
+  "controlAccount": "الحساب الرقابي",
+  "@controlAccount": {
+    "description": "Localized user-interface text."
+  },
+  "paymentTerms": "شروط الدفع",
+  "@paymentTerms": {
+    "description": "Localized user-interface text."
+  },
+  "transactionHistory": "سجل الحركات",
+  "@transactionHistory": {
+    "description": "Localized user-interface text."
+  },
+  "recentInvoicesAndPayments": "الفواتير والمدفوعات الأخيرة",
+  "@recentInvoicesAndPayments": {
+    "description": "Localized user-interface text."
+  },
+  "edit": "تعديل",
+  "@edit": {
+    "description": "Localized user-interface text."
+  },
+  "archive": "أرشفة",
+  "@archive": {
+    "description": "Localized user-interface text."
+  },
+  "legalNameAndContactDetails": "الاسم القانوني وبيانات التواصل",
+  "@legalNameAndContactDetails": {
+    "description": "Localized user-interface text."
+  },
+  "eGRiyadhConstructionCo": "مثال: شركة الرياض للإنشاءات",
+  "@eGRiyadhConstructionCo": {
+    "description": "Localized user-interface text."
+  },
+  "eGAhmedK": "مثال: Ahmed K.",
+  "@eGAhmedK": {
+    "description": "Localized user-interface text."
+  },
+  "eGRiyadh": "مثال: Riyadh",
+  "@eGRiyadh": {
+    "description": "Localized user-interface text."
+  },
+  "linkedControlAccountAndTerms": "الحساب الرقابي المرتبط والشروط",
+  "@linkedControlAccountAndTerms": {
+    "description": "Localized user-interface text."
+  },
+  "taxVatNumber": "الضريبة / رقم ضريبة القيمة المضافة",
+  "@taxVatNumber": {
+    "description": "Localized user-interface text."
+  },
+  "creditLimitSar": "حد الائتمان (SAR)",
+  "@creditLimitSar": {
+    "description": "Localized user-interface text."
+  },
+  "eG10000000": "مثال: 100,000.00",
+  "@eG10000000": {
+    "description": "Localized user-interface text."
+  },
+  "dashboard": "لوحة المعلومات",
+  "@dashboard": {
+    "description": "Localized user-interface text."
+  },
+  "inflowShort": "داخل",
+  "@inflowShort": {
+    "description": "Localized user-interface text."
+  },
+  "outflowShort": "خارج",
+  "@outflowShort": {
+    "description": "Localized user-interface text."
+  },
+  "cashFlow": "التدفق النقدي",
+  "@cashFlow": {
+    "description": "Localized user-interface text."
+  },
+  "inflowVsOutflowSarThousands12Months": "التدفقات الداخلة مقابل الخارجة · بآلاف SAR · 12 شهراً",
+  "@inflowVsOutflowSarThousands12Months": {
+    "description": "Localized user-interface text."
+  },
+  "cashAssetAccounts": "حسابات النقد والأصول",
+  "@cashAssetAccounts": {
+    "description": "Localized user-interface text."
+  },
+  "topBalances": "أعلى الأرصدة",
+  "@topBalances": {
+    "description": "Localized user-interface text."
+  },
+  "recentOperations": "العمليات الأخيرة",
+  "@recentOperations": {
+    "description": "Localized user-interface text."
+  },
+  "needsAttention": "بحاجة إلى انتباه",
+  "@needsAttention": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryAdjustment": "تسوية المخزون",
+  "@inventoryAdjustment": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentDetails": "تفاصيل التسوية",
+  "@adjustmentDetails": {
+    "description": "Localized user-interface text."
+  },
+  "serialNo": "الرقم التسلسلي",
+  "@serialNo": {
+    "description": "Localized user-interface text."
+  },
+  "reason": "السبب",
+  "@reason": {
+    "description": "Localized user-interface text."
+  },
+  "store": "المتجر",
+  "@store": {
+    "description": "Localized user-interface text."
+  },
+  "searchStore": "البحث عن المتجر…",
+  "@searchStore": {
+    "description": "Localized user-interface text."
+  },
+  "countDate": "تاريخ الجرد",
+  "@countDate": {
+    "description": "Localized user-interface text."
+  },
+  "varianceSummary": "ملخص الفروقات",
+  "@varianceSummary": {
+    "description": "Localized user-interface text."
+  },
+  "netFinancialImpactOfThisReconciliation": "الأثر المالي الصافي لهذه المطابقة",
+  "@netFinancialImpactOfThisReconciliation": {
+    "description": "Localized user-interface text."
+  },
+  "netAdjustment": "صافي التسوية",
+  "@netAdjustment": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentLines": "بنود التسوية",
+  "@adjustmentLines": {
+    "description": "Localized user-interface text."
+  },
+  "documentationApproval": "التوثيق والاعتماد",
+  "@documentationApproval": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentNotes": "ملاحظات التسوية",
+  "@adjustmentNotes": {
+    "description": "Localized user-interface text."
+  },
+  "auditorNameWitnessCountSessionReference": "اسم المدقق، الشاهد، مرجع جلسة الجرد…",
+  "@auditorNameWitnessCountSessionReference": {
+    "description": "Localized user-interface text."
+  },
+  "adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro": "التسويات التي تتجاوز 1,000 SAR تتطلب اعتماداً مزدوجاً. يتم ترحيل هذا القيد إلى سجل التدقيق فوراً وإشعار المسؤول.",
+  "@adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro": {
+    "description": "Localized user-interface text."
+  },
+  "barcodePrint": "طباعة الباركود",
+  "@barcodePrint": {
+    "description": "Localized user-interface text."
+  },
+  "preview": "معاينة",
+  "@preview": {
+    "description": "Localized user-interface text."
+  },
+  "labelTemplate": "قالب الملصق",
+  "@labelTemplate": {
+    "description": "Localized user-interface text."
+  },
+  "symbology": "نوع الباركود",
+  "@symbology": {
+    "description": "Localized user-interface text."
+  },
+  "paper": "الورق",
+  "@paper": {
+    "description": "Localized user-interface text."
+  },
+  "copiesPerItem": "عدد النسخ لكل صنف",
+  "@copiesPerItem": {
+    "description": "Localized user-interface text."
+  },
+  "queue": "قائمة الانتظار",
+  "@queue": {
+    "description": "Localized user-interface text."
+  },
+  "categories": "الفئات",
+  "@categories": {
+    "description": "Localized user-interface text."
+  },
+  "categoryTree": "شجرة الفئات",
+  "@categoryTree": {
+    "description": "Localized user-interface text."
+  },
+  "text5TopLevelGroups": "5 مجموعات رئيسية",
+  "@text5TopLevelGroups": {
+    "description": "Localized user-interface text."
+  },
+  "newCategory": "فئة جديدة",
+  "@newCategory": {
+    "description": "Localized user-interface text."
+  },
+  "quickInlineForm": "نموذج سريع داخل الصفحة",
+  "@quickInlineForm": {
+    "description": "Localized user-interface text."
+  },
+  "eGCat006": "مثال: CAT-006",
+  "@eGCat006": {
+    "description": "Localized user-interface text."
+  },
+  "parent": "الأصل",
+  "@parent": {
+    "description": "Localized user-interface text."
+  },
+  "eGAdhesivesSealants": "مثال: Adhesives & Sealants",
+  "@eGAdhesivesSealants": {
+    "description": "Localized user-interface text."
+  },
+  "eGAdhesives": "مثال: لاصقات",
+  "@eGAdhesives": {
+    "description": "Localized user-interface text."
+  },
+  "createProduct": "إنشاء المنتج",
+  "@createProduct": {
+    "description": "Localized user-interface text."
+  },
+  "productDefinition": "تعريف المنتج",
+  "@productDefinition": {
+    "description": "Localized user-interface text."
+  },
+  "skuNamesAndClassification": "SKU والأسماء والتصنيف",
+  "@skuNamesAndClassification": {
+    "description": "Localized user-interface text."
+  },
+  "eGStl44021": "مثال: STL-44021",
+  "@eGStl44021": {
+    "description": "Localized user-interface text."
+  },
+  "barcode": "الباركود",
+  "@barcode": {
+    "description": "Localized user-interface text."
+  },
+  "scanOrType": "امسح أو اكتب",
+  "@scanOrType": {
+    "description": "Localized user-interface text."
+  },
+  "eGStructuralSteelIBeam": "مثال: Structural Steel I-Beam",
+  "@eGStructuralSteelIBeam": {
+    "description": "Localized user-interface text."
+  },
+  "category": "الفئة",
+  "@category": {
+    "description": "Localized user-interface text."
+  },
+  "selectCategory": "اختر فئة…",
+  "@selectCategory": {
+    "description": "Localized user-interface text."
+  },
+  "unitOfMeasure": "وحدة القياس",
+  "@unitOfMeasure": {
+    "description": "Localized user-interface text."
+  },
+  "selectUnit": "اختر وحدة…",
+  "@selectUnit": {
+    "description": "Localized user-interface text."
+  },
+  "costingPricing": "التكلفة والتسعير",
+  "@costingPricing": {
+    "description": "Localized user-interface text."
+  },
+  "unitCostSar": "تكلفة الوحدة (SAR)",
+  "@unitCostSar": {
+    "description": "Localized user-interface text."
+  },
+  "sellingPriceSar": "سعر البيع (SAR)",
+  "@sellingPriceSar": {
+    "description": "Localized user-interface text."
+  },
+  "vatRate": "نسبة ضريبة القيمة المضافة",
+  "@vatRate": {
+    "description": "Localized user-interface text."
+  },
+  "selectRate": "اختر سعراً…",
+  "@selectRate": {
+    "description": "Localized user-interface text."
+  },
+  "inventorySettings": "إعدادات المخزون",
+  "@inventorySettings": {
+    "description": "Localized user-interface text."
+  },
+  "reorderLevel": "حد إعادة الطلب",
+  "@reorderLevel": {
+    "description": "Localized user-interface text."
+  },
+  "selectStore": "اختر متجراً…",
+  "@selectStore": {
+    "description": "Localized user-interface text."
+  },
+  "openingStock": "المخزون الافتتاحي",
+  "@openingStock": {
+    "description": "Localized user-interface text."
+  },
+  "productImages": "صور المنتج",
+  "@productImages": {
+    "description": "Localized user-interface text."
+  },
+  "inventory": "المخزون",
+  "@inventory": {
+    "description": "Localized user-interface text."
+  },
+  "reorderAlerts": "تنبيهات إعادة الطلب",
+  "@reorderAlerts": {
+    "description": "Localized user-interface text."
+  },
+  "text3ProductsAtOrBelowReorderLevel": "3 منتجات عند حد إعادة الطلب أو دونه",
+  "@text3ProductsAtOrBelowReorderLevel": {
+    "description": "Localized user-interface text."
+  },
+  "generatePurchaseOrder": "إنشاء أمر شراء",
+  "@generatePurchaseOrder": {
+    "description": "Localized user-interface text."
+  },
+  "issueDetail": "تفاصيل الصرف",
+  "@issueDetail": {
+    "description": "Localized user-interface text."
+  },
+  "issuedValue": "قيمة المصروف",
+  "@issuedValue": {
+    "description": "Localized user-interface text."
+  },
+  "issueInformation": "معلومات الصرف",
+  "@issueInformation": {
+    "description": "Localized user-interface text."
+  },
+  "customer": "العميل",
+  "@customer": {
+    "description": "Localized user-interface text."
+  },
+  "accountingDistribution": "التوزيع المحاسبي",
+  "@accountingDistribution": {
+    "description": "Localized user-interface text."
+  },
+  "backToOperations": "العودة إلى العمليات",
+  "@backToOperations": {
+    "description": "Localized user-interface text."
+  },
+  "priceLists": "قوائم الأسعار",
+  "@priceLists": {
+    "description": "Localized user-interface text."
+  },
+  "itemPrices": "أسعار الأصناف",
+  "@itemPrices": {
+    "description": "Localized user-interface text."
+  },
+  "productDetail": "تفاصيل المنتج",
+  "@productDetail": {
+    "description": "Localized user-interface text."
+  },
+  "stockSummary": "ملخص المخزون",
+  "@stockSummary": {
+    "description": "Localized user-interface text."
+  },
+  "aggregatedAcrossAllStores": "مجمّع عبر جميع المتاجر",
+  "@aggregatedAcrossAllStores": {
+    "description": "Localized user-interface text."
+  },
+  "totalOnHand": "إجمالي المتاح",
+  "@totalOnHand": {
+    "description": "Localized user-interface text."
+  },
+  "stockValue": "قيمة المخزون",
+  "@stockValue": {
+    "description": "Localized user-interface text."
+  },
+  "avgUnitCost": "متوسط تكلفة الوحدة",
+  "@avgUnitCost": {
+    "description": "Localized user-interface text."
+  },
+  "productInformation": "معلومات المنتج",
+  "@productInformation": {
+    "description": "Localized user-interface text."
+  },
+  "unit": "الوحدة",
+  "@unit": {
+    "description": "Localized user-interface text."
+  },
+  "sellingPrice": "سعر البيع",
+  "@sellingPrice": {
+    "description": "Localized user-interface text."
+  },
+  "stockByStore": "المخزون حسب المتجر",
+  "@stockByStore": {
+    "description": "Localized user-interface text."
+  },
+  "recentMovements": "الحركات الأخيرة",
+  "@recentMovements": {
+    "description": "Localized user-interface text."
+  },
+  "backToProducts": "العودة إلى المنتجات",
+  "@backToProducts": {
+    "description": "Localized user-interface text."
+  },
+  "products": "المنتجات",
+  "@products": {
+    "description": "Localized user-interface text."
+  },
+  "searchProductOrSku": "البحث عن منتج أو SKU…",
+  "@searchProductOrSku": {
+    "description": "Localized user-interface text."
+  },
+  "receiveInventory": "استلام المخزون",
+  "@receiveInventory": {
+    "description": "Localized user-interface text."
+  },
+  "receiveDetails": "تفاصيل الاستلام",
+  "@receiveDetails": {
+    "description": "Localized user-interface text."
+  },
+  "selectCurrency": "اختر عملة…",
+  "@selectCurrency": {
+    "description": "Localized user-interface text."
+  },
+  "receivingStore": "متجر الاستلام",
+  "@receivingStore": {
+    "description": "Localized user-interface text."
+  },
+  "supplierAccount": "حساب المورد",
+  "@supplierAccount": {
+    "description": "Localized user-interface text."
+  },
+  "eGAbcTradingCo": "مثال: ABC Trading Co.",
+  "@eGAbcTradingCo": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryItems": "أصناف المخزون",
+  "@inventoryItems": {
+    "description": "Localized user-interface text."
+  },
+  "receiptNotes": "ملاحظات الاستلام",
+  "@receiptNotes": {
+    "description": "Localized user-interface text."
+  },
+  "poNumberDeliveryNoteInspectionResults": "رقم أمر الشراء، إشعار التسليم، نتائج الفحص…",
+  "@poNumberDeliveryNoteInspectionResults": {
+    "description": "Localized user-interface text."
+  },
+  "attachments": "المرفقات",
+  "@attachments": {
+    "description": "Localized user-interface text."
+  },
+  "receiveDetail": "تفاصيل الاستلام",
+  "@receiveDetail": {
+    "description": "Localized user-interface text."
+  },
+  "receivedValue": "قيمة المستلم",
+  "@receivedValue": {
+    "description": "Localized user-interface text."
+  },
+  "receiptInformation": "معلومات الاستلام",
+  "@receiptInformation": {
+    "description": "Localized user-interface text."
+  },
+  "supplier": "المورد",
+  "@supplier": {
+    "description": "Localized user-interface text."
+  },
+  "poReference": "مرجع أمر الشراء",
+  "@poReference": {
+    "description": "Localized user-interface text."
+  },
+  "items": "الأصناف",
+  "@items": {
+    "description": "Localized user-interface text."
+  },
+  "text2Lines432Units": "2 بند · 432 وحدة",
+  "@text2Lines432Units": {
+    "description": "Localized user-interface text."
+  },
+  "received": "تم الاستلام",
+  "@received": {
+    "description": "Localized user-interface text."
+  },
+  "count": "الجرد",
+  "@count": {
+    "description": "Localized user-interface text."
+  },
+  "inProgress": "قيد التنفيذ",
+  "@inProgress": {
+    "description": "Localized user-interface text."
+  },
+  "stockTake": "جرد المخزون",
+  "@stockTake": {
+    "description": "Localized user-interface text."
+  },
+  "text3Of6Counted": "تم جرد 3 من 6",
+  "@text3Of6Counted": {
+    "description": "Localized user-interface text."
+  },
+  "match": "مطابق",
+  "@match": {
+    "description": "Localized user-interface text."
+  },
+  "short": "عجز",
+  "@short": {
+    "description": "Localized user-interface text."
+  },
+  "over": "زيادة",
+  "@over": {
+    "description": "Localized user-interface text."
+  },
+  "countSheet": "ورقة الجرد",
+  "@countSheet": {
+    "description": "Localized user-interface text."
+  },
+  "transferInventory": "تحويل المخزون",
+  "@transferInventory": {
+    "description": "Localized user-interface text."
+  },
+  "transferDetails": "تفاصيل التحويل",
+  "@transferDetails": {
+    "description": "Localized user-interface text."
+  },
+  "searchOriginWarehouse": "البحث عن مستودع المصدر…",
+  "@searchOriginWarehouse": {
+    "description": "Localized user-interface text."
+  },
+  "toStore": "متجر إلى",
+  "@toStore": {
+    "description": "Localized user-interface text."
+  },
+  "searchDestination": "البحث عن الوجهة…",
+  "@searchDestination": {
+    "description": "Localized user-interface text."
+  },
+  "enterTransferNotesOrInternalInstructions": "أدخل ملاحظات التحويل أو التعليمات الداخلية…",
+  "@enterTransferNotesOrInternalInstructions": {
+    "description": "Localized user-interface text."
+  },
+  "transferDetail": "تفاصيل التحويل",
+  "@transferDetail": {
+    "description": "Localized user-interface text."
+  },
+  "itemsInTransit": "أصناف قيد النقل",
+  "@itemsInTransit": {
+    "description": "Localized user-interface text."
+  },
+  "text2Lines258Units": "2 بند · 258 وحدة",
+  "@text2Lines258Units": {
+    "description": "Localized user-interface text."
+  },
+  "logisticsTracking": "الخدمات اللوجستية والتتبع",
+  "@logisticsTracking": {
+    "description": "Localized user-interface text."
+  },
+  "carrier": "الناقل",
+  "@carrier": {
+    "description": "Localized user-interface text."
+  },
+  "driver": "السائق",
+  "@driver": {
+    "description": "Localized user-interface text."
+  },
+  "expectedArrival": "الوصول المتوقع",
+  "@expectedArrival": {
+    "description": "Localized user-interface text."
+  },
+  "stockTransfers": "تحويلات المخزون",
+  "@stockTransfers": {
+    "description": "Localized user-interface text."
+  },
+  "unitsOfMeasure": "وحدات القياس",
+  "@unitsOfMeasure": {
+    "description": "Localized user-interface text."
+  },
+  "base": "الأساسية",
+  "@base": {
+    "description": "Localized user-interface text."
+  },
+  "warehouses": "المستودعات",
+  "@warehouses": {
+    "description": "Localized user-interface text."
+  },
+  "text5Warehouses": "5 مستودعات",
+  "@text5Warehouses": {
+    "description": "Localized user-interface text."
+  },
+  "capacityAssignedManager": "السعة والمدير المعيّن",
+  "@capacityAssignedManager": {
+    "description": "Localized user-interface text."
+  },
+  "createJournalEntry": "إنشاء قيد يومية",
+  "@createJournalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "entryHeader": "رأس القيد",
+  "@entryHeader": {
+    "description": "Localized user-interface text."
+  },
+  "date": "التاريخ",
+  "@date": {
+    "description": "Localized user-interface text."
+  },
+  "description": "الوصف",
+  "@description": {
+    "description": "Localized user-interface text."
+  },
+  "describeThisJournalEntry": "صف قيد اليومية هذا…",
+  "@describeThisJournalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "journalLines": "بنود القيد",
+  "@journalLines": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntryDetail": "تفاصيل قيد اليومية",
+  "@journalEntryDetail": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntry": "قيد اليومية",
+  "@journalEntry": {
+    "description": "Localized user-interface text."
+  },
+  "lines": "البنود",
+  "@lines": {
+    "description": "Localized user-interface text."
+  },
+  "backToEntries": "العودة إلى القيود",
+  "@backToEntries": {
+    "description": "Localized user-interface text."
+  },
+  "journalEntries": "قيود اليومية",
+  "@journalEntries": {
+    "description": "Localized user-interface text."
+  },
+  "searchEntries": "البحث عن القيود…",
+  "@searchEntries": {
+    "description": "Localized user-interface text."
+  },
+  "noEntriesMatch": "لا توجد قيود مطابقة.",
+  "@noEntriesMatch": {
+    "description": "Localized user-interface text."
+  },
+  "financialOperation": "عملية مالية",
+  "@financialOperation": {
+    "description": "Localized user-interface text."
+  },
+  "operationSummary": "ملخص العملية",
+  "@operationSummary": {
+    "description": "Localized user-interface text."
+  },
+  "difference": "الفرق",
+  "@difference": {
+    "description": "Localized user-interface text."
+  },
+  "ledgerLines": "بنود دفتر الأستاذ",
+  "@ledgerLines": {
+    "description": "Localized user-interface text."
+  },
+  "operationCreated": "تم إنشاء العملية",
+  "@operationCreated": {
+    "description": "Localized user-interface text."
+  },
+  "submittedForReview": "تم الإرسال للمراجعة",
+  "@submittedForReview": {
+    "description": "Localized user-interface text."
+  },
+  "approvedPosted": "تم الاعتماد والترحيل",
+  "@approvedPosted": {
+    "description": "Localized user-interface text."
+  },
+  "openingJournal": "قيد افتتاحي",
+  "@openingJournal": {
+    "description": "Localized user-interface text."
+  },
+  "entryDetails": "تفاصيل القيد",
+  "@entryDetails": {
+    "description": "Localized user-interface text."
+  },
+  "transferLines": "بنود التحويل",
+  "@transferLines": {
+    "description": "Localized user-interface text."
+  },
+  "createEntry": "إنشاء القيد",
+  "@createEntry": {
+    "description": "Localized user-interface text."
+  },
+  "more": "المزيد",
+  "@more": {
+    "description": "Localized user-interface text."
+  },
+  "searchEveryScreen": "البحث في كل الشاشات…",
+  "@searchEveryScreen": {
+    "description": "Localized user-interface text."
+  },
+  "auditLog": "سجل التدقيق",
+  "@auditLog": {
+    "description": "Localized user-interface text."
+  },
+  "immutableActivityTrail": "سجل نشاط غير قابل للتعديل",
+  "@immutableActivityTrail": {
+    "description": "Localized user-interface text."
+  },
+  "everyStateChangingAction7YearRetention": "كل إجراء يغيّر الحالة · احتفاظ لمدة 7 سنوات",
+  "@everyStateChangingAction7YearRetention": {
+    "description": "Localized user-interface text."
+  },
+  "searchEntityOrUser": "البحث عن كيان أو مستخدم…",
+  "@searchEntityOrUser": {
+    "description": "Localized user-interface text."
+  },
+  "noLogEntriesMatch": "لا توجد سجلات مطابقة.",
+  "@noLogEntriesMatch": {
+    "description": "Localized user-interface text."
+  },
+  "balanceSheet": "الميزانية العمومية",
+  "@balanceSheet": {
+    "description": "Localized user-interface text."
+  },
+  "balanceCheck": "فحص التوازن",
+  "@balanceCheck": {
+    "description": "Localized user-interface text."
+  },
+  "incomeStatement": "قائمة الدخل",
+  "@incomeStatement": {
+    "description": "Localized user-interface text."
+  },
+  "netIncome": "صافي الدخل",
+  "@netIncome": {
+    "description": "Localized user-interface text."
+  },
+  "inventoryValuation": "تقييم المخزون",
+  "@inventoryValuation": {
+    "description": "Localized user-interface text."
+  },
+  "method": "الطريقة",
+  "@method": {
+    "description": "Localized user-interface text."
+  },
+  "weightedAvg": "المتوسط المرجّح",
+  "@weightedAvg": {
+    "description": "Localized user-interface text."
+  },
+  "stockValuation": "تقييم المخزون",
+  "@stockValuation": {
+    "description": "Localized user-interface text."
+  },
+  "quantityWeightedAverageUnitCost": "الكمية × متوسط تكلفة الوحدة المرجّح",
+  "@quantityWeightedAverageUnitCost": {
+    "description": "Localized user-interface text."
+  },
+  "searchSkuProductOrStore": "البحث عن SKU أو منتج أو متجر…",
+  "@searchSkuProductOrStore": {
+    "description": "Localized user-interface text."
+  },
+  "totalInventoryValue": "إجمالي قيمة المخزون",
+  "@totalInventoryValue": {
+    "description": "Localized user-interface text."
+  },
+  "trialBalance": "ميزان المراجعة",
+  "@trialBalance": {
+    "description": "Localized user-interface text."
+  },
+  "allAccounts": "جميع الحسابات",
+  "@allAccounts": {
+    "description": "Localized user-interface text."
+  },
+  "debitCreditBalancesAsOfPeriodEnd": "أرصدة المدين والدائن كما في نهاية الفترة",
+  "@debitCreditBalancesAsOfPeriodEnd": {
+    "description": "Localized user-interface text."
+  },
+  "totalsBalanced": "الإجماليات · متوازنة",
+  "@totalsBalanced": {
+    "description": "Localized user-interface text."
+  },
+  "exportPdf": "تصدير PDF",
+  "@exportPdf": {
+    "description": "Localized user-interface text."
+  },
+  "billing": "الفوترة",
+  "@billing": {
+    "description": "Localized user-interface text."
+  },
+  "currentPlan": "الخطة الحالية",
+  "@currentPlan": {
+    "description": "Localized user-interface text."
+  },
+  "business": "الأعمال",
+  "@business": {
+    "description": "Localized user-interface text."
+  },
+  "current": "الحالي",
+  "@current": {
+    "description": "Localized user-interface text."
+  },
+  "recentInvoices": "الفواتير الأخيرة",
+  "@recentInvoices": {
+    "description": "Localized user-interface text."
+  },
+  "paid": "مدفوع",
+  "@paid": {
+    "description": "Localized user-interface text."
+  },
+  "branchesStores": "الفروع والمتاجر",
+  "@branchesStores": {
+    "description": "Localized user-interface text."
+  },
+  "addBranch": "إضافة الفرع",
+  "@addBranch": {
+    "description": "Localized user-interface text."
+  },
+  "companyProfile": "ملف الشركة",
+  "@companyProfile": {
+    "description": "Localized user-interface text."
+  },
+  "namesShownOnDocuments": "الأسماء الظاهرة في المستندات",
+  "@namesShownOnDocuments": {
+    "description": "Localized user-interface text."
+  },
+  "uploadLogo": "رفع الشعار",
+  "@uploadLogo": {
+    "description": "Localized user-interface text."
+  },
+  "legalNameEnglish": "الاسم القانوني بالإنجليزية",
+  "@legalNameEnglish": {
+    "description": "Localized user-interface text."
+  },
+  "legalName": "الاسم القانوني",
+  "@legalName": {
+    "description": "Localized user-interface text."
+  },
+  "tradeName": "الاسم التجاري",
+  "@tradeName": {
+    "description": "Localized user-interface text."
+  },
+  "commercialRegistration": "السجل التجاري",
+  "@commercialRegistration": {
+    "description": "Localized user-interface text."
+  },
+  "registeredAddress": "العنوان المسجل",
+  "@registeredAddress": {
+    "description": "Localized user-interface text."
+  },
+  "streetAddress": "عنوان الشارع",
+  "@streetAddress": {
+    "description": "Localized user-interface text."
+  },
+  "postalCode": "الرمز البريدي",
+  "@postalCode": {
+    "description": "Localized user-interface text."
+  },
+  "taxRegistration": "التسجيل الضريبي",
+  "@taxRegistration": {
+    "description": "Localized user-interface text."
+  },
+  "vatNumber": "رقم ضريبة القيمة المضافة",
+  "@vatNumber": {
+    "description": "Localized user-interface text."
+  },
+  "taxIdentificationNo": "رقم التعريف الضريبي",
+  "@taxIdentificationNo": {
+    "description": "Localized user-interface text."
+  },
+  "taxAuthority": "الهيئة الضريبية",
+  "@taxAuthority": {
+    "description": "Localized user-interface text."
+  },
+  "saveChanges": "حفظ التغييرات",
+  "@saveChanges": {
+    "description": "Localized user-interface text."
+  },
+  "autoPairsSyncDailyManualEditable": "تتم مزامنة الأزواج التلقائية يومياً؛ ويمكن تعديل اليدوية",
+  "@autoPairsSyncDailyManualEditable": {
+    "description": "Localized user-interface text."
+  },
+  "saveRates": "حفظ الأسعار",
+  "@saveRates": {
+    "description": "Localized user-interface text."
+  },
+  "numbering": "الترقيم",
+  "@numbering": {
+    "description": "Localized user-interface text."
+  },
+  "documentSequences": "تسلسلات المستندات",
+  "@documentSequences": {
+    "description": "Localized user-interface text."
+  },
+  "formatPrefixYearNumber": "التنسيق: PREFIX-YEAR-NUMBER",
+  "@formatPrefixYearNumber": {
+    "description": "Localized user-interface text."
+  },
+  "rolesList": "قائمة الأدوار",
+  "@rolesList": {
+    "description": "Localized user-interface text."
+  },
+  "editRole": "تعديل الدور",
+  "@editRole": {
+    "description": "Localized user-interface text."
+  },
+  "newRole": "دور جديد",
+  "@newRole": {
+    "description": "Localized user-interface text."
+  },
+  "workspaces": "مساحات العمل",
+  "@workspaces": {
+    "description": "Localized user-interface text."
+  },
+  "current2": "الحالي",
+  "@current2": {
+    "description": "Localized user-interface text."
+  },
+  "manageWorkspace": "إدارة مساحة العمل",
+  "@manageWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "switchToThisWorkspace": "التبديل إلى مساحة العمل هذه",
+  "@switchToThisWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "newWorkspace": "مساحة عمل جديدة",
+  "@newWorkspace": {
+    "description": "Localized user-interface text."
+  },
+  "createStore": "إنشاء المتجر",
+  "@createStore": {
+    "description": "Localized user-interface text."
+  },
+  "storeDetails": "تفاصيل المتجر",
+  "@storeDetails": {
+    "description": "Localized user-interface text."
+  },
+  "nameAndLocation": "الاسم والموقع",
+  "@nameAndLocation": {
+    "description": "Localized user-interface text."
+  },
+  "eGDowntownCentralStore": "مثال: Downtown Central Store",
+  "@eGDowntownCentralStore": {
+    "description": "Localized user-interface text."
+  },
+  "locationCode": "رمز الموقع",
+  "@locationCode": {
+    "description": "Localized user-interface text."
+  },
+  "storeCategory": "فئة المتجر",
+  "@storeCategory": {
+    "description": "Localized user-interface text."
+  },
+  "addInternalNotes": "أضف ملاحظات داخلية…",
+  "@addInternalNotes": {
+    "description": "Localized user-interface text."
+  },
+  "issueInventory": "صرف المخزون",
+  "@issueInventory": {
+    "description": "Localized user-interface text."
+  },
+  "issueDetails": "تفاصيل الصرف",
+  "@issueDetails": {
+    "description": "Localized user-interface text."
+  },
+  "text1Line12Units": "1 بند · 12 وحدة",
+  "@text1Line12Units": {
+    "description": "Localized user-interface text."
+  },
+  "total": "الإجمالي",
+  "@total": {
+    "description": "Localized user-interface text."
+  },
+  "totalValue": "القيمة الإجمالية",
+  "@totalValue": {
+    "description": "Localized user-interface text."
+  },
+  "storeDetail": "تفاصيل المتجر",
+  "@storeDetail": {
+    "description": "Localized user-interface text."
+  },
+  "stockOnHand": "المخزون المتاح",
+  "@stockOnHand": {
+    "description": "Localized user-interface text."
+  },
+  "noStockItemsAvailable": "لا توجد أصناف مخزون متاحة.",
+  "@noStockItemsAvailable": {
+    "description": "Localized user-interface text."
+  },
+  "stores": "المتاجر",
+  "@stores": {
+    "description": "Localized user-interface text."
+  }
 }

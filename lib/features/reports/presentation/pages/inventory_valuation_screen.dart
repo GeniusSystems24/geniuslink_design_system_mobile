@@ -25,7 +25,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Inventory Valuation')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).inventoryValuation), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           title: "",
@@ -46,13 +46,13 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
               Row(
                 children: [
                   Eyebrow(
-                    'Method',
+                    GeniusLinkLocalization.of(context).method,
                     color: SuperMaterialThemeData.of(context).superTheme.fg3,
                     size: 9.5,
                   ),
                   const SizedBox(width: 7),
                   Text(
-                    'Weighted Avg',
+                    GeniusLinkLocalization.of(context).weightedAvg,
                     style: TextStyle(
                       fontFamily: SuperMaterialThemeData.of(
                         context,
@@ -68,8 +68,8 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
           ),
         ),
         SuperSectionCard2(
-          title: 'Stock Valuation',
-          subtitle: 'Quantity × weighted-average unit cost',
+          title: GeniusLinkLocalization.of(context).stockValuation,
+          subtitle: GeniusLinkLocalization.of(context).quantityWeightedAverageUnitCost,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -80,7 +80,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
             children: [
               MTable(
                 showSearch: true,
-                searchHint: 'Search SKU, product or store…',
+                searchHint: GeniusLinkLocalization.of(context).searchSkuProductOrStore,
                 itemNoun: 'item',
                 itemNounPlural: 'items',
                 columns: [
@@ -117,7 +117,7 @@ class _InventoryValuationScreenState extends State<InventoryValuationScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: ReportTotalBar(
-                  label: 'Total Inventory Value',
+                  label: GeniusLinkLocalization.of(context).totalInventoryValue,
                   value: _money(total),
                 ),
               ),

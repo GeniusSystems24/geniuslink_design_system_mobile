@@ -12,11 +12,11 @@ class CompanyProfileScreen extends StatelessWidget {
     var icon3 = MIcons.of('building');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Company Profile')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).companyProfile), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Identity',
-          subtitle: 'Names shown on documents',
+          title: GeniusLinkLocalization.of(context).identity,
+          subtitle: GeniusLinkLocalization.of(context).namesShownOnDocuments,
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
@@ -48,27 +48,27 @@ class CompanyProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 14),
-                  const MBtn(
-                    'Upload Logo',
+                  MBtn(
+                    GeniusLinkLocalization.of(context).uploadLogo,
                     variant: MBtnVariant.secondary,
                     icon: 'download',
                   ),
                 ],
               ),
-              const TInput(
-                label: 'Legal Name (English)',
+              TInput(
+                label: GeniusLinkLocalization.of(context).legalNameEnglish,
                 defaultValue: 'Al-Rashid Trading Co.',
                 required: true,
               ),
-              const TInput(
-                label: 'الاسم القانوني',
+              TInput(
+                label: GeniusLinkLocalization.of(context).legalName,
                 defaultValue: 'شركة الراشد التجارية',
                 ar: true,
                 required: true,
               ),
-              const TInput(label: 'Trade Name', defaultValue: 'GeniusLink'),
-              const TInput(
-                label: 'Commercial Registration',
+              TInput(label: GeniusLinkLocalization.of(context).tradeName, defaultValue: 'GeniusLink'),
+              TInput(
+                label: GeniusLinkLocalization.of(context).commercialRegistration,
                 defaultValue: '1010234567',
                 mono: true,
               ),
@@ -76,7 +76,7 @@ class CompanyProfileScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Registered Address',
+          title: GeniusLinkLocalization.of(context).registeredAddress,
 
           initiallyExpanded: true,
           accentColor: marker2,
@@ -84,7 +84,7 @@ class CompanyProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               TSelect(
                 label: 'Country',
                 value: 'Saudi Arabia',
@@ -95,17 +95,17 @@ class CompanyProfileScreen extends StatelessWidget {
                   'Qatar',
                 ],
               ),
-              TInput(label: 'City', defaultValue: 'Riyadh'),
+              TInput(label: GeniusLinkLocalization.of(context).city, defaultValue: 'Riyadh'),
               TInput(
-                label: 'Street Address',
+                label: GeniusLinkLocalization.of(context).streetAddress,
                 defaultValue: 'King Fahd Rd, Olaya',
               ),
-              TInput(label: 'Postal Code', defaultValue: '12211', mono: true),
+              TInput(label: GeniusLinkLocalization.of(context).postalCode, defaultValue: '12211', mono: true),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Tax Registration',
+          title: GeniusLinkLocalization.of(context).taxRegistration,
 
           initiallyExpanded: true,
           accentColor: marker,
@@ -113,27 +113,27 @@ class CompanyProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               TInput(
-                label: 'VAT Number',
+                label: GeniusLinkLocalization.of(context).vatNumber,
                 defaultValue: '300123456700003',
                 mono: true,
                 required: true,
               ),
               TInput(
-                label: 'Tax Identification No.',
+                label: GeniusLinkLocalization.of(context).taxIdentificationNo,
                 defaultValue: '9100234567',
                 mono: true,
               ),
               TSelect(
-                label: 'Tax Authority',
+                label: GeniusLinkLocalization.of(context).taxAuthority,
                 value: 'ZATCA (Saudi Arabia)',
                 options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT'],
               ),
             ],
           ),
         ),
-        const MBtn('Save Changes', icon: 'check', full: true),
+        MBtn(GeniusLinkLocalization.of(context).saveChanges, icon: 'check', full: true),
       ]),
     );
   }

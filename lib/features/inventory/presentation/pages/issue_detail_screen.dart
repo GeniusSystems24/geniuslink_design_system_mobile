@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import '../../../../app/router/navigation_extensions.dart';
 import '../../../../design_system/kit.dart';
 import 'inventory_shared_widgets.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class IssueDetailScreen extends StatelessWidget {
   const IssueDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var trailing = const Pill('Posted');
+    var trailing = Pill(GeniusLinkLocalization.of(context).posted);
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Issue Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).issueDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
-          title: 'Issued Value',
+          title: GeniusLinkLocalization.of(context).issuedValue,
           subtitle: 'INV-ISS-2024-0089 · Dec 18, 2025',
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -60,7 +62,7 @@ class IssueDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Issue Information',
+          title: GeniusLinkLocalization.of(context).issueInformation,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -69,16 +71,16 @@ class IssueDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              KV('Serial No', 'INV-ISS-2024-0089', mono: true),
-              KV('Store', 'Downtown Central'),
-              KV('Customer', 'Project A-92'),
-              KV('Currency', 'USD — US Dollar'),
+            children: [
+              KV(GeniusLinkLocalization.of(context).serialNo, 'INV-ISS-2024-0089', mono: true),
+              KV(GeniusLinkLocalization.of(context).store, 'Downtown Central'),
+              KV(GeniusLinkLocalization.of(context).customer, 'Project A-92'),
+              KV(GeniusLinkLocalization.of(context).currency, 'USD — US Dollar'),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Accounting Distribution',
+          title: GeniusLinkLocalization.of(context).accountingDistribution,
 
           initiallyExpanded: true,
           accentColor: accentColor3,
@@ -105,7 +107,7 @@ class IssueDetailScreen extends StatelessWidget {
         ),
 
         MBtn(
-          'Back to Operations',
+          GeniusLinkLocalization.of(context).backToOperations,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

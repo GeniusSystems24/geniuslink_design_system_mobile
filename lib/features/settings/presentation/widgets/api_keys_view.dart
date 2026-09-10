@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class ApiKeysView extends StatelessWidget {
   final FormController controller;
@@ -40,7 +41,7 @@ class ApiKeysView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('API Keys')),
+          appBar: SuperAppBar(title: const Text('API Keys'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             InfoNote(
               "A key's secret is shown only once at creation. Revoke and re-issue anytime.",

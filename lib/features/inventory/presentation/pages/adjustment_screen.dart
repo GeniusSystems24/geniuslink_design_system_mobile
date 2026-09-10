@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _AdjLine extends StatelessWidget {
   final (String, String, int, int, String) item;
@@ -169,10 +171,10 @@ class AdjustmentScreen extends StatelessWidget {
     var icon2 = MIcons.of('box');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Inventory Adjustment')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).inventoryAdjustment), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Adjustment Details',
+          title: GeniusLinkLocalization.of(context).adjustmentDetails,
 
           initiallyExpanded: true,
           accentColor: marker2,
@@ -180,26 +182,26 @@ class AdjustmentScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'Serial No',
+                label: GeniusLinkLocalization.of(context).serialNo,
                 value: 'INV-ADJ-2024-0058',
                 mono: true,
                 locked: true,
               ),
               IField(
-                label: 'Reason',
+                label: GeniusLinkLocalization.of(context).reason,
                 value: 'Physical Stock Count',
                 select: true,
               ),
               IField(
-                label: 'Store',
-                placeholder: 'Search store…',
+                label: GeniusLinkLocalization.of(context).store,
+                placeholder: GeniusLinkLocalization.of(context).searchStore,
                 icon: 'store',
                 required: true,
               ),
               IField(
-                label: 'Count Date',
+                label: GeniusLinkLocalization.of(context).countDate,
                 placeholder: 'mm/dd/yyyy',
                 mono: true,
                 icon: 'calendar',
@@ -208,8 +210,8 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Variance Summary',
-          subtitle: 'Net financial impact of this reconciliation',
+          title: GeniusLinkLocalization.of(context).varianceSummary,
+          subtitle: GeniusLinkLocalization.of(context).netFinancialImpactOfThisReconciliation,
           initiallyExpanded: true,
           accentColor: accentColor2,
 
@@ -217,7 +219,7 @@ class AdjustmentScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Row(
                 children: [
                   Expanded(
@@ -226,7 +228,7 @@ class AdjustmentScreen extends StatelessWidget {
                   SizedBox(width: 12),
                   Expanded(
                     child: Mini(
-                      label: 'Net Adjustment',
+                      label: GeniusLinkLocalization.of(context).netAdjustment,
                       value: '-307.00',
                       sub: 'SAR',
                     ),
@@ -237,7 +239,7 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Adjustment Lines',
+          title: GeniusLinkLocalization.of(context).adjustmentLines,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -260,7 +262,7 @@ class AdjustmentScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Documentation & Approval',
+          title: GeniusLinkLocalization.of(context).documentationApproval,
 
           initiallyExpanded: true,
           accentColor: marker,
@@ -268,14 +270,14 @@ class AdjustmentScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               ITextarea(
-                label: 'Adjustment Notes',
-                placeholder: 'Auditor name, witness, count session reference…',
+                label: GeniusLinkLocalization.of(context).adjustmentNotes,
+                placeholder: GeniusLinkLocalization.of(context).auditorNameWitnessCountSessionReference,
               ),
               UploadBox(),
               InfoNote(
-                'Adjustments above 1,000 SAR require dual approval. This entry posts to the audit log immediately and notifies the controller.',
+                GeniusLinkLocalization.of(context).adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro,
               ),
             ],
           ),

@@ -8,6 +8,7 @@ import '../../features/auth/presentation/controllers/auth_controller.dart';
 import '../../workspace/presentation/controllers/nav_controller.dart';
 import '../../workspace/presentation/controllers/tenant_controller.dart';
 import 'theme_controller.dart';
+import 'locale_controller.dart';
 
 /// Root MVC controller that owns and synchronizes app-scoped controllers.
 ///
@@ -20,6 +21,7 @@ class AppController extends ChangeNotifier {
   final TenantController tenantController;
   final NavController navController;
   final ThemeController themeController;
+  final LocaleController localeController;
 
   bool _disposed = false;
 
@@ -27,6 +29,7 @@ class AppController extends ChangeNotifier {
     required TenantConnectionResolver resolver,
     AuthState initialAuth = const AuthState.unauthenticated(),
     ThemeMode initialThemeMode = ThemeMode.system,
+    Locale? initialLocale,
     bool Function(String)? registryHas,
   }) : authController = AuthController(
          resolver: resolver,
@@ -34,7 +37,8 @@ class AppController extends ChangeNotifier {
        ),
        tenantController = TenantController(resolver: resolver),
        navController = NavController(),
-       themeController = ThemeController(initial: initialThemeMode) {
+       themeController = ThemeController(initial: initialThemeMode),
+       localeController = LocaleController(initial: initialLocale) {
     if (registryHas != null) {
       navController.registryHas = registryHas;
     }
@@ -68,6 +72,7 @@ class AppController extends ChangeNotifier {
     if (_disposed) return;
     _disposed = true;
     authController.removeListener(_syncFromAuth);
+    localeController.dispose();
     themeController.dispose();
     navController.dispose();
     tenantController.dispose();

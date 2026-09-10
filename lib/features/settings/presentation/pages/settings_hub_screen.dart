@@ -11,7 +11,7 @@ class SettingsHubScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Settings')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).settings), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),

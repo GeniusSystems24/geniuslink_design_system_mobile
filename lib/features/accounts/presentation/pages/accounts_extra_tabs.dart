@@ -10,28 +10,38 @@ class AccountsExtraTabs extends StatefulWidget {
 }
 
 class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
-  late SuperTabBarController _tabs;
+  SuperTabBarController? _tabs;
+  String? _tabsLocaleName;
 
   @override
-  void initState() {
-    super.initState();
-    _tabs = _createTabs();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final l10n = GeniusLinkLocalization.of(context);
+
+    if (_tabs != null && _tabsLocaleName == l10n.localeName) {
+      return;
+    }
+
+    _tabs?.dispose();
+    _tabsLocaleName = l10n.localeName;
+    _tabs = _createTabs(l10n);
   }
 
   @override
   void didUpdateWidget(covariant AccountsExtraTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.accountRoots != widget.accountRoots) {
-      _tabs.dispose();
-      _tabs = _createTabs();
+      _tabs?.dispose();
+      _tabs = _createTabs(GeniusLinkLocalization.of(context));
     }
   }
 
-  SuperTabBarController _createTabs() => SuperTabBarController(
+  SuperTabBarController _createTabs(GeniusLinkLocalization l10n) =>
+      SuperTabBarController(
     tabs: [
       SuperTab(
         id: 1,
-        title: 'Chart of Accounts',
+        title: l10n.chartOfAccounts,
         pinned: true,
         behavior: SuperTabBehavior.requiredPinned,
         leading: const Icon(Icons.account_tree_outlined, size: 15),
@@ -40,7 +50,7 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
       ),
       SuperTab(
         id: 2,
-        title: 'Account Detail',
+        title: l10n.accountDetail,
         leading: const Icon(Icons.description_outlined, size: 15),
         pageBuilder: (context, tab) => const AccountDetailFullScreen(),
       ),
@@ -50,14 +60,14 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 
   @override
   void dispose() {
-    _tabs.dispose();
+    _tabs?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SuperTabBar(
-      controller: _tabs,
+      controller: _tabs!,
       fillContent: true,
       scrollContent: false,
       contentPadding: EdgeInsets.zero,

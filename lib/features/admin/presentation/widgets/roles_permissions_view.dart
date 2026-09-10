@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
 import '../../../../shared/presentation/controllers/form_controller.dart';
 import '../../domain/domain.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 Map<PermissionLevel, (Color, String)> permissionMeta(BuildContext context) {
   final theme = SuperMaterialThemeData.of(context).superTheme;
@@ -50,7 +51,7 @@ class RolesPermissionsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Roles & Permissions')),
+          appBar: SuperAppBar(title: const Text('Roles & Permissions'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
           body: MScroll([
             SuperSectionCard2(
               title: 'Select Role',

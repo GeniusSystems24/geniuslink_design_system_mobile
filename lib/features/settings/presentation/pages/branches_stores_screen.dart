@@ -33,7 +33,7 @@ class BranchesStoresScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Branches & Stores')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).branchesStores), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           title: "",
@@ -164,7 +164,7 @@ class BranchesStoresScreen extends StatelessWidget {
             ],
           ),
         ),
-        const MBtn('Add Branch', icon: 'plus', full: true),
+        MBtn(GeniusLinkLocalization.of(context).addBranch, icon: 'plus', full: true),
       ]),
     );
   }

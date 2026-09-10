@@ -9,6 +9,8 @@ import '../../../../design_system/kit.dart';
 import '../../../../app/router/navigation_extensions.dart';
 
 import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_column.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 part 'create_local_transfer_screen.dart';
 part 'local_transfer_detail_screen.dart';
 part 'create_external_transfer_screen.dart';

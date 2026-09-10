@@ -16,7 +16,7 @@ class StoreDetailScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Store Detail')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).storeDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -34,7 +34,7 @@ class StoreDetailScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Mini(
-                      label: 'Stock Value',
+                      label: GeniusLinkLocalization.of(context).stockValue,
                       value: SuperFormat.number(store.stockValue, decimals: 0),
                       sub: 'SAR',
                       hi: true,
@@ -53,7 +53,7 @@ class StoreDetailScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Stock On Hand',
+          title: GeniusLinkLocalization.of(context).stockOnHand,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -77,7 +77,7 @@ class StoreDetailScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          'No stock items available.',
+                          GeniusLinkLocalization.of(context).noStockItemsAvailable,
                           style: TextStyle(
                             color: SuperMaterialThemeData.of(
                               context,
@@ -92,7 +92,7 @@ class StoreDetailScreen extends StatelessWidget {
           ),
         ),
         MBtn(
-          'Back to List',
+          GeniusLinkLocalization.of(context).backToList,
           variant: MBtnVariant.secondary,
           icon: 'back',
           full: true,

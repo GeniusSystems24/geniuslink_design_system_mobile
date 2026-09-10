@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class PriceListsScreen extends StatefulWidget {
   const PriceListsScreen({super.key});
@@ -55,7 +57,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Price Lists')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).priceLists), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         for (final l in lists)
           GestureDetector(
@@ -138,7 +140,7 @@ class _PriceListsScreenState extends State<PriceListsScreen> {
             ),
           ),
         SuperSectionCard2(
-          title: 'Item Prices',
+          title: GeniusLinkLocalization.of(context).itemPrices,
           subtitle: '5 items · 15% discount applied',
           initiallyExpanded: true,
           accentColor: accentColor,

@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class WarehouseRow extends StatelessWidget {
   final (String, String, int, int, String, String) s;
@@ -212,11 +214,11 @@ class WarehousesListScreen extends StatelessWidget {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Warehouses')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).warehouses), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: '5 Warehouses',
-          subtitle: 'Capacity & assigned manager',
+          title: GeniusLinkLocalization.of(context).text5Warehouses,
+          subtitle: GeniusLinkLocalization.of(context).capacityAssignedManager,
           initiallyExpanded: true,
           accentColor: accentColor,
 

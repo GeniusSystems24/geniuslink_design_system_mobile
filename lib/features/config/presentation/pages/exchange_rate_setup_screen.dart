@@ -15,10 +15,10 @@ class ExchangeRateSetupScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Exchange Rates')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).exchangeRates), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Base Currency',
+          title: GeniusLinkLocalization.of(context).baseCurrency,
 
           initiallyExpanded: true,
           accentColor: accentColor,
@@ -90,8 +90,8 @@ class ExchangeRateSetupScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const MBtn(
-                'Pull ECB Feed',
+              MBtn(
+                GeniusLinkLocalization.of(context).pullEcbFeed,
                 variant: MBtnVariant.secondary,
                 icon: 'download',
                 full: true,
@@ -100,8 +100,8 @@ class ExchangeRateSetupScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Rates per 1 SAR',
-          subtitle: 'Auto-fed pairs sync daily; manual pairs are editable',
+          title: GeniusLinkLocalization.of(context).ratesPer1Sar,
+          subtitle: GeniusLinkLocalization.of(context).autoFedPairsSyncDailyManualPairsAreEditable,
           initiallyExpanded: true,
           accentColor: accentColor2,
 

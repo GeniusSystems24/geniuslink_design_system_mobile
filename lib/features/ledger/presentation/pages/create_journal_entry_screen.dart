@@ -32,10 +32,10 @@ class CreateJournalEntryScreen extends StatelessWidget {
     var icon2 = MIcons.of('doc');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Create Journal Entry')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createJournalEntry), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         SuperSectionCard2(
-          title: 'Entry Header',
+          title: GeniusLinkLocalization.of(context).entryHeader,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -43,28 +43,28 @@ class CreateJournalEntryScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               IField(
-                label: 'Serial No',
+                label: GeniusLinkLocalization.of(context).serialNo,
                 value: 'JV-2024-0227',
                 mono: true,
                 locked: true,
               ),
-              IField(label: 'Date', value: 'Dec 19, 2025', icon: 'calendar'),
+              IField(label: GeniusLinkLocalization.of(context).date, value: 'Dec 19, 2025', icon: 'calendar'),
               IField(
-                label: 'Currency',
+                label: GeniusLinkLocalization.of(context).currency,
                 value: 'SAR — Saudi Riyal',
                 select: true,
               ),
               ITextarea(
-                label: 'Description',
-                placeholder: 'Describe this journal entry…',
+                label: GeniusLinkLocalization.of(context).description,
+                placeholder: GeniusLinkLocalization.of(context).describeThisJournalEntry,
               ),
             ],
           ),
         ),
         SuperSectionCard2(
-          title: 'Journal Lines',
+          title: GeniusLinkLocalization.of(context).journalLines,
           subtitle: '${lines.length} lines',
           initiallyExpanded: true,
           accentColor: accentColor,

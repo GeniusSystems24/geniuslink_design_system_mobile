@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design_system/kit.dart';
+import 'package:gl_mobile_app/localization/generated/l10n.dart';
+import 'package:gl_mobile_app/app/widgets/app_preference_actions.dart';
 
 class _ReorderBar extends StatelessWidget {
   final (String, String, int, int, int) p;
@@ -145,7 +147,7 @@ class InvDashboardScreen extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Inventory')),
+      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).inventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         GridView.count(
           crossAxisCount: 2,
@@ -206,7 +208,7 @@ class InvDashboardScreen extends StatelessWidget {
           ],
         ),
         SuperSectionCard2(
-          title: 'Recent Operations',
+          title: GeniusLinkLocalization.of(context).recentOperations,
 
           initiallyExpanded: true,
           accentColor: accentColor2,
@@ -289,8 +291,8 @@ class InvDashboardScreen extends StatelessWidget {
           ),
         ),
         SuperSectionCard2(
-          title: 'Reorder Alerts',
-          subtitle: '3 products at or below reorder level',
+          title: GeniusLinkLocalization.of(context).reorderAlerts,
+          subtitle: GeniusLinkLocalization.of(context).text3ProductsAtOrBelowReorderLevel,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -300,8 +302,8 @@ class InvDashboardScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               for (final p in low) _ReorderBar(p: p),
-              const MBtn(
-                'Generate Purchase Order',
+              MBtn(
+                GeniusLinkLocalization.of(context).generatePurchaseOrder,
                 icon: 'paperclip',
                 full: true,
               ),

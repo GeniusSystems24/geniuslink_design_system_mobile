@@ -12,9 +12,11 @@ class AccountsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = GeniusLinkLocalization.of(context);
+
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: const Text('Accounts')),
+      appBar: SuperAppBar(title: Text(l10n.accounts), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
       body: MScroll([
         Container(
           height: 44,
@@ -35,7 +37,7 @@ class AccountsScreen extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'Search accounts…',
+                l10n.searchAccounts,
                 style: TextStyle(
                   color: SuperMaterialThemeData.of(context).superTheme.fg3,
                   fontSize: 14,
