@@ -1,4 +1,7 @@
 // COMPONENTIZATION_API_COMPAT_V1
+// LAYOUT_THEME_EXTENSIONS_V1
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import 'pressable_surface.dart';
@@ -8,7 +11,8 @@ import 'pressable_surface.dart';
 /// This theme intentionally contains the union of the options used by the
 /// shared design-system component and the feature adapters that compose it.
 @immutable
-class DirectionalSlotTileThemeData {
+class DirectionalSlotTileThemeData
+    extends ThemeExtension<DirectionalSlotTileThemeData> {
   const DirectionalSlotTileThemeData({
     this.padding = const EdgeInsets.symmetric(vertical: 12),
     this.gap = 12,
@@ -22,6 +26,44 @@ class DirectionalSlotTileThemeData {
     this.alignment = AlignmentDirectional.centerStart,
     this.pressableTheme = const PressableSurfaceThemeData(),
   });
+
+  /// Returns the registered [DirectionalSlotTileThemeData], if available.
+  static DirectionalSlotTileThemeData? mayOf(BuildContext context) {
+    return Theme.of(context).extension<DirectionalSlotTileThemeData>();
+  }
+
+  /// Returns the effective directional-slot-tile theme for [context].
+  static DirectionalSlotTileThemeData of(BuildContext context) {
+    final registered = mayOf(context);
+    if (registered != null) {
+      return registered;
+    }
+
+    final materialTheme = Theme.of(context);
+    return materialTheme.brightness == Brightness.dark
+        ? dark(colorScheme: materialTheme.colorScheme)
+        : light(colorScheme: materialTheme.colorScheme);
+  }
+
+  /// Creates the default light directional-slot-tile theme.
+  static DirectionalSlotTileThemeData light({
+    ColorScheme colorScheme = const ColorScheme.light(),
+  }) {
+    return DirectionalSlotTileThemeData(
+      dividerColor: colorScheme.outlineVariant,
+      pressableTheme: PressableSurfaceThemeData.light(),
+    );
+  }
+
+  /// Creates the default dark directional-slot-tile theme.
+  static DirectionalSlotTileThemeData dark({
+    ColorScheme colorScheme = const ColorScheme.dark(),
+  }) {
+    return DirectionalSlotTileThemeData(
+      dividerColor: colorScheme.outlineVariant,
+      pressableTheme: PressableSurfaceThemeData.dark(),
+    );
+  }
 
   final EdgeInsetsGeometry padding;
   final double gap;
@@ -38,6 +80,7 @@ class DirectionalSlotTileThemeData {
   final AlignmentGeometry alignment;
   final PressableSurfaceThemeData pressableTheme;
 
+  @override
   DirectionalSlotTileThemeData copyWith({
     EdgeInsetsGeometry? padding,
     double? gap,
@@ -63,6 +106,38 @@ class DirectionalSlotTileThemeData {
       borderRadius: borderRadius ?? this.borderRadius,
       alignment: alignment ?? this.alignment,
       pressableTheme: pressableTheme ?? this.pressableTheme,
+    );
+  }
+
+  @override
+  DirectionalSlotTileThemeData lerp(
+    covariant DirectionalSlotTileThemeData? other,
+    double t,
+  ) {
+    if (other == null || identical(this, other)) {
+      return this;
+    }
+
+    return DirectionalSlotTileThemeData(
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
+      gap: ui.lerpDouble(gap, other.gap, t)!,
+      minHeight: ui.lerpDouble(minHeight, other.minHeight, t),
+      backgroundColor: Color.lerp(
+        backgroundColor,
+        other.backgroundColor,
+        t,
+      ),
+      border: BoxBorder.lerp(border, other.border, t),
+      borderColor: Color.lerp(borderColor, other.borderColor, t),
+      borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
+      dividerColor: Color.lerp(dividerColor, other.dividerColor, t),
+      borderRadius: BorderRadiusGeometry.lerp(
+        borderRadius,
+        other.borderRadius,
+        t,
+      )!,
+      alignment: AlignmentGeometry.lerp(alignment, other.alignment, t)!,
+      pressableTheme: pressableTheme.lerp(other.pressableTheme, t),
     );
   }
 }

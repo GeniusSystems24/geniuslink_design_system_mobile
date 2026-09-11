@@ -533,7 +533,7 @@ class BKV extends StatelessWidget {
   final bool mono, ar;
   const BKV(this.k, this.v, {super.key, this.mono = false, this.ar = false});
   @override
-  Widget build(BuildContext context) => KV(k, v, mono: mono, ar: ar);
+  Widget build(BuildContext context) => KeyValueRow(k, v, mono: mono, ar: ar);
 }
 
 class BankNote extends StatelessWidget {

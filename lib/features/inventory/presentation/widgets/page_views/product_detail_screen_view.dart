@@ -102,15 +102,15 @@ class ProductDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KV('SKU', product.sku, mono: true),
-              KV(GeniusLinkLocalization.of(context).barcode, detail.barcode, mono: true),
-              KV(GeniusLinkLocalization.of(context).category, product.category),
-              KV(GeniusLinkLocalization.of(context).unit, product.unit),
-              KV(
+              KeyValueRow('SKU', product.sku, mono: true),
+              KeyValueRow(GeniusLinkLocalization.of(context).barcode, detail.barcode, mono: true),
+              KeyValueRow(GeniusLinkLocalization.of(context).category, product.category),
+              KeyValueRow(GeniusLinkLocalization.of(context).unit, product.unit),
+              KeyValueRow(
                 GeniusLinkLocalization.of(context).sellingPrice,
                 '${SuperFormat.number(detail.sellingPrice, decimals: 2)} SAR',
               ),
-              KV(GeniusLinkLocalization.of(context).vatRate, '${(detail.vatRate * 100).toStringAsFixed(0)}%'),
+              KeyValueRow(GeniusLinkLocalization.of(context).vatRate, '${(detail.vatRate * 100).toStringAsFixed(0)}%'),
             ],
           ),
         ),

@@ -28,10 +28,10 @@ void main() {
           textDirection: TextDirection.rtl,
           child: Scaffold(
             body: TwoRowTile(
-              topStart: Text('topStart'),
-              topEnd: Text('topEnd'),
-              bottomStart: Text('bottomStart'),
-              bottomEnd: Text('bottomEnd'),
+              title: Text('topStart'),
+              trailing: Text('topEnd'),
+              subtitle: Text('bottomStart'),
+              subtitleTrailing: Text('bottomEnd'),
             ),
           ),
         ),

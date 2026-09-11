@@ -8,10 +8,10 @@ void main() {
       const MaterialApp(
         home: Scaffold(
           body: TwoRowTile(
-            topStart: Text('top-start'),
-            topEnd: Text('top-end'),
-            bottomStart: Text('bottom-start'),
-            bottomEnd: Text('bottom-end'),
+            title: Text('top-start'),
+            trailing: Text('top-end'),
+            subtitle: Text('bottom-start'),
+            subtitleTrailing: Text('bottom-end'),
           ),
         ),
       ),
@@ -30,7 +30,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: TwoRowTile(
-            topStart: const Text('action'),
+            title: const Text('action'),
             onTap: () => tapped = true,
           ),
         ),
@@ -52,8 +52,8 @@ void main() {
             body: SizedBox(
               width: 320,
               child: TwoRowTile(
-                topStart: Text('start'),
-                topEnd: Text('end'),
+                title: Text('start'),
+                trailing: Text('end'),
               ),
             ),
           ),

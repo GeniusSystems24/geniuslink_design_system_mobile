@@ -1,4 +1,7 @@
 // MOBILE_DASHBOARD_LAYOUT_FIX_V1
+// LAYOUT_THEME_EXTENSIONS_V1
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import 'pressable_surface.dart';
@@ -15,7 +18,8 @@ import 'pressable_surface.dart';
 /// );
 /// ```
 @immutable
-class LabeledActionTileThemeData {
+class LabeledActionTileThemeData
+    extends ThemeExtension<LabeledActionTileThemeData> {
   const LabeledActionTileThemeData({
     this.gap = 7,
     this.padding = EdgeInsets.zero,
@@ -24,12 +28,42 @@ class LabeledActionTileThemeData {
     this.pressableTheme = const PressableSurfaceThemeData(),
   });
 
+  /// Returns the registered [LabeledActionTileThemeData], if available.
+  static LabeledActionTileThemeData? mayOf(BuildContext context) {
+    return Theme.of(context).extension<LabeledActionTileThemeData>();
+  }
+
+  /// Returns the effective labeled-action-tile theme for [context].
+  static LabeledActionTileThemeData of(BuildContext context) {
+    final registered = mayOf(context);
+    if (registered != null) {
+      return registered;
+    }
+
+    return Theme.of(context).brightness == Brightness.dark ? dark() : light();
+  }
+
+  /// Creates the default light labeled-action-tile theme.
+  static LabeledActionTileThemeData light() {
+    return LabeledActionTileThemeData(
+      pressableTheme: PressableSurfaceThemeData.light(),
+    );
+  }
+
+  /// Creates the default dark labeled-action-tile theme.
+  static LabeledActionTileThemeData dark() {
+    return LabeledActionTileThemeData(
+      pressableTheme: PressableSurfaceThemeData.dark(),
+    );
+  }
+
   final double gap;
   final EdgeInsetsGeometry padding;
   final double? minHeight;
   final AlignmentGeometry alignment;
   final PressableSurfaceThemeData pressableTheme;
 
+  @override
   LabeledActionTileThemeData copyWith({
     double? gap,
     EdgeInsetsGeometry? padding,
@@ -43,6 +77,24 @@ class LabeledActionTileThemeData {
       minHeight: minHeight ?? this.minHeight,
       alignment: alignment ?? this.alignment,
       pressableTheme: pressableTheme ?? this.pressableTheme,
+    );
+  }
+
+  @override
+  LabeledActionTileThemeData lerp(
+    covariant LabeledActionTileThemeData? other,
+    double t,
+  ) {
+    if (other == null || identical(this, other)) {
+      return this;
+    }
+
+    return LabeledActionTileThemeData(
+      gap: ui.lerpDouble(gap, other.gap, t)!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
+      minHeight: ui.lerpDouble(minHeight, other.minHeight, t),
+      alignment: AlignmentGeometry.lerp(alignment, other.alignment, t)!,
+      pressableTheme: pressableTheme.lerp(other.pressableTheme, t),
     );
   }
 }

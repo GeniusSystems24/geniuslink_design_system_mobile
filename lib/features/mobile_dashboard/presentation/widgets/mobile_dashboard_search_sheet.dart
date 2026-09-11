@@ -198,7 +198,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
             columnGap: 10,
             dividerColor: context.mdTheme.border,
           ),
-      topStart: Text(
+      title: Text(
         operation.description,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
@@ -209,7 +209,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
           color: context.mdTheme.fg1,
         ),
       ),
-      topEnd: Text(
+      trailing: Text(
         '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
         style: TextStyle(
           fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
@@ -218,7 +218,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
           color: amountColor,
         ),
       ),
-      bottomStart: Text(
+      subtitle: Text(
         operation.reference,
         style: TextStyle(
           fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
@@ -226,7 +226,7 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
           color: context.mdColors.primary,
         ),
       ),
-      bottomEnd: Text(
+      subtitleTrailing: Text(
         domain.toUpperCase(),
         style: TextStyle(
           fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,

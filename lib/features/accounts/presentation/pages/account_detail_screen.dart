@@ -86,10 +86,10 @@ class AccountDetailScreen extends StatelessWidget {
           accentColor: theme.informationAccentColor ?? colors.primary,
           theme: theme.informationSection,
           children: [
-            KV(l10n.code, '1001', mono: true),
-            KV(l10n.accountType, l10n.assetCash),
-            KV(l10n.tree, l10n.assetsTreeOne),
-            KV(l10n.currency, 'SAR'),
+            KeyValueRow(l10n.code, '1001', mono: true),
+            KeyValueRow(l10n.accountType, l10n.assetCash),
+            KeyValueRow(l10n.tree, l10n.assetsTreeOne),
+            KeyValueRow(l10n.currency, 'SAR'),
           ],
         ),
         AccountDetailRecentTransactionsSection(
@@ -100,11 +100,11 @@ class AccountDetailScreen extends StatelessWidget {
             for (final transaction in transactions)
               TwoRowTile(
                 theme: theme.transactionTile,
-                topStart: Text(
+                title: Text(
                   transaction.$1,
                   style: transactionStartStyle,
                 ),
-                topEnd: Text(
+                trailing: Text(
                   transaction.$2,
                   style: transaction.$3
                       ? positiveTransactionEndStyle

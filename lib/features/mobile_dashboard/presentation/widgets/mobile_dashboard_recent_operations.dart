@@ -88,7 +88,7 @@ class MobileDashboardOperationRow extends StatelessWidget {
             columnGap: 10,
             dividerColor: context.mdTheme.border,
           ),
-      topStart: Text(
+      title: Text(
         operation.description,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
@@ -99,7 +99,7 @@ class MobileDashboardOperationRow extends StatelessWidget {
           color: context.mdTheme.fg1,
         ),
       ),
-      topEnd: Text(
+      trailing: Text(
         '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
         style: TextStyle(
           fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
@@ -108,7 +108,7 @@ class MobileDashboardOperationRow extends StatelessWidget {
           color: amountColor,
         ),
       ),
-      bottomStart: Row(
+      subtitle: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
@@ -126,7 +126,7 @@ class MobileDashboardOperationRow extends StatelessWidget {
           ),
         ],
       ),
-      bottomEnd: Text(
+      subtitleTrailing: Text(
         operation.timeLabel,
         style: TextStyle(
           fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,

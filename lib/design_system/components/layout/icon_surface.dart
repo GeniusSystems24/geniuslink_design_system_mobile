@@ -1,3 +1,6 @@
+// LAYOUT_THEME_EXTENSIONS_V1
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import 'pressable_surface.dart';
@@ -16,7 +19,8 @@ import 'pressable_surface.dart';
 /// );
 /// ```
 @immutable
-class IconSurfaceThemeData {
+class IconSurfaceThemeData
+    extends ThemeExtension<IconSurfaceThemeData> {
   const IconSurfaceThemeData({
     this.size = 40,
     this.backgroundColor,
@@ -26,6 +30,44 @@ class IconSurfaceThemeData {
     this.padding = EdgeInsets.zero,
   });
 
+  /// Returns the registered [IconSurfaceThemeData], if available.
+  static IconSurfaceThemeData? mayOf(BuildContext context) {
+    return Theme.of(context).extension<IconSurfaceThemeData>();
+  }
+
+  /// Returns the effective icon-surface theme for [context].
+  static IconSurfaceThemeData of(BuildContext context) {
+    final registered = mayOf(context);
+    if (registered != null) {
+      return registered;
+    }
+
+    final materialTheme = Theme.of(context);
+    return materialTheme.brightness == Brightness.dark
+        ? dark(colorScheme: materialTheme.colorScheme)
+        : light(colorScheme: materialTheme.colorScheme);
+  }
+
+  /// Creates the default light icon-surface theme.
+  static IconSurfaceThemeData light({
+    ColorScheme colorScheme = const ColorScheme.light(),
+  }) {
+    return IconSurfaceThemeData(
+      backgroundColor: colorScheme.surfaceContainerHighest,
+      borderColor: colorScheme.outlineVariant,
+    );
+  }
+
+  /// Creates the default dark icon-surface theme.
+  static IconSurfaceThemeData dark({
+    ColorScheme colorScheme = const ColorScheme.dark(),
+  }) {
+    return IconSurfaceThemeData(
+      backgroundColor: colorScheme.surfaceContainerHighest,
+      borderColor: colorScheme.outlineVariant,
+    );
+  }
+
   final double size;
   final Color? backgroundColor;
   final Color? borderColor;
@@ -33,6 +75,7 @@ class IconSurfaceThemeData {
   final BorderRadiusGeometry borderRadius;
   final EdgeInsetsGeometry padding;
 
+  @override
   IconSurfaceThemeData copyWith({
     double? size,
     Color? backgroundColor,
@@ -48,6 +91,33 @@ class IconSurfaceThemeData {
       borderWidth: borderWidth ?? this.borderWidth,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
+    );
+  }
+
+  @override
+  IconSurfaceThemeData lerp(
+    covariant IconSurfaceThemeData? other,
+    double t,
+  ) {
+    if (other == null || identical(this, other)) {
+      return this;
+    }
+
+    return IconSurfaceThemeData(
+      size: ui.lerpDouble(size, other.size, t)!,
+      backgroundColor: Color.lerp(
+        backgroundColor,
+        other.backgroundColor,
+        t,
+      ),
+      borderColor: Color.lerp(borderColor, other.borderColor, t),
+      borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(
+        borderRadius,
+        other.borderRadius,
+        t,
+      )!,
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
     );
   }
 }
@@ -106,7 +176,8 @@ class IconSurface extends StatelessWidget {
 /// );
 /// ```
 @immutable
-class IconSurfaceButtonThemeData {
+class IconSurfaceButtonThemeData
+    extends ThemeExtension<IconSurfaceButtonThemeData> {
   const IconSurfaceButtonThemeData({
     this.surfaceTheme = const IconSurfaceThemeData(),
     this.badgeTop = -8,
@@ -114,11 +185,50 @@ class IconSurfaceButtonThemeData {
     this.pressableTheme = const PressableSurfaceThemeData(),
   });
 
+  /// Returns the registered [IconSurfaceButtonThemeData], if available.
+  static IconSurfaceButtonThemeData? mayOf(BuildContext context) {
+    return Theme.of(context).extension<IconSurfaceButtonThemeData>();
+  }
+
+  /// Returns the effective icon-surface-button theme for [context].
+  static IconSurfaceButtonThemeData of(BuildContext context) {
+    final registered = mayOf(context);
+    if (registered != null) {
+      return registered;
+    }
+
+    final materialTheme = Theme.of(context);
+    return materialTheme.brightness == Brightness.dark
+        ? dark(colorScheme: materialTheme.colorScheme)
+        : light(colorScheme: materialTheme.colorScheme);
+  }
+
+  /// Creates the default light icon-surface-button theme.
+  static IconSurfaceButtonThemeData light({
+    ColorScheme colorScheme = const ColorScheme.light(),
+  }) {
+    return IconSurfaceButtonThemeData(
+      surfaceTheme: IconSurfaceThemeData.light(colorScheme: colorScheme),
+      pressableTheme: PressableSurfaceThemeData.light(),
+    );
+  }
+
+  /// Creates the default dark icon-surface-button theme.
+  static IconSurfaceButtonThemeData dark({
+    ColorScheme colorScheme = const ColorScheme.dark(),
+  }) {
+    return IconSurfaceButtonThemeData(
+      surfaceTheme: IconSurfaceThemeData.dark(colorScheme: colorScheme),
+      pressableTheme: PressableSurfaceThemeData.dark(),
+    );
+  }
+
   final IconSurfaceThemeData surfaceTheme;
   final double badgeTop;
   final double badgeEnd;
   final PressableSurfaceThemeData pressableTheme;
 
+  @override
   IconSurfaceButtonThemeData copyWith({
     IconSurfaceThemeData? surfaceTheme,
     double? badgeTop,
@@ -130,6 +240,23 @@ class IconSurfaceButtonThemeData {
       badgeTop: badgeTop ?? this.badgeTop,
       badgeEnd: badgeEnd ?? this.badgeEnd,
       pressableTheme: pressableTheme ?? this.pressableTheme,
+    );
+  }
+
+  @override
+  IconSurfaceButtonThemeData lerp(
+    covariant IconSurfaceButtonThemeData? other,
+    double t,
+  ) {
+    if (other == null || identical(this, other)) {
+      return this;
+    }
+
+    return IconSurfaceButtonThemeData(
+      surfaceTheme: surfaceTheme.lerp(other.surfaceTheme, t),
+      badgeTop: ui.lerpDouble(badgeTop, other.badgeTop, t)!,
+      badgeEnd: ui.lerpDouble(badgeEnd, other.badgeEnd, t)!,
+      pressableTheme: pressableTheme.lerp(other.pressableTheme, t),
     );
   }
 }

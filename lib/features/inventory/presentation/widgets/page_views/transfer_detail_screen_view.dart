@@ -250,9 +250,9 @@ class TransferDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KV(GeniusLinkLocalization.of(context).carrier, 'Plate 4892-RKD'),
-              KV(GeniusLinkLocalization.of(context).driver, 'Mohammed S.'),
-              KV(GeniusLinkLocalization.of(context).expectedArrival, 'Dec 20, 2025', mono: true),
+              KeyValueRow(GeniusLinkLocalization.of(context).carrier, 'Plate 4892-RKD'),
+              KeyValueRow(GeniusLinkLocalization.of(context).driver, 'Mohammed S.'),
+              KeyValueRow(GeniusLinkLocalization.of(context).expectedArrival, 'Dec 20, 2025', mono: true),
             ],
           ),
         ),

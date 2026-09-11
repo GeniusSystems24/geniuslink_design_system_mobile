@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:super_auto_suggestion_box/localization/generated/l10n.dart';
 import 'package:super_auto_suggestion_box/super_auto_suggestion_box.dart';
-import 'package:super_core/super_core.dart';
 import 'package:super_form_field/super_form_field.dart';
 import 'package:super_navigation_sidebar/super_navigation_sidebar.dart';
 import 'package:super_tab_bar/super_tab_bar.dart';

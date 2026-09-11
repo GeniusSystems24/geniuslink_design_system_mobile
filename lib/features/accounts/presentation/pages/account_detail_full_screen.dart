@@ -132,14 +132,14 @@ class AccountDetailFullScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KV(l10n.code, '1001', mono: true),
-              KV(l10n.accountType, l10n.assetCashEquivalents),
-              KV(l10n.nameEnglish, 'Cash Box'),
-              KV(l10n.nameArabic, 'الصندوق', ar: true),
-              KV(l10n.accountTree, 'Assets Tree (1)'),
-              KV(l10n.currency, 'SAR — Saudi Riyal'),
-              KV(l10n.parentGroup, 'Current Assets (1000)'),
-              KV(l10n.tenantId, '9', mono: true),
+              KeyValueRow(l10n.code, '1001', mono: true),
+              KeyValueRow(l10n.accountType, l10n.assetCashEquivalents),
+              KeyValueRow(l10n.nameEnglish, 'Cash Box'),
+              KeyValueRow(l10n.nameArabic, 'الصندوق', ar: true),
+              KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
+              KeyValueRow(l10n.currency, 'SAR — Saudi Riyal'),
+              KeyValueRow(l10n.parentGroup, 'Current Assets (1000)'),
+              KeyValueRow(l10n.tenantId, '9', mono: true),
             ],
           ),
         ),
@@ -153,19 +153,19 @@ class AccountDetailFullScreen extends StatelessWidget {
             for (final transaction in transactions)
               TwoRowTile(
                 theme: theme.transactionTile,
-                topStart: Text(
+                title: Text(
                   transaction.$1,
                   style: transactionTopStartStyle(),
                 ),
-                topEnd: Text(
+                trailing: Text(
                   transaction.$4,
                   style: transactionTopEndStyle(transaction.$5),
                 ),
-                bottomStart: Text(
+                subtitle: Text(
                   '${transaction.$3} · ${transaction.$2}',
                   style: transactionBottomStartStyle(),
                 ),
-                bottomEnd: Text(
+                subtitleTrailing: Text(
                   '${l10n.balanceShort} ${transaction.$6}',
                   style: transactionBottomEndStyle(),
                 ),

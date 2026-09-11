@@ -1,3 +1,6 @@
+// LAYOUT_THEME_EXTENSIONS_V1
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import 'directional_slot_tile.dart';
@@ -19,7 +22,8 @@ import 'pressable_surface.dart';
 /// );
 /// ```
 @immutable
-class MetricSlotCardThemeData {
+class MetricSlotCardThemeData
+    extends ThemeExtension<MetricSlotCardThemeData> {
   const MetricSlotCardThemeData({
     this.padding = const EdgeInsets.all(14),
     this.rowGap = 8,
@@ -31,6 +35,46 @@ class MetricSlotCardThemeData {
     this.pressableTheme = const PressableSurfaceThemeData(),
   });
 
+  /// Returns the registered [MetricSlotCardThemeData], if available.
+  static MetricSlotCardThemeData? mayOf(BuildContext context) {
+    return Theme.of(context).extension<MetricSlotCardThemeData>();
+  }
+
+  /// Returns the effective metric-slot-card theme for [context].
+  static MetricSlotCardThemeData of(BuildContext context) {
+    final registered = mayOf(context);
+    if (registered != null) {
+      return registered;
+    }
+
+    final materialTheme = Theme.of(context);
+    return materialTheme.brightness == Brightness.dark
+        ? dark(colorScheme: materialTheme.colorScheme)
+        : light(colorScheme: materialTheme.colorScheme);
+  }
+
+  /// Creates the default light metric-slot-card theme.
+  static MetricSlotCardThemeData light({
+    ColorScheme colorScheme = const ColorScheme.light(),
+  }) {
+    return MetricSlotCardThemeData(
+      backgroundColor: colorScheme.surface,
+      borderColor: colorScheme.outlineVariant,
+      pressableTheme: PressableSurfaceThemeData.light(),
+    );
+  }
+
+  /// Creates the default dark metric-slot-card theme.
+  static MetricSlotCardThemeData dark({
+    ColorScheme colorScheme = const ColorScheme.dark(),
+  }) {
+    return MetricSlotCardThemeData(
+      backgroundColor: colorScheme.surface,
+      borderColor: colorScheme.outlineVariant,
+      pressableTheme: PressableSurfaceThemeData.dark(),
+    );
+  }
+
   final EdgeInsetsGeometry padding;
   final double rowGap;
   final MainAxisAlignment mainAxisAlignment;
@@ -40,6 +84,7 @@ class MetricSlotCardThemeData {
   final BorderRadiusGeometry borderRadius;
   final PressableSurfaceThemeData pressableTheme;
 
+  @override
   MetricSlotCardThemeData copyWith({
     EdgeInsetsGeometry? padding,
     double? rowGap,
@@ -59,6 +104,37 @@ class MetricSlotCardThemeData {
       borderWidth: borderWidth ?? this.borderWidth,
       borderRadius: borderRadius ?? this.borderRadius,
       pressableTheme: pressableTheme ?? this.pressableTheme,
+    );
+  }
+
+  @override
+  MetricSlotCardThemeData lerp(
+    covariant MetricSlotCardThemeData? other,
+    double t,
+  ) {
+    if (other == null || identical(this, other)) {
+      return this;
+    }
+
+    return MetricSlotCardThemeData(
+      padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
+      rowGap: ui.lerpDouble(rowGap, other.rowGap, t)!,
+      // MainAxisAlignment is discrete, so change it at the midpoint.
+      mainAxisAlignment:
+          t < 0.5 ? mainAxisAlignment : other.mainAxisAlignment,
+      backgroundColor: Color.lerp(
+        backgroundColor,
+        other.backgroundColor,
+        t,
+      ),
+      borderColor: Color.lerp(borderColor, other.borderColor, t),
+      borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
+      borderRadius: BorderRadiusGeometry.lerp(
+        borderRadius,
+        other.borderRadius,
+        t,
+      )!,
+      pressableTheme: pressableTheme.lerp(other.pressableTheme, t),
     );
   }
 }

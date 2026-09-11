@@ -46,10 +46,10 @@ class GroupDetailScreen extends StatelessWidget {
           accentColor: theme.informationAccentColor ?? colors.primary,
           theme: theme.section,
           children: [
-              KV(l10n.id, '1042', mono: true),
-              KV(l10n.nameEnglish, 'Current Assets'),
-              KV(l10n.nameArabic, 'الأصول المتداولة', ar: true),
-              KV(l10n.accountTree, 'Assets Tree (1)'),
+              KeyValueRow(l10n.id, '1042', mono: true),
+              KeyValueRow(l10n.nameEnglish, 'Current Assets'),
+              KeyValueRow(l10n.nameArabic, 'الأصول المتداولة', ar: true),
+              KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
             ],
         ),
         AccountsSection(
