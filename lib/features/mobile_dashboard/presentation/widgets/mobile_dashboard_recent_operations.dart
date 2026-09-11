@@ -1,4 +1,6 @@
 // MOBILE_DASHBOARD_COMPONENTIZATION_V3
+// MOVEMENT_TILE_COMPONENT_V1
+// MOVEMENT_TILE_EXTRACTED_V1
 import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
@@ -6,6 +8,7 @@ import 'mobile_dashboard_shared.dart';
 import 'mobile_dashboard_theme.dart';
 import '../../../../design_system/kit.dart';
 
+import 'movement_tile.dart';
 typedef MobileDashboardOperationAmountResolver =
     double Function(MdOperation operation);
 
@@ -53,6 +56,11 @@ class MobileDashboardRecentOperations extends StatelessWidget {
   }
 }
 
+/// Feature adapter that maps [MdOperation] into the generic [MovementTile].
+///
+/// Keeping this adapter separate is important when the domain contains many
+/// transaction types: domain-to-visual mapping stays at the feature boundary,
+/// while [MovementTile] remains model-agnostic.
 class MobileDashboardOperationRow extends StatelessWidget {
   final MdOperation operation;
   final String currency;
@@ -71,68 +79,25 @@ class MobileDashboardOperationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final amountColor = operation.isCredit
-        ? context.mdColors.secondary
-        : context.mdColors.error;
     final sign = operation.isCredit ? '+' : '−';
 
-    return TwoRowTile(
-      semanticLabel:
-          '${operation.description}, $sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
+    return MovementTile(
+      description: operation.description,
+      reference: operation.reference,
+      amountLabel:
+          '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
+      timeLabel: operation.timeLabel,
+      amountTone: operation.isCredit
+          ? MovementAmountTone.credit
+          : MovementAmountTone.debit,
       showBottomDivider: !last,
-      theme: theme ??
-          context.mdComponentTheme.twoRowTheme ??
-          TwoRowTileThemeData(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            rowGap: 7,
-            columnGap: 10,
-            dividerColor: context.mdTheme.border,
-          ),
-      title: Text(
-        operation.description,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: context.mdTheme.fg1,
-        ),
-      ),
-      trailing: Text(
-        '$sign$currency ${mobileDashboardNumber(amount, decimals: 2)}',
-        style: TextStyle(
-          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
-          color: amountColor,
-        ),
-      ),
-      subtitle: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            operation.reference,
-            style: TextStyle(
-              fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-              fontSize: 11,
-              color: context.mdColors.primary,
-            ),
-          ),
-          const SizedBox(width: 8),
-          MobileDashboardPill(
-            label: operation.type,
-            color: mobileDashboardToneColor(context, operation.tone),
-          ),
-        ],
-      ),
-      subtitleTrailing: Text(
-        operation.timeLabel,
-        style: TextStyle(
-          fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
-          fontSize: 11,
-          color: context.mdTheme.fg3,
-        ),
+      theme: theme,
+      // The current dashboard uses a pill for type presentation. This can later
+      // be replaced by a registry-driven icon/badge without modifying
+      // MovementTile itself.
+      typeBadge: MobileDashboardPill(
+        label: operation.type,
+        color: mobileDashboardToneColor(context, operation.tone),
       ),
     );
   }

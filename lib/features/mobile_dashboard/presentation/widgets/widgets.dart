@@ -6,6 +6,7 @@ export 'mobile_dashboard_navigation.dart';
 export 'mobile_dashboard_overview.dart';
 export 'mobile_dashboard_pressable.dart';
 export 'mobile_dashboard_quick_actions.dart';
+export 'movement_tile.dart';
 export 'mobile_dashboard_recent_operations.dart';
 export 'mobile_dashboard_search_sheet.dart';
 export 'mobile_dashboard_shared.dart';

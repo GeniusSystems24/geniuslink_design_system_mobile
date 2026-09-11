@@ -1,5 +1,7 @@
 part of 'accounts_extra_screens.dart';
 
+// ACCOUNT_TRANSACTION_TILE_V1
+
 class AccountDetailFullScreen extends StatelessWidget {
   const AccountDetailFullScreen({
     super.key,
@@ -65,35 +67,6 @@ class AccountDetailFullScreen extends StatelessWidget {
       letterSpacing: -0.6,
     ).merge(theme.currentBalanceContent.topEndStyle);
 
-    TextStyle transactionTopStartStyle() => TextStyle(
-          fontFamily: fontFamily,
-          fontSize: 12,
-          color: colors.primary,
-        ).merge(theme.transactionContent.topStartStyle);
-
-    TextStyle transactionTopEndStyle(bool positive) => TextStyle(
-          fontFamily: fontFamily,
-          fontSize: 13,
-          fontWeight: FontWeight.w600,
-          color: positive ? colors.secondary : colors.error,
-        ).merge(
-          positive
-              ? theme.transactionContent.topEndPositiveStyle
-              : theme.transactionContent.topEndNegativeStyle,
-        );
-
-    TextStyle transactionBottomStartStyle() => TextStyle(
-          fontFamily: fontFamily,
-          fontSize: 12,
-          color: superTheme.fg3,
-        ).merge(theme.transactionContent.bottomStartStyle);
-
-    TextStyle transactionBottomEndStyle() => TextStyle(
-          fontFamily: fontFamily,
-          fontSize: 11.5,
-          color: superTheme.fg2,
-        ).merge(theme.transactionContent.bottomEndStyle);
-
     return Scaffold(
       backgroundColor: theme.backgroundColor ?? colors.surface,
       appBar: SuperAppBar(
@@ -151,24 +124,23 @@ class AccountDetailFullScreen extends StatelessWidget {
           theme: theme.recentTransactionsSection,
           children: [
             for (final transaction in transactions)
-              TwoRowTile(
-                theme: theme.transactionTile,
-                title: Text(
-                  transaction.$1,
-                  style: transactionTopStartStyle(),
-                ),
-                trailing: Text(
-                  transaction.$4,
-                  style: transactionTopEndStyle(transaction.$5),
-                ),
-                subtitle: Text(
-                  '${transaction.$3} · ${transaction.$2}',
-                  style: transactionBottomStartStyle(),
-                ),
-                subtitleTrailing: Text(
-                  '${l10n.balanceShort} ${transaction.$6}',
-                  style: transactionBottomEndStyle(),
-                ),
+              TransactionTile(
+                reference: transaction.$1,
+                description: transaction.$3,
+                dateLabel: transaction.$2,
+                amount: transaction.$4,
+                balanceLabel: '${l10n.balanceShort} ${transaction.$6}',
+                amountTone: transaction.$5
+                    ? TransactionAmountTone.positive
+                    : TransactionAmountTone.negative,
+                tileTheme: theme.transactionTile,
+                referenceStyle: theme.transactionContent.topStartStyle,
+                positiveAmountStyle:
+                    theme.transactionContent.topEndPositiveStyle,
+                negativeAmountStyle:
+                    theme.transactionContent.topEndNegativeStyle,
+                detailsStyle: theme.transactionContent.bottomStartStyle,
+                balanceStyle: theme.transactionContent.bottomEndStyle,
               ),
           ],
         ),
