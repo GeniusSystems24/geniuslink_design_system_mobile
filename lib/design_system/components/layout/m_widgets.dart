@@ -12,21 +12,22 @@ import 'package:gl_mobile_app/design_system/theme/super_core_theme_helpers.dart'
 class Eyebrow extends StatelessWidget {
   final String text;
   final Color? color;
-  final double size;
-  const Eyebrow(this.text, {super.key, this.color, this.size = 10});
+  final double? size;
+  const Eyebrow(this.text, {super.key, this.color, this.size});
   @override
-  Widget build(BuildContext context) => Text(
-    text.toUpperCase(),
-    style: TextStyle(
-      fontFamily: SuperMaterialThemeData.of(
-        context,
-      ).textTheme.bodyMedium?.fontFamily,
-      fontWeight: FontWeight.w700,
-      fontSize: size,
-      letterSpacing: 0.6,
-      color: color ?? SuperMaterialThemeData.of(context).superTheme.fg2,
-    ),
-  );
+  Widget build(BuildContext context) {
+    var theme = SuperMaterialThemeData.of(context);
+    return Text(
+      text.toUpperCase(),
+      style: TextStyle(
+        fontFamily: theme.textTheme.bodyMedium?.fontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: size,
+        letterSpacing: 0.6,
+        color: color ?? theme.superTheme.fg2,
+      ),
+    );
+  }
 }
 
 class MField extends StatelessWidget {

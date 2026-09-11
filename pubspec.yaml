@@ -19,7 +19,7 @@ dependencies:
   geniuslink_design_system: ^2.8.1
 
   # Single source of truth for the complete Material theme and shared tokens.
-  super_core: ^3.6.0
+  super_core: ^3.7.0
 
   # Standard text, numeric, date, select, attachment and boolean fields.
   super_form_field: ^1.14.0
