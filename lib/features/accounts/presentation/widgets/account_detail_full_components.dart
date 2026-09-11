@@ -151,7 +151,7 @@ class AccountDetailCurrentBalanceSection extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: trailing,
-      initiallyExpanded: true,
+      collapsible: false,
       accentColor: accentColor,
       padding: theme.padding,
       child: Column(

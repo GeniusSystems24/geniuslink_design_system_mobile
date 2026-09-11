@@ -125,7 +125,7 @@ class AccountDetailFullScreen extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: l10n.accountInformation,
-          initiallyExpanded: true,
+          collapsible: false,
           accentColor: theme.informationAccentColor ?? colors.primary,
           padding: const EdgeInsets.all(16),
           child: Column(
