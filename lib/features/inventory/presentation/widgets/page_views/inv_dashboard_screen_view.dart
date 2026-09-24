@@ -165,60 +165,72 @@ class InvDashboardView extends StatelessWidget {
         actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 1.8,
+        SuperGrid(
+          scope: SuperGridScope.current,
+          gutter: 10,
+          rowSpacing: 10,
           children: [
             for (final k in kpis)
-              Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: SuperMaterialThemeData.of(context).superTheme.surface,
-                  border: Border.all(
-                    color: SuperMaterialThemeData.of(context).superTheme.border,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Eyebrow(
-                      k.$1,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                      size: 9.5,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      k.$2,
-                      style: TextStyle(
-                        fontFamily: SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        color: k.$4,
-                        height: 1.1,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      k.$3,
-                      style: TextStyle(
-                        fontFamily: SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily,
-                        fontSize: 10.5,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: AspectRatio(
+                  aspectRatio: 1.8,
+                  child: Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: SuperMaterialThemeData.of(
+                        context,
+                      ).superTheme.surface,
+                      border: Border.all(
                         color: SuperMaterialThemeData.of(
                           context,
-                        ).superTheme.fg3,
+                        ).superTheme.border,
                       ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Eyebrow(
+                          k.$1,
+                          color: SuperMaterialThemeData.of(
+                            context,
+                          ).superTheme.fg3,
+                          size: 9.5,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          k.$2,
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: k.$4,
+                            height: 1.1,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          k.$3,
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 10.5,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).superTheme.fg3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
           ],
@@ -230,77 +242,82 @@ class InvDashboardView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < ops.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < ops.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    ops[i].$1,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 11,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < ops.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < ops.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).colorScheme.primary,
+                                      ).superTheme.border,
                                     ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    ops[i].$2,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg3,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      ops[i].$1,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 11,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      ops[i].$2,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              ops[i].$3,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: ops[i].$4,
+                              Text(
+                                ops[i].$3,
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: ops[i].$4,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -315,15 +332,27 @@ class InvDashboardView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              for (final p in low) _ReorderBar(p: p),
-              MBtn(
-                GeniusLinkLocalization.of(context).generatePurchaseOrder,
-                icon: 'paperclip',
-                full: true,
+              for (final p in low)
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 6,
+                  large: 6,
+                  child: _ReorderBar(p: p),
+                ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: MBtn(
+                  GeniusLinkLocalization.of(context).generatePurchaseOrder,
+                  icon: 'paperclip',
+                  full: true,
+                ),
               ),
             ],
           ),

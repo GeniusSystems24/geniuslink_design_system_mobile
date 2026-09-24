@@ -38,23 +38,40 @@ class OpeningJournalView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MField(
-                label: GeniusLinkLocalization.of(context).serialNo,
-                value: 'JV-2024-0042',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: MField(
+                  label: GeniusLinkLocalization.of(context).serialNo,
+                  value: 'JV-2024-0042',
+                  mono: true,
+                ),
               ),
-              MField(
-                label: GeniusLinkLocalization.of(context).currency,
-                value: 'SAR — Saudi Riyal',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: MField(
+                  label: GeniusLinkLocalization.of(context).currency,
+                  value: 'SAR — Saudi Riyal',
+                ),
               ),
-              MField(
-                label: GeniusLinkLocalization.of(context).fiscalYear,
-                value: '2024',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: MField(
+                  label: GeniusLinkLocalization.of(context).fiscalYear,
+                  value: '2024',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -66,122 +83,128 @@ class OpeningJournalView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < lines.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i == lines.length - 1
-                              ? null
-                              : Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < lines.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i == lines.length - 1
+                                ? null
+                                : Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
                                   ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    lines[i].$1,
+                                    style: TextStyle(
+                                      fontSize: 13.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.fg1,
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    lines[i].$2,
+                                    style: TextStyle(
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: lines[i].$3
+                                          ? SuperMaterialThemeData.of(
+                                              context,
+                                            ).colorScheme.secondary
+                                          : SuperMaterialThemeData.of(
+                                              context,
+                                            ).colorScheme.error,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                lines[i].$4,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg3,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
                                 ),
+                              ),
+                            ],
+                          ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  lines[i].$1,
-                                  style: TextStyle(
-                                    fontSize: 13.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.fg1,
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                  ),
-                                ),
-                                Text(
-                                  lines[i].$2,
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: lines[i].$3
-                                        ? SuperMaterialThemeData.of(
-                                            context,
-                                          ).colorScheme.secondary
-                                        : SuperMaterialThemeData.of(
-                                            context,
-                                          ).colorScheme.error,
-                                  ),
-                                ),
-                              ],
+                      Container(
+                        margin: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.only(top: 12),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.borderStrong,
+                              width: 2,
                             ),
-                            const SizedBox(height: 3),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Eyebrow(
+                              'Balanced · Diff 0.00',
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).colorScheme.secondary,
+                              size: 11,
+                            ),
                             Text(
-                              lines[i].$4,
+                              '5,000.00',
                               style: TextStyle(
-                                fontSize: 12,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
                                 fontFamily: SuperMaterialThemeData.of(
                                   context,
                                 ).textTheme.bodyMedium?.fontFamily,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.fg1,
                               ),
                             ),
                           ],
                         ),
                       ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 4),
-                      padding: const EdgeInsets.only(top: 12),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.borderStrong,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Eyebrow(
-                            'Balanced · Diff 0.00',
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).colorScheme.secondary,
-                            size: 11,
-                          ),
-                          Text(
-                            '5,000.00',
-                            style: TextStyle(
-                              fontFamily: SuperMaterialThemeData.of(
-                                context,
-                              ).textTheme.bodyMedium?.fontFamily,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: SuperMaterialThemeData.of(
-                                context,
-                              ).superTheme.fg1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

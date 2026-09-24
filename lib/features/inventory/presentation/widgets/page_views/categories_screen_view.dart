@@ -261,35 +261,64 @@ class _CategoriesScreenState extends State<CategoriesView> {
           initiallyExpanded: false,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).code,
-                placeholder: GeniusLinkLocalization.of(context).eGCat006,
-                mono: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).code,
+                  placeholder: GeniusLinkLocalization.of(context).eGCat006,
+                  mono: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).parent,
-                value: '— Top Level —',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).parent,
+                  value: '— Top Level —',
+                  select: true,
+                ),
               ),
-              IField(
-                label: 'Name (English)',
-                placeholder: GeniusLinkLocalization.of(
-                  context,
-                ).eGAdhesivesSealants,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: 'Name (English)',
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).eGAdhesivesSealants,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGAdhesives,
-                ar: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).nameArabic,
+                  placeholder: GeniusLinkLocalization.of(context).eGAdhesives,
+                  ar: true,
+                  required: true,
+                ),
               ),
-              ActionRow(primary: 'Create Category'),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: ActionRow(primary: 'Create Category'),
+              ),
             ],
           ),
         ),

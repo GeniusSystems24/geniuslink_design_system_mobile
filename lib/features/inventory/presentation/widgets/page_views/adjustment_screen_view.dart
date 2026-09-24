@@ -195,32 +195,55 @@ class AdjustmentView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).serialNo,
-                value: 'INV-ADJ-2024-0058',
-                mono: true,
-                locked: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).serialNo,
+                  value: 'INV-ADJ-2024-0058',
+                  mono: true,
+                  locked: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).reason,
-                value: 'Physical Stock Count',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).reason,
+                  value: 'Physical Stock Count',
+                  select: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).store,
-                placeholder: GeniusLinkLocalization.of(context).searchStore,
-                icon: 'store',
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).store,
+                  placeholder: GeniusLinkLocalization.of(context).searchStore,
+                  icon: 'store',
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).countDate,
-                placeholder: 'mm/dd/yyyy',
-                mono: true,
-                icon: 'calendar',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).countDate,
+                  placeholder: 'mm/dd/yyyy',
+                  mono: true,
+                  icon: 'calendar',
+                ),
               ),
             ],
           ),
@@ -234,24 +257,26 @@ class AdjustmentView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Mini(label: 'Lines Adjusted', value: '3'),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Mini(
-                      label: GeniusLinkLocalization.of(context).netAdjustment,
-                      value: '-307.00',
-                      sub: 'SAR',
-                    ),
-                  ),
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: Mini(label: 'Lines Adjusted', value: '3'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: Mini(
+                  label: GeniusLinkLocalization.of(context).netAdjustment,
+                  value: '-307.00',
+                  sub: 'SAR',
+                ),
               ),
             ],
           ),
@@ -263,17 +288,22 @@ class AdjustmentView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < items.length; i++)
-                      _AdjLine(item: items[i], last: i == items.length - 1),
-                  ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < items.length; i++)
+                        _AdjLine(item: items[i], last: i == items.length - 1),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -285,21 +315,38 @@ class AdjustmentView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              ITextarea(
-                label: GeniusLinkLocalization.of(context).adjustmentNotes,
-                placeholder: GeniusLinkLocalization.of(
-                  context,
-                ).auditorNameWitnessCountSessionReference,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: ITextarea(
+                  label: GeniusLinkLocalization.of(context).adjustmentNotes,
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).auditorNameWitnessCountSessionReference,
+                ),
               ),
-              UploadBox(),
-              InfoNote(
-                GeniusLinkLocalization.of(
-                  context,
-                ).adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: UploadBox(),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: InfoNote(
+                  GeniusLinkLocalization.of(
+                    context,
+                  ).adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro,
+                ),
               ),
             ],
           ),

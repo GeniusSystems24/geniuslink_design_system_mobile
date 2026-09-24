@@ -104,55 +104,80 @@ class _TransferCreateScreenState extends State<TransferCreateView> {
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).serialNo,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).serialNo,
+                  ),
+                  initialValue: 'INV-TRF-2024-0117',
+                  readOnly: true,
                 ),
-                initialValue: 'INV-TRF-2024-0117',
-                readOnly: true,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _currencySource,
-                controller: _currencyController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).currency,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _currencySource,
+                  controller: _currencyController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).currency,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectCurrency,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectCurrency,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _fromSource,
-                controller: _fromController,
-                decoration: InputDecoration(labelText: 'From Store'),
-                hintText: GeniusLinkLocalization.of(
-                  context,
-                ).searchOriginWarehouse,
-              ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _toSource,
-                controller: _toController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).toStore,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _fromSource,
+                  controller: _fromController,
+                  decoration: InputDecoration(labelText: 'From Store'),
+                  hintText: GeniusLinkLocalization.of(
+                    context,
+                  ).searchOriginWarehouse,
                 ),
-                hintText: GeniusLinkLocalization.of(context).searchDestination,
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _toSource,
+                  controller: _toController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).toStore,
+                  ),
+                  hintText: GeniusLinkLocalization.of(
+                    context,
+                  ).searchDestination,
+                ),
               ),
             ],
           ),
@@ -191,29 +216,40 @@ class _TransferCreateScreenState extends State<TransferCreateView> {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).notes,
-                  hintText: GeniusLinkLocalization.of(
-                    context,
-                  ).enterTransferNotesOrInternalInstructions,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).notes,
+                    hintText: GeniusLinkLocalization.of(
+                      context,
+                    ).enterTransferNotesOrInternalInstructions,
+                  ),
+                  multiline: true,
+                  rows: 3,
                 ),
-                multiline: true,
-                rows: 3,
               ),
-              SuperAttachmentFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).attachments,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: SuperAttachmentFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).attachments,
+                  ),
+                  accept: '.pdf,.jpg,.jpeg,.png',
+                  maxSizeMB: 10,
+                  maxFiles: 5,
+                  multiple: true,
+                  onBrowse: () async => const <SuperFile>[],
                 ),
-                accept: '.pdf,.jpg,.jpeg,.png',
-                maxSizeMB: 10,
-                maxFiles: 5,
-                multiple: true,
-                onBrowse: () async => const <SuperFile>[],
               ),
             ],
           ),

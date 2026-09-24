@@ -43,10 +43,43 @@ class GroupDetailScreen extends StatelessWidget {
           accentColor: theme.informationAccentColor ?? colors.primary,
           theme: theme.section,
           children: [
-            KeyValueRow(l10n.id, '1042', mono: true),
-            KeyValueRow(l10n.nameEnglish, 'Current Assets'),
-            KeyValueRow(l10n.nameArabic, 'الأصول المتداولة', ar: true),
-            KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
+            SuperGrid(
+              scope: SuperGridScope.current,
+              children: [
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.id, '1042', mono: true),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.nameEnglish, 'Current Assets'),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(
+                    l10n.nameArabic,
+                    'الأصول المتداولة',
+                    ar: true,
+                  ),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
+                ),
+              ],
+            ),
           ],
         ),
         AccountsSection(

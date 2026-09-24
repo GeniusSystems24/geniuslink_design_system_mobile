@@ -80,69 +80,77 @@ class _UomScreenState extends State<UomView> {
         actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 2.1,
+        SuperGrid(
+          scope: SuperGridScope.current,
+          gutter: 10,
+          rowSpacing: 10,
           children: [
             for (final e in groups.entries)
-              GestureDetector(
-                onTap: () => setState(() => _active = e.key),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: _active == e.key
-                        ? superCoreTint(e.value.$3, 0x14)
-                        : SuperMaterialThemeData.of(context).superTheme.surface,
-                    border: Border.all(
-                      color: _active == e.key
-                          ? e.value.$3
-                          : SuperMaterialThemeData.of(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: AspectRatio(
+                  aspectRatio: 2.1,
+                  child: GestureDetector(
+                    onTap: () => setState(() => _active = e.key),
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: _active == e.key
+                            ? superCoreTint(e.value.$3, 0x14)
+                            : SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.surface,
+                        border: Border.all(
+                          color: _active == e.key
+                              ? e.value.$3
+                              : SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.border,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Eyebrow(
+                            e.value.$1,
+                            color: SuperMaterialThemeData.of(
                               context,
-                            ).superTheme.border,
+                            ).superTheme.fg3,
+                            size: 10,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            '${e.value.$4.length} units',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: e.value.$3,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'base · ${e.value.$2}',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 11,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Eyebrow(
-                        e.value.$1,
-                        color: SuperMaterialThemeData.of(
-                          context,
-                        ).superTheme.fg3,
-                        size: 10,
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        '${e.value.$4.length} units',
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: e.value.$3,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'base · ${e.value.$2}',
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 11,
-                          color: SuperMaterialThemeData.of(
-                            context,
-                          ).superTheme.fg3,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -155,87 +163,92 @@ class _UomScreenState extends State<UomView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < cur.$4.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 13),
-                        decoration: BoxDecoration(
-                          border: i < cur.$4.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < cur.$4.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 13),
+                          decoration: BoxDecoration(
+                            border: i < cur.$4.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 50,
+                                child: Text(
+                                  cur.$4[i].$1,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: cur.$4[i].$4
+                                        ? cur.$3
+                                        : SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.fg2,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  cur.$4[i].$2,
+                                  style: TextStyle(
+                                    fontSize: 13,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.border,
+                                    ).superTheme.fg1,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
                                   ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 50,
-                              child: Text(
-                                cur.$4[i].$1,
+                                ),
+                              ),
+                              Text(
+                                '×${cur.$4[i].$3}',
                                 style: TextStyle(
                                   fontFamily: SuperMaterialThemeData.of(
                                     context,
                                   ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  color: cur.$4[i].$4
-                                      ? cur.$3
-                                      : SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.fg2,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                cur.$4[i].$2,
-                                style: TextStyle(
                                   fontSize: 13,
+                                  fontWeight: FontWeight.w600,
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).superTheme.fg1,
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
+                                  ).superTheme.fg2,
                                 ),
                               ),
-                            ),
-                            Text(
-                              '×${cur.$4[i].$3}',
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg2,
-                              ),
-                            ),
-                            if (cur.$4[i].$4)
-                              Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Pill(
-                                  GeniusLinkLocalization.of(context).base,
-                                  tone: PillTone.info,
+                              if (cur.$4[i].$4)
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Pill(
+                                    GeniusLinkLocalization.of(context).base,
+                                    tone: PillTone.info,
+                                  ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

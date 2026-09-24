@@ -72,11 +72,19 @@ class RoleEditorView extends StatelessWidget {
               accentColor: accentColor2,
 
               padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  TInput(label: 'Role Name', defaultValue: 'Accountant'),
+              child: SuperGrid(
+                scope: SuperGridScope.current,
+                children: [
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: TInput(
+                      label: 'Role Name',
+                      defaultValue: 'Accountant',
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -87,135 +95,56 @@ class RoleEditorView extends StatelessWidget {
               accentColor: accentColor,
 
               padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.border,
-                              ),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Eyebrow(
-                                  'Module',
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).superTheme.fg3,
-                                  size: 9.5,
+                                  ).superTheme.border,
                                 ),
                               ),
-                              for (final column in columns)
-                                SizedBox(
-                                  width: 44,
-                                  child: Center(
-                                    child: Text(
-                                      column.$1.toUpperCase(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 9,
-                                        letterSpacing: 0.4,
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.fg3,
-                                        fontFamily: SuperMaterialThemeData.of(
-                                          context,
-                                        ).textTheme.bodyMedium?.fontFamily,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        for (int i = 0; i < modules.length; i++)
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              border: i < modules.length - 1
-                                  ? Border(
-                                      bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.border,
-                                      ),
-                                    )
-                                  : null,
                             ),
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: Text(
-                                    modules[i].name,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg1,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                    ),
+                                  child: Eyebrow(
+                                    'Module',
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg3,
+                                    size: 9.5,
                                   ),
                                 ),
-                                for (
-                                  int columnIndex = 0;
-                                  columnIndex < columns.length;
-                                  columnIndex++
-                                )
+                                for (final column in columns)
                                   SizedBox(
                                     width: 44,
                                     child: Center(
-                                      child: GestureDetector(
-                                        onTap: () =>
-                                            toggle(modules[i].id, columnIndex),
-                                        child: Container(
-                                          width: 28,
-                                          height: 28,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                permissions[modules[i]
-                                                    .id]![columnIndex]
-                                                ? columns[columnIndex].$2
-                                                : SuperMaterialThemeData.of(
-                                                    context,
-                                                  ).superTheme.inputBg,
-                                            border: Border.all(
-                                              color:
-                                                  permissions[modules[i]
-                                                      .id]![columnIndex]
-                                                  ? columns[columnIndex].$2
-                                                  : SuperMaterialThemeData.of(
-                                                      context,
-                                                    ).superTheme.borderStrong,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                              7,
-                                            ),
-                                          ),
-                                          child:
-                                              permissions[modules[i]
-                                                  .id]![columnIndex]
-                                              ? const Icon(
-                                                  Icons.check_rounded,
-                                                  size: 15,
-                                                  color: Colors.white,
-                                                )
-                                              : null,
+                                      child: Text(
+                                        column.$1.toUpperCase(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 9,
+                                          letterSpacing: 0.4,
+                                          color: SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.fg3,
+                                          fontFamily: SuperMaterialThemeData.of(
+                                            context,
+                                          ).textTheme.bodyMedium?.fontFamily,
                                         ),
                                       ),
                                     ),
@@ -223,7 +152,92 @@ class RoleEditorView extends StatelessWidget {
                               ],
                             ),
                           ),
-                      ],
+                          for (int i = 0; i < modules.length; i++)
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              decoration: BoxDecoration(
+                                border: i < modules.length - 1
+                                    ? Border(
+                                        bottom: BorderSide(
+                                          color: SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.border,
+                                        ),
+                                      )
+                                    : null,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      modules[i].name,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg1,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                  ),
+                                  for (
+                                    int columnIndex = 0;
+                                    columnIndex < columns.length;
+                                    columnIndex++
+                                  )
+                                    SizedBox(
+                                      width: 44,
+                                      child: Center(
+                                        child: GestureDetector(
+                                          onTap: () => toggle(
+                                            modules[i].id,
+                                            columnIndex,
+                                          ),
+                                          child: Container(
+                                            width: 28,
+                                            height: 28,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  permissions[modules[i]
+                                                      .id]![columnIndex]
+                                                  ? columns[columnIndex].$2
+                                                  : SuperMaterialThemeData.of(
+                                                      context,
+                                                    ).superTheme.inputBg,
+                                              border: Border.all(
+                                                color:
+                                                    permissions[modules[i]
+                                                        .id]![columnIndex]
+                                                    ? columns[columnIndex].$2
+                                                    : SuperMaterialThemeData.of(
+                                                        context,
+                                                      ).superTheme.borderStrong,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                            ),
+                                            child:
+                                                permissions[modules[i]
+                                                    .id]![columnIndex]
+                                                ? const Icon(
+                                                    Icons.check_rounded,
+                                                    size: 15,
+                                                    color: Colors.white,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

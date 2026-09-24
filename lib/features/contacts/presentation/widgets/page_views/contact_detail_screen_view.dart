@@ -73,38 +73,45 @@ class ContactDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    'SAR',
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 14,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      'SAR',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 14,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    formatContactAmount(c.balance),
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: contactTone(context, d),
-                      letterSpacing: -0.6,
+                    const SizedBox(width: 8),
+                    Text(
+                      formatContactAmount(c.balance),
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                        color: contactTone(context, d),
+                        letterSpacing: -0.6,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -116,32 +123,70 @@ class ContactDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).code,
-                c.code,
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).code,
+                  c.code,
+                  mono: true,
+                ),
               ),
-              KeyValueRow(GeniusLinkLocalization.of(context).city, c.city),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).contactPerson,
-                'Ahmed K.',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).city,
+                  c.city,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).phone,
-                '+966 55 124 9020',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).contactPerson,
+                  'Ahmed K.',
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).controlAccount,
-                d.controlAccount,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).phone,
+                  '+966 55 124 9020',
+                  mono: true,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).paymentTerms,
-                'Net 30',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).controlAccount,
+                  d.controlAccount,
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).paymentTerms,
+                  'Net 30',
+                ),
               ),
             ],
           ),
@@ -155,86 +200,91 @@ class ContactDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < d.history.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < d.history.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    d.history[i].reference,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 12,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < d.history.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < d.history.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).colorScheme.primary,
+                                      ).superTheme.border,
                                     ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    '${d.history[i].description} · ${formatContactDate(d.history[i].occurredAt)}',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg3,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      d.history[i].reference,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      '${d.history[i].description} · ${formatContactDate(d.history[i].occurredAt)}',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              formatContactAmount(
-                                d.history[i].amount,
-                                signed: true,
+                              Text(
+                                formatContactAmount(
+                                  d.history[i].amount,
+                                  signed: true,
+                                ),
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: d.history[i].amount >= 0
+                                      ? SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.secondary
+                                      : SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.error,
+                                ),
                               ),
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w600,
-                                color: d.history[i].amount >= 0
-                                    ? SuperMaterialThemeData.of(
-                                        context,
-                                      ).colorScheme.secondary
-                                    : SuperMaterialThemeData.of(
-                                        context,
-                                      ).colorScheme.error,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

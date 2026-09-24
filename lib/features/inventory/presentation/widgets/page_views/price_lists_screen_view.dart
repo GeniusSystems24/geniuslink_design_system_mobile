@@ -75,86 +75,101 @@ class _PriceListsScreenState extends State<PriceListsView> {
         actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
-        for (final l in lists)
-          GestureDetector(
-            onTap: () => setState(() => _active = l.$1),
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: _active == l.$1
-                    ? superCoreTint(l.$6, 0x14)
-                    : SuperMaterialThemeData.of(context).superTheme.surface,
-                border: Border.all(
-                  color: _active == l.$1
-                      ? l.$6
-                      : SuperMaterialThemeData.of(context).superTheme.border,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 3,
-                    ),
+        SuperGrid(
+          scope: SuperGridScope.current,
+          children: [
+            for (final l in lists)
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: GestureDetector(
+                  onTap: () => setState(() => _active = l.$1),
+                  child: Container(
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: superCoreTint(l.$6, 0x1F),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      l.$3,
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.6,
-                        color: l.$6,
-                        fontFamily: SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily,
+                      color: _active == l.$1
+                          ? superCoreTint(l.$6, 0x14)
+                          : SuperMaterialThemeData.of(
+                              context,
+                            ).superTheme.surface,
+                      border: Border.all(
+                        color: _active == l.$1
+                            ? l.$6
+                            : SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.border,
                       ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text(
-                          l.$2,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13.5,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg1,
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: superCoreTint(l.$6, 0x1F),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            l.$3,
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.6,
+                              color: l.$6,
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 2),
-                        Text(
-                          '${l.$4} · ${l.$5} items',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 11,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l.$2,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.5,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg1,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                '${l.$4} · ${l.$5} items',
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 11,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg3,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+                        if (_active == l.$1)
+                          Icon(MIcons.of('check'), size: 16, color: l.$6),
                       ],
                     ),
                   ),
-                  if (_active == l.$1)
-                    Icon(MIcons.of('check'), size: 16, color: l.$6),
-                ],
+                ),
               ),
-            ),
-          ),
+          ],
+        ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).itemPrices,
           subtitle: '5 items · 15% discount applied',
@@ -162,50 +177,72 @@ class _PriceListsScreenState extends State<PriceListsView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < items.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < items.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    items[i].$2,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < items.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < items.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg1,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                      ).superTheme.border,
                                     ),
-                                  ),
-                                  const SizedBox(height: 2),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      items[i].$2,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg1,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      items[i].$1,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 11,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
                                   Text(
-                                    items[i].$1,
+                                    items[i].$3,
                                     style: TextStyle(
                                       fontFamily: SuperMaterialThemeData.of(
                                         context,
@@ -213,47 +250,30 @@ class _PriceListsScreenState extends State<PriceListsView> {
                                       fontSize: 11,
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg3,
+                                      ).superTheme.fg4,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                  Text(
+                                    items[i].$4,
+                                    style: TextStyle(
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).colorScheme.secondary,
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  items[i].$3,
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 11,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.fg4,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                                Text(
-                                  items[i].$4,
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).colorScheme.secondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

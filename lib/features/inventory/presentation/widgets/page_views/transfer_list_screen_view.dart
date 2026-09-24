@@ -196,123 +196,128 @@ class _TransferListScreenState extends State<TransferListView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
               for (int i = 0; i < visible.length; i++)
-                GestureDetector(
-                  onTap: () => context.goTo('transferDetail'),
-                  behavior: HitTestBehavior.opaque,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 14,
-                    ),
-                    decoration: BoxDecoration(
-                      border: i < visible.length - 1
-                          ? Border(
-                              bottom: BorderSide(
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.border,
-                              ),
-                            )
-                          : null,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 6,
+                  large: 6,
+                  child: GestureDetector(
+                    onTap: () => context.goTo('transferDetail'),
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 14,
+                      ),
+                      decoration: BoxDecoration(
+                        border: i < visible.length - 1
+                            ? Border(
+                                bottom: BorderSide(
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.border,
+                                ),
+                              )
+                            : null,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  visible[i].$1,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 11.5,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Text(
+                                      visible[i].$2,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg2,
+                                      ),
+                                    ),
+                                    Icon(
+                                      MIcons.of('chevR'),
+                                      size: 11,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.fg4,
+                                    ),
+                                    Text(
+                                      visible[i].$3,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg2,
+                                      ),
+                                    ),
+                                    Text(
+                                      '  · ${visible[i].$5}',
+                                      style: TextStyle(
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg4,
+                                        fontSize: 12,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                visible[i].$1,
+                                visible[i].$4,
                                 style: TextStyle(
                                   fontFamily: SuperMaterialThemeData.of(
                                     context,
                                   ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 11.5,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).colorScheme.primary,
+                                  ).superTheme.fg1,
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Text(
-                                    visible[i].$2,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 12,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg2,
-                                    ),
-                                  ),
-                                  Icon(
-                                    MIcons.of('chevR'),
-                                    size: 11,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.fg4,
-                                  ),
-                                  Text(
-                                    visible[i].$3,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 12,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg2,
-                                    ),
-                                  ),
-                                  Text(
-                                    '  · ${visible[i].$5}',
-                                    style: TextStyle(
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg4,
-                                      fontSize: 12,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                    ),
-                                  ),
-                                ],
+                              Pill(
+                                label(visible[i].$6),
+                                tone: tone(visible[i].$6),
                               ),
                             ],
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              visible[i].$4,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Pill(
-                              label(visible[i].$6),
-                              tone: tone(visible[i].$6),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

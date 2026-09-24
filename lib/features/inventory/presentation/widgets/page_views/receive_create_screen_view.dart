@@ -147,55 +147,82 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).serialNo,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).serialNo,
+                  ),
+                  initialValue: 'INV-REC-2024-0241',
+                  readOnly: true,
                 ),
-                initialValue: 'INV-REC-2024-0241',
-                readOnly: true,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _currencySource,
-                controller: _currencyController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).currency,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _currencySource,
+                  controller: _currencyController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).currency,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectCurrency,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectCurrency,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _storeSource,
-                controller: _storeController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).receivingStore,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _storeSource,
+                  controller: _storeController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(
+                      context,
+                    ).receivingStore,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).searchStore,
                 ),
-                hintText: GeniusLinkLocalization.of(context).searchStore,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _supplierSource,
-                controller: _supplierController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).supplierAccount,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _supplierSource,
+                  controller: _supplierController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(
+                      context,
+                    ).supplierAccount,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).eGAbcTradingCo,
                 ),
-                hintText: GeniusLinkLocalization.of(context).eGAbcTradingCo,
               ),
             ],
           ),
@@ -235,23 +262,40 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
           initiallyExpanded: true,
           accentColor: marker4,
           icon: icon4,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              DistRow(
-                account: '1200 — Inventory (WIP)',
-                side: 'Debit',
-                amount: '+24,200.00',
-                last: false,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: DistRow(
+                  account: '1200 — Inventory (WIP)',
+                  side: 'Debit',
+                  amount: '+24,200.00',
+                  last: false,
+                ),
               ),
-              DistRow(
-                account: '2001 — Accounts Payable',
-                side: 'Credit',
-                amount: '-24,200.00',
-                last: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: DistRow(
+                  account: '2001 — Accounts Payable',
+                  side: 'Credit',
+                  amount: '-24,200.00',
+                  last: true,
+                ),
               ),
-              _BalancedRow(value: '24,200.00'),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: _BalancedRow(value: '24,200.00'),
+              ),
             ],
           ),
         ),
@@ -261,29 +305,40 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).receiptNotes,
-                  hintText: GeniusLinkLocalization.of(
-                    context,
-                  ).poNumberDeliveryNoteInspectionResults,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).receiptNotes,
+                    hintText: GeniusLinkLocalization.of(
+                      context,
+                    ).poNumberDeliveryNoteInspectionResults,
+                  ),
+                  multiline: true,
+                  rows: 3,
                 ),
-                multiline: true,
-                rows: 3,
               ),
-              SuperAttachmentFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).attachments,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: SuperAttachmentFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).attachments,
+                  ),
+                  accept: '.pdf,.jpg,.jpeg,.png',
+                  maxSizeMB: 10,
+                  maxFiles: 5,
+                  multiple: true,
+                  onBrowse: () async => const <SuperFile>[],
                 ),
-                accept: '.pdf,.jpg,.jpeg,.png',
-                maxSizeMB: 10,
-                maxFiles: 5,
-                multiple: true,
-                onBrowse: () async => const <SuperFile>[],
               ),
             ],
           ),

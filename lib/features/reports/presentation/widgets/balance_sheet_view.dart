@@ -59,26 +59,31 @@ class _BalanceSheetViewState extends State<BalanceSheetView> {
             accentColor: b.$2,
 
             padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
+            child: SuperGrid(
+              scope: SuperGridScope.current,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < b.$3.length; i++)
-                        ReportRow(
-                          left: b.$3[i].$1,
-                          right: _money(b.$3[i].$2),
-                          last: i == b.$3.length - 1,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < b.$3.length; i++)
+                          ReportRow(
+                            left: b.$3[i].$1,
+                            right: _money(b.$3[i].$2),
+                            last: i == b.$3.length - 1,
+                          ),
+                        ReportTotalBar(
+                          label: 'Total ${b.$1}',
+                          value: _money(b.$4),
+                          tone: b.$2,
                         ),
-                      ReportTotalBar(
-                        label: 'Total ${b.$1}',
-                        value: _money(b.$4),
-                        tone: b.$2,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -91,45 +96,50 @@ class _BalanceSheetViewState extends State<BalanceSheetView> {
           accentColor: (null),
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Eyebrow(
-                    GeniusLinkLocalization.of(context).balanceCheck,
-                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                    size: 12,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        MIcons.of('check'),
-                        size: 15,
-                        color: SuperMaterialThemeData.of(
-                          context,
-                        ).colorScheme.secondary,
-                      ),
-                      const SizedBox(width: 7),
-                      Text(
-                        '425,790 = 425,790',
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Eyebrow(
+                      GeniusLinkLocalization.of(context).balanceCheck,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                      size: 12,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          MIcons.of('check'),
+                          size: 15,
                           color: SuperMaterialThemeData.of(
                             context,
                           ).colorScheme.secondary,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(width: 7),
+                        Text(
+                          '425,790 = 425,790',
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).colorScheme.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

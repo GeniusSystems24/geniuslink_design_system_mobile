@@ -71,94 +71,42 @@ class NotificationsView extends StatelessWidget {
               accentColor: accentColor,
 
               padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.border,
-                              ),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              const Spacer(),
-                              for (final channel in channels)
-                                SizedBox(
-                                  width: 50,
-                                  child: Center(
-                                    child: Text(
-                                      _channelLabel(channel).toUpperCase(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 9,
-                                        letterSpacing: 0.4,
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.fg3,
-                                        fontFamily: SuperMaterialThemeData.of(
-                                          context,
-                                        ).textTheme.bodyMedium?.fontFamily,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        for (
-                          int categoryIndex = 0;
-                          categoryIndex < categories.length;
-                          categoryIndex++
-                        )
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
-                              border: categoryIndex < categories.length - 1
-                                  ? Border(
-                                      bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.border,
-                                      ),
-                                    )
-                                  : null,
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.border,
+                                ),
+                              ),
                             ),
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        categories[categoryIndex].title,
+                                const Spacer(),
+                                for (final channel in channels)
+                                  SizedBox(
+                                    width: 50,
+                                    child: Center(
+                                      child: Text(
+                                        _channelLabel(channel).toUpperCase(),
                                         style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg1,
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 1),
-                                      Text(
-                                        categories[categoryIndex].description,
-                                        style: TextStyle(
-                                          fontSize: 11,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 9,
+                                          letterSpacing: 0.4,
                                           color: SuperMaterialThemeData.of(
                                             context,
                                           ).superTheme.fg3,
@@ -167,37 +115,91 @@ class NotificationsView extends StatelessWidget {
                                           ).textTheme.bodyMedium?.fontFamily,
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                for (
-                                  int channelIndex = 0;
-                                  channelIndex < channels.length;
-                                  channelIndex++
-                                )
-                                  SizedBox(
-                                    width: 50,
-                                    child: Center(
-                                      child: GestureDetector(
-                                        onTap: () => toggle(
-                                          categories[categoryIndex].id,
-                                          channelIndex,
+                              ],
+                            ),
+                          ),
+                          for (
+                            int categoryIndex = 0;
+                            categoryIndex < categories.length;
+                            categoryIndex++
+                          )
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: BoxDecoration(
+                                border: categoryIndex < categories.length - 1
+                                    ? Border(
+                                        bottom: BorderSide(
+                                          color: SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.border,
                                         ),
-                                        child: Container(
-                                          width: 26,
-                                          height: 26,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                prefs[categories[categoryIndex]
-                                                    .id]![channelIndex]
-                                                ? SuperMaterialThemeData.of(
-                                                    context,
-                                                  ).colorScheme.primary
-                                                : SuperMaterialThemeData.of(
-                                                    context,
-                                                  ).superTheme.inputBg,
-                                            border: Border.all(
+                                      )
+                                    : null,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          categories[categoryIndex].title,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg1,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 1),
+                                        Text(
+                                          categories[categoryIndex].description,
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg3,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  for (
+                                    int channelIndex = 0;
+                                    channelIndex < channels.length;
+                                    channelIndex++
+                                  )
+                                    SizedBox(
+                                      width: 50,
+                                      child: Center(
+                                        child: GestureDetector(
+                                          onTap: () => toggle(
+                                            categories[categoryIndex].id,
+                                            channelIndex,
+                                          ),
+                                          child: Container(
+                                            width: 26,
+                                            height: 26,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
                                               color:
                                                   prefs[categories[categoryIndex]
                                                       .id]![channelIndex]
@@ -206,29 +208,39 @@ class NotificationsView extends StatelessWidget {
                                                     ).colorScheme.primary
                                                   : SuperMaterialThemeData.of(
                                                       context,
-                                                    ).superTheme.borderStrong,
+                                                    ).superTheme.inputBg,
+                                              border: Border.all(
+                                                color:
+                                                    prefs[categories[categoryIndex]
+                                                        .id]![channelIndex]
+                                                    ? SuperMaterialThemeData.of(
+                                                        context,
+                                                      ).colorScheme.primary
+                                                    : SuperMaterialThemeData.of(
+                                                        context,
+                                                      ).superTheme.borderStrong,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
                                             ),
-                                            borderRadius: BorderRadius.circular(
-                                              7,
-                                            ),
+                                            child:
+                                                prefs[categories[categoryIndex]
+                                                    .id]![channelIndex]
+                                                ? const Icon(
+                                                    Icons.check_rounded,
+                                                    size: 14,
+                                                    color: Colors.white,
+                                                  )
+                                                : null,
                                           ),
-                                          child:
-                                              prefs[categories[categoryIndex]
-                                                  .id]![channelIndex]
-                                              ? const Icon(
-                                                  Icons.check_rounded,
-                                                  size: 14,
-                                                  color: Colors.white,
-                                                )
-                                              : null,
                                         ),
                                       ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

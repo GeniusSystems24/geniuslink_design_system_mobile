@@ -36,20 +36,31 @@ class CreateDepositView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MMoney(
-                label: GeniusLinkLocalization.of(context).amount,
-                value: '120,000.00',
-                accent: SuperMaterialThemeData.of(
-                  context,
-                ).colorScheme.secondary,
-                required: true,
-                sign: '+',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: MMoney(
+                  label: GeniusLinkLocalization.of(context).amount,
+                  value: '120,000.00',
+                  accent: SuperMaterialThemeData.of(
+                    context,
+                  ).colorScheme.secondary,
+                  required: true,
+                  sign: '+',
+                ),
               ),
-              const MMethod(value: 'cash'),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: const MMethod(value: 'cash'),
+              ),
             ],
           ),
         ),
@@ -59,24 +70,43 @@ class CreateDepositView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).depositTo,
-                value: 'Bank · NCB Main (1100)',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).depositTo,
+                  value: 'Bank · NCB Main (1100)',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).reference,
-                placeholder: GeniusLinkLocalization.of(context).eGCounterSlipNo,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).reference,
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).eGCounterSlipNo,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).valueDate,
-                value: 'Dec 19, 2025',
-                icon: 'calendar',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).valueDate,
+                  value: 'Dec 19, 2025',
+                  icon: 'calendar',
+                ),
               ),
             ],
           ),
@@ -87,15 +117,20 @@ class CreateDepositView extends StatelessWidget {
           initiallyExpanded: false,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              JournalPreview(
-                rows: [
-                  ('Bank · NCB Main (1100)', '120,000.00', null),
-                  ('Cash Box (1001)', null, '120,000.00'),
-                ],
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: JournalPreview(
+                  rows: [
+                    ('Bank · NCB Main (1100)', '120,000.00', null),
+                    ('Cash Box (1001)', null, '120,000.00'),
+                  ],
+                ),
               ),
             ],
           ),
@@ -198,15 +233,44 @@ class DepositDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              BKV('Method', 'Cash'),
-              BKV('Deposited To', 'Bank · NCB Main (1100)'),
-              BKV('Value Date', 'Dec 19, 2025', mono: true),
-              BKV('Reference', 'CTR-9920', mono: true),
-              BKV('Status', 'Cleared'),
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Method', 'Cash'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Deposited To', 'Bank · NCB Main (1100)'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Value Date', 'Dec 19, 2025', mono: true),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Reference', 'CTR-9920', mono: true),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Status', 'Cleared'),
+              ),
             ],
           ),
         ),
@@ -217,15 +281,20 @@ class DepositDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              JournalPreview(
-                rows: [
-                  ('Bank · NCB Main (1100)', '120,000.00', null),
-                  ('Cash Box (1001)', null, '120,000.00'),
-                ],
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: JournalPreview(
+                  rows: [
+                    ('Bank · NCB Main (1100)', '120,000.00', null),
+                    ('Cash Box (1001)', null, '120,000.00'),
+                  ],
+                ),
               ),
             ],
           ),
@@ -288,18 +357,29 @@ class CreateWithdrawalView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MMoney(
-                label: GeniusLinkLocalization.of(context).amount,
-                value: '12,045.00',
-                accent: SuperMaterialThemeData.of(context).colorScheme.error,
-                required: true,
-                sign: '−',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: MMoney(
+                  label: GeniusLinkLocalization.of(context).amount,
+                  value: '12,045.00',
+                  accent: SuperMaterialThemeData.of(context).colorScheme.error,
+                  required: true,
+                  sign: '−',
+                ),
               ),
-              const MMethod(value: 'wire'),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: const MMethod(value: 'wire'),
+              ),
             ],
           ),
         ),
@@ -309,32 +389,55 @@ class CreateWithdrawalView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).withdrawFrom,
-                value: 'Bank · NCB Main (1100)',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).withdrawFrom,
+                  value: 'Bank · NCB Main (1100)',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).payee,
-                placeholder: GeniusLinkLocalization.of(
-                  context,
-                ).eGGlobalSteelImports,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).payee,
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).eGGlobalSteelImports,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).expenseAccount,
-                value: 'Cost of Goods Sold (5001)',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).expenseAccount,
+                  value: 'Cost of Goods Sold (5001)',
+                  select: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).valueDate,
-                value: 'Dec 19, 2025',
-                icon: 'calendar',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).valueDate,
+                  value: 'Dec 19, 2025',
+                  icon: 'calendar',
+                ),
               ),
             ],
           ),
@@ -442,14 +545,37 @@ class WithdrawalDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              BKV('Method', 'Wire Transfer'),
-              BKV('Payee', 'Global Steel Imports'),
-              BKV('From', 'Bank · NCB Main (1100)'),
-              BKV('Value Date', 'Dec 19, 2025', mono: true),
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Method', 'Wire Transfer'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Payee', 'Global Steel Imports'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('From', 'Bank · NCB Main (1100)'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Value Date', 'Dec 19, 2025', mono: true),
+              ),
             ],
           ),
         ),
@@ -460,15 +586,20 @@ class WithdrawalDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              JournalPreview(
-                rows: [
-                  ('Cost of Goods Sold (5001)', '12,045.00', null),
-                  ('Bank · NCB Main (1100)', null, '12,045.00'),
-                ],
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: JournalPreview(
+                  rows: [
+                    ('Cost of Goods Sold (5001)', '12,045.00', null),
+                    ('Bank · NCB Main (1100)', null, '12,045.00'),
+                  ],
+                ),
               ),
             ],
           ),

@@ -45,35 +45,48 @@ class _InventoryValuationViewState extends State<InventoryValuationView> {
           accentColor: (null),
 
           padding: EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Segmented(
-                options: const ['All', 'Downtown', 'King Fahd', 'Jeddah'],
-                value: _store,
-                onChange: (v) => setState(() => _store = v),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: Segmented(
+                  options: const ['All', 'Downtown', 'King Fahd', 'Jeddah'],
+                  value: _store,
+                  onChange: (v) => setState(() => _store = v),
+                ),
               ),
-              Row(
-                children: [
-                  Eyebrow(
-                    GeniusLinkLocalization.of(context).method,
-                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                    size: 9.5,
-                  ),
-                  const SizedBox(width: 7),
-                  Text(
-                    GeniusLinkLocalization.of(context).weightedAvg,
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  children: [
+                    Eyebrow(
+                      GeniusLinkLocalization.of(context).method,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                      size: 9.5,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 7),
+                    Text(
+                      GeniusLinkLocalization.of(context).weightedAvg,
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -87,53 +100,66 @@ class _InventoryValuationViewState extends State<InventoryValuationView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MTable(
-                showSearch: true,
-                searchHint: GeniusLinkLocalization.of(
-                  context,
-                ).searchSkuProductOrStore,
-                itemNoun: 'item',
-                itemNounPlural: 'items',
-                columns: [
-                  const MCol('item', 'Item', flex: 1),
-                  MCol(
-                    'qty',
-                    'Qty',
-                    fixed: 70,
-                    align: TextAlign.right,
-                    numeric: true,
-                    format: (v) => switch (v) {
-                      final int n when n != 0 => '$n',
-                      _ => '\u2014',
-                    },
-                  ),
-                  MCol(
-                    'value',
-                    'Value',
-                    fixed: 110,
-                    align: TextAlign.right,
-                    numeric: true,
-                    format: (v) => _money((v as num?) ?? 0),
-                  ),
-                ],
-                rows: [
-                  for (final r in visible)
-                    {
-                      'item': '${r.$2}\n${r.$1} · ${r.$5} · ${_money(r.$4)}',
-                      'qty': r.$3,
-                      'value': r.$3 * r.$4,
-                    },
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: MTable(
+                  showSearch: true,
+                  searchHint: GeniusLinkLocalization.of(
+                    context,
+                  ).searchSkuProductOrStore,
+                  itemNoun: 'item',
+                  itemNounPlural: 'items',
+                  columns: [
+                    const MCol('item', 'Item', flex: 1),
+                    MCol(
+                      'qty',
+                      'Qty',
+                      fixed: 70,
+                      align: TextAlign.right,
+                      numeric: true,
+                      format: (v) => switch (v) {
+                        final int n when n != 0 => '$n',
+                        _ => '\u2014',
+                      },
+                    ),
+                    MCol(
+                      'value',
+                      'Value',
+                      fixed: 110,
+                      align: TextAlign.right,
+                      numeric: true,
+                      format: (v) => _money((v as num?) ?? 0),
+                    ),
+                  ],
+                  rows: [
+                    for (final r in visible)
+                      {
+                        'item': '${r.$2}\n${r.$1} · ${r.$5} · ${_money(r.$4)}',
+                        'qty': r.$3,
+                        'value': r.$3 * r.$4,
+                      },
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: ReportTotalBar(
-                  label: GeniusLinkLocalization.of(context).totalInventoryValue,
-                  value: _money(total),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: ReportTotalBar(
+                    label: GeniusLinkLocalization.of(
+                      context,
+                    ).totalInventoryValue,
+                    value: _money(total),
+                  ),
                 ),
               ),
             ],

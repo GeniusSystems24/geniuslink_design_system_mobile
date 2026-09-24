@@ -76,14 +76,20 @@ class DashboardView extends StatelessWidget {
         ),
       ),
       // KPI grid
-      GridView.count(
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: 1.55,
-        children: [for (final kpi in snapshot.kpis) _Kpi(kpi: kpi)],
+      SuperGrid(
+        scope: SuperGridScope.current,
+        gutter: 12,
+        rowSpacing: 12,
+        children: [
+          for (final kpi in snapshot.kpis)
+            SuperGridCell(
+              mobile: 4,
+              tablet: 4,
+              desktop: 6,
+              large: 6,
+              child: AspectRatio(aspectRatio: 1.55, child: _Kpi(kpi: kpi)),
+            ),
+        ],
       ),
       // Cash flow
       SuperSectionCard2(
@@ -96,10 +102,17 @@ class DashboardView extends StatelessWidget {
         accentColor: accentColor3,
 
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [_CashFlowBars(points: snapshot.cashFlow)],
+        child: SuperGrid(
+          scope: SuperGridScope.current,
+          children: [
+            SuperGridCell(
+              mobile: 4,
+              tablet: 8,
+              desktop: 12,
+              large: 12,
+              child: _CashFlowBars(points: snapshot.cashFlow),
+            ),
+          ],
         ),
       ),
       // Balances
@@ -110,12 +123,17 @@ class DashboardView extends StatelessWidget {
         accentColor: accentColor2,
 
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
+        child: SuperGrid(
+          scope: SuperGridScope.current,
           children: [
             for (final balance in snapshot.balances)
-              _BalanceRow(balance: balance),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: _BalanceRow(balance: balance),
+              ),
           ],
         ),
       ),
@@ -127,20 +145,25 @@ class DashboardView extends StatelessWidget {
         accentColor: accentColor4,
 
         padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
+        child: SuperGrid(
+          scope: SuperGridScope.current,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  for (int i = 0; i < snapshot.recentOperations.length; i++)
-                    _RecentRow(
-                      operation: snapshot.recentOperations[i],
-                      last: i == snapshot.recentOperations.length - 1,
-                    ),
-                ],
+            SuperGridCell(
+              mobile: 4,
+              tablet: 8,
+              desktop: 12,
+              large: 12,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < snapshot.recentOperations.length; i++)
+                      _RecentRow(
+                        operation: snapshot.recentOperations[i],
+                        last: i == snapshot.recentOperations.length - 1,
+                      ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -154,11 +177,17 @@ class DashboardView extends StatelessWidget {
         accentColor: accentColor,
 
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
+        child: SuperGrid(
+          scope: SuperGridScope.current,
           children: [
-            for (final alert in snapshot.alerts) _AlertRow(alert: alert),
+            for (final alert in snapshot.alerts)
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: _AlertRow(alert: alert),
+              ),
           ],
         ),
       ),

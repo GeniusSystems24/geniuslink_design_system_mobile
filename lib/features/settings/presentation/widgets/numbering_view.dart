@@ -35,105 +35,111 @@ class NumberingView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < seqs.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < seqs.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  seqs[i].$1,
-                                  style: TextStyle(
-                                    fontSize: 13.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.fg1,
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                  ),
-                                ),
-                                Text(
-                                  '${seqs[i].$2}-2024-${seqs[i].$3}',
-                                  style: TextStyle(
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TInput(
-                                    defaultValue: seqs[i].$2,
-                                    mono: true,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Container(
-                                  width: 90,
-                                  height: 46,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.inputBg,
-                                    border: Border.all(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < seqs.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < seqs.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
                                       ).superTheme.border,
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
+                                  )
+                                : null,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    seqs[i].$1,
+                                    style: TextStyle(
+                                      fontSize: 13.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.fg1,
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
+                                    ),
                                   ),
-                                  child: Text(
-                                    'Next ${seqs[i].$3}',
+                                  Text(
+                                    '${seqs[i].$2}-2024-${seqs[i].$3}',
                                     style: TextStyle(
                                       fontFamily: SuperMaterialThemeData.of(
                                         context,
                                       ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 12,
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w600,
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg3,
+                                      ).colorScheme.primary,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TInput(
+                                      defaultValue: seqs[i].$2,
+                                      mono: true,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Container(
+                                    width: 90,
+                                    height: 46,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.inputBg,
+                                      border: Border.all(
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.border,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      'Next ${seqs[i].$3}',
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 12,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -59,75 +59,94 @@ class BillingView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    GeniusLinkLocalization.of(context).business,
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.headlineMedium?.fontFamily,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 22,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      GeniusLinkLocalization.of(context).business,
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.headlineMedium?.fontFamily,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '349.00 SAR',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 14,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg2,
+                    const SizedBox(width: 10),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '349.00 SAR',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 14,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg2,
+                            ),
                           ),
-                        ),
-                        TextSpan(
-                          text: '/mo',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
+                          TextSpan(
+                            text: '/mo',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Text(
-                'Renews Jan 1, 2026',
-                style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                  fontSize: 11,
-                  color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                  ],
                 ),
               ),
-              Column(
-                children: [
-                  for (final u in usage)
-                    BillingUsageBar(
-                      label: u.$1,
-                      val: u.$2,
-                      max: u.$3,
-                      unit: u.$4,
-                    ),
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  'Renews Jan 1, 2026',
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 11,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                  ),
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Column(
+                  children: [
+                    for (final u in usage)
+                      BillingUsageBar(
+                        label: u.$1,
+                        val: u.$2,
+                        max: u.$3,
+                        unit: u.$4,
+                      ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -283,78 +302,83 @@ class BillingView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (final inv in const [
-                      ('INV-GL-2025-012', 'Dec 01', '349.00'),
-                      ('INV-GL-2025-011', 'Nov 01', '349.00'),
-                      ('INV-GL-2025-010', 'Oct 01', '349.00'),
-                    ])
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: SuperMaterialThemeData.of(
-                                context,
-                              ).superTheme.border,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (final inv in const [
+                        ('INV-GL-2025-012', 'Dec 01', '349.00'),
+                        ('INV-GL-2025-011', 'Nov 01', '349.00'),
+                        ('INV-GL-2025-010', 'Oct 01', '349.00'),
+                      ])
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.border,
+                              ),
                             ),
                           ),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                inv.$1,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  inv.$1,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 12,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                inv.$2,
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg3,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                inv.$3,
                                 style: TextStyle(
                                   fontFamily: SuperMaterialThemeData.of(
                                     context,
                                   ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 12,
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).colorScheme.primary,
+                                  ).superTheme.fg1,
                                 ),
                               ),
-                            ),
-                            Text(
-                              inv.$2,
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Text(
-                              inv.$3,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 12.5,
-                                fontWeight: FontWeight.w600,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Pill(GeniusLinkLocalization.of(context).paid),
-                          ],
+                              const SizedBox(width: 10),
+                              Pill(GeniusLinkLocalization.of(context).paid),
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

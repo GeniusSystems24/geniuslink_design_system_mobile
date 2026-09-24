@@ -42,39 +42,52 @@ class OpDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Text(
-                'OP-2024-0883',
-                style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                  fontSize: 12,
-                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  'OP-2024-0883',
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.primary,
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Mini(
-                      label: GeniusLinkLocalization.of(context).totalDebits,
-                      value: '6,600.00',
-                      sub: 'SAR',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).totalDebits,
+                        value: '6,600.00',
+                        sub: 'SAR',
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Mini(
-                      label: GeniusLinkLocalization.of(context).difference,
-                      value: '0.00',
-                      sub: 'SAR',
-                      hi: true,
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).difference,
+                        value: '0.00',
+                        sub: 'SAR',
+                        hi: true,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -86,79 +99,84 @@ class OpDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < lines.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i == lines.length - 1
-                              ? null
-                              : Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                ),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    lines[i].$1,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < lines.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i == lines.length - 1
+                                ? null
+                                : Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg1,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                      ).superTheme.border,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
-                                  Pill(
-                                    lines[i].$4,
-                                    tone: lines[i].$4 == 'Debit'
-                                        ? PillTone.info
-                                        : PillTone.danger,
-                                  ),
-                                ],
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      lines[i].$1,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg1,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Pill(
+                                      lines[i].$4,
+                                      tone: lines[i].$4 == 'Debit'
+                                          ? PillTone.info
+                                          : PillTone.danger,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              lines[i].$2,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w600,
-                                color: lines[i].$3
-                                    ? SuperMaterialThemeData.of(
-                                        context,
-                                      ).colorScheme.secondary
-                                    : SuperMaterialThemeData.of(
-                                        context,
-                                      ).colorScheme.error,
+                              Text(
+                                lines[i].$2,
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: lines[i].$3
+                                      ? SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.secondary
+                                      : SuperMaterialThemeData.of(
+                                          context,
+                                        ).colorScheme.error,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

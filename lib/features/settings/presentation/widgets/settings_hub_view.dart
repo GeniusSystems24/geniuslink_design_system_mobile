@@ -83,98 +83,111 @@ class SettingsHubView extends StatelessWidget {
             accentColor: SuperMaterialThemeData.of(context).colorScheme.primary,
 
             padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
+            child: SuperGrid(
+              scope: SuperGridScope.current,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < section.items.length; i++)
-                        GestureDetector(
-                          onTap: () => context.goTo(section.items[i].routeId),
-                          behavior: HitTestBehavior.opaque,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              border: i < section.items.length - 1
-                                  ? Border(
-                                      bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.border,
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 34,
-                                  height: 34,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.inputBg,
-                                    borderRadius: BorderRadius.circular(8),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < section.items.length; i++)
+                          GestureDetector(
+                            onTap: () => context.goTo(section.items[i].routeId),
+                            behavior: HitTestBehavior.opaque,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: BoxDecoration(
+                                border: i < section.items.length - 1
+                                    ? Border(
+                                        bottom: BorderSide(
+                                          color: SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.border,
+                                        ),
+                                      )
+                                    : null,
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 34,
+                                    height: 34,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.inputBg,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Icon(
+                                      MIcons.of(section.items[i].iconName),
+                                      size: 16,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.fg2,
+                                    ),
                                   ),
-                                  child: Icon(
-                                    MIcons.of(section.items[i].iconName),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          section.items[i].label,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg1,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 1),
+                                        Text(
+                                          section.items[i].description,
+                                          style: TextStyle(
+                                            fontSize: 11.5,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg3,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Icon(
+                                    MIcons.of('chevR'),
                                     size: 16,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.fg2,
+                                    ).superTheme.fg4,
                                   ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        section.items[i].label,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg1,
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 1),
-                                      Text(
-                                        section.items[i].description,
-                                        style: TextStyle(
-                                          fontSize: 11.5,
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg3,
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Icon(
-                                  MIcons.of('chevR'),
-                                  size: 16,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.fg4,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

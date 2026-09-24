@@ -52,58 +52,64 @@ class MoreView extends StatelessWidget {
             accentColor: accentColor,
 
             padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
+            child: SuperGrid(
+              scope: SuperGridScope.current,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < group.items.length; i++)
-                        GestureDetector(
-                          onTap: () => context.goTo(group.items[i].routeId),
-                          behavior: HitTestBehavior.opaque,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 13),
-                            decoration: BoxDecoration(
-                              border: i == group.items.length - 1
-                                  ? null
-                                  : Border(
-                                      bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.border,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < group.items.length; i++)
+                          GestureDetector(
+                            onTap: () => context.goTo(group.items[i].routeId),
+                            behavior: HitTestBehavior.opaque,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 13),
+                              decoration: BoxDecoration(
+                                border: i == group.items.length - 1
+                                    ? null
+                                    : Border(
+                                        bottom: BorderSide(
+                                          color: SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.border,
+                                        ),
                                       ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    group.items[i].label,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.fg1,
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
                                     ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  group.items[i].label,
-                                  style: TextStyle(
-                                    fontSize: 14,
+                                  ),
+                                  Icon(
+                                    MIcons.of('chevR'),
+                                    size: 16,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.fg1,
-                                    fontFamily: SuperMaterialThemeData.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.fontFamily,
+                                    ).superTheme.fg4,
                                   ),
-                                ),
-                                Icon(
-                                  MIcons.of('chevR'),
-                                  size: 16,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.fg4,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

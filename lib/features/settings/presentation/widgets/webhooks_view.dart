@@ -58,145 +58,160 @@ class WebhooksView extends StatelessWidget {
               accentColor: accentColor,
 
               padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        for (int i = 0; i < hooks.length; i++)
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              border: i < hooks.length - 1
-                                  ? Border(
-                                      bottom: BorderSide(
-                                        color: SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.border,
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      MIcons.of('link'),
-                                      size: 15,
-                                      color: hooks[i][2] as bool
-                                          ? SuperMaterialThemeData.of(
-                                              context,
-                                            ).colorScheme.secondary
-                                          : SuperMaterialThemeData.of(
-                                              context,
-                                            ).superTheme.fg4,
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Text(
-                                        hooks[i][0] as String,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                          fontSize: 12,
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          for (int i = 0; i < hooks.length; i++)
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: BoxDecoration(
+                                border: i < hooks.length - 1
+                                    ? Border(
+                                        bottom: BorderSide(
                                           color: SuperMaterialThemeData.of(
                                             context,
-                                          ).superTheme.fg1,
+                                          ).superTheme.border,
                                         ),
-                                      ),
-                                    ),
-                                    PlatformToggle(
-                                      on: hooks[i][2] as bool,
-                                      onTap: () => toggle(i),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 25),
-                                  child: Row(
+                                      )
+                                    : null,
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
                                     children: [
+                                      Icon(
+                                        MIcons.of('link'),
+                                        size: 15,
+                                        color: hooks[i][2] as bool
+                                            ? SuperMaterialThemeData.of(
+                                                context,
+                                              ).colorScheme.secondary
+                                            : SuperMaterialThemeData.of(
+                                                context,
+                                              ).superTheme.fg4,
+                                      ),
+                                      const SizedBox(width: 10),
                                       Expanded(
-                                        child: Wrap(
-                                          spacing: 6,
-                                          runSpacing: 6,
-                                          children: [
-                                            for (final e
-                                                in (hooks[i][1] as String)
-                                                    .split(','))
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 7,
-                                                      vertical: 2,
-                                                    ),
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      SuperMaterialThemeData.of(
-                                                        context,
-                                                      ).superTheme.inputBg,
-                                                  border: Border.all(
-                                                    color:
-                                                        SuperMaterialThemeData.of(
-                                                          context,
-                                                        ).superTheme.border,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                ),
-                                                child: Text(
-                                                  e,
-                                                  style: TextStyle(
-                                                    fontFamily:
-                                                        SuperMaterialThemeData.of(
-                                                              context,
-                                                            )
-                                                            .textTheme
-                                                            .bodyMedium
-                                                            ?.fontFamily,
-                                                    fontSize: 10,
-                                                    color:
-                                                        SuperMaterialThemeData.of(
-                                                          context,
-                                                        ).superTheme.fg2,
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
+                                        child: Text(
+                                          hooks[i][0] as String,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                            fontSize: 12,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg1,
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        hooks[i][3] as String,
-                                        style: TextStyle(
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                          fontSize: 10,
-                                          color:
-                                              (hooks[i][3] as String)
-                                                  .startsWith('2')
-                                              ? SuperMaterialThemeData.of(
-                                                  context,
-                                                ).colorScheme.secondary
-                                              : SuperMaterialThemeData.of(
-                                                  context,
-                                                ).colorScheme.error,
-                                        ),
+                                      PlatformToggle(
+                                        on: hooks[i][2] as bool,
+                                        onTap: () => toggle(i),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 8),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 25),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Wrap(
+                                            spacing: 6,
+                                            runSpacing: 6,
+                                            children: [
+                                              for (final e
+                                                  in (hooks[i][1] as String)
+                                                      .split(','))
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 7,
+                                                        vertical: 2,
+                                                      ),
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        SuperMaterialThemeData.of(
+                                                          context,
+                                                        ).superTheme.inputBg,
+                                                    border: Border.all(
+                                                      color:
+                                                          SuperMaterialThemeData.of(
+                                                            context,
+                                                          ).superTheme.border,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          4,
+                                                        ),
+                                                  ),
+                                                  child: Text(
+                                                    e,
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          SuperMaterialThemeData.of(
+                                                                context,
+                                                              )
+                                                              .textTheme
+                                                              .bodyMedium
+                                                              ?.fontFamily,
+                                                      fontSize: 10,
+                                                      color:
+                                                          SuperMaterialThemeData.of(
+                                                            context,
+                                                          ).superTheme.fg2,
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          hooks[i][3] as String,
+                                          style: TextStyle(
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                            fontSize: 10,
+                                            color:
+                                                (hooks[i][3] as String)
+                                                    .startsWith('2')
+                                                ? SuperMaterialThemeData.of(
+                                                    context,
+                                                  ).colorScheme.secondary
+                                                : SuperMaterialThemeData.of(
+                                                    context,
+                                                  ).colorScheme.error,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -218,25 +218,49 @@ class StockTakeView extends StatelessWidget {
                   ),
                 ],
               ),
-              GridView.count(
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1.4,
+              SuperGrid(
+                scope: SuperGridScope.current,
+                gutter: 10,
+                rowSpacing: 10,
                 children: [
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).match,
-                    value: '1',
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 4,
+                    large: 4,
+                    child: AspectRatio(
+                      aspectRatio: 1.4,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).match,
+                        value: '1',
+                      ),
+                    ),
                   ),
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).short,
-                    value: '2',
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 4,
+                    large: 4,
+                    child: AspectRatio(
+                      aspectRatio: 1.4,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).short,
+                        value: '2',
+                      ),
+                    ),
                   ),
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).over,
-                    value: '0',
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 4,
+                    large: 4,
+                    child: AspectRatio(
+                      aspectRatio: 1.4,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).over,
+                        value: '0',
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -250,17 +274,22 @@ class StockTakeView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < items.length; i++)
-                      _CountRow(item: items[i], last: i == items.length - 1),
-                  ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < items.length; i++)
+                        _CountRow(item: items[i], last: i == items.length - 1),
+                    ],
+                  ),
                 ),
               ),
             ],

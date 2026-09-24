@@ -57,119 +57,132 @@ class _TrialBalanceViewState extends State<TrialBalanceView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MTable(
-                columns: [
-                  const MCol('code', 'Code', fixed: 60, mono: true),
-                  const MCol('account', 'Account', flex: 1, bold: true),
-                  MCol(
-                    'debit',
-                    'Debit',
-                    fixed: 110,
-                    align: TextAlign.right,
-                    numeric: true,
-                    format: (v) => switch (v) {
-                      final int n when n != 0 => _money(n),
-                      _ => '\u2014',
-                    },
-                    styles: {
-                      (_, _, row, cell) => (cell.value as num?) != 0: CellStyle(
-                        foreground: SuperMaterialThemeData.of(
-                          context,
-                        ).colorScheme.secondary,
-                      ),
-                      (_, _, row, cell) => true: CellStyle(
-                        foreground: SuperMaterialThemeData.of(
-                          context,
-                        ).superTheme.fg4,
-                      ),
-                    },
-                  ),
-                  MCol(
-                    'credit',
-                    'Credit',
-                    fixed: 110,
-                    align: TextAlign.right,
-                    numeric: true,
-                    format: (v) => switch (v) {
-                      final int n when n != 0 => _money(n),
-                      _ => '\u2014',
-                    },
-                    styles: {
-                      (_, _, row, cell) => (cell.value as num?) != 0: CellStyle(
-                        foreground: SuperMaterialThemeData.of(
-                          context,
-                        ).colorScheme.error,
-                      ),
-                      (_, _, row, cell) => true: CellStyle(
-                        foreground: SuperMaterialThemeData.of(
-                          context,
-                        ).superTheme.fg4,
-                      ),
-                    },
-                  ),
-                ],
-                rows: [
-                  for (final r in rows)
-                    {
-                      'code': r.$1,
-                      'account': r.$2,
-                      'debit': r.$3,
-                      'credit': r.$4,
-                    },
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Eyebrow(
-                        GeniusLinkLocalization.of(context).totalsBalanced,
-                        color: SuperMaterialThemeData.of(
-                          context,
-                        ).colorScheme.secondary,
-                        size: 10,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 110,
-                      child: Text(
-                        _money(totDr),
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          color: SuperMaterialThemeData.of(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: MTable(
+                  columns: [
+                    const MCol('code', 'Code', fixed: 60, mono: true),
+                    const MCol('account', 'Account', flex: 1, bold: true),
+                    MCol(
+                      'debit',
+                      'Debit',
+                      fixed: 110,
+                      align: TextAlign.right,
+                      numeric: true,
+                      format: (v) => switch (v) {
+                        final int n when n != 0 => _money(n),
+                        _ => '\u2014',
+                      },
+                      styles: {
+                        (_, _, row, cell) =>
+                            (cell.value as num?) != 0: CellStyle(
+                          foreground: SuperMaterialThemeData.of(
                             context,
                           ).colorScheme.secondary,
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 110,
-                      child: Text(
-                        _money(totCr),
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
+                        (_, _, row, cell) => true: CellStyle(
+                          foreground: SuperMaterialThemeData.of(
                             context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          color: SuperMaterialThemeData.of(
-                            context,
-                          ).colorScheme.secondary,
+                          ).superTheme.fg4,
                         ),
-                      ),
+                      },
+                    ),
+                    MCol(
+                      'credit',
+                      'Credit',
+                      fixed: 110,
+                      align: TextAlign.right,
+                      numeric: true,
+                      format: (v) => switch (v) {
+                        final int n when n != 0 => _money(n),
+                        _ => '\u2014',
+                      },
+                      styles: {
+                        (_, _, row, cell) =>
+                            (cell.value as num?) != 0: CellStyle(
+                          foreground: SuperMaterialThemeData.of(
+                            context,
+                          ).colorScheme.error,
+                        ),
+                        (_, _, row, cell) => true: CellStyle(
+                          foreground: SuperMaterialThemeData.of(
+                            context,
+                          ).superTheme.fg4,
+                        ),
+                      },
                     ),
                   ],
+                  rows: [
+                    for (final r in rows)
+                      {
+                        'code': r.$1,
+                        'account': r.$2,
+                        'debit': r.$3,
+                        'credit': r.$4,
+                      },
+                  ],
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Eyebrow(
+                          GeniusLinkLocalization.of(context).totalsBalanced,
+                          color: SuperMaterialThemeData.of(
+                            context,
+                          ).colorScheme.secondary,
+                          size: 10,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 110,
+                        child: Text(
+                          _money(totDr),
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 110,
+                        child: Text(
+                          _money(totCr),
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

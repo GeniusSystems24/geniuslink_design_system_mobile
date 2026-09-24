@@ -47,38 +47,47 @@ class CurrencyDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    currency.code,
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 14,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      currency.code,
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 14,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    currency.exchangeRate.toStringAsFixed(6),
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 34,
-                      fontWeight: FontWeight.w700,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                      letterSpacing: -0.6,
+                    const SizedBox(width: 10),
+                    Text(
+                      currency.exchangeRate.toStringAsFixed(6),
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 34,
+                        fontWeight: FontWeight.w700,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                        letterSpacing: -0.6,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -90,37 +99,72 @@ class CurrencyDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).isoCode,
-                currency.code,
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).isoCode,
+                  currency.code,
+                  mono: true,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).symbol,
-                currency.symbol,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).symbol,
+                  currency.symbol,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).nameEnglish,
-                currency.name,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).nameEnglish,
+                  currency.name,
+                ),
               ),
               if (currency.localizedName case final localizedName?)
-                KeyValueRow(
-                  GeniusLinkLocalization.of(context).localizedName,
-                  localizedName,
-                  ar: true,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(
+                    GeniusLinkLocalization.of(context).localizedName,
+                    localizedName,
+                    ar: true,
+                  ),
                 ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).decimalPlaces,
-                '${currency.decimalPlaces}',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).decimalPlaces,
+                  '${currency.decimalPlaces}',
+                  mono: true,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).source,
-                currency.source,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).source,
+                  currency.source,
+                ),
               ),
             ],
           ),
@@ -132,98 +176,105 @@ class CurrencyDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < currency.rateHistory.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < currency.rateHistory.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < currency.rateHistory.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < currency.rateHistory.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 92,
+                                child: Text(
+                                  _formatDate(
+                                    currency.rateHistory[i].effectiveAt,
+                                  ),
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 12,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.border,
+                                    ).superTheme.fg2,
                                   ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 92,
-                              child: Text(
-                                _formatDate(
-                                  currency.rateHistory[i].effectiveAt,
-                                ),
-                                style: TextStyle(
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 12,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.fg2,
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                currency.rateHistory[i].rate.toStringAsFixed(6),
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.fg1,
+                              Expanded(
+                                child: Text(
+                                  currency.rateHistory[i].rate.toStringAsFixed(
+                                    6,
+                                  ),
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg1,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 12),
-                            SizedBox(
-                              width: 112,
-                              child: Text(
-                                currency.rateHistory[i].source,
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.fg3,
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
+                              const SizedBox(width: 12),
+                              SizedBox(
+                                width: 112,
+                                child: Text(
+                                  currency.rateHistory[i].source,
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg3,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (currency.rateHistory.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          GeniusLinkLocalization.of(
-                            context,
-                          ).noRateHistoryAvailable,
-                          style: TextStyle(
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
+                            ],
                           ),
                         ),
-                      ),
-                  ],
+                      if (currency.rateHistory.isEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            GeniusLinkLocalization.of(
+                              context,
+                            ).noRateHistoryAvailable,
+                            style: TextStyle(
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -108,43 +108,54 @@ class _AuditLogViewState extends State<AuditLogView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MTable(
-                showSearch: true,
-                searchHint: GeniusLinkLocalization.of(
-                  context,
-                ).searchEntityOrUser,
-                itemNoun: 'event',
-                itemNounPlural: 'events',
-                columns: const [
-                  MCol('entity', 'Entity', flex: 1),
-                  MCol('action', 'Action', fixed: 100),
-                ],
-                rows: [
-                  for (final l in visible)
-                    {
-                      'entity': '${l.$4}\n${l.$2} · ${l.$5} · ${l.$1}',
-                      'action': l.$3,
-                    },
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: MTable(
+                  showSearch: true,
+                  searchHint: GeniusLinkLocalization.of(
+                    context,
+                  ).searchEntityOrUser,
+                  itemNoun: 'event',
+                  itemNounPlural: 'events',
+                  columns: const [
+                    MCol('entity', 'Entity', flex: 1),
+                    MCol('action', 'Action', fixed: 100),
+                  ],
+                  rows: [
+                    for (final l in visible)
+                      {
+                        'entity': '${l.$4}\n${l.$2} · ${l.$5} · ${l.$1}',
+                        'action': l.$3,
+                      },
+                  ],
+                ),
               ),
               if (visible.isEmpty)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Center(
-                    child: Text(
-                      GeniusLinkLocalization.of(context).noLogEntriesMatch,
-                      style: TextStyle(
-                        color: SuperMaterialThemeData.of(
-                          context,
-                        ).superTheme.fg3,
-                        fontSize: 13,
-                        fontFamily: SuperMaterialThemeData.of(
-                          context,
-                        ).textTheme.bodyMedium?.fontFamily,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    child: Center(
+                      child: Text(
+                        GeniusLinkLocalization.of(context).noLogEntriesMatch,
+                        style: TextStyle(
+                          color: SuperMaterialThemeData.of(
+                            context,
+                          ).superTheme.fg3,
+                          fontSize: 13,
+                          fontFamily: SuperMaterialThemeData.of(
+                            context,
+                          ).textTheme.bodyMedium?.fontFamily,
+                        ),
                       ),
                     ),
                   ),

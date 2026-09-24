@@ -73,120 +73,135 @@ class UsersListView extends StatelessWidget {
               accentColor: (null),
 
               padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
                   for (int i = 0; i < visible.length; i++)
-                    GestureDetector(
-                      onTap: () => context.goTo('userDetail'),
-                      behavior: HitTestBehavior.opaque,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 12,
-                        ),
-                        decoration: BoxDecoration(
-                          border: i < visible.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Avatar(visible[i].name, size: 38),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    visible[i].name,
-                                    style: TextStyle(
-                                      fontSize: 13.5,
-                                      fontWeight: FontWeight.w600,
+                    SuperGridCell(
+                      mobile: 4,
+                      tablet: 8,
+                      desktop: 6,
+                      large: 6,
+                      child: GestureDetector(
+                        onTap: () => context.goTo('userDetail'),
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            border: i < visible.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg1,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                      ).superTheme.border,
                                     ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    visible[i].email,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 11,
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.fg3,
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Avatar(visible[i].name, size: 38),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      visible[i].name,
+                                      style: TextStyle(
+                                        fontSize: 13.5,
+                                        fontWeight: FontWeight.w600,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg1,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 6,
-                                        height: 6,
-                                        decoration: BoxDecoration(
-                                          color: userRoleColor(
-                                            context,
-                                            visible[i].role,
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      visible[i].email,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 11,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 6,
+                                          height: 6,
+                                          decoration: BoxDecoration(
+                                            color: userRoleColor(
+                                              context,
+                                              visible[i].role,
+                                            ),
+                                            shape: BoxShape.circle,
                                           ),
-                                          shape: BoxShape.circle,
                                         ),
-                                      ),
-                                      const SizedBox(width: 6),
-                                      Text(
-                                        visible[i].role,
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg3,
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          visible[i].role,
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg3,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Pill(
-                              visible[i].status.label,
-                              tone: userTone(visible[i].status),
-                            ),
-                          ],
+                              Pill(
+                                visible[i].status.label,
+                                tone: userTone(visible[i].status),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   if (visible.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 36),
-                      child: Center(
-                        child: Text(
-                          'No users match.',
-                          style: TextStyle(
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
-                            fontSize: 13,
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                    SuperGridCell(
+                      mobile: 4,
+                      tablet: 8,
+                      desktop: 12,
+                      large: 12,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 36),
+                        child: Center(
+                          child: Text(
+                            'No users match.',
+                            style: TextStyle(
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                              fontSize: 13,
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                            ),
                           ),
                         ),
                       ),

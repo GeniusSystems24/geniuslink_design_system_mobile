@@ -35,29 +35,52 @@ class CreateUserView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              TInput(
-                label: GeniusLinkLocalization.of(context).nameEnglish,
-                placeholder: GeniusLinkLocalization.of(context).eGOmarHassan,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).nameEnglish,
+                  placeholder: GeniusLinkLocalization.of(context).eGOmarHassan,
+                  required: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGOmarHassan,
-                ar: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).nameArabic,
+                  placeholder: GeniusLinkLocalization.of(context).eGOmarHassan,
+                  ar: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).workEmail,
-                placeholder: 'name@geniuslink.sa',
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).workEmail,
+                  placeholder: 'name@geniuslink.sa',
+                  required: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).employeeId,
-                placeholder: GeniusLinkLocalization.of(context).optional,
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).employeeId,
+                  placeholder: GeniusLinkLocalization.of(context).optional,
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -70,36 +93,53 @@ class CreateUserView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              TSelect(
-                label: GeniusLinkLocalization.of(context).role,
-                value: 'Accountant',
-                options: [
-                  'Administrator',
-                  'Controller',
-                  'Accountant',
-                  'Store Manager',
-                  'Viewer',
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TSelect(
+                  label: GeniusLinkLocalization.of(context).role,
+                  value: 'Accountant',
+                  options: [
+                    'Administrator',
+                    'Controller',
+                    'Accountant',
+                    'Store Manager',
+                    'Viewer',
+                  ],
+                ),
               ),
-              TSelect(
-                label: GeniusLinkLocalization.of(context).defaultStore,
-                value: 'All Stores',
-                options: [
-                  'All Stores',
-                  'Downtown Central',
-                  'King Fahd Warehouse',
-                  'Jeddah Showroom',
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TSelect(
+                  label: GeniusLinkLocalization.of(context).defaultStore,
+                  value: 'All Stores',
+                  options: [
+                    'All Stores',
+                    'Downtown Central',
+                    'King Fahd Warehouse',
+                    'Jeddah Showroom',
+                  ],
+                ),
               ),
-              InfoNote(
-                GeniusLinkLocalization.of(
-                  context,
-                ).anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword,
-                tone: SuperMaterialThemeData.of(context).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: InfoNote(
+                  GeniusLinkLocalization.of(
+                    context,
+                  ).anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword,
+                  tone: SuperMaterialThemeData.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),

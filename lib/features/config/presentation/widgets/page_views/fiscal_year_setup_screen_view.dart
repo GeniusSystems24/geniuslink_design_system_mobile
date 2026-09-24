@@ -52,24 +52,41 @@ class FiscalYearSetupView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).fiscalYear,
-                value: '2024',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).fiscalYear,
+                  value: '2024',
+                  mono: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).startDate,
-                value: '01/01/2024',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).startDate,
+                  value: '01/01/2024',
+                  mono: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).endDate,
-                value: '12/31/2024',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).endDate,
+                  value: '12/31/2024',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -87,18 +104,26 @@ class FiscalYearSetupView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              GridView.count(
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1.7,
+              SuperGrid(
+                scope: SuperGridScope.current,
+                gutter: 10,
+                rowSpacing: 10,
                 children: [
                   for (int i = 0; i < months.length; i++)
-                    FiscalPeriodTile(
-                      month: months[i],
-                      state: i < 11 ? 'closed' : (i == 11 ? 'open' : 'future'),
+                    SuperGridCell(
+                      mobile: 4,
+                      tablet: 4,
+                      desktop: 4,
+                      large: 4,
+                      child: AspectRatio(
+                        aspectRatio: 1.7,
+                        child: FiscalPeriodTile(
+                          month: months[i],
+                          state: i < 11
+                              ? 'closed'
+                              : (i == 11 ? 'open' : 'future'),
+                        ),
+                      ),
                     ),
                 ],
               ),

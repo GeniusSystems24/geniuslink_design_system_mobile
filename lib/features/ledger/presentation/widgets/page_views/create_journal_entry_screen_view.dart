@@ -59,31 +59,54 @@ class CreateJournalEntryView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).serialNo,
-                value: 'JV-2024-0227',
-                mono: true,
-                locked: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).serialNo,
+                  value: 'JV-2024-0227',
+                  mono: true,
+                  locked: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).date,
-                value: 'Dec 19, 2025',
-                icon: 'calendar',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).date,
+                  value: 'Dec 19, 2025',
+                  icon: 'calendar',
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).currency,
-                value: 'SAR — Saudi Riyal',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).currency,
+                  value: 'SAR — Saudi Riyal',
+                  select: true,
+                ),
               ),
-              ITextarea(
-                label: GeniusLinkLocalization.of(context).description,
-                placeholder: GeniusLinkLocalization.of(
-                  context,
-                ).describeThisJournalEntry,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: ITextarea(
+                  label: GeniusLinkLocalization.of(context).description,
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).describeThisJournalEntry,
+                ),
               ),
             ],
           ),
@@ -94,55 +117,76 @@ class CreateJournalEntryView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
               for (final line in lines)
-                JournalLineEditor(line: line, accounts: accounts),
-              const AddLineBtn(),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: SuperMaterialThemeData.of(context).superTheme.bg,
-                  border: Border.all(
-                    color: SuperMaterialThemeData.of(context).superTheme.border,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: JournalLineEditor(line: line, accounts: accounts),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: JournalTotal(
-                        'Debits',
-                        SuperFormat.number(
-                          lines
-                              .where((line) => line.side == JournalSide.debit)
-                              .fold<double>(
-                                0,
-                                (sum, line) => sum + line.amount,
-                              ),
-                          decimals: 2,
-                        ),
-                        SuperMaterialThemeData.of(context).superTheme.fg1,
-                      ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: const AddLineBtn(),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: SuperMaterialThemeData.of(context).superTheme.bg,
+                    border: Border.all(
+                      color: SuperMaterialThemeData.of(
+                        context,
+                      ).superTheme.border,
                     ),
-                    Expanded(
-                      child: JournalTotal(
-                        'Credits',
-                        SuperFormat.number(
-                          lines
-                              .where((line) => line.side == JournalSide.credit)
-                              .fold<double>(
-                                0,
-                                (sum, line) => sum + line.amount,
-                              ),
-                          decimals: 2,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: JournalTotal(
+                          'Debits',
+                          SuperFormat.number(
+                            lines
+                                .where((line) => line.side == JournalSide.debit)
+                                .fold<double>(
+                                  0,
+                                  (sum, line) => sum + line.amount,
+                                ),
+                            decimals: 2,
+                          ),
+                          SuperMaterialThemeData.of(context).superTheme.fg1,
                         ),
-                        SuperMaterialThemeData.of(context).superTheme.fg1,
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: JournalTotal(
+                          'Credits',
+                          SuperFormat.number(
+                            lines
+                                .where(
+                                  (line) => line.side == JournalSide.credit,
+                                )
+                                .fold<double>(
+                                  0,
+                                  (sum, line) => sum + line.amount,
+                                ),
+                            decimals: 2,
+                          ),
+                          SuperMaterialThemeData.of(context).superTheme.fg1,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -59,37 +59,73 @@ class ProductDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 2,
+              SuperGrid(
+                scope: SuperGridScope.current,
+                gutter: 12,
+                rowSpacing: 12,
                 children: [
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).totalOnHand,
-                    value: '${detail.totalOnHand}',
-                    sub: product.unit,
-                    hi: true,
-                  ),
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).stockValue,
-                    value: SuperFormat.number(detail.stockValue, decimals: 0),
-                    sub: 'SAR',
-                  ),
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).avgUnitCost,
-                    value: SuperFormat.number(
-                      detail.averageUnitCost,
-                      decimals: 2,
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 6,
+                    large: 6,
+                    child: AspectRatio(
+                      aspectRatio: 2,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).totalOnHand,
+                        value: '${detail.totalOnHand}',
+                        sub: product.unit,
+                        hi: true,
+                      ),
                     ),
-                    sub: 'SAR',
                   ),
-                  Mini(
-                    label: GeniusLinkLocalization.of(context).reorderLevel,
-                    value: '${detail.reorderLevel}',
-                    sub: product.unit,
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 6,
+                    large: 6,
+                    child: AspectRatio(
+                      aspectRatio: 2,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).stockValue,
+                        value: SuperFormat.number(
+                          detail.stockValue,
+                          decimals: 0,
+                        ),
+                        sub: 'SAR',
+                      ),
+                    ),
+                  ),
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 6,
+                    large: 6,
+                    child: AspectRatio(
+                      aspectRatio: 2,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).avgUnitCost,
+                        value: SuperFormat.number(
+                          detail.averageUnitCost,
+                          decimals: 2,
+                        ),
+                        sub: 'SAR',
+                      ),
+                    ),
+                  ),
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 6,
+                    large: 6,
+                    child: AspectRatio(
+                      aspectRatio: 2,
+                      child: Mini(
+                        label: GeniusLinkLocalization.of(context).reorderLevel,
+                        value: '${detail.reorderLevel}',
+                        sub: product.unit,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -103,31 +139,66 @@ class ProductDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              KeyValueRow('SKU', product.sku, mono: true),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).barcode,
-                detail.barcode,
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow('SKU', product.sku, mono: true),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).category,
-                product.category,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).barcode,
+                  detail.barcode,
+                  mono: true,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).unit,
-                product.unit,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).category,
+                  product.category,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).sellingPrice,
-                '${SuperFormat.number(detail.sellingPrice, decimals: 2)} SAR',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).unit,
+                  product.unit,
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).vatRate,
-                '${(detail.vatRate * 100).toStringAsFixed(0)}%',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).sellingPrice,
+                  '${SuperFormat.number(detail.sellingPrice, decimals: 2)} SAR',
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).vatRate,
+                  '${(detail.vatRate * 100).toStringAsFixed(0)}%',
+                ),
               ),
             ],
           ),
@@ -139,93 +210,98 @@ class ProductDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < detail.stockByStore.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < detail.stockByStore.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < detail.stockByStore.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < detail.stockByStore.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 54,
+                                child: Text(
+                                  detail.stockByStore[i].storeCode,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 11,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.border,
+                                    ).superTheme.fg3,
                                   ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 54,
-                              child: Text(
-                                detail.stockByStore[i].storeCode,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  detail.stockByStore[i].storeName,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg1,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '${detail.stockByStore[i].quantity}',
                                 style: TextStyle(
                                   fontFamily: SuperMaterialThemeData.of(
                                     context,
                                   ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 11,
+                                  fontSize: 13,
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).superTheme.fg3,
+                                  ).superTheme.fg2,
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                detail.stockByStore[i].storeName,
+                              const SizedBox(width: 14),
+                              Text(
+                                SuperFormat.number(
+                                  detail.stockByStore[i].value,
+                                  decimals: 2,
+                                ),
                                 style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: SuperMaterialThemeData.of(
                                     context,
                                   ).superTheme.fg1,
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
                                 ),
                               ),
-                            ),
-                            Text(
-                              '${detail.stockByStore[i].quantity}',
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg2,
-                              ),
-                            ),
-                            const SizedBox(width: 14),
-                            Text(
-                              SuperFormat.number(
-                                detail.stockByStore[i].value,
-                                decimals: 2,
-                              ),
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -238,110 +314,117 @@ class ProductDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < detail.recentMovements.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < detail.recentMovements.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < detail.recentMovements.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < detail.recentMovements.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  detail.recentMovements[i].reference,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 12,
                                     color: SuperMaterialThemeData.of(
                                       context,
-                                    ).superTheme.border,
+                                    ).colorScheme.primary,
                                   ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                detail.recentMovements[i].reference,
+                                ),
+                              ),
+                              Text(
+                                _movementLabel(detail.recentMovements[i].type),
                                 style: TextStyle(
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
                                   fontSize: 12,
                                   color: SuperMaterialThemeData.of(
                                     context,
-                                  ).colorScheme.primary,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              _movementLabel(detail.recentMovements[i].type),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                              ),
-                            ),
-                            const SizedBox(width: 14),
-                            SizedBox(
-                              width: 44,
-                              child: Text(
-                                _quantityLabel(detail.recentMovements[i]),
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      detail.recentMovements[i].quantityDelta >
-                                          0
-                                      ? SuperMaterialThemeData.of(
-                                          context,
-                                        ).colorScheme.secondary
-                                      : detail
-                                                .recentMovements[i]
-                                                .quantityDelta <
-                                            0
-                                      ? SuperMaterialThemeData.of(
-                                          context,
-                                        ).colorScheme.error
-                                      : SuperMaterialThemeData.of(
-                                          context,
-                                        ).superTheme.fg2,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            SizedBox(
-                              width: 70,
-                              child: Text(
-                                _dateLabel(
-                                  detail.recentMovements[i].occurredAt,
-                                ),
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
-                                  fontSize: 11,
-                                  color: SuperMaterialThemeData.of(
-                                    context,
                                   ).superTheme.fg3,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
                                 ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 14),
+                              SizedBox(
+                                width: 44,
+                                child: Text(
+                                  _quantityLabel(detail.recentMovements[i]),
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color:
+                                        detail
+                                                .recentMovements[i]
+                                                .quantityDelta >
+                                            0
+                                        ? SuperMaterialThemeData.of(
+                                            context,
+                                          ).colorScheme.secondary
+                                        : detail
+                                                  .recentMovements[i]
+                                                  .quantityDelta <
+                                              0
+                                        ? SuperMaterialThemeData.of(
+                                            context,
+                                          ).colorScheme.error
+                                        : SuperMaterialThemeData.of(
+                                            context,
+                                          ).superTheme.fg2,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              SizedBox(
+                                width: 70,
+                                child: Text(
+                                  _dateLabel(
+                                    detail.recentMovements[i].occurredAt,
+                                  ),
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 11,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg3,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

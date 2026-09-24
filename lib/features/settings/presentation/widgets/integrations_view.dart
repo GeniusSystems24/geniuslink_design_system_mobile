@@ -58,92 +58,99 @@ class IntegrationsView extends StatelessWidget {
                   accentColor: _categoryColor(context, category),
 
                   padding: EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
+                  child: SuperGrid(
+                    scope: SuperGridScope.current,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Column(
-                          children: [
-                            for (final item in integrations.where(
-                              (item) => item.category == category,
-                            ))
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: SuperMaterialThemeData.of(
-                                        context,
-                                      ).superTheme.border,
+                      SuperGridCell(
+                        mobile: 4,
+                        tablet: 8,
+                        desktop: 12,
+                        large: 12,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Column(
+                            children: [
+                              for (final item in integrations.where(
+                                (item) => item.category == category,
+                              ))
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.border,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    PlatformMonoText(
-                                      name: item.name,
-                                      tone: _categoryColor(context, category),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            item.name,
-                                            style: TextStyle(
-                                              fontSize: 13.5,
-                                              fontWeight: FontWeight.w600,
-                                              color: SuperMaterialThemeData.of(
-                                                context,
-                                              ).superTheme.fg1,
-                                              fontFamily:
-                                                  SuperMaterialThemeData.of(
-                                                        context,
-                                                      )
-                                                      .textTheme
-                                                      .bodyMedium
-                                                      ?.fontFamily,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 1),
-                                          Text(
-                                            item.description,
-                                            style: TextStyle(
-                                              fontSize: 11.5,
-                                              color: SuperMaterialThemeData.of(
-                                                context,
-                                              ).superTheme.fg3,
-                                              fontFamily:
-                                                  SuperMaterialThemeData.of(
-                                                        context,
-                                                      )
-                                                      .textTheme
-                                                      .bodyMedium
-                                                      ?.fontFamily,
-                                            ),
-                                          ),
-                                        ],
+                                  child: Row(
+                                    children: [
+                                      PlatformMonoText(
+                                        name: item.name,
+                                        tone: _categoryColor(context, category),
                                       ),
-                                    ),
-                                    if (values[item.id] == true)
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 8),
-                                        child: Pill('On'),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              item.name,
+                                              style: TextStyle(
+                                                fontSize: 13.5,
+                                                fontWeight: FontWeight.w600,
+                                                color:
+                                                    SuperMaterialThemeData.of(
+                                                      context,
+                                                    ).superTheme.fg1,
+                                                fontFamily:
+                                                    SuperMaterialThemeData.of(
+                                                          context,
+                                                        )
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.fontFamily,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 1),
+                                            Text(
+                                              item.description,
+                                              style: TextStyle(
+                                                fontSize: 11.5,
+                                                color:
+                                                    SuperMaterialThemeData.of(
+                                                      context,
+                                                    ).superTheme.fg3,
+                                                fontFamily:
+                                                    SuperMaterialThemeData.of(
+                                                          context,
+                                                        )
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.fontFamily,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    PlatformToggle(
-                                      on: values[item.id] ?? false,
-                                      onTap: () => toggle(item.id),
-                                    ),
-                                  ],
+                                      if (values[item.id] == true)
+                                        const Padding(
+                                          padding: EdgeInsets.only(right: 8),
+                                          child: Pill('On'),
+                                        ),
+                                      PlatformToggle(
+                                        on: values[item.id] ?? false,
+                                        onTap: () => toggle(item.id),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

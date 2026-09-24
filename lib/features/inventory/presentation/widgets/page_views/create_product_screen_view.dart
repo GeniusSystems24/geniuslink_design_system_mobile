@@ -107,77 +107,112 @@ class _CreateProductScreenState extends State<CreateProductView> {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: 'SKU',
-                  hintText: GeniusLinkLocalization.of(context).eGStl44021,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'SKU',
+                    hintText: GeniusLinkLocalization.of(context).eGStl44021,
+                  ),
+                  required: true,
+                  minLength: 3,
+                  forceError: _force,
+                  onValidity: (e) => _skuErr = e,
                 ),
-                required: true,
-                minLength: 3,
-                forceError: _force,
-                onValidity: (e) => _skuErr = e,
               ),
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).barcode,
-                  hintText: GeniusLinkLocalization.of(context).scanOrType,
-                  prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).barcode,
+                    hintText: GeniusLinkLocalization.of(context).scanOrType,
+                    prefixIcon: Icon(Icons.qr_code_scanner_rounded, size: 18),
+                  ),
                 ),
               ),
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).nameEnglish,
-                  hintText: GeniusLinkLocalization.of(
-                    context,
-                  ).eGStructuralSteelIBeam,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).nameEnglish,
+                    hintText: GeniusLinkLocalization.of(
+                      context,
+                    ).eGStructuralSteelIBeam,
+                  ),
+                  required: true,
+                  minLength: 2,
+                  forceError: _force,
+                  onValidity: (e) => _nameEnErr = e,
                 ),
-                required: true,
-                minLength: 2,
-                forceError: _force,
-                onValidity: (e) => _nameEnErr = e,
               ),
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).nameArabic,
-                  hintText: GeniusLinkLocalization.of(
-                    context,
-                  ).eGStructuralSteelIBeam,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperTextFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).nameArabic,
+                    hintText: GeniusLinkLocalization.of(
+                      context,
+                    ).eGStructuralSteelIBeam,
+                  ),
+                  arabic: true,
+                  required: true,
+                  minLength: 2,
+                  forceError: _force,
+                  onValidity: (e) => _nameArErr = e,
                 ),
-                arabic: true,
-                required: true,
-                minLength: 2,
-                forceError: _force,
-                onValidity: (e) => _nameArErr = e,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _categorySource,
-                controller: _categoryController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).category,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _categorySource,
+                  controller: _categoryController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).category,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectCategory,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectCategory,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _uomSource,
-                controller: _uomController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).unitOfMeasure,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _uomSource,
+                  controller: _uomController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).unitOfMeasure,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectUnit,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectUnit,
               ),
             ],
           ),
@@ -188,38 +223,57 @@ class _CreateProductScreenState extends State<CreateProductView> {
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperNumericFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).unitCostSar,
-                  prefixText: 'SAR ',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperNumericFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).unitCostSar,
+                    prefixText: 'SAR ',
+                  ),
+                  decimals: 2,
+                  min: 0,
                 ),
-                decimals: 2,
-                min: 0,
               ),
-              SuperNumericFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).sellingPriceSar,
-                  prefixText: 'SAR ',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperNumericFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(
+                      context,
+                    ).sellingPriceSar,
+                    prefixText: 'SAR ',
+                  ),
+                  decimals: 2,
+                  min: 0,
                 ),
-                decimals: 2,
-                min: 0,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _vatSource,
-                controller: _vatController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).vatRate,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _vatSource,
+                  controller: _vatController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).vatRate,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectRate,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectRate,
               ),
             ],
           ),
@@ -230,48 +284,71 @@ class _CreateProductScreenState extends State<CreateProductView> {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              SuperNumericFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).reorderLevel,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperNumericFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).reorderLevel,
+                  ),
+                  min: 0,
+                  step: 1,
+                  decimals: 0,
                 ),
-                min: 0,
-                step: 1,
-                decimals: 0,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (context, items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                      value: item,
-                      titleText: item,
-                    ),
-                source: _storeSource,
-                controller: _storeController,
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).defaultStore,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperAutoSuggestionsBox<String>(
+                  suggestionBuilder: (context, items, index, item) =>
+                      SuperAutoSuggestionsItem<String>(
+                        value: item,
+                        titleText: item,
+                      ),
+                  source: _storeSource,
+                  controller: _storeController,
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).defaultStore,
+                  ),
+                  hintText: GeniusLinkLocalization.of(context).selectStore,
                 ),
-                hintText: GeniusLinkLocalization.of(context).selectStore,
               ),
-              SuperNumericFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).openingStock,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: SuperNumericFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).openingStock,
+                  ),
+                  min: 0,
+                  step: 1,
+                  decimals: 0,
                 ),
-                min: 0,
-                step: 1,
-                decimals: 0,
               ),
-              SuperAttachmentFormField(
-                decoration: InputDecoration(
-                  labelText: GeniusLinkLocalization.of(context).productImages,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: SuperAttachmentFormField(
+                  decoration: InputDecoration(
+                    labelText: GeniusLinkLocalization.of(context).productImages,
+                  ),
+                  accept: '.jpg,.jpeg,.png,.pdf',
+                  maxSizeMB: 10,
+                  maxFiles: 5,
+                  multiple: true,
+                  onBrowse: () async => const <SuperFile>[],
                 ),
-                accept: '.jpg,.jpeg,.png,.pdf',
-                maxSizeMB: 10,
-                maxFiles: 5,
-                multiple: true,
-                onBrowse: () async => const <SuperFile>[],
               ),
             ],
           ),

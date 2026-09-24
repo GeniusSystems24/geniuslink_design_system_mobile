@@ -239,12 +239,20 @@ class WarehousesListView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
               for (int i = 0; i < stores.length; i++)
-                WarehouseRow(s: stores[i], last: i == stores.length - 1),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 6,
+                  large: 6,
+                  child: WarehouseRow(
+                    s: stores[i],
+                    last: i == stores.length - 1,
+                  ),
+                ),
             ],
           ),
         ),

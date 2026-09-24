@@ -46,28 +46,41 @@ class JournalEntryDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Text(
-                '${entry.reference} · ${_dateLabel(entry.occurredAt)}',
-                style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                  fontSize: 12,
-                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  '${entry.reference} · ${_dateLabel(entry.occurredAt)}',
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.primary,
+                  ),
                 ),
               ),
-              Text(
-                entry.description,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  entry.description,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: SuperMaterialThemeData.of(context).superTheme.fg1,
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                  ),
                 ),
               ),
             ],
@@ -80,24 +93,29 @@ class JournalEntryDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              JournalPreview(
-                numbered: true,
-                rows: [
-                  for (final line in entry.lines)
-                    (
-                      '${line.account.name} (${line.account.code})',
-                      line.side == JournalSide.debit
-                          ? SuperFormat.number(line.amount, decimals: 2)
-                          : null,
-                      line.side == JournalSide.credit
-                          ? SuperFormat.number(line.amount, decimals: 2)
-                          : null,
-                    ),
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: JournalPreview(
+                  numbered: true,
+                  rows: [
+                    for (final line in entry.lines)
+                      (
+                        '${line.account.name} (${line.account.code})',
+                        line.side == JournalSide.debit
+                            ? SuperFormat.number(line.amount, decimals: 2)
+                            : null,
+                        line.side == JournalSide.credit
+                            ? SuperFormat.number(line.amount, decimals: 2)
+                            : null,
+                      ),
+                  ],
+                ),
               ),
             ],
           ),

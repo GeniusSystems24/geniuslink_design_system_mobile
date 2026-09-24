@@ -37,31 +37,54 @@ class CreateCurrencyView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).isoCode,
-                placeholder: GeniusLinkLocalization.of(context).eGUsd,
-                mono: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).isoCode,
+                  placeholder: GeniusLinkLocalization.of(context).eGUsd,
+                  mono: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).symbol,
-                placeholder: 'e.g. \$',
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).symbol,
+                  placeholder: 'e.g. \$',
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).nameEnglish,
-                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).nameEnglish,
+                  placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
-                ar: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).nameArabic,
+                  placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
+                  ar: true,
+                  required: true,
+                ),
               ),
             ],
           ),
@@ -74,23 +97,40 @@ class CreateCurrencyView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).decimalPlaces,
-                value: '2',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).decimalPlaces,
+                  value: '2',
+                  select: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).exchangeRatePer1Sar,
-                placeholder: GeniusLinkLocalization.of(context).eG3750200,
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).exchangeRatePer1Sar,
+                  placeholder: GeniusLinkLocalization.of(context).eG3750200,
+                  mono: true,
+                ),
               ),
-              IToggle(
-                label: GeniusLinkLocalization.of(context).setAsBaseCurrency,
-                on: false,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IToggle(
+                  label: GeniusLinkLocalization.of(context).setAsBaseCurrency,
+                  on: false,
+                ),
               ),
             ],
           ),

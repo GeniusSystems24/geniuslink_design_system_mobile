@@ -83,10 +83,39 @@ class AccountDetailScreen extends StatelessWidget {
           accentColor: theme.informationAccentColor ?? colors.primary,
           theme: theme.informationSection,
           children: [
-            KeyValueRow(l10n.code, '1001', mono: true),
-            KeyValueRow(l10n.accountType, l10n.assetCash),
-            KeyValueRow(l10n.tree, l10n.assetsTreeOne),
-            KeyValueRow(l10n.currency, 'SAR'),
+            SuperGrid(
+              scope: SuperGridScope.current,
+              children: [
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.code, '1001', mono: true),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.accountType, l10n.assetCash),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.tree, l10n.assetsTreeOne),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 6,
+                  large: 6,
+                  child: KeyValueRow(l10n.currency, 'SAR'),
+                ),
+              ],
+            ),
           ],
         ),
         AccountDetailRecentTransactionsSection(

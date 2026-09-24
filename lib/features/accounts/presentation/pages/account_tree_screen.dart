@@ -85,19 +85,36 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
         title: Text(l10n.accountTree),
         actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
-      body: AccountTreeSection(
-        title: l10n.chartOfAccounts,
-        subtitle: l10n.rollUpBalancesBilingual,
-        icon: Icons.account_tree_outlined,
-        accentColor:
-            widget.theme.accentColor ?? materialTheme.colorScheme.primary,
-        theme: widget.theme.section,
-        headerStart: Text(l10n.account, style: headerStartStyle),
-        headerEnd: Text(l10n.balanceSar, style: headerEndStyle),
-        content: SuperTree<Account>(
-          controller: _controller,
-          leadingBuilder: _leading,
-          trailingBuilder: _trailing,
+      body: LayoutBuilder(
+        builder: (context, constraints) => SuperGrid(
+          scope: SuperGridScope.current,
+          children: [
+            SuperGridCell(
+              mobile: 4,
+              tablet: 8,
+              desktop: 12,
+              large: 12,
+              child: SizedBox(
+                height: constraints.maxHeight,
+                child: AccountTreeSection(
+                  title: l10n.chartOfAccounts,
+                  subtitle: l10n.rollUpBalancesBilingual,
+                  icon: Icons.account_tree_outlined,
+                  accentColor:
+                      widget.theme.accentColor ??
+                      materialTheme.colorScheme.primary,
+                  theme: widget.theme.section,
+                  headerStart: Text(l10n.account, style: headerStartStyle),
+                  headerEnd: Text(l10n.balanceSar, style: headerEndStyle),
+                  content: SuperTree<Account>(
+                    controller: _controller,
+                    leadingBuilder: _leading,
+                    trailingBuilder: _trailing,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

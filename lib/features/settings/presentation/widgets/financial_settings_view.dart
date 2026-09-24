@@ -49,96 +49,119 @@ class FinancialSettingsView extends StatelessWidget {
               initiallyExpanded: true,
               accentColor: marker,
               icon: icon,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
-                  const TSelect(
-                    label: 'Base Currency',
-                    value: 'SAR — Saudi Riyal',
-                    options: [
-                      'SAR — Saudi Riyal',
-                      'USD — US Dollar',
-                      'AED — UAE Dirham',
-                    ],
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: const TSelect(
+                      label: 'Base Currency',
+                      value: 'SAR — Saudi Riyal',
+                      options: [
+                        'SAR — Saudi Riyal',
+                        'USD — US Dollar',
+                        'AED — UAE Dirham',
+                      ],
+                    ),
                   ),
-                  const TSelect(
-                    label: 'Fiscal Year Start',
-                    value: 'January',
-                    options: ['January', 'April', 'July', 'October'],
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: const TSelect(
+                      label: 'Fiscal Year Start',
+                      value: 'January',
+                      options: ['January', 'April', 'July', 'October'],
+                    ),
                   ),
-                  const TSelect(
-                    label: 'Rounding Precision',
-                    value: '2 decimals',
-                    options: ['0 decimals', '2 decimals', '3 decimals'],
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: const TSelect(
+                      label: 'Rounding Precision',
+                      value: '2 decimals',
+                      options: ['0 decimals', '2 decimals', '3 decimals'],
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 7),
-                        child: Eyebrow('Accounting Basis'),
-                      ),
-                      Row(
-                        children: [
-                          for (final e in const [
-                            ('accrual', 'Accrual'),
-                            ('cash', 'Cash'),
-                          ]) ...[
-                            if (e.$1 == 'cash') const SizedBox(width: 8),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => form.setField('basis', e.$1),
-                                child: Container(
-                                  padding: const EdgeInsets.all(12),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: basis == e.$1
-                                        ? superCoreTint(
-                                            SuperMaterialThemeData.of(
-                                              context,
-                                            ).colorScheme.primary,
-                                            0x1F,
-                                          )
-                                        : SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.inputBg,
-                                    border: Border.all(
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 7),
+                          child: Eyebrow('Accounting Basis'),
+                        ),
+                        Row(
+                          children: [
+                            for (final e in const [
+                              ('accrual', 'Accrual'),
+                              ('cash', 'Cash'),
+                            ]) ...[
+                              if (e.$1 == 'cash') const SizedBox(width: 8),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => form.setField('basis', e.$1),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
                                       color: basis == e.$1
-                                          ? SuperMaterialThemeData.of(
-                                              context,
-                                            ).colorScheme.primary
+                                          ? superCoreTint(
+                                              SuperMaterialThemeData.of(
+                                                context,
+                                              ).colorScheme.primary,
+                                              0x1F,
+                                            )
                                           : SuperMaterialThemeData.of(
                                               context,
-                                            ).superTheme.border,
+                                            ).superTheme.inputBg,
+                                      border: Border.all(
+                                        color: basis == e.$1
+                                            ? SuperMaterialThemeData.of(
+                                                context,
+                                              ).colorScheme.primary
+                                            : SuperMaterialThemeData.of(
+                                                context,
+                                              ).superTheme.border,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    e.$2.toUpperCase(),
-                                    style: TextStyle(
-                                      color: basis == e.$1
-                                          ? SuperMaterialThemeData.of(
-                                              context,
-                                            ).colorScheme.primary
-                                          : SuperMaterialThemeData.of(
-                                              context,
-                                            ).superTheme.fg2,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 12,
-                                      letterSpacing: 0.4,
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                    child: Text(
+                                      e.$2.toUpperCase(),
+                                      style: TextStyle(
+                                        color: basis == e.$1
+                                            ? SuperMaterialThemeData.of(
+                                                context,
+                                              ).colorScheme.primary
+                                            : SuperMaterialThemeData.of(
+                                                context,
+                                              ).superTheme.fg2,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 12,
+                                        letterSpacing: 0.4,
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ],
-                        ],
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -149,22 +172,33 @@ class FinancialSettingsView extends StatelessWidget {
               initiallyExpanded: true,
               accentColor: marker3,
               icon: icon3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  TSelect(
-                    label: 'Retained Earnings',
-                    value: '3100 — Retained Earnings',
-                    options: [
-                      '3100 — Retained Earnings',
-                      '3001 — Owner Capital',
-                    ],
+              child: SuperGrid(
+                scope: SuperGridScope.current,
+                children: [
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: TSelect(
+                      label: 'Retained Earnings',
+                      value: '3100 — Retained Earnings',
+                      options: [
+                        '3100 — Retained Earnings',
+                        '3001 — Owner Capital',
+                      ],
+                    ),
                   ),
-                  TSelect(
-                    label: 'Default Tax Account',
-                    value: '2200 — VAT Payable',
-                    options: ['2200 — VAT Payable', '1350 — VAT Receivable'],
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: TSelect(
+                      label: 'Default Tax Account',
+                      value: '2200 — VAT Payable',
+                      options: ['2200 — VAT Payable', '1350 — VAT Receivable'],
+                    ),
                   ),
                 ],
               ),
@@ -175,15 +209,29 @@ class FinancialSettingsView extends StatelessWidget {
               initiallyExpanded: true,
               accentColor: marker2,
               icon: icon2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  TSwitch(
-                    label: 'Lock postings to open periods only',
-                    defaultOn: true,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
+                children: [
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: TSwitch(
+                      label: 'Lock postings to open periods only',
+                      defaultOn: true,
+                    ),
                   ),
-                  TSwitch(label: 'Auto-update FX rates daily', defaultOn: true),
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: TSwitch(
+                      label: 'Auto-update FX rates daily',
+                      defaultOn: true,
+                    ),
+                  ),
                 ],
               ),
             ),

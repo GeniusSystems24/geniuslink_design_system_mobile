@@ -61,26 +61,37 @@ class _IncomeStatementViewState extends State<IncomeStatementView> {
             initiallyExpanded: true,
             accentColor: s.$2,
             icon: MIcons.of('ledger'),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
+            child: SuperGrid(
+              scope: SuperGridScope.current,
               children: [
                 for (int i = 0; i < s.$3.length; i++)
-                  ReportRow(
-                    left: s.$3[i].$2,
-                    sub: s.$3[i].$1,
-                    right: s.$3[i].$3 < 0
-                        ? '(${_money(s.$3[i].$3)})'
-                        : _money(s.$3[i].$3),
-                    rightTone: s.$3[i].$3 < 0
-                        ? SuperMaterialThemeData.of(context).colorScheme.error
-                        : SuperMaterialThemeData.of(context).superTheme.fg1,
-                    last: i == s.$3.length - 1,
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 8,
+                    desktop: 12,
+                    large: 12,
+                    child: ReportRow(
+                      left: s.$3[i].$2,
+                      sub: s.$3[i].$1,
+                      right: s.$3[i].$3 < 0
+                          ? '(${_money(s.$3[i].$3)})'
+                          : _money(s.$3[i].$3),
+                      rightTone: s.$3[i].$3 < 0
+                          ? SuperMaterialThemeData.of(context).colorScheme.error
+                          : SuperMaterialThemeData.of(context).superTheme.fg1,
+                      last: i == s.$3.length - 1,
+                    ),
                   ),
-                ReportTotalBar(
-                  label: 'Total ${s.$1}',
-                  value: s.$4 < 0 ? '(${_money(s.$4)})' : _money(s.$4),
-                  tone: s.$2,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: ReportTotalBar(
+                    label: 'Total ${s.$1}',
+                    value: s.$4 < 0 ? '(${_money(s.$4)})' : _money(s.$4),
+                    tone: s.$2,
+                  ),
                 ),
               ],
             ),
@@ -92,55 +103,62 @@ class _IncomeStatementViewState extends State<IncomeStatementView> {
           accentColor: SuperMaterialThemeData.of(context).colorScheme.secondary,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    GeniusLinkLocalization.of(context).netIncome,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 13,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg1,
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      GeniusLinkLocalization.of(context).netIncome,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg1,
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                      ),
                     ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '13,360.00 ',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).colorScheme.secondary,
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '13,360.00 ',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).colorScheme.secondary,
+                            ),
                           ),
-                        ),
-                        TextSpan(
-                          text: 'SAR',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
+                          TextSpan(
+                            text: 'SAR',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

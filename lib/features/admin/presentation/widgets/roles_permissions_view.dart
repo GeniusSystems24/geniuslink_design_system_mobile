@@ -63,14 +63,19 @@ class RolesPermissionsView extends StatelessWidget {
               accentColor: accentColor,
 
               padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
-                  Segmented(
-                    options: matrix.roles,
-                    value: role,
-                    onChange: (v) => form.setField('role', v),
+                  SuperGridCell(
+                    mobile: 4,
+                    tablet: 4,
+                    desktop: 3,
+                    large: 3,
+                    child: Segmented(
+                      options: matrix.roles,
+                      value: role,
+                      onChange: (v) => form.setField('role', v),
+                    ),
                   ),
                 ],
               ),
@@ -82,92 +87,99 @@ class RolesPermissionsView extends StatelessWidget {
               accentColor: (null),
 
               padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
+              child: SuperGrid(
+                scope: SuperGridScope.current,
                 children: [
                   for (int i = 0; i < matrix.modules.length; i++)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 13,
-                      ),
-                      decoration: BoxDecoration(
-                        border: i < matrix.modules.length - 1
-                            ? Border(
-                                bottom: BorderSide(
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.border,
-                                ),
-                              )
-                            : null,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            matrix.modules[i],
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: SuperMaterialThemeData.of(
-                                context,
-                              ).superTheme.fg1,
-                              fontFamily: SuperMaterialThemeData.of(
-                                context,
-                              ).textTheme.bodyMedium?.fontFamily,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => cycle(matrix.modules[i]),
-                            child: () {
-                              final lvl = matrix.levelFor(
-                                matrix.modules[i],
-                                ri,
-                              );
-                              final meta = permissionMeta(context)[lvl]!;
-                              final hasColor = lvl != PermissionLevel.none;
-                              return Container(
-                                constraints: const BoxConstraints(minWidth: 72),
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 7,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: hasColor
-                                      ? superCoreTint(meta.$1, 0x26)
-                                      : Colors.transparent,
-                                  border: hasColor
-                                      ? null
-                                      : Border.all(
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.border,
-                                        ),
-                                  borderRadius: BorderRadius.circular(999),
-                                ),
-                                child: Text(
-                                  meta.$2.toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.4,
-                                    fontFamily: SuperMaterialThemeData.of(
+                    SuperGridCell(
+                      mobile: 4,
+                      tablet: 8,
+                      desktop: 12,
+                      large: 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          border: i < matrix.modules.length - 1
+                              ? Border(
+                                  bottom: BorderSide(
+                                    color: SuperMaterialThemeData.of(
                                       context,
-                                    ).textTheme.bodyMedium?.fontFamily,
-                                    color: hasColor
-                                        ? meta.$1
-                                        : SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg4,
+                                    ).superTheme.border,
                                   ),
-                                ),
-                              );
-                            }(),
-                          ),
-                        ],
+                                )
+                              : null,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              matrix.modules[i],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.fg1,
+                                fontFamily: SuperMaterialThemeData.of(
+                                  context,
+                                ).textTheme.bodyMedium?.fontFamily,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => cycle(matrix.modules[i]),
+                              child: () {
+                                final lvl = matrix.levelFor(
+                                  matrix.modules[i],
+                                  ri,
+                                );
+                                final meta = permissionMeta(context)[lvl]!;
+                                final hasColor = lvl != PermissionLevel.none;
+                                return Container(
+                                  constraints: const BoxConstraints(
+                                    minWidth: 72,
+                                  ),
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 14,
+                                    vertical: 7,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: hasColor
+                                        ? superCoreTint(meta.$1, 0x26)
+                                        : Colors.transparent,
+                                    border: hasColor
+                                        ? null
+                                        : Border.all(
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.border,
+                                          ),
+                                    borderRadius: BorderRadius.circular(999),
+                                  ),
+                                  child: Text(
+                                    meta.$2.toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.4,
+                                      fontFamily: SuperMaterialThemeData.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.fontFamily,
+                                      color: hasColor
+                                          ? meta.$1
+                                          : SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg4,
+                                    ),
+                                  ),
+                                );
+                              }(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                 ],

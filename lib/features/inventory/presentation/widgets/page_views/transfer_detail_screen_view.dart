@@ -142,78 +142,101 @@ class TransferDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 2),
-                child: Text(
-                  'INV-TRF-2024-0117',
-                  style: TextStyle(
-                    fontFamily: SuperMaterialThemeData.of(
-                      context,
-                    ).textTheme.bodyMedium?.fontFamily,
-                    fontSize: 12,
-                    color: SuperMaterialThemeData.of(
-                      context,
-                    ).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: Text(
+                    'INV-TRF-2024-0117',
+                    style: TextStyle(
+                      fontFamily: SuperMaterialThemeData.of(
+                        context,
+                      ).textTheme.bodyMedium?.fontFamily,
+                      fontSize: 12,
+                      color: SuperMaterialThemeData.of(
+                        context,
+                      ).colorScheme.primary,
+                    ),
                   ),
                 ),
               ),
-              _TransferFlowCard(
-                tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-                label: 'From Store',
-                store: 'ST-001 · Downtown Central',
-                ar: 'متجر وسط المدينة',
-                delta: '-54,892 SAR',
-                deltaColor: SuperMaterialThemeData.of(
-                  context,
-                ).colorScheme.error,
-              ),
-              Transform.translate(
-                offset: const Offset(0, -6),
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: SuperMaterialThemeData.of(
-                      context,
-                    ).colorScheme.primary,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: superCoreTint(
-                          SuperMaterialThemeData.of(
-                            context,
-                          ).colorScheme.primary,
-                          0x99,
-                        ),
-                        blurRadius: 18,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 22,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Transform.translate(
-                offset: const Offset(0, -6),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
                 child: _TransferFlowCard(
-                  tone: SuperMaterialThemeData.of(
-                    context,
-                  ).colorScheme.secondary,
-                  label: GeniusLinkLocalization.of(context).toStore,
-                  store: 'ST-002 · King Fahd Warehouse',
-                  ar: 'مستودع الملك فهد',
-                  delta: '+54,892 SAR',
+                  tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
+                  label: 'From Store',
+                  store: 'ST-001 · Downtown Central',
+                  ar: 'متجر وسط المدينة',
+                  delta: '-54,892 SAR',
                   deltaColor: SuperMaterialThemeData.of(
                     context,
-                  ).colorScheme.secondary,
+                  ).colorScheme.error,
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Transform.translate(
+                  offset: const Offset(0, -6),
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: SuperMaterialThemeData.of(
+                        context,
+                      ).colorScheme.primary,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: superCoreTint(
+                            SuperMaterialThemeData.of(
+                              context,
+                            ).colorScheme.primary,
+                            0x99,
+                          ),
+                          blurRadius: 18,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Transform.translate(
+                  offset: const Offset(0, -6),
+                  child: _TransferFlowCard(
+                    tone: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.secondary,
+                    label: GeniusLinkLocalization.of(context).toStore,
+                    store: 'ST-002 · King Fahd Warehouse',
+                    ar: 'مستودع الملك فهد',
+                    delta: '+54,892 SAR',
+                    deltaColor: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.secondary,
+                  ),
                 ),
               ),
             ],
@@ -226,17 +249,22 @@ class TransferDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < items.length; i++)
-                      ItemLine(item: items[i], last: i == items.length - 1),
-                  ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < items.length; i++)
+                        ItemLine(item: items[i], last: i == items.length - 1),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -249,22 +277,39 @@ class TransferDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).carrier,
-                'Plate 4892-RKD',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).carrier,
+                  'Plate 4892-RKD',
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).driver,
-                'Mohammed S.',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).driver,
+                  'Mohammed S.',
+                ),
               ),
-              KeyValueRow(
-                GeniusLinkLocalization.of(context).expectedArrival,
-                'Dec 20, 2025',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: KeyValueRow(
+                  GeniusLinkLocalization.of(context).expectedArrival,
+                  'Dec 20, 2025',
+                  mono: true,
+                ),
               ),
             ],
           ),

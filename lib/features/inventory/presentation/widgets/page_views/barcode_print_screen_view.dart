@@ -74,80 +74,85 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                alignment: Alignment.center,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 260),
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFD4D4D8)),
-                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        'Portland Cement Type I',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12,
-                          color: Color(0xFF0B0C10),
-                          height: 1.2,
+                  alignment: Alignment.center,
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 260),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: const Color(0xFFD4D4D8)),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          'Portland Cement Type I',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12,
+                            color: Color(0xFF0B0C10),
+                            height: 1.2,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        height: 36,
-                        child: CustomPaint(
-                          painter: _BarcodePainter(),
-                          size: const Size(double.infinity, 36),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          height: 36,
+                          child: CustomPaint(
+                            painter: _BarcodePainter(),
+                            size: const Size(double.infinity, 36),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            'CMT-90112',
+                        const SizedBox(height: 8),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'CMT-90112',
+                              style: TextStyle(
+                                fontFamily: 'monospace',
+                                fontSize: 10,
+                                color: Color(0xFF0B0C10),
+                              ),
+                            ),
+                            Text(
+                              'SAR 28.00',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                                color: Color(0xFF0B0C10),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        const Center(
+                          child: Text(
+                            '6 281000 901127',
                             style: TextStyle(
                               fontFamily: 'monospace',
-                              fontSize: 10,
+                              fontSize: 9,
+                              letterSpacing: 0.8,
                               color: Color(0xFF0B0C10),
                             ),
-                          ),
-                          Text(
-                            'SAR 28.00',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16,
-                              color: Color(0xFF0B0C10),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      const Center(
-                        child: Text(
-                          '6 281000 901127',
-                          style: TextStyle(
-                            fontFamily: 'monospace',
-                            fontSize: 9,
-                            letterSpacing: 0.8,
-                            color: Color(0xFF0B0C10),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -164,72 +169,78 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 2.6,
+              SuperGrid(
+                scope: SuperGridScope.current,
+                gutter: 8,
+                rowSpacing: 8,
                 children: [
                   for (final t in tpls)
-                    GestureDetector(
-                      onTap: () => setState(() => _tpl = t.$1),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: _tpl == t.$1
-                              ? superCoreTint(
-                                  SuperMaterialThemeData.of(
-                                    context,
-                                  ).colorScheme.primary,
-                                  0x14,
-                                )
-                              : SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.inputBg,
-                          border: Border.all(
-                            color: _tpl == t.$1
-                                ? SuperMaterialThemeData.of(
-                                    context,
-                                  ).colorScheme.primary
-                                : SuperMaterialThemeData.of(
-                                    context,
-                                  ).superTheme.border,
+                    SuperGridCell(
+                      mobile: 4,
+                      tablet: 4,
+                      desktop: 6,
+                      large: 6,
+                      child: AspectRatio(
+                        aspectRatio: 2.6,
+                        child: GestureDetector(
+                          onTap: () => setState(() => _tpl = t.$1),
+                          child: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: _tpl == t.$1
+                                  ? superCoreTint(
+                                      SuperMaterialThemeData.of(
+                                        context,
+                                      ).colorScheme.primary,
+                                      0x14,
+                                    )
+                                  : SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.inputBg,
+                              border: Border.all(
+                                color: _tpl == t.$1
+                                    ? SuperMaterialThemeData.of(
+                                        context,
+                                      ).colorScheme.primary
+                                    : SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  t.$2,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg1,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  '${t.$3} mm',
+                                  style: TextStyle(
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                    fontSize: 10.5,
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).superTheme.fg3,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              t.$2,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '${t.$3} mm',
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 10.5,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ),
@@ -244,24 +255,41 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: GeniusLinkLocalization.of(context).symbology,
-                value: 'Code 128',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).symbology,
+                  value: 'Code 128',
+                  select: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).paper,
-                value: 'A4 (210 × 297 mm)',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).paper,
+                  value: 'A4 (210 × 297 mm)',
+                  select: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).copiesPerItem,
-                placeholder: '1',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).copiesPerItem,
+                  placeholder: '1',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -272,9 +300,8 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
               for (final q in const [
                 ('STL-44021', 'Structural Steel I-Beam', 4),
@@ -282,57 +309,63 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
                 ('AGG-21044', 'Coarse Aggregate 20mm', 2),
                 ('PLY-30022', 'Plywood Sheet 18mm', 6),
               ])
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              q.$2,
-                              style: TextStyle(
-                                fontSize: 12.5,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 8,
+                  desktop: 12,
+                  large: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                q.$2,
+                                style: TextStyle(
+                                  fontSize: 12.5,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg1,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              q.$1,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 10.5,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
+                              const SizedBox(height: 2),
+                              Text(
+                                q.$1,
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 10.5,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg3,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        '×${q.$3}',
-                        style: TextStyle(
-                          fontFamily: SuperMaterialThemeData.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          color: SuperMaterialThemeData.of(
-                            context,
-                          ).superTheme.fg1,
+                        Text(
+                          '×${q.$3}',
+                          style: TextStyle(
+                            fontFamily: SuperMaterialThemeData.of(
+                              context,
+                            ).textTheme.bodyMedium?.fontFamily,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: SuperMaterialThemeData.of(
+                              context,
+                            ).superTheme.fg1,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
             ],

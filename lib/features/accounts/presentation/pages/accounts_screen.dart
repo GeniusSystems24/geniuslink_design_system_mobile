@@ -25,28 +25,45 @@ class AccountsScreen extends StatelessWidget {
         actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
-        AccountsSearchPrompt(
-          theme: theme.searchPrompt,
-          start: const Icon(Icons.search_rounded, size: 16),
-          center: Text(l10n.searchAccounts),
-        ),
-        AccountsListSection(
-          theme: theme.listSection,
+        SuperGrid(
+          scope: SuperGridScope.current,
           children: [
-            for (int index = 0; index < accounts.length; index++)
-              AccountRow(
-                account: accounts[index],
-                last: index == accounts.length - 1,
-                theme: theme.accountRow,
-                onTap: () {
-                  final callback = onAccountSelected;
-                  if (callback != null) {
-                    callback(accounts[index]);
-                  } else {
-                    context.goTo('accountDetail');
-                  }
-                },
+            SuperGridCell(
+              mobile: 4,
+              tablet: 8,
+              desktop: 12,
+              large: 12,
+              child: AccountsSearchPrompt(
+                theme: theme.searchPrompt,
+                start: const Icon(Icons.search_rounded, size: 16),
+                center: Text(l10n.searchAccounts),
               ),
+            ),
+            SuperGridCell(
+              mobile: 4,
+              tablet: 8,
+              desktop: 12,
+              large: 12,
+              child: AccountsListSection(
+                theme: theme.listSection,
+                children: [
+                  for (int index = 0; index < accounts.length; index++)
+                    AccountRow(
+                      account: accounts[index],
+                      last: index == accounts.length - 1,
+                      theme: theme.accountRow,
+                      onTap: () {
+                        final callback = onAccountSelected;
+                        if (callback != null) {
+                          callback(accounts[index]);
+                        } else {
+                          context.goTo('accountDetail');
+                        }
+                      },
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
       ]),

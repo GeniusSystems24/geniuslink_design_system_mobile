@@ -58,56 +58,61 @@ class UserDetailView extends StatelessWidget {
           accentColor: (null),
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                children: [
-                  const Avatar('Layla Ahmed', size: 56),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Layla Ahmed',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg1,
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  children: [
+                    const Avatar('Layla Ahmed', size: 56),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Layla Ahmed',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg1,
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          'layla.a@geniuslink.sa',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 12,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
+                          const SizedBox(height: 3),
+                          Text(
+                            'layla.a@geniuslink.sa',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 12,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            UserRoleChip(),
-                            SizedBox(width: 8),
-                            Pill(GeniusLinkLocalization.of(context).active),
-                          ],
-                        ),
-                      ],
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              UserRoleChip(),
+                              SizedBox(width: 8),
+                              Pill(GeniusLinkLocalization.of(context).active),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -118,23 +123,40 @@ class UserDetailView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              TInput(
-                label: GeniusLinkLocalization.of(context).fullName,
-                defaultValue: 'Layla Ahmed',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).fullName,
+                  defaultValue: 'Layla Ahmed',
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).workEmail,
-                defaultValue: 'layla.a@geniuslink.sa',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).workEmail,
+                  defaultValue: 'layla.a@geniuslink.sa',
+                  mono: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).employeeId,
-                defaultValue: 'EMP-0012',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).employeeId,
+                  defaultValue: 'EMP-0012',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -146,92 +168,97 @@ class UserDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          GeniusLinkLocalization.of(
-                            context,
-                          ).twoFactorAuthentication,
-                          style: TextStyle(
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w600,
-                            color: SuperMaterialThemeData.of(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            GeniusLinkLocalization.of(
                               context,
-                            ).superTheme.fg1,
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                            ).twoFactorAuthentication,
+                            style: TextStyle(
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w600,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg1,
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          twoFactorEnabled
-                              ? 'Enabled · Authenticator app'
-                              : 'Disabled',
-                          style: TextStyle(
-                            fontSize: 11.5,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                          const SizedBox(height: 2),
+                          Text(
+                            twoFactorEnabled
+                                ? 'Enabled · Authenticator app'
+                                : 'Disabled',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => onTwoFactorChanged(!twoFactorEnabled),
-                    child: Container(
-                      width: 42,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: twoFactorEnabled
-                            ? SuperMaterialThemeData.of(
-                                context,
-                              ).colorScheme.secondary
-                            : SuperMaterialThemeData.of(
-                                context,
-                              ).superTheme.inputBg,
-                        border: Border.all(
+                    GestureDetector(
+                      onTap: () => onTwoFactorChanged(!twoFactorEnabled),
+                      child: Container(
+                        width: 42,
+                        height: 24,
+                        decoration: BoxDecoration(
                           color: twoFactorEnabled
                               ? SuperMaterialThemeData.of(
                                   context,
                                 ).colorScheme.secondary
                               : SuperMaterialThemeData.of(
                                   context,
-                                ).superTheme.borderStrong,
+                                ).superTheme.inputBg,
+                          border: Border.all(
+                            color: twoFactorEnabled
+                                ? SuperMaterialThemeData.of(
+                                    context,
+                                  ).colorScheme.secondary
+                                : SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.borderStrong,
+                          ),
+                          borderRadius: BorderRadius.circular(999),
                         ),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: AnimatedAlign(
-                        duration: const Duration(milliseconds: 150),
-                        alignment: twoFactorEnabled
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        child: Container(
-                          width: 18,
-                          height: 18,
-                          margin: const EdgeInsets.symmetric(horizontal: 2),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                        child: AnimatedAlign(
+                          duration: const Duration(milliseconds: 150),
+                          alignment: twoFactorEnabled
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child: Container(
+                            width: 18,
+                            height: 18,
+                            margin: const EdgeInsets.symmetric(horizontal: 2),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -243,98 +270,109 @@ class UserDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < sessions.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: i < sessions.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              MIcons.of(sessions[i].$3 ? 'briefcase' : 'swap'),
-                              size: 17,
-                              color: SuperMaterialThemeData.of(
-                                context,
-                              ).superTheme.fg3,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        sessions[i].$1,
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: SuperMaterialThemeData.of(
-                                            context,
-                                          ).superTheme.fg1,
-                                          fontFamily: SuperMaterialThemeData.of(
-                                            context,
-                                          ).textTheme.bodyMedium?.fontFamily,
-                                        ),
-                                      ),
-                                      if (sessions[i].$3)
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 7),
-                                          child: Pill('This'),
-                                        ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    sessions[i].$2,
-                                    style: TextStyle(
-                                      fontFamily: SuperMaterialThemeData.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
-                                      fontSize: 10.5,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < sessions.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: i < sessions.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
                                       color: SuperMaterialThemeData.of(
                                         context,
-                                      ).superTheme.fg3,
+                                      ).superTheme.border,
                                     ),
-                                  ),
-                                ],
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                MIcons.of(
+                                  sessions[i].$3 ? 'briefcase' : 'swap',
+                                ),
+                                size: 17,
+                                color: SuperMaterialThemeData.of(
+                                  context,
+                                ).superTheme.fg3,
                               ),
-                            ),
-                            if (!sessions[i].$3)
-                              Text(
-                                GeniusLinkLocalization.of(context).revoke,
-                                style: TextStyle(
-                                  color: SuperMaterialThemeData.of(
-                                    context,
-                                  ).colorScheme.error,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: SuperMaterialThemeData.of(
-                                    context,
-                                  ).textTheme.bodyMedium?.fontFamily,
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          sessions[i].$1,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: SuperMaterialThemeData.of(
+                                              context,
+                                            ).superTheme.fg1,
+                                            fontFamily:
+                                                SuperMaterialThemeData.of(
+                                                      context,
+                                                    )
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.fontFamily,
+                                          ),
+                                        ),
+                                        if (sessions[i].$3)
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 7),
+                                            child: Pill('This'),
+                                          ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      sessions[i].$2,
+                                      style: TextStyle(
+                                        fontFamily: SuperMaterialThemeData.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.fontFamily,
+                                        fontSize: 10.5,
+                                        color: SuperMaterialThemeData.of(
+                                          context,
+                                        ).superTheme.fg3,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                          ],
+                              if (!sessions[i].$3)
+                                Text(
+                                  GeniusLinkLocalization.of(context).revoke,
+                                  style: TextStyle(
+                                    color: SuperMaterialThemeData.of(
+                                      context,
+                                    ).colorScheme.error,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: SuperMaterialThemeData.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.fontFamily,
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -347,59 +385,64 @@ class UserDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < activity.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 11),
-                        decoration: BoxDecoration(
-                          border: i < activity.length - 1
-                              ? Border(
-                                  bottom: BorderSide(
-                                    color: SuperMaterialThemeData.of(
-                                      context,
-                                    ).superTheme.border,
-                                  ),
-                                )
-                              : null,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              activity[i].$1,
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg1,
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < activity.length; i++)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 11),
+                          decoration: BoxDecoration(
+                            border: i < activity.length - 1
+                                ? Border(
+                                    bottom: BorderSide(
+                                      color: SuperMaterialThemeData.of(
+                                        context,
+                                      ).superTheme.border,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                activity[i].$1,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg1,
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                ),
                               ),
-                            ),
-                            Text(
-                              activity[i].$2,
-                              style: TextStyle(
-                                fontFamily: SuperMaterialThemeData.of(
-                                  context,
-                                ).textTheme.bodyMedium?.fontFamily,
-                                fontSize: 11,
-                                color: SuperMaterialThemeData.of(
-                                  context,
-                                ).superTheme.fg3,
+                              Text(
+                                activity[i].$2,
+                                style: TextStyle(
+                                  fontFamily: SuperMaterialThemeData.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.fontFamily,
+                                  fontSize: 11,
+                                  color: SuperMaterialThemeData.of(
+                                    context,
+                                  ).superTheme.fg3,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

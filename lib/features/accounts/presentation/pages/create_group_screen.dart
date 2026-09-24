@@ -67,38 +67,61 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           accentColor: widget.theme.detailsAccentColor ?? colors.primary,
           theme: widget.theme.section,
           children: [
-            SuperTextFormField(
-              decoration: InputDecoration(
-                labelText: l10n.nameEnglish,
-                hintText: l10n.exampleCurrentAssets,
-              ),
-              required: true,
-              minLength: 3,
-              forceError: _force,
-              onValidity: (error) => _nameEnErr = error,
-            ),
-            SuperTextFormField(
-              decoration: InputDecoration(
-                labelText: l10n.nameArabic,
-                hintText: l10n.exampleCurrentAssets,
-              ),
-              required: true,
-              minLength: 3,
-              arabic: true,
-              forceError: _force,
-              onValidity: (error) => _nameArErr = error,
-            ),
-            SuperAutoSuggestionsBox<String>(
-              suggestionBuilder: (context, items, index, item) =>
-                  SuperAutoSuggestionsItem<String>(
-                    value: item,
-                    titleText: item,
+            SuperGrid(
+              scope: SuperGridScope.current,
+              children: [
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 3,
+                  large: 3,
+                  child: SuperTextFormField(
+                    decoration: InputDecoration(
+                      labelText: l10n.nameEnglish,
+                      hintText: l10n.exampleCurrentAssets,
+                    ),
+                    required: true,
+                    minLength: 3,
+                    forceError: _force,
+                    onValidity: (error) => _nameEnErr = error,
                   ),
-              source: _treeSource,
-              controller: _treeController,
-              decoration: InputDecoration(labelText: l10n.accountTree),
-              hintText: l10n.selectTree,
-              required: true,
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 3,
+                  large: 3,
+                  child: SuperTextFormField(
+                    decoration: InputDecoration(
+                      labelText: l10n.nameArabic,
+                      hintText: l10n.exampleCurrentAssets,
+                    ),
+                    required: true,
+                    minLength: 3,
+                    arabic: true,
+                    forceError: _force,
+                    onValidity: (error) => _nameArErr = error,
+                  ),
+                ),
+                SuperGridCell(
+                  mobile: 4,
+                  tablet: 4,
+                  desktop: 3,
+                  large: 3,
+                  child: SuperAutoSuggestionsBox<String>(
+                    suggestionBuilder: (context, items, index, item) =>
+                        SuperAutoSuggestionsItem<String>(
+                          value: item,
+                          titleText: item,
+                        ),
+                    source: _treeSource,
+                    controller: _treeController,
+                    decoration: InputDecoration(labelText: l10n.accountTree),
+                    hintText: l10n.selectTree,
+                    required: true,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

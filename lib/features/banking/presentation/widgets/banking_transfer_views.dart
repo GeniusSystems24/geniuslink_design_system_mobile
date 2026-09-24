@@ -37,15 +37,22 @@ class CreateLocalTransferView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MMoney(
-                label: GeniusLinkLocalization.of(context).amount,
-                value: '50,000.00',
-                accent: SuperMaterialThemeData.of(context).colorScheme.primary,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: MMoney(
+                  label: GeniusLinkLocalization.of(context).amount,
+                  value: '50,000.00',
+                  accent: SuperMaterialThemeData.of(
+                    context,
+                  ).colorScheme.primary,
+                  required: true,
+                ),
               ),
             ],
           ),
@@ -56,32 +63,55 @@ class CreateLocalTransferView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: 'From Account',
-                value: 'Bank · NCB Main (1100)',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: 'From Account',
+                  value: 'Bank · NCB Main (1100)',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).toAccount,
-                value: 'Bank · Al Rajhi (1101)',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).toAccount,
+                  value: 'Bank · Al Rajhi (1101)',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).valueDate,
-                value: 'Dec 19, 2025',
-                icon: 'calendar',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).valueDate,
+                  value: 'Dec 19, 2025',
+                  icon: 'calendar',
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).reference,
-                placeholder: GeniusLinkLocalization.of(
-                  context,
-                ).internalNoteSlipNo,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).reference,
+                  placeholder: GeniusLinkLocalization.of(
+                    context,
+                  ).internalNoteSlipNo,
+                ),
               ),
             ],
           ),
@@ -92,15 +122,20 @@ class CreateLocalTransferView extends StatelessWidget {
           initiallyExpanded: false,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              JournalPreview(
-                rows: [
-                  ('Bank · Al Rajhi (1101)', '50,000.00', null),
-                  ('Bank · NCB Main (1100)', null, '50,000.00'),
-                ],
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: JournalPreview(
+                  rows: [
+                    ('Bank · Al Rajhi (1101)', '50,000.00', null),
+                    ('Bank · NCB Main (1100)', null, '50,000.00'),
+                  ],
+                ),
               ),
             ],
           ),
@@ -143,18 +178,25 @@ class LocalTransferDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Text(
-                'TR-2024-9042 · Dec 18, 2025',
-                style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                  fontSize: 12,
-                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  'TR-2024-9042 · Dec 18, 2025',
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.primary,
+                  ),
                 ),
               ),
             ],
@@ -167,25 +209,30 @@ class LocalTransferDetailView extends StatelessWidget {
           accentColor: accentColor4,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              FromToFlow(
-                from: const FlowCardData(
-                  label: 'From',
-                  title: 'Bank · NCB Main',
-                  subtitle: '1100',
-                  meta: 'Balance after  ·  136,420.00',
-                ),
-                to: FlowCardData(
-                  label: GeniusLinkLocalization.of(context).to,
-                  title: 'Bank · Al Rajhi',
-                  subtitle: '1101',
-                  meta: 'Balance after  ·  56,240.00',
-                  metaColor: SuperMaterialThemeData.of(
-                    context,
-                  ).colorScheme.secondary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: FromToFlow(
+                  from: const FlowCardData(
+                    label: 'From',
+                    title: 'Bank · NCB Main',
+                    subtitle: '1100',
+                    meta: 'Balance after  ·  136,420.00',
+                  ),
+                  to: FlowCardData(
+                    label: GeniusLinkLocalization.of(context).to,
+                    title: 'Bank · Al Rajhi',
+                    subtitle: '1101',
+                    meta: 'Balance after  ·  56,240.00',
+                    metaColor: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.secondary,
+                  ),
                 ),
               ),
             ],
@@ -198,52 +245,57 @@ class LocalTransferDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Eyebrow(
-                    GeniusLinkLocalization.of(context).transferred,
-                    color: SuperMaterialThemeData.of(context).superTheme.fg3,
-                    size: 11,
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '50,000.00 ',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg1,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'SAR',
-                          style: TextStyle(
-                            fontFamily: SuperMaterialThemeData.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                            fontSize: 12,
-                            color: SuperMaterialThemeData.of(
-                              context,
-                            ).superTheme.fg3,
-                          ),
-                        ),
-                      ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Eyebrow(
+                      GeniusLinkLocalization.of(context).transferred,
+                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                      size: 11,
                     ),
-                  ),
-                ],
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '50,000.00 ',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg1,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'SAR',
+                            style: TextStyle(
+                              fontFamily: SuperMaterialThemeData.of(
+                                context,
+                              ).textTheme.bodyMedium?.fontFamily,
+                              fontSize: 12,
+                              color: SuperMaterialThemeData.of(
+                                context,
+                              ).superTheme.fg3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -308,16 +360,23 @@ class CreateExternalTransferView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              MMoney(
-                label: GeniusLinkLocalization.of(context).amount,
-                value: '11,000.00',
-                currency: 'USD',
-                accent: SuperMaterialThemeData.of(context).colorScheme.tertiary,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 6,
+                large: 6,
+                child: MMoney(
+                  label: GeniusLinkLocalization.of(context).amount,
+                  value: '11,000.00',
+                  currency: 'USD',
+                  accent: SuperMaterialThemeData.of(
+                    context,
+                  ).colorScheme.tertiary,
+                  required: true,
+                ),
               ),
             ],
           ),
@@ -328,26 +387,31 @@ class CreateExternalTransferView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              FxTiles(
-                tiles: [
-                  ('Rate', '3.7500', 'USD → SAR', null),
-                  (
-                    'Converted',
-                    '41,250.00',
-                    'SAR',
-                    SuperMaterialThemeData.of(context).superTheme.fg1,
-                  ),
-                  (
-                    'Fee',
-                    '75.00',
-                    'SAR',
-                    SuperMaterialThemeData.of(context).colorScheme.tertiary,
-                  ),
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: FxTiles(
+                  tiles: [
+                    ('Rate', '3.7500', 'USD → SAR', null),
+                    (
+                      'Converted',
+                      '41,250.00',
+                      'SAR',
+                      SuperMaterialThemeData.of(context).superTheme.fg1,
+                    ),
+                    (
+                      'Fee',
+                      '75.00',
+                      'SAR',
+                      SuperMaterialThemeData.of(context).colorScheme.tertiary,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -358,31 +422,54 @@ class CreateExternalTransferView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              IField(
-                label: 'From Account',
-                value: 'Bank · NCB Main (1100)',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: 'From Account',
+                  value: 'Bank · NCB Main (1100)',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).beneficiary,
-                value: 'Global Steel Imports',
-                select: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).beneficiary,
+                  value: 'Global Steel Imports',
+                  select: true,
+                  required: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).ibanSwift,
-                value: 'DE89 3704 0044 0532 0130 00',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).ibanSwift,
+                  value: 'DE89 3704 0044 0532 0130 00',
+                  mono: true,
+                ),
               ),
-              IField(
-                label: GeniusLinkLocalization.of(context).purposeCode,
-                value: 'GSD — Goods',
-                select: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: IField(
+                  label: GeniusLinkLocalization.of(context).purposeCode,
+                  value: 'GSD — Goods',
+                  select: true,
+                ),
               ),
             ],
           ),
@@ -430,18 +517,25 @@ class ExternalTransferDetailView extends StatelessWidget {
           accentColor: accentColor2,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Text(
-                'EXT-2024-0311 · Dec 18, 2025',
-                style: TextStyle(
-                  fontFamily: SuperMaterialThemeData.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                  fontSize: 12,
-                  color: SuperMaterialThemeData.of(context).colorScheme.primary,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Text(
+                  'EXT-2024-0311 · Dec 18, 2025',
+                  style: TextStyle(
+                    fontFamily: SuperMaterialThemeData.of(
+                      context,
+                    ).textTheme.bodyMedium?.fontFamily,
+                    fontSize: 12,
+                    color: SuperMaterialThemeData.of(
+                      context,
+                    ).colorScheme.primary,
+                  ),
                 ),
               ),
             ],
@@ -454,55 +548,68 @@ class ExternalTransferDetailView extends StatelessWidget {
           accentColor: accentColor3,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    '−11,000.00 ',
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                      color: SuperMaterialThemeData.of(
-                        context,
-                      ).colorScheme.error,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      '−11,000.00 ',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w700,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).colorScheme.error,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'USD',
-                    style: TextStyle(
-                      fontFamily: SuperMaterialThemeData.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
-                      fontSize: 12,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    Text(
+                      'USD',
+                      style: TextStyle(
+                        fontFamily: SuperMaterialThemeData.of(
+                          context,
+                        ).textTheme.bodyMedium?.fontFamily,
+                        fontSize: 12,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              FxTiles(
-                tiles: [
-                  ('Rate', '3.7500', 'USD → SAR', null),
-                  (
-                    'Debited',
-                    '41,250.00',
-                    'SAR',
-                    SuperMaterialThemeData.of(context).superTheme.fg1,
-                  ),
-                  (
-                    'Fee',
-                    '75.00',
-                    'SAR',
-                    SuperMaterialThemeData.of(context).colorScheme.tertiary,
-                  ),
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: FxTiles(
+                  tiles: [
+                    ('Rate', '3.7500', 'USD → SAR', null),
+                    (
+                      'Debited',
+                      '41,250.00',
+                      'SAR',
+                      SuperMaterialThemeData.of(context).superTheme.fg1,
+                    ),
+                    (
+                      'Fee',
+                      '75.00',
+                      'SAR',
+                      SuperMaterialThemeData.of(context).colorScheme.tertiary,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -514,14 +621,37 @@ class ExternalTransferDetailView extends StatelessWidget {
           accentColor: accentColor,
 
           padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              BKV('Name', 'Global Steel Imports'),
-              BKV('IBAN', 'DE89 3704 0044 0532 0130 00', mono: true),
-              BKV('SWIFT', 'COBADEFFXXX', mono: true),
-              BKV('Purpose', 'GSD — Goods'),
+          child: SuperGrid(
+            scope: SuperGridScope.current,
+            children: [
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Name', 'Global Steel Imports'),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('IBAN', 'DE89 3704 0044 0532 0130 00', mono: true),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('SWIFT', 'COBADEFFXXX', mono: true),
+              ),
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 6,
+                large: 6,
+                child: BKV('Purpose', 'GSD — Goods'),
+              ),
             ],
           ),
         ),

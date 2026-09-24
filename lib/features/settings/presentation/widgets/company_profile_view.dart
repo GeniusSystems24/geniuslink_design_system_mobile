@@ -32,62 +32,93 @@ class CompanyProfileView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker3,
           icon: icon3,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 64,
-                    height: 64,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: SuperMaterialThemeData.of(
-                        context,
-                      ).superTheme.inputBg,
-                      border: Border.all(
+              SuperGridCell(
+                mobile: 4,
+                tablet: 8,
+                desktop: 12,
+                large: 12,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 64,
+                      height: 64,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
                         color: SuperMaterialThemeData.of(
                           context,
-                        ).superTheme.borderStrong,
+                        ).superTheme.inputBg,
+                        border: Border.all(
+                          color: SuperMaterialThemeData.of(
+                            context,
+                          ).superTheme.borderStrong,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      child: Icon(
+                        MIcons.of('building'),
+                        size: 26,
+                        color: SuperMaterialThemeData.of(
+                          context,
+                        ).superTheme.fg3,
+                      ),
                     ),
-                    child: Icon(
-                      MIcons.of('building'),
-                      size: 26,
-                      color: SuperMaterialThemeData.of(context).superTheme.fg3,
+                    const SizedBox(width: 14),
+                    MBtn(
+                      GeniusLinkLocalization.of(context).uploadLogo,
+                      variant: MBtnVariant.secondary,
+                      icon: 'download',
                     ),
-                  ),
-                  const SizedBox(width: 14),
-                  MBtn(
-                    GeniusLinkLocalization.of(context).uploadLogo,
-                    variant: MBtnVariant.secondary,
-                    icon: 'download',
-                  ),
-                ],
+                  ],
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).legalNameEnglish,
-                defaultValue: 'Al-Rashid Trading Co.',
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).legalNameEnglish,
+                  defaultValue: 'Al-Rashid Trading Co.',
+                  required: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).legalName,
-                defaultValue: 'شركة الراشد التجارية',
-                ar: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).legalName,
+                  defaultValue: 'شركة الراشد التجارية',
+                  ar: true,
+                  required: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).tradeName,
-                defaultValue: 'GeniusLink',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).tradeName,
+                  defaultValue: 'GeniusLink',
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(
-                  context,
-                ).commercialRegistration,
-                defaultValue: '1010234567',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(
+                    context,
+                  ).commercialRegistration,
+                  defaultValue: '1010234567',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -98,32 +129,55 @@ class CompanyProfileView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              TSelect(
-                label: 'Country',
-                value: 'Saudi Arabia',
-                options: [
-                  'Saudi Arabia',
-                  'United Arab Emirates',
-                  'Kuwait',
-                  'Qatar',
-                ],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TSelect(
+                  label: 'Country',
+                  value: 'Saudi Arabia',
+                  options: [
+                    'Saudi Arabia',
+                    'United Arab Emirates',
+                    'Kuwait',
+                    'Qatar',
+                  ],
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).city,
-                defaultValue: 'Riyadh',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).city,
+                  defaultValue: 'Riyadh',
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).streetAddress,
-                defaultValue: 'King Fahd Rd, Olaya',
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).streetAddress,
+                  defaultValue: 'King Fahd Rd, Olaya',
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).postalCode,
-                defaultValue: '12211',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).postalCode,
+                  defaultValue: '12211',
+                  mono: true,
+                ),
               ),
             ],
           ),
@@ -134,25 +188,42 @@ class CompanyProfileView extends StatelessWidget {
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: SuperGrid(
+            scope: SuperGridScope.current,
             children: [
-              TInput(
-                label: GeniusLinkLocalization.of(context).vatNumber,
-                defaultValue: '300123456700003',
-                mono: true,
-                required: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).vatNumber,
+                  defaultValue: '300123456700003',
+                  mono: true,
+                  required: true,
+                ),
               ),
-              TInput(
-                label: GeniusLinkLocalization.of(context).taxIdentificationNo,
-                defaultValue: '9100234567',
-                mono: true,
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TInput(
+                  label: GeniusLinkLocalization.of(context).taxIdentificationNo,
+                  defaultValue: '9100234567',
+                  mono: true,
+                ),
               ),
-              TSelect(
-                label: GeniusLinkLocalization.of(context).taxAuthority,
-                value: 'ZATCA (Saudi Arabia)',
-                options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT'],
+              SuperGridCell(
+                mobile: 4,
+                tablet: 4,
+                desktop: 3,
+                large: 3,
+                child: TSelect(
+                  label: GeniusLinkLocalization.of(context).taxAuthority,
+                  value: 'ZATCA (Saudi Arabia)',
+                  options: ['ZATCA (Saudi Arabia)', 'FTA (UAE)', 'GAZT'],
+                ),
               ),
             ],
           ),
