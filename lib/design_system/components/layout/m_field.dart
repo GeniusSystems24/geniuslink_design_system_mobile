@@ -59,10 +59,7 @@ class MField extends StatelessWidget {
     // Delegate field styling and read-only behavior to SuperTextFormField
     // instead of duplicating form-field presentation locally.
     return SuperTextFormField(
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: placeholder,
-      ),
+      decoration: InputDecoration(labelText: label, hintText: placeholder),
       initialValue: value ?? '',
       required: required,
       arabic: ar,

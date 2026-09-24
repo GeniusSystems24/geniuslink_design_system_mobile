@@ -102,7 +102,10 @@ class _TransferListScreenState extends State<TransferListView> {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).stockTransfers), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).stockTransfers),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SizedBox(
           height: 32,

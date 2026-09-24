@@ -49,9 +49,7 @@ class AppThemeToggleButton extends StatelessWidget {
           icon: Icon(
             isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
           ),
-          onPressed: () => controller.toggle(
-            currentBrightness: brightness,
-          ),
+          onPressed: () => controller.toggle(currentBrightness: brightness),
         );
       },
     );

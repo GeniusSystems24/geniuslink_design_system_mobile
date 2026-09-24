@@ -78,9 +78,14 @@ class CompanyProfileView extends StatelessWidget {
                 ar: true,
                 required: true,
               ),
-              TInput(label: GeniusLinkLocalization.of(context).tradeName, defaultValue: 'GeniusLink'),
               TInput(
-                label: GeniusLinkLocalization.of(context).commercialRegistration,
+                label: GeniusLinkLocalization.of(context).tradeName,
+                defaultValue: 'GeniusLink',
+              ),
+              TInput(
+                label: GeniusLinkLocalization.of(
+                  context,
+                ).commercialRegistration,
                 defaultValue: '1010234567',
                 mono: true,
               ),
@@ -107,12 +112,19 @@ class CompanyProfileView extends StatelessWidget {
                   'Qatar',
                 ],
               ),
-              TInput(label: GeniusLinkLocalization.of(context).city, defaultValue: 'Riyadh'),
+              TInput(
+                label: GeniusLinkLocalization.of(context).city,
+                defaultValue: 'Riyadh',
+              ),
               TInput(
                 label: GeniusLinkLocalization.of(context).streetAddress,
                 defaultValue: 'King Fahd Rd, Olaya',
               ),
-              TInput(label: GeniusLinkLocalization.of(context).postalCode, defaultValue: '12211', mono: true),
+              TInput(
+                label: GeniusLinkLocalization.of(context).postalCode,
+                defaultValue: '12211',
+                mono: true,
+              ),
             ],
           ),
         ),
@@ -145,7 +157,11 @@ class CompanyProfileView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).saveChanges, icon: 'check', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).saveChanges,
+          icon: 'check',
+          full: true,
+        ),
       ],
     );
   }

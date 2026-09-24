@@ -74,13 +74,14 @@ class MobileDashboardMetricCard extends StatelessWidget {
     final trendColor = trend == null
         ? context.mdTheme.fg4
         : trend.up
-            ? context.mdColors.secondary
-            : context.mdColors.error;
+        ? context.mdColors.secondary
+        : context.mdColors.error;
     final t = SuperMaterialThemeData.of(context);
 
     return MetricSlotCard(
       semanticLabel: '${card.label}, $currency ${mobileDashboardNumber(value)}',
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.metricCardTheme ??
           MetricSlotCardThemeData(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 14, 14, 14),
@@ -158,7 +159,11 @@ class MobileDashboardMetricCard extends StatelessWidget {
                 children: [
                   Text(
                     trend.up ? '▲' : '▼',
-                    style: TextStyle(fontSize: 10, height: 1, color: trendColor),
+                    style: TextStyle(
+                      fontSize: 10,
+                      height: 1,
+                      color: trendColor,
+                    ),
                   ),
                   const SizedBox(width: 5),
                   Text(

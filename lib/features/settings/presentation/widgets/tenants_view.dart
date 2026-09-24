@@ -84,9 +84,9 @@ class _TenantsViewState extends State<TenantsView> {
       builder: (context, _) {
         final activeId = _controller.state.activeTenantId;
         return FeaturePageScaffold(
-      title: Text(GeniusLinkLocalization.of(context).workspaces),
-      automaticallyImplyLeading: true,
-      children: [
+          title: Text(GeniusLinkLocalization.of(context).workspaces),
+          automaticallyImplyLeading: true,
+          children: [
             for (final t in tenants)
               SuperSectionCard2(
                 trailing: null,
@@ -141,7 +141,11 @@ class _TenantsViewState extends State<TenantsView> {
                                   if (t.$1.toString() == activeId)
                                     Padding(
                                       padding: EdgeInsets.only(left: 8),
-                                      child: Pill(GeniusLinkLocalization.of(context).current2),
+                                      child: Pill(
+                                        GeniusLinkLocalization.of(
+                                          context,
+                                        ).current2,
+                                      ),
                                     ),
                                 ],
                               ),
@@ -180,7 +184,9 @@ class _TenantsViewState extends State<TenantsView> {
                       )
                     else
                       MBtn(
-                        GeniusLinkLocalization.of(context).switchToThisWorkspace,
+                        GeniusLinkLocalization.of(
+                          context,
+                        ).switchToThisWorkspace,
                         icon: 'switch2',
                         full: true,
                         onTap: () =>
@@ -189,9 +195,13 @@ class _TenantsViewState extends State<TenantsView> {
                   ],
                 ),
               ),
-            MBtn(GeniusLinkLocalization.of(context).newWorkspace, icon: 'plus', full: true),
+            MBtn(
+              GeniusLinkLocalization.of(context).newWorkspace,
+              icon: 'plus',
+              full: true,
+            ),
           ],
-    );
+        );
       },
     );
   }

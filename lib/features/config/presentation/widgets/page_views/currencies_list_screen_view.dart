@@ -30,7 +30,10 @@ class CurrenciesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).currencies), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).currencies),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: "",

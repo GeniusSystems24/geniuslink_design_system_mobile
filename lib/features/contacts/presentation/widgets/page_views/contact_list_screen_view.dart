@@ -49,7 +49,10 @@ class _ContactListScreenState extends State<ContactListView> {
     }).toList();
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(contactPluralLabel(d.type)), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(contactPluralLabel(d.type)),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SearchInput(
           placeholder: 'Search ${contactPluralLabel(d.type).toLowerCase()}…',

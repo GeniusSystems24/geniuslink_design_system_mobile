@@ -36,12 +36,7 @@ class Eyebrow extends StatelessWidget {
   final double? size;
 
   /// Creates a compact uppercase label.
-  const Eyebrow(
-    this.text, {
-    super.key,
-    this.color,
-    this.size,
-  });
+  const Eyebrow(this.text, {super.key, this.color, this.size});
 
   @override
   Widget build(BuildContext context) {

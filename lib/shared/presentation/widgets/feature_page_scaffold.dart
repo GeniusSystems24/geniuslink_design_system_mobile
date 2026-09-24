@@ -80,10 +80,7 @@ class FeaturePageScaffold extends StatelessWidget {
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions:
             actions ??
-            const [
-              AppLanguageToggleButton(),
-              AppThemeToggleButton(),
-            ],
+            const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll(children, pad: theme.bodyPadding),
     );

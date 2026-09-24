@@ -14,7 +14,6 @@ part of 'settings_org_screens.dart';
 /// )
 /// ```
 class SettingsHubScreen extends StatelessWidget {
-
   final List<SettingsNavigationSection> sections;
 
   const SettingsHubScreen({
@@ -24,9 +23,6 @@ class SettingsHubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsHubView(
-        key: key,
-        sections: sections,
-      );
+    return SettingsHubView(key: key, sections: sections);
   }
 }

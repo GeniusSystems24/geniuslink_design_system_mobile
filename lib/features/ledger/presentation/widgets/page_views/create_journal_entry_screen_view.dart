@@ -48,7 +48,10 @@ class CreateJournalEntryView extends StatelessWidget {
     var icon2 = MIcons.of('doc');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createJournalEntry), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).createJournalEntry),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).entryHeader,
@@ -66,7 +69,11 @@ class CreateJournalEntryView extends StatelessWidget {
                 mono: true,
                 locked: true,
               ),
-              IField(label: GeniusLinkLocalization.of(context).date, value: 'Dec 19, 2025', icon: 'calendar'),
+              IField(
+                label: GeniusLinkLocalization.of(context).date,
+                value: 'Dec 19, 2025',
+                icon: 'calendar',
+              ),
               IField(
                 label: GeniusLinkLocalization.of(context).currency,
                 value: 'SAR — Saudi Riyal',
@@ -74,7 +81,9 @@ class CreateJournalEntryView extends StatelessWidget {
               ),
               ITextarea(
                 label: GeniusLinkLocalization.of(context).description,
-                placeholder: GeniusLinkLocalization.of(context).describeThisJournalEntry,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).describeThisJournalEntry,
               ),
             ],
           ),

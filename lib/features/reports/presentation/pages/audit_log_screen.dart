@@ -12,13 +12,10 @@ part of 'reports_screens.dart';
 /// const AuditLogScreen()
 /// ```
 class AuditLogScreen extends StatelessWidget {
-
   const AuditLogScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AuditLogView(
-        key: key,
-      );
+    return AuditLogView(key: key);
   }
 }

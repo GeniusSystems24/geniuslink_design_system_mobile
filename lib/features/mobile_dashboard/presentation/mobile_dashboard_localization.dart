@@ -6,10 +6,7 @@ import 'package:gl_mobile_app/features/mobile_dashboard/data/datasources/mobile_
 import 'package:gl_mobile_app/features/mobile_dashboard/domain/domain.dart';
 import 'package:gl_mobile_app/localization/generated/l10n.dart';
 
-String mobileDashboardText(
-  GeniusLinkLocalization l10n,
-  String sourceText,
-) {
+String mobileDashboardText(GeniusLinkLocalization l10n, String sourceText) {
   return switch (sourceText) {
     'Workspace' => l10n.mobileDashboardWorkspace,
     'Notifications' => l10n.mobileDashboardNotifications,
@@ -28,11 +25,14 @@ String mobileDashboardText(
     'Tenant 14' => l10n.mobileDashboardTenant14,
     'Tenant 22' => l10n.mobileDashboardTenant22,
     'Out-of-balance entries' => l10n.mobileDashboardOutOfBalanceEntries,
-    'Debits and credits don\'t match' => l10n.mobileDashboardDebitsAndCreditsDonTMatch2,
+    'Debits and credits don\'t match' =>
+      l10n.mobileDashboardDebitsAndCreditsDonTMatch2,
     'Pending approvals' => l10n.mobileDashboardPendingApprovals,
-    'Vouchers awaiting your sign-off' => l10n.mobileDashboardVouchersAwaitingYourSignOff,
+    'Vouchers awaiting your sign-off' =>
+      l10n.mobileDashboardVouchersAwaitingYourSignOff,
     'Sync conflict' => l10n.mobileDashboardSyncConflict,
-    'A draft edited on two devices' => l10n.mobileDashboardADraftEditedOnTwoDevices,
+    'A draft edited on two devices' =>
+      l10n.mobileDashboardADraftEditedOnTwoDevices,
     'Banking' => l10n.mobileDashboardBanking,
     'Total Balance' => l10n.mobileDashboardTotalBalance,
     'Available Cash' => l10n.mobileDashboardAvailableCash,
@@ -92,11 +92,13 @@ String mobileDashboardText(
     '3h ago' => l10n.mobileDashboardText3hAgo,
     'TREASURY & CASH MANAGEMENT' => l10n.mobileDashboardTreasuryCashManagement,
     'Banking control center' => l10n.mobileDashboardBankingControlCenter,
-    'Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.' => l10n.mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity,
+    'Monitor liquidity, bank positions, transfers, and reconciliation activity across every legal entity.' =>
+      l10n.mobileDashboardMonitorLiquidityBankPositionsTransfersAndReconciliationActivityAcrossEveryLegalEntity,
     'New transfer' => l10n.mobileDashboardNewTransfer,
     'Treasury status' => l10n.mobileDashboardTreasuryStatus,
     'Treasury workflow' => l10n.mobileDashboardTreasuryWorkflow,
-    'Items that require action before the next cut-off.' => l10n.mobileDashboardItemsThatRequireActionBeforeTheNextCutOff,
+    'Items that require action before the next cut-off.' =>
+      l10n.mobileDashboardItemsThatRequireActionBeforeTheNextCutOff,
     'Latest bank movements' => l10n.mobileDashboardLatestBankMovements,
     'Treasury exceptions' => l10n.mobileDashboardTreasuryExceptions,
     'Connected accounts' => l10n.mobileDashboardConnectedAccounts,
@@ -111,22 +113,31 @@ String mobileDashboardText(
     'Reconcile bank statements' => l10n.mobileDashboardReconcileBankStatements,
     'Riyad Bank and SNB' => l10n.mobileDashboardRiyadBankAndSnb,
     '3 open' => l10n.mobileDashboardText3Open,
-    'Review 13-week cash forecast' => l10n.mobileDashboardReview13WeekCashForecast,
-    'Updated with current commitments' => l10n.mobileDashboardUpdatedWithCurrentCommitments,
+    'Review 13-week cash forecast' =>
+      l10n.mobileDashboardReview13WeekCashForecast,
+    'Updated with current commitments' =>
+      l10n.mobileDashboardUpdatedWithCurrentCommitments,
     'Today' => l10n.mobileDashboardToday,
     'Unreconciled statements' => l10n.mobileDashboardUnreconciledStatements,
-    'Bank statement lines remain unmatched' => l10n.mobileDashboardBankStatementLinesRemainUnmatched,
-    'Payments awaiting approval' => l10n.mobileDashboardPaymentsAwaitingApproval,
-    'Transfers are approaching the bank cut-off' => l10n.mobileDashboardTransfersAreApproachingTheBankCutOff,
+    'Bank statement lines remain unmatched' =>
+      l10n.mobileDashboardBankStatementLinesRemainUnmatched,
+    'Payments awaiting approval' =>
+      l10n.mobileDashboardPaymentsAwaitingApproval,
+    'Transfers are approaching the bank cut-off' =>
+      l10n.mobileDashboardTransfersAreApproachingTheBankCutOff,
     'Bank feed delayed' => l10n.mobileDashboardBankFeedDelayed,
-    'One account has not synchronized today' => l10n.mobileDashboardOneAccountHasNotSynchronizedToday,
-    'GENERAL LEDGER & FINANCIAL CONTROL' => l10n.mobileDashboardGeneralLedgerFinancialControl,
+    'One account has not synchronized today' =>
+      l10n.mobileDashboardOneAccountHasNotSynchronizedToday,
+    'GENERAL LEDGER & FINANCIAL CONTROL' =>
+      l10n.mobileDashboardGeneralLedgerFinancialControl,
     'Accounting command center' => l10n.mobileDashboardAccountingCommandCenter,
-    'Track close readiness, posting health, balances, and control exceptions from one operational workspace.' => l10n.mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace,
+    'Track close readiness, posting health, balances, and control exceptions from one operational workspace.' =>
+      l10n.mobileDashboardTrackCloseReadinessPostingHealthBalancesAndControlExceptionsFromOneOperationalWorkspace,
     'Post journal' => l10n.mobileDashboardPostJournal,
     'Close readiness' => l10n.mobileDashboardCloseReadiness,
     'Period-close workflow' => l10n.mobileDashboardPeriodCloseWorkflow,
-    'Priority tasks for an accurate and controlled close.' => l10n.mobileDashboardPriorityTasksForAnAccurateAndControlledClose,
+    'Priority tasks for an accurate and controlled close.' =>
+      l10n.mobileDashboardPriorityTasksForAnAccurateAndControlledClose,
     'Recent postings' => l10n.mobileDashboardRecentPostings,
     'Accounting exceptions' => l10n.mobileDashboardAccountingExceptions,
     'Open period' => l10n.mobileDashboardOpenPeriod,
@@ -138,26 +149,36 @@ String mobileDashboardText(
     'Unposted journals' => l10n.mobileDashboardUnpostedJournals,
     '2 require approval' => l10n.mobileDashboardText2RequireApproval,
     'Post recurring journals' => l10n.mobileDashboardPostRecurringJournals,
-    'Rent, payroll, and depreciation' => l10n.mobileDashboardRentPayrollAndDepreciation,
+    'Rent, payroll, and depreciation' =>
+      l10n.mobileDashboardRentPayrollAndDepreciation,
     '4 batches' => l10n.mobileDashboardText4Batches,
     'Review control accounts' => l10n.mobileDashboardReviewControlAccounts,
     'AR, AP, inventory, and tax' => l10n.mobileDashboardArApInventoryAndTax,
     '2 variances' => l10n.mobileDashboardText2Variances,
-    'Lock operational subledgers' => l10n.mobileDashboardLockOperationalSubledgers,
+    'Lock operational subledgers' =>
+      l10n.mobileDashboardLockOperationalSubledgers,
     'After final posting review' => l10n.mobileDashboardAfterFinalPostingReview,
     'Pending' => l10n.mobileDashboardPending,
-    'Debits and credits do not match' => l10n.mobileDashboardDebitsAndCreditsDoNotMatch,
-    'Draft and approval queues remain open' => l10n.mobileDashboardDraftAndApprovalQueuesRemainOpen,
+    'Debits and credits do not match' =>
+      l10n.mobileDashboardDebitsAndCreditsDoNotMatch,
+    'Draft and approval queues remain open' =>
+      l10n.mobileDashboardDraftAndApprovalQueuesRemainOpen,
     'Control account variances' => l10n.mobileDashboardControlAccountVariances,
-    'AR and inventory require investigation' => l10n.mobileDashboardArAndInventoryRequireInvestigation,
-    'SALES, PURCHASING & ORDER FULFILMENT' => l10n.mobileDashboardSalesPurchasingOrderFulfilment,
-    'Commercial operations center' => l10n.mobileDashboardCommercialOperationsCenter,
-    'Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.' => l10n.mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness,
+    'AR and inventory require investigation' =>
+      l10n.mobileDashboardArAndInventoryRequireInvestigation,
+    'SALES, PURCHASING & ORDER FULFILMENT' =>
+      l10n.mobileDashboardSalesPurchasingOrderFulfilment,
+    'Commercial operations center' =>
+      l10n.mobileDashboardCommercialOperationsCenter,
+    'Manage revenue execution, procurement commitments, receivables, and fulfilment risks across the business.' =>
+      l10n.mobileDashboardManageRevenueExecutionProcurementCommitmentsReceivablesAndFulfilmentRisksAcrossTheBusiness,
     'Create sales order' => l10n.mobileDashboardCreateSalesOrder,
     'Commercial pulse' => l10n.mobileDashboardCommercialPulse,
     'Order-to-cash workflow' => l10n.mobileDashboardOrderToCashWorkflow,
-    'Operational work that can affect revenue and customer service.' => l10n.mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService,
-    'Latest commercial documents' => l10n.mobileDashboardLatestCommercialDocuments,
+    'Operational work that can affect revenue and customer service.' =>
+      l10n.mobileDashboardOperationalWorkThatCanAffectRevenueAndCustomerService,
+    'Latest commercial documents' =>
+      l10n.mobileDashboardLatestCommercialDocuments,
     'Commercial exceptions' => l10n.mobileDashboardCommercialExceptions,
     'Open sales orders' => l10n.mobileDashboardOpenSalesOrders,
     'SAR 1.14M pipeline' => l10n.mobileDashboardSar114mPipeline,
@@ -165,21 +186,27 @@ String mobileDashboardText(
     '4 orders at risk' => l10n.mobileDashboardText4OrdersAtRisk,
     'Overdue receivables' => l10n.mobileDashboardOverdueReceivables,
     'SAR 176K overdue' => l10n.mobileDashboardSar176kOverdue,
-    'Release blocked sales orders' => l10n.mobileDashboardReleaseBlockedSalesOrders,
+    'Release blocked sales orders' =>
+      l10n.mobileDashboardReleaseBlockedSalesOrders,
     'Credit and margin checks' => l10n.mobileDashboardCreditAndMarginChecks,
     '4 orders' => l10n.mobileDashboardText4Orders,
-    'Confirm purchase commitments' => l10n.mobileDashboardConfirmPurchaseCommitments,
-    'Lead-time changes from suppliers' => l10n.mobileDashboardLeadTimeChangesFromSuppliers,
+    'Confirm purchase commitments' =>
+      l10n.mobileDashboardConfirmPurchaseCommitments,
+    'Lead-time changes from suppliers' =>
+      l10n.mobileDashboardLeadTimeChangesFromSuppliers,
     '6 lines' => l10n.mobileDashboardText6Lines,
     'Follow up overdue invoices' => l10n.mobileDashboardFollowUpOverdueInvoices,
     'Top customer balances' => l10n.mobileDashboardTopCustomerBalances,
     '8 accounts' => l10n.mobileDashboardText8Accounts,
     'Orders on credit hold' => l10n.mobileDashboardOrdersOnCreditHold,
-    'Customer limits or overdue balances exceeded' => l10n.mobileDashboardCustomerLimitsOrOverdueBalancesExceeded,
+    'Customer limits or overdue balances exceeded' =>
+      l10n.mobileDashboardCustomerLimitsOrOverdueBalancesExceeded,
     'Fulfilment shortages' => l10n.mobileDashboardFulfilmentShortages,
-    'Committed quantities exceed available stock' => l10n.mobileDashboardCommittedQuantitiesExceedAvailableStock,
+    'Committed quantities exceed available stock' =>
+      l10n.mobileDashboardCommittedQuantitiesExceedAvailableStock,
     'Supplier delivery changes' => l10n.mobileDashboardSupplierDeliveryChanges,
-    'Expected dates were updated by vendors' => l10n.mobileDashboardExpectedDatesWereUpdatedByVendors,
+    'Expected dates were updated by vendors' =>
+      l10n.mobileDashboardExpectedDatesWereUpdatedByVendors,
     '9a' => l10n.mobileDashboardText9a,
     '12p' => l10n.mobileDashboardText12p,
     '3p' => l10n.mobileDashboardText3p,
@@ -216,11 +243,10 @@ class LocalizedWorkspaceRepository implements WorkspaceRepository {
   final WorkspaceRepository _source;
   final GeniusLinkLocalization _l10n;
 
-  late final MobileDashboardCatalog _catalog =
-      localizeMobileDashboardCatalog(
-        _source.catalog,
-        (text) => mobileDashboardText(_l10n, text),
-      );
+  late final MobileDashboardCatalog _catalog = localizeMobileDashboardCatalog(
+    _source.catalog,
+    (text) => mobileDashboardText(_l10n, text),
+  );
 
   late final List<MobileDashboardNavigationDestination> _navigation =
       localizeMobileDashboardNavigationItems(
@@ -235,6 +261,5 @@ class LocalizedWorkspaceRepository implements WorkspaceRepository {
   MobileDashboardCatalog get catalog => _catalog;
 
   @override
-  List<MobileDashboardNavigationDestination> get navigationItems =>
-      _navigation;
+  List<MobileDashboardNavigationDestination> get navigationItems => _navigation;
 }

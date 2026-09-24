@@ -34,28 +34,54 @@ class CreateStoreView extends StatelessWidget {
             children: [
               MField(
                 label: GeniusLinkLocalization.of(context).nameEnglish,
-                placeholder: GeniusLinkLocalization.of(context).eGDowntownCentralStore,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).eGDowntownCentralStore,
                 required: true,
               ),
               MField(
                 label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGDowntownCentralStore,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).eGDowntownCentralStore,
                 ar: true,
                 required: true,
               ),
-              MField(label: GeniusLinkLocalization.of(context).locationCode, value: 'ST-001', mono: true),
-              MField(label: GeniusLinkLocalization.of(context).storeCategory, value: 'Retail'),
-              MField(label: GeniusLinkLocalization.of(context).note, placeholder: GeniusLinkLocalization.of(context).addInternalNotes),
+              MField(
+                label: GeniusLinkLocalization.of(context).locationCode,
+                value: 'ST-001',
+                mono: true,
+              ),
+              MField(
+                label: GeniusLinkLocalization.of(context).storeCategory,
+                value: 'Retail',
+              ),
+              MField(
+                label: GeniusLinkLocalization.of(context).note,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).addInternalNotes,
+              ),
             ],
           ),
         ),
         Row(
           children: [
             Expanded(
-              child: MBtn(GeniusLinkLocalization.of(context).cancel, variant: MBtnVariant.secondary, full: true),
+              child: MBtn(
+                GeniusLinkLocalization.of(context).cancel,
+                variant: MBtnVariant.secondary,
+                full: true,
+              ),
             ),
             SizedBox(width: 10),
-            Expanded(child: MBtn(GeniusLinkLocalization.of(context).create, icon: 'check', full: true)),
+            Expanded(
+              child: MBtn(
+                GeniusLinkLocalization.of(context).create,
+                icon: 'check',
+                full: true,
+              ),
+            ),
           ],
         ),
       ],

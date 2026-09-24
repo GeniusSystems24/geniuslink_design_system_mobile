@@ -44,7 +44,10 @@ class IntegrationsView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Integrations'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+          appBar: SuperAppBar(
+            title: const Text('Integrations'),
+            actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+          ),
           body: MScroll([
             for (final category in IntegrationCategory.values)
               if (integrations.any((item) => item.category == category))

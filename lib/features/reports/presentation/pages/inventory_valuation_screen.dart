@@ -12,13 +12,10 @@ part of 'reports_screens.dart';
 /// const InventoryValuationScreen()
 /// ```
 class InventoryValuationScreen extends StatelessWidget {
-
   const InventoryValuationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return InventoryValuationView(
-        key: key,
-      );
+    return InventoryValuationView(key: key);
   }
 }

@@ -25,11 +25,7 @@ class Avatar extends StatelessWidget {
   final double size;
 
   /// Creates a text-based circular avatar.
-  const Avatar(
-    this.name, {
-    super.key,
-    this.size = 40,
-  });
+  const Avatar(this.name, {super.key, this.size = 40});
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +45,7 @@ class Avatar extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.superTheme.inputBg,
         shape: BoxShape.circle,
-        border: Border.all(
-          color: theme.superTheme.borderStrong,
-        ),
+        border: Border.all(color: theme.superTheme.borderStrong),
       ),
       child: Text(
         initials,

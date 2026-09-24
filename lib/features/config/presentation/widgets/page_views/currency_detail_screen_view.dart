@@ -34,7 +34,10 @@ class CurrencyDetailView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).currencyDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).currencyDetail),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -91,13 +94,34 @@ class CurrencyDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KeyValueRow(GeniusLinkLocalization.of(context).isoCode, currency.code, mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).symbol, currency.symbol),
-              KeyValueRow(GeniusLinkLocalization.of(context).nameEnglish, currency.name),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).isoCode,
+                currency.code,
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).symbol,
+                currency.symbol,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).nameEnglish,
+                currency.name,
+              ),
               if (currency.localizedName case final localizedName?)
-                KeyValueRow(GeniusLinkLocalization.of(context).localizedName, localizedName, ar: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).decimalPlaces, '${currency.decimalPlaces}', mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).source, currency.source),
+                KeyValueRow(
+                  GeniusLinkLocalization.of(context).localizedName,
+                  localizedName,
+                  ar: true,
+                ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).decimalPlaces,
+                '${currency.decimalPlaces}',
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).source,
+                currency.source,
+              ),
             ],
           ),
         ),
@@ -189,7 +213,9 @@ class CurrencyDetailView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          GeniusLinkLocalization.of(context).noRateHistoryAvailable,
+                          GeniusLinkLocalization.of(
+                            context,
+                          ).noRateHistoryAvailable,
                           style: TextStyle(
                             color: SuperMaterialThemeData.of(
                               context,

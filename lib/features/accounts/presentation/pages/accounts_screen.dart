@@ -22,10 +22,7 @@ class AccountsScreen extends StatelessWidget {
           theme.backgroundColor ?? materialTheme.colorScheme.surface,
       appBar: SuperAppBar(
         title: Text(l10n.accounts),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         AccountsSearchPrompt(

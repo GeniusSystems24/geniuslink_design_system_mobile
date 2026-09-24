@@ -26,7 +26,10 @@ class OpeningJournalView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).openingJournal), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).openingJournal),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).entryDetails,
@@ -39,9 +42,20 @@ class OpeningJournalView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              MField(label: GeniusLinkLocalization.of(context).serialNo, value: 'JV-2024-0042', mono: true),
-              MField(label: GeniusLinkLocalization.of(context).currency, value: 'SAR — Saudi Riyal'),
-              MField(label: GeniusLinkLocalization.of(context).fiscalYear, value: '2024', mono: true),
+              MField(
+                label: GeniusLinkLocalization.of(context).serialNo,
+                value: 'JV-2024-0042',
+                mono: true,
+              ),
+              MField(
+                label: GeniusLinkLocalization.of(context).currency,
+                value: 'SAR — Saudi Riyal',
+              ),
+              MField(
+                label: GeniusLinkLocalization.of(context).fiscalYear,
+                value: '2024',
+                mono: true,
+              ),
             ],
           ),
         ),
@@ -173,7 +187,11 @@ class OpeningJournalView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).createEntry, icon: 'check', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).createEntry,
+          icon: 'check',
+          full: true,
+        ),
       ]),
     );
   }

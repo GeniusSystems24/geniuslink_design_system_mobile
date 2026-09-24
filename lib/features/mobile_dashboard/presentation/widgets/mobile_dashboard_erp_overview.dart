@@ -286,7 +286,8 @@ class _StatusCard extends StatelessWidget {
       child: MetricSlotCard(
         onTap: onTap,
         semanticLabel: '${item.label}: ${item.value}',
-        theme: context.mdComponentTheme.metricCardTheme ??
+        theme:
+            context.mdComponentTheme.metricCardTheme ??
             MetricSlotCardThemeData(
               padding: const EdgeInsets.all(14),
               rowGap: 3,
@@ -408,7 +409,8 @@ class _WorkflowRow extends StatelessWidget {
       onTap: onTap,
       semanticLabel: '${item.title}, ${item.value}',
       showBottomDivider: !last,
-      theme: context.mdComponentTheme.rowTheme ??
+      theme:
+          context.mdComponentTheme.rowTheme ??
           DirectionalSlotTileThemeData(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
             dividerColor: context.mdTheme.border,

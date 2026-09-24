@@ -71,10 +71,7 @@ class AccountDetailFullScreen extends StatelessWidget {
       backgroundColor: theme.backgroundColor ?? colors.surface,
       appBar: SuperAppBar(
         title: Text(l10n.accountDetail),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         AccountDetailCurrentBalanceSection(
@@ -119,8 +116,7 @@ class AccountDetailFullScreen extends StatelessWidget {
         AccountDetailRecentTransactionsSection(
           title: l10n.recentTransactions,
           subtitle: l10n.latestEntriesRunningBalance,
-          accentColor:
-              theme.recentTransactionsAccentColor ?? colors.secondary,
+          accentColor: theme.recentTransactionsAccentColor ?? colors.secondary,
           theme: theme.recentTransactionsSection,
           children: [
             for (final transaction in transactions)

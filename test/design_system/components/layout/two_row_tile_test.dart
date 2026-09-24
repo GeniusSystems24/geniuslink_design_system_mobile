@@ -43,7 +43,9 @@ void main() {
     expect(tapped, isTrue);
   });
 
-  testWidgets('TwoRowTile follows RTL start/end directionality', (tester) async {
+  testWidgets('TwoRowTile follows RTL start/end directionality', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Directionality(
@@ -51,10 +53,7 @@ void main() {
           child: Scaffold(
             body: SizedBox(
               width: 320,
-              child: TwoRowTile(
-                title: Text('start'),
-                trailing: Text('end'),
-              ),
+              child: TwoRowTile(title: Text('start'), trailing: Text('end')),
             ),
           ),
         ),

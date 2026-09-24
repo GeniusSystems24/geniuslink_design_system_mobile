@@ -57,7 +57,10 @@ List<NavigationGroup> buildDefaultMoreNavigationGroups(
       NavigationItem(label: l10n.receiveInventory, routeId: 'receiveCreate'),
       NavigationItem(label: l10n.receiveDetailsMore, routeId: 'receiveDetail'),
       NavigationItem(label: l10n.transferInventory, routeId: 'transferCreate'),
-      NavigationItem(label: l10n.transferDetailsMore, routeId: 'transferDetail'),
+      NavigationItem(
+        label: l10n.transferDetailsMore,
+        routeId: 'transferDetail',
+      ),
       NavigationItem(label: l10n.inventoryAdjustment, routeId: 'adjustment'),
       NavigationItem(label: l10n.stockTake, routeId: 'stockTake'),
       NavigationItem(label: l10n.categories, routeId: 'categories'),
@@ -85,14 +88,20 @@ List<NavigationGroup> buildDefaultMoreNavigationGroups(
   NavigationGroup(
     title: l10n.salesCustomers,
     items: [
-      NavigationItem(label: l10n.mobileDashboardCustomers, routeId: 'customersList'),
+      NavigationItem(
+        label: l10n.mobileDashboardCustomers,
+        routeId: 'customersList',
+      ),
       NavigationItem(label: l10n.addCustomer, routeId: 'createCustomer'),
     ],
   ),
   NavigationGroup(
     title: l10n.procurementSuppliers,
     items: [
-      NavigationItem(label: l10n.mobileDashboardSuppliers, routeId: 'suppliersList'),
+      NavigationItem(
+        label: l10n.mobileDashboardSuppliers,
+        routeId: 'suppliersList',
+      ),
       NavigationItem(label: l10n.addSupplier, routeId: 'createSupplier'),
     ],
   ),
@@ -111,7 +120,10 @@ List<NavigationGroup> buildDefaultMoreNavigationGroups(
       NavigationItem(label: l10n.createDeposit, routeId: 'createDeposit'),
       NavigationItem(label: l10n.depositReceipt, routeId: 'depositDetail'),
       NavigationItem(label: l10n.createWithdrawal, routeId: 'createWithdrawal'),
-      NavigationItem(label: l10n.withdrawalVoucher, routeId: 'withdrawalDetail'),
+      NavigationItem(
+        label: l10n.withdrawalVoucher,
+        routeId: 'withdrawalDetail',
+      ),
     ],
   ),
   NavigationGroup(

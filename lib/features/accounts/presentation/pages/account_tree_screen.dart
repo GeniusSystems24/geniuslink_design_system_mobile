@@ -51,11 +51,11 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
       )..expandAll();
 
   static TreeNode<Account> _toTreeNode(AccountNode node) => TreeNode<Account>(
-        code: node.account.code,
-        name: node.account.name,
-        value: node.account,
-        children: node.children.map(_toTreeNode).toList(growable: false),
-      );
+    code: node.account.code,
+    name: node.account.name,
+    value: node.account,
+    children: node.children.map(_toTreeNode).toList(growable: false),
+  );
 
   @override
   void dispose() {
@@ -83,10 +83,7 @@ class _AccountTreeScreenState extends State<AccountTreeScreen> {
           widget.theme.backgroundColor ?? materialTheme.colorScheme.surface,
       appBar: SuperAppBar(
         title: Text(l10n.accountTree),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: AccountTreeSection(
         title: l10n.chartOfAccounts,

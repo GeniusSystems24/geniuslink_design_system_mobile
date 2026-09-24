@@ -34,13 +34,13 @@ export 'package:super_form_field/super_form_field.dart'
         SuperDateFormField,
         SuperMultiSelectFieldController,
         SuperMultiSelectFormField,
+        SuperMultiSelectSources,
         SuperNumericFieldController,
         SuperNumericFormField,
         SuperOption,
         SuperSelectFieldController,
         SuperSelectSource,
-        SuperSelectListSource,
-        SuperSelectRemoteSource,
+        SuperSelectSources,
         SuperSelectFormField,
         SuperTextFieldController,
         SuperTextFormField,
@@ -151,7 +151,7 @@ class TSelect extends StatelessWidget {
     required: required,
     initialValue: value,
     searchable: options.length > 8,
-    sources: [SuperSelectListSource<String>(items: options)],
+    source: SuperSelectSources.list<String>(options),
     optionBuilder: (items, index, option) =>
         SuperOption<String>(value: option, label: option),
   );
@@ -229,7 +229,8 @@ class _MSuggestState extends State<MSuggest> {
     super.initState();
     final initial = _itemForValue(widget.value);
     _source = _buildSource();
-    _initialTextController = initial == null && (widget.value?.isNotEmpty ?? false)
+    _initialTextController =
+        initial == null && (widget.value?.isNotEmpty ?? false)
         ? TextEditingController(text: widget.value)
         : null;
     _controller = suggest.SuperAutoSuggestionsController<String>(
@@ -304,33 +305,29 @@ class _MSuggestState extends State<MSuggest> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      suggest.SuperAutoSuggestionsBox<String>(
-        source: _source,
-        suggestionBuilder: (items, index, item) =>
-            _itemForValue(item) ??
-            suggest.SuperAutoSuggestionsItem<String>(
-              value: item,
-              titleText: item,
-            ),
-        controller: _controller,
-        decoration: InputDecoration(
-          labelText: widget.label,
-          prefixIcon: Icon(
-            MIcons.of(widget.icon),
-            size: 16,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        hintText: widget.placeholder,
-        required: widget.required,
-        fieldHeight: 46,
-        mode: suggest.SuperAutoSuggestionsMode.textBox,
-        highlightMatch: suggest.AutoSuggestionMatch.contains,
-        onSelectionChanged: (items) {
-          if (items.isNotEmpty) widget.onSelected?.call(items.last);
-        },
-      );
+  Widget build(BuildContext context) => suggest.SuperAutoSuggestionsBox<String>(
+    source: _source,
+    suggestionBuilder: (context, items, index, item) =>
+        _itemForValue(item) ??
+        suggest.SuperAutoSuggestionsItem<String>(value: item, titleText: item),
+    controller: _controller,
+    decoration: InputDecoration(
+      labelText: widget.label,
+      prefixIcon: Icon(
+        MIcons.of(widget.icon),
+        size: 16,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
+      ),
+    ),
+    hintText: widget.placeholder,
+    required: widget.required,
+    fieldHeight: 46,
+    mode: suggest.SuperAutoSuggestionsMode.textBox,
+    highlightMatch: suggest.AutoSuggestionMatch.contains,
+    onSelectionChanged: (items) {
+      if (items.isNotEmpty) widget.onSelected?.call(items.last);
+    },
+  );
 }
 
 /// Convenience mapping from strings to autocomplete rows.
@@ -339,7 +336,11 @@ List<suggest.SuperAutoSuggestionsItem<String>> mSuggestions(
   String? group,
 }) => [
   for (final option in options)
-    suggest.SuperAutoSuggestionsItem<String>(value: option, titleText: option, group: group),
+    suggest.SuperAutoSuggestionsItem<String>(
+      value: option,
+      titleText: option,
+      group: group,
+    ),
 ];
 
 /// Compact fixed-set filter backed by `SuperChoiceFormField`.

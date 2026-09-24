@@ -82,9 +82,7 @@ class AccountsSearchPrompt extends StatelessWidget {
 @immutable
 class AccountsListSectionThemeData {
   const AccountsListSectionThemeData({
-    this.section = const AccountsSectionThemeData(
-      padding: EdgeInsets.all(8),
-    ),
+    this.section = const AccountsSectionThemeData(padding: EdgeInsets.all(8)),
   });
 
   final AccountsSectionThemeData section;

@@ -83,7 +83,10 @@ class _AnimatedSkeletonBoxState extends State<AnimatedSkeletonBox>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.theme.duration);
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.theme.duration,
+    );
   }
 
   @override
@@ -160,9 +163,8 @@ class _AnimatedSkeletonBoxState extends State<AnimatedSkeletonBox>
           ? placeholder(Alignment.center)
           : AnimatedBuilder(
               animation: _controller,
-              builder: (_, _) => placeholder(
-                Alignment(-3 + (_controller.value * 6), 0),
-              ),
+              builder: (_, _) =>
+                  placeholder(Alignment(-3 + (_controller.value * 6), 0)),
             ),
     );
   }

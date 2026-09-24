@@ -15,7 +15,6 @@ part of 'stores_screens.dart';
 /// )
 /// ```
 class StoresScreen extends StatelessWidget {
-
   final List<StoreSummary> stores;
   final ValueChanged<StoreSummary>? onStoreSelected;
 
@@ -24,9 +23,9 @@ class StoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoresView(
-        key: key,
-        stores: stores,
-        onStoreSelected: onStoreSelected,
-      );
+      key: key,
+      stores: stores,
+      onStoreSelected: onStoreSelected,
+    );
   }
 }

@@ -34,10 +34,7 @@ class GroupDetailScreen extends StatelessWidget {
       backgroundColor: theme.backgroundColor ?? colors.surface,
       appBar: SuperAppBar(
         title: Text(l10n.groupDetail),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         AccountsFieldSection(
@@ -46,11 +43,11 @@ class GroupDetailScreen extends StatelessWidget {
           accentColor: theme.informationAccentColor ?? colors.primary,
           theme: theme.section,
           children: [
-              KeyValueRow(l10n.id, '1042', mono: true),
-              KeyValueRow(l10n.nameEnglish, 'Current Assets'),
-              KeyValueRow(l10n.nameArabic, 'الأصول المتداولة', ar: true),
-              KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
-            ],
+            KeyValueRow(l10n.id, '1042', mono: true),
+            KeyValueRow(l10n.nameEnglish, 'Current Assets'),
+            KeyValueRow(l10n.nameArabic, 'الأصول المتداولة', ar: true),
+            KeyValueRow(l10n.accountTree, 'Assets Tree (1)'),
+          ],
         ),
         AccountsSection(
           title: l10n.notes,

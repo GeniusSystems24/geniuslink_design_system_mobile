@@ -138,9 +138,7 @@ class LabeledActionTile extends StatelessWidget {
       semanticLabel: semanticLabel,
       theme: theme.pressableTheme,
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: theme.minHeight ?? 0,
-        ),
+        constraints: BoxConstraints(minHeight: theme.minHeight ?? 0),
         child: Align(
           alignment: theme.alignment,
           // A non-null heightFactor is important here. It prevents this

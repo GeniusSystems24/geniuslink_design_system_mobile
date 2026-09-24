@@ -80,10 +80,7 @@ SuperTextTheme _buildReadableTextTheme({required bool isArabic}) {
 }
 
 Color _readableTone(Color foreground, Color background, double opacity) {
-  return Color.alphaBlend(
-    foreground.withValues(alpha: opacity),
-    background,
-  );
+  return Color.alphaBlend(foreground.withValues(alpha: opacity), background);
 }
 
 double _minimumReadableTextScale(Locale? locale) {
@@ -177,9 +174,7 @@ SuperMaterialThemeData _buildReadableAppTheme({
   );
 
   return readable.copyWith(
-    extensions: [
-      SuperAutoSuggestionsBoxThemeData.fromMaterialTheme(readable),
-    ],
+    extensions: [SuperAutoSuggestionsBoxThemeData.fromMaterialTheme(readable)],
   );
 }
 
@@ -188,10 +183,7 @@ SuperMaterialThemeData buildAppTheme({
   required Brightness brightness,
   required Locale? locale,
 }) {
-  return _buildReadableAppTheme(
-    brightness: brightness,
-    locale: locale,
-  );
+  return _buildReadableAppTheme(brightness: brightness, locale: locale);
 }
 
 /// Returns the minimum app text scale used for readability.

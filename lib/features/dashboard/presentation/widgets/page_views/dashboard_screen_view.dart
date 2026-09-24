@@ -34,7 +34,10 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).dashboard), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).dashboard),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: _buildDashboardContent(context),
     );
   }
@@ -86,7 +89,9 @@ class DashboardView extends StatelessWidget {
       SuperSectionCard2(
         trailing: trailing,
         title: GeniusLinkLocalization.of(context).cashFlow,
-        subtitle: GeniusLinkLocalization.of(context).inflowVsOutflowSarThousands12Months,
+        subtitle: GeniusLinkLocalization.of(
+          context,
+        ).inflowVsOutflowSarThousands12Months,
         initiallyExpanded: true,
         accentColor: accentColor3,
 

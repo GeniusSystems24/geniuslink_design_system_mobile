@@ -29,7 +29,9 @@ class MobileDashboardSkeleton extends StatelessWidget {
     final baseColor = context.mdTheme.inputBg;
     final highlightColor = Color.alphaBlend(
       context.mdColors.onSurface.withValues(
-        alpha: context.mdMaterialTheme.brightness == Brightness.dark ? 0.12 : 0.07,
+        alpha: context.mdMaterialTheme.brightness == Brightness.dark
+            ? 0.12
+            : 0.07,
       ),
       baseColor,
     );
@@ -46,7 +48,6 @@ class MobileDashboardSkeleton extends StatelessWidget {
     );
   }
 }
-
 
 /// Loading state for the ERP hero at the top of every dashboard.
 class MobileDashboardErpHeroSkeleton extends StatelessWidget {

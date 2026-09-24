@@ -50,7 +50,9 @@ class _TrialBalanceViewState extends State<TrialBalanceView> {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).allAccounts,
-          subtitle: GeniusLinkLocalization.of(context).debitCreditBalancesAsOfPeriodEnd,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).debitCreditBalancesAsOfPeriodEnd,
           initiallyExpanded: true,
           accentColor: accentColor,
 

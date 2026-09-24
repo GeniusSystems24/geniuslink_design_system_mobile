@@ -12,13 +12,10 @@ part of 'reports_screens.dart';
 /// const BalanceSheetScreen()
 /// ```
 class BalanceSheetScreen extends StatelessWidget {
-
   const BalanceSheetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BalanceSheetView(
-        key: key,
-      );
+    return BalanceSheetView(key: key);
   }
 }

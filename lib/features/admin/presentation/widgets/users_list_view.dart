@@ -51,7 +51,10 @@ class UsersListView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Users'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+          appBar: SuperAppBar(
+            title: const Text('Users'),
+            actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+          ),
           body: MScroll([
             SearchInput(
               placeholder: 'Search name or email…',

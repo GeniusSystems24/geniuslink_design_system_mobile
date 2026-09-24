@@ -12,13 +12,10 @@ part of 'settings_platform_screens.dart';
 /// const BillingScreen()
 /// ```
 class BillingScreen extends StatelessWidget {
-
   const BillingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BillingView(
-        key: key,
-      );
+    return BillingView(key: key);
   }
 }

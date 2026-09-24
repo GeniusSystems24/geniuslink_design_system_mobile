@@ -184,7 +184,10 @@ class AdjustmentView extends StatelessWidget {
     var icon2 = MIcons.of('box');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).inventoryAdjustment), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).inventoryAdjustment),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).adjustmentDetails,
@@ -224,7 +227,9 @@ class AdjustmentView extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).varianceSummary,
-          subtitle: GeniusLinkLocalization.of(context).netFinancialImpactOfThisReconciliation,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).netFinancialImpactOfThisReconciliation,
           initiallyExpanded: true,
           accentColor: accentColor2,
 
@@ -286,11 +291,15 @@ class AdjustmentView extends StatelessWidget {
             children: [
               ITextarea(
                 label: GeniusLinkLocalization.of(context).adjustmentNotes,
-                placeholder: GeniusLinkLocalization.of(context).auditorNameWitnessCountSessionReference,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).auditorNameWitnessCountSessionReference,
               ),
               UploadBox(),
               InfoNote(
-                GeniusLinkLocalization.of(context).adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro,
+                GeniusLinkLocalization.of(
+                  context,
+                ).adjustmentsAbove1000SarRequireDualApprovalThisEntryPostsToTheAuditLogImmediatelyAndNotifiesTheContro,
               ),
             ],
           ),

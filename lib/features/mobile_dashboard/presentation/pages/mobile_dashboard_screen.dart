@@ -16,8 +16,6 @@ import '../widgets/mobile_dashboard_section_view.dart';
 import '../widgets/mobile_dashboard_theme.dart';
 import '../mobile_dashboard_localization.dart';
 
-
-
 class MobileDashboardScreen extends StatefulWidget {
   final WorkspaceRepository repository;
   final TenantController? tenantController;
@@ -152,61 +150,62 @@ class _MobileDashboardScreenState extends State<MobileDashboardScreen> {
       data: widget.componentTheme,
       child: ListenableBuilder(
         listenable: _tenantController,
-      builder: (context, _) {
-        _activeTenantId =
-            _tenantController.state.activeTenantId ?? _activeTenantId;
+        builder: (context, _) {
+          _activeTenantId =
+              _tenantController.state.activeTenantId ?? _activeTenantId;
 
-        final l10n = GeniusLinkLocalization.of(context);
-        final repository = LocalizedWorkspaceRepository(
-          widget.repository,
-          l10n,
-        );
-        final catalog = repository.catalog;
-        final navigationItems = repository.navigationItems;
-        final workspace = _workspaceFor(catalog, l10n);
+          final l10n = GeniusLinkLocalization.of(context);
+          final repository = LocalizedWorkspaceRepository(
+            widget.repository,
+            l10n,
+          );
+          final catalog = repository.catalog;
+          final navigationItems = repository.navigationItems;
+          final workspace = _workspaceFor(catalog, l10n);
 
-        return ChromeScaffold(
-          hideFloatingActionButtonWhenScroll: true,
-          hideBottomNavigationBarWhenScroll: true,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(
-              MediaQuery.paddingOf(context).top + 64,
-            ),
-            child: MobileDashboardAppBar(
-              workspace: workspace,
-              workspaceMenuOpen: _workspaceMenuOpen,
-              onWorkspaceTap: () =>
-                  setState(() => _workspaceMenuOpen = !_workspaceMenuOpen),
-              onNotificationsTap: () => _showToast(l10n.mobileDashboardNotifications),
-            ),
-          ),
-          bottomNavigationBar: MobileDashboardBottomNavigation(
-            selectedId: 'home',
-            items: navigationItems,
-            onSelected: (id) => _selectNavigationItem(id, navigationItems),
-          ),
-          floatingActionButton: MobileDashboardFloatingSearchButton(
-            onTap: () => _sectionKey.currentState?.openSearch(),
-          ),
-          body: Stack(
-            fit: StackFit.expand,
-            children: [
-              MobileDashboardSectionView(
-                key: _sectionKey,
-                repository: repository,
-                workspace: workspace,
-                online: _online,
+          return ChromeScaffold(
+            hideFloatingActionButtonWhenScroll: true,
+            hideBottomNavigationBarWhenScroll: true,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(
+                MediaQuery.paddingOf(context).top + 64,
               ),
-              if (_workspaceMenuOpen)
-                MobileDashboardWorkspaceMenu(
-                  workspaces: catalog.workspaces,
-                  selectedWorkspace: workspace,
-                  onSelected: _switchWorkspace,
-                  onDismiss: () => setState(() => _workspaceMenuOpen = false),
+              child: MobileDashboardAppBar(
+                workspace: workspace,
+                workspaceMenuOpen: _workspaceMenuOpen,
+                onWorkspaceTap: () =>
+                    setState(() => _workspaceMenuOpen = !_workspaceMenuOpen),
+                onNotificationsTap: () =>
+                    _showToast(l10n.mobileDashboardNotifications),
+              ),
+            ),
+            bottomNavigationBar: MobileDashboardBottomNavigation(
+              selectedId: 'home',
+              items: navigationItems,
+              onSelected: (id) => _selectNavigationItem(id, navigationItems),
+            ),
+            floatingActionButton: MobileDashboardFloatingSearchButton(
+              onTap: () => _sectionKey.currentState?.openSearch(),
+            ),
+            body: Stack(
+              fit: StackFit.expand,
+              children: [
+                MobileDashboardSectionView(
+                  key: _sectionKey,
+                  repository: repository,
+                  workspace: workspace,
+                  online: _online,
                 ),
-            ],
-          ),
-        );
+                if (_workspaceMenuOpen)
+                  MobileDashboardWorkspaceMenu(
+                    workspaces: catalog.workspaces,
+                    selectedWorkspace: workspace,
+                    onSelected: _switchWorkspace,
+                    onDismiss: () => setState(() => _workspaceMenuOpen = false),
+                  ),
+              ],
+            ),
+          );
         },
       ),
     );

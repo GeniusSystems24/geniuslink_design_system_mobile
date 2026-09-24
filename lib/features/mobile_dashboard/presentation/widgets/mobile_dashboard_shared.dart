@@ -53,7 +53,8 @@ class MobileDashboardPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatusBadge(
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.badgeTheme ??
           StatusBadgeThemeData(
             backgroundColor: superCoreTint(color, 0x24),

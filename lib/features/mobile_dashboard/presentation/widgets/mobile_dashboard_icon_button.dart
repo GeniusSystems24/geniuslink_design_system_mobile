@@ -23,7 +23,8 @@ class MobileDashboardIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resolvedTheme = theme ??
+    final resolvedTheme =
+        theme ??
         context.mdComponentTheme.iconButtonTheme ??
         IconSurfaceButtonThemeData(
           surfaceTheme: IconSurfaceThemeData(
@@ -42,7 +43,8 @@ class MobileDashboardIconButton extends StatelessWidget {
       badge: badge == null
           ? null
           : StatusBadge(
-              theme: badgeTheme ??
+              theme:
+                  badgeTheme ??
                   StatusBadgeThemeData(
                     minWidth: 15,
                     minHeight: 15,

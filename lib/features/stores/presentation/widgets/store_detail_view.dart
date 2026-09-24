@@ -91,7 +91,9 @@ class StoreDetailView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          GeniusLinkLocalization.of(context).noStockItemsAvailable,
+                          GeniusLinkLocalization.of(
+                            context,
+                          ).noStockItemsAvailable,
                           style: TextStyle(
                             color: SuperMaterialThemeData.of(
                               context,

@@ -40,7 +40,8 @@ class JournalLineEditor extends StatelessWidget {
                       SuperAutoSuggestionsItem<String>(
                         value: '${account.name} (${account.code})',
                         titleText: account.name,
-                        descriptionText: '${account.code} · ${account.category}',
+                        descriptionText:
+                            '${account.code} · ${account.category}',
                       ),
                   ],
                 ),

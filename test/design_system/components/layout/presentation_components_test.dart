@@ -21,7 +21,9 @@ void main() {
     expect(find.text('end'), findsOneWidget);
   });
 
-  testWidgets('TwoRowTile keeps start/end semantic positions in RTL', (tester) async {
+  testWidgets('TwoRowTile keeps start/end semantic positions in RTL', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Directionality(

@@ -80,9 +80,6 @@ class _ForgotScreenState extends State<ForgotScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ForgotPasswordView(
-      controller: _controller,
-      emailController: _email,
-    );
+    return ForgotPasswordView(controller: _controller, emailController: _email);
   }
 }

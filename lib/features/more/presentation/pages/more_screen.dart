@@ -11,6 +11,7 @@ import '../models/models.dart';
 
 import 'package:gl_mobile_app/shared/presentation/widgets/feature_page_scaffold.dart';
 part '../widgets/more_view.dart';
+
 // componentized-by: dismantle_more_reports_settings_stores.py
 /// Route/page boundary for the More feature view.
 ///
@@ -25,16 +26,12 @@ part '../widgets/more_view.dart';
 /// )
 /// ```
 class MoreScreen extends StatelessWidget {
-
   final List<NavigationGroup>? groups;
 
   const MoreScreen({this.groups, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MoreView(
-        key: key,
-        groups: groups,
-      );
+    return MoreView(key: key, groups: groups);
   }
 }

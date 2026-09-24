@@ -24,11 +24,16 @@ class CreateCurrencyView extends StatelessWidget {
     var icon2 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).addCurrency), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).addCurrency),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).currencyDefinition,
-          subtitle: GeniusLinkLocalization.of(context).isoCodeDisplayNamesAndSymbol,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).isoCodeDisplayNamesAndSymbol,
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
@@ -42,7 +47,11 @@ class CreateCurrencyView extends StatelessWidget {
                 mono: true,
                 required: true,
               ),
-              IField(label: GeniusLinkLocalization.of(context).symbol, placeholder: 'e.g. \$', required: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).symbol,
+                placeholder: 'e.g. \$',
+                required: true,
+              ),
               IField(
                 label: GeniusLinkLocalization.of(context).nameEnglish,
                 placeholder: GeniusLinkLocalization.of(context).eGUsDollar,
@@ -59,7 +68,9 @@ class CreateCurrencyView extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).precisionRate,
-          subtitle: GeniusLinkLocalization.of(context).decimalPlacesAndExchangeRateAgainstBase,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).decimalPlacesAndExchangeRateAgainstBase,
           initiallyExpanded: true,
           accentColor: accentColor,
           icon: icon,
@@ -67,13 +78,20 @@ class CreateCurrencyView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              IField(label: GeniusLinkLocalization.of(context).decimalPlaces, value: '2', select: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).decimalPlaces,
+                value: '2',
+                select: true,
+              ),
               IField(
                 label: GeniusLinkLocalization.of(context).exchangeRatePer1Sar,
                 placeholder: GeniusLinkLocalization.of(context).eG3750200,
                 mono: true,
               ),
-              IToggle(label: GeniusLinkLocalization.of(context).setAsBaseCurrency, on: false),
+              IToggle(
+                label: GeniusLinkLocalization.of(context).setAsBaseCurrency,
+                on: false,
+              ),
             ],
           ),
         ),

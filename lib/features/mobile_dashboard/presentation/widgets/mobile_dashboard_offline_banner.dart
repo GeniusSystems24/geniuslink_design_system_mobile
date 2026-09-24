@@ -17,7 +17,8 @@ class MobileDashboardOfflineBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = context.mdColors.tertiary;
     return DirectionalSlotTile(
-      theme: theme ??
+      theme:
+          theme ??
           DirectionalSlotTileThemeData(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
             gap: 8,

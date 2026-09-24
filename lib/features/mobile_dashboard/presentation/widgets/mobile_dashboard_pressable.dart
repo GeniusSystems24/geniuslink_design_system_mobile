@@ -22,7 +22,8 @@ class MobileDashboardPressable extends StatelessWidget {
     return PressableSurface(
       onTap: onTap,
       semanticLabel: semanticLabel,
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.pressableTheme ??
           const PressableSurfaceThemeData(),
       child: child,

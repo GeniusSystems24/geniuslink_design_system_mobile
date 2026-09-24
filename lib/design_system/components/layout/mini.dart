@@ -70,11 +70,7 @@ class Mini extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Eyebrow(
-            label,
-            color: theme.superTheme.fg3,
-            size: 9.5,
-          ),
+          Eyebrow(label, color: theme.superTheme.fg3, size: 9.5),
           Padding(
             padding: const EdgeInsets.only(top: 6),
             child: Text(

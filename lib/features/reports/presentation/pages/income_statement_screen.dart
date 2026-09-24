@@ -12,13 +12,10 @@ part of 'reports_screens.dart';
 /// const IncomeStatementScreen()
 /// ```
 class IncomeStatementScreen extends StatelessWidget {
-
   const IncomeStatementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return IncomeStatementView(
-        key: key,
-      );
+    return IncomeStatementView(key: key);
   }
 }

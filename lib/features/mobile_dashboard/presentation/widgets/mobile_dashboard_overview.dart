@@ -265,7 +265,8 @@ class MobileDashboardPeriodSelector extends StatelessWidget {
       semanticLabels: [
         for (final item in periods) '${labelFor(item)} comparison period',
       ],
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.segmentedSelectorTheme ??
           SegmentedSlotSelectorThemeData(
             minHeight: 38,
@@ -286,8 +287,9 @@ class MobileDashboardPeriodSelector extends StatelessWidget {
             style: TextStyle(
               fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
               fontSize: 12,
-              fontWeight:
-                  index == selectedIndex ? FontWeight.w700 : FontWeight.w600,
+              fontWeight: index == selectedIndex
+                  ? FontWeight.w700
+                  : FontWeight.w600,
             ),
           ),
       ],

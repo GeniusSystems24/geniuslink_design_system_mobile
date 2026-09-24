@@ -224,10 +224,7 @@ class TwoRowTileThemeData extends ThemeExtension<TwoRowTileThemeData> {
   /// Flutter calls this method while animating between [ThemeData] instances,
   /// for example when switching between light and dark themes.
   @override
-  TwoRowTileThemeData lerp(
-    covariant TwoRowTileThemeData? other,
-    double t,
-  ) {
+  TwoRowTileThemeData lerp(covariant TwoRowTileThemeData? other, double t) {
     if (other == null) {
       return this;
     }
@@ -244,21 +241,9 @@ class TwoRowTileThemeData extends ThemeExtension<TwoRowTileThemeData> {
       columnGap: ui.lerpDouble(columnGap, other.columnGap, t)!,
       leadingGap: ui.lerpDouble(leadingGap, other.leadingGap, t)!,
       minHeight: ui.lerpDouble(minHeight, other.minHeight, t),
-      backgroundColor: Color.lerp(
-        backgroundColor,
-        other.backgroundColor,
-        t,
-      ),
-      borderColor: Color.lerp(
-        borderColor,
-        other.borderColor,
-        t,
-      ),
-      dividerColor: Color.lerp(
-        dividerColor,
-        other.dividerColor,
-        t,
-      ),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      borderColor: Color.lerp(borderColor, other.borderColor, t),
+      dividerColor: Color.lerp(dividerColor, other.dividerColor, t),
       borderRadius: BorderRadiusGeometry.lerp(
         borderRadius,
         other.borderRadius,
@@ -372,8 +357,7 @@ class TwoRowTile extends StatelessWidget {
             end: trailing,
             gap: theme.columnGap,
           ),
-        if (hasTitleRow && hasSubtitleRow)
-          SizedBox(height: theme.rowGap),
+        if (hasTitleRow && hasSubtitleRow) SizedBox(height: theme.rowGap),
         if (hasSubtitleRow)
           _DirectionalContentRow(
             start: subtitle,
@@ -392,10 +376,7 @@ class TwoRowTile extends StatelessWidget {
       layout = Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: leading,
-          ),
+          Align(alignment: AlignmentDirectional.centerStart, child: leading),
           SizedBox(width: theme.leadingGap),
           Expanded(child: contentColumn),
         ],
@@ -414,8 +395,8 @@ class TwoRowTile extends StatelessWidget {
         border: theme.borderColor != null
             ? Border.all(color: theme.borderColor!)
             : showBottomDivider && theme.dividerColor != null
-                ? Border(bottom: BorderSide(color: theme.dividerColor!))
-                : null,
+            ? Border(bottom: BorderSide(color: theme.dividerColor!))
+            : null,
         borderRadius: theme.borderRadius,
       ),
       child: layout,
@@ -442,11 +423,7 @@ class TwoRowTile extends StatelessWidget {
 
     return semanticLabel == null
         ? interactive
-        : Semantics(
-            button: true,
-            label: semanticLabel,
-            child: interactive,
-          );
+        : Semantics(button: true, label: semanticLabel, child: interactive);
   }
 }
 
@@ -470,17 +447,11 @@ class _DirectionalContentRow extends StatelessWidget {
     // A single child does not need Row/Flex, which also makes single-slot usage
     // safe in more parent constraint configurations.
     if (start == null) {
-      return Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: end,
-      );
+      return Align(alignment: AlignmentDirectional.centerEnd, child: end);
     }
 
     if (end == null) {
-      return Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: start,
-      );
+      return Align(alignment: AlignmentDirectional.centerStart, child: start);
     }
 
     // Expanded gives the primary/start slot the remaining horizontal space,
@@ -496,10 +467,7 @@ class _DirectionalContentRow extends StatelessWidget {
         ),
         SizedBox(width: gap),
         Flexible(
-          child: Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: end,
-          ),
+          child: Align(alignment: AlignmentDirectional.centerEnd, child: end),
         ),
       ],
     );

@@ -8,11 +8,5 @@ export 'key_value_row.dart';
 /// Deprecated alias for [KeyValueRow].
 @Deprecated('Use KeyValueRow instead.')
 class KV extends KeyValueRow {
-  const KV(
-    super.k,
-    super.v, {
-    super.key,
-    super.mono,
-    super.ar,
-  });
+  const KV(super.k, super.v, {super.key, super.mono, super.ar});
 }

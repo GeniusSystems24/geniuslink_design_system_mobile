@@ -40,12 +40,17 @@ class ProductDetailView extends StatelessWidget {
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).productDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).productDetail),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
           title: GeniusLinkLocalization.of(context).stockSummary,
-          subtitle: GeniusLinkLocalization.of(context).aggregatedAcrossAllStores,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).aggregatedAcrossAllStores,
           initiallyExpanded: true,
           accentColor: accentColor4,
 
@@ -103,14 +108,27 @@ class ProductDetailView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               KeyValueRow('SKU', product.sku, mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).barcode, detail.barcode, mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).category, product.category),
-              KeyValueRow(GeniusLinkLocalization.of(context).unit, product.unit),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).barcode,
+                detail.barcode,
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).category,
+                product.category,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).unit,
+                product.unit,
+              ),
               KeyValueRow(
                 GeniusLinkLocalization.of(context).sellingPrice,
                 '${SuperFormat.number(detail.sellingPrice, decimals: 2)} SAR',
               ),
-              KeyValueRow(GeniusLinkLocalization.of(context).vatRate, '${(detail.vatRate * 100).toStringAsFixed(0)}%'),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).vatRate,
+                '${(detail.vatRate * 100).toStringAsFixed(0)}%',
+              ),
             ],
           ),
         ),

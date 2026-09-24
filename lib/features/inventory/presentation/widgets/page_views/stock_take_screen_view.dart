@@ -143,11 +143,17 @@ class StockTakeView extends StatelessWidget {
       ('RBR-71203', 'Reinforcement Bar #6', 0, -1),
     ];
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.secondary;
-    var trailing = Pill(GeniusLinkLocalization.of(context).inProgress, tone: PillTone.warning);
+    var trailing = Pill(
+      GeniusLinkLocalization.of(context).inProgress,
+      tone: PillTone.warning,
+    );
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).stockTake), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).stockTake),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -168,7 +174,10 @@ class StockTakeView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Eyebrow(GeniusLinkLocalization.of(context).text3Of6Counted, size: 10),
+                      Eyebrow(
+                        GeniusLinkLocalization.of(context).text3Of6Counted,
+                        size: 10,
+                      ),
                       Text(
                         '50%',
                         style: TextStyle(
@@ -217,9 +226,18 @@ class StockTakeView extends StatelessWidget {
                 crossAxisSpacing: 10,
                 childAspectRatio: 1.4,
                 children: [
-                  Mini(label: GeniusLinkLocalization.of(context).match, value: '1'),
-                  Mini(label: GeniusLinkLocalization.of(context).short, value: '2'),
-                  Mini(label: GeniusLinkLocalization.of(context).over, value: '0'),
+                  Mini(
+                    label: GeniusLinkLocalization.of(context).match,
+                    value: '1',
+                  ),
+                  Mini(
+                    label: GeniusLinkLocalization.of(context).short,
+                    value: '2',
+                  ),
+                  Mini(
+                    label: GeniusLinkLocalization.of(context).over,
+                    value: '0',
+                  ),
                 ],
               ),
             ],

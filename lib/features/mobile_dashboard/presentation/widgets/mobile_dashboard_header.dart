@@ -143,7 +143,8 @@ class MobileDashboardSegmentedPreference extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resolvedTheme = theme ??
+    final resolvedTheme =
+        theme ??
         context.mdComponentTheme.segmentedSelectorTheme ??
         SegmentedSlotSelectorThemeData(
           minHeight: 38,
@@ -184,8 +185,9 @@ class MobileDashboardSegmentedPreference extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: context.mdTextTheme.bodyMedium?.fontFamily,
                     fontSize: 12.5,
-                    fontWeight:
-                        index == value ? FontWeight.w700 : FontWeight.w500,
+                    fontWeight: index == value
+                        ? FontWeight.w700
+                        : FontWeight.w500,
                   ),
                 ),
             ],

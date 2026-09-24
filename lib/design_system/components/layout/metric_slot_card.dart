@@ -22,8 +22,7 @@ import 'pressable_surface.dart';
 /// );
 /// ```
 @immutable
-class MetricSlotCardThemeData
-    extends ThemeExtension<MetricSlotCardThemeData> {
+class MetricSlotCardThemeData extends ThemeExtension<MetricSlotCardThemeData> {
   const MetricSlotCardThemeData({
     this.padding = const EdgeInsets.all(14),
     this.rowGap = 8,
@@ -120,13 +119,8 @@ class MetricSlotCardThemeData
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       rowGap: ui.lerpDouble(rowGap, other.rowGap, t)!,
       // MainAxisAlignment is discrete, so change it at the midpoint.
-      mainAxisAlignment:
-          t < 0.5 ? mainAxisAlignment : other.mainAxisAlignment,
-      backgroundColor: Color.lerp(
-        backgroundColor,
-        other.backgroundColor,
-        t,
-      ),
+      mainAxisAlignment: t < 0.5 ? mainAxisAlignment : other.mainAxisAlignment,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       borderColor: Color.lerp(borderColor, other.borderColor, t),
       borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
       borderRadius: BorderRadiusGeometry.lerp(

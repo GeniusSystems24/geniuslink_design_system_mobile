@@ -20,7 +20,11 @@ class CommercialRepository implements WorkspaceRepository {
   List<MobileDashboardNavigationDestination> get navigationItems => const [
     (id: 'home', label: MobileDashboardNavigationCopy.overview, icon: 'home'),
     (id: 'sales', label: MobileDashboardNavigationCopy.sales, icon: 'send'),
-    (id: 'inventory', label: MobileDashboardNavigationCopy.inventory, icon: 'grid'),
+    (
+      id: 'inventory',
+      label: MobileDashboardNavigationCopy.inventory,
+      icon: 'grid',
+    ),
     (id: 'more', label: MobileDashboardNavigationCopy.more, icon: 'dots'),
   ];
 }

@@ -101,11 +101,14 @@ class WorkspaceMenuItem extends StatelessWidget {
     return DirectionalSlotTile(
       onTap: onTap,
       semanticLabel: workspace.name,
-      theme: theme ??
+      theme:
+          theme ??
           DirectionalSlotTileThemeData(
             minHeight: 48,
             padding: const EdgeInsets.all(10),
-            backgroundColor: selected ? context.mdTheme.hover : Colors.transparent,
+            backgroundColor: selected
+                ? context.mdTheme.hover
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             pressableTheme: const PressableSurfaceThemeData(pressedScale: 1),
           ),

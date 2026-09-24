@@ -31,23 +31,14 @@ class MScroll extends StatelessWidget {
   final double pad;
 
   /// Creates a vertically scrolling section list.
-  const MScroll(
-    this.children, {
-    super.key,
-    this.pad = 16,
-  });
+  const MScroll(this.children, {super.key, this.pad = 16});
 
   @override
   Widget build(BuildContext context) {
     // ListView.separated centralizes inter-section spacing so callers do not
     // need to wrap every child in its own bottom Padding or SizedBox.
     return ListView.separated(
-      padding: EdgeInsets.fromLTRB(
-        pad,
-        pad,
-        pad,
-        24,
-      ),
+      padding: EdgeInsets.fromLTRB(pad, pad, pad, 24),
       itemCount: children.length,
       separatorBuilder: (_, _) => const SizedBox(height: 14),
       itemBuilder: (_, index) => children[index],

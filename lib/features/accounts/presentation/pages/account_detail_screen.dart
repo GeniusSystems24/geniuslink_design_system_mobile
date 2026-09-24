@@ -67,10 +67,7 @@ class AccountDetailScreen extends StatelessWidget {
       backgroundColor: theme.backgroundColor ?? colors.surface,
       appBar: SuperAppBar(
         title: Text(l10n.accountDetail),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         AccountDetailBalanceSection(
@@ -100,10 +97,7 @@ class AccountDetailScreen extends StatelessWidget {
             for (final transaction in transactions)
               TwoRowTile(
                 theme: theme.transactionTile,
-                title: Text(
-                  transaction.$1,
-                  style: transactionStartStyle,
-                ),
+                title: Text(transaction.$1, style: transactionStartStyle),
                 trailing: Text(
                   transaction.$2,
                   style: transaction.$3

@@ -12,13 +12,10 @@ part of 'stores_screens.dart';
 /// const CreateStoreScreen()
 /// ```
 class CreateStoreScreen extends StatelessWidget {
-
   const CreateStoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CreateStoreView(
-        key: key,
-      );
+    return CreateStoreView(key: key);
   }
 }

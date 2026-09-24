@@ -176,7 +176,11 @@ class BranchesStoresView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).addBranch, icon: 'plus', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).addBranch,
+          icon: 'plus',
+          full: true,
+        ),
       ],
     );
   }

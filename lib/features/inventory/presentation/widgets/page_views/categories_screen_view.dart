@@ -80,7 +80,10 @@ class _CategoriesScreenState extends State<CategoriesView> {
     var icon = MIcons.of('briefcase');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).categories), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).categories),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).categoryTree,
@@ -268,10 +271,16 @@ class _CategoriesScreenState extends State<CategoriesView> {
                 mono: true,
                 required: true,
               ),
-              IField(label: GeniusLinkLocalization.of(context).parent, value: '— Top Level —', select: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).parent,
+                value: '— Top Level —',
+                select: true,
+              ),
               IField(
                 label: 'Name (English)',
-                placeholder: GeniusLinkLocalization.of(context).eGAdhesivesSealants,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).eGAdhesivesSealants,
                 required: true,
               ),
               IField(

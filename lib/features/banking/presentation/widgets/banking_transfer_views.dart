@@ -6,7 +6,6 @@ import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_colum
 import 'package:gl_mobile_app/localization/generated/l10n.dart';
 import 'package:gl_mobile_app/shared/presentation/widgets/feature_page_scaffold.dart';
 
-
 /// Presentation view extracted from `CreateLocalTransferScreen`.
 ///
 /// Keeping rendering in a dedicated widget lets the page remain a lifecycle,
@@ -29,9 +28,9 @@ class CreateLocalTransferView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var icon3 = MIcons.of('building');
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).createLocalTransfer),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).createLocalTransfer),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).transferAmount,
 
@@ -80,7 +79,9 @@ class CreateLocalTransferView extends StatelessWidget {
               ),
               IField(
                 label: GeniusLinkLocalization.of(context).reference,
-                placeholder: GeniusLinkLocalization.of(context).internalNoteSlipNo,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).internalNoteSlipNo,
               ),
             ],
           ),
@@ -106,7 +107,7 @@ class CreateLocalTransferView extends StatelessWidget {
         ),
         const ActionRow(primary: 'Create Transfer'),
       ],
-      );
+    );
   }
 }
 
@@ -131,9 +132,9 @@ class LocalTransferDetailView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return FeaturePageScaffold(
-        title: const Text('Local Transfer Detail'),
-        automaticallyImplyLeading: true,
-        children: [
+      title: const Text('Local Transfer Detail'),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           trailing: trailing,
           title: GeniusLinkLocalization.of(context).interAccountSettlement,
@@ -272,7 +273,7 @@ class LocalTransferDetailView extends StatelessWidget {
           onTap: () => context.goTo('more'),
         ),
       ],
-      );
+    );
   }
 }
 
@@ -298,9 +299,9 @@ class CreateExternalTransferView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     var icon3 = MIcons.of('building');
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).createExternalTransfer),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).createExternalTransfer),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).transferAmount,
 
@@ -378,17 +379,23 @@ class CreateExternalTransferView extends StatelessWidget {
                 value: 'DE89 3704 0044 0532 0130 00',
                 mono: true,
               ),
-              IField(label: GeniusLinkLocalization.of(context).purposeCode, value: 'GSD — Goods', select: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).purposeCode,
+                value: 'GSD — Goods',
+                select: true,
+              ),
             ],
           ),
         ),
         InfoNote(
-          GeniusLinkLocalization.of(context).externalWiresSettleIn12BusinessDaysAndRequireDualApproval,
+          GeniusLinkLocalization.of(
+            context,
+          ).externalWiresSettleIn12BusinessDaysAndRequireDualApproval,
           tone: SuperMaterialThemeData.of(context).colorScheme.primary,
         ),
         const ActionRow(primary: 'Submit Wire'),
       ],
-      );
+    );
   }
 }
 
@@ -412,9 +419,9 @@ class ExternalTransferDetailView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.tertiary;
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).externalWireDetail),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).externalWireDetail),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           trailing: trailing,
           title: GeniusLinkLocalization.of(context).externalWire,
@@ -530,6 +537,6 @@ class ExternalTransferDetailView extends StatelessWidget {
           onTap: () => context.goTo('more'),
         ),
       ],
-      );
+    );
   }
 }

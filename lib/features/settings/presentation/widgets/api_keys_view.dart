@@ -52,7 +52,10 @@ class ApiKeysView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('API Keys'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+          appBar: SuperAppBar(
+            title: const Text('API Keys'),
+            actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+          ),
           body: MScroll([
             InfoNote(
               "A key's secret is shown only once at creation. Revoke and re-issue anytime.",

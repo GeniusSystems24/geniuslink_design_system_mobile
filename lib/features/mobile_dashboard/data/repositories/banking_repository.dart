@@ -18,8 +18,16 @@ class BankingRepository implements WorkspaceRepository {
   @override
   List<MobileDashboardNavigationDestination> get navigationItems => const [
     (id: 'home', label: MobileDashboardNavigationCopy.overview, icon: 'home'),
-    (id: 'accounts', label: MobileDashboardNavigationCopy.accounts, icon: 'inbox'),
-    (id: 'transfers', label: MobileDashboardNavigationCopy.transfers, icon: 'send'),
+    (
+      id: 'accounts',
+      label: MobileDashboardNavigationCopy.accounts,
+      icon: 'inbox',
+    ),
+    (
+      id: 'transfers',
+      label: MobileDashboardNavigationCopy.transfers,
+      icon: 'send',
+    ),
     (id: 'more', label: MobileDashboardNavigationCopy.more, icon: 'dots'),
   ];
 }

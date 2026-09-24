@@ -24,12 +24,14 @@ class CreateUserView extends StatelessWidget {
     var marker2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var icon2 = MIcons.of('user');
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).inviteUser),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).inviteUser),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).identity,
-          subtitle: GeniusLinkLocalization.of(context).theNewMemberSNameAndContact,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).theNewMemberSNameAndContact,
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
@@ -52,13 +54,19 @@ class CreateUserView extends StatelessWidget {
                 placeholder: 'name@geniuslink.sa',
                 required: true,
               ),
-              TInput(label: GeniusLinkLocalization.of(context).employeeId, placeholder: GeniusLinkLocalization.of(context).optional, mono: true),
+              TInput(
+                label: GeniusLinkLocalization.of(context).employeeId,
+                placeholder: GeniusLinkLocalization.of(context).optional,
+                mono: true,
+              ),
             ],
           ),
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).access,
-          subtitle: GeniusLinkLocalization.of(context).roleDeterminesDefaultPermissions,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).roleDeterminesDefaultPermissions,
           initiallyExpanded: true,
           accentColor: marker,
           icon: icon,
@@ -88,7 +96,9 @@ class CreateUserView extends StatelessWidget {
                 ],
               ),
               InfoNote(
-                GeniusLinkLocalization.of(context).anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword,
+                GeniusLinkLocalization.of(
+                  context,
+                ).anInvitationEmailWithASingleUseSetupLinkWillBeSentTheAccountStaysPendingUntilTheUserSetsAPassword,
                 tone: SuperMaterialThemeData.of(context).colorScheme.primary,
               ),
             ],
@@ -97,13 +107,23 @@ class CreateUserView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: MBtn(GeniusLinkLocalization.of(context).cancel, variant: MBtnVariant.secondary, full: true),
+              child: MBtn(
+                GeniusLinkLocalization.of(context).cancel,
+                variant: MBtnVariant.secondary,
+                full: true,
+              ),
             ),
             SizedBox(width: 10),
-            Expanded(child: MBtn(GeniusLinkLocalization.of(context).sendInvitation, icon: 'check', full: true)),
+            Expanded(
+              child: MBtn(
+                GeniusLinkLocalization.of(context).sendInvitation,
+                icon: 'check',
+                full: true,
+              ),
+            ),
           ],
         ),
       ],
-      );
+    );
   }
 }

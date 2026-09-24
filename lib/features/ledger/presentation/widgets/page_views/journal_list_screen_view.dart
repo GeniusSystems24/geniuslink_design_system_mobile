@@ -48,7 +48,10 @@ class _JournalListScreenState extends State<JournalListView> {
     final filterLabel = _filter == null ? 'All' : _statusLabel(_filter!);
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).journalEntries), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).journalEntries),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SearchInput(
           placeholder: GeniusLinkLocalization.of(context).searchEntries,

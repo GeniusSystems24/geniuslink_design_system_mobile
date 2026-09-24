@@ -12,13 +12,10 @@ part of 'settings_org_screens.dart';
 /// const CurrenciesSettingsScreen()
 /// ```
 class CurrenciesSettingsScreen extends StatelessWidget {
-
   const CurrenciesSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CurrenciesSettingsView(
-        key: key,
-      );
+    return CurrenciesSettingsView(key: key);
   }
 }

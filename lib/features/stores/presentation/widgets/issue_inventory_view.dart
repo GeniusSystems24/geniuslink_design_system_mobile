@@ -44,7 +44,10 @@ class IssueInventoryView extends StatelessWidget {
                 placeholder: GeniusLinkLocalization.of(context).searchStore,
                 required: true,
               ),
-              MField(label: GeniusLinkLocalization.of(context).currency, value: 'USD — US Dollar'),
+              MField(
+                label: GeniusLinkLocalization.of(context).currency,
+                value: 'USD — US Dollar',
+              ),
             ],
           ),
         ),
@@ -181,7 +184,11 @@ class IssueInventoryView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).issueInventory, icon: 'check', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).issueInventory,
+          icon: 'check',
+          full: true,
+        ),
       ],
     );
   }

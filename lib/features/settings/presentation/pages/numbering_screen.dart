@@ -12,13 +12,10 @@ part of 'settings_org_screens.dart';
 /// const NumberingScreen()
 /// ```
 class NumberingScreen extends StatelessWidget {
-
   const NumberingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return NumberingView(
-        key: key,
-      );
+    return NumberingView(key: key);
   }
 }

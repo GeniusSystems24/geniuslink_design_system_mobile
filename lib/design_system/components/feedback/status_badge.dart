@@ -103,10 +103,7 @@ class StatusBadge extends StatelessWidget {
         color: theme.backgroundColor,
         border: theme.borderColor == null
             ? null
-            : Border.all(
-                color: theme.borderColor!,
-                width: theme.borderWidth,
-              ),
+            : Border.all(color: theme.borderColor!, width: theme.borderWidth),
         borderRadius: theme.borderRadius,
       ),
       child: content,

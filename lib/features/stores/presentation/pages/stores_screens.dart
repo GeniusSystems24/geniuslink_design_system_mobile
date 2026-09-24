@@ -21,4 +21,5 @@ part '../widgets/create_store_view.dart';
 part '../widgets/issue_inventory_view.dart';
 part '../widgets/store_detail_view.dart';
 part '../widgets/stores_view.dart';
+
 /// A dashed-border container (CustomPaint) for "add" affordances.

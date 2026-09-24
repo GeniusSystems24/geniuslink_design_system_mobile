@@ -60,7 +60,10 @@ class RoleEditorView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Role Editor'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+          appBar: SuperAppBar(
+            title: const Text('Role Editor'),
+            actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+          ),
           body: MScroll([
             SuperSectionCard2(
               title: 'Accountant',

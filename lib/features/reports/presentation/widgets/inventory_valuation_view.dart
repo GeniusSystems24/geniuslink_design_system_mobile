@@ -15,8 +15,7 @@ part of '../pages/reports_screens.dart';
 class InventoryValuationView extends StatefulWidget {
   const InventoryValuationView({super.key});
   @override
-  State<InventoryValuationView> createState() =>
-      _InventoryValuationViewState();
+  State<InventoryValuationView> createState() => _InventoryValuationViewState();
 }
 
 class _InventoryValuationViewState extends State<InventoryValuationView> {
@@ -81,7 +80,9 @@ class _InventoryValuationViewState extends State<InventoryValuationView> {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).stockValuation,
-          subtitle: GeniusLinkLocalization.of(context).quantityWeightedAverageUnitCost,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).quantityWeightedAverageUnitCost,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -92,7 +93,9 @@ class _InventoryValuationViewState extends State<InventoryValuationView> {
             children: [
               MTable(
                 showSearch: true,
-                searchHint: GeniusLinkLocalization.of(context).searchSkuProductOrStore,
+                searchHint: GeniusLinkLocalization.of(
+                  context,
+                ).searchSkuProductOrStore,
                 itemNoun: 'item',
                 itemNounPlural: 'items',
                 columns: [

@@ -160,7 +160,10 @@ class InvDashboardView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).inventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).inventory),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         GridView.count(
           crossAxisCount: 2,
@@ -305,7 +308,9 @@ class InvDashboardView extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).reorderAlerts,
-          subtitle: GeniusLinkLocalization.of(context).text3ProductsAtOrBelowReorderLevel,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).text3ProductsAtOrBelowReorderLevel,
           initiallyExpanded: true,
           accentColor: accentColor,
 

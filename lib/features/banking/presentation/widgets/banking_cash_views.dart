@@ -6,7 +6,6 @@ import 'package:gl_mobile_app/features/accounts/presentation/widgets/audit_colum
 import 'package:gl_mobile_app/localization/generated/l10n.dart';
 import 'package:gl_mobile_app/shared/presentation/widgets/feature_page_scaffold.dart';
 
-
 /// Presentation view extracted from `CreateDepositScreen`.
 ///
 /// Keeping rendering in a dedicated widget lets the page remain a lifecycle,
@@ -29,9 +28,9 @@ class CreateDepositView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var icon3 = MIcons.of('card');
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).createDeposit),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).createDeposit),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).depositAmount,
           initiallyExpanded: true,
@@ -70,7 +69,10 @@ class CreateDepositView extends StatelessWidget {
                 select: true,
                 required: true,
               ),
-              IField(label: GeniusLinkLocalization.of(context).reference, placeholder: GeniusLinkLocalization.of(context).eGCounterSlipNo),
+              IField(
+                label: GeniusLinkLocalization.of(context).reference,
+                placeholder: GeniusLinkLocalization.of(context).eGCounterSlipNo,
+              ),
               IField(
                 label: GeniusLinkLocalization.of(context).valueDate,
                 value: 'Dec 19, 2025',
@@ -100,11 +102,13 @@ class CreateDepositView extends StatelessWidget {
         ),
         ITextarea(
           label: 'Memo',
-          placeholder: GeniusLinkLocalization.of(context).optionalNoteForThisDeposit,
+          placeholder: GeniusLinkLocalization.of(
+            context,
+          ).optionalNoteForThisDeposit,
         ),
         const ActionRow(primary: 'Create Deposit'),
       ],
-      );
+    );
   }
 }
 
@@ -127,9 +131,9 @@ class DepositDetailView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).depositReceipt),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).depositReceipt),
+      automaticallyImplyLeading: true,
+      children: [
         Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -251,7 +255,7 @@ class DepositDetailView extends StatelessWidget {
           onTap: () => context.goTo('more'),
         ),
       ],
-      );
+    );
   }
 }
 
@@ -275,9 +279,9 @@ class CreateWithdrawalView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.primary;
     var icon2 = MIcons.of('building');
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).createWithdrawal),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).createWithdrawal),
+      automaticallyImplyLeading: true,
+      children: [
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).withdrawalAmount,
 
@@ -317,7 +321,9 @@ class CreateWithdrawalView extends StatelessWidget {
               ),
               IField(
                 label: GeniusLinkLocalization.of(context).payee,
-                placeholder: GeniusLinkLocalization.of(context).eGGlobalSteelImports,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).eGGlobalSteelImports,
                 required: true,
               ),
               IField(
@@ -334,12 +340,14 @@ class CreateWithdrawalView extends StatelessWidget {
           ),
         ),
         InfoNote(
-          GeniusLinkLocalization.of(context).withdrawalsAbove10000SarRequireASecondApprovalBeforePosting,
+          GeniusLinkLocalization.of(
+            context,
+          ).withdrawalsAbove10000SarRequireASecondApprovalBeforePosting,
           tone: SuperMaterialThemeData.of(context).colorScheme.tertiary,
         ),
         const ActionRow(primary: 'Submit for Approval'),
       ],
-      );
+    );
   }
 }
 
@@ -361,9 +369,9 @@ class WithdrawalDetailView extends StatelessWidget {
     var accentColor = SuperMaterialThemeData.of(context).colorScheme.primary;
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return FeaturePageScaffold(
-        title: Text(GeniusLinkLocalization.of(context).withdrawalVoucher),
-        automaticallyImplyLeading: true,
-        children: [
+      title: Text(GeniusLinkLocalization.of(context).withdrawalVoucher),
+      automaticallyImplyLeading: true,
+      children: [
         Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -473,6 +481,6 @@ class WithdrawalDetailView extends StatelessWidget {
           onTap: () => context.goTo('more'),
         ),
       ],
-      );
+    );
   }
 }

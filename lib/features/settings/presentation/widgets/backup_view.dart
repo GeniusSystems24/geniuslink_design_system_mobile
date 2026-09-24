@@ -48,7 +48,10 @@ class BackupView extends StatelessWidget {
           backgroundColor: SuperMaterialThemeData.of(
             context,
           ).colorScheme.surface,
-          appBar: SuperAppBar(title: const Text('Backup'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+          appBar: SuperAppBar(
+            title: const Text('Backup'),
+            actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+          ),
           body: MScroll([
             SuperSectionCard2(
               trailing: trailing,

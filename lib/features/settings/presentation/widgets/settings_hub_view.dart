@@ -17,10 +17,7 @@ part of '../pages/settings_org_screens.dart';
 class SettingsHubView extends StatelessWidget {
   final List<SettingsNavigationSection> sections;
 
-  const SettingsHubView({
-    this.sections = defaultSettingsNavigation,
-    super.key,
-  });
+  const SettingsHubView({this.sections = defaultSettingsNavigation, super.key});
   @override
   Widget build(BuildContext context) {
     return FeaturePageScaffold(

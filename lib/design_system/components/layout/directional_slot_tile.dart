@@ -122,11 +122,7 @@ class DirectionalSlotTileThemeData
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       gap: ui.lerpDouble(gap, other.gap, t)!,
       minHeight: ui.lerpDouble(minHeight, other.minHeight, t),
-      backgroundColor: Color.lerp(
-        backgroundColor,
-        other.backgroundColor,
-        t,
-      ),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       border: BoxBorder.lerp(border, other.border, t),
       borderColor: Color.lerp(borderColor, other.borderColor, t),
       borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
@@ -184,10 +180,7 @@ class DirectionalSlotTile extends StatelessWidget {
     if (theme.border != null) return theme.border;
 
     if (theme.borderColor != null) {
-      return Border.all(
-        color: theme.borderColor!,
-        width: theme.borderWidth,
-      );
+      return Border.all(color: theme.borderColor!, width: theme.borderWidth);
     }
 
     if (showBottomDivider && theme.dividerColor != null) {
@@ -289,10 +282,7 @@ class DirectionalSlotRow extends StatelessWidget {
           const Spacer(),
         if (center != null && end != null) SizedBox(width: gap),
         if (end != null)
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: end,
-          ),
+          Align(alignment: AlignmentDirectional.centerEnd, child: end),
       ],
     );
   }

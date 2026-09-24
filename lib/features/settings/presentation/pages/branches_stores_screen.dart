@@ -12,13 +12,10 @@ part of 'settings_org_screens.dart';
 /// const BranchesStoresScreen()
 /// ```
 class BranchesStoresScreen extends StatelessWidget {
-
   const BranchesStoresScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BranchesStoresView(
-        key: key,
-      );
+    return BranchesStoresView(key: key);
   }
 }

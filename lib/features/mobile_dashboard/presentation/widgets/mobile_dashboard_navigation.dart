@@ -115,13 +115,10 @@ class _BottomNavigationItem extends StatelessWidget {
     return LabeledActionTile(
       onTap: onTap,
       semanticLabel: item.label,
-      theme: (context.mdComponentTheme.actionTileTheme ??
-              const LabeledActionTileThemeData())
-          .copyWith(
-            gap: 4,
-            minHeight: 48,
-            alignment: Alignment.center,
-          ),
+      theme:
+          (context.mdComponentTheme.actionTileTheme ??
+                  const LabeledActionTileThemeData())
+              .copyWith(gap: 4, minHeight: 48, alignment: Alignment.center),
       top: Icon(MIcons.of(item.icon), size: 21, color: color),
       bottom: Text(
         item.label,

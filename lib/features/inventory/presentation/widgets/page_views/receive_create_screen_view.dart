@@ -70,26 +70,26 @@ class ReceiveCreateView extends StatefulWidget {
 
 class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
   final _storeSource = SuperAutoSuggestionSources.strings([
-      'Downtown Central',
-      'North Warehouse',
-      'East Distribution',
-    ]);
+    'Downtown Central',
+    'North Warehouse',
+    'East Distribution',
+  ]);
   final _storeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
   final _supplierSource = SuperAutoSuggestionSources.strings([
-      'ABC Trading Co.',
-      'SteelMart LLC',
-      'ConcretePro Ltd.',
-    ]);
+    'ABC Trading Co.',
+    'SteelMart LLC',
+    'ConcretePro Ltd.',
+  ]);
   final _supplierController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
   final _currencySource = SuperAutoSuggestionSources.strings([
-      'SAR — Saudi Riyal',
-      'USD — US Dollar',
-      'EUR — Euro',
-    ]);
+    'SAR — Saudi Riyal',
+    'USD — US Dollar',
+    'EUR — Euro',
+  ]);
   final _currencyController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
@@ -136,7 +136,10 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
     var icon4 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).receiveInventory), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).receiveInventory),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).receiveDetails,
@@ -149,38 +152,49 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SuperTextFormField(
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).serialNo),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).serialNo,
+                ),
                 initialValue: 'INV-REC-2024-0241',
                 readOnly: true,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _currencySource,
                 controller: _currencyController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).currency),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).currency,
+                ),
                 hintText: GeniusLinkLocalization.of(context).selectCurrency,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _storeSource,
                 controller: _storeController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).receivingStore),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).receivingStore,
+                ),
                 hintText: GeniusLinkLocalization.of(context).searchStore,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _supplierSource,
                 controller: _supplierController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).supplierAccount),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).supplierAccount,
+                ),
                 hintText: GeniusLinkLocalization.of(context).eGAbcTradingCo,
               ),
             ],
@@ -254,13 +268,17 @@ class _ReceiveCreateScreenState extends State<ReceiveCreateView> {
               SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: GeniusLinkLocalization.of(context).receiptNotes,
-                  hintText: GeniusLinkLocalization.of(context).poNumberDeliveryNoteInspectionResults,
+                  hintText: GeniusLinkLocalization.of(
+                    context,
+                  ).poNumberDeliveryNoteInspectionResults,
                 ),
                 multiline: true,
                 rows: 3,
               ),
               SuperAttachmentFormField(
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).attachments),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).attachments,
+                ),
                 accept: '.pdf,.jpg,.jpeg,.png',
                 maxSizeMB: 10,
                 maxFiles: 5,

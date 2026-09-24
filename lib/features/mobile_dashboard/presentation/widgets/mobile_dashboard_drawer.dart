@@ -240,7 +240,8 @@ class DrawerItem extends StatelessWidget {
     return DirectionalSlotTile(
       onTap: onTap,
       semanticLabel: label,
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.rowTheme ??
           const DirectionalSlotTileThemeData(
             minHeight: 48,

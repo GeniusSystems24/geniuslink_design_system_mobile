@@ -39,10 +39,7 @@ class AccountDetailRecentTransactionsSectionTheme {
 /// Layout customization for the screen's directional bottom actions.
 @immutable
 class AccountDetailActionsTheme {
-  const AccountDetailActionsTheme({
-    this.gap = 10,
-    this.stackBreakpoint = 280,
-  });
+  const AccountDetailActionsTheme({this.gap = 10, this.stackBreakpoint = 280});
 
   final double gap;
   final double stackBreakpoint;
@@ -160,7 +157,8 @@ class AccountDetailCurrentBalanceSection extends StatelessWidget {
         children: [
           Row(
             crossAxisAlignment: theme.topCrossAxisAlignment,
-            textBaseline: theme.topCrossAxisAlignment == CrossAxisAlignment.baseline
+            textBaseline:
+                theme.topCrossAxisAlignment == CrossAxisAlignment.baseline
                 ? theme.textBaseline
                 : null,
             children: [
@@ -221,7 +219,8 @@ class AccountDetailRecentTransactionsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dividerColor = theme.dividerColor ??
+    final dividerColor =
+        theme.dividerColor ??
         SuperMaterialThemeData.of(context).superTheme.border;
 
     return SuperSectionCard2(

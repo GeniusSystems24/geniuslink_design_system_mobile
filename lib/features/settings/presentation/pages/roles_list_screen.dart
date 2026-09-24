@@ -12,13 +12,10 @@ part of 'settings_team_screens.dart';
 /// const RolesListScreen()
 /// ```
 class RolesListScreen extends StatelessWidget {
-
   const RolesListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return RolesListView(
-        key: key,
-      );
+    return RolesListView(key: key);
   }
 }

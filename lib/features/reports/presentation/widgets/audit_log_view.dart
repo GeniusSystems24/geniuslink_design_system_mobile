@@ -101,7 +101,9 @@ class _AuditLogViewState extends State<AuditLogView> {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).immutableActivityTrail,
-          subtitle: GeniusLinkLocalization.of(context).everyStateChangingAction7YearRetention,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).everyStateChangingAction7YearRetention,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -112,7 +114,9 @@ class _AuditLogViewState extends State<AuditLogView> {
             children: [
               MTable(
                 showSearch: true,
-                searchHint: GeniusLinkLocalization.of(context).searchEntityOrUser,
+                searchHint: GeniusLinkLocalization.of(
+                  context,
+                ).searchEntityOrUser,
                 itemNoun: 'event',
                 itemNounPlural: 'events',
                 columns: const [

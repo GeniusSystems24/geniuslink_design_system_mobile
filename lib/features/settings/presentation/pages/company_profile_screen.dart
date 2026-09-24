@@ -12,13 +12,10 @@ part of 'settings_org_screens.dart';
 /// const CompanyProfileScreen()
 /// ```
 class CompanyProfileScreen extends StatelessWidget {
-
   const CompanyProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CompanyProfileView(
-        key: key,
-      );
+    return CompanyProfileView(key: key);
   }
 }

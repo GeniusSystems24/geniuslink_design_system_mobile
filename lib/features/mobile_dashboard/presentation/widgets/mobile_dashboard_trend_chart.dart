@@ -72,7 +72,8 @@ class MobileDashboardTrendChart extends StatelessWidget {
               color: color,
               axis: axisLabels,
               currency: currency,
-              gridColor: theme.gridColor ??
+              gridColor:
+                  theme.gridColor ??
                   context.mdColors.outlineVariant.withValues(alpha: 0.58),
               surfaceColor: theme.surfaceColor ?? context.mdTheme.surface,
               labelColor: theme.labelColor ?? context.mdColors.onSurfaceVariant,
@@ -82,7 +83,8 @@ class MobileDashboardTrendChart extends StatelessWidget {
               tooltipForeground:
                   theme.tooltipForeground ?? context.mdColors.onInverseSurface,
               fontFamily:
-                  theme.fontFamily ?? context.mdTextTheme.bodyMedium?.fontFamily,
+                  theme.fontFamily ??
+                  context.mdTextTheme.bodyMedium?.fontFamily,
               textDirection: Directionality.of(context),
             ),
           ),

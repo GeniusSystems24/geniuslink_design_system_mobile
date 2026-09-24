@@ -10,6 +10,7 @@ import 'package:gl_mobile_app/localization/generated/l10n.dart';
 
 import 'package:gl_mobile_app/shared/presentation/widgets/feature_page_scaffold.dart';
 part '../widgets/tenants_view.dart';
+
 // componentized-by: dismantle_more_reports_settings_stores.py
 /// Route/page boundary for the Tenants feature view.
 ///
@@ -24,16 +25,12 @@ part '../widgets/tenants_view.dart';
 /// )
 /// ```
 class TenantsScreen extends StatelessWidget {
-
   final TenantController? controller;
 
   const TenantsScreen({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return TenantsView(
-        key: key,
-        controller: controller,
-      );
+    return TenantsView(key: key, controller: controller);
   }
 }

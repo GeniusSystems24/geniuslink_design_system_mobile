@@ -58,10 +58,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       backgroundColor: widget.theme.backgroundColor ?? colors.surface,
       appBar: SuperAppBar(
         title: Text(l10n.createAccountGroup),
-        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         AccountsFieldSection(
@@ -70,40 +67,40 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           accentColor: widget.theme.detailsAccentColor ?? colors.primary,
           theme: widget.theme.section,
           children: [
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: l10n.nameEnglish,
-                  hintText: l10n.exampleCurrentAssets,
-                ),
-                required: true,
-                minLength: 3,
-                forceError: _force,
-                onValidity: (error) => _nameEnErr = error,
+            SuperTextFormField(
+              decoration: InputDecoration(
+                labelText: l10n.nameEnglish,
+                hintText: l10n.exampleCurrentAssets,
               ),
-              SuperTextFormField(
-                decoration: InputDecoration(
-                  labelText: l10n.nameArabic,
-                  hintText: l10n.exampleCurrentAssets,
-                ),
-                required: true,
-                minLength: 3,
-                arabic: true,
-                forceError: _force,
-                onValidity: (error) => _nameArErr = error,
+              required: true,
+              minLength: 3,
+              forceError: _force,
+              onValidity: (error) => _nameEnErr = error,
+            ),
+            SuperTextFormField(
+              decoration: InputDecoration(
+                labelText: l10n.nameArabic,
+                hintText: l10n.exampleCurrentAssets,
               ),
-              SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) =>
-                    SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
-                source: _treeSource,
-                controller: _treeController,
-                decoration: InputDecoration(labelText: l10n.accountTree),
-                hintText: l10n.selectTree,
-                required: true,
-              ),
-            ],
+              required: true,
+              minLength: 3,
+              arabic: true,
+              forceError: _force,
+              onValidity: (error) => _nameArErr = error,
+            ),
+            SuperAutoSuggestionsBox<String>(
+              suggestionBuilder: (context, items, index, item) =>
+                  SuperAutoSuggestionsItem<String>(
+                    value: item,
+                    titleText: item,
+                  ),
+              source: _treeSource,
+              controller: _treeController,
+              decoration: InputDecoration(labelText: l10n.accountTree),
+              hintText: l10n.selectTree,
+              required: true,
+            ),
+          ],
         ),
         AccountsSection(
           title: l10n.additionalInformation,
@@ -121,17 +118,8 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
         ),
         AccountsPageActions(
           theme: widget.theme.actions,
-          start: MBtn(
-            l10n.cancel,
-            variant: MBtnVariant.secondary,
-            full: true,
-          ),
-          end: MBtn(
-            l10n.create,
-            icon: 'check',
-            full: true,
-            onTap: _submit,
-          ),
+          start: MBtn(l10n.cancel, variant: MBtnVariant.secondary, full: true),
+          end: MBtn(l10n.create, icon: 'check', full: true, onTap: _submit),
         ),
       ]),
     );

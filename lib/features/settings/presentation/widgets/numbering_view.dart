@@ -139,7 +139,11 @@ class NumberingView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).saveChanges, icon: 'check', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).saveChanges,
+          icon: 'check',
+          full: true,
+        ),
       ],
     );
   }

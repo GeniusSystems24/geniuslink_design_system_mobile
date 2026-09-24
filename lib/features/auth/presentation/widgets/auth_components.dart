@@ -75,17 +75,16 @@ class AuthPageScaffold extends StatelessWidget {
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions:
             actions ??
-            const [
-              AppLanguageToggleButton(),
-              AppThemeToggleButton(),
-            ],
+            const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
             // Keep content readable on wide windows instead of stretching
             // fields across the entire available width.
-            final maxWidth = constraints.maxWidth >= 720 ? 560.0 : double.infinity;
+            final maxWidth = constraints.maxWidth >= 720
+                ? 560.0
+                : double.infinity;
             return SingleChildScrollView(
               padding: theme.padding,
               child: Align(

@@ -35,7 +35,10 @@ class ReceiveDetailView extends StatelessWidget {
     var accentColor4 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).receiveDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).receiveDetail),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -94,10 +97,24 @@ class ReceiveDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KeyValueRow(GeniusLinkLocalization.of(context).serialNo, 'INV-REC-2024-0241', mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).receivingStore, 'King Fahd Warehouse'),
-              KeyValueRow(GeniusLinkLocalization.of(context).supplier, 'ABC Trading Co.'),
-              KeyValueRow(GeniusLinkLocalization.of(context).poReference, 'PO-2024-1182', mono: true),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).serialNo,
+                'INV-REC-2024-0241',
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).receivingStore,
+                'King Fahd Warehouse',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).supplier,
+                'ABC Trading Co.',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).poReference,
+                'PO-2024-1182',
+                mono: true,
+              ),
             ],
           ),
         ),

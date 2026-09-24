@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gl_mobile_app/design_system/kit.dart';
 
 void main() {
-  testWidgets('DirectionalSlotTile renders direct visual slots', (tester) async {
+  testWidgets('DirectionalSlotTile renders direct visual slots', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Material(
@@ -39,16 +41,15 @@ void main() {
     expect(tapped, isTrue);
   });
 
-  testWidgets('DirectionalSlotTile respects RTL directionality', (tester) async {
+  testWidgets('DirectionalSlotTile respects RTL directionality', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Directionality(
           textDirection: TextDirection.rtl,
           child: Material(
-            child: DirectionalSlotTile(
-              start: Text('start'),
-              end: Text('end'),
-            ),
+            child: DirectionalSlotTile(start: Text('start'), end: Text('end')),
           ),
         ),
       ),

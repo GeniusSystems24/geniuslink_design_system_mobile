@@ -58,10 +58,7 @@ class KeyValueRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Eyebrow(
-          k,
-          color: theme.superTheme.fg3,
-        ),
+        Eyebrow(k, color: theme.superTheme.fg3),
         const SizedBox(width: 12),
         Expanded(
           child: Text(

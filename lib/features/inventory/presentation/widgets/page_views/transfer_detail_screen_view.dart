@@ -129,7 +129,10 @@ class TransferDetailView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.primary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).transferDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).transferDetail),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -250,9 +253,19 @@ class TransferDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KeyValueRow(GeniusLinkLocalization.of(context).carrier, 'Plate 4892-RKD'),
-              KeyValueRow(GeniusLinkLocalization.of(context).driver, 'Mohammed S.'),
-              KeyValueRow(GeniusLinkLocalization.of(context).expectedArrival, 'Dec 20, 2025', mono: true),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).carrier,
+                'Plate 4892-RKD',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).driver,
+                'Mohammed S.',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).expectedArrival,
+                'Dec 20, 2025',
+                mono: true,
+              ),
             ],
           ),
         ),

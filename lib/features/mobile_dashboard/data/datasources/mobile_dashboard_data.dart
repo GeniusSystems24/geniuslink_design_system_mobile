@@ -713,10 +713,7 @@ MdOperation _localizedOperation(
   );
 }
 
-MdCard _localizedCard(
-  MdCard item,
-  MobileDashboardTextResolver resolve,
-) {
+MdCard _localizedCard(MdCard item, MobileDashboardTextResolver resolve) {
   return MdCard(
     id: item.id,
     label: resolve(item.label),
@@ -727,17 +724,11 @@ MdCard _localizedCard(
   );
 }
 
-MdAction _localizedAction(
-  MdAction item,
-  MobileDashboardTextResolver resolve,
-) {
+MdAction _localizedAction(MdAction item, MobileDashboardTextResolver resolve) {
   return MdAction(item.id, resolve(item.label), item.group);
 }
 
-MdTab _localizedTab(
-  MdTab item,
-  MobileDashboardTextResolver resolve,
-) {
+MdTab _localizedTab(MdTab item, MobileDashboardTextResolver resolve) {
   return MdTab(
     id: item.id,
     label: resolve(item.label),
@@ -851,10 +842,8 @@ MobileDashboardCatalog localizeMobileDashboardCatalog(
         .map((currency) => _localizedCurrency(currency, resolve))
         .toList(growable: false),
     axisLabels: source.axisLabels.map(
-      (period, labels) => MapEntry(
-        period,
-        labels.map(resolve).toList(growable: false),
-      ),
+      (period, labels) =>
+          MapEntry(period, labels.map(resolve).toList(growable: false)),
     ),
     profiles: source.profiles.map(
       (key, profile) => MapEntry(key, _localizedProfile(profile, resolve)),
@@ -869,13 +858,7 @@ localizeMobileDashboardNavigationItems(
   MobileDashboardTextResolver resolve,
 ) {
   return source
-      .map(
-        (item) => (
-          id: item.id,
-          label: resolve(item.label),
-          icon: item.icon,
-        ),
-      )
+      .map((item) => (id: item.id, label: resolve(item.label), icon: item.icon))
       .toList(growable: false);
 }
 

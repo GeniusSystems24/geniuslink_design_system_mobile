@@ -19,8 +19,7 @@ import 'pressable_surface.dart';
 /// );
 /// ```
 @immutable
-class IconSurfaceThemeData
-    extends ThemeExtension<IconSurfaceThemeData> {
+class IconSurfaceThemeData extends ThemeExtension<IconSurfaceThemeData> {
   const IconSurfaceThemeData({
     this.size = 40,
     this.backgroundColor,
@@ -95,21 +94,14 @@ class IconSurfaceThemeData
   }
 
   @override
-  IconSurfaceThemeData lerp(
-    covariant IconSurfaceThemeData? other,
-    double t,
-  ) {
+  IconSurfaceThemeData lerp(covariant IconSurfaceThemeData? other, double t) {
     if (other == null || identical(this, other)) {
       return this;
     }
 
     return IconSurfaceThemeData(
       size: ui.lerpDouble(size, other.size, t)!,
-      backgroundColor: Color.lerp(
-        backgroundColor,
-        other.backgroundColor,
-        t,
-      ),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       borderColor: Color.lerp(borderColor, other.borderColor, t),
       borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t)!,
       borderRadius: BorderRadiusGeometry.lerp(

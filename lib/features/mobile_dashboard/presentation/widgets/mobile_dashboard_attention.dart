@@ -74,7 +74,8 @@ class MobileDashboardAttentionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = mobileDashboardToneColor(context, item.tone);
-    final rowTheme = theme ??
+    final rowTheme =
+        theme ??
         context.mdComponentTheme.rowTheme ??
         DirectionalSlotTileThemeData(
           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -87,7 +88,8 @@ class MobileDashboardAttentionRow extends StatelessWidget {
       showBottomDivider: !last,
       theme: rowTheme,
       start: IconSurface(
-        theme: context.mdComponentTheme.iconSurfaceTheme ??
+        theme:
+            context.mdComponentTheme.iconSurfaceTheme ??
             IconSurfaceThemeData(
               size: 38,
               backgroundColor: superCoreTint(color, 0x29),

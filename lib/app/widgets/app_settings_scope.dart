@@ -13,7 +13,8 @@ class AppSettingsScope extends InheritedWidget {
   final AppController controller;
 
   static AppController of(BuildContext context) {
-    final scope = context.dependOnInheritedWidgetOfExactType<AppSettingsScope>();
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<AppSettingsScope>();
     assert(scope != null, 'No AppSettingsScope found in context.');
     return scope!.controller;
   }

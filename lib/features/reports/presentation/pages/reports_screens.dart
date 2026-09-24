@@ -22,6 +22,7 @@ part '../widgets/balance_sheet_view.dart';
 part '../widgets/income_statement_view.dart';
 part '../widgets/inventory_valuation_view.dart';
 part '../widgets/trial_balance_view.dart';
+
 String _money(num n) {
   final v = n.abs().toStringAsFixed(2);
   final parts = v.split('.');

@@ -28,7 +28,10 @@ class IssueDetailView extends StatelessWidget {
     var accentColor3 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).issueDetail), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).issueDetail),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
@@ -85,10 +88,23 @@ class IssueDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KeyValueRow(GeniusLinkLocalization.of(context).serialNo, 'INV-ISS-2024-0089', mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).store, 'Downtown Central'),
-              KeyValueRow(GeniusLinkLocalization.of(context).customer, 'Project A-92'),
-              KeyValueRow(GeniusLinkLocalization.of(context).currency, 'USD — US Dollar'),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).serialNo,
+                'INV-ISS-2024-0089',
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).store,
+                'Downtown Central',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).customer,
+                'Project A-92',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).currency,
+                'USD — US Dollar',
+              ),
             ],
           ),
         ),

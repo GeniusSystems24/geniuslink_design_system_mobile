@@ -18,6 +18,7 @@ part 'contact_detail_screen.dart';
 part '../widgets/page_views/contact_detail_screen_view.dart';
 part '../widgets/page_views/contact_list_screen_view.dart';
 part '../widgets/page_views/create_contact_screen_view.dart';
+
 String contactSingularLabel(ContactType type) =>
     type == ContactType.supplier ? 'Supplier' : 'Customer';
 String contactPluralLabel(ContactType type) =>

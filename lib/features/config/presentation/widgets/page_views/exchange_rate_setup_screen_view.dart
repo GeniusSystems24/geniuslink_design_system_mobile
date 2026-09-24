@@ -29,7 +29,10 @@ class ExchangeRateSetupView extends StatelessWidget {
     var accentColor2 = SuperMaterialThemeData.of(context).colorScheme.secondary;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).exchangeRates), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).exchangeRates),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).baseCurrency,
@@ -115,7 +118,9 @@ class ExchangeRateSetupView extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).ratesPer1Sar,
-          subtitle: GeniusLinkLocalization.of(context).autoFedPairsSyncDailyManualPairsAreEditable,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).autoFedPairsSyncDailyManualPairsAreEditable,
           initiallyExpanded: true,
           accentColor: accentColor2,
 

@@ -104,14 +104,16 @@ class MobileDashboardActionTile extends StatelessWidget {
     return LabeledActionTile(
       onTap: onTap,
       semanticLabel: label,
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.actionTileTheme ??
           const LabeledActionTileThemeData(gap: 7),
       top: IconSurface(
         theme: IconSurfaceThemeData(
           size: 46,
-          backgroundColor:
-              outlined ? Colors.transparent : superCoreTint(color, 0x21),
+          backgroundColor: outlined
+              ? Colors.transparent
+              : superCoreTint(color, 0x21),
           borderColor: outlined ? context.mdTheme.borderStrong : null,
           borderWidth: outlined ? 1.5 : 1,
           borderRadius: BorderRadius.circular(14),

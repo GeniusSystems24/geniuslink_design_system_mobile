@@ -31,11 +31,16 @@ class CreateContactView extends StatelessWidget {
     var icon3 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text('Add ${contactSingularLabel(d.type)}'), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text('Add ${contactSingularLabel(d.type)}'),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: '${contactSingularLabel(d.type)} Identity',
-          subtitle: GeniusLinkLocalization.of(context).legalNameAndContactDetails,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).legalNameAndContactDetails,
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon2,
@@ -52,7 +57,9 @@ class CreateContactView extends StatelessWidget {
               ),
               TInput(
                 label: GeniusLinkLocalization.of(context).nameArabic,
-                placeholder: GeniusLinkLocalization.of(context).eGRiyadhConstructionCo,
+                placeholder: GeniusLinkLocalization.of(
+                  context,
+                ).eGRiyadhConstructionCo,
                 ar: true,
               ),
               TInput(
@@ -64,14 +71,22 @@ class CreateContactView extends StatelessWidget {
                 placeholder: '+966 5X XXX XXXX',
                 mono: true,
               ),
-              TInput(label: GeniusLinkLocalization.of(context).email, placeholder: 'name@company.com'),
-              TInput(label: GeniusLinkLocalization.of(context).city, placeholder: GeniusLinkLocalization.of(context).eGRiyadh),
+              TInput(
+                label: GeniusLinkLocalization.of(context).email,
+                placeholder: 'name@company.com',
+              ),
+              TInput(
+                label: GeniusLinkLocalization.of(context).city,
+                placeholder: GeniusLinkLocalization.of(context).eGRiyadh,
+              ),
             ],
           ),
         ),
         SuperSectionCard2(
           title: 'Financial',
-          subtitle: GeniusLinkLocalization.of(context).linkedControlAccountAndTerms,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).linkedControlAccountAndTerms,
           initiallyExpanded: true,
           accentColor: accentColor3,
           icon: icon3,
@@ -123,7 +138,11 @@ class CreateContactView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: MBtn(GeniusLinkLocalization.of(context).cancel, variant: MBtnVariant.secondary, full: true),
+              child: MBtn(
+                GeniusLinkLocalization.of(context).cancel,
+                variant: MBtnVariant.secondary,
+                full: true,
+              ),
             ),
             const SizedBox(width: 10),
             Expanded(

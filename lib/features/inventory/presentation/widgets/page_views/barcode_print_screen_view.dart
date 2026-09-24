@@ -62,7 +62,10 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
     var icon3 = MIcons.of('scan');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).barcodePrint), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).barcodePrint),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).preview,
@@ -245,9 +248,21 @@ class _BarcodePrintScreenState extends State<BarcodePrintView> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              IField(label: GeniusLinkLocalization.of(context).symbology, value: 'Code 128', select: true),
-              IField(label: GeniusLinkLocalization.of(context).paper, value: 'A4 (210 × 297 mm)', select: true),
-              IField(label: GeniusLinkLocalization.of(context).copiesPerItem, placeholder: '1', mono: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).symbology,
+                value: 'Code 128',
+                select: true,
+              ),
+              IField(
+                label: GeniusLinkLocalization.of(context).paper,
+                value: 'A4 (210 × 297 mm)',
+                select: true,
+              ),
+              IField(
+                label: GeniusLinkLocalization.of(context).copiesPerItem,
+                placeholder: '1',
+                mono: true,
+              ),
             ],
           ),
         ),

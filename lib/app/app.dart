@@ -64,8 +64,8 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
         final typography = SuperTextTheme(isArabic: isArabic);
 
         var superSectionTitleThemeData = SuperSectionTitleThemeData(
-          title1Style: typography.bodyMedium?.copyWith(),
-          title2Style: typography.bodyMedium?.copyWith(),
+          // title1Style: typography.bodyMedium?.copyWith(),
+          // title2Style: typography.bodyMedium?.copyWith(),
         );
         return MaterialApp.router(
           builder: (context, child) {
@@ -117,7 +117,7 @@ class _GeniusLinkAppState extends State<GeniusLinkApp> {
             GlobalCupertinoLocalizations.delegate,
             // super packages
             SuperTableLocalization.delegate,
-            SuperAutoSuggestionsTranslation.delegate,
+            SuperAutoSuggestionLocalization.delegate,
             SuperFormTranslation.delegate,
             SuperTreeLocalization.delegate,
             SuperNavigationLocalization.delegate,

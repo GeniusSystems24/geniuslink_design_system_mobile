@@ -75,7 +75,10 @@ class _UomScreenState extends State<UomView> {
     var accentColor = cur.$3;
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).unitsOfMeasure), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).unitsOfMeasure),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         GridView.count(
           crossAxisCount: 2,
@@ -224,7 +227,10 @@ class _UomScreenState extends State<UomView> {
                             if (cur.$4[i].$4)
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
-                                child: Pill(GeniusLinkLocalization.of(context).base, tone: PillTone.info),
+                                child: Pill(
+                                  GeniusLinkLocalization.of(context).base,
+                                  tone: PillTone.info,
+                                ),
                               ),
                           ],
                         ),

@@ -96,10 +96,11 @@ class MobileDashboardViewData {
         .toInt();
   }
 
-  int get recentOperationsSkeletonCount => MobileDashboardDefaults.skeletonCount(
-    selectedTab.operations.length,
-    MobileDashboardDefaults.recentOperationsSkeletonCount,
-  );
+  int get recentOperationsSkeletonCount =>
+      MobileDashboardDefaults.skeletonCount(
+        selectedTab.operations.length,
+        MobileDashboardDefaults.recentOperationsSkeletonCount,
+      );
 
   int get attentionSkeletonCount => MobileDashboardDefaults.skeletonCount(
     profile.attentionItems.length,

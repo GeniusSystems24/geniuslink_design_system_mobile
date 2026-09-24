@@ -34,16 +34,23 @@ class _CreateProductScreenState extends State<CreateProductView> {
   String? _skuErr, _nameEnErr, _nameArErr;
 
   final _categorySource = SuperAutoSuggestionSources.strings([
-      'Steel',
-      'Concrete',
-      'Lumber',
-      'Fasteners',
-      'Tools',
-    ]);
+    'Steel',
+    'Concrete',
+    'Lumber',
+    'Fasteners',
+    'Tools',
+  ]);
   final _categoryController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
-  final _uomSource = SuperAutoSuggestionSources.strings(['PCS', 'KG', 'TON', 'M', 'M²', 'LTR']);
+  final _uomSource = SuperAutoSuggestionSources.strings([
+    'PCS',
+    'KG',
+    'TON',
+    'M',
+    'M²',
+    'LTR',
+  ]);
   final _uomController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
@@ -53,10 +60,10 @@ class _CreateProductScreenState extends State<CreateProductView> {
     initialValue: '15%',
   );
   final _storeSource = SuperAutoSuggestionSources.strings([
-      'Downtown Central',
-      'North Warehouse',
-      'East Distribution',
-    ]);
+    'Downtown Central',
+    'North Warehouse',
+    'East Distribution',
+  ]);
   final _storeController = SuperAutoSuggestionsController<String>(
     allowFreeText: false,
   );
@@ -87,11 +94,16 @@ class _CreateProductScreenState extends State<CreateProductView> {
     var icon3 = MIcons.of('swap');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).createProduct), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).createProduct),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).productDefinition,
-          subtitle: GeniusLinkLocalization.of(context).skuNamesAndClassification,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).skuNamesAndClassification,
           initiallyExpanded: true,
           accentColor: marker2,
           icon: icon2,
@@ -119,7 +131,9 @@ class _CreateProductScreenState extends State<CreateProductView> {
               SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: GeniusLinkLocalization.of(context).nameEnglish,
-                  hintText: GeniusLinkLocalization.of(context).eGStructuralSteelIBeam,
+                  hintText: GeniusLinkLocalization.of(
+                    context,
+                  ).eGStructuralSteelIBeam,
                 ),
                 required: true,
                 minLength: 2,
@@ -129,7 +143,9 @@ class _CreateProductScreenState extends State<CreateProductView> {
               SuperTextFormField(
                 decoration: InputDecoration(
                   labelText: GeniusLinkLocalization.of(context).nameArabic,
-                  hintText: GeniusLinkLocalization.of(context).eGStructuralSteelIBeam,
+                  hintText: GeniusLinkLocalization.of(
+                    context,
+                  ).eGStructuralSteelIBeam,
                 ),
                 arabic: true,
                 required: true,
@@ -138,23 +154,29 @@ class _CreateProductScreenState extends State<CreateProductView> {
                 onValidity: (e) => _nameArErr = e,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _categorySource,
                 controller: _categoryController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).category),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).category,
+                ),
                 hintText: GeniusLinkLocalization.of(context).selectCategory,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _uomSource,
                 controller: _uomController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).unitOfMeasure),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).unitOfMeasure,
+                ),
                 hintText: GeniusLinkLocalization.of(context).selectUnit,
               ),
             ],
@@ -187,13 +209,16 @@ class _CreateProductScreenState extends State<CreateProductView> {
                 min: 0,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _vatSource,
                 controller: _vatController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).vatRate),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).vatRate,
+                ),
                 hintText: GeniusLinkLocalization.of(context).selectRate,
               ),
             ],
@@ -210,29 +235,38 @@ class _CreateProductScreenState extends State<CreateProductView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SuperNumericFormField(
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).reorderLevel),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).reorderLevel,
+                ),
                 min: 0,
                 step: 1,
                 decimals: 0,
               ),
               SuperAutoSuggestionsBox<String>(
-                suggestionBuilder: (items, index, item) => SuperAutoSuggestionsItem<String>(
-                  value: item,
-                  titleText: item,
-                ),
+                suggestionBuilder: (context, items, index, item) =>
+                    SuperAutoSuggestionsItem<String>(
+                      value: item,
+                      titleText: item,
+                    ),
                 source: _storeSource,
                 controller: _storeController,
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).defaultStore),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).defaultStore,
+                ),
                 hintText: GeniusLinkLocalization.of(context).selectStore,
               ),
               SuperNumericFormField(
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).openingStock),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).openingStock,
+                ),
                 min: 0,
                 step: 1,
                 decimals: 0,
               ),
               SuperAttachmentFormField(
-                decoration: InputDecoration(labelText: GeniusLinkLocalization.of(context).productImages),
+                decoration: InputDecoration(
+                  labelText: GeniusLinkLocalization.of(context).productImages,
+                ),
                 accept: '.jpg,.jpeg,.png,.pdf',
                 maxSizeMB: 10,
                 maxFiles: 5,

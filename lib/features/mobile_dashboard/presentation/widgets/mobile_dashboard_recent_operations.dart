@@ -9,6 +9,7 @@ import 'mobile_dashboard_theme.dart';
 import '../../../../design_system/kit.dart';
 
 import 'movement_tile.dart';
+
 typedef MobileDashboardOperationAmountResolver =
     double Function(MdOperation operation);
 

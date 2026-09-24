@@ -14,16 +14,12 @@ part of 'stores_screens.dart';
 /// )
 /// ```
 class StoreDetailScreen extends StatelessWidget {
-
   final StoreSummary store;
 
   const StoreDetailScreen({required this.store, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StoreDetailView(
-        key: key,
-        store: store,
-      );
+    return StoreDetailView(key: key, store: store);
   }
 }

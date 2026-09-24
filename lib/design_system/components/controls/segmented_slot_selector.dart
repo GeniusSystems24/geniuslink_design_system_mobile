@@ -117,10 +117,7 @@ class SegmentedSlotSelector extends StatelessWidget {
         color: theme.backgroundColor,
         border: theme.borderColor == null
             ? null
-            : Border.all(
-                color: theme.borderColor!,
-                width: theme.borderWidth,
-              ),
+            : Border.all(color: theme.borderColor!, width: theme.borderWidth),
         borderRadius: theme.borderRadius,
       ),
       child: Row(
@@ -142,7 +139,9 @@ class SegmentedSlotSelector extends StatelessWidget {
                     ),
                     child: AnimatedContainer(
                       duration: theme.duration,
-                      constraints: BoxConstraints(minHeight: theme.minHeight - 6),
+                      constraints: BoxConstraints(
+                        minHeight: theme.minHeight - 6,
+                      ),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: index == active

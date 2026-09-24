@@ -190,7 +190,8 @@ class MobileDashboardSearchResultRow extends StatelessWidget {
       onTap: onTap,
       semanticLabel: '${operation.description}, $domain',
       showBottomDivider: !last,
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.twoRowTheme ??
           TwoRowTileThemeData(
             padding: const EdgeInsets.symmetric(vertical: 12),

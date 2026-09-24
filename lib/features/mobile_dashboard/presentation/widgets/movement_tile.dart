@@ -9,11 +9,7 @@ import 'mobile_dashboard_theme.dart';
 /// This describes only how the amount should be presented. It is intentionally
 /// independent from the business transaction type, so the application can
 /// support hundreds of transaction types without growing this enum.
-enum MovementAmountTone {
-  credit,
-  debit,
-  neutral,
-}
+enum MovementAmountTone { credit, debit, neutral }
 
 /// Reusable presentation widget for a financial movement.
 ///
@@ -179,7 +175,8 @@ class MovementTile extends StatelessWidget {
       semanticLabel:
           semanticLabel ?? '$description, $amountLabel, $reference, $timeLabel',
       showBottomDivider: showBottomDivider,
-      theme: theme ??
+      theme:
+          theme ??
           context.mdComponentTheme.twoRowTheme ??
           TwoRowTileThemeData(
             padding: const EdgeInsets.symmetric(vertical: 12),

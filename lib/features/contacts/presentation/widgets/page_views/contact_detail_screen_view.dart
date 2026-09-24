@@ -32,10 +32,8 @@ class ContactDetailView extends StatelessWidget {
       return Scaffold(
         backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
         appBar: SuperAppBar(
-          title: Text('${contactSingularLabel(d.type)} Detail'),          actions: const [
-            AppLanguageToggleButton(),
-            AppThemeToggleButton(),
-          ],
+          title: Text('${contactSingularLabel(d.type)} Detail'),
+          actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
         ),
         body: Center(
           child: Text(
@@ -63,10 +61,8 @@ class ContactDetailView extends StatelessWidget {
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
       appBar: SuperAppBar(
-        title: Text('${contactSingularLabel(d.type)} Detail'),        actions: const [
-          AppLanguageToggleButton(),
-          AppThemeToggleButton(),
-        ],
+        title: Text('${contactSingularLabel(d.type)} Detail'),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
       ),
       body: MScroll([
         SuperSectionCard2(
@@ -124,18 +120,37 @@ class ContactDetailView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              KeyValueRow(GeniusLinkLocalization.of(context).code, c.code, mono: true),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).code,
+                c.code,
+                mono: true,
+              ),
               KeyValueRow(GeniusLinkLocalization.of(context).city, c.city),
-              KeyValueRow(GeniusLinkLocalization.of(context).contactPerson, 'Ahmed K.'),
-              KeyValueRow(GeniusLinkLocalization.of(context).phone, '+966 55 124 9020', mono: true),
-              KeyValueRow(GeniusLinkLocalization.of(context).controlAccount, d.controlAccount),
-              KeyValueRow(GeniusLinkLocalization.of(context).paymentTerms, 'Net 30'),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).contactPerson,
+                'Ahmed K.',
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).phone,
+                '+966 55 124 9020',
+                mono: true,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).controlAccount,
+                d.controlAccount,
+              ),
+              KeyValueRow(
+                GeniusLinkLocalization.of(context).paymentTerms,
+                'Net 30',
+              ),
             ],
           ),
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).transactionHistory,
-          subtitle: GeniusLinkLocalization.of(context).recentInvoicesAndPayments,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).recentInvoicesAndPayments,
           initiallyExpanded: true,
           accentColor: accentColor,
 

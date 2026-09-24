@@ -60,9 +60,8 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
             id: 2,
             title: l10n.accountDetail,
             leading: const Icon(Icons.description_outlined, size: 15),
-            pageBuilder: (context, tab) => AccountDetailFullScreen(
-              theme: widget.theme.detail,
-            ),
+            pageBuilder: (context, tab) =>
+                AccountDetailFullScreen(theme: widget.theme.detail),
           ),
         ],
         activeId: 1,
@@ -76,9 +75,6 @@ class _AccountsExtraTabsState extends State<AccountsExtraTabs> {
 
   @override
   Widget build(BuildContext context) {
-    return AccountsTabsView(
-      controller: _tabs!,
-      theme: widget.theme.tabs,
-    );
+    return AccountsTabsView(controller: _tabs!, theme: widget.theme.tabs);
   }
 }

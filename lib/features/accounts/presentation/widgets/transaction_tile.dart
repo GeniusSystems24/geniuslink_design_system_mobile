@@ -8,11 +8,7 @@ import '../../../../design_system/components/layout/two_row_tile.dart';
 ///
 /// This deliberately does not represent the business transaction type, so the
 /// enum remains small even when the application supports hundreds of types.
-enum TransactionAmountTone {
-  positive,
-  negative,
-  neutral,
-}
+enum TransactionAmountTone { positive, negative, neutral }
 
 /// Reusable presentation component for one account transaction.
 ///
@@ -198,8 +194,8 @@ class TransactionTile extends StatelessWidget {
         style: effectiveBalanceStyle,
       ),
       onTap: onTap,
-      semanticLabel: semanticLabel ??
-          '$reference, $description, $amount, $balanceLabel',
+      semanticLabel:
+          semanticLabel ?? '$reference, $description, $amount, $balanceLabel',
     );
   }
 }

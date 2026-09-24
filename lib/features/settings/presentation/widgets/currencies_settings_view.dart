@@ -113,7 +113,9 @@ class CurrenciesSettingsView extends StatelessWidget {
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).ratesPer1Sar,
-          subtitle: GeniusLinkLocalization.of(context).autoPairsSyncDailyManualEditable,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).autoPairsSyncDailyManualEditable,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -229,7 +231,11 @@ class CurrenciesSettingsView extends StatelessWidget {
             ],
           ),
         ),
-        MBtn(GeniusLinkLocalization.of(context).saveRates, icon: 'check', full: true),
+        MBtn(
+          GeniusLinkLocalization.of(context).saveRates,
+          icon: 'check',
+          full: true,
+        ),
       ],
     );
   }

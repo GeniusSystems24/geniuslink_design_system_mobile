@@ -12,13 +12,10 @@ part of 'reports_screens.dart';
 /// const TrialBalanceScreen()
 /// ```
 class TrialBalanceScreen extends StatelessWidget {
-
   const TrialBalanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TrialBalanceView(
-        key: key,
-      );
+    return TrialBalanceView(key: key);
   }
 }

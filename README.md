@@ -7,9 +7,30 @@ menu. Dark-only (matches the web demo), bilingual EN/AR strings, and feature-fir
 ## Input libraries
 
 - `super_core` supplies the application `ThemeData`, tokens and shared visual foundation.
-- `super_form_field` supplies standard text, numeric, date, select, attachment and boolean form fields.
-- `super_auto_suggestion_box` remains the autocomplete/typeahead implementation for searchable master-data selectors, SKU entry and the global screen spotlight.
+- `super_form_field` `^1.15.0` supplies standard text, numeric, date, select, attachment and boolean form fields; select controls use the source-oriented API (`source` + `optionBuilder`).
+- `super_auto_suggestion_box` `^1.7.0` remains the autocomplete/typeahead implementation for searchable master-data selectors, SKU entry and the global screen spotlight; builders and remote fetch callbacks are BuildContext-aware.
 
+
+<!-- geniuslink-v3.2.1-packages:start -->
+### Package baseline — v3.2.1
+
+Version `3.2.1` aligns the app with `super_form_field ^1.15.0` and
+`super_auto_suggestion_box ^1.7.0`.
+
+- `SuperSelectFormField<T>` uses a single `source`; local lists use
+  `SuperSelectSources.list(...)` and presentation metadata stays in
+  `optionBuilder`.
+- `SuperMultiSelectFormField<T>` should use `SuperMultiSelectSources` for new
+  and migrated code; `SuperChoiceFormField<T>.options` remains unchanged.
+- `SuperAutoSuggestionsBox<T>.suggestionBuilder` receives `BuildContext` as its
+  first argument.
+- Remote auto-suggestion callbacks in `async`, `hybrid`, `remoteFallback`, and
+  `paged` sources receive the active `BuildContext`. Local matching is immediate
+  and debounce applies to external fetch work.
+- `minResult` is intentionally omitted for the current local-only suggestion
+  sources; add it only when a local-first source should still supplement a small
+  result set remotely.
+<!-- geniuslink-v3.2.1-packages:end -->
 
 ## Run
 ```bash
@@ -130,3 +151,25 @@ rules and run the architecture guard with:
 ```bash
 python tool/check_clean_architecture.py
 ```
+
+<!-- migration-1.0.1-super-table-field:start -->
+## Dependency baseline — 1.0.1
+
+Release `1.0.1` upgrades the table integration to `super_table_field ^3.2.0`.
+
+- `super_table_field`: `^3.2.0`
+- `super_auto_suggestion_box`: `>=1.6.0 <2.0.0` when used directly
+- Custom suggestion builders now receive the active Flutter `BuildContext` as
+  their first argument: `(context, items, index, item)`.
+- Existing `SuperComboColumn.advancedSearch` and `SuperComboColumn.leading`
+  usage remains valid; `super_table_field` adapts those values internally.
+- Direct `SuperAutoSuggestionsBox` usage must follow the 1.6.0 builder API.
+
+After dependency changes, run:
+
+```bash
+flutter pub get
+dart format lib test
+flutter analyze
+```
+<!-- migration-1.0.1-super-table-field:end -->

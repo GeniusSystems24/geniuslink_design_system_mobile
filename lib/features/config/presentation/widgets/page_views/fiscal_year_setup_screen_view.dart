@@ -38,12 +38,17 @@ class FiscalYearSetupView extends StatelessWidget {
     var icon = MIcons.of('calendar');
     return Scaffold(
       backgroundColor: SuperMaterialThemeData.of(context).colorScheme.surface,
-      appBar: SuperAppBar(title: Text(GeniusLinkLocalization.of(context).fiscalYear), actions: const [AppLanguageToggleButton(), AppThemeToggleButton()]),
+      appBar: SuperAppBar(
+        title: Text(GeniusLinkLocalization.of(context).fiscalYear),
+        actions: const [AppLanguageToggleButton(), AppThemeToggleButton()],
+      ),
       body: MScroll([
         SuperSectionCard2(
           trailing: trailing,
           title: 'Year Definition',
-          subtitle: GeniusLinkLocalization.of(context).defineTheActiveFiscalYearBoundaries,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).defineTheActiveFiscalYearBoundaries,
           initiallyExpanded: true,
           accentColor: accentColor2,
           icon: icon,
@@ -51,15 +56,29 @@ class FiscalYearSetupView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              IField(label: GeniusLinkLocalization.of(context).fiscalYear, value: '2024', mono: true),
-              IField(label: GeniusLinkLocalization.of(context).startDate, value: '01/01/2024', mono: true),
-              IField(label: GeniusLinkLocalization.of(context).endDate, value: '12/31/2024', mono: true),
+              IField(
+                label: GeniusLinkLocalization.of(context).fiscalYear,
+                value: '2024',
+                mono: true,
+              ),
+              IField(
+                label: GeniusLinkLocalization.of(context).startDate,
+                value: '01/01/2024',
+                mono: true,
+              ),
+              IField(
+                label: GeniusLinkLocalization.of(context).endDate,
+                value: '12/31/2024',
+                mono: true,
+              ),
             ],
           ),
         ),
         SuperSectionCard2(
           title: GeniusLinkLocalization.of(context).accountingPeriods,
-          subtitle: GeniusLinkLocalization.of(context).text12MonthlyPeriodsLockToPreventBackDatedPostings,
+          subtitle: GeniusLinkLocalization.of(
+            context,
+          ).text12MonthlyPeriodsLockToPreventBackDatedPostings,
           initiallyExpanded: true,
           accentColor: accentColor,
 
@@ -87,7 +106,9 @@ class FiscalYearSetupView extends StatelessWidget {
           ),
         ),
         InfoNote(
-          GeniusLinkLocalization.of(context).closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti,
+          GeniusLinkLocalization.of(
+            context,
+          ).closingAPeriodLocksAllPostingsDatedWithinItALockedPeriodCanOnlyBeReopenedByAControllerWithAuditJusti,
         ),
         const ActionRow(primary: 'Save Configuration'),
       ]),

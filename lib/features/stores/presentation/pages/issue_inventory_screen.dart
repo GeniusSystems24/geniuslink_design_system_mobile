@@ -12,13 +12,10 @@ part of 'stores_screens.dart';
 /// const IssueInventoryScreen()
 /// ```
 class IssueInventoryScreen extends StatelessWidget {
-
   const IssueInventoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return IssueInventoryView(
-        key: key,
-      );
+    return IssueInventoryView(key: key);
   }
 }
